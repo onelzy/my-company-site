@@ -15,6 +15,8 @@ import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
+import keystatic from '@keystatic/astro';
+
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -26,8 +28,17 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 export default defineConfig({
   output: 'static',
 
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'],
+    routing: {
+      prefixDefaultLocale: false,
+    },
+  },
+
   integrations: [
     sitemap(),
+    keystatic(),
     mdx(),
     icon({
       include: {
