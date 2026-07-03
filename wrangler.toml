@@ -1,0 +1,6 @@
+name = "my-company-site"
+compatibility_date = "2024-07-04"
+
+# 指定 Pages 部署的静态资源目录
+[assets]
+directory = "dist"
