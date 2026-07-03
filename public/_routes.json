@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "include": [
+    "/keystatic",
+    "/keystatic/*",
+    "/api/keystatic/*"
+  ],
+  "exclude": []
+}
