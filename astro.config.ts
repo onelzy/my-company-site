@@ -17,6 +17,8 @@ import astrowind from './vendor/integration';
 
 import keystatic from '@keystatic/astro';
 
+import cloudflare from '@astrojs/cloudflare';
+
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -27,6 +29,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'static',
+  adapter: cloudflare(),
 
   i18n: {
     defaultLocale: 'en',
