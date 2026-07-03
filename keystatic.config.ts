@@ -4,6 +4,9 @@ export default config({
   storage: {
     kind: 'local',
   },
+  routing: {
+    path: '/keystatic',
+  },
   collections: {
     products: collection({
       label: 'Products',
