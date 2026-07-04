@@ -15,7 +15,31 @@ import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
-import keystatic from '@keystatic/astro';
+import keystaticOriginal from '@keystatic/astro';
+
+// Wrapper: intercepts injectRoute to prevent route collision with our
+// physical file-system routes (src/pages/keystatic, src/pages/api/keystatic).
+// @keystatic/astro v5.x's injectRoute calls conflict with physical routes
+// and cause GetStaticPathsRequired errors during Cloudflare prerendering.
+function keystatic() {
+  const integration = keystaticOriginal() as any;
+  const originalHook = integration.hooks['astro:config:setup'];
+
+  integration.hooks['astro:config:setup'] = (params: any) => {
+    const originalInject = params.injectRoute.bind(params);
+    params.injectRoute = (route: any) => {
+      // Skip Keystatic's own route injection — we provide physical file routes instead
+      const keystaticPatterns = ['/keystatic/[...params]', '/api/keystatic/[...params]'];
+      if (keystaticPatterns.includes(route.pattern)) {
+        return;
+      }
+      return originalInject(route);
+    };
+    return originalHook(params);
+  };
+
+  return integration as any;
+}
 
 import cloudflare from '@astrojs/cloudflare';
 

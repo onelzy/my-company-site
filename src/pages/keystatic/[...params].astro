@@ -1,10 +1,7 @@
 ---
 import { Keystatic } from './_keystatic-page.js';
-import type { GetStaticPaths } from 'astro';
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return [];
-};
+export const prerender = false;
 ---
 
 <Keystatic client:only="react" />
