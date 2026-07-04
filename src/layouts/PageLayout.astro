@@ -19,6 +19,31 @@ export interface Props {
 }
 
 const { metadata, alternates } = Astro.props;
+
+// -------------------------------------------------------------------
+// Locale-aware navigation: prefix all internal hrefs with the current
+// locale so links like /products become /zh/products when appropriate.
+// -------------------------------------------------------------------
+const locale = Astro.currentLocale || 'en';
+
+function localizeHref(obj: any): any {
+  if (Array.isArray(obj)) return obj.map(localizeHref);
+  if (obj && typeof obj === 'object') {
+    const result: any = {};
+    for (const [key, val] of Object.entries(obj)) {
+      if (key === 'href' && typeof val === 'string' && val.startsWith('/') && !val.startsWith('//')) {
+        result[key] = locale === 'en' ? val : `/${locale}${val}`;
+      } else {
+        result[key] = localizeHref(val);
+      }
+    }
+    return result;
+  }
+  return obj;
+}
+
+const localizedHeader = localizeHref(headerData);
+const localizedFooter = localizeHref(footerData);
 ---
 
 <Layout metadata={metadata} alternates={alternates}>
@@ -26,12 +51,12 @@ const { metadata, alternates } = Astro.props;
     <Announcement />
   </slot>
   <slot name="header">
-    <Header {...headerData} isSticky showRssFeed showToggleTheme />
+    <Header {...localizedHeader} isSticky showRssFeed showToggleTheme showLanguagePicker />
   </slot>
   <main>
     <slot />
   </main>
   <slot name="footer">
-    <Footer {...footerData} />
+    <Footer {...localizedFooter} />
   </slot>
 </Layout>

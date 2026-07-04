@@ -28,7 +28,10 @@ export interface Props {
 }
 
 const { metadata = {}, alternates } = Astro.props;
-const { language, textDirection } = I18N;
+const { language } = I18N;
+// RTL for Arabic; falls back to config.yaml textDirection for others
+const currentLocale = Astro.currentLocale || 'en';
+const textDirection = currentLocale === 'ar' ? 'rtl' : I18N.textDirection;
 ---
 <!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">

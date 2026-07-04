@@ -10,6 +10,27 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
+
+// Locale-aware href prefixing
+const locale = Astro.currentLocale || 'en';
+function localizeHref(obj: any): any {
+  if (Array.isArray(obj)) return obj.map(localizeHref);
+  if (obj && typeof obj === 'object') {
+    const result: any = {};
+    for (const [key, val] of Object.entries(obj)) {
+      if (key === 'href' && typeof val === 'string' && val.startsWith('/') && !val.startsWith('//')) {
+        result[key] = locale === 'en' ? val : `/${locale}${val}`;
+      } else {
+        result[key] = localizeHref(val);
+      }
+    }
+    return result;
+  }
+  return obj;
+}
+
+const companyLinks = headerData?.links[2] ? [headerData.links[2]] : undefined;
+const localizedLinks = localizeHref(companyLinks);
 ---
 
 <PageLayout metadata={metadata}>
@@ -19,7 +40,7 @@ const { metadata } = Astro.props;
   <Fragment slot="header">
     <slot name="header">
       <Header
-        links={headerData?.links[2] ? [headerData.links[2]] : undefined}
+        links={localizedLinks}
         actions={[
           {
             text: 'Download',
@@ -27,6 +48,7 @@ const { metadata } = Astro.props;
           },
         ]}
         showToggleTheme
+        showLanguagePicker
         position="right"
       />
     </slot>

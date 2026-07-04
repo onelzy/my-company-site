@@ -1,0 +1,85 @@
+---
+/**
+ * LanguagePicker — locale switcher dropdown for the header.
+ *
+ * Displays the current locale label and a dropdown with all 8 supported
+ * locales.  Constructs URLs by swapping the locale prefix in the current
+ * pathname (no prefix for default 'en').
+ */
+import { Icon } from 'astro-icon/components';
+
+const LOCALES = [
+  { code: 'en', label: 'English', native: 'English' },
+  { code: 'zh', label: '中文', native: '中文' },
+  { code: 'es', label: 'Español', native: 'Español' },
+  { code: 'ru', label: 'Русский', native: 'Русский' },
+  { code: 'fr', label: 'Français', native: 'Français' },
+  { code: 'de', label: 'Deutsch', native: 'Deutsch' },
+  { code: 'ar', label: 'العربية', native: 'العربية' },
+  { code: 'pt', label: 'Português', native: 'Português' },
+] as const;
+
+const SUPPORTED_LOCALES = ['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'] as const;
+
+const currentLocale = (Astro.currentLocale || 'en') as (typeof SUPPORTED_LOCALES)[number];
+
+// Strip current locale prefix to get the base path
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+let basePath = currentPath;
+if (currentLocale !== 'en' && basePath.startsWith(`/${currentLocale}`)) {
+  basePath = basePath.slice(currentLocale.length + 1) || '/';
+}
+
+function localeUrl(locale: string): string {
+  const prefix = locale === 'en' ? '' : `/${locale}`;
+  return `${prefix}${basePath === '/' ? '' : basePath}` || '/';
+}
+
+const current = LOCALES.find((l) => l.code === currentLocale) || LOCALES[0];
+---
+
+<div class="relative group/locale">
+  <button
+    type="button"
+    class="flex items-center gap-1.5 px-3 py-2 text-sm font-medium
+           text-muted dark:text-slate-400
+           hover:text-default dark:hover:text-slate-200
+           rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800
+           transition-colors"
+    aria-label="Change language"
+  >
+    <span class="hidden sm:inline">{current.native}</span>
+    <span class="sm:hidden">{current.code.toUpperCase()}</span>
+    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 transition-transform group-hover/locale:rotate-180" />
+  </button>
+
+  <!-- Dropdown -->
+  <div
+    class="absolute right-0 top-full mt-1 min-w-[160px]
+           hidden group-hover/locale:block
+           bg-white dark:bg-slate-900
+           border border-gray-200 dark:border-slate-700
+           rounded-lg shadow-xl
+           z-50 py-1"
+  >
+    {LOCALES.map((loc) => {
+      const href = localeUrl(loc.code);
+      const isActive = loc.code === currentLocale;
+      return (
+        <a
+          href={href}
+          class:list={[
+            'flex items-center justify-between px-4 py-2 text-sm whitespace-nowrap transition-colors',
+            {
+              'bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground font-medium': isActive,
+              'text-default dark:text-slate-200 hover:bg-gray-50 dark:hover:bg-slate-800': !isActive,
+            },
+          ]}
+        >
+          <span>{loc.native}</span>
+          {isActive && <Icon name="tabler:check" class="w-4 h-4 ml-2 flex-shrink-0" />}
+        </a>
+      );
+    })}
+  </div>
+</div>
