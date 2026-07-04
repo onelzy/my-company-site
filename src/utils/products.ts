@@ -998,3 +998,20 @@ export function getProductSubTypes(type: string): string[] {
     .filter(([, parent]) => parent === type)
     .map(([subType]) => subType);
 }
+
+/**
+ * Return all distinct tech solution values.
+ */
+export function getAllTechSolutions(): string[] {
+  return ['tuya', 'mqtt', 'zigbee'];
+}
+
+/**
+ * Return the tech sub-type values for a given tech solution.
+ * Returns an empty array for unknown solutions.
+ */
+export function getTechSubTypes(solution: string): string[] {
+  return Object.entries(TECH_SUB_PARENT)
+    .filter(([, parent]) => parent === solution)
+    .map(([subType]) => subType);
+}

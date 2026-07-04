@@ -1,0 +1,106 @@
+---
+import type { Product, TechSolution } from '~/types';
+import { getCollection } from 'astro:content';
+import PageLayout from '~/layouts/PageLayout.astro';
+import ProductCard from '~/components/products/ProductCard.astro';
+import {
+  TECH_SOLUTION_LABELS,
+  getLocalizedLabel,
+  getAllTechSolutions,
+} from '~/utils/products';
+
+export const prerender = false;
+
+const locale = Astro.currentLocale || 'en';
+const allProducts = await getCollection('products');
+
+// Filter by current locale
+const products: Product[] = allProducts
+  .filter((p) => p.data.language === locale)
+  .map((p) => ({
+    ...p.data,
+    id: p.id,
+    slug: p.id.split('/').pop()?.replace('.mdoc', '') || p.data.name.toLowerCase().replace(/\s+/g, '-'),
+    collection: 'products' as const,
+    data: p.data,
+  }));
+
+// Group products by techSolution
+const solutions = getAllTechSolutions();
+const groupedProducts: { solution: string; label: string; products: Product[]; count: number }[] = solutions
+  .map((solution) => {
+    const filtered = products.filter((p) => p.techSolution === solution);
+    return {
+      solution,
+      label: getLocalizedLabel(TECH_SOLUTION_LABELS, solution, locale),
+      products: filtered,
+      count: filtered.length,
+    };
+  })
+  .filter((g) => g.count > 0);
+
+const title = locale === 'zh' ? '技术方案' : 'Technical Solutions';
+const description = locale === 'zh'
+  ? 'OWON Technology 三大技术方案——涂鸦智能、MQTT 开放协议、ZigBee 私有方案，满足不同场景需求'
+  : 'OWON Technology three technical solutions — Tuya Smart, MQTT Open Protocol, ZigBee Private Solution for every scenario';
+---
+
+<PageLayout metadata={{ title, description }}>
+  <section class="py-12 lg:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Page Header -->
+      <div class="mb-10">
+        <h1 class="text-3xl font-bold text-default dark:text-slate-100 sm:text-4xl">
+          {title}
+        </h1>
+        <p class="mt-3 text-lg text-muted dark:text-slate-400 max-w-3xl">
+          {description}
+        </p>
+      </div>
+
+      <!-- Solutions Grid -->
+      <div class="space-y-12">
+        {groupedProducts.map((group) => (
+          <section>
+            <div class="mb-6 flex items-center justify-between">
+              <h2 class="text-2xl font-bold text-default dark:text-slate-100">
+                <a
+                  href={`/${locale}/solutions/${group.solution}`}
+                  class="hover:text-primary transition-colors"
+                >
+                  {group.label}
+                </a>
+              </h2>
+              <span class="text-sm text-muted dark:text-slate-400">
+                {group.count} {locale === 'zh' ? '个产品' : 'products'}
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {group.products.slice(0, 6).map((product) => (
+                <ProductCard
+                  product={product}
+                  baseUrl={`/${locale}/solutions`}
+                />
+              ))}
+            </div>
+
+            {group.count > 6 && (
+              <div class="mt-6 text-center">
+                <a
+                  href={`/${locale}/solutions/${group.solution}`}
+                  class="inline-flex items-center gap-2 text-primary hover:underline font-medium"
+                >
+                  {locale === 'zh'
+                    ? `查看全部 ${group.count} 个产品`
+                    : `View all ${group.count} products`}
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            )}
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+</PageLayout>
