@@ -265,5 +265,5 @@ const hasAnyFilter =
   </fieldset>
 </aside>
 
-<!-- Filter JS — Vite bundles this automatically -->
-<script src="/src/assets/scripts/product-filter.js" type="module"></script>
+<!-- Filter JS — served from public/ directory (Vite does NOT serve src/ assets directly in production) -->
+<script src="/scripts/product-filter.js"></script>
