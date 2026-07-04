@@ -31,7 +31,7 @@ const locale = (['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'] as const)
   .find((l) => pathSegments[0] === l) || 'en';
 
 // -------------------------------------------------------------------
-// Find the matching product
+// Hreflang alternates — find all locale versions of this product
 // -------------------------------------------------------------------
 const allProducts = await getCollection('products');
 
@@ -44,6 +44,34 @@ const entry = allProducts.find(
 
 if (!entry) {
   return new Response(null, { status: 404, statusText: 'Not Found' });
+}
+
+// -------------------------------------------------------------------
+// Build hreflang alternates — same Keystatic slug in other languages
+// -------------------------------------------------------------------
+const keySlug = entry.data.slug?.slug ||
+  entry.id.split('/').pop()?.replace('.mdoc', '') || '';
+const alternates = keySlug
+  ? allProducts
+      .filter((p) => {
+        const pKeySlug =
+          p.data.slug?.slug ||
+          p.id.split('/').pop()?.replace('.mdoc', '') ||
+          '';
+        return pKeySlug === keySlug;
+      })
+      .map((p) => ({
+        hreflang: p.data.language || 'en',
+        href: `${Astro.url.origin}${p.data.language === 'en' ? '' : '/' + p.data.language}/products/${keySlug}`,
+      }))
+  : [];
+
+// Add x-default
+if (alternates.length > 0) {
+  const enAlt = alternates.find((a) => a.hreflang === 'en');
+  if (enAlt) {
+    alternates.push({ hreflang: 'x-default', href: enAlt.href });
+  }
 }
 
 // Build the Product shape
@@ -151,7 +179,7 @@ const specsLabel = locale === 'zh' ? '技术规格' : 'Specifications';
 const relatedLabel = locale === 'zh' ? '相关产品' : 'Related Products';
 ---
 
-<PageLayout metadata={{ title: metaTitle, description: metaDescription }}>
+<PageLayout metadata={{ title: metaTitle, description: metaDescription }} alternates={alternates}>
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- ==================================================== -->

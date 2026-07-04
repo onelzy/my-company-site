@@ -8,14 +8,20 @@ import { headerData, footerData } from '~/navigation';
 
 import type { MetaData } from '~/types';
 
-export interface Props {
-  metadata?: MetaData;
+interface AlternateLink {
+  hreflang: string;
+  href: string;
 }
 
-const { metadata } = Astro.props;
+export interface Props {
+  metadata?: MetaData;
+  alternates?: AlternateLink[];
+}
+
+const { metadata, alternates } = Astro.props;
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} alternates={alternates}>
   <slot name="announcement">
     <Announcement />
   </slot>
