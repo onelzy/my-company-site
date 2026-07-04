@@ -15,31 +15,8 @@ import type { AstroIntegration } from 'astro';
 
 import astrowind from './vendor/integration';
 
-import keystaticOriginal from '@keystatic/astro';
-
-// Wrapper: intercepts injectRoute to prevent route collision with our
-// physical file-system routes (src/pages/keystatic, src/pages/api/keystatic).
-// @keystatic/astro v5.x's injectRoute calls conflict with physical routes
-// and cause GetStaticPathsRequired errors during Cloudflare prerendering.
-function keystatic() {
-  const integration = keystaticOriginal() as any;
-  const originalHook = integration.hooks['astro:config:setup'];
-
-  integration.hooks['astro:config:setup'] = (params: any) => {
-    const originalInject = params.injectRoute.bind(params);
-    params.injectRoute = (route: any) => {
-      // Skip Keystatic's own route injection — we provide physical file routes instead
-      const keystaticPatterns = ['/keystatic/[...params]', '/api/keystatic/[...params]'];
-      if (keystaticPatterns.includes(route.pattern)) {
-        return;
-      }
-      return originalInject(route);
-    };
-    return originalHook(params);
-  };
-
-  return integration as any;
-}
+import react from '@astrojs/react';
+import keystatic from '@keystatic/astro';
 
 import cloudflare from '@astrojs/cloudflare';
 
@@ -52,7 +29,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
 export default defineConfig({
-  output: 'static',
+  output: 'server',
   adapter: cloudflare(),
 
   i18n: {
@@ -64,6 +41,7 @@ export default defineConfig({
   },
 
   integrations: [
+    react(),
     sitemap(),
     keystatic(),
     mdx(),
@@ -109,16 +87,6 @@ export default defineConfig({
   ],
 
   image: {
-    // Astro's default Sharp service handles local images.
-    //
-    // Most remote CDN images (Unsplash, Cloudinary, Imgix…) are routed by
-    // src/components/common/Image.astro through `unpic`, which rewrites the
-    // URL with CDN-side query parameters and serves it straight from the
-    // provider — Astro never downloads it, so they don't need to be listed.
-    //
-    // `domains` only matters for remote URLs that fall through to Astro's
-    // native <Image /> (i.e. providers Unpic can't detect, like Pixabay).
-    // Listed entries are authorized to be processed by Sharp.
     domains: ['cdn.pixabay.com'],
   },
 
@@ -134,6 +102,12 @@ export default defineConfig({
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
+        // Cloudflare Workers workaround: use react-dom/server.edge
+        // instead of react-dom/server.browser for React 19.
+        // Without this, MessageChannel from node:worker_threads needs polyfilling.
+        ...(import.meta.env.PROD && {
+          'react-dom/server': 'react-dom/server.edge',
+        }),
       },
     },
     optimizeDeps: {
