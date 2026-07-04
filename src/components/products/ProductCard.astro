@@ -1,0 +1,154 @@
+---
+/**
+ * ProductCard.astro — Reusable product card component.
+ *
+ * Props:
+ *   product: Product — the product data to display
+ *   href: string    — link target for the card
+ *
+ * Displays product image, name, model, truncated description, and
+ * communication method badges in a themed card with hover effect.
+ */
+import { twMerge } from 'tailwind-merge';
+import Image from '~/components/common/Image.astro';
+import type { Product } from '~/types';
+import { SPEC_LABELS, getLocalizedLabel } from '~/utils/products';
+
+export interface Props {
+  product: Product;
+  href: string;
+  class?: string;
+}
+
+const { product, href, class: className } = Astro.props;
+
+// Build truncated description (max 2 lines via line-clamp-2)
+const description = product.description?.trim() ?? '';
+
+// Communication method badges (up to 4, rest shown as "+N")
+const commMethods = product.communication ?? [];
+const visibleComms = commMethods.slice(0, 4);
+const overflowCount = commMethods.length - visibleComms.length;
+
+// Construct product detail link
+const detailUrl = href.replace(/\/$/, '') + '/' + product.slug;
+
+// Determine image src: use product.image or fallback to placeholder
+const imageSrc = product.image || undefined;
+const hasImage = !!imageSrc;
+
+// Model number for display
+const modelDisplay = product.model?.trim() ?? '';
+
+// Locale from product data (default to 'en')
+const locale = (product.language as string) || 'en';
+---
+
+<a
+  href={detailUrl}
+  class={twMerge(
+    'group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl',
+    'border border-gray-200 dark:border-slate-700',
+    'transition-all duration-300 ease-in-out',
+    'hover:-translate-y-1 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+    'overflow-hidden',
+    className
+  )}
+>
+  <!-- Product image -->
+  <div class="relative h-48 sm:h-56 bg-gray-100 dark:bg-slate-700 overflow-hidden">
+    {
+      hasImage ? (
+        <Image
+          src={imageSrc}
+          alt={product.name}
+          layout="cover"
+          class="absolute inset-0 w-full h-full"
+          width={600}
+          height={400}
+          format="webp"
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div class="absolute inset-0 flex items-center justify-center text-muted dark:text-slate-500">
+          <svg
+            class="w-16 h-16"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Card content -->
+  <div class="p-4 sm:p-5">
+    <!-- Product name -->
+    <h3 class="text-lg font-semibold leading-snug text-default dark:text-slate-200 group-hover:text-primary dark:group-hover:text-primary transition-colors duration-200 mb-1">
+      {product.name}
+    </h3>
+
+    <!-- Model number -->
+    {
+      modelDisplay && (
+        <p class="text-sm text-muted dark:text-slate-400 font-mono mb-2">
+          {modelDisplay}
+        </p>
+      )
+    }
+
+    <!-- Description (truncated to 2 lines) -->
+    {
+      description && (
+        <p class="text-sm text-muted dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">
+          {description}
+        </p>
+      )
+    }
+
+    <!-- Communication method badges -->
+    {
+      visibleComms.length > 0 && (
+        <div class="flex flex-wrap items-center gap-1.5 mt-auto">
+          {visibleComms.map((method) => (
+            <span
+              class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                     bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground
+                     border border-primary/20 dark:border-primary/30"
+            >
+              {getLocalizedLabel(SPEC_LABELS, method, locale)}
+            </span>
+          ))}
+          {overflowCount > 0 && (
+            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                           bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400">
+              +{overflowCount}
+            </span>
+          )}
+        </div>
+      )
+    }
+
+    <!-- Empty state for no communication -->
+    {
+      commMethods.length === 0 && (
+        <div class="mt-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                         bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400">
+            No communication
+          </span>
+        </div>
+      )
+    }
+  </div>
+</a>

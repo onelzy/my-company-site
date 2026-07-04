@@ -1,0 +1,64 @@
+---
+/**
+ * ProductGrid.astro — Responsive product grid layout.
+ *
+ * Props:
+ *   products: Product[] — array of products to display
+ *   baseUrl:  string    — base URL for building product detail links
+ *
+ * Renders a CSS grid that adapts:
+ *   • 1 column on mobile
+ *   • 2 columns on tablet (md)
+ *   • 3 columns on desktop (lg)
+ *
+ * Empty state shows a localized "No products found" message.
+ */
+import type { Product } from '~/types';
+import ProductCard from './ProductCard.astro';
+
+export interface Props {
+  products: Product[];
+  baseUrl: string;
+  class?: string;
+}
+
+const { products, baseUrl, class: className } = Astro.props;
+---
+
+{
+  products.length > 0 ? (
+    <div
+      class:list={[
+        'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8',
+        className,
+      ]}
+    >
+      {products.map((product) => (
+        <ProductCard product={product} href={baseUrl} />
+      ))}
+    </div>
+  ) : (
+    <div class="flex flex-col items-center justify-center py-16 px-4 text-center">
+      <svg
+        class="w-16 h-16 text-muted dark:text-slate-600 mb-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+        />
+      </svg>
+      <p class="text-lg text-muted dark:text-slate-400 font-medium">
+        No products found
+      </p>
+      <p class="text-sm text-muted dark:text-slate-500 mt-1">
+        Try adjusting your filters or search terms.
+      </p>
+    </div>
+  )
+}

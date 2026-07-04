@@ -249,3 +249,167 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+// ===================================================================
+// Products — B2B product catalogue types
+// ===================================================================
+
+/** Supported locales for product content (matches content.config.ts schema). */
+export type ProductLocale = 'en' | 'zh' | 'es' | 'ru' | 'fr' | 'de' | 'ar' | 'pt';
+
+/** Product content collection data schema fields. */
+export interface ProductData {
+  name: string;
+  model?: string;
+  /** Keystatic auto-generated slug from fields.slug { name, slug }. */
+  slug?: {
+    name: string;
+    slug: string;
+  };
+  description?: string;
+
+  // Dimension 1: Product Type
+  productType?:
+    | 'smart-meters'
+    | 'thermostats'
+    | 'senior-care'
+    | 'hotel-control'
+    | 'software-platforms';
+  productSubType?:
+    | 'single-phase' | 'three-phase' | 'multi-circuit' | 'din-rail' | 'anti-backflow'
+    | '24vac' | 'boiler-trv' | 'zigbee-hvac'
+    | 'emergency' | 'safety' | 'tracking' | 'health' | 'management'
+    | 'aijuan-app' | 'home-care-web' | 'nursing-station-web'
+    | 'room-thermostat' | 'lighting' | 'door-sign'
+    | 'smartowon-app' | 'zigbee-control-web' | 'energy-monitor-web' | 'partner-platform' | 'iot-platform';
+
+  // Dimension 2: Technical Solution
+  techSolution?: 'tuya' | 'mqtt' | 'zigbee';
+  techSubType?:
+    | 'tuya-meters' | 'tuya-thermostats' | 'tuya-lighting' | 'tuya-gateways'
+    | 'tuya-remotes' | 'tuya-senior' | 'tuya-sensors'
+    | 'mqtt-meters' | 'mqtt-thermostats' | 'mqtt-gateways' | 'mqtt-remotes' | 'mqtt-software'
+    | 'zigbee-meters' | 'zigbee-thermostats' | 'zigbee-lighting' | 'zigbee-gateways'
+    | 'zigbee-remotes' | 'zigbee-senior' | 'zigbee-sensors' | 'zigbee-energy' | 'zigbee-software';
+
+  // Multi-select technical spec arrays
+  communication?: Array<'zigbee' | 'wifi' | '4g' | 'lora' | 'nb-iot' | 'modbus' | 'mqtt' | 'tcpip' | 'rj45'>;
+  ecosystem?: Array<'tuya' | 'mqtt-open' | 'zigbee-solution' | 'home-assistant' | 'local-api'>;
+  extraTags?: Array<'modbus-rtu' | 'modbus-tcp'>;
+  softwareType?: Array<'app' | 'web' | 'admin' | 'analytics' | 'iot-platform'>;
+
+  // Media & Specs
+  image?: string;
+  specs?: {
+    accuracy?: string;
+    voltage?: string;
+    current?: string;
+    frequency?: string;
+    powerSupply?: string;
+    display?: string;
+    dimensions?: string;
+    weight?: string;
+    operatingTemp?: string;
+    protocol?: string;
+    certification?: string;
+    warranty?: string;
+  };
+
+  language?: ProductLocale;
+}
+
+/**
+ * Full product entry — flat interface combining content collection data
+ * with Astro's CollectionEntry render fields. All ProductData fields are
+ * available at the top level for convenient component access.
+ */
+export interface Product extends Omit<ProductData, 'slug'> {
+  /** Unique Astro-generated ID (e.g. "src/content/products/pc321-ty.mdoc"). */
+  id: string;
+  /** URL-friendly slug computed by Astro from the file path. */
+  slug: string;
+  /** Collection name, always "products". */
+  collection: 'products';
+  /** The product's content collection data (also spread at top level). */
+  data: ProductData;
+  /** Rendered HTML body (from .mdoc content). */
+  body?: string;
+  /** Rendered output metadata (Astro v6 render fields). */
+  rendered?: {
+    html?: string;
+    metadata?: Record<string, unknown>;
+  };
+}
+
+/**
+ * Filter state for the product catalogue page.
+ * Single-value filters use AND logic between groups.
+ * Array filters use OR logic within each group (product must match at least one).
+ */
+export interface ProductFilterState {
+  productType?: ProductData['productType'];
+  productSubType?: ProductData['productSubType'];
+  techSolution?: ProductData['techSolution'];
+  techSubType?: ProductData['techSubType'];
+  communication?: ProductData['communication'];
+  ecosystem?: ProductData['ecosystem'];
+  extraTags?: ProductData['extraTags'];
+  softwareType?: ProductData['softwareType'];
+}
+
+// Convenience type aliases for product catalogue values (reusable across components)
+
+export type ProductType =
+  | 'smart-meters'
+  | 'thermostats'
+  | 'senior-care'
+  | 'hotel-control'
+  | 'software-platforms';
+
+export type ProductSubType =
+  // Smart Meters
+  | 'single-phase' | 'three-phase' | 'multi-circuit' | 'din-rail' | 'anti-backflow'
+  // Thermostats
+  | '24vac' | 'boiler-trv' | 'zigbee-hvac'
+  // Senior Care
+  | 'emergency' | 'safety' | 'tracking' | 'health' | 'management'
+  | 'aijuan-app' | 'home-care-web' | 'nursing-station-web'
+  // Hotel Control
+  | 'room-thermostat' | 'lighting' | 'door-sign' | 'energy-management'
+  // Software & Platforms
+  | 'smartowon-app' | 'zigbee-control-web' | 'energy-monitor-web' | 'partner-platform' | 'iot-platform';
+
+export type TechSolution = 'tuya' | 'mqtt' | 'zigbee';
+
+export type TechSubType =
+  // Tuya
+  | 'tuya-meters' | 'tuya-thermostats' | 'tuya-lighting' | 'tuya-gateways'
+  | 'tuya-remotes' | 'tuya-senior' | 'tuya-sensors'
+  // MQTT
+  | 'mqtt-meters' | 'mqtt-thermostats' | 'mqtt-gateways' | 'mqtt-remotes' | 'mqtt-software'
+  // ZigBee
+  | 'zigbee-meters' | 'zigbee-thermostats' | 'zigbee-lighting' | 'zigbee-gateways'
+  | 'zigbee-remotes' | 'zigbee-senior' | 'zigbee-sensors' | 'zigbee-energy' | 'zigbee-software';
+
+export type CommunicationMethod = 'zigbee' | 'wifi' | '4g' | 'lora' | 'nb-iot' | 'modbus' | 'mqtt' | 'tcpip' | 'rj45';
+
+export type EcosystemType = 'tuya' | 'mqtt-open' | 'zigbee-solution' | 'home-assistant' | 'local-api';
+
+export type ExtraTag = 'modbus-rtu' | 'modbus-tcp';
+
+export type SoftwareType = 'app' | 'web' | 'admin' | 'analytics' | 'iot-platform';
+
+export interface ProductSpecs {
+  accuracy?: string;
+  voltage?: string;
+  current?: string;
+  frequency?: string;
+  powerSupply?: string;
+  display?: string;
+  dimensions?: string;
+  weight?: string;
+  operatingTemp?: string;
+  protocol?: string;
+  certification?: string;
+  warranty?: string;
+}
