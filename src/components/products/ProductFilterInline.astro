@@ -378,8 +378,8 @@ const activeCount = quickFilters.filter((f) => f.active).length;
   </div>
 </dialog>
 
-<!-- Filter JS — served from public/ directory -->
-<script src="/scripts/product-filter.js"></script>
+<!-- Filter JS — public/ asset, is:inline to prevent Astro bundling -->
+<script is:inline src="/scripts/product-filter.js"></script>
 
 <!-- Mobile drawer & quick-filter plumbing -->
 <script>

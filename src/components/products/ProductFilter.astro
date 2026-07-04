@@ -265,5 +265,5 @@ const hasAnyFilter =
   </fieldset>
 </aside>
 
-<!-- Filter JS — served from public/ directory (Vite does NOT serve src/ assets directly in production) -->
-<script src="/scripts/product-filter.js"></script>
+<!-- Filter JS — public/ asset, is:inline to prevent Astro bundling -->
+<script is:inline src="/scripts/product-filter.js"></script>
