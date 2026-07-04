@@ -1,8 +1,5 @@
 ---
-import { makePage } from '@keystatic/astro/ui';
-import config from 'virtual:keystatic-config';
-
-const Keystatic = makePage(config);
+import { Keystatic } from './_keystatic-page.js';
 
 export const prerender = false;
 ---
