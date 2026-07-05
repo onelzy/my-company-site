@@ -16,9 +16,22 @@ export interface Props {
 }
 
 const { post, url } = Astro.props;
+
+// Article SEO Schema
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  datePublished: post.publishDate?.toISOString(),
+  dateModified: post.updateDate?.toISOString() || post.publishDate?.toISOString(),
+  author: { '@type': 'Organization', name: 'OWON Technology' },
+  publisher: { '@type': 'Organization', name: 'OWON Technology' },
+  description: post.excerpt || post.title,
+};
 ---
 
 <section class="py-8 sm:py-16 lg:py-20 mx-auto">
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
   <article>
     <header
       class={post.image

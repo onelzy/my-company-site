@@ -12,7 +12,24 @@ export const headerData = {
     },
     {
       text: 'Developers',
-      href: getPermalink('/developers'),
+      links: [
+        {
+          text: 'API Reference',
+          href: getPermalink('/developers/api'),
+        },
+        {
+          text: 'SDKs & Libraries',
+          href: getPermalink('/developers/sdks'),
+        },
+        {
+          text: 'Code Examples',
+          href: getPermalink('/developers/examples'),
+        },
+        {
+          text: 'Firmware Changelog',
+          href: getPermalink('/developers/changelog'),
+        },
+      ],
     },
     {
       text: 'Resources',
@@ -22,6 +39,14 @@ export const headerData = {
           href: getBlogPermalink(),
         },
         {
+          text: 'Brochures & Datasheets',
+          href: getPermalink('/resources/brochures'),
+        },
+        {
+          text: 'FAQ',
+          href: getPermalink('/resources/faq'),
+        },
+        {
           text: 'About Us',
           href: getPermalink('/about'),
         },
@@ -29,7 +54,7 @@ export const headerData = {
     },
   ],
   actions: [
-    { text: 'Contact Sales', href: getPermalink('/contact') },
+    { text: 'Contact Sales', href: getPermalink('/contact-sales') },
   ],
 };
 
@@ -60,7 +85,7 @@ export const footerData = {
       title: 'Company',
       links: [
         { text: 'About', href: getPermalink('/about') },
-        { text: 'Contact', href: getPermalink('/contact') },
+        { text: 'Contact Sales', href: getPermalink('/contact-sales') },
         { text: 'Blog', href: getBlogPermalink() },
       ],
     },

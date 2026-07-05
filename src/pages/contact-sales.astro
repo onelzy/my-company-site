@@ -1,0 +1,205 @@
+---
+/**
+ * Contact Sales — Minimal conversion page (no global nav).
+ * Embed Calendly + contact form. Pre-fills email from query params.
+ */
+import Layout from '~/layouts/Layout.astro';
+import Logo from '~/components/Logo.astro';
+import { headerData } from '~/navigation';
+
+const url = new URL(Astro.request.url);
+const prefilledEmail = url.searchParams.get('email') || '';
+const prefilledCompany = url.searchParams.get('company') || '';
+
+const metadata = {
+  title: 'Contact Sales — OWON Technology',
+  description: 'Get in touch with our sales team for product pricing, demos, and custom solutions.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <div class="min-h-screen flex flex-col">
+    <!-- Minimal header: logo only -->
+    <header class="py-5 px-4 sm:px-6 lg:px-8 border-b border-gray-200 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto">
+        <a href="/" class="inline-flex items-center">
+          <Logo />
+        </a>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="flex-1 py-8 sm:py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <h1 class="text-3xl font-bold sm:text-4xl text-default dark:text-slate-100 mb-3">
+            Let's Talk
+          </h1>
+          <p class="text-lg text-muted dark:text-slate-400 max-w-xl mx-auto">
+            Tell us about your project and we'll get back to you within one business day.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+          <!-- Left: Calendly -->
+          <div class="order-2 lg:order-1">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">
+              📅 Book a 15-minute call
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-6">
+              Pick a time that works for you. Our team will walk you through pricing and capabilities.
+            </p>
+            <div class="rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800 p-6 min-h-[400px] flex items-center justify-center text-muted dark:text-slate-400">
+              <div class="text-center">
+                <div class="text-4xl mb-3">📅</div>
+                <p>Calendly integration coming soon.</p>
+                <p class="text-sm mt-2">In the meantime, use the form →</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <div class="order-1 lg:order-2">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">
+              ✉️ Send us a message
+            </h2>
+            <form id="contactSalesForm" class="space-y-4" method="POST" action="/api/contact">
+              <div>
+                <label for="fullName" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">
+                  Full Name *
+                </label>
+                <input type="text" id="fullName" name="fullName" required
+                       class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700
+                              bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm
+                              focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+                       placeholder="John Smith" />
+              </div>
+
+              <div>
+                <label for="businessEmail" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">
+                  Business Email *
+                </label>
+                <input type="email" id="businessEmail" name="businessEmail" required
+                       value={prefilledEmail}
+                       class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700
+                              bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm
+                              focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+                       placeholder="you@company.com" />
+              </div>
+
+              <div>
+                <label for="companyName" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">
+                  Company Name *
+                </label>
+                <input type="text" id="companyName" name="companyName" required
+                       value={prefilledCompany}
+                       class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700
+                              bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm
+                              focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+                       placeholder="Your company" />
+              </div>
+
+              <div>
+                <label for="phoneNumber" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">
+                  Phone Number <span class="text-muted font-normal">(optional)</span>
+                </label>
+                <input type="tel" id="phoneNumber" name="phoneNumber"
+                       class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700
+                              bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm
+                              focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+                       placeholder="+1 555-0123" />
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">
+                  Message / Project Details *
+                </label>
+                <textarea id="message" name="message" required rows="4"
+                          class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700
+                                 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm
+                                 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow resize-y"
+                          placeholder="Tell us about your project, requirements, timeline..."></textarea>
+              </div>
+
+              <button type="submit"
+                      class="w-full py-3 px-6 rounded-lg font-semibold text-sm text-white transition-all
+                             bg-[#FF6B00] hover:bg-[#E55D00] active:scale-[0.98]">
+                Send Message
+              </button>
+
+              <div class="flex items-start gap-2 text-xs text-muted dark:text-slate-500 pt-1">
+                <span class="shrink-0 mt-0.5">🛡️</span>
+                <span>We respect your privacy. Your data will only be used to process your inquiry.</span>
+              </div>
+            </form>
+
+            <!-- Success message (hidden initially) -->
+            <div id="contactSuccess" class="hidden text-center py-8">
+              <div class="text-4xl mb-3">✅</div>
+              <h3 class="text-lg font-semibold text-default dark:text-slate-100 mb-2">Message sent!</h3>
+              <p class="text-sm text-muted dark:text-slate-400">We'll get back to you within one business day.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick connect buttons -->
+        <div class="mt-16 pt-8 border-t border-gray-200 dark:border-slate-800 text-center">
+          <p class="text-sm text-muted dark:text-slate-400 mb-4">Or reach us directly:</p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a href="https://wa.me/" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#25D366] text-white font-medium text-sm hover:opacity-90 transition-opacity">
+              💬 Chat on WhatsApp
+            </a>
+            <a href="https://teams.microsoft.com/" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#6264A7] text-white font-medium text-sm hover:opacity-90 transition-opacity">
+              💬 Chat on Microsoft Teams
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Minimal footer -->
+    <footer class="py-4 px-4 text-center text-xs text-muted dark:text-slate-500 border-t border-gray-200 dark:border-slate-800">
+      © {new Date().getFullYear()} OWON Technology Inc. All rights reserved.
+    </footer>
+  </div>
+</Layout>
+
+<script>
+  document.getElementById('contactSalesForm')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+    // Basic validation
+    const email = (form.querySelector('#businessEmail') as HTMLInputElement)?.value?.trim();
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      alert('Please enter a valid business email address.');
+      return;
+    }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      // In production, POST to /api/contact (Cloudflare Worker)
+      // For now, simulate success
+      await new Promise(r => setTimeout(r, 1000));
+      form.classList.add('hidden');
+      document.getElementById('contactSuccess')?.classList.remove('hidden');
+
+      if (window.gtag) {
+        window.gtag('event', 'contact_form_submit', {
+          event_category: 'lead',
+          event_label: 'contact-sales',
+        });
+      }
+    } catch (_) {
+      btn.textContent = 'Send Message';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again or email us directly.');
+    }
+  });
+</script>
