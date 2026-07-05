@@ -53,6 +53,7 @@ export default config({
             { label: '酒店客控', value: 'hotel-control' },
             { label: '软件&平台', value: 'software-platforms' },
           ],
+          defaultValue: 'smart-meters',
         }),
         productSubType: fields.select({
           label: '产品子分类',
@@ -98,6 +99,7 @@ export default config({
             { label: 'MQTT开放协议', value: 'mqtt' },
             { label: 'ZigBee标准方案', value: 'zigbee' },
           ],
+          defaultValue: 'tuya',
         }),
         techSubType: fields.select({
           label: '技术方案子分类',
