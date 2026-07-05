@@ -26,8 +26,9 @@ const currentLocale = (Astro.currentLocale || 'en') as (typeof SUPPORTED_LOCALES
 // Strip current locale prefix to get the base path
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 let basePath = currentPath;
-if (currentLocale !== 'en' && basePath.startsWith(`/${currentLocale}`)) {
-  basePath = basePath.slice(currentLocale.length + 1) || '/';
+if (currentLocale !== 'en' && currentPath.startsWith(`/${currentLocale}`)) {
+  basePath = '/' + currentPath.slice(currentLocale.length + 1);
+  if (basePath.endsWith('/') && basePath !== '/') basePath = basePath.slice(0, -1);
 }
 
 // Preserve query string when switching locale
