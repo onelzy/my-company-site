@@ -51,6 +51,24 @@
 
   function getCards() { return $$('.product-card-wrapper'); }
 
+  /**
+   * Load taxonomy data. Reads from <script type="application/json" id="taxonomy-data">
+   * if present, with fallback to window.__PRODUCT_TAXONOMY.
+   */
+  function getTaxonomy() {
+    if (window.__PRODUCT_TAXONOMY) return window.__PRODUCT_TAXONOMY;
+    var el = document.getElementById('taxonomy-data');
+    if (el) {
+      try {
+        window.__PRODUCT_TAXONOMY = JSON.parse(el.textContent);
+      } catch (_e) {
+        console.warn('Failed to parse taxonomy data:', _e);
+        window.__PRODUCT_TAXONOMY = {};
+      }
+    }
+    return window.__PRODUCT_TAXONOMY || {};
+  }
+
   // ===========================================================================
   // URL sync
   // ===========================================================================
@@ -257,7 +275,7 @@
     const container = $('#' + containerId);
     if (!container) return;
 
-    const taxonomy = window.__PRODUCT_TAXONOMY || {};
+    const taxonomy = getTaxonomy();
     const key = group === 'subtype'
       ? (taxonomy.typeGroups && taxonomy.typeGroups[parentKey])
       : (taxonomy.solutionGroups && taxonomy.solutionGroups[parentKey]);

@@ -277,9 +277,8 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
 
 <!-- =============================================================== -->
 <!-- Product taxonomy data for client JS -->
+<!-- Use type="application/json" to avoid SSR HTML-escaping issues  -->
 <!-- =============================================================== -->
-<script>
-  window.__PRODUCT_TAXONOMY = {taxonomyJson};
-</script>
+<script type="application/json" id="taxonomy-data">{taxonomyJson}</script>
 
 <script is:inline src="/scripts/product-filter.js"></script>
