@@ -33,6 +33,19 @@ const description = locale === 'zh'
   : 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
 
 // ===================================================================
+// Taxonomy data (must be declared BEFORE buildTaxonomy + its call)
+// ===================================================================
+
+const techSolutionTree: Record<string, string[]> = {
+  tuya: ['tuya-meters', 'tuya-thermostats', 'tuya-lighting', 'tuya-gateways', 'tuya-remotes', 'tuya-senior', 'tuya-sensors'],
+  mqtt: ['mqtt-meters', 'mqtt-thermostats', 'mqtt-gateways', 'mqtt-remotes', 'mqtt-software'],
+  zigbee: ['zigbee-meters', 'zigbee-thermostats', 'zigbee-lighting', 'zigbee-gateways', 'zigbee-remotes', 'zigbee-senior', 'zigbee-sensors', 'zigbee-energy', 'zigbee-software'],
+};
+
+const productTypes = getAllProductTypes();
+const techSolutions = Object.keys(techSolutionTree);
+
+// ===================================================================
 // Build taxonomy object server-side for client JS
 // ===================================================================
 function buildTaxonomy() {
@@ -60,16 +73,6 @@ function buildTaxonomy() {
 }
 
 const taxonomyJson = JSON.stringify(buildTaxonomy());
-
-// Keep techSolutionTree for server-side rendering
-const techSolutionTree: Record<string, string[]> = {
-  tuya: ['tuya-meters', 'tuya-thermostats', 'tuya-lighting', 'tuya-gateways', 'tuya-remotes', 'tuya-senior', 'tuya-sensors'],
-  mqtt: ['mqtt-meters', 'mqtt-thermostats', 'mqtt-gateways', 'mqtt-remotes', 'mqtt-software'],
-  zigbee: ['zigbee-meters', 'zigbee-thermostats', 'zigbee-lighting', 'zigbee-gateways', 'zigbee-remotes', 'zigbee-senior', 'zigbee-sensors', 'zigbee-energy', 'zigbee-software'],
-};
-
-const productTypes = getAllProductTypes();
-const techSolutions = Object.keys(techSolutionTree);
 const commTags = ['zigbee', 'wifi', '4g', 'modbus', 'mqtt', 'tcpip', 'rj45'];
 
 // i18n labels

@@ -2,7 +2,8 @@
 import { SITE } from 'astrowind:config';
 
 const locale = Astro.currentLocale || 'en';
-const prefix = locale === SITE.defaultLanguage ? '' : `/${locale}`;
+const defaultLocale = 'en'; // matches astro.config.ts i18n.defaultLocale
+const prefix = locale === defaultLocale ? '' : `/${locale}`;
 
 // Parse optional solution and sub-type from URL
 const path = Astro.params.path || '';
