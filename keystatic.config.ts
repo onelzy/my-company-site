@@ -38,8 +38,9 @@ export default config({
           label: '简短描述',
           multiline: true,
         }),
-        content: fields.markdown({
+        content: fields.markdoc({
           label: '详细内容（Markdown）',
+          extension: 'mdoc',
         }),
 
         // ---- Dimension 1: Product Type ----
