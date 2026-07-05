@@ -10,162 +10,85 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import { getPermalink } from '~/utils/permalinks';
 
-const locale = Astro.currentLocale || 'en';
-
 const metadata = {
-  title: locale === 'zh'
-    ? 'OWON Technology — 智能物联网设备制造商'
-    : 'OWON Technology — Smart IoT Device Manufacturer',
+  title: 'OWON Technology — Smart IoT Device Manufacturer',
   ignoreTitleTemplate: true,
 };
 
 const productsUrl = getPermalink('/products');
-const aboutUrl = getPermalink('/about');
 const contactUrl = getPermalink('/contact');
-
-const i18n = {
-  heroTitle: locale === 'zh'
-    ? '专业的智能物联网设备制造商'
-    : 'Professional Smart IoT Device Manufacturer',
-  heroSub: locale === 'zh'
-    ? 'OWON Technology 专注智能电表、温控器、智慧养老、酒店客控系统及 IoT 平台的研发与制造，服务全球 B2B 客户。'
-    : 'OWON Technology specializes in smart meters, thermostats, senior care, hotel control systems, and IoT platforms — serving B2B customers worldwide.',
-  productsBtn: locale === 'zh' ? '查看产品' : 'View Products',
-  contactBtn: locale === 'zh' ? '联系我们' : 'Contact Us',
-  featuresTitle: locale === 'zh' ? '核心产品线' : 'Core Product Lines',
-  featuresSub: locale === 'zh'
-    ? '五大产品系列，覆盖智能能源、环境控制、照护管理、酒店智控及软件平台'
-    : 'Five product lines covering smart energy, environmental control, care management, hotel automation, and software platforms',
-  metersTitle: locale === 'zh' ? '智能电表' : 'Smart Meters',
-  metersDesc: locale === 'zh'
-    ? '单相 / 三相 / 多回路 / 导轨式电表，支持 Wi-Fi、ZigBee、Modbus、MQTT 等多种通讯协议，满足家庭、商业、工业场景需求。'
-    : 'Single / three-phase / multi-circuit / DIN-rail meters with Wi-Fi, ZigBee, Modbus, MQTT support for residential, commercial, and industrial applications.',
-  thermostatsTitle: locale === 'zh' ? '智能温控器' : 'Smart Thermostats',
-  thermostatsDesc: locale === 'zh'
-    ? '24Vac 触屏温控器、ZigBee TRV 阀门、锅炉套件，兼容主流智能家居生态，实现精准温控与节能管理。'
-    : '24V AC touchscreen thermostats, ZigBee TRV valves, boiler kits — compatible with major smart home ecosystems for precise temperature control.',
-  seniorTitle: locale === 'zh' ? '智慧养老' : 'Senior Care',
-  seniorDesc: locale === 'zh'
-    ? '智能睡眠监测垫、紧急呼叫、安全防护、定位追踪、健康监测设备，搭配爱居安 APP 与养老院管理平台。'
-    : 'Smart sleep monitors, emergency call, safety, tracking, health devices with AiJuan app and nursing station management platform.',
-  hotelTitle: locale === 'zh' ? '酒店客控' : 'Hotel Control',
-  hotelDesc: locale === 'zh'
-    ? '客房温控器、照明控制、门牌显示、能源管理系统，支持 ZigBee / Tuya 方案，提升住客体验与运营效率。'
-    : 'Room thermostats, lighting control, door signs, energy management — ZigBee / Tuya powered for better guest experience.',
-  softwareTitle: locale === 'zh' ? '软件 & 平台' : 'Software & Platforms',
-  softwareDesc: locale === 'zh'
-    ? 'SmartOWON APP、EdgeEco IoT 平台、能耗监测 Web 端、代理商管理平台——为设备管理、数据分析提供全面支撑。'
-    : 'SmartOWON app, EdgeEco IoT platform, energy monitoring web, partner management — complete device management and data analytics.',
-  strengthTitle: locale === 'zh' ? '为什么选择 OWON' : 'Why OWON',
-  strengthSub: locale === 'zh'
-    ? '多年的硬件研发与制造经验，为全球客户提供可靠的产品与定制化方案'
-    : 'Years of hardware R&D and manufacturing experience, delivering reliable products and customized solutions worldwide',
-  s1Title: locale === 'zh' ? '多协议支持' : 'Multi-Protocol',
-  s1Desc: locale === 'zh'
-    ? '同时支持 Tuya、MQTT 开放协议、ZigBee 私有方案三套技术体系，灵活适配不同客户需求。'
-    : 'Simultaneously supports Tuya, MQTT open protocol, and ZigBee private solutions — adapts to diverse customer needs.',
-  s2Title: locale === 'zh' ? '全球合规' : 'Global Compliance',
-  s2Desc: locale === 'zh'
-    ? '产品通过 CE、FCC、RoHS 等国际认证，满足不同国家地区的法规要求。'
-    : 'Products certified with CE, FCC, RoHS and more, meeting regulatory requirements across global markets.',
-  s3Title: locale === 'zh' ? 'B2B 定制' : 'B2B Customization',
-  s3Desc: locale === 'zh'
-    ? '提供 OEM / ODM 定制服务，从硬件设计到固件开发，从 App 到云平台，全程技术支持。'
-    : 'OEM / ODM customization from hardware design to firmware, app, and cloud platform — full technical support.',
-  s4Title: locale === 'zh' ? 'IoT 全栈' : 'Full-Stack IoT',
-  s4Desc: locale === 'zh'
-    ? '从终端设备到云平台，从 App 到 Web 管理后台，提供端到端的物联网整体解决方案。'
-    : 'End-to-end IoT solutions from devices to cloud, from mobile apps to web management dashboards.',
-  ctaTitle: locale === 'zh'
-    ? '寻找可靠的智能物联网合作伙伴？'
-    : 'Looking for a reliable smart IoT partner?',
-  ctaSub: locale === 'zh'
-    ? '联系我们，获取产品目录、技术文档和定制方案报价'
-    : 'Contact us for product catalogues, technical documentation, and customized solution quotes',
-};
 ---
 
 <Layout metadata={metadata}>
-  <!-- ============================================================ -->
   <!-- Hero -->
-  <!-- ============================================================ -->
   <Hero
     actions={[
-      {
-        variant: 'primary',
-        text: i18n.productsBtn,
-        href: productsUrl,
-        icon: 'tabler:apps',
-      },
-      { text: i18n.contactBtn, href: contactUrl },
+      { variant: 'primary', text: 'View Products', href: productsUrl, icon: 'tabler:apps' },
+      { text: 'Contact Sales', href: contactUrl },
     ]}
   >
     <Fragment slot="title">
-      {i18n.heroTitle}
+      Professional Smart IoT Device Manufacturer
     </Fragment>
     <Fragment slot="subtitle">
-      {i18n.heroSub}
+      OWON Technology specializes in smart meters, thermostats, senior care, hotel control systems, and IoT platforms — serving B2B customers worldwide.
     </Fragment>
   </Hero>
 
-  <!-- ============================================================ -->
   <!-- Product Lines -->
-  <!-- ============================================================ -->
   <Features
     id="products"
-    title={i18n.featuresTitle}
-    subtitle={i18n.featuresSub}
+    title="Core Product Lines"
+    subtitle="Five product lines covering smart energy, environmental control, care management, hotel automation, and software platforms"
     items={[
       {
-        title: i18n.metersTitle,
-        description: i18n.metersDesc,
+        title: 'Smart Meters',
+        description: 'Single / three-phase / multi-circuit / DIN-rail meters with Wi-Fi, ZigBee, Modbus, MQTT support for residential, commercial, and industrial applications.',
         icon: 'tabler:bolt',
       },
       {
-        title: i18n.thermostatsTitle,
-        description: i18n.thermostatsDesc,
+        title: 'Smart Thermostats',
+        description: '24V AC touchscreen thermostats, ZigBee TRV valves, boiler kits — compatible with major smart home ecosystems for precise temperature control.',
         icon: 'tabler:temperature',
       },
       {
-        title: i18n.seniorTitle,
-        description: i18n.seniorDesc,
+        title: 'Senior Care',
+        description: 'Smart sleep monitors, emergency call, safety, tracking, health devices with AiJuan app and nursing station management platform.',
         icon: 'tabler:heart',
       },
       {
-        title: i18n.hotelTitle,
-        description: i18n.hotelDesc,
+        title: 'Hotel Control',
+        description: 'Room thermostats, lighting control, door signs, energy management — ZigBee / Tuya powered for better guest experience.',
         icon: 'tabler:building-skyscraper',
       },
       {
-        title: i18n.softwareTitle,
-        description: i18n.softwareDesc,
+        title: 'Software & Platforms',
+        description: 'SmartOWON app, EdgeEco IoT platform, energy monitoring web, partner management — complete device management and data analytics.',
         icon: 'tabler:cloud-computing',
       },
     ]}
   />
 
-  <!-- ============================================================ -->
   <!-- Why OWON -->
-  <!-- ============================================================ -->
   <Content
-    title={i18n.strengthTitle}
-    subtitle={i18n.strengthSub}
+    title="Why OWON"
+    subtitle="Years of hardware R&D and manufacturing experience, delivering reliable products and customized solutions worldwide"
     items={[
       {
-        title: i18n.s1Title,
-        description: i18n.s1Desc,
+        title: 'Multi-Protocol',
+        description: 'Simultaneously supports Tuya, MQTT open protocol, and ZigBee private solutions — adapts to diverse customer needs.',
       },
       {
-        title: i18n.s2Title,
-        description: i18n.s2Desc,
+        title: 'Global Compliance',
+        description: 'Products certified with CE, FCC, RoHS and more, meeting regulatory requirements across global markets.',
       },
       {
-        title: i18n.s3Title,
-        description: i18n.s3Desc,
+        title: 'B2B Customization',
+        description: 'OEM / ODM customization from hardware design to firmware, app, and cloud platform — full technical support.',
       },
       {
-        title: i18n.s4Title,
-        description: i18n.s4Desc,
+        title: 'Full-Stack IoT',
+        description: 'End-to-end IoT solutions from devices to cloud, from mobile apps to web management dashboards.',
       },
     ]}
   >
@@ -174,24 +97,17 @@ const i18n = {
     </Fragment>
   </Content>
 
-  <!-- ============================================================ -->
   <!-- CTA -->
-  <!-- ============================================================ -->
   <CallToAction
     actions={[
-      {
-        variant: 'primary',
-        text: i18n.contactBtn,
-        href: contactUrl,
-        icon: 'tabler:mail',
-      },
+      { variant: 'primary', text: 'Contact Sales', href: contactUrl, icon: 'tabler:mail' },
     ]}
   >
     <Fragment slot="title">
-      {i18n.ctaTitle}
+      Looking for a reliable smart IoT partner?
     </Fragment>
     <Fragment slot="subtitle">
-      {i18n.ctaSub}
+      Contact us for product catalogues, technical documentation, and customized solution quotes
     </Fragment>
   </CallToAction>
 </Layout>

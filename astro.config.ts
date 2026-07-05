@@ -32,13 +32,17 @@ export default defineConfig({
   output: 'server',
   adapter: cloudflare(),
 
-  i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'],
-    routing: {
-      prefixDefaultLocale: false,
-    },
-  },
+  // ================================================================
+  // i18n: Currently English-only. Language field is reserved in
+  // Keystatic schema for future multi-language expansion.
+  // When ready, uncomment the block below:
+  //
+  //   i18n: {
+  //     defaultLocale: 'en',
+  //     locales: ['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'],
+  //     routing: { prefixDefaultLocale: false },
+  //   },
+  // ================================================================
 
   integrations: [
     react(),

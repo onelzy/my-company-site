@@ -14,11 +14,9 @@ import {
 
 export const prerender = false;
 
-const locale = Astro.currentLocale || 'en';
 const allProducts = await getCollection('products');
 
 const products: Product[] = allProducts
-  .filter((p) => p.data.language === locale)
   .map((p) => ({
     ...p.data,
     id: p.id,
@@ -27,15 +25,10 @@ const products: Product[] = allProducts
     data: p.data,
   }));
 
-const title = locale === 'zh' ? '产品中心' : 'Product Center';
-const description = locale === 'zh'
-  ? 'OWON Technology 全系列智能产品——电表、恒温器、智能养老、酒店客控及软件平台'
-  : 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
+const title = 'Product Center';
+const description = 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
 
-// ===================================================================
-// Taxonomy data (must be declared BEFORE buildTaxonomy + its call)
-// ===================================================================
-
+// Taxonomy data
 const techSolutionTree: Record<string, string[]> = {
   tuya: ['tuya-meters', 'tuya-thermostats', 'tuya-lighting', 'tuya-gateways', 'tuya-remotes', 'tuya-senior', 'tuya-sensors'],
   mqtt: ['mqtt-meters', 'mqtt-thermostats', 'mqtt-gateways', 'mqtt-remotes', 'mqtt-software'],
@@ -45,16 +38,13 @@ const techSolutionTree: Record<string, string[]> = {
 const productTypes = getAllProductTypes();
 const techSolutions = Object.keys(techSolutionTree);
 
-// ===================================================================
-// Build taxonomy object server-side for client JS
-// ===================================================================
 function buildTaxonomy() {
   const typeGroups: Record<string, { label: string; children: Record<string, string> }> = {};
   for (const pt of productTypes) {
     typeGroups[pt] = {
-      label: getLocalizedLabel(PRODUCT_TYPE_LABELS, pt, locale),
+      label: getLocalizedLabel(PRODUCT_TYPE_LABELS, pt, 'en'),
       children: Object.fromEntries(
-        getProductSubTypes(pt).map((s) => [s, getLocalizedLabel(PRODUCT_TYPE_LABELS, s, locale)])
+        getProductSubTypes(pt).map((s) => [s, getLocalizedLabel(PRODUCT_TYPE_LABELS, s, 'en')])
       ),
     };
   }
@@ -62,11 +52,10 @@ function buildTaxonomy() {
   const solutionGroups: Record<string, { label: string; children: Record<string, string> }> = {};
   for (const ts of techSolutions) {
     solutionGroups[ts] = {
-      label: getLocalizedLabel(TECH_SOLUTION_LABELS, ts, locale),
+      label: getLocalizedLabel(TECH_SOLUTION_LABELS, ts, 'en'),
       children: Object.fromEntries(
         techSolutionTree[ts]!.map((s) => {
-          const label = getLocalizedLabel(TECH_SOLUTION_LABELS, s, locale);
-          // Strip tech prefix: "ZigBee智能电表" → "智能电表", "Tuya照护" → "照护"
+          const label = getLocalizedLabel(TECH_SOLUTION_LABELS, s, 'en');
           const clean = label.replace(/^(Tuya|ZigBee|MQTT)\s*/i, '');
           return [s, clean || label];
         })
@@ -77,23 +66,7 @@ function buildTaxonomy() {
   return { typeGroups, solutionGroups };
 }
 
-const taxonomyJson = JSON.stringify(buildTaxonomy());
 const commTags = ['zigbee', 'wifi', '4g', 'modbus', 'mqtt', 'tcpip', 'rj45'];
-
-// i18n labels
-const tabTypeLabel = locale === 'zh' ? '按产品类型' : 'By Product Type';
-const tabSolutionLabel = locale === 'zh' ? '按技术方案' : 'By Tech Solution';
-const typeLabel = locale === 'zh' ? '产品类型' : 'Product Type';
-const subtypeLabel = locale === 'zh' ? '子分类' : 'Sub-Type';
-const ecoLabel = locale === 'zh' ? '生态' : 'Ecosystem';
-const commLabel = locale === 'zh' ? '通讯方式' : 'Communication';
-const solLabel = locale === 'zh' ? '技术方案' : 'Tech Solution';
-const quickTypeLabel = locale === 'zh' ? '类型' : 'Type';
-const showLabel = locale === 'zh' ? '显示' : 'Showing';
-const productsLabel = locale === 'zh' ? '款产品' : 'products';
-const emptyTitle = locale === 'zh' ? '没有找到符合条件的产品' : 'No products match your filters';
-const emptyHint = locale === 'zh' ? '试试调整筛选条件' : 'Try adjusting your filters';
-const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
 ---
 
 <PageLayout metadata={{ title, description }}>
@@ -109,38 +82,33 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
         </p>
       </div>
 
-      <!-- =============================================================== -->
       <!-- Dimension Tabs -->
-      <!-- =============================================================== -->
       <div id="dimensionTabs" class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-6 w-fit">
         <button class="dimension-tab inline-flex items-center gap-1.5 px-4 py-2 rounded-lg
                        text-sm font-semibold cursor-pointer transition-all duration-200
                        bg-white dark:bg-slate-700 text-default dark:text-slate-200
                        shadow-sm active" data-dim="type">
-          📂 {tabTypeLabel}
+          📂 By Product Type
         </button>
         <button class="dimension-tab inline-flex items-center gap-1.5 px-4 py-2 rounded-lg
                        text-sm font-semibold cursor-pointer transition-all duration-200
                        text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60" data-dim="solution">
-          🔬 {tabSolutionLabel}
+          🔬 By Tech Solution
         </button>
       </div>
 
-      <!-- =============================================================== -->
-      <!-- Filter Row (server-rendered for type dimension, JS handles solution) -->
-      <!-- =============================================================== -->
+      <!-- Filter Row -->
       <div class="bg-white dark:bg-slate-800/50 rounded-xl p-4 mb-6
                   border border-gray-200 dark:border-slate-700 shadow-sm"
            id="filterRow">
         <!-- TYPE DIMENSION FILTERS -->
         <div id="typeFilters" class="filter-dim">
-          <!-- Product Type Chips -->
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{typeLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Product Type:</span>
             <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                           transition-all duration-150 bg-primary text-primary-foreground border border-primary active"
                     data-group="type" data-value="">
-              {locale === 'zh' ? '全部' : 'All'}
+              All
             </button>
             {productTypes.map((pt) => (
               <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
@@ -149,25 +117,23 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
                             border border-gray-300 dark:border-slate-600
                             hover:border-primary dark:hover:border-primary"
                       data-group="type" data-value={pt}>
-                {getLocalizedLabel(PRODUCT_TYPE_LABELS, pt, locale)}
+                {getLocalizedLabel(PRODUCT_TYPE_LABELS, pt, 'en')}
               </button>
             ))}
           </div>
 
-          <!-- Sub-Type Chips (shown when a type is selected) -->
           <div id="typeSubFilters" class="flex items-center gap-2 flex-wrap mt-3 hidden">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{subtypeLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Sub-Type:</span>
             <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                           transition-all duration-150 bg-primary text-primary-foreground border border-primary active"
                     data-group="subtype" data-value="">
-              {locale === 'zh' ? '全部' : 'All'}
+              All
             </button>
             <div id="subTypeContainer" class="flex items-center gap-2 flex-wrap"></div>
           </div>
 
-          <!-- Quick Eco Tags -->
           <div class="flex items-center gap-2 flex-wrap mt-3 ml-auto sm:ml-0">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{ecoLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Ecosystem:</span>
             {techSolutions.map((ts) => (
               <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                             transition-all duration-150
@@ -175,14 +141,13 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
                             bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300
                             hover:bg-blue-100 dark:hover:bg-blue-900/40"
                       data-group="sol" data-value={ts}>
-                {getLocalizedLabel(TECH_SOLUTION_LABELS, ts, locale)}
+                {getLocalizedLabel(TECH_SOLUTION_LABELS, ts, 'en')}
               </button>
             ))}
           </div>
 
-          <!-- Communication Chips -->
           <div class="flex items-center gap-2 flex-wrap mt-3">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{commLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Communication:</span>
             {commTags.map((ct) => (
               <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                             transition-all duration-150
@@ -190,7 +155,7 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
                             bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300
                             hover:bg-green-100 dark:hover:bg-green-900/40"
                       data-group="comm" data-value={ct}>
-                {getLocalizedLabel(SPEC_LABELS, ct, locale)}
+                {getLocalizedLabel(SPEC_LABELS, ct, 'en')}
               </button>
             ))}
           </div>
@@ -198,13 +163,12 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
 
         <!-- SOLUTION DIMENSION FILTERS -->
         <div id="solutionFilters" class="filter-dim hidden">
-          <!-- Tech Solution Chips -->
           <div class="flex items-center gap-2 flex-wrap">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{solLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Tech Solution:</span>
             <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                           transition-all duration-150 bg-primary text-primary-foreground border border-primary active"
                     data-group="sol" data-value="">
-              {locale === 'zh' ? '全部' : 'All'}
+              All
             </button>
             {techSolutions.map((ts) => (
               <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
@@ -213,25 +177,23 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
                             border border-gray-300 dark:border-slate-600
                             hover:border-primary dark:hover:border-primary"
                       data-group="sol" data-value={ts}>
-                {getLocalizedLabel(TECH_SOLUTION_LABELS, ts, locale)}
+                {getLocalizedLabel(TECH_SOLUTION_LABELS, ts, 'en')}
               </button>
             ))}
           </div>
 
-          <!-- Tech Sub-Type Chips (shown when a solution is selected) -->
           <div id="solSubFilters" class="flex items-center gap-2 flex-wrap mt-3 hidden">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{subtypeLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Sub-Type:</span>
             <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                           transition-all duration-150 bg-primary text-primary-foreground border border-primary active"
                     data-group="subsol" data-value="">
-              {locale === 'zh' ? '全部' : 'All'}
+              All
             </button>
             <div id="solSubContainer" class="flex items-center gap-2 flex-wrap"></div>
           </div>
 
-          <!-- Communication Chips -->
           <div class="flex items-center gap-2 flex-wrap mt-3">
-            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">{commLabel}:</span>
+            <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0">Communication:</span>
             {commTags.map((ct) => (
               <button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer
                             transition-all duration-150
@@ -239,51 +201,37 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
                             bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300
                             hover:bg-green-100 dark:hover:bg-green-900/40"
                       data-group="comm" data-value={ct}>
-                {getLocalizedLabel(SPEC_LABELS, ct, locale)}
+                {getLocalizedLabel(SPEC_LABELS, ct, 'en')}
               </button>
             ))}
           </div>
         </div>
       </div>
 
-      <!-- =============================================================== -->
       <!-- Result Stats -->
-      <!-- =============================================================== -->
       <div class="flex justify-between items-center mb-6 flex-wrap gap-3" id="resultStats">
         <span class="text-sm text-muted dark:text-slate-400">
-          {showLabel} <strong id="countDisplay" class="text-default dark:text-slate-200 font-semibold">{products.length}</strong> {productsLabel}
+          Showing <strong id="countDisplay" class="text-default dark:text-slate-200 font-semibold">{products.length}</strong> products
         </span>
       </div>
 
-      <!-- =============================================================== -->
       <!-- Product Grid -->
-      <!-- =============================================================== -->
       <div id="productGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => {
-          const typeLabel = getLocalizedLabel(PRODUCT_TYPE_LABELS, product.productType || '', locale);
-          const solLabel2 = getLocalizedLabel(TECH_SOLUTION_LABELS, product.techSolution || '', locale);
-          const href = `/${locale}/products`;
-          return (
-            <ProductCard product={product} href={href} />
-          );
-        })}
+        {products.map((product) => (
+          <ProductCard product={product} href="/products" />
+        ))}
       </div>
 
-      <!-- =============================================================== -->
       <!-- Empty State -->
-      <!-- =============================================================== -->
       <div id="emptyState" class="hidden text-center py-16 text-muted dark:text-slate-400">
-        <p class="text-lg">😕 {emptyTitle}</p>
-        <p class="text-sm mt-1">{emptyHint}</p>
+        <p class="text-lg">😕 No products match your filters</p>
+        <p class="text-sm mt-1">Try adjusting your filters</p>
       </div>
     </div>
   </section>
 </PageLayout>
 
-<!-- =============================================================== -->
-<!-- Product taxonomy data for client JS — uses Astro define:vars   -->
-<!-- for safe injection without HTML escaping issues                -->
-<!-- =============================================================== -->
+<!-- Taxonomy data for client JS -->
 <script define:vars={{ taxonomy: buildTaxonomy() }}>
   window.__PRODUCT_TAXONOMY = taxonomy;
 </script>

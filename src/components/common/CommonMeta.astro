@@ -2,13 +2,13 @@
 /**
  * CommonMeta — shared <head> metadata for all pages.
  *
- * Renders charset / viewport / sitemap link plus hreflang alternate links
- * for the 8 supported locales.  For product detail pages the hreflang set
- * may be overridden via the `alternates` prop.
+ * Currently English-only. hreflang alternates are reserved for
+ * future multi-language expansion — uncomment the block and
+ * re-enable i18n in astro.config.ts when ready.
  */
 import { getAsset } from '~/utils/permalinks';
 
-const LOCALES = ['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'] as const;
+// const LOCALES = ['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'] as const;
 
 interface AlternateLink {
   hreflang: string;
@@ -16,44 +16,12 @@ interface AlternateLink {
 }
 
 interface Props {
-  /** Explicit hreflang alternates (e.g. from a product detail page). */
   alternates?: AlternateLink[];
 }
 
 const { alternates } = Astro.props as Props;
 
-// -------------------------------------------------------------------
-// If explicit alternates are provided use them, otherwise derive a
-// basic set for static pages from the current URL path.
-// -------------------------------------------------------------------
-const currentLocale = Astro.currentLocale || 'en';
-const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
-
-let links: AlternateLink[];
-if (alternates && alternates.length > 0) {
-  links = alternates;
-} else {
-  // Strip locale prefix to get the "base" path
-  let basePath = currentPath;
-  if (currentLocale !== 'en' && basePath.startsWith(`/${currentLocale}`)) {
-    basePath = basePath.slice(currentLocale.length + 1) || '/';
-  }
-
-  links = LOCALES.map((locale) => {
-    const prefixedPath =
-      locale === 'en' ? basePath : `/${locale}${basePath === '/' ? '' : basePath}`;
-    return {
-      hreflang: locale,
-      href: `${Astro.url.origin}${prefixedPath}`,
-    };
-  });
-
-  // x-default → en
-  const enLink = links.find((l) => l.hreflang === 'en');
-  if (enLink) {
-    links.push({ hreflang: 'x-default', href: enLink.href });
-  }
-}
+const links: AlternateLink[] = alternates || [];
 ---
 
 <meta charset="UTF-8" />
@@ -61,7 +29,6 @@ if (alternates && alternates.length > 0) {
 
 <link rel="sitemap" href={getAsset('/sitemap-index.xml')} />
 
-<!-- hreflang alternate links -->
-{links.map((link) => (
+{links.length > 0 && links.map((link) => (
   <link rel="alternate" hreflang={link.hreflang} href={link.href} />
 ))}

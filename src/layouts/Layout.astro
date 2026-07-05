@@ -30,8 +30,10 @@ export interface Props {
 const { metadata = {}, alternates } = Astro.props;
 const { language } = I18N;
 // RTL for Arabic; falls back to config.yaml textDirection for others
-const currentLocale = Astro.currentLocale || 'en';
-const textDirection = currentLocale === 'ar' ? 'rtl' : I18N.textDirection;
+// i18n: English-only for now. When multi-language is enabled via
+// astro.config.ts, restore: const currentLocale = Astro.currentLocale || 'en';
+const currentLocale = 'en';
+const textDirection = I18N.textDirection;
 ---
 <!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
