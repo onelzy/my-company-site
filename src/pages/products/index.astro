@@ -32,7 +32,36 @@ const description = locale === 'zh'
   ? 'OWON Technology 全系列智能产品——电表、恒温器、智能养老、酒店客控及软件平台'
   : 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
 
-// Taxonomy data for the server-side filter chip rendering
+// ===================================================================
+// Build taxonomy object server-side for client JS
+// ===================================================================
+function buildTaxonomy() {
+  const typeGroups: Record<string, { label: string; children: Record<string, string> }> = {};
+  for (const pt of productTypes) {
+    typeGroups[pt] = {
+      label: getLocalizedLabel(PRODUCT_TYPE_LABELS, pt, locale),
+      children: Object.fromEntries(
+        getProductSubTypes(pt).map((s) => [s, getLocalizedLabel(PRODUCT_TYPE_LABELS, s, locale)])
+      ),
+    };
+  }
+
+  const solutionGroups: Record<string, { label: string; children: Record<string, string> }> = {};
+  for (const ts of techSolutions) {
+    solutionGroups[ts] = {
+      label: getLocalizedLabel(TECH_SOLUTION_LABELS, ts, locale),
+      children: Object.fromEntries(
+        techSolutionTree[ts]!.map((s) => [s, getLocalizedLabel(TECH_SOLUTION_LABELS, s, locale)])
+      ),
+    };
+  }
+
+  return { typeGroups, solutionGroups };
+}
+
+const taxonomyJson = JSON.stringify(buildTaxonomy());
+
+// Keep techSolutionTree for server-side rendering
 const techSolutionTree: Record<string, string[]> = {
   tuya: ['tuya-meters', 'tuya-thermostats', 'tuya-lighting', 'tuya-gateways', 'tuya-remotes', 'tuya-senior', 'tuya-sensors'],
   mqtt: ['mqtt-meters', 'mqtt-thermostats', 'mqtt-gateways', 'mqtt-remotes', 'mqtt-software'],
@@ -262,20 +291,7 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
 <!-- Product taxonomy data for client JS -->
 <!-- =============================================================== -->
 <script>
-  window.__PRODUCT_TAXONOMY = {
-    typeGroups: {
-      'smart-meters': { label: {JSON.stringify(PRODUCT_TYPE_LABELS['smart-meters']?.[locale] || 'Smart Meters')}, children: {JSON.stringify(Object.fromEntries(getProductSubTypes('smart-meters').map(s => [s, PRODUCT_TYPE_LABELS[s]?.[locale] || s]))) } },
-      'thermostats': { label: {JSON.stringify(PRODUCT_TYPE_LABELS['thermostats']?.[locale] || 'Thermostats')}, children: {JSON.stringify(Object.fromEntries(getProductSubTypes('thermostats').map(s => [s, PRODUCT_TYPE_LABELS[s]?.[locale] || s]))) } },
-      'senior-care': { label: {JSON.stringify(PRODUCT_TYPE_LABELS['senior-care']?.[locale] || 'Senior Care')}, children: {JSON.stringify(Object.fromEntries(getProductSubTypes('senior-care').map(s => [s, PRODUCT_TYPE_LABELS[s]?.[locale] || s]))) } },
-      'hotel-control': { label: {JSON.stringify(PRODUCT_TYPE_LABELS['hotel-control']?.[locale] || 'Hotel Control')}, children: {JSON.stringify(Object.fromEntries(getProductSubTypes('hotel-control').map(s => [s, PRODUCT_TYPE_LABELS[s]?.[locale] || s]))) } },
-      'software-platforms': { label: {JSON.stringify(PRODUCT_TYPE_LABELS['software-platforms']?.[locale] || 'Software & Platforms')}, children: {JSON.stringify(Object.fromEntries(getProductSubTypes('software-platforms').map(s => [s, PRODUCT_TYPE_LABELS[s]?.[locale] || s]))) } },
-    },
-    solutionGroups: {
-      tuya: { label: {JSON.stringify(TECH_SOLUTION_LABELS['tuya']?.[locale] || 'Tuya')}, children: {JSON.stringify(Object.fromEntries(techSolutionTree.tuya.map(s => [s, TECH_SOLUTION_LABELS[s]?.[locale] || s]))) } },
-      mqtt: { label: {JSON.stringify(TECH_SOLUTION_LABELS['mqtt']?.[locale] || 'MQTT')}, children: {JSON.stringify(Object.fromEntries(techSolutionTree.mqtt.map(s => [s, TECH_SOLUTION_LABELS[s]?.[locale] || s]))) } },
-      zigbee: { label: {JSON.stringify(TECH_SOLUTION_LABELS['zigbee']?.[locale] || 'ZigBee')}, children: {JSON.stringify(Object.fromEntries(techSolutionTree.zigbee.map(s => [s, TECH_SOLUTION_LABELS[s]?.[locale] || s]))) } },
-    },
-  };
+  window.__PRODUCT_TAXONOMY = {taxonomyJson};
 </script>
 
 <script is:inline src="/scripts/product-filter.js"></script>
