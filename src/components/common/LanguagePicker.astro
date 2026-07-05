@@ -30,9 +30,13 @@ if (currentLocale !== 'en' && basePath.startsWith(`/${currentLocale}`)) {
   basePath = basePath.slice(currentLocale.length + 1) || '/';
 }
 
+// Preserve query string when switching locale
+const queryString = Astro.url.search;
+
 function localeUrl(locale: string): string {
   const prefix = locale === 'en' ? '' : `/${locale}`;
-  return `${prefix}${basePath === '/' ? '' : basePath}` || '/';
+  const base = `${prefix}${basePath === '/' ? '' : basePath}` || '/';
+  return queryString ? `${base}${queryString}` : base;
 }
 
 const current = LOCALES.find((l) => l.code === currentLocale) || LOCALES[0];
