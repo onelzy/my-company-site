@@ -276,9 +276,11 @@ const viewDetail = locale === 'zh' ? '查看详情' : 'View Details';
 </PageLayout>
 
 <!-- =============================================================== -->
-<!-- Product taxonomy data for client JS -->
-<!-- Use type="application/json" to avoid SSR HTML-escaping issues  -->
+<!-- Product taxonomy data for client JS — uses Astro define:vars   -->
+<!-- for safe injection without HTML escaping issues                -->
 <!-- =============================================================== -->
-<script type="application/json" id="taxonomy-data">{taxonomyJson}</script>
+<script define:vars={{ taxonomy: buildTaxonomy() }}>
+  window.__PRODUCT_TAXONOMY = taxonomy;
+</script>
 
 <script is:inline src="/scripts/product-filter.js"></script>
