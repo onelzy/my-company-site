@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const allSolutions = await getCollection('solutions');
+const entry = allSolutions.find((s) => {
+  const sSlug = s.id.split('/').pop()?.replace('.mdoc', '') || '';
+  return sSlug === slug && s.data.language === 'en';
+});
+
+if (!entry) return new Response(null, { status: 404 });
+
+const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry } = entry.data;
+const bodyHtml = entry.rendered?.html || entry.body || '';
+
+const industryLabels: Record<string, string> = {
+  'smart-hotels': 'Smart Hotels',
+  'senior-care': 'Senior Care',
+  'energy-management': 'Energy Management',
+  'smart-building': 'Smart Building',
+  'industrial-iot': 'Industrial IoT',
+};
+const industryLabel = industryLabels[industry || ''] || '';
+
+const techLabels: Record<string, string> = { tuya: 'Tuya', mqtt: 'MQTT', zigbee: 'ZigBee' };
+const techLabel = techLabels[techSolution || ''] || '';
+---
+
+<PageLayout metadata={{ title: `${title} — OWON Solutions`, description: subtitle || title }}>
+  <section class="py-12 lg:py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-8 text-sm text-muted dark:text-slate-400">
+        <a href="/" class="hover:text-primary transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/solutions" class="hover:text-primary transition-colors">Solutions</a>
+        <span class="mx-2">/</span>
+        <span class="text-default dark:text-slate-200 font-medium">{title}</span>
+      </nav>
+
+      <!-- Hero -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
+        <div class="relative aspect-video rounded-xl bg-gray-100 dark:bg-slate-800 overflow-hidden border border-gray-200 dark:border-slate-700">
+          {heroImage ? (
+            <Image src={heroImage} alt={title} layout="cover" class="absolute inset-0 w-full h-full" width={800} height={450} />
+          ) : (
+            <div class="absolute inset-0 flex items-center justify-center text-6xl">🏢</div>
+          )}
+        </div>
+        <div class="flex flex-col justify-center">
+          {industryLabel && (
+            <span class="text-xs font-bold text-primary uppercase tracking-wider mb-2">{industryLabel}</span>
+          )}
+          <h1 class="text-3xl font-bold sm:text-4xl mb-4 text-default dark:text-slate-100">{title}</h1>
+          {subtitle && <p class="text-lg text-muted dark:text-slate-400 mb-6">{subtitle}</p>}
+          <div class="flex flex-wrap gap-2 mb-6">
+            {productLines?.map((pl) => (
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                {pl}
+              </span>
+            ))}
+            {techLabel && (
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                {techLabel}
+              </span>
+            )}
+          </div>
+          <a href="/contact"
+             class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity w-fit">
+            Request a Demo →
+          </a>
+        </div>
+      </div>
+
+      <!-- Key Stats -->
+      {stats && stats.length > 0 && (
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 bg-gray-50 dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700">
+          {stats.map((s) => (
+            <div class="text-center">
+              <div class="text-3xl font-bold text-primary mb-1">{s.value}</div>
+              <div class="text-sm text-muted dark:text-slate-400">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <!-- Topology Diagram -->
+      {diagramImage && (
+        <div class="mb-16">
+          <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">System Architecture</h2>
+          <div class="rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800 p-4">
+            <Image src={diagramImage} alt="System topology" width={1200} height={600} class="w-full h-auto" />
+          </div>
+        </div>
+      )}
+
+      <!-- Body Content -->
+      {bodyHtml && (
+        <div class="prose prose-lg dark:prose-invert max-w-none
+                    prose-headings:text-default dark:prose-headings:text-slate-100
+                    prose-p:text-default dark:prose-p:text-slate-300"
+             set:html={bodyHtml} />
+      )}
+
+      <!-- CTA -->
+      <div class="mt-16 text-center p-12 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/10">
+        <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Ready to get started?</h2>
+        <p class="text-muted dark:text-slate-400 mb-6">Contact our solutions team for a personalized demo and quote.</p>
+        <a href="/contact"
+           class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity">
+          Contact Sales →
+        </a>
+      </div>
+    </div>
+  </section>
+</PageLayout>

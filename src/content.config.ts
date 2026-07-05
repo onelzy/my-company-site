@@ -159,9 +159,34 @@ const productsCollection = defineCollection({
 });
 
 // ===================================================================
+// Solutions — Industry use-case driven solutions
+// ===================================================================
+const solutionsCollection = defineCollection({
+  loader: glob({ pattern: '*.mdoc', base: 'src/content/solutions' }),
+  schema: z.object({
+    title: z.string(),
+    subtitle: z.string().optional(),
+    industry: z
+      .enum(['smart-hotels', 'senior-care', 'energy-management', 'smart-building', 'industrial-iot'])
+      .optional(),
+    productLines: z
+      .array(z.enum(['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms']))
+      .optional(),
+    techSolution: z.enum(['tuya', 'mqtt', 'zigbee']).optional(),
+    heroImage: z.string().optional(),
+    diagramImage: z.string().optional(),
+    stats: z
+      .array(z.object({ value: z.string(), label: z.string() }))
+      .optional(),
+    language: z.enum(['en']).optional(),
+  }),
+});
+
+// ===================================================================
 // Export
 // ===================================================================
 export const collections = {
   post: postCollection,
   products: productsCollection,
+  solutions: solutionsCollection,
 };

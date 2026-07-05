@@ -1,12 +1,4 @@
 ---
-/**
- * Product detail page at /products/[slug]/
- *
- * Dynamic SSR route that matches a product by Keystatic slug (p.data.slug?.slug)
- * with a fallback to the filename-derived slug. Renders hero with image, model,
- * tag badges, markdown body (Overview), specs table (Specifications), and
- * related products grid.
- */
 import type { Product } from '~/types';
 import { getCollection } from 'astro:content';
 import PageLayout from '~/layouts/PageLayout.astro';
@@ -23,55 +15,17 @@ export const prerender = false;
 
 const { slug } = Astro.params;
 
-// -------------------------------------------------------------------
-// Resolve locale from URL path (e.g. /en/products/...)
-// -------------------------------------------------------------------
-const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
-const locale = (['en', 'zh', 'es', 'ru', 'fr', 'de', 'ar', 'pt'] as const)
-  .find((l) => pathSegments[0] === l) || 'en';
-
-// -------------------------------------------------------------------
-// Hreflang alternates — find all locale versions of this product
-// -------------------------------------------------------------------
+// All products (English only)
 const allProducts = await getCollection('products');
 
 const entry = allProducts.find(
   (p) =>
-    p.data.language === locale &&
     (p.data.slug?.slug === slug ||
       p.id.split('/').pop()?.replace('.mdoc', '') === slug)
 );
 
 if (!entry) {
   return new Response(null, { status: 404, statusText: 'Not Found' });
-}
-
-// -------------------------------------------------------------------
-// Build hreflang alternates — same Keystatic slug in other languages
-// -------------------------------------------------------------------
-const keySlug = entry.data.slug?.slug ||
-  entry.id.split('/').pop()?.replace('.mdoc', '') || '';
-const alternates = keySlug
-  ? allProducts
-      .filter((p) => {
-        const pKeySlug =
-          p.data.slug?.slug ||
-          p.id.split('/').pop()?.replace('.mdoc', '') ||
-          '';
-        return pKeySlug === keySlug;
-      })
-      .map((p) => ({
-        hreflang: p.data.language || 'en',
-        href: `${Astro.url.origin}${p.data.language === 'en' ? '' : '/' + p.data.language}/products/${keySlug}`,
-      }))
-  : [];
-
-// Add x-default
-if (alternates.length > 0) {
-  const enAlt = alternates.find((a) => a.hreflang === 'en');
-  if (enAlt) {
-    alternates.push({ hreflang: 'x-default', href: enAlt.href });
-  }
 }
 
 // Build the Product shape
@@ -87,9 +41,7 @@ const product: Product = {
 
 const { name, model, description } = product;
 
-// -------------------------------------------------------------------
 // Tag badge data
-// -------------------------------------------------------------------
 const productType = product.productType;
 const techSolution = product.techSolution;
 const communication = product.communication ?? [];
@@ -97,22 +49,20 @@ const ecosystem = product.ecosystem ?? [];
 const extraTags = product.extraTags ?? [];
 const softwareType = product.softwareType ?? [];
 
-// -------------------------------------------------------------------
-// Specs fields (only include non-empty ones)
-// -------------------------------------------------------------------
+// Specs fields
 const specFieldLabels: Record<string, string> = {
-  accuracy: locale === 'zh' ? '精度' : 'Accuracy',
-  voltage: locale === 'zh' ? '电压' : 'Voltage',
-  current: locale === 'zh' ? '电流' : 'Current',
-  frequency: locale === 'zh' ? '频率' : 'Frequency',
-  powerSupply: locale === 'zh' ? '供电' : 'Power Supply',
-  display: locale === 'zh' ? '显示' : 'Display',
-  dimensions: locale === 'zh' ? '尺寸' : 'Dimensions',
-  weight: locale === 'zh' ? '重量' : 'Weight',
-  operatingTemp: locale === 'zh' ? '工作温度' : 'Operating Temp',
-  protocol: locale === 'zh' ? '协议' : 'Protocol',
-  certification: locale === 'zh' ? '认证' : 'Certification',
-  warranty: locale === 'zh' ? '保修' : 'Warranty',
+  accuracy: 'Accuracy',
+  voltage: 'Voltage',
+  current: 'Current',
+  frequency: 'Frequency',
+  powerSupply: 'Power Supply',
+  display: 'Display',
+  dimensions: 'Dimensions',
+  weight: 'Weight',
+  operatingTemp: 'Operating Temp',
+  protocol: 'Protocol',
+  certification: 'Certification',
+  warranty: 'Warranty',
 };
 
 const specs = product.specs ?? {};
@@ -120,16 +70,11 @@ const specEntries = Object.entries(specs).filter(
   ([, v]) => v !== undefined && v !== null && String(v).trim() !== ''
 );
 
-// -------------------------------------------------------------------
 // Related products (same productType OR same techSolution, excluding self, max 4)
-// -------------------------------------------------------------------
 const relatedProducts: Product[] = allProducts
   .filter((p) => {
-    // same locale, not self
-    if (p.data.language !== locale) return false;
     const pSlug = p.data.slug?.slug || p.id.split('/').pop()?.replace('.mdoc', '');
     if (pSlug === slug) return false;
-    // match productType OR techSolution
     return (
       (productType && p.data.productType === productType) ||
       (techSolution && p.data.techSolution === techSolution)
@@ -144,195 +89,143 @@ const relatedProducts: Product[] = allProducts
     data: p.data,
   }));
 
-// -------------------------------------------------------------------
 // SEO metadata
-// -------------------------------------------------------------------
 const metaTitle = `${name} — OWON Technology`;
 const metaDescription =
   description?.trim() || `Learn about ${name} specifications and features.`;
 
-// -------------------------------------------------------------------
-// Breadcrumb labels
-// -------------------------------------------------------------------
-const homeLabel = locale === 'zh' ? '首页' : 'Home';
-const productsLabel = locale === 'zh' ? '产品' : 'Products';
+// Labels
 const typeLabel = productType
-  ? getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, locale)
+  ? getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en')
   : '';
 
-// -------------------------------------------------------------------
-// Body content (rendered HTML or raw markdown)
-// -------------------------------------------------------------------
+// Body content
 const htmlContent = product.rendered?.html || product.body || '';
 
-// -------------------------------------------------------------------
-// Image source
-// -------------------------------------------------------------------
+// Image
 const imageSrc = product.image || undefined;
 const hasImage = !!imageSrc;
 
-// -------------------------------------------------------------------
-// Locale-aware strings for section headings
-// -------------------------------------------------------------------
-const overviewLabel = locale === 'zh' ? '概述' : 'Overview';
-const specsLabel = locale === 'zh' ? '技术规格' : 'Specifications';
-const relatedLabel = locale === 'zh' ? '相关产品' : 'Related Products';
+// ============================================================
+// SEO Schema: Product JSON-LD
+// ============================================================
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: name,
+  description: metaDescription,
+  sku: model || product.slug,
+  brand: { '@type': 'Brand', name: 'OWON Technology' },
+  ...(hasImage && { image: `${Astro.url.origin}${imageSrc}` }),
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+  },
+};
 ---
 
-<PageLayout metadata={{ title: metaTitle, description: metaDescription }} alternates={alternates}>
+<PageLayout metadata={{ title: metaTitle, description: metaDescription }}>
+  <!-- SEO Schema -->
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <!-- ==================================================== -->
-      <!-- Breadcrumb                                              -->
-      <!-- ==================================================== -->
+      <!-- Breadcrumb -->
       <nav class="mb-8 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
-        <a href={`/${locale}`} class="hover:text-primary transition-colors">
-          {homeLabel}
-        </a>
+        <a href="/" class="hover:text-primary transition-colors">Home</a>
         <span class="mx-2" aria-hidden="true">/</span>
-        <a href={`/${locale}/products`} class="hover:text-primary transition-colors">
-          {productsLabel}
-        </a>
-        {
-          productType && (
+        <a href="/products" class="hover:text-primary transition-colors">Products</a>
+        {productType && (
+          <>
             <span class="mx-2" aria-hidden="true">/</span>
             <span class="text-default dark:text-slate-200 font-medium">{typeLabel}</span>
-          )
-        }
+          </>
+        )}
         <span class="mx-2" aria-hidden="true">/</span>
         <span class="text-default dark:text-slate-200 font-medium">{name}</span>
       </nav>
 
-      <!-- ==================================================== -->
-      <!-- Hero Section                                            -->
-      <!-- ==================================================== -->
+      <!-- Hero Section -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-        <!-- Product image -->
         <div class="relative aspect-square rounded-xl bg-gray-100 dark:bg-slate-800 overflow-hidden
                     border border-gray-200 dark:border-slate-700">
-          {
-            hasImage ? (
-              <Image
-                src={imageSrc}
-                alt={name}
-                layout="cover"
-                class="absolute inset-0 w-full h-full"
-                width={800}
-                height={800}
-                format="webp"
-                loading="eager"
-                decoding="async"
-              />
-            ) : (
-              <div class="absolute inset-0 flex items-center justify-center text-muted dark:text-slate-500">
-                <svg
-                  class="w-24 h-24"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-            )
-          }
+          {hasImage ? (
+            <Image src={imageSrc} alt={name} layout="cover"
+                   class="absolute inset-0 w-full h-full" width={800} height={800}
+                   format="webp" loading="eager" decoding="async" />
+          ) : (
+            <div class="absolute inset-0 flex items-center justify-center text-muted dark:text-slate-500">
+              <svg class="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+          )}
         </div>
 
-        <!-- Product info -->
         <div class="flex flex-col justify-center">
-          <h1 class="text-3xl font-bold text-default dark:text-slate-100 sm:text-4xl lg:text-5xl mb-3">
-            {name}
-          </h1>
-
+          <h1 class="text-3xl font-bold text-default dark:text-slate-100 sm:text-4xl lg:text-5xl mb-3">{name}</h1>
           {model && (
             <p class="text-lg font-mono text-muted dark:text-slate-400 mb-4
                        bg-gray-100 dark:bg-slate-800 inline-block self-start
-                       px-3 py-1 rounded-md border border-gray-200 dark:border-slate-700">
-              {model}
-            </p>
+                       px-3 py-1 rounded-md border border-gray-200 dark:border-slate-700">{model}</p>
           )}
-
           {description && (
-            <p class="text-base text-default dark:text-slate-300 leading-relaxed mb-6 max-w-xl">
-              {description}
-            </p>
+            <p class="text-base text-default dark:text-slate-300 leading-relaxed mb-6 max-w-xl">{description}</p>
           )}
 
           <!-- Tag badges -->
           <div class="flex flex-wrap gap-2">
-            <!-- Product type badge -->
             {productType && (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                            bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground
-                           border border-primary/20 dark:border-primary/30">
-                {typeLabel}
-              </span>
+                           border border-primary/20 dark:border-primary/30">{typeLabel}</span>
             )}
-
-            <!-- Tech solution badge -->
             {techSolution && (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                            bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300
                            border border-blue-200 dark:border-blue-700">
-                {getLocalizedLabel(TECH_SOLUTION_LABELS, techSolution, locale)}
+                {getLocalizedLabel(TECH_SOLUTION_LABELS, techSolution, 'en')}
               </span>
             )}
-
-            <!-- Communication badges -->
             {communication.map((method) => (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                            bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300
                            border border-green-200 dark:border-green-700">
-                {getLocalizedLabel(SPEC_LABELS, method, locale)}
+                {getLocalizedLabel(SPEC_LABELS, method, 'en')}
               </span>
             ))}
-
-            <!-- Ecosystem badges -->
             {ecosystem.map((eco) => (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                            bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300
                            border border-purple-200 dark:border-purple-700">
-                {getLocalizedLabel(SPEC_LABELS, eco, locale)}
+                {getLocalizedLabel(SPEC_LABELS, eco, 'en')}
               </span>
             ))}
-
-            <!-- Extra tags -->
             {extraTags.map((tag) => (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                            bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300
                            border border-amber-200 dark:border-amber-700">
-                {getLocalizedLabel(SPEC_LABELS, tag, locale)}
+                {getLocalizedLabel(SPEC_LABELS, tag, 'en')}
               </span>
             ))}
-
-            <!-- Software type badges -->
             {softwareType.map((sw) => (
               <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium
                            bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-300
                            border border-teal-200 dark:border-teal-700">
-                {getLocalizedLabel(SPEC_LABELS, sw, locale)}
+                {getLocalizedLabel(SPEC_LABELS, sw, 'en')}
               </span>
             ))}
           </div>
         </div>
       </div>
 
-      <!-- ==================================================== -->
-      <!-- Content Sections (Overview + Specs)                    -->
-      <!-- ==================================================== -->
+      <!-- Content Sections -->
       <div class="space-y-16">
-        <!-- Overview (markdown content) -->
+        <!-- Overview -->
         <section>
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-6 pb-2
-                     border-b border-gray-200 dark:border-slate-700">
-            {overviewLabel}
-          </h2>
+                     border-b border-gray-200 dark:border-slate-700">Overview</h2>
           <div class="prose prose-lg dark:prose-invert max-w-none
                       prose-headings:text-default dark:prose-headings:text-slate-100
                       prose-p:text-default dark:prose-p:text-slate-300
@@ -341,67 +234,48 @@ const relatedLabel = locale === 'zh' ? '相关产品' : 'Related Products';
                       prose-a:text-primary dark:prose-a:text-primary
                       prose-code:bg-gray-100 dark:prose-code:bg-slate-800
                       prose-code:text-default dark:prose-code:text-slate-200
-                      prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
-                      prose-code:text-sm">
-            {
-              htmlContent ? (
-                <Fragment set:html={htmlContent} />
-              ) : (
-                <p class="text-muted dark:text-slate-400 italic">
-                  {locale === 'zh' ? '暂无概述信息。' : 'No overview information available.'}
-                </p>
-              )
-            }
+                      prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm">
+            {htmlContent ? (
+              <Fragment set:html={htmlContent} />
+            ) : (
+              <p class="text-muted dark:text-slate-400 italic">No overview information available.</p>
+            )}
           </div>
         </section>
 
         <!-- Specifications -->
         <section>
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-6 pb-2
-                     border-b border-gray-200 dark:border-slate-700">
-            {specsLabel}
-          </h2>
-          {
-            specEntries.length > 0 ? (
-              <div class="rounded-xl border border-gray-200 dark:border-slate-700
-                          overflow-hidden bg-white dark:bg-slate-800 shadow-sm">
-                <table class="w-full text-sm">
-                  <tbody>
-                    {specEntries.map(([key, value]) => (
-                      <tr class="border-b border-gray-100 dark:border-slate-700 last:border-b-0
-                                 transition-colors hover:bg-gray-50 dark:hover:bg-slate-800/60">
-                        <th class="px-5 py-3 text-left font-medium text-muted dark:text-slate-400
-                                   bg-gray-50 dark:bg-slate-800/40 w-1/3">
-                          {specFieldLabels[key] ?? key}
-                        </th>
-                        <td class="px-5 py-3 text-default dark:text-slate-200 font-mono">
-                          {String(value)}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <p class="text-muted dark:text-slate-400 italic">
-                {locale === 'zh' ? '暂无规格信息。' : 'No specifications available.'}
-              </p>
-            )
-          }
+                     border-b border-gray-200 dark:border-slate-700">Specifications</h2>
+          {specEntries.length > 0 ? (
+            <div class="rounded-xl border border-gray-200 dark:border-slate-700
+                        overflow-hidden bg-white dark:bg-slate-800 shadow-sm">
+              <table class="w-full text-sm">
+                <tbody>
+                  {specEntries.map(([key, value]) => (
+                    <tr class="border-b border-gray-100 dark:border-slate-700 last:border-b-0
+                               transition-colors hover:bg-gray-50 dark:hover:bg-slate-800/60">
+                      <th class="px-5 py-3 text-left font-medium text-muted dark:text-slate-400
+                                 bg-gray-50 dark:bg-slate-800/40 w-1/3">{specFieldLabels[key] ?? key}</th>
+                      <td class="px-5 py-3 text-default dark:text-slate-200 font-mono">{String(value)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p class="text-muted dark:text-slate-400 italic">No specifications available.</p>
+          )}
         </section>
 
         <!-- Related Products -->
-        {
-          relatedProducts.length > 0 && (
-            <section>
-              <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-6 pb-2
-                         border-b border-gray-200 dark:border-slate-700">
-                {relatedLabel}
-              </h2>
-              <ProductGrid products={relatedProducts} baseUrl={`/${locale}/products`} />
-            </section>
-          )
-        }
+        {relatedProducts.length > 0 && (
+          <section>
+            <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-6 pb-2
+                       border-b border-gray-200 dark:border-slate-700">Related Products</h2>
+            <ProductGrid products={relatedProducts} baseUrl="/products" />
+          </section>
+        )}
       </div>
     </div>
   </section>

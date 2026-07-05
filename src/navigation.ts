@@ -7,25 +7,29 @@ export const headerData = {
       href: getPermalink('/products'),
     },
     {
-      text: 'Company',
+      text: 'Solutions',
+      href: getPermalink('/solutions'),
+    },
+    {
+      text: 'Developers',
+      href: getPermalink('/developers'),
+    },
+    {
+      text: 'Resources',
       links: [
-        {
-          text: 'About Us',
-          href: getPermalink('/about'),
-        },
-        {
-          text: 'Contact',
-          href: getPermalink('/contact'),
-        },
         {
           text: 'Blog',
           href: getBlogPermalink(),
+        },
+        {
+          text: 'About Us',
+          href: getPermalink('/about'),
         },
       ],
     },
   ],
   actions: [
-    { text: 'Contact Us', href: getPermalink('/contact') },
+    { text: 'Contact Sales', href: getPermalink('/contact') },
   ],
 };
 
@@ -40,6 +44,16 @@ export const footerData = {
         { text: 'Senior Care', href: getPermalink('/products?type=senior-care') },
         { text: 'Hotel Control', href: getPermalink('/products?type=hotel-control') },
         { text: 'Software & Platforms', href: getPermalink('/products?type=software-platforms') },
+      ],
+    },
+    {
+      title: 'Solutions',
+      links: [
+        { text: 'Smart Hotels', href: getPermalink('/solutions') },
+        { text: 'Senior Care', href: getPermalink('/solutions') },
+        { text: 'Energy Management', href: getPermalink('/solutions') },
+        { text: 'Smart Building', href: getPermalink('/solutions') },
+        { text: 'Industrial IoT', href: getPermalink('/solutions') },
       ],
     },
     {

@@ -1,0 +1,128 @@
+---
+import { getCollection } from 'astro:content';
+import PageLayout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+
+export const prerender = false;
+
+const allSolutions = await getCollection('solutions');
+const solutions = allSolutions.filter((s) => s.data.language === 'en');
+
+const industries = [
+  { value: 'smart-hotels', label: 'Smart Hotels' },
+  { value: 'senior-care', label: 'Senior Care' },
+  { value: 'energy-management', label: 'Energy Management' },
+  { value: 'smart-building', label: 'Smart Building' },
+  { value: 'industrial-iot', label: 'Industrial IoT' },
+];
+
+const industryIcons: Record<string, string> = {
+  'smart-hotels': '🏨',
+  'senior-care': '🏥',
+  'energy-management': '⚡',
+  'smart-building': '🏢',
+  'industrial-iot': '🏭',
+};
+
+function getIndustryLabel(value: string): string {
+  return industries.find((i) => i.value === value)?.label || '';
+}
+---
+
+<PageLayout metadata={{ title: 'Solutions — OWON Technology', description: 'Industry-specific IoT solutions for smart hotels, senior care, energy management and more.' }}>
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">Solutions</h1>
+      <p class="text-lg text-muted dark:text-slate-400 mb-8 max-w-2xl">
+        Industry-proven IoT solutions built on OWON's hardware and software stack.
+        From smart hotels to industrial energy management — find the right solution for your project.
+      </p>
+
+      <!-- Industry filter chips -->
+      <div id="solFilterRow" class="flex flex-wrap gap-3 mb-10">
+        <button class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all
+                       bg-primary text-primary-foreground active" data-industry="">
+          All Solutions
+        </button>
+        {industries.map((ind) => (
+          <button class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all
+                         border border-gray-300 dark:border-slate-600
+                         text-gray-600 dark:text-slate-400
+                         hover:border-primary dark:hover:border-primary hover:text-primary"
+                  data-industry={ind.value}>
+            {ind.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Solution cards -->
+      <div id="solGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {solutions.map((s) => {
+          const solutionSlug = s.id.split('/').pop()?.replace('.mdoc', '') || '';
+          const indLabel = getIndustryLabel(s.data.industry || '');
+          const icon = industryIcons[s.data.industry || ''] || '🏢';
+          return (
+            <a href={`/solutions/${solutionSlug}`}
+               class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl
+                      border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
+               data-industry={s.data.industry || ''}>
+              <div class="h-48 bg-gray-100 dark:bg-slate-700 overflow-hidden relative flex items-center justify-center text-5xl">
+                {s.data.heroImage ? (
+                  <Image src={s.data.heroImage} alt={s.data.title} layout="cover" class="absolute inset-0 w-full h-full" width={600} height={400} />
+                ) : (
+                  <span>{icon}</span>
+                )}
+              </div>
+              <div class="p-5">
+                {indLabel && (
+                  <span class="text-xs font-semibold text-primary uppercase tracking-wide">{indLabel}</span>
+                )}
+                <h3 class="text-lg font-semibold mt-1 mb-2 text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                  {s.data.title}
+                </h3>
+                {s.data.subtitle && (
+                  <p class="text-sm text-muted dark:text-slate-400 line-clamp-2">{s.data.subtitle}</p>
+                )}
+              </div>
+            </a>
+          );
+        })}
+
+        {solutions.length === 0 && (
+          <div class="col-span-full text-center py-16 text-muted dark:text-slate-400">
+            <p class="text-lg">No solutions yet — create your first solution in Keystatic.</p>
+            <a href="/keystatic" class="text-primary hover:underline text-sm mt-2 inline-block">Open CMS →</a>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<script>
+  document.getElementById('solFilterRow')?.addEventListener('click', (e) => {
+    const chip = (e.target as HTMLElement).closest('.sol-filter-chip');
+    if (!chip) return;
+
+    // Update active state
+    document.querySelectorAll('.sol-filter-chip').forEach((c) => {
+      c.classList.remove('active', 'bg-primary', 'text-primary-foreground');
+      c.classList.add('border', 'text-gray-600');
+    });
+    chip.classList.add('active', 'bg-primary', 'text-primary-foreground');
+    chip.classList.remove('border', 'text-gray-600');
+
+    const industry = (chip as HTMLElement).dataset.industry || '';
+
+    // Filter cards
+    document.querySelectorAll('#solGrid > a').forEach((card) => {
+      const el = card as HTMLElement;
+      const cardIndustry = el.dataset.industry || '';
+      if (!industry || cardIndustry === industry) {
+        el.style.display = '';
+      } else {
+        el.style.display = 'none';
+      }
+    });
+  });
+</script>

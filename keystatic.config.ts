@@ -316,5 +316,98 @@ export default config({
         }),
       },
     }),
+
+    // ===================================================================
+    // Solutions — Industry use-case driven solutions
+    // ===================================================================
+    solutions: collection({
+      label: 'Solutions',
+      path: 'src/content/solutions/*',
+      slugField: 'title',
+      format: {
+        contentField: 'body',
+      },
+      schema: {
+        title: fields.text({
+          label: 'Title',
+          validation: { isRequired: true },
+        }),
+        subtitle: fields.text({
+          label: 'Subtitle',
+          multiline: true,
+        }),
+        industry: fields.select({
+          label: 'Industry',
+          options: [
+            { label: 'Smart Hotels', value: 'smart-hotels' },
+            { label: 'Senior Care', value: 'senior-care' },
+            { label: 'Energy Management', value: 'energy-management' },
+            { label: 'Smart Building', value: 'smart-building' },
+            { label: 'Industrial IoT', value: 'industrial-iot' },
+          ],
+          defaultValue: 'smart-hotels',
+        }),
+        productLines: fields.array(
+          fields.select({
+            label: 'Product Line',
+            options: [
+              { label: 'Smart Meters', value: 'smart-meters' },
+              { label: 'Thermostats', value: 'thermostats' },
+              { label: 'Senior Care', value: 'senior-care' },
+              { label: 'Hotel Control', value: 'hotel-control' },
+              { label: 'Software & Platforms', value: 'software-platforms' },
+            ],
+            defaultValue: 'smart-meters',
+          }),
+          {
+            label: 'Related Product Lines',
+            itemLabel: (props) => props.value || 'Product Line',
+          }
+        ),
+        techSolution: fields.select({
+          label: 'Technology',
+          options: [
+            { label: 'Tuya', value: 'tuya' },
+            { label: 'MQTT', value: 'mqtt' },
+            { label: 'ZigBee', value: 'zigbee' },
+          ],
+          defaultValue: 'zigbee',
+        }),
+        heroImage: fields.image({
+          label: 'Hero Image',
+          directory: 'public/images/solutions',
+          publicPath: '/images/solutions',
+        }),
+        diagramImage: fields.image({
+          label: 'Topology Diagram',
+          directory: 'public/images/solutions',
+          publicPath: '/images/solutions',
+        }),
+        stats: fields.array(
+          fields.object(
+            {
+              value: fields.text({ label: 'Value (e.g. "30%")' }),
+              label: fields.text({ label: 'Label (e.g. "Energy Savings")' }),
+            },
+            { label: 'Stat' }
+          ),
+          {
+            label: 'Key Stats',
+            itemLabel: (props) => props.fields.value || 'Stat',
+          }
+        ),
+        body: fields.markdoc({
+          label: 'Body Content',
+          extension: 'mdoc',
+        }),
+        language: fields.select({
+          label: 'Language',
+          options: [
+            { label: 'English', value: 'en' },
+          ],
+          defaultValue: 'en',
+        }),
+      },
+    }),
   },
 });
