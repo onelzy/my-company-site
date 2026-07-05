@@ -298,10 +298,8 @@
 
     container.innerHTML = html;
 
-    // Bind click events for new chips
-    $$('.filter-chip', container).forEach(function (chip) {
-      chip.addEventListener('click', handleChipClick);
-    });
+    // Note: click events are handled by delegation on #filterRow —
+    // no need to add individual listeners here.
   }
 
   // ===========================================================================
