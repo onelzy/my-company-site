@@ -332,7 +332,9 @@
   // Chip click handler
   // ===========================================================================
   function handleChipClick(e) {
-    const chip = e.target.closest('.filter-chip');
+    // e.target may be a text node (no .closest method) when clicking on chip text
+    var el = e.target.closest ? e.target : e.target.parentElement;
+    var chip = el ? el.closest('.filter-chip') : null;
     if (!chip) return;
 
     const group = chip.getAttribute('data-group');
