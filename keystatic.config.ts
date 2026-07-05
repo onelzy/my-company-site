@@ -57,6 +57,7 @@ export default config({
         }),
         productSubType: fields.select({
           label: '产品子分类',
+          defaultValue: 'single-phase',
           options: [
             // Smart Meters
             { label: '单相电表', value: 'single-phase' },
@@ -103,6 +104,7 @@ export default config({
         }),
         techSubType: fields.select({
           label: '技术方案子分类',
+          defaultValue: 'tuya-meters',
           options: [
             // Tuya
             { label: 'Tuya智能电表', value: 'tuya-meters' },
@@ -136,6 +138,7 @@ export default config({
           label: '通讯方式',
           element: fields.select({
             label: '通讯方式',
+            defaultValue: 'zigbee',
             options: [
               { label: 'ZigBee', value: 'zigbee' },
               { label: 'Wi-Fi', value: 'wifi' },
@@ -153,6 +156,7 @@ export default config({
           label: '生态方式',
           element: fields.select({
             label: '生态方式',
+            defaultValue: 'tuya',
             options: [
               { label: 'Tuya生态', value: 'tuya' },
               { label: 'MQTT开放协议', value: 'mqtt-open' },
@@ -166,6 +170,7 @@ export default config({
           label: '附加标签',
           element: fields.select({
             label: '附加标签',
+            defaultValue: 'modbus-rtu',
             options: [
               { label: 'Modbus RTU', value: 'modbus-rtu' },
               { label: 'Modbus TCP', value: 'modbus-tcp' },
@@ -176,6 +181,7 @@ export default config({
           label: '软件类型',
           element: fields.select({
             label: '软件类型',
+            defaultValue: 'app',
             options: [
               { label: 'APP端', value: 'app' },
               { label: 'Web端', value: 'web' },
