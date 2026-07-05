@@ -99,7 +99,7 @@ function getIndustryLabel(value: string): string {
   </section>
 </PageLayout>
 
-<script>
+<script is:inline>
   document.getElementById('solFilterRow')?.addEventListener('click', (e) => {
     const chip = (e.target as HTMLElement).closest('.sol-filter-chip');
     if (!chip) return;

@@ -167,7 +167,7 @@ const metadata = {
   </div>
 </Layout>
 
-<script>
+<script is:inline>
   document.getElementById('contactSalesForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;

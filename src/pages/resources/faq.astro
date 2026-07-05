@@ -65,13 +65,12 @@ const faqItems = [
   </section>
 </PageLayout>
 
-<script>
+<script is:inline>
   document.getElementById('faqSearch')?.addEventListener('input', function() {
-    const query = (this as HTMLInputElement).value.toLowerCase();
-    document.querySelectorAll('.faq-item').forEach((item) => {
-      const el = item as HTMLElement;
-      const text = el.textContent?.toLowerCase() || '';
-      el.style.display = !query || text.includes(query) ? '' : 'none';
+    var query = this.value.toLowerCase();
+    document.querySelectorAll('.faq-item').forEach(function(item) {
+      var text = (item.textContent || '').toLowerCase();
+      item.style.display = !query || text.indexOf(query) !== -1 ? '' : 'none';
     });
   });
 </script>
