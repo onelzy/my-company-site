@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
+  <rect width="600" height="400" fill="#e8f4f8"/>
+  <rect x="150" y="120" width="300" height="160" rx="12" fill="white" stroke="#ccc" stroke-width="2"/>
+  <text x="300" y="190" text-anchor="middle" font-family="Inter, sans-serif" font-size="20" font-weight="700" fill="#333">PC321-TY</text>
+  <text x="300" y="220" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#888">Single Phase Smart Meter</text>
+  <text x="300" y="260" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" fill="#aaa">[Product Image — replace with photo]</text>
+</svg>
