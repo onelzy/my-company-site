@@ -289,7 +289,7 @@
       const active = filterState[group] === value;
       const activeClass = active
         ? 'bg-primary text-primary-foreground border-primary active'
-        : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary';
+        : 'border text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary';
       html += '<button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer ' +
               'transition-all duration-150 ' + activeClass + '" ' +
               'data-group="' + group + '" data-value="' + value + '">' +

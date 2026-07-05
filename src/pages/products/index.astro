@@ -64,7 +64,12 @@ function buildTaxonomy() {
     solutionGroups[ts] = {
       label: getLocalizedLabel(TECH_SOLUTION_LABELS, ts, locale),
       children: Object.fromEntries(
-        techSolutionTree[ts]!.map((s) => [s, getLocalizedLabel(TECH_SOLUTION_LABELS, s, locale)])
+        techSolutionTree[ts]!.map((s) => {
+          const label = getLocalizedLabel(TECH_SOLUTION_LABELS, s, locale);
+          // Strip tech prefix: "ZigBee智能电表" → "智能电表", "Tuya照护" → "照护"
+          const clean = label.replace(/^(Tuya|ZigBee|MQTT)\s*/i, '');
+          return [s, clean || label];
+        })
       ),
     };
   }
