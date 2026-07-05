@@ -1,0 +1,18 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+import { makePage } from '@keystatic/astro/ui';
+import keystaticConfig from '../../keystatic.config';
+
+export const prerender = false;
+
+const AdminPage = makePage(keystaticConfig);
+
+const metadata = {
+  title: 'Keystatic CMS — OWON Technology',
+  ignoreTitleTemplate: true,
+};
+---
+
+<PageLayout metadata={metadata}>
+  <AdminPage client:only="react" />
+</PageLayout>
