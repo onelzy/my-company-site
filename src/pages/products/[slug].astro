@@ -195,12 +195,8 @@ const relatedLabel = locale === 'zh' ? '相关产品' : 'Related Products';
         </a>
         {
           productType && (
-            <>
-              <span class="mx-2" aria-hidden="true">/</span>
-              <a href={`/${locale}/products/${productType}`} class="hover:text-primary transition-colors">
-                {typeLabel}
-              </a>
-            </>
+            <span class="mx-2" aria-hidden="true">/</span>
+            <span class="text-default dark:text-slate-200 font-medium">{typeLabel}</span>
           )
         }
         <span class="mx-2" aria-hidden="true">/</span>

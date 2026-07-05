@@ -1,433 +1,497 @@
 /**
- * Client-side Product Filter — vanilla JS
+ * Product Filter — Vanilla JS for dimension-tab + chip-based filtering
  *
- * Implements AND/OR filtering with URL parameter synchronization via
- * history.replaceState. Multiple values for the same key = OR logic;
- * different keys = AND logic.
+ * Two dimensions:
+ *   "type"   — filter by productType / productSubType + quick sol/comm chips
+ *   "solution" — filter by techSolution / techSubType + quick type/comm chips
  *
- * URL format:  ?type=smart-meters&comm=zigbee&comm=wifi&eco=tuya
+ * AND between groups (type, subtype, sol, subsol, comm)
+ * Single-select within single-value groups, multi-select within comm
  *
- * Supported filter keys:
- *   type, subtype, sol, subsol, comm, eco, tag, sw
- *
- * Exports a global `ProductFilter` object for external control.
+ * URL format: ?dim=type&type=smart-meters&subtype=single-phase&comm=zigbee&comm=wifi
+ *             ?dim=solution&sol=tuya&subsol=tuya-meters&type=smart-meters&comm=zigbee
  */
 (function () {
   'use strict';
 
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
   // Constants
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
+  const SINGLE_GROUPS = ['type', 'subtype', 'sol', 'subsol'];
+  const MULTI_GROUPS = ['comm'];
 
-  /** Filter keys recognised in the URL query string. */
-  const FILTER_KEYS = ['type', 'subtype', 'sol', 'subsol', 'comm', 'eco', 'tag', 'sw'];
-
-  /**
-   * Maps a URL filter key to the data-attribute on product-card-wrapper
-   * elements. Scalar attributes hold a single value; array attributes hold
-   * a JSON array.
-   */
-  const KEY_TO_DATA_ATTR = {
+  /** Map URL group key to data-attribute on .product-card-wrapper */
+  const GROUP_TO_ATTR = {
     type: 'data-product-type',
     subtype: 'data-product-subtype',
     sol: 'data-tech-solution',
     subsol: 'data-tech-subtype',
     comm: 'data-comm',
-    eco: 'data-eco',
-    tag: 'data-tags',
-    sw: 'data-sw',
   };
 
-  /** Keys whose product data attributes contain JSON arrays. */
-  const ARRAY_KEYS = new Set(['comm', 'eco', 'tag', 'sw']);
+  // ===========================================================================
+  // State
+  // ===========================================================================
+  let currentDim = 'type';
 
-  // ---------------------------------------------------------------------------
-  // DOM Selectors (queried lazily so the script can be loaded in <head>)
-  // ---------------------------------------------------------------------------
+  /** { type: string|null, subtype: string|null, sol: string|null, subsol: string|null, comm: Set<string> } */
+  const filterState = {
+    type: null,
+    subtype: null,
+    sol: null,
+    subsol: null,
+    comm: new Set(),
+  };
 
-  function getProductWrappers() {
-    return document.querySelectorAll('.product-card-wrapper');
-  }
+  // ===========================================================================
+  // DOM helpers
+  // ===========================================================================
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $$(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
 
-  function getFilterSidebar() {
-    return document.querySelector('.product-filter');
-  }
+  function getCards() { return $$('.product-card-wrapper'); }
 
-  function getProductCount() {
-    return document.querySelector('.product-count');
-  }
-
-  function getEmptyState() {
-    return document.querySelector('.product-empty-state');
-  }
-
-  function getFilterCheckboxes() {
-    return document.querySelectorAll('.filter-checkbox');
-  }
-
-  // ---------------------------------------------------------------------------
-  // Read / Write filter state from / to URL
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Parse the current URL search params into a filter-state object.
-   * @returns {{ [key: string]: string[] }}
-   */
+  // ===========================================================================
+  // URL sync
+  // ===========================================================================
   function readFiltersFromURL() {
     const params = new URLSearchParams(window.location.search);
-    const state = {};
+    // Dimension
+    const dim = params.get('dim');
+    if (dim === 'type' || dim === 'solution') currentDim = dim;
 
-    for (const key of FILTER_KEYS) {
-      const values = params.getAll(key);
-      if (values.length > 0) {
-        // Normalise: lowercase, trim, drop empties, deduplicate
-        const cleaned = [
-          ...new Set(
-            values
-              .map(function (v) {
-                return v.trim().toLowerCase();
-              })
-              .filter(Boolean)
-          ),
-        ];
-        if (cleaned.length > 0) {
-          state[key] = cleaned;
-        }
-      }
+    // Single-value groups
+    for (const g of SINGLE_GROUPS) {
+      filterState[g] = params.get(g)?.trim().toLowerCase() || null;
     }
 
-    return state;
+    // Multi-value groups (comm)
+    filterState.comm = new Set();
+    const commVals = params.getAll('comm');
+    for (const v of commVals) {
+      const cleaned = v.trim().toLowerCase();
+      if (cleaned) filterState.comm.add(cleaned);
+    }
   }
 
-  /**
-   * Sync the current filter state into the URL via history.replaceState (no
-   * page reload). Clears params that have no values.
-   */
-  function writeFiltersToURL(filterState) {
+  function writeFiltersToURL() {
     const params = new URLSearchParams();
+    params.set('dim', currentDim);
 
-    for (const key of FILTER_KEYS) {
-      const values = filterState[key];
-      if (values && values.length > 0) {
-        for (const v of values) {
-          params.append(key, v);
-        }
-      }
+    for (const g of SINGLE_GROUPS) {
+      if (filterState[g]) params.set(g, filterState[g]);
     }
 
-    const newSearch = params.toString();
-    const newURL =
-      (newSearch ? '?' + newSearch : window.location.pathname) +
-      window.location.hash;
+    for (const v of filterState.comm) {
+      params.append('comm', v);
+    }
 
+    const qs = params.toString();
+    const newURL = (qs ? '?' + qs : window.location.pathname) + window.location.hash;
     history.replaceState(null, '', newURL);
   }
 
-  // ---------------------------------------------------------------------------
-  // Checkbox synchronisation
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Read the checked state of all filter checkboxes and return a filter-state
-   * object (with lowercase values).
-   */
-  function readFiltersFromCheckboxes() {
-    const state = {};
-    const checkboxes = getFilterCheckboxes();
-
-    for (const cb of checkboxes) {
-      const group = cb.getAttribute('data-filter-group');
-      const value = cb.getAttribute('data-filter-value');
-
-      if (!group || !value) continue;
-      if (!cb.checked) continue;
-
-      const key = group.toLowerCase();
-      const val = value.trim().toLowerCase();
-
-      if (!FILTER_KEYS.includes(key)) continue;
-
-      if (!state[key]) state[key] = [];
-      state[key].push(val);
-    }
-
-    return state;
+  /** Check if any filter is active. */
+  function hasAnyFilter() {
+    for (const g of SINGLE_GROUPS) if (filterState[g]) return true;
+    if (filterState.comm.size > 0) return true;
+    return false;
   }
 
-  /**
-   * Set checkbox checked state to match the given filter-state object.
-   * Also manages sub-type checkbox visibility based on parent type selection.
-   */
-  function syncCheckboxesToState(filterState) {
-    const checkboxes = getFilterCheckboxes();
-
-    // Build a quick lookup set for parent types that are active
-    const activeParentTypes = new Set(filterState.type || []);
-
-    for (const cb of checkboxes) {
-      const group = (cb.getAttribute('data-filter-group') || '').toLowerCase();
-      const value = (cb.getAttribute('data-filter-value') || '').trim().toLowerCase();
-      const parent = cb.getAttribute('data-filter-parent');
-
-      if (!group || !value || !FILTER_KEYS.includes(group)) continue;
-
-      // Determine checked state
-      const selectedValues = filterState[group] || [];
-      cb.checked = selectedValues.includes(value);
-
-      // Manage sub-type visibility
-      if (parent) {
-        const parentValue = parent.trim().toLowerCase();
-        const wrapper = cb.closest('.filter-subtype-group, .filter-option');
-        const shouldShow = activeParentTypes.size === 0 || activeParentTypes.has(parentValue);
-
-        if (wrapper) {
-          wrapper.classList.toggle('hidden', !shouldShow);
-        } else if (cb.parentElement) {
-          cb.parentElement.classList.toggle('hidden', !shouldShow);
-        }
-      }
+  // ===========================================================================
+  // Product matching
+  // ===========================================================================
+  function cardMatches(card) {
+    // Single-value groups (AND between them)
+    for (const g of SINGLE_GROUPS) {
+      const want = filterState[g];
+      if (!want) continue; // no filter for this group → match
+      const attrName = GROUP_TO_ATTR[g];
+      const raw = card.getAttribute(attrName);
+      if (!raw) return false;
+      if (raw.trim().toLowerCase() !== want) return false;
     }
-  }
 
-  // ---------------------------------------------------------------------------
-  // Matching logic
-  // ---------------------------------------------------------------------------
-
-  /**
-   * Determine whether a single product wrapper matches the given filter state.
-   *
-   * AND across groups: the product must match EVERY active group.
-   * OR within a group: the product matches if it has ANY of the selected values.
-   */
-  function productMatchesFilter(wrapper, filterState) {
-    const activeKeys = Object.keys(filterState).filter(function (k) {
-      return filterState[k] && filterState[k].length > 0;
-    });
-
-    // No active filters → show everything
-    if (activeKeys.length === 0) return true;
-
-    for (const key of activeKeys) {
-      const selectedValues = filterState[key];
-      const attrName = KEY_TO_DATA_ATTR[key];
-
-      if (!attrName) continue;
-
-      const raw = wrapper.getAttribute(attrName);
-      if (!raw) return false; // missing attribute → no match
-
-      let match = false;
-
-      if (ARRAY_KEYS.has(key)) {
-        // Array attribute — parse JSON, check for intersection
-        let arr;
-        try {
-          arr = JSON.parse(raw);
-        } catch (_e) {
-          return false; // malformed JSON attribute
-        }
+    // Multi-value comm (OR within group)
+    if (filterState.comm.size > 0) {
+      const raw = card.getAttribute('data-comm');
+      if (!raw) return false;
+      try {
+        const arr = JSON.parse(raw);
         if (!Array.isArray(arr)) return false;
-
-        const lowercased = arr.map(function (v) {
-          return String(v).trim().toLowerCase();
-        });
-        match = selectedValues.some(function (sv) {
-          return lowercased.includes(sv);
-        });
-      } else {
-        // Scalar attribute — direct (case-insensitive) comparison
-        const normalized = raw.trim().toLowerCase();
-        match = selectedValues.includes(normalized);
+        const lower = arr.map(function (v) { return String(v).trim().toLowerCase(); });
+        const match = [...filterState.comm].some(function (v) { return lower.includes(v); });
+        if (!match) return false;
+      } catch (_) {
+        return false;
       }
-
-      if (!match) return false; // AND — one group failed
     }
 
     return true;
   }
 
-  // ---------------------------------------------------------------------------
-  // Apply filters to the DOM
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
+  // Apply filters to DOM
+  // ===========================================================================
+  function applyFilters() {
+    const cards = getCards();
+    let visible = 0;
 
-  /** Debounce helper — cancels a pending animation frame. */
-  let _applyRAF = null;
-
-  /**
-   * Main entry point: read current filter state (either from arg or URL),
-   * show/hide product cards, update count, toggle empty state.
-   *
-   * Debounced via requestAnimationFrame so rapid checkbox clicks collapse
-   * into a single DOM update.
-   */
-  function applyFilters(filterState) {
-    if (_applyRAF) {
-      cancelAnimationFrame(_applyRAF);
+    for (const card of cards) {
+      if (cardMatches(card)) {
+        card.classList.remove('hidden');
+        visible++;
+      } else {
+        card.classList.add('hidden');
+      }
     }
 
-    _applyRAF = requestAnimationFrame(function () {
-      const state = filterState || readFiltersFromURL();
-      const wrappers = getProductWrappers();
-      let visibleCount = 0;
+    // Update count
+    const countEl = $('#countDisplay');
+    if (countEl) countEl.textContent = visible;
 
-      for (const wrapper of wrappers) {
-        if (productMatchesFilter(wrapper, state)) {
-          wrapper.classList.remove('hidden');
-          visibleCount++;
+    // Toggle empty state
+    const emptyEl = $('#emptyState');
+    const gridEl = $('#productGrid');
+    if (emptyEl) {
+      if (visible === 0) {
+        emptyEl.classList.remove('hidden');
+        if (gridEl) gridEl.classList.add('hidden');
+      } else {
+        emptyEl.classList.add('hidden');
+        if (gridEl) gridEl.classList.remove('hidden');
+      }
+    }
+  }
+
+  // ===========================================================================
+  // Chip UI sync
+  // ===========================================================================
+  function syncChips() {
+    $$('.filter-chip').forEach(function (chip) {
+      const group = chip.getAttribute('data-group');
+      const value = chip.getAttribute('data-value') || '';
+
+      if (!group) return;
+
+      let active = false;
+
+      if (group === 'comm') {
+        // Multi-select: active if value is in the set (or empty = all when set is empty)
+        if (value === '') {
+          active = filterState.comm.size === 0;
         } else {
-          wrapper.classList.add('hidden');
+          active = filterState.comm.has(value);
+        }
+      } else if (group === 'type' || group === 'subtype' || group === 'sol' || group === 'subsol') {
+        // Single-select: active if value matches (empty = all/null)
+        if (value === '') {
+          active = !filterState[group];
+        } else {
+          active = filterState[group] === value;
         }
       }
 
-      // Update product count element
-      const countEl = getProductCount();
-      if (countEl) {
-        countEl.textContent = visibleCount;
+      // Toggle active classes
+      if (active) {
+        chip.classList.add('active');
+        chip.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
+        chip.classList.remove('text-gray-600', 'dark:text-slate-400', 'bg-white', 'dark:bg-slate-800',
+                        'border-gray-300', 'dark:border-slate-600',
+                        'border-blue-200', 'dark:border-blue-700',
+                        'bg-blue-50', 'dark:bg-blue-900/20', 'text-blue-700', 'dark:text-blue-300',
+                        'border-green-200', 'dark:border-green-700',
+                        'bg-green-50', 'dark:bg-green-900/20', 'text-green-700', 'dark:text-green-300');
+      } else {
+        chip.classList.remove('active');
+        chip.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
+
+        if (group === 'sol') {
+          // Eco tags: blue style
+          chip.classList.add('bg-blue-50', 'dark:bg-blue-900/20', 'text-blue-700', 'dark:text-blue-300',
+                          'border-blue-200', 'dark:border-blue-700');
+        } else if (group === 'comm') {
+          // Comm tags: green style
+          chip.classList.add('bg-green-50', 'dark:bg-green-900/20', 'text-green-700', 'dark:text-green-300',
+                          'border-green-200', 'dark:border-green-700');
+        } else {
+          // Default: gray style
+          chip.classList.add('text-gray-600', 'dark:text-slate-400', 'bg-white', 'dark:bg-slate-800',
+                          'border-gray-300', 'dark:border-slate-600');
+        }
       }
+    });
 
-      // Toggle empty state
-      const emptyEl = getEmptyState();
-      if (emptyEl) {
-        emptyEl.classList.toggle('hidden', visibleCount > 0);
+    // Show/hide sub-type sections
+    updateSubTypeVisibility();
+  }
+
+  /** Show or hide the sub-type chip sections based on current dim and parent selection. */
+  function updateSubTypeVisibility() {
+    const typeSubFilters = $('#typeSubFilters');
+    const solSubFilters = $('#solSubFilters');
+
+    if (currentDim === 'type') {
+      // Show type sub-filters if a type is selected
+      if (filterState.type && typeSubFilters) {
+        typeSubFilters.classList.remove('hidden');
+        // Populate sub-type chips dynamically
+        populateSubTypeChips('subtype', filterState.type);
+      } else if (typeSubFilters) {
+        typeSubFilters.classList.add('hidden');
       }
+    } else {
+      // Show solution sub-filters if a sol is selected
+      if (filterState.sol && solSubFilters) {
+        solSubFilters.classList.remove('hidden');
+        populateSubTypeChips('subsol', filterState.sol);
+      } else if (solSubFilters) {
+        solSubFilters.classList.add('hidden');
+      }
+    }
+  }
 
-      // Sync checkboxes (so back/forward resets visuals correctly)
-      syncCheckboxesToState(state);
+  /** Dynamically generate sub-type chips for a given parent. */
+  function populateSubTypeChips(group, parentKey) {
+    const containerId = group === 'subtype' ? 'subTypeContainer' : 'solSubContainer';
+    const container = $('#' + containerId);
+    if (!container) return;
 
-      // Dispatch a custom event so other scripts can react
-      document.dispatchEvent(
-        new CustomEvent('product-filter:updated', {
-          detail: { visibleCount, total: wrappers.length, filters: state },
-        })
-      );
+    const taxonomy = window.__PRODUCT_TAXONOMY || {};
+    const key = group === 'subtype'
+      ? (taxonomy.typeGroups && taxonomy.typeGroups[parentKey])
+      : (taxonomy.solutionGroups && taxonomy.solutionGroups[parentKey]);
+
+    if (!key || !key.children) return;
+
+    const children = typeof key.children === 'string' ? JSON.parse(key.children) : key.children;
+    let html = '';
+
+    for (const [value, label] of Object.entries(children)) {
+      const active = filterState[group] === value;
+      const activeClass = active
+        ? 'bg-primary text-primary-foreground border-primary active'
+        : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary';
+      html += '<button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer ' +
+              'transition-all duration-150 ' + activeClass + '" ' +
+              'data-group="' + group + '" data-value="' + value + '">' +
+              label + '</button>';
+    }
+
+    container.innerHTML = html;
+
+    // Bind click events for new chips
+    $$('.filter-chip', container).forEach(function (chip) {
+      chip.addEventListener('click', handleChipClick);
     });
   }
 
-  // ---------------------------------------------------------------------------
-  // Event handlers
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
+  // Dimension tab switching
+  // ===========================================================================
+  function switchDimension(dim) {
+    if (dim === currentDim) return;
 
-  /**
-   * Handle a checkbox change: build state from checked boxes, write to URL,
-   * then re-apply filters.
-   */
-  function handleCheckboxChange() {
-    const state = readFiltersFromCheckboxes();
-    writeFiltersToURL(state);
-    applyFilters(state);
-  }
+    currentDim = dim;
 
-  /** Handle popstate (browser back/forward). */
-  function handlePopState() {
-    applyFilters(readFiltersFromURL());
-  }
+    // Update tab UI
+    $$('.dimension-tab').forEach(function (tab) {
+      if (tab.getAttribute('data-dim') === dim) {
+        tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.remove('text-gray-600', 'dark:text-slate-400');
+      } else {
+        tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.add('text-gray-600', 'dark:text-slate-400');
+      }
+    });
 
-  // ---------------------------------------------------------------------------
-  // Initialisation
-  // ---------------------------------------------------------------------------
-
-  function init() {
-    const sidebar = getFilterSidebar();
-
-    // 1. Sync checkboxes to match initial URL state
-    const initialState = readFiltersFromURL();
-    syncCheckboxesToState(initialState);
-
-    // 2. Apply initial filter
-    applyFilters(initialState);
-
-    // 3. Listen for checkbox changes (event delegation on the sidebar)
-    if (sidebar) {
-      sidebar.addEventListener('change', function (e) {
-        const target = e.target;
-        if (
-          target &&
-          target.tagName === 'INPUT' &&
-          target.type === 'checkbox' &&
-          target.classList.contains('filter-checkbox')
-        ) {
-          handleCheckboxChange();
-        }
-      });
+    // Show/hide filter dimensions
+    const typeFilters = $('#typeFilters');
+    const solFilters = $('#solutionFilters');
+    if (dim === 'type') {
+      if (typeFilters) typeFilters.classList.remove('hidden');
+      if (solFilters) solFilters.classList.add('hidden');
     } else {
-      // Fallback: listen on the whole document
-      document.addEventListener('change', function (e) {
-        const target = e.target;
-        if (
-          target &&
-          target.tagName === 'INPUT' &&
-          target.type === 'checkbox' &&
-          target.classList.contains('filter-checkbox')
-        ) {
-          handleCheckboxChange();
-        }
-      });
+      if (typeFilters) typeFilters.classList.add('hidden');
+      if (solFilters) solFilters.classList.remove('hidden');
     }
 
-    // 4. Listen for browser back/forward
-    window.addEventListener('popstate', handlePopState);
+    // Reset all filters on dimension switch
+    resetFilters();
+    writeFiltersToURL();
+    syncChips();
+    applyFilters();
   }
 
-  // ---------------------------------------------------------------------------
-  // Public API (attached to window.ProductFilter)
-  // ---------------------------------------------------------------------------
+  function resetFilters() {
+    for (const g of SINGLE_GROUPS) filterState[g] = null;
+    filterState.comm = new Set();
+  }
 
-  /**
-   * @typedef {Object} ProductFilterAPI
-   * @property {function(): Object}        getState     — current filter state
-   * @property {function(Object): void}    setState     — replace filter state, update URL & DOM
-   * @property {function(): void}          reset        — clear all filters
-   * @property {function(): number}        getCount     — number of currently visible products
-   * @property {function(): void}          refresh      — re-apply filters (useful after DOM mutations)
-   */
+  // ===========================================================================
+  // Chip click handler
+  // ===========================================================================
+  function handleChipClick(e) {
+    const chip = e.target.closest('.filter-chip');
+    if (!chip) return;
 
-  window.ProductFilter = {
-    /** Return a copy of the current filter state (from URL). */
-    getState: function () {
-      return readFiltersFromURL();
-    },
+    const group = chip.getAttribute('data-group');
+    const value = chip.getAttribute('data-value') || '';
 
-    /**
-     * Replace the filter state entirely. Accepts an object like
-     * { type: ['smart-meters'], comm: ['zigbee','wifi'] }.
-     */
-    setState: function (newState) {
-      writeFiltersToURL(newState);
-      syncCheckboxesToState(newState);
-      applyFilters(newState);
-    },
+    if (!group) return;
 
-    /** Clear all filters. */
-    reset: function () {
-      writeFiltersToURL({});
-      syncCheckboxesToState({});
-      applyFilters({});
-    },
-
-    /** Return the count of currently visible (non-hidden) product cards. */
-    getCount: function () {
-      const wrappers = getProductWrappers();
-      let count = 0;
-      for (const w of wrappers) {
-        if (!w.classList.contains('hidden')) count++;
+    if (group === 'comm') {
+      // Multi-select toggle
+      if (value === '') {
+        // "All" button clicked — clear comm
+        filterState.comm = new Set();
+      } else {
+        if (filterState.comm.has(value)) {
+          filterState.comm.delete(value);
+        } else {
+          filterState.comm.add(value);
+        }
       }
-      return count;
-    },
+    } else {
+      // Single-select groups
+      if (value === '') {
+        // "All" button clicked
+        filterState[group] = null;
 
-    /** Re-apply filters (e.g. after dynamically adding/removing product cards). */
-    refresh: function () {
-      applyFilters(readFiltersFromURL());
-    },
-  };
+        // If clearing a parent, also clear its sub
+        if (group === 'type') filterState.subtype = null;
+        if (group === 'sol') filterState.subsol = null;
+      } else {
+        // If toggling the already-selected value, de-select
+        if (filterState[group] === value) {
+          filterState[group] = null;
+          if (group === 'type') filterState.subtype = null;
+          if (group === 'sol') filterState.subsol = null;
+        } else {
+          filterState[group] = value;
+          // Clear sub if parent changed
+          if (group === 'type') filterState.subtype = null;
+          if (group === 'sol') filterState.subsol = null;
+        }
+      }
+    }
 
-  // ---------------------------------------------------------------------------
-  // Bootstrap
-  // ---------------------------------------------------------------------------
+    writeFiltersToURL();
+    syncChips();
+    applyFilters();
+  }
+
+  // ===========================================================================
+  // Event binding
+  // ===========================================================================
+  function bindEvents() {
+    // Tab clicks
+    $$('.dimension-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        switchDimension(tab.getAttribute('data-dim'));
+      });
+    });
+
+    // Chip clicks (event delegation on filter row)
+    var filterRow = $('#filterRow');
+    if (filterRow) {
+      filterRow.addEventListener('click', handleChipClick);
+    }
+
+    // Browser back/forward
+    window.addEventListener('popstate', function () {
+      readFiltersFromURL();
+      syncChips();
+      applyFilters();
+
+      // Update dimension tab UI
+      $$('.dimension-tab').forEach(function (tab) {
+        if (tab.getAttribute('data-dim') === currentDim) {
+          tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+          tab.classList.remove('text-gray-600', 'dark:text-slate-400');
+        } else {
+          tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+          tab.classList.add('text-gray-600', 'dark:text-slate-400');
+        }
+      });
+
+      // Show correct filter dim
+      var tf = $('#typeFilters');
+      var sf = $('#solutionFilters');
+      if (currentDim === 'solution') {
+        if (tf) tf.classList.add('hidden');
+        if (sf) sf.classList.remove('hidden');
+      } else {
+        if (tf) tf.classList.remove('hidden');
+        if (sf) sf.classList.add('hidden');
+      }
+    });
+  }
+
+  // ===========================================================================
+  // Initialization
+  // ===========================================================================
+  function init() {
+    readFiltersFromURL();
+
+    // Apply initial dimension
+    $$('.dimension-tab').forEach(function (tab) {
+      if (tab.getAttribute('data-dim') === currentDim) {
+        tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.remove('text-gray-600', 'dark:text-slate-400');
+      } else {
+        tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.add('text-gray-600', 'dark:text-slate-400');
+      }
+    });
+
+    // Show correct filter dimension
+    var tf = $('#typeFilters');
+    var sf = $('#solutionFilters');
+    if (currentDim === 'solution') {
+      if (tf) tf.classList.add('hidden');
+      if (sf) sf.classList.remove('hidden');
+    } else {
+      if (tf) tf.classList.remove('hidden');
+      if (sf) sf.classList.add('hidden');
+    }
+
+    syncChips();
+    applyFilters();
+    bindEvents();
+  }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  // ===========================================================================
+  // Public API
+  // ===========================================================================
+  window.ProductFilter = {
+    getState: function () {
+      var s = {};
+      for (var i = 0; i < SINGLE_GROUPS.length; i++) {
+        var g = SINGLE_GROUPS[i];
+        if (filterState[g]) s[g] = filterState[g];
+      }
+      s.comm = [...filterState.comm];
+      s.dim = currentDim;
+      return s;
+    },
+    reset: function () {
+      resetFilters();
+      writeFiltersToURL();
+      syncChips();
+      applyFilters();
+    },
+    refresh: function () { applyFilters(); },
+    getCount: function () {
+      return $$('.product-card-wrapper').filter(function (c) {
+        return !c.classList.contains('hidden');
+      }).length;
+    },
+  };
 })();

@@ -1,0 +1,33 @@
+---
+import { SITE } from 'astrowind:config';
+
+const locale = Astro.currentLocale || 'en';
+const prefix = locale === SITE.defaultLanguage ? '' : `/${locale}`;
+
+// Parse optional solution and sub-type from URL
+const path = Astro.params.path || '';
+const parts = path.split('/').filter(Boolean);
+const solution = parts[0] || '';
+const subType = parts[1] || '';
+
+// Build redirect query params
+const params = new URLSearchParams();
+if (solution) params.set('sol', solution);
+if (subType) params.set('techsub', subType);
+
+const query = params.toString();
+const redirectUrl = `${prefix}/products/${query ? '?' + query : ''}`;
+---
+
+<!DOCTYPE html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={"0;url=" + redirectUrl} />
+    <link rel="canonical" href={redirectUrl} />
+    <script>window.location.href = {JSON.stringify(redirectUrl)};</script>
+  </head>
+  <body>
+    <p>Redirecting to <a href={redirectUrl}>products</a>...</p>
+  </body>
+</html>

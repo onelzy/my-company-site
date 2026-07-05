@@ -4,53 +4,7 @@ export const headerData = {
   links: [
     {
       text: 'Products',
-      links: [
-        {
-          text: 'All Products',
-          href: getPermalink('/products'),
-        },
-        {
-          text: 'Smart Meters',
-          href: getPermalink('/products/smart-meters'),
-        },
-        {
-          text: 'Thermostats',
-          href: getPermalink('/products/thermostats'),
-        },
-        {
-          text: 'Senior Care',
-          href: getPermalink('/products/senior-care'),
-        },
-        {
-          text: 'Hotel Control',
-          href: getPermalink('/products/hotel-control'),
-        },
-        {
-          text: 'Software & Platforms',
-          href: getPermalink('/products/software-platforms'),
-        },
-      ],
-    },
-    {
-      text: 'Solutions',
-      links: [
-        {
-          text: 'All Solutions',
-          href: getPermalink('/solutions'),
-        },
-        {
-          text: 'Tuya Ecosystem',
-          href: getPermalink('/solutions/tuya'),
-        },
-        {
-          text: 'MQTT Protocol',
-          href: getPermalink('/solutions/mqtt'),
-        },
-        {
-          text: 'ZigBee Standard',
-          href: getPermalink('/solutions/zigbee'),
-        },
-      ],
+      href: getPermalink('/products'),
     },
     {
       text: 'Company',
@@ -80,19 +34,12 @@ export const footerData = {
     {
       title: 'Products',
       links: [
-        { text: 'Smart Meters', href: getPermalink('/products/smart-meters') },
-        { text: 'Thermostats', href: getPermalink('/products/thermostats') },
-        { text: 'Senior Care', href: getPermalink('/products/senior-care') },
-        { text: 'Hotel Control', href: getPermalink('/products/hotel-control') },
-        { text: 'Software & Platforms', href: getPermalink('/products/software-platforms') },
-      ],
-    },
-    {
-      title: 'Solutions',
-      links: [
-        { text: 'Tuya Ecosystem', href: getPermalink('/solutions/tuya') },
-        { text: 'MQTT Protocol', href: getPermalink('/solutions/mqtt') },
-        { text: 'ZigBee Standard', href: getPermalink('/solutions/zigbee') },
+        { text: 'All Products', href: getPermalink('/products') },
+        { text: 'Smart Meters', href: getPermalink('/products?type=smart-meters') },
+        { text: 'Thermostats', href: getPermalink('/products?type=thermostats') },
+        { text: 'Senior Care', href: getPermalink('/products?type=senior-care') },
+        { text: 'Hotel Control', href: getPermalink('/products?type=hotel-control') },
+        { text: 'Software & Platforms', href: getPermalink('/products?type=software-platforms') },
       ],
     },
     {
