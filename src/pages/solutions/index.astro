@@ -1,12 +1,27 @@
 ---
-import { getCollection } from 'astro:content';
+// solutions/index.astro — Industry solution listing
+// Uses import.meta.glob to load .mdoc files directly
+---
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
+import { parseMdoc } from '~/utils/parseMdoc';
 
 export const prerender = false;
 
-const allSolutions = await getCollection('solutions');
-const solutions = allSolutions.filter((s) => s.data.language === 'en');
+// Load .mdoc files via Vite glob
+const rawModules = import.meta.glob('/src/content/solutions/*.mdoc', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
+
+const allSolutions = Object.entries(rawModules).map(([path, raw]) => {
+  const parsed = parseMdoc(raw);
+  const slug = path.split('/').pop()?.replace('.mdoc', '') || '';
+  return { ...parsed.data, id: path, slug, body: parsed.body, rendered: undefined };
+});
+
+const solutions = allSolutions.filter((s) => (s as any).language === 'en');
 
 const industries = [
   { value: 'smart-hotels', label: 'Smart Hotels' },
@@ -58,17 +73,17 @@ function getIndustryLabel(value: string): string {
       <!-- Solution cards -->
       <div id="solGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {solutions.map((s) => {
-          const solutionSlug = s.id.split('/').pop()?.replace('.mdoc', '') || '';
-          const indLabel = getIndustryLabel(s.data.industry || '');
-          const icon = industryIcons[s.data.industry || ''] || '🏢';
+          const solutionSlug = s.slug || '';
+          const indLabel = getIndustryLabel((s as any).industry || '');
+          const icon = industryIcons[(s as any).industry || ''] || '🏢';
           return (
             <a href={`/solutions/${solutionSlug}`}
                class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl
                       border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
-               data-industry={s.data.industry || ''}>
+               data-industry={(s as any).industry || ''}>
               <div class="h-48 bg-gray-100 dark:bg-slate-700 overflow-hidden relative flex items-center justify-center text-5xl">
-                {s.data.heroImage ? (
-                  <Image src={s.data.heroImage} alt={s.data.title} layout="cover" class="absolute inset-0 w-full h-full" width={600} height={400} />
+                {(s as any).heroImage ? (
+                  <Image src={(s as any).heroImage} alt={(s as any).title} layout="cover" class="absolute inset-0 w-full h-full" width={600} height={400} />
                 ) : (
                   <span>{icon}</span>
                 )}
@@ -78,10 +93,10 @@ function getIndustryLabel(value: string): string {
                   <span class="text-xs font-semibold text-primary uppercase tracking-wide">{indLabel}</span>
                 )}
                 <h3 class="text-lg font-semibold mt-1 mb-2 text-default dark:text-slate-200 group-hover:text-primary transition-colors">
-                  {s.data.title}
+                  {(s as any).title}
                 </h3>
-                {s.data.subtitle && (
-                  <p class="text-sm text-muted dark:text-slate-400 line-clamp-2">{s.data.subtitle}</p>
+                {(s as any).subtitle && (
+                  <p class="text-sm text-muted dark:text-slate-400 line-clamp-2">{(s as any).subtitle}</p>
                 )}
               </div>
             </a>
@@ -104,7 +119,6 @@ function getIndustryLabel(value: string): string {
     const chip = (e.target as HTMLElement).closest('.sol-filter-chip');
     if (!chip) return;
 
-    // Update active state
     document.querySelectorAll('.sol-filter-chip').forEach((c) => {
       c.classList.remove('active', 'bg-primary', 'text-primary-foreground');
       c.classList.add('border', 'text-gray-600');
@@ -114,7 +128,6 @@ function getIndustryLabel(value: string): string {
 
     const industry = (chip as HTMLElement).dataset.industry || '';
 
-    // Filter cards
     document.querySelectorAll('#solGrid > a').forEach((card) => {
       const el = card as HTMLElement;
       const cardIndustry = el.dataset.industry || '';

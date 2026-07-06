@@ -1,6 +1,8 @@
 ---
+// products/index.astro — Product catalogue with dual-dimension filtering
+// Uses import.meta.glob to load .mdoc files directly (bypasses Content Layer API)
+---
 import type { Product } from '~/types';
-import { getCollection } from 'astro:content';
 import PageLayout from '~/layouts/PageLayout.astro';
 import ProductCard from '~/components/products/ProductCard.astro';
 import {
@@ -11,19 +13,40 @@ import {
   getAllProductTypes,
   getProductSubTypes,
 } from '~/utils/products';
+import { parseMdoc, type ParsedMdoc } from '~/utils/parseMdoc';
 
 export const prerender = false;
 
-const allProducts = await getCollection('products');
+// Load .mdoc files via Vite glob (with ?raw for plain text)
+const rawModules = import.meta.glob('/src/content/products/*.mdoc', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
 
-const products: Product[] = allProducts
-  .map((p) => ({
-    ...p.data,
-    id: p.id,
-    slug: p.id.split('/').pop()?.replace('.mdoc', '') || p.data.name.toLowerCase().replace(/\s+/g, '-'),
+const allProducts = Object.entries(rawModules).map(([path, raw]) => {
+  const parsed: ParsedMdoc = parseMdoc(raw);
+  const slug = path.split('/').pop()?.replace('.mdoc', '') || '';
+  return {
+    ...parsed.data,
+    id: path,
+    slug,
     collection: 'products' as const,
-    data: p.data,
-  }));
+    data: parsed.data,
+    body: parsed.body,
+    rendered: undefined,
+  };
+});
+
+const products: Product[] = allProducts.map((p) => ({
+  ...p.data,
+  id: p.id,
+  slug: p.slug || (p.data as any).name?.toLowerCase().replace(/\s+/g, '-'),
+  collection: 'products' as const,
+  data: p.data,
+}));
+
+const enProducts = products.filter((p) => (p.data as any).language === 'en');
 
 const title = 'Product Center';
 const description = 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
@@ -211,13 +234,13 @@ const commTags = ['zigbee', 'wifi', '4g', 'modbus', 'mqtt', 'tcpip', 'rj45'];
       <!-- Result Stats -->
       <div class="flex justify-between items-center mb-6 flex-wrap gap-3" id="resultStats">
         <span class="text-sm text-muted dark:text-slate-400">
-          Showing <strong id="countDisplay" class="text-default dark:text-slate-200 font-semibold">{products.length}</strong> products
+          Showing <strong id="countDisplay" class="text-default dark:text-slate-200 font-semibold">{enProducts.length}</strong> products
         </span>
       </div>
 
       <!-- Product Grid -->
       <div id="productGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {products.map((product) => (
+        {enProducts.map((product) => (
           <ProductCard product={product} href="/products" />
         ))}
       </div>

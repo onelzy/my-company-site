@@ -1,27 +1,37 @@
 ---
-import { getCollection } from 'astro:content';
+// solutions/[slug].astro — Solution detail page
+// Uses import.meta.glob to load .mdoc files directly
+---
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
+import { parseMdoc, renderMarkdown } from '~/utils/parseMdoc';
 
 export const prerender = false;
 
 const { slug } = Astro.params;
-const allSolutions = await getCollection('solutions');
-const entry = allSolutions.find((s) => {
-  const sSlug = s.id.split('/').pop()?.replace('.mdoc', '') || '';
-  return sSlug === slug && s.data.language === 'en';
+
+const rawModules = import.meta.glob('/src/content/solutions/*.mdoc', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+}) as Record<string, string>;
+
+const allSolutions = Object.entries(rawModules).map(([path, raw]) => {
+  const parsed = parseMdoc(raw);
+  const sSlug = path.split('/').pop()?.replace('.mdoc', '') || '';
+  return { ...parsed.data, id: path, slug: sSlug, body: parsed.body, rendered: undefined };
 });
+
+const entry = allSolutions.find((s) => s.slug === slug && (s as any).language === 'en');
 
 if (!entry) return new Response(null, { status: 404 });
 
-const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry } = entry.data;
-const bodyHtml = entry.rendered?.html || entry.body || '';
+const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry } = entry as any;
+const bodyHtml = renderMarkdown(entry.body || '');
 
 const industryLabels: Record<string, string> = {
-  'smart-hotels': 'Smart Hotels',
-  'senior-care': 'Senior Care',
-  'energy-management': 'Energy Management',
-  'smart-building': 'Smart Building',
+  'smart-hotels': 'Smart Hotels', 'senior-care': 'Senior Care',
+  'energy-management': 'Energy Management', 'smart-building': 'Smart Building',
   'industrial-iot': 'Industrial IoT',
 };
 const industryLabel = industryLabels[industry || ''] || '';
@@ -33,7 +43,6 @@ const techLabel = techLabels[techSolution || ''] || '';
 <PageLayout metadata={{ title: `${title} — OWON Solutions`, description: subtitle || title }}>
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <!-- Breadcrumb -->
       <nav class="mb-8 text-sm text-muted dark:text-slate-400">
         <a href="/" class="hover:text-primary transition-colors">Home</a>
         <span class="mx-2">/</span>
@@ -42,7 +51,6 @@ const techLabel = techLabels[techSolution || ''] || '';
         <span class="text-default dark:text-slate-200 font-medium">{title}</span>
       </nav>
 
-      <!-- Hero -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
         <div class="relative aspect-video rounded-xl bg-gray-100 dark:bg-slate-800 overflow-hidden border border-gray-200 dark:border-slate-700">
           {heroImage ? (
@@ -58,7 +66,7 @@ const techLabel = techLabels[techSolution || ''] || '';
           <h1 class="text-3xl font-bold sm:text-4xl mb-4 text-default dark:text-slate-100">{title}</h1>
           {subtitle && <p class="text-lg text-muted dark:text-slate-400 mb-6">{subtitle}</p>}
           <div class="flex flex-wrap gap-2 mb-6">
-            {productLines?.map((pl) => (
+            {(productLines || []).map((pl: string) => (
               <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
                 {pl}
               </span>
@@ -76,10 +84,9 @@ const techLabel = techLabels[techSolution || ''] || '';
         </div>
       </div>
 
-      <!-- Key Stats -->
       {stats && stats.length > 0 && (
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 bg-gray-50 dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700">
-          {stats.map((s) => (
+          {stats.map((s: any) => (
             <div class="text-center">
               <div class="text-3xl font-bold text-primary mb-1">{s.value}</div>
               <div class="text-sm text-muted dark:text-slate-400">{s.label}</div>
@@ -88,7 +95,6 @@ const techLabel = techLabels[techSolution || ''] || '';
         </div>
       )}
 
-      <!-- Topology Diagram -->
       {diagramImage && (
         <div class="mb-16">
           <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">System Architecture</h2>
@@ -98,15 +104,11 @@ const techLabel = techLabels[techSolution || ''] || '';
         </div>
       )}
 
-      <!-- Body Content -->
       {bodyHtml && (
-        <div class="prose prose-lg dark:prose-invert max-w-none
-                    prose-headings:text-default dark:prose-headings:text-slate-100
-                    prose-p:text-default dark:prose-p:text-slate-300"
+        <div class="prose prose-lg dark:prose-invert max-w-none prose-headings:text-default dark:prose-headings:text-slate-100 prose-p:text-default dark:prose-p:text-slate-300"
              set:html={bodyHtml} />
       )}
 
-      <!-- CTA -->
       <div class="mt-16 text-center p-12 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/10">
         <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Ready to get started?</h2>
         <p class="text-muted dark:text-slate-400 mb-6">Contact our solutions team for a personalized demo and quote.</p>
