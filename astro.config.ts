@@ -103,6 +103,7 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    assetsInclude: ['**/*.mdoc'],
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
