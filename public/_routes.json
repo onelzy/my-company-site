@@ -1,34 +1,5 @@
 {
   "version": 1,
-  "include": [
-    "/",
-    "/products",
-    "/products/*",
-    "/solutions",
-    "/solutions/*",
-    "/about",
-    "/contact",
-    "/contact-sales",
-    "/blog",
-    "/blog/*",
-    "/developers",
-    "/developers/*",
-    "/resources",
-    "/resources/*",
-    "/keystatic",
-    "/keystatic/*",
-    "/services",
-    "/pricing",
-    "/terms",
-    "/privacy",
-    "/404"
-  ],
-  "exclude": [
-    "/_astro/*",
-    "/images/*",
-    "/favicon.ico",
-    "/robots.txt",
-    "/sitemap*.xml",
-    "/rss.xml"
-  ]
+  "include": ["/*"],
+  "exclude": ["/_astro/*", "/favicon.ico", "/images/*", "/fonts/*", "/scripts/*"]
 }
