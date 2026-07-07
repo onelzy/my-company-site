@@ -1,10 +1,7 @@
 import { config, collection, fields } from '@keystatic/core';
 
 export default config({
-  storage: {
-    kind: 'github',
-    repo: 'onelzy/my-company-site',
-  },
+  storage: { kind: 'local' },
 
   collections: {
     // ================================================================
