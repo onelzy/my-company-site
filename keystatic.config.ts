@@ -2,7 +2,6 @@ import { config, collection, fields } from '@keystatic/core';
 
 export default config({
   storage: { kind: 'local' },
-  routing: { path: '/keystatic' },
 
   collections: {
     // ================================================================
@@ -230,7 +229,7 @@ export default config({
         diagramImage: fields.image({ label: 'Topology Diagram', directory: 'public/images/solutions', publicPath: '/images/solutions' }),
         stats: fields.array(
           fields.object({ value: fields.text({ label: 'Value' }), label: fields.text({ label: 'Label' }) }, { label: 'Stat' }),
-          { label: 'Key Stats', itemLabel: (p) => p.fields.value || 'Stat' }
+          { label: 'Key Stats', itemLabel: (p) => ((p.fields as any).value as string) || 'Stat' }
         ),
         body: fields.markdoc({ label: 'Body Content', extension: 'mdoc' }),
         language: fields.select({

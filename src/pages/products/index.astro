@@ -18,15 +18,14 @@ import { products as rawProducts } from '~/data/products';
 export const prerender = false;
 
 const allProducts = rawProducts.map((entry) => {
-  // Save slug before ...entry.data overwrites it (data.slug is { name, slug })
-  const entrySlug = entry.slug;
-  const { slug: _dataSlug, ...restData } = entry.data as Record<string, unknown>;
-  // Use nested slug.slug (Keystatic fields.slug auto-generates this) or entry slug
-  const urlSlug = (typeof _dataSlug === 'object' && _dataSlug !== null && 'slug' in _dataSlug)
-    ? (_dataSlug as { slug: string }).slug
-    : entrySlug;
+  const entryData = entry.data as Record<string, unknown>;
+  // entry.data.slug is { name, slug } from Keystatic fields.slug — extract the URL-safe slug
+  const dataSlug = entryData.slug as { name?: string; slug?: string } | undefined;
+  const urlSlug = dataSlug?.slug || entry.slug;
+  // Destructure to get all data fields EXCEPT slug (we use our own)
+  const { slug: _unused, ...restData } = entryData;
   return {
-    id: entrySlug,
+    id: entry.slug,
     slug: urlSlug,
     collection: 'products' as const,
     data: entry.data,
