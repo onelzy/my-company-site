@@ -43,71 +43,107 @@ const locale = (product.language as string) || 'en';
     )}
   >
     <!-- Product image (clickable link to detail) -->
-    <a href={detailUrl}
-       class="relative h-48 sm:h-56 bg-gray-100 dark:bg-slate-700 overflow-hidden block
-              focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
-      {hasImage ? (
-        <Image src={imageSrc} alt={product.name} layout="cover"
-               class="absolute inset-0 w-full h-full" width={600} height={400}
-               format="webp" loading="lazy" decoding="async" />
-      ) : (
-        <div class="absolute inset-0 flex items-center justify-center text-muted dark:text-slate-500">
-          <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-        </div>
-      )}
+    <a
+      href={detailUrl}
+      class="relative h-48 sm:h-56 bg-gray-100 dark:bg-slate-700 overflow-hidden block
+              focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    >
+      {
+        hasImage ? (
+          <Image
+            src={imageSrc}
+            alt={product.name}
+            layout="cover"
+            class="absolute inset-0 w-full h-full"
+            width={600}
+            height={400}
+            format="webp"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div class="absolute inset-0 flex items-center justify-center text-muted dark:text-slate-500">
+            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+        )
+      }
     </a>
 
     <!-- Card content (clickable) -->
     <a href={detailUrl} class="flex-1 p-4 sm:p-5 block">
-      <h3 class="text-lg font-semibold leading-snug text-default dark:text-slate-200
-                 group-hover:text-primary transition-colors duration-200 mb-1">
+      <h3
+        class="text-lg font-semibold leading-snug text-default dark:text-slate-200
+                 group-hover:text-primary transition-colors duration-200 mb-1"
+      >
         {product.name}
       </h3>
-      {modelDisplay && (
-        <p class="text-sm text-muted dark:text-slate-400 font-mono mb-2">{modelDisplay}</p>
-      )}
-      {description && (
-        <p class="text-sm text-muted dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">{description}</p>
-      )}
-      {visibleComms.length > 0 && (
-        <div class="flex flex-wrap items-center gap-1.5 mt-auto">
-          {visibleComms.map((method) => (
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+      {modelDisplay && <p class="text-sm text-muted dark:text-slate-400 font-mono mb-2">{modelDisplay}</p>}
+      {
+        description && (
+          <p class="text-sm text-muted dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">{description}</p>
+        )
+      }
+      {
+        visibleComms.length > 0 && (
+          <div class="flex flex-wrap items-center gap-1.5 mt-auto">
+            {visibleComms.map((method) => (
+              <span
+                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
                          bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground
-                         border border-primary/20 dark:border-primary/30">
-              {getLocalizedLabel(SPEC_LABELS, method, locale)}
+                         border border-primary/20 dark:border-primary/30"
+              >
+                {getLocalizedLabel(SPEC_LABELS, method, locale)}
+              </span>
+            ))}
+            {overflowCount > 0 && (
+              <span
+                class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                           bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400"
+              >
+                +{overflowCount}
+              </span>
+            )}
+          </div>
+        )
+      }
+      {
+        commMethods.length === 0 && (
+          <div class="mt-2">
+            <span
+              class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
+                         bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400"
+            >
+              See details
             </span>
-          ))}
-          {overflowCount > 0 && (
-            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                           bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400">+{overflowCount}</span>
-          )}
-        </div>
-      )}
-      {commMethods.length === 0 && (
-        <div class="mt-2">
-          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                         bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400">See details</span>
-        </div>
-      )}
+          </div>
+        )
+      }
     </a>
 
     <!-- Action buttons -->
     <div class="px-4 sm:px-5 pb-4 sm:pb-5 flex gap-2">
-      <a href={detailUrl}
-         class="flex-1 text-center px-3 py-2 rounded-lg text-xs font-medium
+      <a
+        href={detailUrl}
+        class="flex-1 text-center px-3 py-2 rounded-lg text-xs font-medium
                 border border-gray-300 dark:border-slate-600
                 text-default dark:text-slate-300
-                hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
+                hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+      >
         View Details
       </a>
-      <button type="button"
-              onclick="window.__openLeadModal?.({ scenario: 'price', productName: '{product.name}' })"
-              class="flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors
-                     bg-[#FF6B00] text-white hover:bg-[#E55D00]">
+      <button
+        type="button"
+        onclick="window.__openLeadModal?.({ scenario: 'price', productName: '{product.name}' })"
+        class="flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors
+                     bg-[#FF6B00] text-white hover:bg-[#E55D00]"
+      >
         Get Base Price
       </button>
     </div>

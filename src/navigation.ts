@@ -53,9 +53,7 @@ export const headerData = {
       ],
     },
   ],
-  actions: [
-    { text: 'Contact Sales', href: getPermalink('/contact-sales') },
-  ],
+  actions: [{ text: 'Contact Sales', href: getPermalink('/contact-sales') }],
 };
 
 export const footerData = {

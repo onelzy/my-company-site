@@ -83,27 +83,40 @@ const productsCollection = defineCollection({
 
     // Dimension 1: Product Type
     productType: z
-      .enum([
-        'smart-meters',
-        'thermostats',
-        'senior-care',
-        'hotel-control',
-        'software-platforms',
-      ])
+      .enum(['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms'])
       .optional(),
     productSubType: z
       .enum([
         // Smart Meters
-        'single-phase', 'three-phase', 'multi-circuit', 'din-rail', 'anti-backflow',
+        'single-phase',
+        'three-phase',
+        'multi-circuit',
+        'din-rail',
+        'anti-backflow',
         // Thermostats
-        '24vac', 'boiler-trv', 'zigbee-hvac',
+        '24vac',
+        'boiler-trv',
+        'zigbee-hvac',
         // Senior Care
-        'emergency', 'safety', 'tracking', 'health', 'management',
-        'aijuan-app', 'home-care-web', 'nursing-station-web',
+        'emergency',
+        'safety',
+        'tracking',
+        'health',
+        'management',
+        'aijuan-app',
+        'home-care-web',
+        'nursing-station-web',
         // Hotel Control
-        'room-thermostat', 'lighting', 'door-sign', 'energy-management',
+        'room-thermostat',
+        'lighting',
+        'door-sign',
+        'energy-management',
         // Software & Platforms
-        'smartowon-app', 'zigbee-control-web', 'energy-monitor-web', 'partner-platform', 'iot-platform',
+        'smartowon-app',
+        'zigbee-control-web',
+        'energy-monitor-web',
+        'partner-platform',
+        'iot-platform',
       ])
       .optional(),
 
@@ -112,13 +125,29 @@ const productsCollection = defineCollection({
     techSubType: z
       .enum([
         // Tuya
-        'tuya-meters', 'tuya-thermostats', 'tuya-lighting', 'tuya-gateways',
-        'tuya-remotes', 'tuya-senior', 'tuya-sensors',
+        'tuya-meters',
+        'tuya-thermostats',
+        'tuya-lighting',
+        'tuya-gateways',
+        'tuya-remotes',
+        'tuya-senior',
+        'tuya-sensors',
         // MQTT
-        'mqtt-meters', 'mqtt-thermostats', 'mqtt-gateways', 'mqtt-remotes', 'mqtt-software',
+        'mqtt-meters',
+        'mqtt-thermostats',
+        'mqtt-gateways',
+        'mqtt-remotes',
+        'mqtt-software',
         // ZigBee
-        'zigbee-meters', 'zigbee-thermostats', 'zigbee-lighting', 'zigbee-gateways',
-        'zigbee-remotes', 'zigbee-senior', 'zigbee-sensors', 'zigbee-energy', 'zigbee-software',
+        'zigbee-meters',
+        'zigbee-thermostats',
+        'zigbee-lighting',
+        'zigbee-gateways',
+        'zigbee-remotes',
+        'zigbee-senior',
+        'zigbee-sensors',
+        'zigbee-energy',
+        'zigbee-software',
       ])
       .optional(),
 
@@ -126,13 +155,9 @@ const productsCollection = defineCollection({
     communication: z
       .array(z.enum(['zigbee', 'wifi', '4g', 'lora', 'nb-iot', 'modbus', 'mqtt', 'tcpip', 'rj45']))
       .optional(),
-    ecosystem: z
-      .array(z.enum(['tuya', 'mqtt-open', 'zigbee-solution', 'home-assistant', 'local-api']))
-      .optional(),
+    ecosystem: z.array(z.enum(['tuya', 'mqtt-open', 'zigbee-solution', 'home-assistant', 'local-api'])).optional(),
     extraTags: z.array(z.enum(['modbus-rtu', 'modbus-tcp'])).optional(),
-    softwareType: z
-      .array(z.enum(['app', 'web', 'admin', 'analytics', 'iot-platform']))
-      .optional(),
+    softwareType: z.array(z.enum(['app', 'web', 'admin', 'analytics', 'iot-platform'])).optional(),
 
     // Media & Specs
     image: z.string().optional(),
@@ -175,9 +200,7 @@ const solutionsCollection = defineCollection({
     techSolution: z.enum(['tuya', 'mqtt', 'zigbee']).optional(),
     heroImage: z.string().optional(),
     diagramImage: z.string().optional(),
-    stats: z
-      .array(z.object({ value: z.string(), label: z.string() }))
-      .optional(),
+    stats: z.array(z.object({ value: z.string(), label: z.string() })).optional(),
     language: z.enum(['en']).optional(),
   }),
 });

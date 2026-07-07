@@ -269,28 +269,57 @@ export interface ProductData {
   description?: string;
 
   // Dimension 1: Product Type
-  productType?:
-    | 'smart-meters'
-    | 'thermostats'
-    | 'senior-care'
-    | 'hotel-control'
-    | 'software-platforms';
+  productType?: 'smart-meters' | 'thermostats' | 'senior-care' | 'hotel-control' | 'software-platforms';
   productSubType?:
-    | 'single-phase' | 'three-phase' | 'multi-circuit' | 'din-rail' | 'anti-backflow'
-    | '24vac' | 'boiler-trv' | 'zigbee-hvac'
-    | 'emergency' | 'safety' | 'tracking' | 'health' | 'management'
-    | 'aijuan-app' | 'home-care-web' | 'nursing-station-web'
-    | 'room-thermostat' | 'lighting' | 'door-sign'
-    | 'smartowon-app' | 'zigbee-control-web' | 'energy-monitor-web' | 'partner-platform' | 'iot-platform';
+    | 'single-phase'
+    | 'three-phase'
+    | 'multi-circuit'
+    | 'din-rail'
+    | 'anti-backflow'
+    | '24vac'
+    | 'boiler-trv'
+    | 'zigbee-hvac'
+    | 'emergency'
+    | 'safety'
+    | 'tracking'
+    | 'health'
+    | 'management'
+    | 'aijuan-app'
+    | 'home-care-web'
+    | 'nursing-station-web'
+    | 'room-thermostat'
+    | 'lighting'
+    | 'door-sign'
+    | 'smartowon-app'
+    | 'zigbee-control-web'
+    | 'energy-monitor-web'
+    | 'partner-platform'
+    | 'iot-platform';
 
   // Dimension 2: Technical Solution
   techSolution?: 'tuya' | 'mqtt' | 'zigbee';
   techSubType?:
-    | 'tuya-meters' | 'tuya-thermostats' | 'tuya-lighting' | 'tuya-gateways'
-    | 'tuya-remotes' | 'tuya-senior' | 'tuya-sensors'
-    | 'mqtt-meters' | 'mqtt-thermostats' | 'mqtt-gateways' | 'mqtt-remotes' | 'mqtt-software'
-    | 'zigbee-meters' | 'zigbee-thermostats' | 'zigbee-lighting' | 'zigbee-gateways'
-    | 'zigbee-remotes' | 'zigbee-senior' | 'zigbee-sensors' | 'zigbee-energy' | 'zigbee-software';
+    | 'tuya-meters'
+    | 'tuya-thermostats'
+    | 'tuya-lighting'
+    | 'tuya-gateways'
+    | 'tuya-remotes'
+    | 'tuya-senior'
+    | 'tuya-sensors'
+    | 'mqtt-meters'
+    | 'mqtt-thermostats'
+    | 'mqtt-gateways'
+    | 'mqtt-remotes'
+    | 'mqtt-software'
+    | 'zigbee-meters'
+    | 'zigbee-thermostats'
+    | 'zigbee-lighting'
+    | 'zigbee-gateways'
+    | 'zigbee-remotes'
+    | 'zigbee-senior'
+    | 'zigbee-sensors'
+    | 'zigbee-energy'
+    | 'zigbee-software';
 
   // Multi-select technical spec arrays
   communication?: Array<'zigbee' | 'wifi' | '4g' | 'lora' | 'nb-iot' | 'modbus' | 'mqtt' | 'tcpip' | 'rj45'>;
@@ -359,37 +388,67 @@ export interface ProductFilterState {
 
 // Convenience type aliases for product catalogue values (reusable across components)
 
-export type ProductType =
-  | 'smart-meters'
-  | 'thermostats'
-  | 'senior-care'
-  | 'hotel-control'
-  | 'software-platforms';
+export type ProductType = 'smart-meters' | 'thermostats' | 'senior-care' | 'hotel-control' | 'software-platforms';
 
 export type ProductSubType =
   // Smart Meters
-  | 'single-phase' | 'three-phase' | 'multi-circuit' | 'din-rail' | 'anti-backflow'
+  | 'single-phase'
+  | 'three-phase'
+  | 'multi-circuit'
+  | 'din-rail'
+  | 'anti-backflow'
   // Thermostats
-  | '24vac' | 'boiler-trv' | 'zigbee-hvac'
+  | '24vac'
+  | 'boiler-trv'
+  | 'zigbee-hvac'
   // Senior Care
-  | 'emergency' | 'safety' | 'tracking' | 'health' | 'management'
-  | 'aijuan-app' | 'home-care-web' | 'nursing-station-web'
+  | 'emergency'
+  | 'safety'
+  | 'tracking'
+  | 'health'
+  | 'management'
+  | 'aijuan-app'
+  | 'home-care-web'
+  | 'nursing-station-web'
   // Hotel Control
-  | 'room-thermostat' | 'lighting' | 'door-sign' | 'energy-management'
+  | 'room-thermostat'
+  | 'lighting'
+  | 'door-sign'
+  | 'energy-management'
   // Software & Platforms
-  | 'smartowon-app' | 'zigbee-control-web' | 'energy-monitor-web' | 'partner-platform' | 'iot-platform';
+  | 'smartowon-app'
+  | 'zigbee-control-web'
+  | 'energy-monitor-web'
+  | 'partner-platform'
+  | 'iot-platform';
 
 export type TechSolution = 'tuya' | 'mqtt' | 'zigbee';
 
 export type TechSubType =
   // Tuya
-  | 'tuya-meters' | 'tuya-thermostats' | 'tuya-lighting' | 'tuya-gateways'
-  | 'tuya-remotes' | 'tuya-senior' | 'tuya-sensors'
+  | 'tuya-meters'
+  | 'tuya-thermostats'
+  | 'tuya-lighting'
+  | 'tuya-gateways'
+  | 'tuya-remotes'
+  | 'tuya-senior'
+  | 'tuya-sensors'
   // MQTT
-  | 'mqtt-meters' | 'mqtt-thermostats' | 'mqtt-gateways' | 'mqtt-remotes' | 'mqtt-software'
+  | 'mqtt-meters'
+  | 'mqtt-thermostats'
+  | 'mqtt-gateways'
+  | 'mqtt-remotes'
+  | 'mqtt-software'
   // ZigBee
-  | 'zigbee-meters' | 'zigbee-thermostats' | 'zigbee-lighting' | 'zigbee-gateways'
-  | 'zigbee-remotes' | 'zigbee-senior' | 'zigbee-sensors' | 'zigbee-energy' | 'zigbee-software';
+  | 'zigbee-meters'
+  | 'zigbee-thermostats'
+  | 'zigbee-lighting'
+  | 'zigbee-gateways'
+  | 'zigbee-remotes'
+  | 'zigbee-senior'
+  | 'zigbee-sensors'
+  | 'zigbee-energy'
+  | 'zigbee-software';
 
 export type CommunicationMethod = 'zigbee' | 'wifi' | '4g' | 'lora' | 'nb-iot' | 'modbus' | 'mqtt' | 'tcpip' | 'rj45';
 

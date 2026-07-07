@@ -9,91 +9,84 @@ export interface SolutionsEntry {
 
 export const solutions: SolutionsEntry[] = [
   {
-    "slug": "industrial-energy-submetering",
-    "data": {
-      "title": "Industrial Energy Submetering",
-      "subtitle": "Granular per-machine energy tracking for factories and industrial facilities. MQTT integration with existing SCADA and BMS systems.",
-      "industry": "industrial-iot",
-      "productLines": [
-        "smart-meters",
-        "software-platforms"
-      ],
-      "techSolution": "mqtt",
-      "stats": [
+    slug: 'industrial-energy-submetering',
+    data: {
+      title: 'Industrial Energy Submetering',
+      subtitle:
+        'Granular per-machine energy tracking for factories and industrial facilities. MQTT integration with existing SCADA and BMS systems.',
+      industry: 'industrial-iot',
+      productLines: ['smart-meters', 'software-platforms'],
+      techSolution: 'mqtt',
+      stats: [
         {
-          "value": "15%",
-          "label": "Average Cost Reduction"
+          value: '15%',
+          label: 'Average Cost Reduction',
         },
         {
-          "value": "99.9%",
-          "label": "System Uptime"
+          value: '99.9%',
+          label: 'System Uptime',
         },
         {
-          "value": "1M+",
-          "label": "Data Points per Day"
-        }
+          value: '1M+',
+          label: 'Data Points per Day',
+        },
       ],
-      "language": "en"
+      language: 'en',
     },
-    "body": "## The Challenge\n\nIndustrial facilities consume massive amounts of energy but lack per-machine visibility. A single production line may have 20+ machines, each with different energy profiles. Without granular data, energy waste goes undetected and unmanaged.\n\n## Our Solution\n\nOWON's Industrial Energy Submetering system provides per-machine energy monitoring with MQTT integration into existing industrial control systems.\n\n### Product Stack\n- **PC341-3M16S Multi-Circuit Monitors** — one unit monitors up to 16 machines\n- **PC321-TY Smart Meters** — for main feeder monitoring\n- **EdgeEco IoT Platform** — enterprise analytics and reporting\n\n### How It Works\n\n1. **Per-Machine Monitoring** — PC341 sub-CTs clamp onto individual machine circuits\n2. **MQTT Data Stream** — real-time energy data published to MQTT broker\n3. **SCADA Integration** — MQTT data consumed by existing industrial control systems\n4. **EdgeEco Analytics** — trend analysis, anomaly detection, cost allocation by machine\n\n## Results\n\nIndustrial facilities using OWON's system report:\n- **15% reduction** in energy costs through targeted optimization\n- **ROI within 8 months** from eliminating energy waste\n- **99.9% uptime** with local data buffering during network outages\n\n## Architecture\n\n[Topology Diagram: Production Line Machines → PC341 CT clamps → MQTT Broker → SCADA/BMS + EdgeEco Cloud Analytics]\n\n---\n\n> \"We identified a single compressor running 24/7 due to a stuck valve — something we would have never found without per-machine monitoring. The system paid for itself in the first quarter.\"\n> — Chief Engineer, Automotive Parts Manufacturer"
+    body: '## The Challenge\n\nIndustrial facilities consume massive amounts of energy but lack per-machine visibility. A single production line may have 20+ machines, each with different energy profiles. Without granular data, energy waste goes undetected and unmanaged.\n\n## Our Solution\n\nOWON\'s Industrial Energy Submetering system provides per-machine energy monitoring with MQTT integration into existing industrial control systems.\n\n### Product Stack\n- **PC341-3M16S Multi-Circuit Monitors** — one unit monitors up to 16 machines\n- **PC321-TY Smart Meters** — for main feeder monitoring\n- **EdgeEco IoT Platform** — enterprise analytics and reporting\n\n### How It Works\n\n1. **Per-Machine Monitoring** — PC341 sub-CTs clamp onto individual machine circuits\n2. **MQTT Data Stream** — real-time energy data published to MQTT broker\n3. **SCADA Integration** — MQTT data consumed by existing industrial control systems\n4. **EdgeEco Analytics** — trend analysis, anomaly detection, cost allocation by machine\n\n## Results\n\nIndustrial facilities using OWON\'s system report:\n- **15% reduction** in energy costs through targeted optimization\n- **ROI within 8 months** from eliminating energy waste\n- **99.9% uptime** with local data buffering during network outages\n\n## Architecture\n\n[Topology Diagram: Production Line Machines → PC341 CT clamps → MQTT Broker → SCADA/BMS + EdgeEco Cloud Analytics]\n\n---\n\n> "We identified a single compressor running 24/7 due to a stuck valve — something we would have never found without per-machine monitoring. The system paid for itself in the first quarter."\n> — Chief Engineer, Automotive Parts Manufacturer',
   },
   {
-    "slug": "senior-care-monitoring",
-    "data": {
-      "title": "Senior Care Monitoring System",
-      "subtitle": "Non-intrusive health monitoring for elderly residents. Detect falls, track sleep quality, and alert caregivers in real time.",
-      "industry": "senior-care",
-      "productLines": [
-        "senior-care",
-        "software-platforms"
-      ],
-      "techSolution": "zigbee",
-      "stats": [
+    slug: 'senior-care-monitoring',
+    data: {
+      title: 'Senior Care Monitoring System',
+      subtitle:
+        'Non-intrusive health monitoring for elderly residents. Detect falls, track sleep quality, and alert caregivers in real time.',
+      industry: 'senior-care',
+      productLines: ['senior-care', 'software-platforms'],
+      techSolution: 'zigbee',
+      stats: [
         {
-          "value": "10,000+",
-          "label": "Seniors Monitored"
+          value: '10,000+',
+          label: 'Seniors Monitored',
         },
         {
-          "value": "90%",
-          "label": "Alert Accuracy Rate"
+          value: '90%',
+          label: 'Alert Accuracy Rate',
         },
         {
-          "value": "3 min",
-          "label": "Average Response Time"
-        }
+          value: '3 min',
+          label: 'Average Response Time',
+        },
       ],
-      "language": "en"
+      language: 'en',
     },
-    "body": "## The Challenge\n\nAging populations worldwide demand better senior care solutions. Traditional check-in rounds are labor-intensive and miss critical events between visits. Wearable devices are often refused by elderly residents due to discomfort and stigma.\n\n## Our Solution\n\nOWON's Senior Care Monitoring System uses non-contact sensors, emergency call buttons, and the AiJuan platform to provide continuous, dignified monitoring.\n\n### Product Stack\n- **SPM-915 Smart Sleep Monitors** — placed under mattresses, no wearables needed\n- **Emergency Call Buttons** — wall-mounted and portable options\n- **AiJuan Platform** — mobile app for caregivers + web dashboard for facility managers\n\n### How It Works\n\n1. **Continuous Monitoring** — SPM-915 pads track sleep quality, heart rate, and respiratory rate\n2. **Emergency Detection** — falls, prolonged inactivity, and abnormal vitals trigger alerts\n3. **Caregiver Notification** — AiJuan app sends push notifications with room number and event type\n4. **Analytics Dashboard** — facility managers see trends, compliance reports, and staffing recommendations\n\n## Results\n\nSenior care facilities using OWON's system report:\n- **90% alert accuracy** — fewer false alarms, faster genuine responses\n- **3-minute average response** to emergency events\n- **40% reduction** in night-shift staffing needs through automated monitoring\n\n---\n\n> \"The SPM-915 sleep monitors transformed our night shift. We went from hourly room checks to targeted responses. Our residents sleep better and our staff stress levels dropped dramatically.\"\n> — Nursing Director, 200-bed Senior Care Facility"
+    body: '## The Challenge\n\nAging populations worldwide demand better senior care solutions. Traditional check-in rounds are labor-intensive and miss critical events between visits. Wearable devices are often refused by elderly residents due to discomfort and stigma.\n\n## Our Solution\n\nOWON\'s Senior Care Monitoring System uses non-contact sensors, emergency call buttons, and the AiJuan platform to provide continuous, dignified monitoring.\n\n### Product Stack\n- **SPM-915 Smart Sleep Monitors** — placed under mattresses, no wearables needed\n- **Emergency Call Buttons** — wall-mounted and portable options\n- **AiJuan Platform** — mobile app for caregivers + web dashboard for facility managers\n\n### How It Works\n\n1. **Continuous Monitoring** — SPM-915 pads track sleep quality, heart rate, and respiratory rate\n2. **Emergency Detection** — falls, prolonged inactivity, and abnormal vitals trigger alerts\n3. **Caregiver Notification** — AiJuan app sends push notifications with room number and event type\n4. **Analytics Dashboard** — facility managers see trends, compliance reports, and staffing recommendations\n\n## Results\n\nSenior care facilities using OWON\'s system report:\n- **90% alert accuracy** — fewer false alarms, faster genuine responses\n- **3-minute average response** to emergency events\n- **40% reduction** in night-shift staffing needs through automated monitoring\n\n---\n\n> "The SPM-915 sleep monitors transformed our night shift. We went from hourly room checks to targeted responses. Our residents sleep better and our staff stress levels dropped dramatically."\n> — Nursing Director, 200-bed Senior Care Facility',
   },
   {
-    "slug": "smart-hotel-energy-management",
-    "data": {
-      "title": "Smart Hotel Energy Management",
-      "subtitle": "Reduce energy costs by 30% with per-room monitoring and automated HVAC control across your entire property.",
-      "industry": "smart-hotels",
-      "productLines": [
-        "smart-meters",
-        "hotel-control",
-        "software-platforms"
-      ],
-      "techSolution": "zigbee",
-      "stats": [
+    slug: 'smart-hotel-energy-management',
+    data: {
+      title: 'Smart Hotel Energy Management',
+      subtitle:
+        'Reduce energy costs by 30% with per-room monitoring and automated HVAC control across your entire property.',
+      industry: 'smart-hotels',
+      productLines: ['smart-meters', 'hotel-control', 'software-platforms'],
+      techSolution: 'zigbee',
+      stats: [
         {
-          "value": "30%",
-          "label": "Average Energy Savings"
+          value: '30%',
+          label: 'Average Energy Savings',
         },
         {
-          "value": "500+",
-          "label": "Rooms Managed"
+          value: '500+',
+          label: 'Rooms Managed',
         },
         {
-          "value": "24/7",
-          "label": "Real-time Monitoring"
-        }
+          value: '24/7',
+          label: 'Real-time Monitoring',
+        },
       ],
-      "language": "en"
+      language: 'en',
     },
-    "body": "## The Challenge\n\nHotels face rising energy costs and guest expectations for comfort. Traditional HVAC systems run 24/7 regardless of occupancy, wasting up to 40% of energy. Manual thermostat adjustments by staff are slow and inconsistent.\n\n## Our Solution\n\nOWON's Smart Hotel Energy Management system combines smart meters, room thermostats, and a centralized dashboard to deliver per-room energy visibility and automated control.\n\n### Product Stack\n- **PC341-3M16S Multi-Circuit Monitors** — per-floor or per-wing energy sub-metering\n- **PCT513 Touchscreen Thermostats** — in-room temperature control with occupancy detection\n- **EdgeEco IoT Platform** — centralized dashboard for facility managers\n\n### How It Works\n\n1. **Sub-metering** — PC341 monitors track energy consumption per floor, wing, or individual room\n2. **Smart Thermostats** — PCT513 units detect occupancy and adjust temperature automatically\n3. **Central Dashboard** — EdgeEco provides real-time analytics, alerts, and energy reports\n4. **Automated Rules** — set temperature setbacks during unoccupied hours\n\n## Results\n\nHotels using OWON's system report:\n- **30% reduction** in HVAC energy costs\n- **15-minute response** to temperature complaints (down from 2+ hours)\n- **Full visibility** into energy consumption patterns by floor and time of day\n\n## Architecture\n\n[Topology Diagram: PC341 monitors → ZigBee Gateway → EdgeEco Cloud → Facility Manager Dashboard. PCT513 thermostats communicate via ZigBee mesh to gateway.]\n\n---\n\n> \"We reduced our monthly energy bill by $4,200 after installing OWON's system across 200 rooms. The dashboard alone pays for itself in operational efficiency.\"\n> — Hotel Operations Director, European Hotel Chain"
-  }
+    body: "## The Challenge\n\nHotels face rising energy costs and guest expectations for comfort. Traditional HVAC systems run 24/7 regardless of occupancy, wasting up to 40% of energy. Manual thermostat adjustments by staff are slow and inconsistent.\n\n## Our Solution\n\nOWON's Smart Hotel Energy Management system combines smart meters, room thermostats, and a centralized dashboard to deliver per-room energy visibility and automated control.\n\n### Product Stack\n- **PC341-3M16S Multi-Circuit Monitors** — per-floor or per-wing energy sub-metering\n- **PCT513 Touchscreen Thermostats** — in-room temperature control with occupancy detection\n- **EdgeEco IoT Platform** — centralized dashboard for facility managers\n\n### How It Works\n\n1. **Sub-metering** — PC341 monitors track energy consumption per floor, wing, or individual room\n2. **Smart Thermostats** — PCT513 units detect occupancy and adjust temperature automatically\n3. **Central Dashboard** — EdgeEco provides real-time analytics, alerts, and energy reports\n4. **Automated Rules** — set temperature setbacks during unoccupied hours\n\n## Results\n\nHotels using OWON's system report:\n- **30% reduction** in HVAC energy costs\n- **15-minute response** to temperature complaints (down from 2+ hours)\n- **Full visibility** into energy consumption patterns by floor and time of day\n\n## Architecture\n\n[Topology Diagram: PC341 monitors → ZigBee Gateway → EdgeEco Cloud → Facility Manager Dashboard. PCT513 thermostats communicate via ZigBee mesh to gateway.]\n\n---\n\n> \"We reduced our monthly energy bill by $4,200 after installing OWON's system across 200 rooms. The dashboard alone pays for itself in operational efficiency.\"\n> — Hotel Operations Director, European Hotel Chain",
+  },
 ];

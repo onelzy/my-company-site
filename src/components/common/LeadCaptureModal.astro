@@ -14,30 +14,32 @@
  *
  * Opens by setting window.__openLeadModal(config).
  */
-const scenarioLabels = {
-  price: 'Unlock Base Price',
-  pdf: 'Please enter your work email to download',
-  case: 'Get the Full Case Study PDF',
-};
-
-const scenarioFields: Record<string, { email: boolean; company: boolean }> = {
-  price: { email: true, company: true },
-  pdf: { email: true, company: false },
-  case: { email: true, company: true },
-};
 ---
 
-<div id="leadCaptureOverlay" class="fixed inset-0 z-[9999] hidden items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300" role="dialog" aria-modal="true" aria-label="Lead capture form">
+<div
+  id="leadCaptureOverlay"
+  class="fixed inset-0 z-[9999] hidden items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Lead capture form"
+>
   <!-- Mobile: bottom sheet | Desktop: centered card -->
-  <div id="leadCaptureSheet" class="w-full sm:max-w-md sm:rounded-2xl bg-white dark:bg-slate-900 shadow-2xl rounded-t-2xl sm:rounded-2xl
+  <div
+    id="leadCaptureSheet"
+    class="w-full sm:max-w-md sm:rounded-2xl bg-white dark:bg-slate-900 shadow-2xl rounded-t-2xl sm:rounded-2xl
               transform transition-transform duration-300 translate-y-full sm:translate-y-0 sm:scale-95
-              max-h-[90vh] overflow-y-auto">
+              max-h-[90vh] overflow-y-auto"
+  >
     <!-- Close button -->
     <div class="flex items-center justify-between p-4 sm:p-5 border-b border-gray-100 dark:border-slate-800">
       <h3 id="leadCaptureTitle" class="text-lg font-semibold text-default dark:text-slate-100"></h3>
-      <button id="leadCaptureClose" class="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors" aria-label="Close">
+      <button
+        id="leadCaptureClose"
+        class="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
+        aria-label="Close"
+      >
         <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
     </div>
@@ -45,27 +47,41 @@ const scenarioFields: Record<string, { email: boolean; company: boolean }> = {
     <!-- Form -->
     <div class="p-4 sm:p-5 space-y-4">
       <div id="leadCaptureCompanyRow" class="hidden">
-        <label for="leadCaptureCompany" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">Company Name *</label>
-        <input type="text" id="leadCaptureCompany" placeholder="Your company"
-               class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" />
+        <label for="leadCaptureCompany" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5"
+          >Company Name *</label
+        >
+        <input
+          type="text"
+          id="leadCaptureCompany"
+          placeholder="Your company"
+          class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+        />
       </div>
 
       <div>
-        <label for="leadCaptureEmail" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">Business Email *</label>
-        <input type="email" id="leadCaptureEmail" placeholder="you@company.com"
-               class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow" />
-        <p id="leadCaptureError" class="hidden mt-1 text-xs text-red-500">Please enter a valid business email address.</p>
+        <label for="leadCaptureEmail" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5"
+          >Business Email *</label
+        >
+        <input
+          type="email"
+          id="leadCaptureEmail"
+          placeholder="you@company.com"
+          class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+        />
+        <p id="leadCaptureError" class="hidden mt-1 text-xs text-red-500">
+          Please enter a valid business email address.
+        </p>
       </div>
 
-      <button id="leadCaptureSubmit"
-              class="w-full py-3 px-6 rounded-lg font-semibold text-sm text-white transition-all
-                     bg-[#FF6B00] hover:bg-[#E55D00] active:scale-[0.98]">
+      <button
+        id="leadCaptureSubmit"
+        class="w-full py-3 px-6 rounded-lg font-semibold text-sm text-white transition-all
+                     bg-[#FF6B00] hover:bg-[#E55D00] active:scale-[0.98]"
+      >
         Submit & Continue
       </button>
 
-      <p class="text-xs text-center text-muted dark:text-slate-500 pt-1">
-        🔒 No spam. Unsubscribe anytime.
-      </p>
+      <p class="text-xs text-center text-muted dark:text-slate-500 pt-1">🔒 No spam. Unsubscribe anytime.</p>
     </div>
 
     <!-- Success state (hidden by default) -->

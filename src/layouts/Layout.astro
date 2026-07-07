@@ -33,9 +33,10 @@ const { language } = I18N;
 // RTL for Arabic; falls back to config.yaml textDirection for others
 // i18n: English-only for now. When multi-language is enabled via
 // astro.config.ts, restore: const currentLocale = Astro.currentLocale || 'en';
-const currentLocale = 'en';
+// const currentLocale = 'en'; // unused in English-only MVP
 const textDirection = I18N.textDirection;
 ---
+
 <!doctype html>
 <html lang={language} dir={textDirection} class="2xl:text-[20px]">
   <head>
@@ -53,13 +54,17 @@ const textDirection = I18N.textDirection;
     <ClientRouter fallback="swap" />
 
     <!-- Organization SEO Schema -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Organization',
-      name: 'OWON Technology',
-      url: 'https://my-company-site.onelzy.workers.dev',
-      description: 'Professional smart IoT device manufacturer — smart meters, thermostats, hotel control, senior care.',
-    })} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: 'OWON Technology',
+        url: 'https://my-company-site.onelzy.workers.dev',
+        description:
+          'Professional smart IoT device manufacturer — smart meters, thermostats, hotel control, senior care.',
+      })}
+    />
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">

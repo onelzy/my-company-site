@@ -2,27 +2,56 @@
 import PageLayout from '~/layouts/PageLayout.astro';
 ---
 
-<PageLayout metadata={{ title: 'API Reference — OWON Developers', description: 'REST API documentation for OWON IoT devices.' }}>
+<PageLayout
+  metadata={{ title: 'API Reference — OWON Developers', description: 'REST API documentation for OWON IoT devices.' }}
+>
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex gap-8">
         <!-- Sidebar -->
         <nav class="hidden lg:block w-56 shrink-0 sticky top-24 self-start space-y-1">
           <p class="text-xs font-semibold uppercase text-muted mb-3 tracking-wider">Developers</p>
-          <a href="/developers" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Overview</a>
-          <a href="/developers/api" class="block px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary">API Reference</a>
-          <a href="/developers/sdks" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">SDKs & Libraries</a>
-          <a href="/developers/examples" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Code Examples</a>
-          <a href="/developers/changelog" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Firmware Changelog</a>
+          <a
+            href="/developers"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Overview</a
+          >
+          <a href="/developers/api" class="block px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary"
+            >API Reference</a
+          >
+          <a
+            href="/developers/sdks"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >SDKs & Libraries</a
+          >
+          <a
+            href="/developers/examples"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Code Examples</a
+          >
+          <a
+            href="/developers/changelog"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Firmware Changelog</a
+          >
         </nav>
         <!-- Content -->
         <div class="flex-1 min-w-0">
           <h1 class="text-3xl font-bold mb-6 text-default dark:text-slate-100">API Reference</h1>
-          <p class="text-muted dark:text-slate-400 mb-8">Interactive API documentation is coming soon. Our API provides RESTful endpoints for device management, data retrieval, and configuration.</p>
-          <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 p-12 text-center">
+          <p class="text-muted dark:text-slate-400 mb-8">
+            Interactive API documentation is coming soon. Our API provides RESTful endpoints for device management, data
+            retrieval, and configuration.
+          </p>
+          <div
+            class="rounded-xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 p-12 text-center"
+          >
             <div class="text-4xl mb-4">📡</div>
             <h2 class="text-lg font-semibold mb-2 text-default dark:text-slate-200">Swagger UI coming soon</h2>
-            <p class="text-sm text-muted dark:text-slate-400">For API access, contact our <a href="/contact-sales" class="text-primary hover:underline">engineering team</a>.</p>
+            <p class="text-sm text-muted dark:text-slate-400">
+              For API access, contact our <a href="/contact-sales" class="text-primary hover:underline"
+                >engineering team</a
+              >.
+            </p>
           </div>
         </div>
       </div>

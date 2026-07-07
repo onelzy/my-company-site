@@ -157,7 +157,7 @@ export const PRODUCT_TYPE_LABELS: Record<string, LocalizedRecord> = {
     zh: '紧急呼叫',
     es: 'Llamada de Emergencia',
     ru: 'Экстренный вызов',
-    fr: 'Appel d\'Urgence',
+    fr: "Appel d'Urgence",
     de: 'Notruf',
     ar: 'نداء الطوارئ',
     pt: 'Chamada de Emergência',
@@ -249,7 +249,7 @@ export const PRODUCT_TYPE_LABELS: Record<string, LocalizedRecord> = {
     zh: '灯光控制',
     es: 'Control de Iluminación',
     ru: 'Управление освещением',
-    fr: 'Contrôle d\'Éclairage',
+    fr: "Contrôle d'Éclairage",
     de: 'Lichtsteuerung',
     ar: 'التحكم بالإضاءة',
     pt: 'Controle de Iluminação',
@@ -779,7 +779,7 @@ export const SPEC_LABELS: Record<string, LocalizedRecord> = {
     zh: '管理后台',
     es: 'Panel de Administración',
     ru: 'Админ-панель',
-    fr: 'Panneau d\'Administration',
+    fr: "Panneau d'Administration",
     de: 'Admin-Panel',
     ar: 'لوحة الإدارة',
     pt: 'Painel de Administração',
@@ -883,7 +883,7 @@ const TECH_SUB_PARENT: Record<string, string> = {
 export function getLocalizedLabel(
   labels: Record<string, LocalizedRecord>,
   value: string,
-  locale: Locale = 'en',
+  locale: Locale = 'en'
 ): string {
   const entry = labels[value];
   if (!entry) return value;
@@ -898,16 +898,18 @@ export function getLocalizedLabel(
  * - OR within multi-select groups (communication, ecosystem, etc.)
  * - A missing (undefined) filter or empty array means "match all" for that group.
  */
-export function filterProducts<T extends {
-  productType?: string;
-  productSubType?: string;
-  techSolution?: string;
-  techSubType?: string;
-  communication?: string[];
-  ecosystem?: string[];
-  extraTags?: string[];
-  softwareType?: string[];
-}>(
+export function filterProducts<
+  T extends {
+    productType?: string;
+    productSubType?: string;
+    techSolution?: string;
+    techSubType?: string;
+    communication?: string[];
+    ecosystem?: string[];
+    extraTags?: string[];
+    softwareType?: string[];
+  },
+>(
   products: T[],
   filters: {
     productType?: string;
@@ -918,7 +920,7 @@ export function filterProducts<T extends {
     ecosystem?: string[];
     extraTags?: string[];
     softwareType?: string[];
-  },
+  }
 ): T[] {
   return products.filter((product) => {
     // --- Single-value filters (AND logic between groups) ---
@@ -945,8 +947,7 @@ export function filterProducts<T extends {
     if (
       filters.communication &&
       filters.communication.length > 0 &&
-      (!product.communication ||
-        !filters.communication.some((v) => product.communication!.includes(v)))
+      (!product.communication || !filters.communication.some((v) => product.communication!.includes(v)))
     ) {
       return false;
     }
@@ -954,8 +955,7 @@ export function filterProducts<T extends {
     if (
       filters.ecosystem &&
       filters.ecosystem.length > 0 &&
-      (!product.ecosystem ||
-        !filters.ecosystem.some((v) => product.ecosystem!.includes(v)))
+      (!product.ecosystem || !filters.ecosystem.some((v) => product.ecosystem!.includes(v)))
     ) {
       return false;
     }
@@ -963,8 +963,7 @@ export function filterProducts<T extends {
     if (
       filters.extraTags &&
       filters.extraTags.length > 0 &&
-      (!product.extraTags ||
-        !filters.extraTags.some((v) => product.extraTags!.includes(v)))
+      (!product.extraTags || !filters.extraTags.some((v) => product.extraTags!.includes(v)))
     ) {
       return false;
     }
@@ -972,8 +971,7 @@ export function filterProducts<T extends {
     if (
       filters.softwareType &&
       filters.softwareType.length > 0 &&
-      (!product.softwareType ||
-        !filters.softwareType.some((v) => product.softwareType!.includes(v)))
+      (!product.softwareType || !filters.softwareType.some((v) => product.softwareType!.includes(v)))
     ) {
       return false;
     }

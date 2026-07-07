@@ -22,9 +22,7 @@ const companyLinks = headerData?.links[2] ? [headerData.links[2]] : undefined;
     <slot name="header">
       <Header
         links={companyLinks}
-        actions={[
-          { text: 'Download', href: 'https://github.com/arthelokyo/astrowind' },
-        ]}
+        actions={[{ text: 'Download', href: 'https://github.com/arthelokyo/astrowind' }]}
         showToggleTheme
         position="right"
       />

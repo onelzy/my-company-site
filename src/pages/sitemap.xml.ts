@@ -7,12 +7,7 @@
  */
 import { getCollection } from 'astro:content';
 import { SITE } from 'astrowind:config';
-import {
-  getAllProductTypes,
-  getProductSubTypes,
-  getAllTechSolutions,
-  getTechSubTypes,
-} from '~/utils/products';
+import { getAllProductTypes, getProductSubTypes, getAllTechSolutions, getTechSubTypes } from '~/utils/products';
 
 export const prerender = false;
 
@@ -24,10 +19,7 @@ function localePrefix(locale: string): string {
 }
 
 /** Derive the canonical Keystatic slug for a product entry. */
-function productSlug(p: {
-  data: { slug?: { slug?: string }; name?: string };
-  id: string;
-}): string {
+function productSlug(p: { data: { slug?: { slug?: string }; name?: string }; id: string }): string {
   return (
     p.data.slug?.slug ||
     p.id.split('/').pop()?.replace('.mdoc', '') ||
@@ -154,10 +146,7 @@ export const GET = async () => {
   // 4. Product detail pages with hreflang alternates
   //    Group products by Keystatic slug so we can link locale variants.
   // -------------------------------------------------------------------
-  const productGroups = new Map<
-    string,
-    { locale: string; slug: string }[]
-  >();
+  const productGroups = new Map<string, { locale: string; slug: string }[]>();
 
   for (const p of products) {
     const keySlug = productSlug(p);
@@ -211,7 +200,7 @@ export const GET = async () => {
       if (entry.alternates && entry.alternates.length > 0) {
         for (const alt of entry.alternates) {
           lines.push(
-            `    <xhtml:link rel="alternate" hreflang="${escapeXml(alt.hreflang)}" href="${escapeXml(alt.href)}" />`,
+            `    <xhtml:link rel="alternate" hreflang="${escapeXml(alt.hreflang)}" href="${escapeXml(alt.href)}" />`
           );
         }
       }

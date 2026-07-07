@@ -29,6 +29,4 @@ const links: AlternateLink[] = alternates || [];
 
 <link rel="sitemap" href={getAsset('/sitemap-index.xml')} />
 
-{links.length > 0 && links.map((link) => (
-  <link rel="alternate" hreflang={link.hreflang} href={link.href} />
-))}
+{links.length > 0 && links.map((link) => <link rel="alternate" hreflang={link.hreflang} href={link.href} />)}
