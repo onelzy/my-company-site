@@ -5,6 +5,7 @@
 **Goal:** Add a use-case-driven Solutions page, restructure navigation to match the Brief (Products / Solutions / Developers / Resources / Contact Sales), and add Product + Article SEO Schema.
 
 **Architecture:**
+
 - Solutions page: Keystatic-managed collection of use-case entries (Markdown), rendered as a dynamic list with multi-filter (industry × product-line × tech). Each solution links to a detail page with topology diagrams, data points, and CTA.
 - Navigation: Update `navigation.ts` to 5-item structure. Contact Sales is a highlighted CTA button. Developers + Resources are placeholder pages (P1).
 - SEO Schema: Add `@type: Product` JSON-LD to product detail pages, `@type: Article` to blog posts, `@type: WebSite` to Layout.
@@ -112,8 +113,12 @@ const solutionsCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     subtitle: z.string().optional(),
-    industry: z.enum(['smart-hotels', 'senior-care', 'energy-management', 'smart-building', 'industrial-iot']).optional(),
-    productLines: z.array(z.enum(['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms'])).optional(),
+    industry: z
+      .enum(['smart-hotels', 'senior-care', 'energy-management', 'smart-building', 'industrial-iot'])
+      .optional(),
+    productLines: z
+      .array(z.enum(['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms']))
+      .optional(),
     techSolution: z.enum(['tuya', 'mqtt', 'zigbee']).optional(),
     heroImage: z.string().optional(),
     diagramImage: z.string().optional(),
@@ -162,49 +167,78 @@ const industries = [
 ];
 ---
 
-<PageLayout metadata={{ title: 'Solutions — OWON Technology', description: 'Industry-specific IoT solutions for smart hotels, senior care, energy management and more.' }}>
+<PageLayout
+  metadata={{
+    title: 'Solutions — OWON Technology',
+    description: 'Industry-specific IoT solutions for smart hotels, senior care, energy management and more.',
+  }}
+>
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold sm:text-4xl mb-2">Solutions</h1>
       <p class="text-lg text-muted mb-8 max-w-2xl">
-        Industry-proven IoT solutions built on OWON's hardware and software stack.
-        From smart hotels to industrial energy management — find the right solution for your project.
+        Industry-proven IoT solutions built on OWON's hardware and software stack. From smart hotels to industrial
+        energy management — find the right solution for your project.
       </p>
 
       <!-- Industry filter chips -->
       <div id="solFilterRow" class="flex flex-wrap gap-3 mb-10">
-        <button class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium bg-primary text-primary-foreground active" data-industry="">
+        <button
+          class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium bg-primary text-primary-foreground active"
+          data-industry=""
+        >
           All Solutions
         </button>
-        {industries.map((ind) => (
-          <button class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium border border-gray-300 hover:border-primary transition-colors" data-industry={ind.value}>
-            {ind.label}
-          </button>
-        ))}
+        {
+          industries.map((ind) => (
+            <button
+              class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium border border-gray-300 hover:border-primary transition-colors"
+              data-industry={ind.value}
+            >
+              {ind.label}
+            </button>
+          ))
+        }
       </div>
 
       <!-- Solution cards -->
       <div id="solGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {solutions.map((s) => {
-          const solutionSlug = s.id.split('/').pop()?.replace('.mdoc', '') || '';
-          const industryLabel = industries.find((i) => i.value === s.data.industry)?.label || '';
-          return (
-            <a href={`/solutions/${solutionSlug}`} class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden">
-              <div class="h-48 bg-gray-100 dark:bg-slate-700 overflow-hidden relative">
-                {s.data.heroImage ? (
-                  <Image src={s.data.heroImage} alt={s.data.title} layout="cover" class="absolute inset-0 w-full h-full" width={600} height={400} />
-                ) : (
-                  <div class="absolute inset-0 flex items-center justify-center text-5xl">🏢</div>
-                )}
-              </div>
-              <div class="p-5">
-                {industryLabel && <span class="text-xs font-semibold text-primary uppercase tracking-wide">{industryLabel}</span>}
-                <h3 class="text-lg font-semibold mt-1 mb-2 group-hover:text-primary transition-colors">{s.data.title}</h3>
-                {s.data.subtitle && <p class="text-sm text-muted line-clamp-2">{s.data.subtitle}</p>}
-              </div>
-            </a>
-          );
-        })}
+        {
+          solutions.map((s) => {
+            const solutionSlug = s.id.split('/').pop()?.replace('.mdoc', '') || '';
+            const industryLabel = industries.find((i) => i.value === s.data.industry)?.label || '';
+            return (
+              <a
+                href={`/solutions/${solutionSlug}`}
+                class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
+              >
+                <div class="h-48 bg-gray-100 dark:bg-slate-700 overflow-hidden relative">
+                  {s.data.heroImage ? (
+                    <Image
+                      src={s.data.heroImage}
+                      alt={s.data.title}
+                      layout="cover"
+                      class="absolute inset-0 w-full h-full"
+                      width={600}
+                      height={400}
+                    />
+                  ) : (
+                    <div class="absolute inset-0 flex items-center justify-center text-5xl">🏢</div>
+                  )}
+                </div>
+                <div class="p-5">
+                  {industryLabel && (
+                    <span class="text-xs font-semibold text-primary uppercase tracking-wide">{industryLabel}</span>
+                  )}
+                  <h3 class="text-lg font-semibold mt-1 mb-2 group-hover:text-primary transition-colors">
+                    {s.data.title}
+                  </h3>
+                  {s.data.subtitle && <p class="text-sm text-muted line-clamp-2">{s.data.subtitle}</p>}
+                </div>
+              </a>
+            );
+          })
+        }
       </div>
     </div>
   </section>
@@ -216,7 +250,9 @@ const industries = [
     const chip = (e.target as HTMLElement).closest('.sol-filter-chip');
     if (!chip) return;
     const industry = chip.dataset.industry || '';
-    document.querySelectorAll('.sol-filter-chip').forEach((c) => c.classList.remove('active', 'bg-primary', 'text-primary-foreground'));
+    document
+      .querySelectorAll('.sol-filter-chip')
+      .forEach((c) => c.classList.remove('active', 'bg-primary', 'text-primary-foreground'));
     chip.classList.add('active', 'bg-primary', 'text-primary-foreground');
     document.querySelectorAll('#solGrid > a').forEach((card) => {
       const cardIndustry = card.querySelector('[data-industry]')?.getAttribute('data-industry');
@@ -269,9 +305,7 @@ export const headerData = {
       ],
     },
   ],
-  actions: [
-    { text: 'Contact Sales', href: getPermalink('/contact') },
-  ],
+  actions: [{ text: 'Contact Sales', href: getPermalink('/contact') }],
 };
 ```
 
@@ -328,6 +362,7 @@ export const footerData = {
 **Objective:** Create minimal pages so navigation links work.
 
 **Files:**
+
 - Create: `src/pages/developers/index.astro`
 - The `/solutions` redirect page at `src/pages/solutions/[...path].astro` is now superseded by the list page — keep it as a fallback redirect.
 
@@ -338,12 +373,21 @@ export const footerData = {
 import PageLayout from '~/layouts/PageLayout.astro';
 ---
 
-<PageLayout metadata={{ title: 'Developers — OWON Technology', description: 'API documentation, SDKs, and integration guides for OWON IoT devices.' }}>
+<PageLayout
+  metadata={{
+    title: 'Developers — OWON Technology',
+    description: 'API documentation, SDKs, and integration guides for OWON IoT devices.',
+  }}
+>
   <section class="py-20">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <h1 class="text-3xl font-bold sm:text-4xl mb-4">Developer Center</h1>
       <p class="text-lg text-muted mb-8">API documentation, SDKs, and integration guides are coming soon.</p>
-      <p class="text-sm text-muted">For immediate technical support, <a href="/contact" class="text-primary hover:underline">contact our engineering team</a>.</p>
+      <p class="text-sm text-muted">
+        For immediate technical support, <a href="/contact" class="text-primary hover:underline"
+          >contact our engineering team</a
+        >.
+      </p>
     </div>
   </section>
 </PageLayout>
@@ -380,7 +424,7 @@ const productSchema = {
 And in the template, add inside `<PageLayout>`:
 
 ```astro
-  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 ```
 
 ---
@@ -395,18 +439,21 @@ And in the template, add inside `<PageLayout>`:
 **Blog Article Schema** (in SinglePost.astro frontmatter):
 
 ```typescript
-const articleSchema = post ? {
-  '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: post.title,
-  datePublished: post.publishDate?.toISOString(),
-  dateModified: post.updateDate?.toISOString(),
-  author: { '@type': 'Organization', name: 'OWON Technology' },
-  publisher: { '@type': 'Organization', name: 'OWON Technology' },
-} : null;
+const articleSchema = post
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: post.title,
+      datePublished: post.publishDate?.toISOString(),
+      dateModified: post.updateDate?.toISOString(),
+      author: { '@type': 'Organization', name: 'OWON Technology' },
+      publisher: { '@type': 'Organization', name: 'OWON Technology' },
+    }
+  : null;
 ```
 
 Template:
+
 ```astro
 {articleSchema && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
 ```
@@ -414,13 +461,16 @@ Template:
 **Organization Schema** (in Layout.astro, in `<head>`):
 
 ```astro
-<script type="application/ld+json" set:html={JSON.stringify({
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'OWON Technology',
-  url: 'https://my-company-site.onelzy.workers.dev',
-  description: 'Professional smart IoT device manufacturer — smart meters, thermostats, hotel control, senior care.',
-})} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'OWON Technology',
+    url: 'https://my-company-site.onelzy.workers.dev',
+    description: 'Professional smart IoT device manufacturer — smart meters, thermostats, hotel control, senior care.',
+  })}
+/>
 ```
 
 ---
@@ -451,13 +501,14 @@ if (!entry) return new Response(null, { status: 404 });
 const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry } = entry.data;
 const bodyHtml = entry.rendered?.html || entry.body || '';
 
-const industryLabel = {
-  'smart-hotels': 'Smart Hotels',
-  'senior-care': 'Senior Care',
-  'energy-management': 'Energy Management',
-  'smart-building': 'Smart Building',
-  'industrial-iot': 'Industrial IoT',
-}[industry || ''] || '';
+const industryLabel =
+  {
+    'smart-hotels': 'Smart Hotels',
+    'senior-care': 'Senior Care',
+    'energy-management': 'Energy Management',
+    'smart-building': 'Smart Building',
+    'industrial-iot': 'Industrial IoT',
+  }[industry || ''] || '';
 
 const techLabel = { tuya: 'Tuya', mqtt: 'MQTT', zigbee: 'ZigBee' }[techSolution || ''] || '';
 ---
@@ -476,61 +527,92 @@ const techLabel = { tuya: 'Tuya', mqtt: 'MQTT', zigbee: 'ZigBee' }[techSolution 
 
       <!-- Hero -->
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 mb-16">
-        <div class="relative aspect-video rounded-xl bg-gray-100 dark:bg-slate-800 overflow-hidden border border-gray-200 dark:border-slate-700">
-          {heroImage ? (
-            <Image src={heroImage} alt={title} layout="cover" class="absolute inset-0 w-full h-full" width={800} height={450} />
-          ) : (
-            <div class="absolute inset-0 flex items-center justify-center text-6xl">🏢</div>
-          )}
+        <div
+          class="relative aspect-video rounded-xl bg-gray-100 dark:bg-slate-800 overflow-hidden border border-gray-200 dark:border-slate-700"
+        >
+          {
+            heroImage ? (
+              <Image
+                src={heroImage}
+                alt={title}
+                layout="cover"
+                class="absolute inset-0 w-full h-full"
+                width={800}
+                height={450}
+              />
+            ) : (
+              <div class="absolute inset-0 flex items-center justify-center text-6xl">🏢</div>
+            )
+          }
         </div>
         <div class="flex flex-col justify-center">
-          {industryLabel && <span class="text-xs font-bold text-primary uppercase tracking-wider mb-2">{industryLabel}</span>}
+          {
+            industryLabel && (
+              <span class="text-xs font-bold text-primary uppercase tracking-wider mb-2">{industryLabel}</span>
+            )
+          }
           <h1 class="text-3xl font-bold sm:text-4xl mb-4">{title}</h1>
           {subtitle && <p class="text-lg text-muted mb-6">{subtitle}</p>}
           <div class="flex flex-wrap gap-2 mb-6">
-            {productLines?.map((pl) => (
-              <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">{pl}</span>
-            ))}
-            {techLabel && <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">{techLabel}</span>}
+            {
+              productLines?.map((pl) => (
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+                  {pl}
+                </span>
+              ))
+            }
+            {
+              techLabel && (
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">{techLabel}</span>
+              )
+            }
           </div>
-          <a href="/contact" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity w-fit">
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity w-fit"
+          >
             Request a Demo
           </a>
         </div>
       </div>
 
       <!-- Key Stats -->
-      {stats && stats.length > 0 && (
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 bg-gray-50 dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700">
-          {stats.map((s) => (
-            <div class="text-center">
-              <div class="text-3xl font-bold text-primary mb-1">{s.value}</div>
-              <div class="text-sm text-muted">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      )}
+      {
+        stats && stats.length > 0 && (
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16 p-8 bg-gray-50 dark:bg-slate-800/50 rounded-xl border border-gray-200 dark:border-slate-700">
+            {stats.map((s) => (
+              <div class="text-center">
+                <div class="text-3xl font-bold text-primary mb-1">{s.value}</div>
+                <div class="text-sm text-muted">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        )
+      }
 
       <!-- Topology Diagram -->
-      {diagramImage && (
-        <div class="mb-16">
-          <h2 class="text-2xl font-bold mb-6">System Architecture</h2>
-          <div class="rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800 p-4">
-            <Image src={diagramImage} alt="System topology" width={1200} height={600} class="w-full h-auto" />
+      {
+        diagramImage && (
+          <div class="mb-16">
+            <h2 class="text-2xl font-bold mb-6">System Architecture</h2>
+            <div class="rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden bg-white dark:bg-slate-800 p-4">
+              <Image src={diagramImage} alt="System topology" width={1200} height={600} class="w-full h-auto" />
+            </div>
           </div>
-        </div>
-      )}
+        )
+      }
 
       <!-- Body Content -->
-      {bodyHtml && (
-        <div class="prose prose-lg dark:prose-invert max-w-none" set:html={bodyHtml} />
-      )}
+      {bodyHtml && <div class="prose prose-lg dark:prose-invert max-w-none" set:html={bodyHtml} />}
 
       <!-- CTA -->
       <div class="mt-16 text-center p-12 bg-primary/5 rounded-2xl border border-primary/10">
         <h2 class="text-2xl font-bold mb-3">Ready to get started?</h2>
         <p class="text-muted mb-6">Contact our solutions team for a personalized demo and quote.</p>
-        <a href="/contact" class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90">
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90"
+        >
           Contact Sales →
         </a>
       </div>
@@ -577,6 +659,7 @@ const techLabel = { tuya: 'Tuya', mqtt: 'MQTT', zigbee: 'ZigBee' }[techSolution 
 **File:** Modify: `src/pages/products/[slug].astro`
 
 Replace:
+
 - Line 29-31: Remove locale detection from URL path — hardcode `'en'`
 - Line 104-116: Simplify `specFieldLabels` — remove Chinese translations
 - Line 157-179: Simplify heading labels — remove Chinese
@@ -587,12 +670,14 @@ Replace:
 ### Verification
 
 After each task, verify via:
+
 ```bash
 cd /home/admin/my-company-site && git add -A && git commit -m "..."
 git push
 ```
 
 After all tasks, test:
+
 - `/solutions` — list page with industry filter
 - `/solutions/smart-hotel-energy-management` — detail page
 - Navigation bar shows: Products | Solutions | Developers | Resources ▾ | [Contact Sales]

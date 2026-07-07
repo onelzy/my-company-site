@@ -28,8 +28,19 @@
 
   function isValidBusinessEmail(email) {
     // Reject free email providers for B2B
-    const freeDomains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com',
-      'icloud.com', 'mail.com', 'protonmail.com', 'qq.com', '163.com', '126.com'];
+    const freeDomains = [
+      'gmail.com',
+      'yahoo.com',
+      'hotmail.com',
+      'outlook.com',
+      'aol.com',
+      'icloud.com',
+      'mail.com',
+      'protonmail.com',
+      'qq.com',
+      '163.com',
+      '126.com',
+    ];
     const domain = email.split('@')[1]?.toLowerCase();
     if (!domain) return false;
     if (freeDomains.includes(domain)) return false;
@@ -79,20 +90,20 @@
     currentConfig = config;
     const scenario = config.scenario || 'price';
 
-    if (titleEl) titleEl.textContent = {
-      price: 'Unlock Base Price',
-      pdf: 'Please enter your work email to download',
-      case: 'Get the Full Case Study PDF',
-    }[scenario] || 'Unlock Content';
+    if (titleEl)
+      titleEl.textContent =
+        {
+          price: 'Unlock Base Price',
+          pdf: 'Please enter your work email to download',
+          case: 'Get the Full Case Study PDF',
+        }[scenario] || 'Unlock Content';
 
     // Show/hide company field
     const needsCompany = scenario === 'price' || scenario === 'case';
     if (companyRow) companyRow.classList.toggle('hidden', !needsCompany);
 
     if (submitBtn) {
-      submitBtn.textContent = scenario === 'pdf'
-        ? 'Download Now'
-        : 'Submit & Continue';
+      submitBtn.textContent = scenario === 'pdf' ? 'Download Now' : 'Submit & Continue';
     }
 
     resetForm();
@@ -125,7 +136,9 @@
           product: currentConfig?.productName || '',
         });
       }
-    } catch (_) { /* ignore */ }
+    } catch {
+      /* ignore */
+    }
 
     // Handle per-scenario
     if (scenario === 'pdf' || scenario === 'case') {
@@ -158,9 +171,10 @@
 
   // Event bindings
   if (closeBtn) closeBtn.addEventListener('click', hide);
-  if (overlay) overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) hide();
-  });
+  if (overlay)
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) hide();
+    });
   if (submitBtn) submitBtn.addEventListener('click', handleSubmit);
   if (emailInput) {
     emailInput.addEventListener('keydown', (e) => {

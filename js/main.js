@@ -3,7 +3,7 @@
  * 功能：导航菜单、产品筛选、表单提交、返回顶部
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   // ===== Mobile Nav Toggle =====
@@ -11,19 +11,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.getElementById('navLinks');
 
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function() {
+    navToggle.addEventListener('click', function () {
       navLinks.classList.toggle('open');
     });
 
     // Close menu when link is clicked
-    navLinks.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', function() {
+    navLinks.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
         navLinks.classList.remove('open');
       });
     });
 
     // Close menu on outside click
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
         navLinks.classList.remove('open');
       }
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const backToTop = document.getElementById('backToTop');
 
   if (backToTop) {
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       if (window.scrollY > 400) {
         backToTop.classList.add('show');
       } else {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    backToTop.addEventListener('click', function() {
+    backToTop.addEventListener('click', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
@@ -52,15 +52,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const productCards = document.querySelectorAll('.product-card');
 
   if (filterBtns.length > 0 && productCards.length > 0) {
-    filterBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
+    filterBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
         // Update active button
-        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        filterBtns.forEach(function (b) {
+          b.classList.remove('active');
+        });
         btn.classList.add('active');
 
         const filter = btn.getAttribute('data-filter');
 
-        productCards.forEach(function(card) {
+        productCards.forEach(function (card) {
           if (filter === 'all' || card.getAttribute('data-category') === filter) {
             card.style.display = 'block';
           } else {
@@ -76,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const formSuccess = document.getElementById('formSuccess');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
       // Simple validation
@@ -96,12 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Show loading state
       const submitBtn = contactForm.querySelector('.submit-btn');
-      const originalText = submitBtn.textContent;
       submitBtn.textContent = '提交中...';
       submitBtn.disabled = true;
 
       // Simulate sending (replace with actual fetch/XMLHttpRequest)
-      setTimeout(function() {
+      setTimeout(function () {
         contactForm.style.display = 'none';
         formSuccess.classList.add('show');
       }, 800);
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const navbar = document.getElementById('navbar');
 
   if (navbar) {
-    window.addEventListener('scroll', function() {
+    window.addEventListener('scroll', function () {
       if (window.scrollY > 50) {
         navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
       } else {
@@ -122,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // ===== Smooth Scroll for Anchor Links =====
-  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
       const href = anchor.getAttribute('href');
       if (href === '#') return;
       e.preventDefault();

@@ -26,6 +26,7 @@ The system classifies products along two independent axes, allowing cross-filter
 - **Client-side filtering** via JavaScript (Alpine.js or vanilla JS)
 
 ### Data Flow
+
 ```
 Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → Pages
 ```
@@ -35,6 +36,7 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 ## Execution Phases
 
 ### Phase 1: Keystatic Product Collection
+
 **Depends on:** None
 **Files:** `keystatic.config.ts`
 
@@ -47,6 +49,7 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 - Add `featured` boolean, `sortOrder` integer
 
 ### Phase 2: Astro Content Collection
+
 **Depends on:** Phase 1
 **Files:** `src/content.config.ts`
 
@@ -55,8 +58,10 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 - Export from collections
 
 ### Phase 3: Product Type Pages (Dimension 1)
+
 **Depends on:** Phase 2
 **Files:**
+
 - `src/pages/products/index.astro` — all products listing
 - `src/pages/products/[type]/index.astro` — main category listing
 - `src/pages/products/[type]/[subType]/index.astro` — sub-category listing
@@ -64,6 +69,7 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 - `src/components/products/ProductFilter.astro` — client-side filter component
 
 **Routes:**
+
 ```
 /products/                          → all products
 /products/smart-meters/             → smart meter list
@@ -74,13 +80,16 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 ```
 
 ### Phase 4: Technical Solution Pages (Dimension 2)
+
 **Depends on:** Phase 2
 **Files:**
+
 - `src/pages/solutions/index.astro` — all solutions overview
 - `src/pages/solutions/[solution]/index.astro` — solution landing
 - `src/pages/solutions/[solution]/[subType]/index.astro` — sub-type listing
 
 **Routes:**
+
 ```
 /solutions/                         → solutions overview
 /solutions/tuya/                    → Tuya ecosystem
@@ -93,8 +102,10 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 ```
 
 ### Phase 5: Product Detail Page
+
 **Depends on:** Phase 2
 **Files:**
+
 - `src/pages/products/[slug].astro` — dynamic product detail
 
 **Route:** `/products/[slug]/`
@@ -102,29 +113,36 @@ Keystatic CMS → src/content/products/*.mdoc → Astro Content Collections → 
 Displays: product name, model, image, description, content (markdown), all dimension labels, spec tags, technical specs JSON.
 
 ### Phase 6: Client-Side Filtering
+
 **Depends on:** Phase 3, 4
 **Files:**
+
 - `src/assets/scripts/product-filter.js` — vanilla JS filter logic
 - Update ProductFilter.astro with interactive checkboxes
 - URL parameter sync (read on load, write on change)
 - Cross-dimension filtering (AND logic between dimensions)
 
 **Behavior:**
+
 - Read URL params on page load → apply filters
 - On filter change → update URL params → re-filter
 - Filter logic: product matches if it passes ALL active filters (AND)
 - Within multi-select groups: OR logic (any matching tag)
 
 ### Phase 7: SEO & Sitemap
+
 **Depends on:** Phase 3, 4, 5
 **Files:**
+
 - Update `src/config.yaml` with OWON site info
 - Add SEO metadata to all product/solution pages
 - Generate sitemap entries for product pages
 - i18n alternate links for all product pages
 
 ### Phase 8: Integration Testing
+
 **Depends on:** Phase 6, 7
+
 - Verify all 8 languages render correctly
 - Test product filtering across dimensions
 - Verify URL parameter persistence
@@ -144,43 +162,44 @@ Displays: product name, model, image, description, content (markdown), all dimen
 
 ## Files Changed Summary
 
-| File | Phase | Action |
-|------|-------|--------|
-| `keystatic.config.ts` | 1 | Rewrite products collection |
-| `src/content.config.ts` | 2 | Add products collection |
-| `src/config.yaml` | 7 | Update OWON metadata |
-| `src/navigation.ts` | 3 | Add products/solutions nav |
-| `src/pages/products/index.astro` | 3 | Create |
-| `src/pages/products/[type]/index.astro` | 3 | Create |
-| `src/pages/products/[type]/[subType]/index.astro` | 3 | Create |
-| `src/pages/products/[slug].astro` | 5 | Create |
-| `src/pages/solutions/index.astro` | 4 | Create |
-| `src/pages/solutions/[solution]/index.astro` | 4 | Create |
-| `src/pages/solutions/[solution]/[subType]/index.astro` | 4 | Create |
-| `src/components/products/ProductCard.astro` | 3 | Create |
-| `src/components/products/ProductGrid.astro` | 3 | Create |
-| `src/components/products/ProductFilter.astro` | 3 | Create |
-| `src/assets/scripts/product-filter.js` | 6 | Create |
-| `src/utils/products.ts` | 3 | Create (data helpers) |
-| `src/types.ts` | 3 | Update (product types) |
+| File                                                   | Phase | Action                      |
+| ------------------------------------------------------ | ----- | --------------------------- |
+| `keystatic.config.ts`                                  | 1     | Rewrite products collection |
+| `src/content.config.ts`                                | 2     | Add products collection     |
+| `src/config.yaml`                                      | 7     | Update OWON metadata        |
+| `src/navigation.ts`                                    | 3     | Add products/solutions nav  |
+| `src/pages/products/index.astro`                       | 3     | Create                      |
+| `src/pages/products/[type]/index.astro`                | 3     | Create                      |
+| `src/pages/products/[type]/[subType]/index.astro`      | 3     | Create                      |
+| `src/pages/products/[slug].astro`                      | 5     | Create                      |
+| `src/pages/solutions/index.astro`                      | 4     | Create                      |
+| `src/pages/solutions/[solution]/index.astro`           | 4     | Create                      |
+| `src/pages/solutions/[solution]/[subType]/index.astro` | 4     | Create                      |
+| `src/components/products/ProductCard.astro`            | 3     | Create                      |
+| `src/components/products/ProductGrid.astro`            | 3     | Create                      |
+| `src/components/products/ProductFilter.astro`          | 3     | Create                      |
+| `src/assets/scripts/product-filter.js`                 | 6     | Create                      |
+| `src/utils/products.ts`                                | 3     | Create (data helpers)       |
+| `src/types.ts`                                         | 3     | Update (product types)      |
 
 ---
 
 ## Risks & Mitigations
 
-| Risk | Mitigation |
-|------|------------|
-| Keystatic `fields.slug` incompatibility with Astro v6 Content Layer | Use `fields.text` as slug fallback if slug field causes issues |
-| Large product catalogue causing slow client-side filtering | Implement virtual scrolling or pagination if >100 products |
-| i18n routing conflict with product dynamic routes | Test all locale prefixes early; use `getStaticPaths` with `prerender: false` for SSR routes |
-| Cloudflare build time for many static pages | Keep product detail as SSR route; only prerender category index pages |
-| Keystatic `fields.json` for specs might not exist in v0.5.x | Fall back to `fields.text` with JSON validation, or use `fields.object` with dynamic keys |
+| Risk                                                                | Mitigation                                                                                  |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| Keystatic `fields.slug` incompatibility with Astro v6 Content Layer | Use `fields.text` as slug fallback if slug field causes issues                              |
+| Large product catalogue causing slow client-side filtering          | Implement virtual scrolling or pagination if >100 products                                  |
+| i18n routing conflict with product dynamic routes                   | Test all locale prefixes early; use `getStaticPaths` with `prerender: false` for SSR routes |
+| Cloudflare build time for many static pages                         | Keep product detail as SSR route; only prerender category index pages                       |
+| Keystatic `fields.json` for specs might not exist in v0.5.x         | Fall back to `fields.text` with JSON validation, or use `fields.object` with dynamic keys   |
 
 ---
 
 ## Verification Criteria
 
 After all phases complete:
+
 1. ✅ `npm run build` succeeds on Cloudflare Pages
 2. ✅ Keystatic admin at `/keystatic` loads and allows product CRUD
 3. ✅ Products appear on listing pages filtered by type/subType/solution

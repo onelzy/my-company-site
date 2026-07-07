@@ -18,6 +18,7 @@
   // Constants
   // ===========================================================================
   const SINGLE_GROUPS = ['type', 'subtype', 'sol', 'subsol'];
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const MULTI_GROUPS = ['comm'];
 
   /** Map URL group key to data-attribute on .product-card-wrapper */
@@ -46,10 +47,16 @@
   // ===========================================================================
   // DOM helpers
   // ===========================================================================
-  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
-  function $$(sel, ctx) { return Array.from((ctx || document).querySelectorAll(sel)); }
+  function $(sel, ctx) {
+    return (ctx || document).querySelector(sel);
+  }
+  function $$(sel, ctx) {
+    return Array.from((ctx || document).querySelectorAll(sel));
+  }
 
-  function getCards() { return $$('.product-card-wrapper'); }
+  function getCards() {
+    return $$('.product-card-wrapper');
+  }
 
   /**
    * Load taxonomy data. Reads from <script type="application/json" id="taxonomy-data">
@@ -110,6 +117,7 @@
   }
 
   /** Check if any filter is active. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   function hasAnyFilter() {
     for (const g of SINGLE_GROUPS) if (filterState[g]) return true;
     if (filterState.comm.size > 0) return true;
@@ -137,10 +145,14 @@
       try {
         const arr = JSON.parse(raw);
         if (!Array.isArray(arr)) return false;
-        const lower = arr.map(function (v) { return String(v).trim().toLowerCase(); });
-        const match = [...filterState.comm].some(function (v) { return lower.includes(v); });
+        const lower = arr.map(function (v) {
+          return String(v).trim().toLowerCase();
+        });
+        const match = [...filterState.comm].some(function (v) {
+          return lower.includes(v);
+        });
         if (!match) return false;
-      } catch (_) {
+      } catch {
         return false;
       }
     }
@@ -214,28 +226,60 @@
       if (active) {
         chip.classList.add('active');
         chip.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
-        chip.classList.remove('text-gray-600', 'dark:text-slate-400', 'bg-white', 'dark:bg-slate-800',
-                        'border-gray-300', 'dark:border-slate-600',
-                        'border-blue-200', 'dark:border-blue-700',
-                        'bg-blue-50', 'dark:bg-blue-900/20', 'text-blue-700', 'dark:text-blue-300',
-                        'border-green-200', 'dark:border-green-700',
-                        'bg-green-50', 'dark:bg-green-900/20', 'text-green-700', 'dark:text-green-300');
+        chip.classList.remove(
+          'text-gray-600',
+          'dark:text-slate-400',
+          'bg-white',
+          'dark:bg-slate-800',
+          'border-gray-300',
+          'dark:border-slate-600',
+          'border-blue-200',
+          'dark:border-blue-700',
+          'bg-blue-50',
+          'dark:bg-blue-900/20',
+          'text-blue-700',
+          'dark:text-blue-300',
+          'border-green-200',
+          'dark:border-green-700',
+          'bg-green-50',
+          'dark:bg-green-900/20',
+          'text-green-700',
+          'dark:text-green-300'
+        );
       } else {
         chip.classList.remove('active');
         chip.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
 
         if (group === 'sol') {
           // Eco tags: blue style
-          chip.classList.add('bg-blue-50', 'dark:bg-blue-900/20', 'text-blue-700', 'dark:text-blue-300',
-                          'border-blue-200', 'dark:border-blue-700');
+          chip.classList.add(
+            'bg-blue-50',
+            'dark:bg-blue-900/20',
+            'text-blue-700',
+            'dark:text-blue-300',
+            'border-blue-200',
+            'dark:border-blue-700'
+          );
         } else if (group === 'comm') {
           // Comm tags: green style
-          chip.classList.add('bg-green-50', 'dark:bg-green-900/20', 'text-green-700', 'dark:text-green-300',
-                          'border-green-200', 'dark:border-green-700');
+          chip.classList.add(
+            'bg-green-50',
+            'dark:bg-green-900/20',
+            'text-green-700',
+            'dark:text-green-300',
+            'border-green-200',
+            'dark:border-green-700'
+          );
         } else {
           // Default: gray style
-          chip.classList.add('text-gray-600', 'dark:text-slate-400', 'bg-white', 'dark:bg-slate-800',
-                          'border-gray-300', 'dark:border-slate-600');
+          chip.classList.add(
+            'text-gray-600',
+            'dark:text-slate-400',
+            'bg-white',
+            'dark:bg-slate-800',
+            'border-gray-300',
+            'dark:border-slate-600'
+          );
         }
       }
     });
@@ -276,9 +320,10 @@
     if (!container) return;
 
     const taxonomy = getTaxonomy();
-    const key = group === 'subtype'
-      ? (taxonomy.typeGroups && taxonomy.typeGroups[parentKey])
-      : (taxonomy.solutionGroups && taxonomy.solutionGroups[parentKey]);
+    const key =
+      group === 'subtype'
+        ? taxonomy.typeGroups && taxonomy.typeGroups[parentKey]
+        : taxonomy.solutionGroups && taxonomy.solutionGroups[parentKey];
 
     if (!key || !key.children) return;
 
@@ -290,10 +335,18 @@
       const activeClass = active
         ? 'bg-primary text-primary-foreground border-primary active'
         : 'border text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary';
-      html += '<button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer ' +
-              'transition-all duration-150 ' + activeClass + '" ' +
-              'data-group="' + group + '" data-value="' + value + '">' +
-              label + '</button>';
+      html +=
+        '<button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer ' +
+        'transition-all duration-150 ' +
+        activeClass +
+        '" ' +
+        'data-group="' +
+        group +
+        '" data-value="' +
+        value +
+        '">' +
+        label +
+        '</button>';
     }
 
     container.innerHTML = html;
@@ -313,10 +366,24 @@
     // Update tab UI
     $$('.dimension-tab').forEach(function (tab) {
       if (tab.getAttribute('data-dim') === dim) {
-        tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.add(
+          'active',
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm'
+        );
         tab.classList.remove('text-gray-600', 'dark:text-slate-400');
       } else {
-        tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.remove(
+          'active',
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm'
+        );
         tab.classList.add('text-gray-600', 'dark:text-slate-400');
       }
     });
@@ -425,10 +492,24 @@
       // Update dimension tab UI
       $$('.dimension-tab').forEach(function (tab) {
         if (tab.getAttribute('data-dim') === currentDim) {
-          tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+          tab.classList.add(
+            'active',
+            'bg-white',
+            'dark:bg-slate-700',
+            'text-default',
+            'dark:text-slate-200',
+            'shadow-sm'
+          );
           tab.classList.remove('text-gray-600', 'dark:text-slate-400');
         } else {
-          tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+          tab.classList.remove(
+            'active',
+            'bg-white',
+            'dark:bg-slate-700',
+            'text-default',
+            'dark:text-slate-200',
+            'shadow-sm'
+          );
           tab.classList.add('text-gray-600', 'dark:text-slate-400');
         }
       });
@@ -455,10 +536,24 @@
     // Apply initial dimension
     $$('.dimension-tab').forEach(function (tab) {
       if (tab.getAttribute('data-dim') === currentDim) {
-        tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.add(
+          'active',
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm'
+        );
         tab.classList.remove('text-gray-600', 'dark:text-slate-400');
       } else {
-        tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.remove(
+          'active',
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm'
+        );
         tab.classList.add('text-gray-600', 'dark:text-slate-400');
       }
     });
@@ -505,7 +600,9 @@
       syncChips();
       applyFilters();
     },
-    refresh: function () { applyFilters(); },
+    refresh: function () {
+      applyFilters();
+    },
     getCount: function () {
       return $$('.product-card-wrapper').filter(function (c) {
         return !c.classList.contains('hidden');

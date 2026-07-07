@@ -158,20 +158,23 @@ export default config({
           directory: 'public/images/products',
           publicPath: '/images/products',
         }),
-        specs: fields.object({
-          accuracy: fields.text({ label: 'Accuracy Class' }),
-          voltage: fields.text({ label: 'Rated Voltage' }),
-          current: fields.text({ label: 'Rated Current' }),
-          frequency: fields.text({ label: 'Frequency' }),
-          powerSupply: fields.text({ label: 'Power Supply' }),
-          display: fields.text({ label: 'Display' }),
-          dimensions: fields.text({ label: 'Dimensions' }),
-          weight: fields.text({ label: 'Weight' }),
-          operatingTemp: fields.text({ label: 'Operating Temperature' }),
-          protocol: fields.text({ label: 'Protocol' }),
-          certification: fields.text({ label: 'Certifications' }),
-          warranty: fields.text({ label: 'Warranty' }),
-        }, { label: 'Technical Specs' }),
+        specs: fields.object(
+          {
+            accuracy: fields.text({ label: 'Accuracy Class' }),
+            voltage: fields.text({ label: 'Rated Voltage' }),
+            current: fields.text({ label: 'Rated Current' }),
+            frequency: fields.text({ label: 'Frequency' }),
+            powerSupply: fields.text({ label: 'Power Supply' }),
+            display: fields.text({ label: 'Display' }),
+            dimensions: fields.text({ label: 'Dimensions' }),
+            weight: fields.text({ label: 'Weight' }),
+            operatingTemp: fields.text({ label: 'Operating Temperature' }),
+            protocol: fields.text({ label: 'Protocol' }),
+            certification: fields.text({ label: 'Certifications' }),
+            warranty: fields.text({ label: 'Warranty' }),
+          },
+          { label: 'Technical Specs' }
+        ),
         language: fields.select({
           label: 'Language',
           options: [{ label: 'English', value: 'en' }],
@@ -225,11 +228,22 @@ export default config({
             { label: 'ZigBee', value: 'zigbee' },
           ],
         }),
-        heroImage: fields.image({ label: 'Hero Image', directory: 'public/images/solutions', publicPath: '/images/solutions' }),
-        diagramImage: fields.image({ label: 'Topology Diagram', directory: 'public/images/solutions', publicPath: '/images/solutions' }),
+        heroImage: fields.image({
+          label: 'Hero Image',
+          directory: 'public/images/solutions',
+          publicPath: '/images/solutions',
+        }),
+        diagramImage: fields.image({
+          label: 'Topology Diagram',
+          directory: 'public/images/solutions',
+          publicPath: '/images/solutions',
+        }),
         stats: fields.array(
-          fields.object({ value: fields.text({ label: 'Value' }), label: fields.text({ label: 'Label' }) }, { label: 'Stat' }),
-          { label: 'Key Stats', itemLabel: (p) => (p.fields as Record<string, unknown>).value as string || 'Stat' }
+          fields.object(
+            { value: fields.text({ label: 'Value' }), label: fields.text({ label: 'Label' }) },
+            { label: 'Stat' }
+          ),
+          { label: 'Key Stats', itemLabel: (p) => ((p.fields as Record<string, unknown>).value as string) || 'Stat' }
         ),
         body: fields.markdoc({ label: 'Body Content', extension: 'mdoc' }),
         language: fields.select({

@@ -11,7 +11,7 @@ metadata:
   title:
     default: OWON Technology — Smart Energy Solutions
     template: '%s | OWON Technology'
-  description: "OWON Technology — Professional smart energy solutions provider. Smart meters, thermostats, senior care devices, hotel control systems, and IoT platforms for B2B customers worldwide."
+  description: 'OWON Technology — Professional smart energy solutions provider. Smart meters, thermostats, senior care devices, hotel control systems, and IoT platforms for B2B customers worldwide.'
   robots:
     index: true
     follow: true
