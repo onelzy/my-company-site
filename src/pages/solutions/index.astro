@@ -8,7 +8,8 @@ import { solutions as rawSolutions } from '~/data/solutions';
 
 export const prerender = false;
 
-const solutions = rawSolutions.filter((s) => (s.data as any).language === 'en');
+// English MVP — all content is English, skip language filter
+const solutions = rawSolutions;
 
 const industries = [
   { value: 'smart-hotels', label: 'Smart Hotels' },

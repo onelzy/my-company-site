@@ -17,16 +17,26 @@ import { products as rawProducts } from '~/data/products';
 
 export const prerender = false;
 
-const allProducts = rawProducts.map((entry) => ({
-  id: entry.slug,
-  slug: entry.slug,
-  collection: 'products' as const,
-  data: entry.data,
-  ...entry.data,
-}));
+const allProducts = rawProducts.map((entry) => {
+  // Save slug before ...entry.data overwrites it (data.slug is { name, slug })
+  const entrySlug = entry.slug;
+  const { slug: _dataSlug, ...restData } = entry.data as Record<string, unknown>;
+  // Use nested slug.slug (Keystatic fields.slug auto-generates this) or entry slug
+  const urlSlug = (typeof _dataSlug === 'object' && _dataSlug !== null && 'slug' in _dataSlug)
+    ? (_dataSlug as { slug: string }).slug
+    : entrySlug;
+  return {
+    id: entrySlug,
+    slug: urlSlug,
+    collection: 'products' as const,
+    data: entry.data,
+    ...restData,
+  };
+});
 
 const products: Product[] = allProducts;
-const enProducts = products.filter((p) => (p as any).language === 'en');
+// English MVP — all content is English, skip language filter
+const enProducts = products;
 
 const title = 'Product Center';
 const description = 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
