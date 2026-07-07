@@ -18,7 +18,8 @@ const industries = [
   { value: 'smart-building', label: 'Smart Building' },
   { value: 'industrial-iot', label: 'Industrial IoT' },
 ];
-const industryIcons: Record<string, string> = { 'smart-hotels': '🏨', 'senior-care': '🏥', 'energy-management': '⚡', 'smart-building': '🏢', 'industrial-iot': '🏭' };
+type StrMapIndex = { [key: string]: string }
+const industryIcons: StrMapIndex = { 'smart-hotels': '🏨', 'senior-care': '🏥', 'energy-management': '⚡', 'smart-building': '🏢', 'industrial-iot': '🏭' };
 function getIndustryLabel(value: string): string { return industries.find((i) => i.value === value)?.label || ''; }
 ---
 

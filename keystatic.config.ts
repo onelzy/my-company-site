@@ -229,7 +229,7 @@ export default config({
         diagramImage: fields.image({ label: 'Topology Diagram', directory: 'public/images/solutions', publicPath: '/images/solutions' }),
         stats: fields.array(
           fields.object({ value: fields.text({ label: 'Value' }), label: fields.text({ label: 'Label' }) }, { label: 'Stat' }),
-          { label: 'Key Stats', itemLabel: (p) => ((p.fields as any).value as string) || 'Stat' }
+          { label: 'Key Stats', itemLabel: (p) => (p.fields as Record<string, unknown>).value as string || 'Stat' }
         ),
         body: fields.markdoc({ label: 'Body Content', extension: 'mdoc' }),
         language: fields.select({

@@ -18,12 +18,11 @@ import { products as rawProducts } from '~/data/products';
 export const prerender = false;
 
 const allProducts = rawProducts.map((entry) => {
-  const entryData = entry.data as Record<string, unknown>;
   // entry.data.slug is { name, slug } from Keystatic fields.slug — extract the URL-safe slug
-  const dataSlug = entryData.slug as { name?: string; slug?: string } | undefined;
+  const dataSlug = entry.data?.slug as { name?: string; slug?: string } | undefined;
   const urlSlug = dataSlug?.slug || entry.slug;
-  // Destructure to get all data fields EXCEPT slug (we use our own)
-  const { slug: _unused, ...restData } = entryData;
+  const data = entry.data || {};
+  const { slug: _unused, ...restData } = data;
   return {
     id: entry.slug,
     slug: urlSlug,
@@ -40,7 +39,8 @@ const enProducts = products;
 const title = 'Product Center';
 const description = 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
 
-const techSolutionTree: Record<string, string[]> = {
+type StrArr = { [key: string]: string[] }
+const techSolutionTree: StrArr = {
   tuya: ['tuya-meters', 'tuya-thermostats', 'tuya-lighting', 'tuya-gateways', 'tuya-remotes', 'tuya-senior', 'tuya-sensors'],
   mqtt: ['mqtt-meters', 'mqtt-thermostats', 'mqtt-gateways', 'mqtt-remotes', 'mqtt-software'],
   zigbee: ['zigbee-meters', 'zigbee-thermostats', 'zigbee-lighting', 'zigbee-gateways', 'zigbee-remotes', 'zigbee-senior', 'zigbee-sensors', 'zigbee-energy', 'zigbee-software'],
@@ -50,7 +50,8 @@ const productTypes = getAllProductTypes();
 const techSolutions = Object.keys(techSolutionTree);
 
 function buildTaxonomy() {
-  const typeGroups: Record<string, { label: string; children: Record<string, string> }> = {};
+  type StrStrMap = { [key: string]: { label: string; children: { [key: string]: string } } }
+  const typeGroups: StrStrMap = {};
   for (const pt of productTypes) {
     typeGroups[pt] = {
       label: getLocalizedLabel(PRODUCT_TYPE_LABELS, pt, 'en'),
@@ -60,7 +61,7 @@ function buildTaxonomy() {
     };
   }
 
-  const solutionGroups: Record<string, { label: string; children: Record<string, string> }> = {};
+  const solutionGroups: StrStrMap = {};
   for (const ts of techSolutions) {
     solutionGroups[ts] = {
       label: getLocalizedLabel(TECH_SOLUTION_LABELS, ts, 'en'),

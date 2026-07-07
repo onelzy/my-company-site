@@ -10,15 +10,16 @@ import { solutions as rawSolutions } from '~/data/solutions';
 export const prerender = false;
 
 const { slug } = Astro.params;
-const entry = rawSolutions.find((s) => s.slug === slug && (s.data as any).language === 'en');
+const entry = rawSolutions.find((s) => s.slug === slug);
 if (!entry) return new Response(null, { status: 404 });
 
 const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry } = entry.data as any;
 const bodyHtml = renderMarkdown(entry.body || '');
 
-const industryLabels: Record<string, string> = { 'smart-hotels': 'Smart Hotels', 'senior-care': 'Senior Care', 'energy-management': 'Energy Management', 'smart-building': 'Smart Building', 'industrial-iot': 'Industrial IoT' };
+type StrMapSL = { [key: string]: string }
+const industryLabels: StrMapSL = { 'smart-hotels': 'Smart Hotels', 'senior-care': 'Senior Care', 'energy-management': 'Energy Management', 'smart-building': 'Smart Building', 'industrial-iot': 'Industrial IoT' };
 const industryLabel = industryLabels[industry || ''] || '';
-const techLabels: Record<string, string> = { tuya: 'Tuya', mqtt: 'MQTT', zigbee: 'ZigBee' };
+const techLabels: StrMapSL = { tuya: 'Tuya', mqtt: 'MQTT', zigbee: 'ZigBee' };
 const techLabel = techLabels[techSolution || ''] || '';
 ---
 

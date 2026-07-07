@@ -29,7 +29,8 @@ const ecosystem = (entry.data as any).ecosystem ?? [];
 const extraTags = (entry.data as any).extraTags ?? [];
 const softwareType = (entry.data as any).softwareType ?? [];
 
-const specFieldLabels: Record<string, string> = {
+type SpecLabels = { [key: string]: string }
+const specFieldLabels: SpecLabels = {
   accuracy: 'Accuracy', voltage: 'Voltage', current: 'Current', frequency: 'Frequency',
   powerSupply: 'Power Supply', display: 'Display', dimensions: 'Dimensions', weight: 'Weight',
   operatingTemp: 'Operating Temp', protocol: 'Protocol', certification: 'Certification', warranty: 'Warranty',
