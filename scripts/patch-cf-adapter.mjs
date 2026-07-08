@@ -9,7 +9,7 @@
  * Fix: modify createLocals() to accept 'env' and return it from the getter.
  * This only applies to 'output: server' mode (fetch.js).
  */
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, rmSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -68,3 +68,11 @@ count += patch(join(dist, 'utils', 'handler.js'), [
 ]) ? 1 : 0;
 
 console.log(count > 0 ? `✅ Patched Cloudflare adapter (${count}/3)` : '⏭️  Already patched');
+
+// Clear Vite's dependency pre-bundling cache so it picks up the patched files.
+// Without this, Vite uses the pre-patch cached bundle from node_modules/.vite.
+const viteCache = join(__dirname, '..', 'node_modules', '.vite');
+if (existsSync(viteCache)) {
+  rmSync(viteCache, { recursive: true, force: true });
+  console.log('  Cleared Vite dependency cache');
+}
