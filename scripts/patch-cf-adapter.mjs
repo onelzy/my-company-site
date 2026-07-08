@@ -43,12 +43,18 @@ if (cfn.includes(oldGetter)) {
 
 // ── 2. Patch handler.js — pass env to createLocals ──────────────────
 let hn = readFileSync(join(nm, 'utils', 'handler.js'), 'utf-8');
-
-// createLocals(context) → createLocals(context, env)
 if (hn.includes('createLocals(context);') && !hn.includes('createLocals(context, env)')) {
   hn = hn.replace('createLocals(context);', 'createLocals(context, env);');
   writeFileSync(join(nm, 'utils', 'handler.js'), hn, 'utf-8');
   console.log('  [handler] Pass env to createLocals');
+}
+
+// ── 3. Patch fetch.js — pass env to createLocals ────────────────────
+let fn = readFileSync(join(nm, 'fetch.js'), 'utf-8');
+if (fn.includes('createLocals(ctx)') && !fn.includes('createLocals(ctx, env)')) {
+  fn = fn.replace('createLocals(ctx)', 'createLocals(ctx, env)');
+  writeFileSync(join(nm, 'fetch.js'), fn, 'utf-8');
+  console.log('  [fetch] Pass env to createLocals');
 }
 
 console.log('✅ Cloudflare adapter patched for Keystatic OAuth');
