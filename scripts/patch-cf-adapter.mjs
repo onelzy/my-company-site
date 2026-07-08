@@ -1,73 +1,70 @@
 #!/usr/bin/env node
 /**
- * Patches @astrojs/cloudflare to restore locals.runtime.env
- * for @keystatic/astro OAuth compatibility.
+ * Patches @astrojs/cloudflare v13 to restore locals.runtime.env
+ * for @keystatic/astro OAuth compatibility on Cloudflare Workers.
  *
- * Astro v6 + @astrojs/cloudflare v13 removed locals.runtime.env (throws on access).
- * Keystatic reads Worker secrets (KEYSTATIC_GITHUB_CLIENT_ID, etc.) via this API.
+ * Problem: Astro v6 adapter removed locals.runtime.env (access throws Error).
+ * Keystatic reads Worker secrets via this API for GitHub OAuth.
+ *
+ * Fix: modify createLocals() to accept 'env' and return it from the getter.
+ * This only applies to 'output: server' mode (fetch.js).
  */
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const nm = join(__dirname, '..', 'node_modules', '@astrojs', 'cloudflare', 'dist');
-const cfHelpers = join(nm, 'utils', 'cf-helpers.js');
-const handler = join(nm, 'utils', 'handler.js');
-const fetchJs = join(nm, 'fetch.js');
+const dist = join(__dirname, '..', 'node_modules', '@astrojs', 'cloudflare', 'dist');
 
-let changes = 0;
-
-// ── cf-helpers.js: change get env() to return env instead of throwing ──
-if (existsSync(cfHelpers)) {
-  let src = readFileSync(cfHelpers, 'utf-8');
-  const oldSig = 'function createLocals(ctx) {';
-  const newSig = 'function createLocals(ctx, env) {';
-  if (src.includes(oldSig)) {
-    src = src.replace(oldSig, newSig);
-    console.log('  [cf-helpers] Added env param to createLocals');
-    changes++;
+function patch(path, replacements) {
+  let src = readFileSync(path, 'utf-8');
+  let changed = false;
+  for (const [old, replacement] of replacements) {
+    if (src.includes(old)) {
+      src = src.replace(old, replacement);
+      changed = true;
+    }
   }
-
-  const oldGetter = /get env\(\) \{\s+throw new Error\(\s+`Astro\.locals\.runtime\.env has been removed/;
-  if (oldGetter.test(src)) {
-    src = src.replace(
-      /(get env\(\) \{\s+)throw new Error\([\s\S]*?`,/,
-      '$1return env; // restored for @keystatic/astro\n      // was: throw new Error(`Astro.locals.runtime.env has been removed...`,\n      '
-    );
-    writeFileSync(cfHelpers, src, 'utf-8');
-    console.log('  [cf-helpers] Restored runtime.env getter');
-    changes++;
+  if (changed) {
+    writeFileSync(path, src, 'utf-8');
   }
-} else {
-  console.error('❌ cf-helpers.js not found!');
-  process.exit(1);
+  return changed;
 }
 
-// ── handler.js: pass env to createLocals ────────────────────────────
-if (existsSync(handler)) {
-  let src = readFileSync(handler, 'utf-8');
-  if (src.includes('createLocals(context);')) {
-    src = src.replace('createLocals(context);', 'createLocals(context, env);');
-    writeFileSync(handler, src, 'utf-8');
-    console.log('  [handler] Pass env to createLocals');
-    changes++;
-  }
-}
+let count = 0;
 
-// ── fetch.js: pass env to createLocals (production SSR code path) ───
-if (existsSync(fetchJs)) {
-  let src = readFileSync(fetchJs, 'utf-8');
-  if (src.includes('createLocals(ctx)') && !src.includes('createLocals(ctx, env)')) {
-    src = src.replace('createLocals(ctx)', 'createLocals(ctx, env)');
-    writeFileSync(fetchJs, src, 'utf-8');
-    console.log('  [fetch] Pass env to createLocals');
-    changes++;
-  }
-}
+// 1. cf-helpers.js: function signature + getter
+count += patch(join(dist, 'utils', 'cf-helpers.js'), [
+  [
+    'function createLocals(ctx) {',
+    'function createLocals(ctx, env) {',
+  ],
+  [
+    `get env() {
+        throw new Error(
+          \`Astro.locals.runtime.env has been removed in Astro v6. Use 'import { env } from "cloudflare:workers"' instead.\`
+        );
+      },`,
+    `get env() {
+        return env;
+      },`,
+  ],
+]) ? 1 : 0;
 
-if (changes > 0) {
-  console.log(`✅ Cloudflare adapter patched (${changes} changes)`);
-} else {
-  console.log('✅ Cloudflare adapter already patched');
-}
+// 2. fetch.js: production SSR code path
+count += patch(join(dist, 'fetch.js'), [
+  [
+    'createLocals(ctx)',
+    'createLocals(ctx, env)',
+  ],
+]) ? 1 : 0;
+
+// 3. handler.js: prerender code path (belt and suspenders)
+count += patch(join(dist, 'utils', 'handler.js'), [
+  [
+    'createLocals(context);',
+    'createLocals(context, env);',
+  ],
+]) ? 1 : 0;
+
+console.log(count > 0 ? `✅ Patched Cloudflare adapter (${count}/3)` : '⏭️  Already patched');
