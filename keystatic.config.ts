@@ -1,9 +1,26 @@
 import { config, collection, fields } from '@keystatic/core';
 
+// Read GitHub OAuth credentials from the Worker environment.
+// `import { env } from "cloudflare:workers"` works at runtime in Cloudflare Workers.
+// At build time, the import fails silently and credentials default to empty.
+let ghClientId = '';
+let ghClientSecret = '';
+try {
+  const cf = await import('cloudflare:workers');
+  const cfEnv = (cf as { env?: Record<string, string> }).env ?? {};
+  ghClientId = cfEnv.KEYSTATIC_GITHUB_CLIENT_ID ?? '';
+  ghClientSecret = cfEnv.KEYSTATIC_GITHUB_CLIENT_SECRET ?? '';
+} catch {
+  // build time / local dev — credentials come from wrangler secrets at runtime via
+  // the adapter patch in scripts/patch-cf-adapter.mjs
+}
+
 export default config({
   storage: {
     kind: 'github',
     repo: 'onelzy/my-company-site',
+    githubClientId: ghClientId,
+    githubClientSecret: ghClientSecret,
   },
 
   collections: {
