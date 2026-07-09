@@ -65,9 +65,9 @@ for (const file of files) {
   const oldTryBlock =
     "  const _tokenData = await tokenRes.json();\n  let tokenData;\n  try {\n    tokenData = tokenDataResultType.create(_tokenData);\n  } catch {\n    return {\n      status: 401,\n      body: 'Authorization failed'\n    };\n  }";
 
-  if (src.includes(oldTryBlock) && !src.includes('_tokenData.error')) {
+  if (src.includes(oldTryBlock) && !src.includes('tokenResponseDefaults')) {
     const newTryBlock =
-      "  const _tokenData = await tokenRes.json();\n  if (_tokenData.error) {\n    return {\n      status: 401,\n      body: 'Authorization failed: ' + _tokenData.error + ' - ' + (_tokenData.error_description || _tokenData.error_uri || '')\n    };\n  }\n  let tokenData;\n  try {\n    tokenData = tokenDataResultType.create(_tokenData);\n  } catch {\n    return {\n      status: 401,\n      body: 'Authorization failed: token parse error - ' + JSON.stringify(_tokenData)\n    };\n  }";
+      "  const _tokenData = await tokenRes.json();\n  if (_tokenData.error) {\n    return {\n      status: 401,\n      body: 'Authorization failed: ' + _tokenData.error + ' - ' + (_tokenData.error_description || _tokenData.error_uri || '')\n    };\n  }\n  // GitHub OAuth Apps may omit refresh_token/expires_in — provide defaults\n  _tokenData.expires_in = _tokenData.expires_in || 28800;\n  _tokenData.refresh_token = _tokenData.refresh_token || '';\n  _tokenData.refresh_token_expires_in = _tokenData.refresh_token_expires_in || 15897600;\n  let tokenData;\n  try {\n    tokenData = tokenDataResultType.create(_tokenData);\n  } catch {\n    return {\n      status: 401,\n      body: 'Authorization failed: token parse error - ' + JSON.stringify(_tokenData)\n    };\n  }";
     src = src.replace(oldTryBlock, newTryBlock);
     changed = true;
     details.push(`${file}: GitHub error surfacing`);
