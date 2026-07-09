@@ -73,16 +73,6 @@ for (const file of files) {
     details.push(`${file}: GitHub error surfacing`);
   }
 
-  // --- Patch 3: Include GitHub error body if !tokenRes.ok ---
-  const old401 = "body: 'Authorization failed'\n    };\n  }";
-  const err401 = "const _errBody = await tokenRes.text();\n    return {\n      status: 401,\n      body: 'Authorization failed: ' + _errBody\n    };\n  }";
-  
-  if (src.includes("body: 'Authorization failed'\n") && !src.includes('_errBody')) {
-    src = src.replace(old401, err401);
-    changed = true;
-    details.push(`${file}: HTTP error surfacing`);
-  }
-
   if (changed) {
     writeFileSync(path, src, 'utf-8');
     count++;
