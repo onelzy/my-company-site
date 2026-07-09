@@ -9,14 +9,16 @@
 import type { APIRoute } from 'astro';
 
 export const GET: APIRoute = async ({ request, locals }) => {
-  const runtime = (locals as Record<string, unknown>).runtime as Record<string, unknown> | undefined;
+  const runtime = (locals as unknown as Record<string, unknown>).runtime as Record<string, unknown> | undefined;
   const env = (runtime?.env as Record<string, string>) || {};
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
 
   // Collect env var info (mask secrets beyond first 6 chars)
   const envInfo: Record<string, unknown> = {};
-  for (const key of Object.keys(env).filter((k) => k.startsWith('KEYSTATIC') || k.startsWith('GITHUB') || k === 'SESSION' || k === 'ASSETS')) {
+  for (const key of Object.keys(env).filter(
+    (k) => k.startsWith('KEYSTATIC') || k.startsWith('GITHUB') || k === 'SESSION' || k === 'ASSETS'
+  )) {
     const raw = env[key];
     envInfo[key] = raw ? { exists: true, length: raw.length, prefix: raw.substring(0, 6) + '...' } : { exists: false };
   }
@@ -99,9 +101,9 @@ export const GET: APIRoute = async ({ request, locals }) => {
       { headers: { 'Content-Type': 'application/json' } }
     );
   } catch (err) {
-    return new Response(
-      JSON.stringify({ error: 'fetch failed', message: String(err) }),
-      { status: 500, headers: { 'Content-Type': 'application/json' } }
-    );
+    return new Response(JSON.stringify({ error: 'fetch failed', message: String(err) }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 };

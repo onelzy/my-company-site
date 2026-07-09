@@ -35,10 +35,7 @@ let count = 0;
 
 // 1. cf-helpers.js: function signature + getter
 count += patch(join(dist, 'utils', 'cf-helpers.js'), [
-  [
-    'function createLocals(ctx) {',
-    'function createLocals(ctx, env) {',
-  ],
+  ['function createLocals(ctx) {', 'function createLocals(ctx, env) {'],
   [
     `get env() {
         throw new Error(
@@ -49,23 +46,15 @@ count += patch(join(dist, 'utils', 'cf-helpers.js'), [
         return env;
       },`,
   ],
-]) ? 1 : 0;
+])
+  ? 1
+  : 0;
 
 // 2. fetch.js: production SSR code path
-count += patch(join(dist, 'fetch.js'), [
-  [
-    'createLocals(ctx)',
-    'createLocals(ctx, env)',
-  ],
-]) ? 1 : 0;
+count += patch(join(dist, 'fetch.js'), [['createLocals(ctx)', 'createLocals(ctx, env)']]) ? 1 : 0;
 
 // 3. handler.js: prerender code path (belt and suspenders)
-count += patch(join(dist, 'utils', 'handler.js'), [
-  [
-    'createLocals(context);',
-    'createLocals(context, env);',
-  ],
-]) ? 1 : 0;
+count += patch(join(dist, 'utils', 'handler.js'), [['createLocals(context);', 'createLocals(context, env);']]) ? 1 : 0;
 
 console.log(count > 0 ? `✅ Patched Cloudflare adapter (${count}/3)` : '⏭️  Already patched');
 
