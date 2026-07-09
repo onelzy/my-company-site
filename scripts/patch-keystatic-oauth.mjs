@@ -73,14 +73,16 @@ for (const file of files) {
     details.push(`${file}: GitHub error surfacing`);
   }
 
-  // --- Patch 3: Fix cookie secure flag (process.env.NODE_ENV not on CF Workers) ---
+  // --- Patch 3: Fix cookie secure flag + expires calculation ---
   if (!src.includes('fix-cookie-secure')) {
+    src = src.replace(/secure: process\.env\.NODE_ENV === 'production'/g, 'secure: true  /* fix-cookie-secure */');
+    // Fix refresh_token expires: uses *100 instead of *1000
     src = src.replace(
-      /secure: process\.env\.NODE_ENV === 'production'/g,
-      "secure: (process.env.NODE_ENV === 'production' || true)  /* fix-cookie-secure */"
+      /new Date\(Date\.now\(\) \+ tokenData\.refresh_token_expires_in \* 100\)/g,
+      'new Date(Date.now() + tokenData.refresh_token_expires_in * 1000)'
     );
     changed = true;
-    details.push(`${file}: cookie secure flag`);
+    details.push(`${file}: cookie secure + expires fix`);
   }
 
   if (changed) {
