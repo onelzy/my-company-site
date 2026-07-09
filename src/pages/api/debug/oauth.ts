@@ -1,13 +1,13 @@
 import type { APIRoute } from 'astro';
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request, locals }) => {
+  const runtime = (locals as any).runtime;
+  const env = runtime?.env;
+
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
 
   if (!code) {
-    const runtime = (globalThis as any).Astro?.locals?.runtime;
-    const env = runtime?.env;
-
     // Show secret metadata without exposing values
     const info: Record<string, unknown> = {};
     if (env) {
@@ -17,16 +17,14 @@ export const GET: APIRoute = async ({ request }) => {
       }
     }
 
-    // Show what redirect_uri would be computed
     const redirectUri = `${new URL(request.url).origin}/api/keystatic/github/oauth/callback`;
 
-    return new Response(JSON.stringify({ env: info, redirectUri, requestOrigin: new URL(request.url).origin }, null, 2), {
+    return new Response(JSON.stringify({ env: info, redirectUri, origin: new URL(request.url).origin, hasRuntime: !!runtime, hasEnv: !!env }, null, 2), {
       headers: { 'Content-Type': 'application/json' },
     });
   }
 
   // Actually try the token exchange
-  const env = (globalThis as any).Astro?.locals?.runtime?.env;
   const clientId = env?.KEYSTATIC_GITHUB_CLIENT_ID;
   const clientSecret = env?.KEYSTATIC_GITHUB_CLIENT_SECRET;
 
@@ -46,7 +44,6 @@ export const GET: APIRoute = async ({ request }) => {
     httpStatus: res.status,
     ok: res.ok,
     body: parsed,
-    requestUrl: tokenUrl.toString(),
   }, null, 2), {
     headers: { 'Content-Type': 'application/json' },
   });
