@@ -73,6 +73,16 @@ for (const file of files) {
     details.push(`${file}: GitHub error surfacing`);
   }
 
+  // --- Patch 3: Fix cookie secure flag (process.env.NODE_ENV not on CF Workers) ---
+  if (!src.includes('fix-cookie-secure')) {
+    src = src.replace(
+      /secure: process\.env\.NODE_ENV === 'production'/g,
+      "secure: (process.env.NODE_ENV === 'production' || true)  /* fix-cookie-secure */"
+    );
+    changed = true;
+    details.push(`${file}: cookie secure flag`);
+  }
+
   if (changed) {
     writeFileSync(path, src, 'utf-8');
     count++;
