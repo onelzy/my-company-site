@@ -25,16 +25,24 @@ for (const file of files) {
   const path = join(dist, file);
   let src = readFileSync(path, 'utf-8');
 
-  const oldStr = `  url.searchParams.set('code', code);
-  const tokenRes = await fetch(url, {`;
-  const newStr = `  url.searchParams.set('code', code);
-  url.searchParams.set('redirect_uri', \`\${new URL(req.url).origin}/api/keystatic/github/oauth/callback\`);
-  const tokenRes = await fetch(url, {`;
+  // The exact token exchange code block (after code param, before fetch)
+  const oldStr = "url.searchParams.set('code', code);\n  const tokenRes = await fetch(url, {";
 
-  if (src.includes(oldStr) && !src.includes('redirect_uri')) {
-    src = src.replace(oldStr, newStr);
-    writeFileSync(path, src, 'utf-8');
-    count++;
+  // Check if redirect_uri is already in the token exchange (not in the error message)
+  const newStrCheck = "url.searchParams.set('redirect_uri'";
+  
+  if (src.includes(oldStr)) {
+    // Find the token exchange section
+    const idx = src.indexOf(oldStr);
+    // Check the 200 chars after code set for redirect_uri
+    const afterCode = src.substring(idx, idx + 300);
+    
+    if (!afterCode.includes(newStrCheck)) {
+      const replacement = "url.searchParams.set('code', code);\n  url.searchParams.set('redirect_uri', `${new URL(req.url).origin}/api/keystatic/github/oauth/callback`);\n  const tokenRes = await fetch(url, {";
+      src = src.replace(oldStr, replacement);
+      writeFileSync(path, src, 'utf-8');
+      count++;
+    }
   }
 }
 
