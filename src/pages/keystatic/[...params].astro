@@ -1,7 +1,4 @@
-/**
- * Keystatic page with client-side error catcher.
- * Catches React crashes and displays the error instead of white screen.
- */
+---
 import KeystaticPage from '@keystatic/astro/internal/keystatic-astro-page.astro';
 ---
 
@@ -16,7 +13,7 @@ import KeystaticPage from '@keystatic/astro/internal/keystatic-astro-page.astro'
   document.body.appendChild(errorContainer);
 
   function showError(msg) {
-    errorContainer.textContent = '🔴 React Crash Detected:\n\n' + msg;
+    errorContainer.textContent = '\u{1F534} React Crash Detected:\n\n' + msg;
     errorContainer.style.display = 'block';
   }
 
@@ -34,16 +31,4 @@ import KeystaticPage from '@keystatic/astro/internal/keystatic-astro-page.astro'
   window.addEventListener('unhandledrejection', function (e) {
     showError('Unhandled Promise:\n' + (e.reason?.message || e.reason || 'Unknown'));
   });
-
-  // Also watch for React error overlay
-  const observer = new MutationObserver(function () {
-    const bodyChildren = document.body.children;
-    if (bodyChildren.length === 1 && bodyChildren[0] === errorContainer) {
-      // Page went white — React crashed
-      if (!errorContainer.style.display || errorContainer.style.display === 'none') {
-        showError('React tree unmounted (no error caught). Possible render error in a component.');
-      }
-    }
-  });
-  observer.observe(document.body, { childList: true });
 </script>
