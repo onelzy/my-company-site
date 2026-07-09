@@ -30,27 +30,24 @@ for (const file of files) {
     const idx = src.indexOf(oldTokenExchange);
     const afterCode = src.substring(idx, idx + 300);
     if (!afterCode.includes("url.searchParams.set('redirect_uri'")) {
-      const replacement = "url.searchParams.set('code', code);\n  url.searchParams.set('redirect_uri', `${new URL(req.url).origin}/api/keystatic/github/oauth/callback`);\n  const tokenRes = await fetch(url, {";
-      src = src.replace(oldTokenExchange, replacement);
+      // Use string concat instead of template literal to avoid any escaping issues
+      const newLines = [
+        "  url.searchParams.set('code', code);",
+        "  url.searchParams.set('redirect_uri', new URL(req.url).origin + '/api/keystatic/github/oauth/callback');",
+        "  const tokenRes = await fetch(url, {"
+      ].join('\n');
+      src = src.replace(oldTokenExchange, newLines);
       changed = true;
     }
   }
 
   // Patch 2: Include GitHub error message in 401 response
-  const old401 = "body: 'Authorization failed'";
-  if (src.includes(old401)) {
-    // Find the if block and add error body capture before the return
-    const oldBlock = "if (!tokenRes.ok) {\n    return {\n      status: 401,\n      body: 'Authorization failed'\n    };\n  }";
-    const newBlock = "if (!tokenRes.ok) {\n    const _errBody = await tokenRes.text();\n    return {\n      status: 401,\n      body: 'Authorization failed: ' + _errBody\n    };\n  }";
+  const oldBlock = "if (!tokenRes.ok) {\n    return {\n      status: 401,\n      body: 'Authorization failed'\n    };\n  }";
+  const newBlock = "if (!tokenRes.ok) {\n    const _errBody = await tokenRes.text();\n    return {\n      status: 401,\n      body: 'Authorization failed: ' + _errBody\n    };\n  }";
 
-    if (src.includes(oldBlock)) {
-      src = src.replace(oldBlock, newBlock);
-      changed = true;
-    } else if (src.includes(old401) && !src.includes('_errBody')) {
-      // Fallback: simpler replacement if the block format differs
-      src = src.replace("body: 'Authorization failed'", "body: 'Authorization failed: ' + (await tokenRes.clone().text())");
-      changed = true;
-    }
+  if (src.includes(oldBlock)) {
+    src = src.replace(oldBlock, newBlock);
+    changed = true;
   }
 
   if (changed) {
