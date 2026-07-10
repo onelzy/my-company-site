@@ -21,9 +21,7 @@ const message = productName
   ? `你好！我想咨询一下 ${productName}${sourceTag}`
   : `你好！我想了解更多产品信息${sourceTag}`;
 
-const whatsappUrl = link
-  ? `${link}&text=${encodeURIComponent(message)}`
-  : `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 ---
 
 <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
