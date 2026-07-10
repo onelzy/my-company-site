@@ -6,7 +6,9 @@ import Image from '~/components/common/Image.astro';
 import WhatsAppButton from '~/components/common/WhatsAppButton.astro';
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { solutions as rawSolutions } from '~/data/solutions';
+import { products as rawProducts } from '~/data/products';
 import { SITE } from 'astrowind:config';
+import { PRODUCT_TYPE_LABELS, getLocalizedLabel } from '~/utils/products';
 
 export const prerender = false;
 
@@ -41,6 +43,26 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: industryLabel ? 4 : 3, name: title },
   ],
 };
+
+// Cross-reference: find products used in this solution
+const solutionProductTypes = (productLines as string[]) || [];
+const relatedProducts = rawProducts.filter((p) => {
+  const pt = p.data.productType as string | undefined;
+  return pt && solutionProductTypes.includes(pt);
+});
+
+// Group products by type for display
+const productTypeOrder = ['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms'];
+const groupedProducts = new Map<string, typeof relatedProducts>();
+for (const p of relatedProducts) {
+  const pt = (p.data.productType as string) || 'other';
+  if (!groupedProducts.has(pt)) groupedProducts.set(pt, []);
+  groupedProducts.get(pt)!.push(p);
+}
+// Sort groups by defined order
+const sortedGroups = [...groupedProducts.entries()].sort(
+  ([a], [b]) => productTypeOrder.indexOf(a) - productTypeOrder.indexOf(b)
+);
 ---
 
 <PageLayout metadata={{ title: `${title} — OWON Solutions`, description: subtitle || title }}>
@@ -127,6 +149,66 @@ const breadcrumbSchema = {
         )
       }
       {bodyHtml && <div class="prose prose-lg dark:prose-invert max-w-none" set:html={bodyHtml} />}
+
+      <!-- Related Products — cross-reference -->
+      {
+        relatedProducts.length > 0 && (
+          <section class="mt-16">
+            <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">Products Used in This Solution</h2>
+            <p class="text-muted dark:text-slate-400 mb-8 text-sm">
+              The following OWON products are part of the <strong class="text-default dark:text-slate-200">{title}</strong> solution stack.
+            </p>
+            {
+              sortedGroups.map(([productType, products]) => (
+                <div class="mb-10">
+                  <h3 class="text-lg font-semibold mb-3 text-default dark:text-slate-200 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+                    {getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en')}
+                  </h3>
+                  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {products.map((p) => {
+                      const name = p.data.name as string || p.slug;
+                      const imageSrc = p.data.image as string | undefined;
+                      return (
+                        <a
+                          href={`/products/${p.slug}`}
+                          class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all"
+                        >
+                          <div class="w-14 h-14 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden border border-gray-200 dark:border-slate-600">
+                            {imageSrc ? (
+                              <Image
+                                src={imageSrc}
+                                alt={name}
+                                width={56}
+                                height={56}
+                                class="w-full h-full object-contain p-1"
+                              />
+                            ) : (
+                              <span class="text-xl">{p.slug.startsWith('edgeeco') ? '☁️' : p.slug.startsWith('pc') ? '⚡' : p.slug.startsWith('pct') ? '🌡️' : '🛏️'}</span>
+                            )}
+                          </div>
+                          <div class="min-w-0 flex-1">
+                            <h4 class="font-medium text-sm text-default dark:text-slate-200 group-hover:text-primary transition-colors truncate">
+                              {name}
+                            </h4>
+                            <p class="text-xs text-muted dark:text-slate-500 mt-0.5 line-clamp-1">
+                              {(p.data.model || '') as string}
+                            </p>
+                          </div>
+                          <svg class="w-4 h-4 text-gray-300 dark:text-slate-600 group-hover:text-primary transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                          </svg>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))
+            }
+          </section>
+        )
+      }
+
       <div class="mt-16 text-center p-12 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/10">
         <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Interested in this solution?</h2>
         <p class="text-muted dark:text-slate-400 mb-6">

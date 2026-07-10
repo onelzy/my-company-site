@@ -74,7 +74,7 @@ export const solutions: SolutionsEntry[] = [
       "industry": "smart-hotels",
       "productLines": [
         "smart-meters",
-        "hotel-control",
+        "thermostats",
         "software-platforms"
       ],
       "techSolution": "zigbee",
