@@ -1,4 +1,7 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
+import { SITE } from 'astrowind:config';
+
+const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
 
 export const headerData = {
   links: [
@@ -7,7 +10,7 @@ export const headerData = {
       href: getPermalink('/products'),
     },
     {
-      text: 'Solutions',
+      text: 'Use Cases',
       href: getPermalink('/solutions'),
     },
     {
@@ -22,12 +25,8 @@ export const headerData = {
           href: getPermalink('/developers/sdks'),
         },
         {
-          text: 'Code Examples',
-          href: getPermalink('/developers/examples'),
-        },
-        {
-          text: 'Firmware Changelog',
-          href: getPermalink('/developers/changelog'),
+          text: 'Documentation',
+          href: getPermalink('/developers'),
         },
       ],
     },
@@ -35,11 +34,7 @@ export const headerData = {
       text: 'Resources',
       links: [
         {
-          text: 'Blog',
-          href: getBlogPermalink(),
-        },
-        {
-          text: 'Brochures & Datasheets',
+          text: 'Datasheets & Brochures',
           href: getPermalink('/resources/brochures'),
         },
         {
@@ -47,17 +42,20 @@ export const headerData = {
           href: getPermalink('/resources/videos'),
         },
         {
-          text: 'FAQ',
-          href: getPermalink('/resources/faq'),
-        },
-        {
-          text: 'About Us',
-          href: getPermalink('/about'),
+          text: 'Blog',
+          href: getBlogPermalink(),
         },
       ],
     },
   ],
-  actions: [{ text: 'Contact Sales', href: getPermalink('/contact-sales') }],
+  actions: [
+    {
+      text: 'WhatsApp',
+      href: `https://wa.me/${whatsappNumber}`,
+      icon: 'tabler:brand-whatsapp',
+    },
+    { text: 'Talk to Sales', href: getPermalink('/contact-sales'), icon: 'tabler:message' },
+  ],
 };
 
 export const footerData = {
@@ -65,16 +63,16 @@ export const footerData = {
     {
       title: 'Products',
       links: [
+        { text: 'Smart Meters', href: getPermalink('/products/smart-meters') },
+        { text: 'Thermostats', href: getPermalink('/products/thermostats') },
+        { text: 'Senior Care', href: getPermalink('/products/senior-care') },
+        { text: 'Hotel Control', href: getPermalink('/products/hotel-control') },
+        { text: 'Software & Platforms', href: getPermalink('/products/software-platforms') },
         { text: 'All Products', href: getPermalink('/products') },
-        { text: 'Smart Meters', href: getPermalink('/products?type=smart-meters') },
-        { text: 'Thermostats', href: getPermalink('/products?type=thermostats') },
-        { text: 'Senior Care', href: getPermalink('/products?type=senior-care') },
-        { text: 'Hotel Control', href: getPermalink('/products?type=hotel-control') },
-        { text: 'Software & Platforms', href: getPermalink('/products?type=software-platforms') },
       ],
     },
     {
-      title: 'Solutions',
+      title: 'Use Cases',
       links: [
         { text: 'Smart Hotels', href: getPermalink('/solutions') },
         { text: 'Senior Care', href: getPermalink('/solutions') },
@@ -84,18 +82,20 @@ export const footerData = {
       ],
     },
     {
-      title: 'Company',
+      title: 'Developers',
       links: [
-        { text: 'About', href: getPermalink('/about') },
-        { text: 'Contact Sales', href: getPermalink('/contact-sales') },
-        { text: 'Blog', href: getBlogPermalink() },
+        { text: 'API Reference', href: getPermalink('/developers/api') },
+        { text: 'SDKs & Libraries', href: getPermalink('/developers/sdks') },
+        { text: 'Documentation', href: getPermalink('/developers') },
       ],
     },
     {
-      title: 'Support',
+      title: 'Company',
       links: [
-        { text: 'Terms', href: getPermalink('/terms') },
-        { text: 'Privacy Policy', href: getPermalink('/privacy') },
+        { text: 'About Us', href: getPermalink('/about') },
+        { text: 'FAQ', href: getPermalink('/resources/faq') },
+        { text: 'Contact Sales', href: getPermalink('/contact-sales') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
   ],
@@ -104,6 +104,7 @@ export const footerData = {
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
   socialLinks: [
+    { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: `https://wa.me/${whatsappNumber}` },
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '#' },
     { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: '#' },
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
