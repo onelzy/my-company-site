@@ -16,151 +16,216 @@ import Hero2 from '~/components/widgets/Hero2.astro';
     tagline="Integrate our IoT devices into your platform — REST APIs, MQTT data streams, SDKs in Python, Node.js, Java, and C#."
   />
 
-  <!-- Architecture Overview -->
-  <section class="py-16">
+  <!-- Content with Sidebar -->
+  <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">Integration Architecture</h2>
-      <div class="grid gap-6 sm:grid-cols-4 text-center">
-        <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
-          <div class="text-3xl mb-3">🏠</div>
-          <h3 class="font-semibold mb-2 text-default dark:text-slate-200">OWON Devices</h3>
-          <p class="text-sm text-muted dark:text-slate-400">
-            Smart meters, thermostats, sensors — MQTT over Wi-Fi / Zigbee / RS-485
-          </p>
-        </div>
-        <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
-          <div class="text-3xl mb-3">☁️</div>
-          <h3 class="font-semibold mb-2 text-default dark:text-slate-200">MQTT Broker</h3>
-          <p class="text-sm text-muted dark:text-slate-400">
-            Standard MQTT 3.1.1 / 5.0 — subscribe to device telemetry in real time
-          </p>
-        </div>
-        <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
-          <div class="text-3xl mb-3">🔌</div>
-          <h3 class="font-semibold mb-2 text-default dark:text-slate-200">REST API</h3>
-          <p class="text-sm text-muted dark:text-slate-400">
-            HTTPS REST endpoints for device management, data queries, and OTA updates
-          </p>
-        </div>
-        <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
-          <div class="text-3xl mb-3">📊</div>
-          <h3 class="font-semibold mb-2 text-default dark:text-slate-200">Your Platform</h3>
-          <p class="text-sm text-muted dark:text-slate-400">
-            EMS, BMS, property management, or any custom IoT dashboard
-          </p>
+      <div class="flex gap-8">
+        <!-- Sidebar -->
+        <nav class="hidden lg:block w-56 shrink-0 sticky top-24 self-start space-y-1">
+          <p class="text-xs font-semibold uppercase text-muted mb-3 tracking-wider">Developers</p>
+          <a href="/developers" class="block px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary"
+            >Overview</a
+          >
+          <a
+            href="/developers/mqtt"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >MQTT Quick Start</a
+          >
+          <a
+            href="/developers/api"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >HTTP Server API</a
+          >
+          <a
+            href="/developers/zigbee"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >ZigBee Clusters</a
+          >
+          <a
+            href="/developers/ha"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Home Assistant &amp; Z2M</a
+          >
+          <a
+            href="/developers/sdks"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >SDKs &amp; Libraries</a
+          >
+          <a
+            href="/developers/examples"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Code Examples</a
+          >
+          <a
+            href="/developers/changelog"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Firmware Changelog</a
+          >
+        </nav>
+
+        <!-- Content -->
+        <div class="flex-1 min-w-0">
+          <!-- Architecture Overview -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-10 text-default dark:text-slate-100">Integration Architecture</h2>
+            <div class="grid gap-6 sm:grid-cols-4 text-center">
+              <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+                <div class="text-3xl mb-3">🏠</div>
+                <h3 class="font-semibold mb-2 text-default dark:text-slate-200">OWON Devices</h3>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  Smart meters, thermostats, sensors — MQTT over Wi-Fi / Zigbee / RS-485
+                </p>
+              </div>
+              <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+                <div class="text-3xl mb-3">☁️</div>
+                <h3 class="font-semibold mb-2 text-default dark:text-slate-200">MQTT Broker</h3>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  Standard MQTT 3.1.1 / 5.0 — subscribe to device telemetry in real time
+                </p>
+              </div>
+              <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+                <div class="text-3xl mb-3">🔌</div>
+                <h3 class="font-semibold mb-2 text-default dark:text-slate-200">REST API</h3>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  HTTPS REST endpoints for device management, data queries, and OTA updates
+                </p>
+              </div>
+              <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
+                <div class="text-3xl mb-3">📊</div>
+                <h3 class="font-semibold mb-2 text-default dark:text-slate-200">Your Platform</h3>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  EMS, BMS, property management, or any custom IoT dashboard
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- Quick Start Cards -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">Quick Start</h2>
+            <div class="grid gap-6 sm:grid-cols-4 text-left">
+              <a
+                href="/developers/mqtt"
+                class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">📡</div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                    MQTT Quick Start
+                  </h3>
+                </div>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  Connect gateways, WiFi meters, and 4G cellular devices to the OWON MQTT broker.
+                </p>
+                <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
+                  Start with MQTT →
+                </span>
+              </a>
+
+              <a
+                href="/developers/api"
+                class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">🔌</div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                    HTTP Server API
+                  </h3>
+                </div>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  REST API + webhooks — device management, telemetry queries, OTA firmware updates.
+                </p>
+                <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
+                  Browse API docs →
+                </span>
+              </a>
+
+              <a
+                href="/developers/zigbee"
+                class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">🔷</div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                    ZigBee Clusters
+                  </h3>
+                </div>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  ZCL specifications for smart meters, thermostats, and sleep monitors.
+                </p>
+                <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
+                  View clusters →
+                </span>
+              </a>
+
+              <a
+                href="/developers/ha"
+                class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+              >
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">🏠</div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                    Home Assistant &amp; Z2M
+                  </h3>
+                </div>
+                <p class="text-sm text-muted dark:text-slate-400">
+                  Integrate OWON devices with Home Assistant via Zigbee2MQTT — zero custom converters.
+                </p>
+                <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
+                  HA guide →
+                </span>
+              </a>
+            </div>
+          </section>
+
+          <!-- MQTT Broker Info -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">MQTT Broker Access</h2>
+            <div
+              class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 font-mono text-sm"
+            >
+              <p class="text-muted dark:text-slate-400 mb-3"># Connect to OWON cloud MQTT broker</p>
+              <p class="mb-1">
+                <span class="text-green-600 dark:text-green-400">Host:</span>
+                <span class="text-default dark:text-slate-200">mqtt.owon-iot.com</span>
+              </p>
+              <p class="mb-1">
+                <span class="text-green-600 dark:text-green-400">Port:</span>
+                <span class="text-default dark:text-slate-200">8883 (TLS)</span>
+              </p>
+              <p class="mb-1">
+                <span class="text-green-600 dark:text-green-400">Protocol:</span>
+                <span class="text-default dark:text-slate-200">MQTT 3.1.1 / 5.0</span>
+              </p>
+              <p>
+                <span class="text-green-600 dark:text-green-400">Auth:</span>
+                <span class="text-default dark:text-slate-200">Username + Password (issued per project)</span>
+              </p>
+            </div>
+            <p class="mt-4 text-sm text-muted dark:text-slate-500">
+              MQTT credentials are provisioned per project. Contact our <a
+                href="/contact-sales"
+                class="text-primary hover:underline">engineering team</a
+              > to request access.
+            </p>
+          </section>
+
+          <!-- Firmware Updates -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">OTA Firmware Updates</h2>
+            <p class="text-muted dark:text-slate-400 mb-6">
+              All OWON devices support Over-The-Air firmware updates via MQTT or HTTP. Use our REST API to trigger
+              firmware upgrades at scale.
+            </p>
+            <a
+              href="/developers/changelog"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium"
+            >
+              View Firmware Changelog →
+            </a>
+          </section>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Quick Start Cards -->
-  <section class="py-16 bg-gray-50 dark:bg-slate-900/50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">Quick Start</h2>
-      <div class="grid gap-6 sm:grid-cols-3 text-left">
-        <a
-          href="/developers/api"
-          class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
-        >
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">📡</div>
-            <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
-              REST API Reference
-            </h3>
-          </div>
-          <p class="text-sm text-muted dark:text-slate-400">
-            Full endpoint documentation — authentication, device management, telemetry queries, OTA firmware updates.
-          </p>
-          <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
-            Browse API docs →
-          </span>
-        </a>
-
-        <a
-          href="/developers/sdks"
-          class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
-        >
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">📦</div>
-            <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
-              SDKs & Libraries
-            </h3>
-          </div>
-          <p class="text-sm text-muted dark:text-slate-400">
-            Native client libraries — Python (pip), Node.js (npm), Java (Maven), C# (NuGet). MQTT + REST support.
-          </p>
-          <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline"> View SDKs → </span>
-        </a>
-
-        <a
-          href="/developers/examples"
-          class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
-        >
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">💻</div>
-            <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
-              Code Examples
-            </h3>
-          </div>
-          <p class="text-sm text-muted dark:text-slate-400">
-            Copy-pasteable snippets — MQTT subscription, HTTP device control, data parsing, error handling.
-          </p>
-          <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
-            Explore examples →
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- MQTT Broker Info -->
-  <section class="py-16">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">MQTT Broker Access</h2>
-      <div
-        class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 font-mono text-sm"
-      >
-        <p class="text-muted dark:text-slate-400 mb-3"># Connect to OWON cloud MQTT broker</p>
-        <p class="mb-1">
-          <span class="text-green-600 dark:text-green-400">Host:</span>
-          <span class="text-default dark:text-slate-200">mqtt.owon-iot.com</span>
-        </p>
-        <p class="mb-1">
-          <span class="text-green-600 dark:text-green-400">Port:</span>
-          <span class="text-default dark:text-slate-200">8883 (TLS)</span>
-        </p>
-        <p class="mb-1">
-          <span class="text-green-600 dark:text-green-400">Protocol:</span>
-          <span class="text-default dark:text-slate-200">MQTT 3.1.1 / 5.0</span>
-        </p>
-        <p>
-          <span class="text-green-600 dark:text-green-400">Auth:</span>
-          <span class="text-default dark:text-slate-200">Username + Password (issued per project)</span>
-        </p>
-      </div>
-      <p class="mt-4 text-sm text-muted dark:text-slate-500">
-        MQTT credentials are provisioned per project. Contact our <a
-          href="/contact-sales"
-          class="text-primary hover:underline">engineering team</a
-        > to request access.
-      </p>
-    </div>
-  </section>
-
-  <!-- Firmware Updates -->
-  <section class="py-16 bg-gray-50 dark:bg-slate-900/50">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">OTA Firmware Updates</h2>
-      <p class="text-muted dark:text-slate-400 mb-6">
-        All OWON devices support Over-The-Air firmware updates via MQTT or HTTP. Use our REST API to trigger firmware
-        upgrades at scale.
-      </p>
-      <a
-        href="/developers/changelog"
-        class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium"
-      >
-        View Firmware Changelog →
-      </a>
     </div>
   </section>
 </PageLayout>

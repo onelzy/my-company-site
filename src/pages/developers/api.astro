@@ -3,7 +3,11 @@ import PageLayout from '~/layouts/PageLayout.astro';
 ---
 
 <PageLayout
-  metadata={{ title: 'API Reference — OWON Developers', description: 'REST API documentation for OWON IoT devices.' }}
+  metadata={{
+    title: 'HTTP Server API — OWON Developers',
+    description:
+      'REST API + server-side HTTPS integration for OWON IoT devices — device management, telemetry, webhooks, and OTA updates.',
+  }}
 >
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -16,13 +20,28 @@ import PageLayout from '~/layouts/PageLayout.astro';
             class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
             >Overview</a
           >
+          <a
+            href="/developers/mqtt"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >MQTT Quick Start</a
+          >
           <a href="/developers/api" class="block px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary"
-            >API Reference</a
+            >HTTP Server API</a
+          >
+          <a
+            href="/developers/zigbee"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >ZigBee Clusters</a
+          >
+          <a
+            href="/developers/ha"
+            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
+            >Home Assistant &amp; Z2M</a
           >
           <a
             href="/developers/sdks"
             class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >SDKs & Libraries</a
+            >SDKs &amp; Libraries</a
           >
           <a
             href="/developers/examples"
@@ -38,12 +57,182 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
         <!-- Content -->
         <div class="flex-1 min-w-0">
-          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">REST API Reference</h1>
+          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">HTTP Server API</h1>
           <p class="text-muted dark:text-slate-400 mb-8">
-            OWON IoT Platform REST API — manage devices, query telemetry, and trigger OTA updates via HTTPS.
+            REST API + server-side HTTPS integration for OWON IoT devices — manage devices, query telemetry, trigger OTA
+            updates, and receive webhook events.
           </p>
 
-          <!-- Authentication -->
+          <!-- NEW: Server Integration Overview -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Server Integration Overview</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-6">
+              The OWON cloud platform can push real-time device events to your server via HTTPS webhooks. This enables
+              event-driven architectures without polling.
+            </p>
+
+            <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 mb-6">
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Architecture</h3>
+              <div class="rounded bg-gray-50 dark:bg-slate-900/50 p-4 font-mono text-sm overflow-x-auto">
+                <p class="mb-1">
+                  <span class="text-green-600 dark:text-green-400">Device</span>
+                  <span class="text-gray-400">→ MQTT →</span>
+                  <span class="text-blue-600 dark:text-blue-400">OWON Cloud</span>
+                </p>
+                <p class="mb-1">
+                  <span class="text-blue-600 dark:text-blue-400">OWON Cloud</span>
+                  <span class="text-gray-400">→ HTTPS Webhook →</span>
+                  <span class="text-orange-600 dark:text-orange-400">Your Server</span>
+                </p>
+                <p>
+                  <span class="text-orange-600 dark:text-orange-400">Your Server</span>
+                  <span class="text-gray-400">→ HTTPS API →</span>
+                  <span class="text-blue-600 dark:text-blue-400">OWON Cloud</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Registering a Webhook Callback URL</h3>
+              <p class="text-sm text-muted dark:text-slate-400 mb-3">
+                Configure your callback endpoint via the REST API or the OWON Cloud Console:
+              </p>
+              <div
+                class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto"
+              >
+                <p class="text-muted dark:text-slate-500 mb-1"># Register webhook</p>
+                <p class="text-default dark:text-slate-200 mb-1">POST /webhooks</p>
+                <p class="text-muted dark:text-slate-500 mb-1">{'{'}</p>
+                <p class="text-default dark:text-slate-200 mb-1">"url": "https://your-server.com/owon-webhook",</p>
+                <p class="text-default dark:text-slate-200 mb-1">
+                  "events": ["device.online", "device.offline", "device.data"],
+                </p>
+                <p class="text-default dark:text-slate-200 mb-1">"secret": "your-webhook-secret"</p>
+                <p class="text-muted dark:text-slate-500 mb-1">{'}'}</p>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Webhook Event Types</h3>
+              <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                  <thead>
+                    <tr class="border-b border-gray-200 dark:border-slate-700">
+                      <th class="text-left py-2 pr-4 text-muted">Event</th>
+                      <th class="text-left py-2 pr-4 text-muted">Trigger</th>
+                      <th class="text-left py-2 text-muted">Frequency</th>
+                    </tr>
+                  </thead>
+                  <tbody class="text-default dark:text-slate-300">
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">device.online</td><td class="py-2 pr-4"
+                        >Device connects to MQTT broker</td
+                      ><td class="py-2">On connection</td></tr
+                    >
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">device.offline</td><td class="py-2 pr-4"
+                        >Device disconnects (clean or unclean)</td
+                      ><td class="py-2">On disconnect</td></tr
+                    >
+                    <tr
+                      ><td class="py-2 pr-4 font-mono">device.data</td><td class="py-2 pr-4"
+                        >Device publishes telemetry</td
+                      ><td class="py-2">Per report interval</td></tr
+                    >
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Webhook Payload Format</h3>
+              <div class="rounded-lg bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
+                <pre>{`{
+  "event": "device.data",
+  "device_id": "dev_7a3b9c",
+  "timestamp": "2026-07-10T08:30:00Z",
+  "data": {
+    "voltage": 220.5,
+    "current": 12.3,
+    "power": 2712.15,
+    "energy_kwh": 1847.6
+  }
+}`}</pre>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Signature Verification</h3>
+              <p class="text-sm text-muted dark:text-slate-400 mb-3">
+                Every webhook request includes an <code class="bg-gray-100 dark:bg-slate-700 px-1 rounded"
+                  >X-OWON-Signature</code
+                > header. Verify using HMAC-SHA256 with your webhook secret:
+              </p>
+              <div
+                class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto"
+              >
+                <p class="text-default dark:text-slate-200"># Node.js example:</p>
+                <p class="text-default dark:text-slate-200">const crypto = require('crypto');</p>
+                <p class="text-default dark:text-slate-200">const sig = req.headers['x-owon-signature'];</p>
+                <p class="text-default dark:text-slate-200">const expected = crypto</p>
+                <p class="text-default dark:text-slate-200">.createHmac('sha256', secret)</p>
+                <p class="text-default dark:text-slate-200">.update(JSON.stringify(req.body))</p>
+                <p class="text-default dark:text-slate-200">.digest('hex');</p>
+                <p class="text-default dark:text-slate-200">
+                  if (sig !== expected) throw new Error('Invalid signature');
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- NEW: Debugging Application -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Debugging Application</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-6">
+              The OWON API Debugger app lets you inspect MQTT traffic, test API endpoints, and simulate device data —
+              all from your mobile device.
+            </p>
+            <div class="grid gap-4 sm:grid-cols-2 mb-4">
+              <div
+                class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
+              >
+                <span class="text-3xl">🍎</span>
+                <div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — iOS</h3>
+                  <p class="text-xs text-muted dark:text-slate-400 mb-2">
+                    MQTT monitor, API request builder, device simulator
+                  </p>
+                  <a href="#" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
+                    Download on App Store →
+                  </a>
+                </div>
+              </div>
+              <div
+                class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
+              >
+                <span class="text-3xl">🤖</span>
+                <div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — Android</h3>
+                  <p class="text-xs text-muted dark:text-slate-400 mb-2">
+                    MQTT monitor, API request builder, device simulator
+                  </p>
+                  <a href="#" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
+                    Download APK →
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4">
+              <h4 class="text-xs font-semibold uppercase text-muted mb-2">Debugger Screens</h4>
+              <ul class="text-sm text-default dark:text-slate-300 space-y-1 list-disc pl-4">
+                <li><strong>MQTT Monitor</strong> — Subscribe to topics and view live telemetry in real time</li>
+                <li><strong>API Request Builder</strong> — Construct and send REST API requests with your API key</li>
+                <li><strong>Device Simulator</strong> — Generate mock telemetry data to test your integration</li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- EXISTING: Authentication -->
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Authentication</h2>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
@@ -66,7 +255,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
             </div>
           </section>
 
-          <!-- Base URL -->
+          <!-- EXISTING: Base URL -->
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Base URL</h2>
             <div
@@ -80,7 +269,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
             </div>
           </section>
 
-          <!-- Device Endpoints -->
+          <!-- EXISTING: Device Endpoints -->
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-6 text-default dark:text-slate-200">Device Management</h2>
 
@@ -265,7 +454,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
             </div>
           </section>
 
-          <!-- Rate Limits -->
+          <!-- EXISTING: Rate Limits -->
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Rate Limits</h2>
             <div class="overflow-x-auto">
@@ -294,7 +483,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
             </div>
           </section>
 
-          <!-- Contact CTA -->
+          <!-- EXISTING: Contact CTA -->
           <div class="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
             <p class="text-default dark:text-slate-200 font-medium mb-2">
               Need API access or custom integration support?

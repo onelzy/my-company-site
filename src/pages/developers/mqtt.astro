@@ -1,0 +1,219 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+
+const pythonGatewayCode = `import paho.mqtt.client as mqtt
+import json, ssl
+
+# OWON Gateway MQTT Configuration
+BROKER = "mqtt.owon-iot.com"
+PORT = 8883
+GATEWAY_ID = "GW-XXXXXX"
+ACCESS_TOKEN = "your_access_token_here"
+
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected (rc={rc})")
+    client.subscribe(f"gw/{GATEWAY_ID}/devices/+/data")
+    client.subscribe(f"gw/{GATEWAY_ID}/status")
+
+def on_message(client, userdata, msg):
+    payload = json.loads(msg.payload)
+    topic_parts = msg.topic.split("/")
+    device_id = topic_parts[3]
+    print(f"[{device_id}] Power: {payload['power']}W | Energy: {payload['energy_kwh']}kWh")
+
+client = mqtt.Client(client_id=GATEWAY_ID)
+client.username_pw_set(ACCESS_TOKEN)
+client.tls_set(cert_reqs=ssl.CERT_REQUIRED, tls_version=ssl.PROTOCOL_TLS)
+client.on_connect = on_connect
+client.on_message = on_message
+client.connect(BROKER, PORT, keepalive=60)
+client.loop_forever()`;
+
+const wifiDeviceCode = `// OWON WiFi Device (e.g. PC321-TY) MQTT Topics
+// When connected directly via WiFi (no gateway):
+
+// Device publishes telemetry to:
+//   owon/{device_mac}/telemetry
+// Example payload:
+{
+  "device_mac": "A4:C1:38:xx:xx:xx",
+  "model": "PC321-TY",
+  "voltage": 220.5,
+  "current": 12.3,
+  "power": 2712.15,
+  "energy_kwh": 1847.6,
+  "timestamp": "2026-07-10T08:30:00Z"
+}
+
+// Device subscribes to control commands:
+//   owon/{device_mac}/command
+// Example: Toggle relay
+{
+  "cmd": "relay",
+  "value": 1
+}`;
+
+const g4gCode = `# OWON 4G Device MQTT Configuration (Cat.1 / NB-IoT)
+
+# 4G devices connect via cellular — APN must be configured
+# Supported bands: LTE Cat.1 (B1/B3/B5/B8/B20)
+
+# Device publishes to:
+#   owon/4g/{imei}/telemetry
+
+# Required: Set APN via device config tool or MQTT command
+# Example:
+mosquitto_pub -h mqtt.owon-iot.com -p 8883 \\
+  -u "YOUR_ACCESS_TOKEN" -P "YOUR_PASSWORD" \\
+  -t "owon/4g/86XXXXXXXXXXXXXX/config" \\
+  -m '{"apn":"internet","mqtt_host":"mqtt.owon-iot.com"}' \\
+  --cafile /etc/ssl/certs/ca-certificates.crt
+
+# Data reporting interval: configurable (default 15 min)
+# Supports: voltage, current, power, energy, temperature readings`;
+
+const LBRACE = '{';
+const RBRACE = '}';
+---
+
+<PageLayout
+  metadata={{
+    title: 'MQTT Quick Start — OWON Developers',
+    description: 'Get started with OWON MQTT — connect gateways, WiFi devices, and 4G cellular devices to the OWON cloud broker.',
+  }}
+>
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex gap-8">
+        <!-- Sidebar -->
+        <nav class="hidden lg:block w-56 shrink-0 sticky top-24 self-start space-y-1">
+          <p class="text-xs font-semibold uppercase text-muted mb-3 tracking-wider">Developers</p>
+          <a href="/developers" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Overview</a>
+          <a href="/developers/mqtt" class="block px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary">MQTT Quick Start</a>
+          <a href="/developers/api" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">HTTP Server API</a>
+          <a href="/developers/zigbee" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">ZigBee Clusters</a>
+          <a href="/developers/ha" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Home Assistant &amp; Z2M</a>
+          <a href="/developers/sdks" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">SDKs &amp; Libraries</a>
+          <a href="/developers/examples" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Code Examples</a>
+          <a href="/developers/changelog" class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors">Firmware Changelog</a>
+        </nav>
+
+        <!-- Content -->
+        <div class="flex-1 min-w-0">
+          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">MQTT Quick Start</h1>
+          <p class="text-muted dark:text-slate-400 mb-8">
+            Connect your OWON devices — gateways, WiFi meters, and 4G cellular devices — to the OWON MQTT broker.
+          </p>
+
+          <!-- Broker Connection Info -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">1. Broker Connection</h2>
+            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-700">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
+                    <th class="text-left py-3 px-4 text-muted">Parameter</th>
+                    <th class="text-left py-3 px-4 text-muted">Value</th>
+                    <th class="text-left py-3 px-4 text-muted">Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white dark:bg-slate-800 text-default dark:text-slate-300">
+                  <tr class="border-b border-gray-100 dark:border-slate-700"><td class="py-3 px-4 font-mono">Host</td><td class="py-3 px-4">mqtt.owon-iot.com</td><td class="py-3 px-4 text-muted dark:text-slate-400">Global endpoint</td></tr>
+                  <tr class="border-b border-gray-100 dark:border-slate-700"><td class="py-3 px-4 font-mono">Port (TLS)</td><td class="py-3 px-4">8883</td><td class="py-3 px-4 text-muted dark:text-slate-400">Mandatory — no plaintext port</td></tr>
+                  <tr class="border-b border-gray-100 dark:border-slate-700"><td class="py-3 px-4 font-mono">Protocol</td><td class="py-3 px-4">MQTT 3.1.1 / 5.0</td><td class="py-3 px-4 text-muted dark:text-slate-400">Both versions supported</td></tr>
+                  <tr class="border-b border-gray-100 dark:border-slate-700"><td class="py-3 px-4 font-mono">QoS</td><td class="py-3 px-4">0, 1, 2</td><td class="py-3 px-4 text-muted dark:text-slate-400">Use QoS 1 for reliable delivery</td></tr>
+                  <tr><td class="py-3 px-4 font-mono">Keep Alive</td><td class="py-3 px-4">60s</td><td class="py-3 px-4 text-muted dark:text-slate-400">Recommended interval</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Gateway MQTT -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">2. Gateway MQTT Setup</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">
+              OWON ZigBee/WiFi gateways connect to the cloud via MQTT. Each gateway bridges multiple sub-devices and publishes their data to a structured topic namespace.
+            </p>
+            <div class="mb-6 p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Topic Structure</h3>
+              <div class="rounded bg-gray-50 dark:bg-slate-900/50 p-4 font-mono text-sm overflow-x-auto">
+                <p class="mb-1"><span class="text-green-600 dark:text-green-400">gw/{LBRACE}gateway_id{RBRACE}/devices/{LBRACE}device_id{RBRACE}/data</span> <span class="text-gray-400">← Device telemetry (upstream)</span></p>
+                <p class="mb-1"><span class="text-green-600 dark:text-green-400">gw/{LBRACE}gateway_id{RBRACE}/devices/{LBRACE}device_id{RBRACE}/command</span> <span class="text-gray-400">→ Device control (downstream)</span></p>
+                <p class="mb-1"><span class="text-green-600 dark:text-green-400">gw/{LBRACE}gateway_id{RBRACE}/status</span> <span class="text-gray-400">← Gateway online/offline</span></p>
+                <p><span class="text-green-600 dark:text-green-400">gw/{LBRACE}gateway_id{RBRACE}/ota</span> <span class="text-gray-400">→ OTA firmware push</span></p>
+              </div>
+            </div>
+            <p class="text-sm text-muted dark:text-slate-400 mb-3 font-medium">Python example — subscribe to gateway data:</p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>{pythonGatewayCode}</pre>
+            </div>
+          </section>
+
+          <!-- WiFi Device MQTT -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">3. WiFi Device MQTT Setup</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">
+              WiFi-enabled devices (PC321-TY, PCT513) connect directly to the MQTT broker without a gateway. Each device uses its MAC address as the client ID.
+            </p>
+            <div class="mb-4 p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Topic Format</h3>
+              <div class="rounded bg-gray-50 dark:bg-slate-900/50 p-4 font-mono text-sm overflow-x-auto">
+                <p class="mb-1"><span class="text-green-600 dark:text-green-400">owon/{LBRACE}device_mac{RBRACE}/telemetry</span> <span class="text-gray-400">← Data report</span></p>
+                <p><span class="text-green-600 dark:text-green-400">owon/{LBRACE}device_mac{RBRACE}/command</span> <span class="text-gray-400">→ Control</span></p>
+              </div>
+            </div>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>{wifiDeviceCode}</pre>
+            </div>
+          </section>
+
+          <!-- 4G Device MQTT -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">4. 4G Cellular Device MQTT Setup</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">
+              4G devices use cellular networks (LTE Cat.1 or NB-IoT). APN configuration is required before the device can connect to the MQTT broker. Devices are identified by IMEI.
+            </p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>{g4gCode}</pre>
+            </div>
+          </section>
+
+          <!-- App Downloads -->
+          <section class="mb-12">
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">5. MQTT Configuration Apps</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-6">
+              Use our mobile apps to configure MQTT parameters (broker, credentials, topics) on WiFi and 4G devices.
+            </p>
+            <div class="grid gap-4 sm:grid-cols-2">
+              <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4">
+                <span class="text-3xl flex-shrink-0">🍎</span>
+                <div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON Device Config — iOS</h3>
+                  <p class="text-xs text-muted dark:text-slate-400 mb-2">MQTT parameter setup, device diagnostics, firmware check</p>
+                  <a href="#" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">Download on App Store →</a>
+                </div>
+              </div>
+              <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4">
+                <span class="text-3xl flex-shrink-0">🤖</span>
+                <div>
+                  <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON Device Config — Android</h3>
+                  <p class="text-xs text-muted dark:text-slate-400 mb-2">MQTT parameter setup, device diagnostics, firmware check</p>
+                  <a href="#" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">Download APK →</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Contact CTA -->
+          <div class="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
+            <p class="text-default dark:text-slate-200 font-medium mb-2">Need MQTT credentials or integration support?</p>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">Our engineering team provisions MQTT access tokens and provides onboarding assistance.</p>
+            <a href="/contact-sales" class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm">
+              Contact Engineering Team →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

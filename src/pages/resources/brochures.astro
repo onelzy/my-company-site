@@ -5,31 +5,81 @@ const brochures = [
   {
     category: 'Corporate',
     items: [
-      { name: 'Company Overview', desc: 'Brand, capabilities, global presence', icon: '🏢', pdfUrl: '/documents/company-overview.pdf' },
-      { name: 'Product Catalogue 2025', desc: 'Full product line with specs', icon: '📖', pdfUrl: '/documents/product-catalogue-2025.pdf' },
+      {
+        name: 'Company Overview',
+        desc: 'Brand, capabilities, global presence',
+        icon: '🏢',
+        pdfUrl: '/documents/company-overview.pdf',
+      },
+      {
+        name: 'Product Catalogue 2025',
+        desc: 'Full product line with specs',
+        icon: '📖',
+        pdfUrl: '/documents/product-catalogue-2025.pdf',
+      },
     ],
   },
   {
     category: 'Smart Meters',
     items: [
-      { name: 'Single-Phase Meter Series', desc: 'PC321-TY, PC341 series datasheets', icon: '⚡', pdfUrl: '/documents/single-phase-meter-series.pdf' },
-      { name: 'Three-Phase Meter Series', desc: 'Industrial & commercial meters', icon: '🔌', pdfUrl: '/documents/three-phase-meter-series.pdf' },
-      { name: 'Multi-Circuit Monitors', desc: 'PC341-3M16S spec sheet', icon: '📊', pdfUrl: '/documents/multi-circuit-monitors.pdf' },
+      {
+        name: 'Single-Phase Meter Series',
+        desc: 'PC321-TY, PC341 series datasheets',
+        icon: '⚡',
+        pdfUrl: '/documents/single-phase-meter-series.pdf',
+      },
+      {
+        name: 'Three-Phase Meter Series',
+        desc: 'Industrial & commercial meters',
+        icon: '🔌',
+        pdfUrl: '/documents/three-phase-meter-series.pdf',
+      },
+      {
+        name: 'Multi-Circuit Monitors',
+        desc: 'PC341-3M16S spec sheet',
+        icon: '📊',
+        pdfUrl: '/documents/multi-circuit-monitors.pdf',
+      },
     ],
   },
   {
     category: 'Thermostats',
     items: [
-      { name: 'PCT513 Touchscreen Thermostat', desc: 'ZigBee smart thermostat', icon: '🌡️', pdfUrl: '/documents/pct513-thermostat.pdf' },
-      { name: 'Boiler & TRV Solutions', desc: 'Heating control systems', icon: '🔥', pdfUrl: '/documents/boiler-trv-solutions.pdf' },
+      {
+        name: 'PCT513 Touchscreen Thermostat',
+        desc: 'ZigBee smart thermostat',
+        icon: '🌡️',
+        pdfUrl: '/documents/pct513-thermostat.pdf',
+      },
+      {
+        name: 'Boiler & TRV Solutions',
+        desc: 'Heating control systems',
+        icon: '🔥',
+        pdfUrl: '/documents/boiler-trv-solutions.pdf',
+      },
     ],
   },
   {
     category: 'Solutions',
     items: [
-      { name: 'Smart Hotel Solution Brief', desc: 'Energy management for hotels', icon: '🏨', pdfUrl: '/documents/smart-hotel-solution-brief.pdf' },
-      { name: 'Senior Care Solution Overview', desc: 'Non-intrusive monitoring', icon: '🏥', pdfUrl: '/documents/senior-care-solution-overview.pdf' },
-      { name: 'Industrial IoT Datasheet', desc: 'Submetering & SCADA integration', icon: '🏭', pdfUrl: '/documents/industrial-iot-datasheet.pdf' },
+      {
+        name: 'Smart Hotel Solution Brief',
+        desc: 'Energy management for hotels',
+        icon: '🏨',
+        pdfUrl: '/documents/smart-hotel-solution-brief.pdf',
+      },
+      {
+        name: 'Senior Care Solution Overview',
+        desc: 'Non-intrusive monitoring',
+        icon: '🏥',
+        pdfUrl: '/documents/senior-care-solution-overview.pdf',
+      },
+      {
+        name: 'Industrial IoT Datasheet',
+        desc: 'Submetering & SCADA integration',
+        icon: '🏭',
+        pdfUrl: '/documents/industrial-iot-datasheet.pdf',
+      },
     ],
   },
 ];
@@ -41,14 +91,17 @@ const totalCount = brochures.reduce((a, b) => a + b.items.length, 0);
 <PageLayout
   metadata={{
     title: 'Brochures & Datasheets — OWON Resources',
-    description: 'Download product brochures, datasheets, and technical documentation for OWON smart meters, thermostats, and IoT solutions.',
+    description:
+      'Download product brochures, datasheets, and technical documentation for OWON smart meters, thermostats, and IoT solutions.',
   }}
 >
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">Brochures & Datasheets</h1>
       <p class="text-muted dark:text-slate-400 mb-8 text-sm">
-        Download product documentation, specifications, and solution briefs. <span class="font-medium text-default dark:text-slate-200">Direct download — no email required.</span>
+        Download product documentation, specifications, and solution briefs. <span
+          class="font-medium text-default dark:text-slate-200">Direct download — no email required.</span
+        >
       </p>
 
       <!-- Search -->
@@ -95,9 +148,7 @@ const totalCount = brochures.reduce((a, b) => a + b.items.length, 0);
 
       <!-- Count -->
       <span class="text-sm text-muted dark:text-slate-400 mb-4 block">
-        Showing <strong id="brochureCount" class="text-default dark:text-slate-200 font-semibold"
-          >{totalCount}</strong
-        > documents
+        Showing <strong id="brochureCount" class="text-default dark:text-slate-200 font-semibold">{totalCount}</strong> documents
       </span>
 
       <div id="brochureList">
@@ -140,7 +191,12 @@ const totalCount = brochures.reduce((a, b) => a + b.items.length, 0);
                             title="Send to my email"
                           >
                             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                              />
                             </svg>
                             Email me
                           </button>
