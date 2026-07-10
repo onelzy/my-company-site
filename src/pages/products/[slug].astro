@@ -242,7 +242,9 @@ const productSchema = {
     </div>
   </section>
   <WhatsAppButton
-    phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || 'REPLACE_WITH_WHATSAPP_NUMBER'}
-    message={`Hi, I'm interested in ${name}`}
+    phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || '8613812345678'}
+    productName={String(name)}
+    company={(SITE as unknown as Record<string, Record<string, string>>).contact?.company || 'OWON Technology'}
+    pageUrl={`/products/${slug}`}
   />
 </PageLayout>
