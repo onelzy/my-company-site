@@ -5,10 +5,13 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
-import Content from '~/components/widgets/Content.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ProductGrid from '~/components/products/ProductGrid.astro';
+import Image from '~/components/common/Image.astro';
 
 import { getPermalink } from '~/utils/permalinks';
+import { products as rawProducts } from '~/data/products';
+import { solutions as rawSolutions } from '~/data/solutions';
 
 const metadata = {
   title: 'OWON Technology — Smart IoT Device Manufacturer',
@@ -17,6 +20,33 @@ const metadata = {
 
 const productsUrl = getPermalink('/products');
 const contactUrl = getPermalink('/contact-sales');
+const solutionsUrl = getPermalink('/solutions');
+
+// Top 6 products for homepage
+const featuredProducts = rawProducts.slice(0, 6).map((p) => ({
+  ...p.data,
+  id: p.slug,
+  slug: p.slug,
+  collection: 'products' as const,
+  data: p.data,
+}));
+
+// Solutions for homepage preview
+const solutionPreviews = rawSolutions.slice(0, 3).map((s) => ({
+  slug: s.slug,
+  title: (s.data as Record<string, unknown>).title as string,
+  subtitle: (s.data as Record<string, unknown>).subtitle as string,
+  heroImage: (s.data as Record<string, unknown>).heroImage as string | undefined,
+  industry: (s.data as Record<string, unknown>).industry as string,
+}));
+
+const industryIcons: Record<string, string> = {
+  'smart-hotels': '🏨',
+  'senior-care': '🏥',
+  'energy-management': '⚡',
+  'smart-building': '🏢',
+  'industrial-iot': '🏭',
+};
 ---
 
 <Layout metadata={metadata}>
@@ -27,86 +57,116 @@ const contactUrl = getPermalink('/contact-sales');
       { text: 'Contact Sales', href: contactUrl },
     ]}
   >
-    <Fragment slot="title"> Professional Smart IoT Device Manufacturer </Fragment>
+    <Fragment slot="title">Professional Smart IoT Device Manufacturer</Fragment>
     <Fragment slot="subtitle">
-      OWON Technology specializes in smart meters, thermostats, senior care, hotel control systems, and IoT platforms —
-      serving B2B customers worldwide.
+      Smart meters, thermostats, senior care, hotel control & IoT platforms — trusted by B2B customers worldwide.
     </Fragment>
   </Hero>
 
-  <!-- Product Lines -->
-  <Features
-    id="products"
-    title="Core Product Lines"
-    subtitle="Five product lines covering smart energy, environmental control, care management, hotel automation, and software platforms"
-    items={[
-      {
-        title: 'Smart Meters',
-        description:
-          'Single / three-phase / multi-circuit / DIN-rail meters with Wi-Fi, ZigBee, Modbus, MQTT support for residential, commercial, and industrial applications.',
-        icon: 'tabler:bolt',
-      },
-      {
-        title: 'Smart Thermostats',
-        description:
-          '24V AC touchscreen thermostats, ZigBee TRV valves, boiler kits — compatible with major smart home ecosystems for precise temperature control.',
-        icon: 'tabler:temperature',
-      },
-      {
-        title: 'Senior Care',
-        description:
-          'Smart sleep monitors, emergency call, safety, tracking, health devices with AiJuan app and nursing station management platform.',
-        icon: 'tabler:heart',
-      },
-      {
-        title: 'Hotel Control',
-        description:
-          'Room thermostats, lighting control, door signs, energy management — ZigBee / Tuya powered for better guest experience.',
-        icon: 'tabler:building-skyscraper',
-      },
-      {
-        title: 'Software & Platforms',
-        description:
-          'SmartOWON app, EdgeEco IoT platform, energy monitoring web, partner management — complete device management and data analytics.',
-        icon: 'tabler:cloud-computing',
-      },
-    ]}
-  />
+  <!-- Featured Products -->
+  <section class="py-16 lg:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+        <div>
+          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Featured Products</h2>
+          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
+            Industry-leading smart devices with multi-protocol support and global certifications.
+          </p>
+        </div>
+        <a
+          href={productsUrl}
+          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+        >
+          View All Products →
+        </a>
+      </div>
+      <ProductGrid products={featuredProducts} baseUrl="/products" />
+    </div>
+  </section>
+
+  <!-- Solutions Preview -->
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/30">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+        <div>
+          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
+          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
+            End-to-end IoT solutions tailored to your industry vertical.
+          </p>
+        </div>
+        <a
+          href={solutionsUrl}
+          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+        >
+          View All Solutions →
+        </a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          solutionPreviews.map((s) => (
+            <a
+              href={`/solutions/${s.slug}`}
+              class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
+            >
+              <div class="h-40 bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-4xl">
+                {s.heroImage ? (
+                  <Image src={s.heroImage} alt={s.title} layout="cover" class="w-full h-full" width={400} height={200} />
+                ) : (
+                  <span>{industryIcons[s.industry] || '🏢'}</span>
+                )}
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                  {s.title}
+                </h3>
+                {s.subtitle && <p class="text-sm text-muted dark:text-slate-400 mt-1 line-clamp-2">{s.subtitle}</p>}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <!-- Why OWON -->
-  <Content
+  <Features
+    id="why-owon"
     title="Why OWON"
-    subtitle="Years of hardware R&D and manufacturing experience, delivering reliable products and customized solutions worldwide"
+    subtitle="Years of hardware R&D, global compliance, and full-stack IoT capabilities"
     items={[
       {
         title: 'Multi-Protocol',
         description:
-          'Simultaneously supports Tuya, MQTT open protocol, and ZigBee private solutions — adapts to diverse customer needs.',
+          'Tuya, MQTT open protocol, and ZigBee — adapts to diverse customer needs.',
+        icon: 'tabler:plug-connected',
       },
       {
         title: 'Global Compliance',
         description:
-          'Products certified with CE, FCC, RoHS and more, meeting regulatory requirements across global markets.',
+          'CE, FCC, RoHS certified — meeting regulatory requirements worldwide.',
+        icon: 'tabler:certificate',
       },
       {
         title: 'B2B Customization',
         description:
-          'OEM / ODM customization from hardware design to firmware, app, and cloud platform — full technical support.',
+          'OEM / ODM from hardware to firmware, app, and cloud — full technical support.',
+        icon: 'tabler:settings',
       },
       {
         title: 'Full-Stack IoT',
-        description: 'End-to-end IoT solutions from devices to cloud, from mobile apps to web management dashboards.',
+        description: 'Devices → Gateways → Cloud → Apps — complete IoT ecosystem.',
+        icon: 'tabler:cloud-computing',
       },
     ]}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
-  </Content>
+  </Features>
 
   <!-- CTA -->
   <CallToAction actions={[{ variant: 'primary', text: 'Contact Sales', href: contactUrl, icon: 'tabler:mail' }]}>
-    <Fragment slot="title"> Looking for a reliable smart IoT partner? </Fragment>
+    <Fragment slot="title">Looking for a reliable smart IoT partner?</Fragment>
     <Fragment slot="subtitle">
       Contact us for product catalogues, technical documentation, and customized solution quotes
     </Fragment>
