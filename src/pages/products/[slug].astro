@@ -4,7 +4,9 @@
 import type { Product } from '~/types';
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
+import WhatsAppButton from '~/components/common/WhatsAppButton.astro';
 import ProductGrid from '~/components/products/ProductGrid.astro';
+import { SITE } from 'astrowind:config';
 import { PRODUCT_TYPE_LABELS, TECH_SOLUTION_LABELS, SPEC_LABELS, getLocalizedLabel } from '~/utils/products';
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { products as rawProducts } from '~/data/products';
@@ -239,4 +241,8 @@ const productSchema = {
       </div>
     </div>
   </section>
+  <WhatsAppButton
+    phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || 'REPLACE_WITH_WHATSAPP_NUMBER'}
+    message={`Hi, I'm interested in ${name}`}
+  />
 </PageLayout>

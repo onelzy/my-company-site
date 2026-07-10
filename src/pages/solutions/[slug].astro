@@ -3,8 +3,10 @@
 // Data from pre-generated src/data/solutions.ts
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
+import WhatsAppButton from '~/components/common/WhatsAppButton.astro';
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { solutions as rawSolutions } from '~/data/solutions';
+import { SITE } from 'astrowind:config';
 
 export const prerender = false;
 
@@ -124,4 +126,8 @@ const techLabel = techLabels[techSolution || ''] || '';
       </div>
     </div>
   </section>
+  <WhatsAppButton
+    phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || 'REPLACE_WITH_WHATSAPP_NUMBER'}
+    message={`Hi, I'm interested in the ${title} solution.`}
+  />
 </PageLayout>

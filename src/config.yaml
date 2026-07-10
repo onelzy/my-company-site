@@ -1,10 +1,13 @@
 site:
   name: XIAMEN OWON TECHNOLOGY CO.,LTD
-  site: 'https://my-company-site.onelzy.workers.dev'
+  site: 'https://www.owon-iot.com'
   base: '/'
   trailingSlash: false
 
   googleSiteVerificationId: ''
+
+  contact:
+    whatsapp: 'REPLACE_WITH_WHATSAPP_NUMBER'
 
 # Default SEO metadata
 metadata:
