@@ -239,6 +239,34 @@ const productSchema = {
           )
         }
       </div>
+
+      <!-- Lead Capture CTA -->
+      <div class="mt-16 p-8 sm:p-12 bg-gradient-to-r from-primary/5 to-blue-500/5 dark:from-primary/10 dark:to-blue-500/10 rounded-2xl border border-primary/10 text-center">
+        <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Interested in {name}?</h2>
+        <p class="text-muted dark:text-slate-400 mb-8 max-w-lg mx-auto">
+          Get pricing, request a sample, or download the datasheet — our team will respond within 24 hours.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <button
+            class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
+            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${name}' })`}
+          >
+            Get Base Price
+          </button>
+          <button
+            class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
+            onclick={`window.__openLeadModal({ scenario: 'pdf', productName: '${name}' })`}
+          >
+            Download Datasheet
+          </button>
+          <a
+            href="/contact-sales"
+            class="px-6 py-3 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
+          >
+            Contact Sales →
+          </a>
+        </div>
+      </div>
     </div>
   </section>
   <WhatsAppButton

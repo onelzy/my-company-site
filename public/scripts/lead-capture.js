@@ -1,202 +1,142 @@
 /**
- * Lead Capture Modal — Client-side logic.
- *
- * Open via: window.__openLeadModal({ scenario: 'price' | 'pdf' | 'case', ... })
- *
- * Three scenarios:
- *   price — Email + Company → redirect to /contact-sales with email prefilled
- *   pdf   — Email only → auto-download file, then redirect
- *   case  — Email + Company → auto-download, then redirect
+ * Lead Capture Modal — client-side logic
+ * Three scenarios: price | pdf | case
+ * Opens via: window.__openLeadModal({ scenario, productName?, pdfUrl? })
  */
 (function () {
   'use strict';
 
-  const overlay = document.getElementById('leadCaptureOverlay');
-  const sheet = document.getElementById('leadCaptureSheet');
-  const titleEl = document.getElementById('leadCaptureTitle');
-  const companyRow = document.getElementById('leadCaptureCompanyRow');
-  const companyInput = document.getElementById('leadCaptureCompany');
-  const emailInput = document.getElementById('leadCaptureEmail');
-  const errorEl = document.getElementById('leadCaptureError');
-  const submitBtn = document.getElementById('leadCaptureSubmit');
-  const closeBtn = document.getElementById('leadCaptureClose');
-  const formArea = submitBtn?.parentElement;
-  const successDiv = document.getElementById('leadCaptureSuccess');
-  const successMsg = document.getElementById('leadCaptureSuccessMsg');
-
-  let currentConfig = null;
+  const FREE_DOMAINS = [
+    'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com',
+    'aol.com', 'icloud.com', 'mail.com', 'protonmail.com',
+    'qq.com', '163.com', '126.com', 'sina.com', 'sohu.com',
+  ];
 
   function isValidBusinessEmail(email) {
-    // Reject free email providers for B2B
-    const freeDomains = [
-      'gmail.com',
-      'yahoo.com',
-      'hotmail.com',
-      'outlook.com',
-      'aol.com',
-      'icloud.com',
-      'mail.com',
-      'protonmail.com',
-      'qq.com',
-      '163.com',
-      '126.com',
-    ];
     const domain = email.split('@')[1]?.toLowerCase();
-    if (!domain) return false;
-    if (freeDomains.includes(domain)) return false;
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return domain && !FREE_DOMAINS.includes(domain) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
-  function show() {
-    if (!overlay) return;
-    overlay.classList.remove('hidden');
-    // Force reflow then animate
-    void overlay.offsetWidth;
-    overlay.classList.add('flex');
-    if (sheet) {
-      setTimeout(() => {
-        sheet.classList.remove('translate-y-full', 'sm:scale-95');
-        sheet.classList.add('translate-y-0', 'sm:scale-100');
-      }, 10);
-    }
-  }
+  const SCENARIO_CONFIG = {
+    price: {
+      icon: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+      iconBg: 'bg-blue-500',
+      title: 'Get Base Price',
+      subtitle: 'Enter your business email to receive pricing information for {product}.',
+      submitLabel: 'Send Pricing Info',
+      showCompany: true,
+      successMsg: 'We will send pricing details to your email shortly.',
+      onSuccess: function () { window.location.href = '/contact-sales'; },
+    },
+    pdf: {
+      icon: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>',
+      iconBg: 'bg-red-500',
+      title: 'Download Datasheet',
+      subtitle: 'Enter your business email to download the datasheet for {product}.',
+      submitLabel: 'Download PDF',
+      showCompany: false,
+      successMsg: 'Your download will start automatically.',
+      onSuccess: function (pdfUrl) { if (pdfUrl) { const a = document.createElement('a'); a.href = pdfUrl; a.download = ''; a.click(); } },
+    },
+    case: {
+      icon: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
+      iconBg: 'bg-purple-500',
+      title: 'Download Case Study',
+      subtitle: 'Enter your business email to access the full case study for {product}.',
+      submitLabel: 'Download Case Study',
+      showCompany: true,
+      successMsg: 'Your case study will download automatically.',
+      onSuccess: function (pdfUrl) { if (pdfUrl) { const a = document.createElement('a'); a.href = pdfUrl; a.download = ''; a.click(); } },
+    },
+  };
 
-  function hide() {
-    if (!overlay || !sheet) return;
-    sheet.classList.add('translate-y-full', 'sm:scale-95');
-    sheet.classList.remove('translate-y-0', 'sm:scale-100');
-    setTimeout(() => {
-      overlay.classList.add('hidden');
-      overlay.classList.remove('flex');
-    }, 300);
-  }
+  function openModal(config) {
+    var scenario = config.scenario || 'price';
+    var productName = config.productName || 'this product';
+    var pdfUrl = config.pdfUrl || '';
+    var cfg = SCENARIO_CONFIG[scenario] || SCENARIO_CONFIG.price;
 
-  function showSuccess(message) {
-    if (!formArea || !successDiv) return;
-    formArea.classList.add('hidden');
-    successDiv.classList.remove('hidden');
-    if (successMsg) successMsg.textContent = message || 'Redirecting...';
-  }
-
-  function resetForm() {
-    if (emailInput) emailInput.value = '';
-    if (companyInput) companyInput.value = '';
-    if (errorEl) errorEl.classList.add('hidden');
-    if (formArea) formArea.classList.remove('hidden');
-    if (successDiv) successDiv.classList.add('hidden');
-  }
-
-  function open(config) {
-    currentConfig = config;
-    const scenario = config.scenario || 'price';
-
-    if (titleEl)
-      titleEl.textContent =
-        {
-          price: 'Unlock Base Price',
-          pdf: 'Please enter your work email to download',
-          case: 'Get the Full Case Study PDF',
-        }[scenario] || 'Unlock Content';
+    // Update UI
+    document.getElementById('lead-modal-icon').innerHTML = cfg.icon;
+    document.getElementById('lead-modal-icon').className = 'w-12 h-12 rounded-xl flex items-center justify-center mb-4 ' + cfg.iconBg;
+    document.getElementById('lead-modal-title').textContent = cfg.title;
+    document.getElementById('lead-modal-subtitle').textContent = cfg.subtitle.replace('{product}', productName);
+    document.getElementById('lead-modal-submit').textContent = cfg.submitLabel;
+    document.getElementById('lead-modal-success-msg').textContent = cfg.successMsg;
 
     // Show/hide company field
-    const needsCompany = scenario === 'price' || scenario === 'case';
-    if (companyRow) companyRow.classList.toggle('hidden', !needsCompany);
+    var companyGroup = document.getElementById('lead-company-group');
+    companyGroup.className = cfg.showCompany ? '' : 'hidden';
 
-    if (submitBtn) {
-      submitBtn.textContent = scenario === 'pdf' ? 'Download Now' : 'Submit & Continue';
-    }
+    // Reset form
+    document.getElementById('lead-modal-form').classList.remove('hidden');
+    document.getElementById('lead-modal-success').classList.add('hidden');
+    document.getElementById('lead-email').value = '';
+    document.getElementById('lead-company').value = '';
+    document.getElementById('lead-email-error').classList.add('hidden');
 
-    resetForm();
-    show();
+    // Show modal
+    document.getElementById('lead-modal').classList.remove('hidden');
+    document.getElementById('lead-modal').classList.add('flex');
+    setTimeout(function () {
+      document.getElementById('lead-email').focus();
+    }, 100);
+
+    // Store config for submit handler
+    document.getElementById('lead-modal-form')._config = { scenario: scenario, pdfUrl: pdfUrl, productName: productName };
   }
 
-  async function handleSubmit() {
-    const email = emailInput?.value?.trim() || '';
-    const company = companyInput?.value?.trim() || '';
-    const scenario = currentConfig?.scenario || 'price';
+  function closeModal() {
+    document.getElementById('lead-modal').classList.add('hidden');
+    document.getElementById('lead-modal').classList.remove('flex');
+  }
 
-    // Validate
-    if (!email || !isValidBusinessEmail(email)) {
-      if (errorEl) errorEl.classList.remove('hidden');
+  function handleSubmit(e) {
+    e.preventDefault();
+    var email = document.getElementById('lead-email').value.trim();
+    var emailError = document.getElementById('lead-email-error');
+
+    if (!isValidBusinessEmail(email)) {
+      emailError.classList.remove('hidden');
       return;
     }
-    if (errorEl) errorEl.classList.add('hidden');
+    emailError.classList.add('hidden');
 
-    const needsCompany = scenario === 'price' || scenario === 'case';
-    if (needsCompany && !company) {
-      if (companyInput) companyInput.focus();
-      return;
+    var config = e.target._config || {};
+
+    // Fire GA event
+    if (window.gtag) {
+      window.gtag('event', 'lead_capture', {
+        scenario: config.scenario,
+        product: config.productName,
+      });
     }
 
-    // Track lead (fire-and-forget to analytics endpoint if available)
-    try {
-      if (window.gtag) {
-        window.gtag('event', 'lead_capture', {
-          scenario: scenario,
-          product: currentConfig?.productName || '',
-        });
+    // Show success
+    document.getElementById('lead-modal-form').classList.add('hidden');
+    document.getElementById('lead-modal-success').classList.remove('hidden');
+
+    // Execute success action after delay
+    setTimeout(function () {
+      var cfg = SCENARIO_CONFIG[config.scenario];
+      if (cfg && cfg.onSuccess) {
+        cfg.onSuccess(config.pdfUrl);
       }
-    } catch {
-      /* ignore */
-    }
-
-    // Handle per-scenario
-    if (scenario === 'pdf' || scenario === 'case') {
-      // Auto-download
-      const pdfUrl = currentConfig?.pdfUrl;
-      if (pdfUrl) {
-        const a = document.createElement('a');
-        a.href = pdfUrl;
-        a.download = '';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      }
-      showSuccess(pdfUrl ? 'Your download has started.' : 'Thank you!');
-      setTimeout(() => {
-        hide();
-        resetForm();
-      }, 2000);
-    } else {
-      // price scenario: redirect to contact-sales with email prefilled
-      showSuccess('Taking you to our sales team...');
-      setTimeout(() => {
-        const params = new URLSearchParams();
-        if (email) params.set('email', email);
-        if (company) params.set('company', company);
-        window.location.href = '/contact-sales?' + params.toString();
-      }, 800);
-    }
+      closeModal();
+    }, 2000);
   }
 
-  // Event bindings
-  if (closeBtn) closeBtn.addEventListener('click', hide);
-  if (overlay)
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) hide();
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('lead-modal-close').addEventListener('click', closeModal);
+    document.getElementById('lead-modal-backdrop').addEventListener('click', closeModal);
+    document.getElementById('lead-modal-form').addEventListener('submit', handleSubmit);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
     });
-  if (submitBtn) submitBtn.addEventListener('click', handleSubmit);
-  if (emailInput) {
-    emailInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSubmit();
-    });
-    emailInput.addEventListener('input', () => {
-      if (errorEl) errorEl.classList.add('hidden');
-    });
-  }
-  if (companyInput) {
-    companyInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleSubmit();
-    });
-  }
-
-  // Close on Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay && !overlay.classList.contains('hidden')) {
-      hide();
-    }
   });
 
-  // Export global API
-  window.__openLeadModal = open;
+  // Global API
+  window.__openLeadModal = openModal;
+  window.__closeLeadModal = closeModal;
 })();

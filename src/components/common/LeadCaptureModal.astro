@@ -1,96 +1,102 @@
 ---
-/**
- * LeadCaptureModal.astro — Global B2B lead capture modal.
- *
- * Three scenarios:
- *   scenario="price"  — "Unlock Base Price" (Email + Company Name)
- *   scenario="pdf"    — "Download PDF" (Email only, auto-download on submit)
- *   scenario="case"   — "Get Full Case Study" (Email + Company Name, auto-download)
- *
- * Usage:
- *   <LeadCaptureModal scenario="price" productName="SW-2301" />
- *   <LeadCaptureModal scenario="pdf" pdfUrl="/downloads/spec.pdf" />
- *   <LeadCaptureModal scenario="case" pdfUrl="/downloads/case.pdf" />
- *
- * Opens by setting window.__openLeadModal(config).
- */
+// LeadCaptureModal.astro — B2B lead capture overlay (3 scenarios)
 ---
 
 <div
-  id="leadCaptureOverlay"
-  class="fixed inset-0 z-[9999] hidden items-end sm:items-center justify-center bg-black/50 backdrop-blur-sm transition-opacity duration-300"
+  id="lead-modal"
+  class="fixed inset-0 z-[9999] hidden items-end sm:items-center justify-center"
   role="dialog"
   aria-modal="true"
-  aria-label="Lead capture form"
+  aria-labelledby="lead-modal-title"
 >
-  <!-- Mobile: bottom sheet | Desktop: centered card -->
+  <!-- Backdrop -->
   <div
-    id="leadCaptureSheet"
-    class="w-full sm:max-w-md sm:rounded-2xl bg-white dark:bg-slate-900 shadow-2xl rounded-t-2xl sm:rounded-2xl
-              transform transition-transform duration-300 translate-y-full sm:translate-y-0 sm:scale-95
-              max-h-[90vh] overflow-y-auto"
+    id="lead-modal-backdrop"
+    class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+  ></div>
+
+  <!-- Modal card -->
+  <div
+    class="relative w-full sm:max-w-md bg-white dark:bg-slate-900 rounded-t-2xl sm:rounded-2xl shadow-2xl p-6 sm:p-8 mx-0 sm:mx-4 animate-slide-up"
   >
     <!-- Close button -->
-    <div class="flex items-center justify-between p-4 sm:p-5 border-b border-gray-100 dark:border-slate-800">
-      <h3 id="leadCaptureTitle" class="text-lg font-semibold text-default dark:text-slate-100"></h3>
-      <button
-        id="leadCaptureClose"
-        class="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors"
-        aria-label="Close"
-      >
-        <svg class="w-5 h-5 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-    </div>
+    <button
+      id="lead-modal-close"
+      class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+      aria-label="Close"
+    >
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <!-- Icon -->
+    <div id="lead-modal-icon" class="w-12 h-12 rounded-xl flex items-center justify-center mb-4"></div>
+
+    <!-- Title -->
+    <h3 id="lead-modal-title" class="text-xl font-bold text-default dark:text-slate-100 mb-2"></h3>
+
+    <!-- Subtitle -->
+    <p id="lead-modal-subtitle" class="text-sm text-muted dark:text-slate-400 mb-6"></p>
 
     <!-- Form -->
-    <div class="p-4 sm:p-5 space-y-4">
-      <div id="leadCaptureCompanyRow" class="hidden">
-        <label for="leadCaptureCompany" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5"
-          >Company Name *</label
-        >
-        <input
-          type="text"
-          id="leadCaptureCompany"
-          placeholder="Your company"
-          class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
-        />
-      </div>
-
+    <form id="lead-modal-form" class="space-y-4">
       <div>
-        <label for="leadCaptureEmail" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5"
-          >Business Email *</label
-        >
+        <label for="lead-email" class="block text-sm font-medium text-default dark:text-slate-200 mb-1">
+          Business Email <span class="text-red-500">*</span>
+        </label>
         <input
           type="email"
-          id="leadCaptureEmail"
+          id="lead-email"
+          required
           placeholder="you@company.com"
-          class="w-full px-3.5 py-2.5 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+          class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-100 placeholder:text-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm"
         />
-        <p id="leadCaptureError" class="hidden mt-1 text-xs text-red-500">
-          Please enter a valid business email address.
-        </p>
+        <p id="lead-email-error" class="hidden text-xs text-red-500 mt-1">Please use a business email address</p>
       </div>
-
+      <div id="lead-company-group" class="hidden">
+        <label for="lead-company" class="block text-sm font-medium text-default dark:text-slate-200 mb-1">
+          Company Name
+        </label>
+        <input
+          type="text"
+          id="lead-company"
+          placeholder="Your company"
+          class="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-100 placeholder:text-gray-400 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm"
+        />
+      </div>
       <button
-        id="leadCaptureSubmit"
-        class="w-full py-3 px-6 rounded-lg font-semibold text-sm text-white transition-all
-                     bg-[#FF6B00] hover:bg-[#E55D00] active:scale-[0.98]"
-      >
-        Submit & Continue
-      </button>
+        type="submit"
+        id="lead-modal-submit"
+        class="w-full py-3 px-6 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
+      ></button>
+    </form>
 
-      <p class="text-xs text-center text-muted dark:text-slate-500 pt-1">🔒 No spam. Unsubscribe anytime.</p>
-    </div>
-
-    <!-- Success state (hidden by default) -->
-    <div id="leadCaptureSuccess" class="hidden p-8 text-center">
-      <div class="text-4xl mb-3">✅</div>
-      <h3 class="text-lg font-semibold text-default dark:text-slate-100 mb-2">Thank you!</h3>
-      <p id="leadCaptureSuccessMsg" class="text-sm text-muted dark:text-slate-400"></p>
+    <!-- Success state -->
+    <div id="lead-modal-success" class="hidden text-center py-6">
+      <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+      <h3 class="text-lg font-bold text-default dark:text-slate-100 mb-1">Thank You!</h3>
+      <p id="lead-modal-success-msg" class="text-sm text-muted dark:text-slate-400"></p>
     </div>
   </div>
 </div>
 
-<script is:inline src="/scripts/lead-capture.js"></script>
+<style is:global>
+  @keyframes slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .animate-slide-up {
+    animation: slide-up 0.3s ease-out;
+  }
+  @media (min-width: 640px) {
+    @keyframes slide-up {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  }
+</style>
