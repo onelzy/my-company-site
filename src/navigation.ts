@@ -14,6 +14,10 @@ export const headerData = {
       href: getPermalink('/solutions'),
     },
     {
+      text: 'Blog',
+      href: getBlogPermalink(),
+    },
+    {
       text: 'Developers',
       links: [
         {
@@ -40,10 +44,6 @@ export const headerData = {
         {
           text: 'Video Center',
           href: getPermalink('/resources/videos'),
-        },
-        {
-          text: 'Blog',
-          href: getBlogPermalink(),
         },
       ],
     },

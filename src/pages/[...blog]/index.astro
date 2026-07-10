@@ -43,9 +43,66 @@ const metadata = merge(
   },
   { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
 ) as MetaData;
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.title,
+  description: post.excerpt,
+  datePublished: post.publishDate,
+  ...(post.author ? { author: { '@type': 'Person', name: post.author.replaceAll('-', ' ') } } : {}),
+  ...(image ? { image: typeof image === 'string' ? image : image.src } : {}),
+  publisher: {
+    '@type': 'Organization',
+    name: 'OWON Technology',
+    url: Astro.url.origin,
+  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${Astro.url.origin}/` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${Astro.url.origin}/blog/` },
+    ...(post.category
+      ? [
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: post.category.title,
+            item: `${Astro.url.origin}${getPermalink(post.category.slug, 'category')}`,
+          },
+        ]
+      : []),
+    { '@type': 'ListItem', position: post.category ? 4 : 3, name: post.title },
+  ],
+};
 ---
 
 <Layout metadata={metadata}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- Breadcrumb -->
+  <nav class="max-w-4xl mx-auto px-6 pt-8 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+    <a href="/" class="hover:text-primary transition-colors">Home</a>
+    <span class="mx-2">/</span>
+    <a href="/blog/" class="hover:text-primary transition-colors">Blog</a>
+    {
+      post.category && (
+        <>
+          <span class="mx-2">/</span>
+          <a href={getPermalink(post.category.slug, 'category')} class="hover:text-primary transition-colors">
+            {post.category.title}
+          </a>
+        </>
+      )
+    }
+    <span class="mx-2">/</span>
+    <span class="text-default dark:text-slate-200">{post.title}</span>
+  </nav>
+
   <SinglePost post={{ ...post, image: image }} url={url}>
     {post.Content && <post.Content />}
   </SinglePost>
