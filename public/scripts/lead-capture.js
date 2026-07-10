@@ -48,12 +48,15 @@
       submitLabel: 'Download PDF',
       showCompany: false,
       successMsg: 'Your download will start automatically.',
+      successLink: true,
       onSuccess: function (pdfUrl) {
         if (pdfUrl) {
-          const a = document.createElement('a');
+          var a = document.createElement('a');
           a.href = pdfUrl;
           a.download = '';
+          document.body.appendChild(a);
           a.click();
+          document.body.removeChild(a);
         }
       },
     },
@@ -145,7 +148,23 @@
 
     // Show success
     document.getElementById('lead-modal-form').classList.add('hidden');
-    document.getElementById('lead-modal-success').classList.remove('hidden');
+    var successDiv = document.getElementById('lead-modal-success');
+    successDiv.classList.remove('hidden');
+
+    // For PDF scenario, add manual download link
+    var existingLink = document.getElementById('lead-modal-download-link');
+    if (existingLink) existingLink.remove();
+
+    var cfg = SCENARIO_CONFIG[config.scenario];
+    if (cfg && cfg.successLink && config.pdfUrl) {
+      var linkEl = document.createElement('a');
+      linkEl.id = 'lead-modal-download-link';
+      linkEl.href = config.pdfUrl;
+      linkEl.download = '';
+      linkEl.className = 'inline-flex items-center gap-2 mt-3 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity';
+      linkEl.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Click here if download doesn\'t start';
+      document.getElementById('lead-modal-success-msg').after(linkEl);
+    }
 
     // Execute success action after delay
     setTimeout(function () {

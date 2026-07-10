@@ -258,24 +258,31 @@ const breadcrumbSchema = {
       >
         <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Interested in {name}?</h2>
         <p class="text-muted dark:text-slate-400 mb-8 max-w-lg mx-auto">
-          Get pricing, request a sample, or download the datasheet — our team will respond within 24 hours.
+          Download the datasheet or request pricing — our team will respond within 24 hours.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <button
-            class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
-            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${name}' })`}
+          <a
+            href={`/documents/datasheet-${slug}.pdf`}
+            download
+            class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
           >
-            Get Base Price
-          </button>
-          <button
-            class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
-            onclick={`window.__openLeadModal({ scenario: 'pdf', productName: '${name}' })`}
-          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
             Download Datasheet
+          </a>
+          <button
+            class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors inline-flex items-center gap-2"
+            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '/documents/datasheet-${slug}.pdf' })`}
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Get Pricing
           </button>
           <a
             href="/contact-sales"
-            class="px-6 py-3 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
+            class="px-6 py-3 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors inline-flex items-center gap-2"
           >
             Contact Sales →
           </a>
