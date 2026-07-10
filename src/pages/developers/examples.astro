@@ -5,7 +5,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
 <PageLayout
   metadata={{
     title: 'Code Examples — OWON Developers',
-    description: 'Code snippets and integration examples for OWON devices.',
+    description: 'Practical code snippets — MQTT, REST API, OTA updates for OWON IoT devices.',
   }}
 >
   <section class="py-12">
@@ -39,10 +39,211 @@ import PageLayout from '~/layouts/PageLayout.astro';
           >
         </nav>
         <div class="flex-1 min-w-0">
-          <h1 class="text-3xl font-bold mb-6 text-default dark:text-slate-100">Code Examples</h1>
+          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">Code Examples</h1>
           <p class="text-muted dark:text-slate-400 mb-8">
-            Coming soon — practical code snippets for common integration scenarios.
+            Copy-pasteable snippets for common OWON IoT integration scenarios.
           </p>
+
+          <!-- MQTT: Subscribe to Device Telemetry -->
+          <section class="mb-10">
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-200">
+              MQTT — Subscribe to Device Telemetry (Python)
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-3">
+              Connect to the OWON MQTT broker and receive real-time power, voltage, and energy data.
+            </p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>import paho.mqtt.client as mqtt
+import json
+
+BROKER = "mqtt.owon-iot.com"
+PORT = 8883
+USERNAME = "your_project_username"
+PASSWORD = "your_project_password"
+
+def on_connect(client, userdata, flags, rc):
+    print(f"Connected (rc={rc})")
+    # Subscribe to all device telemetry under your project
+    client.subscribe("project/+/devices/+/telemetry")
+
+def on_message(client, userdata, msg):
+    payload = json.loads(msg.payload)
+    topic_parts = msg.topic.split("/")
+    device_id = topic_parts[3]
+    print(f"[{device_id}] Power: {payload['power']}W | "
+          f"Energy: {payload['energy_kwh']}kWh | "
+          f"Temp: {payload.get('temperature', 'N/A')}°C")
+
+client = mqtt.Client()
+client.username_pw_set(USERNAME, PASSWORD)
+client.tls_set()  # TLS required on port 8883
+client.on_connect = on_connect
+client.on_message = on_message
+client.connect(BROKER, PORT)
+client.loop_forever()</pre>
+            </div>
+          </section>
+
+          <!-- REST: List & Control Devices -->
+          <section class="mb-10">
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-200">
+              REST API — List Devices & Trigger OTA (cURL)
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-3">
+              Use the REST API to list devices, check status, and push firmware updates.
+            </p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>API_KEY="YOUR_API_KEY"
+BASE="https://api.owon-iot.com/v1"
+
+# 1. List all online smart meters
+curl -s -H "Authorization: Bearer $API_KEY" \
+  "$BASE/devices?type=smart-meter&status=online&limit=5" | jq .data[].name
+
+# 2. Get device details + live telemetry
+curl -s -H "Authorization: Bearer $API_KEY" \
+  "$BASE/devices/dev_7a3b9c" | jq .
+
+# 3. Query historical energy data (last 24h)
+curl -s -H "Authorization: Bearer $API_KEY" \
+  "$BASE/devices/dev_7a3b9c/telemetry?from=$(date -u -d '24 hours ago' +%Y-%m-%dT%H:%M:%SZ)&interval=1h" \
+  | jq .
+
+# 4. Trigger OTA firmware update
+curl -s -X POST -H "Authorization: Bearer $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"firmware_version":"2.2.0","firmware_url":"https://firmware.owon-iot.com/v2.2.0.bin"}' \
+  "$BASE/devices/dev_7a3b9c/ota" | jq .</pre>
+            </div>
+          </section>
+
+          <!-- Python: Batch OTA -->
+          <section class="mb-10">
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-200">
+              Python — Batch OTA Firmware Rollout
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-3">
+              Push a new firmware version to all devices of a given type, with progress tracking.
+            </p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>import time
+from owon_iot import OWONClient
+
+client = OWONClient(api_key="YOUR_API_KEY")
+FIRMWARE_VERSION = "2.2.0"
+FIRMWARE_URL = "https://firmware.owon-iot.com/v2.2.0.bin"
+
+def rollout_firmware(device_type: str = "smart-meter"):
+    devices = client.devices.list(type=device_type, status="online", limit=100)
+
+    ota_ids = []
+    for d in devices.data:
+        result = client.devices.trigger_ota(
+            d.id,
+            firmware_version=FIRMWARE_VERSION,
+            firmware_url=FIRMWARE_URL,
+        )
+        ota_ids.append(result["ota_id"])
+        print(f"  Queued {d.name} ({d.id}) → OTA {result['ota_id']}")
+
+    print(f"\nRollout started: {len(ota_ids)} devices")
+    print("Use GET /ota/{ota_id} to track progress.")
+
+rollout_firmware("smart-meter")</pre>
+            </div>
+          </section>
+
+          <!-- Node.js: Dashboard Data -->
+          <section class="mb-10">
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-200">
+              Node.js — Dashboard Aggregation
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-3">
+              Pull summary data for a real-time IoT dashboard: total devices online, total power consumption.
+            </p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>import { OWONClient } from '@owon/iot-sdk';
+
+const client = new OWONClient({ apiKey: 'YOUR_API_KEY' });
+
+async function getDashboardSummary() {
+  // Get all online devices
+  const devices = await client.devices.list({ status: 'online' });
+
+  // Fetch latest telemetry for each device
+  const readings = await Promise.all(
+    devices.data.map(async (d) => {
+      const tel = await client.devices.getTelemetry(
+        d.id,
+        new Date(Date.now() - 3600_000), // last hour
+        new Date()
+      );
+      return { device: d.name, power: tel.data[tel.data.length - 1]?.power ?? 0 };
+    })
+  );
+
+  const totalPower = readings.reduce((sum, r) => sum + r.power, 0);
+  console.log(`Online: ${devices.total} devices`);
+  console.log(`Total power: ${(totalPower / 1000).toFixed(2)} kW`);
+}
+
+getDashboardSummary();</pre>
+            </div>
+          </section>
+
+          <!-- Java: Alerting -->
+          <section class="mb-10">
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-200">
+              Java — Alert on Device Offline
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-3">
+              Poll device status and trigger alerts when a device goes offline.
+            </p>
+            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
+              <pre>import com.owon.iot.OWONClient;
+import java.time.Duration;
+import java.time.Instant;
+
+public class DeviceMonitor {
+    private static final Duration OFFLINE_THRESHOLD = Duration.ofMinutes(15);
+
+    public static void main(String[] args) {
+        var client = new OWONClient("YOUR_API_KEY");
+        var devices = client.devices().list(null, "smart-meter", "all", 100);
+
+        for (var d : devices.getData()) {
+            if (d.getStatus().equals("offline")) continue;
+
+            var lastSeen = d.getLastSeen();
+            var ago = Duration.between(lastSeen, Instant.now());
+
+            if (ago.compareTo(OFFLINE_THRESHOLD) > 0) {
+                System.out.printf(
+                    "⚠ ALERT: %s last seen %d min ago%n",
+                    d.getName(), ago.toMinutes()
+                );
+                // Integrate with your alerting system here
+                // e.g. sendSlackAlert(d.getName(), ago.toMinutes());
+            }
+        }
+    }
+}</pre>
+            </div>
+          </section>
+
+          <!-- More examples CTA -->
+          <div class="rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 text-center">
+            <p class="text-default dark:text-slate-200 font-medium mb-2">Need a specific integration example?</p>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">
+              Contact our engineering team for custom integration guidance.
+            </p>
+            <a
+              href="/contact-sales"
+              class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm"
+            >
+              Request Engineering Support →
+            </a>
+          </div>
         </div>
       </div>
     </div>

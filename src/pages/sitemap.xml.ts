@@ -70,7 +70,72 @@ export const GET = async () => {
       changefreq: 'monthly',
       priority: '0.5',
     });
+
+    urls.push({
+      loc: `${baseUrl}${prefix}/contact-sales`,
+      changefreq: 'monthly',
+      priority: '0.6',
+    });
+
+    urls.push({
+      loc: `${baseUrl}${prefix}/services`,
+      changefreq: 'monthly',
+      priority: '0.5',
+    });
   }
+
+  // -------------------------------------------------------------------
+  // 2a. Developer pages (English only for now)
+  // -------------------------------------------------------------------
+  urls.push({
+    loc: `${baseUrl}/developers`,
+    changefreq: 'monthly',
+    priority: '0.8',
+  });
+  urls.push({
+    loc: `${baseUrl}/developers/api`,
+    changefreq: 'monthly',
+    priority: '0.8',
+  });
+  urls.push({
+    loc: `${baseUrl}/developers/sdks`,
+    changefreq: 'monthly',
+    priority: '0.7',
+  });
+  urls.push({
+    loc: `${baseUrl}/developers/examples`,
+    changefreq: 'monthly',
+    priority: '0.7',
+  });
+  urls.push({
+    loc: `${baseUrl}/developers/changelog`,
+    changefreq: 'monthly',
+    priority: '0.7',
+  });
+
+  // -------------------------------------------------------------------
+  // 2b. Resource pages (English only for now)
+  // -------------------------------------------------------------------
+  urls.push({
+    loc: `${baseUrl}/resources/brochures`,
+    changefreq: 'weekly',
+    priority: '0.7',
+  });
+  urls.push({
+    loc: `${baseUrl}/resources/faq`,
+    changefreq: 'weekly',
+    priority: '0.6',
+  });
+  urls.push({
+    loc: `${baseUrl}/resources/videos`,
+    changefreq: 'monthly',
+    priority: '0.6',
+  });
+  urls.push({
+    loc: `${baseUrl}/pricing`,
+    changefreq: 'monthly',
+    priority: '0.6',
+  });
 
   // -------------------------------------------------------------------
   // 2. Product type pages × 8 locales

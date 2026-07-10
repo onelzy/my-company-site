@@ -43,6 +43,10 @@ export const headerData = {
           href: getPermalink('/resources/brochures'),
         },
         {
+          text: 'Video Center',
+          href: getPermalink('/resources/videos'),
+        },
+        {
           text: 'FAQ',
           href: getPermalink('/resources/faq'),
         },
