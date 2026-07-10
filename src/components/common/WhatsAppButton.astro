@@ -1,7 +1,8 @@
 ---
 // WhatsAppButton.astro — Floating WhatsApp Business chat button
 export interface Props {
-  phone: string;
+  phone?: string;
+  link?: string;
   productName?: string;
   company?: string;
   pageUrl?: string;
@@ -9,6 +10,7 @@ export interface Props {
 
 const {
   phone,
+  link,
   productName = '',
   company = '',
   pageUrl = '',
@@ -19,7 +21,9 @@ const message = productName
   ? `你好！我想咨询一下 ${productName}${sourceTag}`
   : `你好！我想了解更多产品信息${sourceTag}`;
 
-const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+const whatsappUrl = link
+  ? `${link}&text=${encodeURIComponent(message)}`
+  : `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 ---
 
 <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">

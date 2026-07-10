@@ -8,6 +8,7 @@ site:
 
   contact:
     whatsapp: '8613812345678'
+    whatsappLink: 'https://api.whatsapp.com/message/EIOCLDKNCBFMO1?autoload=1&app_absent=0'
     company: 'OWON Technology'
 
 # Default SEO metadata

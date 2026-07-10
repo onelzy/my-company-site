@@ -243,6 +243,7 @@ const productSchema = {
   </section>
   <WhatsAppButton
     phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || '8613812345678'}
+    link={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsappLink}
     productName={String(name)}
     company={(SITE as unknown as Record<string, Record<string, string>>).contact?.company || 'OWON Technology'}
     pageUrl={`/products/${slug}`}
