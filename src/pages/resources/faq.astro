@@ -44,6 +44,7 @@ const faqItems = [
   },
 ];
 const allQuestions = faqItems.flatMap((cat) => cat.items);
+const categories = faqItems.map((f) => f.category);
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -64,23 +65,41 @@ const faqSchema = {
 >
   <section class="py-12">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">FAQ</h1>
+      <h1 class="text-3xl font-bold mb-6 text-default dark:text-slate-100">FAQ</h1>
       <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-      <p class="text-lg text-muted dark:text-slate-400 mb-8">
-        Frequently asked questions about OWON products and services.
-      </p>
 
       <input
         type="text"
         id="faqSearch"
         placeholder="Search questions..."
-        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 mb-8 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
+        class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-default dark:text-slate-200 mb-4 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-shadow"
       />
+
+      <!-- Category Filters -->
+      <div class="flex items-center gap-2 flex-wrap mb-6" id="faqFilters">
+        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0"
+          >Category:</span
+        >
+        <button
+          class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-primary text-primary-foreground border border-primary active"
+          data-category="">All</button
+        >
+        {
+          categories.map((cat) => (
+            <button
+              class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary"
+              data-category={cat}
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
 
       <div id="faqList" class="space-y-6">
         {
           faqItems.map((cat) => (
-            <div>
+            <div class="faq-section" data-category={cat.category}>
               <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-200">{cat.category}</h2>
               <div class="space-y-2">
                 {cat.items.map((item) => (
@@ -100,12 +119,4 @@ const faqSchema = {
   </section>
 </PageLayout>
 
-<script is:inline>
-  document.getElementById('faqSearch')?.addEventListener('input', function () {
-    const query = this.value.toLowerCase();
-    document.querySelectorAll('.faq-item').forEach(function (item) {
-      const text = (item.textContent || '').toLowerCase();
-      item.style.display = !query || text.indexOf(query) !== -1 ? '' : 'none';
-    });
-  });
-</script>
+<script is:inline src="/scripts/faq-filter.js"></script>

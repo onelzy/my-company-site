@@ -33,6 +33,8 @@ const brochures = [
     ],
   },
 ];
+
+const categories = brochures.map((b) => b.category);
 ---
 
 <PageLayout
@@ -43,47 +45,96 @@ const brochures = [
 >
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">Brochures & Datasheets</h1>
-      <p class="text-lg text-muted dark:text-slate-400 mb-10 max-w-2xl">
-        Download product brochures, solution briefs, and technical datasheets. Enter your business email to unlock each
-        download.
-      </p>
+      <h1 class="text-3xl font-bold sm:text-4xl mb-6 text-default dark:text-slate-100">Brochures & Datasheets</h1>
 
-      {
-        brochures.map((section) => (
-          <div class="mb-12">
-            <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-4 pb-2 border-b border-gray-200 dark:border-slate-700">
-              {section.category}
-            </h2>
-            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {section.items.map((item) => (
-                <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:shadow-md transition-shadow flex items-start gap-4">
-                  <span class="text-3xl flex-shrink-0">{item.icon}</span>
-                  <div class="min-w-0 flex-1">
-                    <h3 class="font-semibold text-sm text-default dark:text-slate-200 mb-0.5 truncate">{item.name}</h3>
-                    <p class="text-xs text-muted dark:text-slate-500 mb-3">{item.desc}</p>
-                    <button
-                      type="button"
-                      onclick={`window.__openLeadModal({ scenario: 'pdf', productName: '${item.name}' })`}
-                      class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-                    >
-                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                        />
-                      </svg>
-                      Download PDF
-                    </button>
+      <!-- Search -->
+      <div class="mb-6">
+        <div class="relative max-w-md">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg
+            >
+          </span>
+          <input
+            type="text"
+            id="brochureSearch"
+            placeholder="Search brochures by name or keyword..."
+            class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow"
+          />
+        </div>
+      </div>
+
+      <!-- Category Filters -->
+      <div class="flex items-center gap-2 flex-wrap mb-6" id="brochureFilters">
+        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0"
+          >Category:</span
+        >
+        <button
+          class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-primary text-primary-foreground border border-primary active"
+          data-category="">All</button
+        >
+        {
+          categories.map((cat) => (
+            <button
+              class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary"
+              data-category={cat}
+            >
+              {cat}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Count -->
+      <span class="text-sm text-muted dark:text-slate-400 mb-4 block">
+        Showing <strong id="brochureCount" class="text-default dark:text-slate-200 font-semibold"
+          >{brochures.reduce((a, b) => a + b.items.length, 0)}</strong
+        > documents
+      </span>
+
+      <div id="brochureList">
+        {
+          brochures.map((section) => (
+            <div class="brochure-section mb-12" data-category={section.category}>
+              <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-4 pb-2 border-b border-gray-200 dark:border-slate-700">
+                {section.category}
+              </h2>
+              <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {section.items.map((item) => (
+                  <div class="brochure-card p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:shadow-md transition-shadow flex items-start gap-4">
+                    <span class="text-3xl flex-shrink-0">{item.icon}</span>
+                    <div class="min-w-0 flex-1">
+                      <h3 class="font-semibold text-sm text-default dark:text-slate-200 mb-0.5 truncate">
+                        {item.name}
+                      </h3>
+                      <p class="text-xs text-muted dark:text-slate-500 mb-3">{item.desc}</p>
+                      <button
+                        type="button"
+                        onclick={`window.__openLeadModal({ scenario: 'pdf', productName: '${item.name}' })`}
+                        class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                      >
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                          />
+                        </svg>
+                        Download PDF
+                      </button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        ))
-      }
+          ))
+        }
+      </div>
 
       <div class="mt-12 p-8 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/10 text-center">
         <h2 class="text-xl font-bold mb-2 text-default dark:text-slate-100">Need custom documentation?</h2>
@@ -100,3 +151,5 @@ const brochures = [
     </div>
   </section>
 </PageLayout>
+
+<script is:inline src="/scripts/brochure-filter.js"></script>
