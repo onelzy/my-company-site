@@ -264,7 +264,7 @@ export default config({
       label: 'Case Studies',
       path: 'src/content/cases/*',
       slugField: 'title',
-      format: { contentField: 'summary' },
+      format: { contentField: 'content' },
       schema: {
         title: fields.text({ label: 'Title', validation: { isRequired: true } }),
         client: fields.text({ label: 'Client' }),
@@ -280,6 +280,7 @@ export default config({
           ],
         }),
         summary: fields.text({ label: 'Summary', multiline: true }),
+        content: fields.markdoc({ label: 'Content', extension: 'mdoc' }),
         image: fields.image({ label: 'Case Image', directory: 'public/images/cases', publicPath: '/images/cases' }),
         language: fields.select({
           label: 'Language',
