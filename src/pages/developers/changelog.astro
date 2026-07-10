@@ -47,23 +47,39 @@ import PageLayout from '~/layouts/PageLayout.astro';
           <!-- Filter tabs -->
           <div class="flex flex-wrap gap-2 mb-10">
             <span class="px-3 py-1 rounded-full text-xs font-medium bg-primary text-white">All Devices</span>
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted">Smart Meters</span>
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted">Thermostats</span>
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted">Hotel Control</span>
-            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted">Senior Care</span>
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted"
+              >Smart Meters</span
+            >
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted"
+              >Thermostats</span
+            >
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted"
+              >Hotel Control</span
+            >
+            <span class="px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-muted"
+              >Senior Care</span
+            >
           </div>
 
           <!-- Changelog entries -->
           <div class="space-y-6">
             <!-- v2.2.0 -->
             <div class="relative pl-8 border-l-2 border-primary/30 pb-6">
-              <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-white dark:border-slate-900"></div>
+              <div
+                class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-white dark:border-slate-900"
+              >
+              </div>
               <div class="flex items-center gap-3 mb-2 flex-wrap">
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">v2.2.0</span>
                 <time class="text-xs text-muted">June 28, 2026</time>
-                <span class="px-2 py-0.5 rounded text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Smart Meters</span>
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                  >Smart Meters</span
+                >
               </div>
-              <h3 class="font-semibold text-default dark:text-slate-200 mb-2">MQTT 5.0 Support + Improved Calibration</h3>
+              <h3 class="font-semibold text-default dark:text-slate-200 mb-2">
+                MQTT 5.0 Support + Improved Calibration
+              </h3>
               <ul class="text-sm text-muted dark:text-slate-400 space-y-1 list-disc pl-4">
                 <li>Added MQTT 5.0 protocol support alongside 3.1.1 (auto-negotiate)</li>
                 <li>Improved voltage measurement accuracy: ±0.5% → ±0.2%</li>
@@ -74,12 +90,21 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
             <!-- v2.1.4 -->
             <div class="relative pl-8 border-l-2 border-primary/30 pb-6">
-              <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-white dark:border-slate-900"></div>
+              <div
+                class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-white dark:border-slate-900"
+              >
+              </div>
               <div class="flex items-center gap-3 mb-2 flex-wrap">
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">v2.1.4</span>
                 <time class="text-xs text-muted">May 15, 2026</time>
-                <span class="px-2 py-0.5 rounded text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Smart Meters</span>
-                <span class="px-2 py-0.5 rounded text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Hotel Control</span>
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                  >Smart Meters</span
+                >
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                  >Hotel Control</span
+                >
               </div>
               <h3 class="font-semibold text-default dark:text-slate-200 mb-2">OTA Delta Updates + Hotel Panel Fix</h3>
               <ul class="text-sm text-muted dark:text-slate-400 space-y-1 list-disc pl-4">
@@ -91,13 +116,21 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
             <!-- v2.1.1 -->
             <div class="relative pl-8 border-l-2 border-primary/30 pb-6">
-              <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-white dark:border-slate-900"></div>
+              <div
+                class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-primary border-2 border-white dark:border-slate-900"
+              >
+              </div>
               <div class="flex items-center gap-3 mb-2 flex-wrap">
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">v2.1.1</span>
                 <time class="text-xs text-muted">April 3, 2026</time>
-                <span class="px-2 py-0.5 rounded text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300">Thermostats</span>
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300"
+                  >Thermostats</span
+                >
               </div>
-              <h3 class="font-semibold text-default dark:text-slate-200 mb-2">Thermostat Scheduling + Energy Report Export</h3>
+              <h3 class="font-semibold text-default dark:text-slate-200 mb-2">
+                Thermostat Scheduling + Energy Report Export
+              </h3>
               <ul class="text-sm text-muted dark:text-slate-400 space-y-1 list-disc pl-4">
                 <li>Added weekly scheduling — set temperature targets per time slot, per day</li>
                 <li>Energy usage CSV export via REST API (GET /devices/:id/energy-report)</li>
@@ -107,14 +140,29 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
             <!-- v2.0.0 -->
             <div class="relative pl-8 pb-6">
-              <div class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-gray-300 dark:bg-slate-600 border-2 border-white dark:border-slate-900"></div>
+              <div
+                class="absolute left-[-9px] top-0 w-4 h-4 rounded-full bg-gray-300 dark:bg-slate-600 border-2 border-white dark:border-slate-900"
+              >
+              </div>
               <div class="flex items-center gap-3 mb-2 flex-wrap">
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-gray-500 text-white">v2.0.0</span>
                 <time class="text-xs text-muted">February 10, 2026</time>
-                <span class="px-2 py-0.5 rounded text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Smart Meters</span>
-                <span class="px-2 py-0.5 rounded text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300">Thermostats</span>
-                <span class="px-2 py-0.5 rounded text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Hotel Control</span>
-                <span class="px-2 py-0.5 rounded text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">Senior Care</span>
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                  >Smart Meters</span
+                >
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300"
+                  >Thermostats</span
+                >
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
+                  >Hotel Control</span
+                >
+                <span
+                  class="px-2 py-0.5 rounded text-xs bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                  >Senior Care</span
+                >
               </div>
               <h3 class="font-semibold text-default dark:text-slate-200 mb-2">Unified Firmware Platform v2</h3>
               <ul class="text-sm text-muted dark:text-slate-400 space-y-1 list-disc pl-4">

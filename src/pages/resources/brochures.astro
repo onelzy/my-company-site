@@ -2,24 +2,36 @@
 import PageLayout from '~/layouts/PageLayout.astro';
 
 const brochures = [
-  { category: 'Corporate', items: [
-    { name: 'Company Overview', desc: 'Brand, capabilities, global presence', icon: '🏢' },
-    { name: 'Product Catalogue 2025', desc: 'Full product line with specs', icon: '📖' },
-  ]},
-  { category: 'Smart Meters', items: [
-    { name: 'Single-Phase Meter Series', desc: 'PC321-TY, PC341 series datasheets', icon: '⚡' },
-    { name: 'Three-Phase Meter Series', desc: 'Industrial & commercial meters', icon: '🔌' },
-    { name: 'Multi-Circuit Monitors', desc: 'PC341-3M16S spec sheet', icon: '📊' },
-  ]},
-  { category: 'Thermostats', items: [
-    { name: 'PCT513 Touchscreen Thermostat', desc: 'ZigBee smart thermostat', icon: '🌡️' },
-    { name: 'Boiler & TRV Solutions', desc: 'Heating control systems', icon: '🔥' },
-  ]},
-  { category: 'Solutions', items: [
-    { name: 'Smart Hotel Solution Brief', desc: 'Energy management for hotels', icon: '🏨' },
-    { name: 'Senior Care Solution Overview', desc: 'Non-intrusive monitoring', icon: '🏥' },
-    { name: 'Industrial IoT Datasheet', desc: 'Submetering & SCADA integration', icon: '🏭' },
-  ]},
+  {
+    category: 'Corporate',
+    items: [
+      { name: 'Company Overview', desc: 'Brand, capabilities, global presence', icon: '🏢' },
+      { name: 'Product Catalogue 2025', desc: 'Full product line with specs', icon: '📖' },
+    ],
+  },
+  {
+    category: 'Smart Meters',
+    items: [
+      { name: 'Single-Phase Meter Series', desc: 'PC321-TY, PC341 series datasheets', icon: '⚡' },
+      { name: 'Three-Phase Meter Series', desc: 'Industrial & commercial meters', icon: '🔌' },
+      { name: 'Multi-Circuit Monitors', desc: 'PC341-3M16S spec sheet', icon: '📊' },
+    ],
+  },
+  {
+    category: 'Thermostats',
+    items: [
+      { name: 'PCT513 Touchscreen Thermostat', desc: 'ZigBee smart thermostat', icon: '🌡️' },
+      { name: 'Boiler & TRV Solutions', desc: 'Heating control systems', icon: '🔥' },
+    ],
+  },
+  {
+    category: 'Solutions',
+    items: [
+      { name: 'Smart Hotel Solution Brief', desc: 'Energy management for hotels', icon: '🏨' },
+      { name: 'Senior Care Solution Overview', desc: 'Non-intrusive monitoring', icon: '🏥' },
+      { name: 'Industrial IoT Datasheet', desc: 'Submetering & SCADA integration', icon: '🏭' },
+    ],
+  },
 ];
 ---
 
@@ -33,7 +45,8 @@ const brochures = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">Brochures & Datasheets</h1>
       <p class="text-lg text-muted dark:text-slate-400 mb-10 max-w-2xl">
-        Download product brochures, solution briefs, and technical datasheets. Enter your business email to unlock each download.
+        Download product brochures, solution briefs, and technical datasheets. Enter your business email to unlock each
+        download.
       </p>
 
       {
@@ -55,7 +68,12 @@ const brochures = [
                       class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
                     >
                       <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                        />
                       </svg>
                       Download PDF
                     </button>
@@ -72,7 +90,10 @@ const brochures = [
         <p class="text-muted dark:text-slate-400 mb-4 text-sm">
           We can provide customized datasheets, CAD drawings, or API documentation for your integration needs.
         </p>
-        <a href="/contact-sales" class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+        <a
+          href="/contact-sales"
+          class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
+        >
           Contact Sales →
         </a>
       </div>

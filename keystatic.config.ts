@@ -246,7 +246,15 @@ export default config({
             { value: fields.text({ label: 'Value' }), label: fields.text({ label: 'Label' }) },
             { label: 'Stat' }
           ),
-          { label: 'Key Stats', itemLabel: (p) => { const vf = (p.fields as Record<string, unknown>).value; return (typeof vf === 'object' && vf !== null && 'value' in vf) ? String((vf as Record<string, unknown>).value || '') : String(vf || ''); } },
+          {
+            label: 'Key Stats',
+            itemLabel: (p) => {
+              const vf = (p.fields as Record<string, unknown>).value;
+              return typeof vf === 'object' && vf !== null && 'value' in vf
+                ? String((vf as Record<string, unknown>).value || '')
+                : String(vf || '');
+            },
+          }
         ),
         body: fields.markdoc({ label: 'Body Content', extension: 'mdoc' }),
         language: fields.select({

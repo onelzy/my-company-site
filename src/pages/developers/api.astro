@@ -47,21 +47,36 @@ import PageLayout from '~/layouts/PageLayout.astro';
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Authentication</h2>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              All API requests require an API key in the <code class="bg-gray-100 dark:bg-slate-700 px-1 rounded">Authorization</code> header.
-              Keys are issued per project — contact our engineering team to obtain one.
+              All API requests require an API key in the <code class="bg-gray-100 dark:bg-slate-700 px-1 rounded"
+                >Authorization</code
+              > header. Keys are issued per project — contact our engineering team to obtain one.
             </p>
-            <div class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto">
+            <div
+              class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto"
+            >
               <p class="text-muted dark:text-slate-500 mb-1"># Every request must include:</p>
-              <p><span class="text-orange-600 dark:text-orange-400">Authorization:</span> <span class="text-default dark:text-slate-200">Bearer YOUR_API_KEY</span></p>
-              <p><span class="text-orange-600 dark:text-orange-400">Content-Type:</span> <span class="text-default dark:text-slate-200">application/json</span></p>
+              <p>
+                <span class="text-orange-600 dark:text-orange-400">Authorization:</span>
+                <span class="text-default dark:text-slate-200">Bearer YOUR_API_KEY</span>
+              </p>
+              <p>
+                <span class="text-orange-600 dark:text-orange-400">Content-Type:</span>
+                <span class="text-default dark:text-slate-200">application/json</span>
+              </p>
             </div>
           </section>
 
           <!-- Base URL -->
           <section class="mb-12">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Base URL</h2>
-            <div class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm">
-              <p><span class="text-green-600 dark:text-green-400">https://</span><span class="text-default dark:text-slate-200">api.owon-iot.com/v1</span></p>
+            <div
+              class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm"
+            >
+              <p>
+                <span class="text-green-600 dark:text-green-400">https://</span><span
+                  class="text-default dark:text-slate-200">api.owon-iot.com/v1</span
+                >
+              </p>
             </div>
           </section>
 
@@ -71,7 +86,9 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
             <!-- GET /devices -->
             <div class="mb-8 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
+              <div
+                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
+              >
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">GET</span>
                 <code class="text-sm font-mono text-default dark:text-slate-200">/devices</code>
               </div>
@@ -87,15 +104,31 @@ import PageLayout from '~/layouts/PageLayout.astro';
                     </tr>
                   </thead>
                   <tbody class="text-default dark:text-slate-300">
-                    <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono">page</td><td class="py-2 pr-4">int</td><td class="py-2">Page number (default: 1)</td></tr>
-                    <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono">limit</td><td class="py-2 pr-4">int</td><td class="py-2">Items per page (default: 20, max: 100)</td></tr>
-                    <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono">type</td><td class="py-2 pr-4">string</td><td class="py-2">Filter: <code>smart-meter</code>, <code>thermostat</code>, <code>sensor</code></td></tr>
-                    <tr><td class="py-2 pr-4 font-mono">status</td><td class="py-2 pr-4">string</td><td class="py-2">Filter: <code>online</code>, <code>offline</code>, <code>all</code></td></tr>
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">page</td><td class="py-2 pr-4">int</td><td class="py-2"
+                        >Page number (default: 1)</td
+                      ></tr
+                    >
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">limit</td><td class="py-2 pr-4">int</td><td class="py-2"
+                        >Items per page (default: 20, max: 100)</td
+                      ></tr
+                    >
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">type</td><td class="py-2 pr-4">string</td><td class="py-2"
+                        >Filter: <code>smart-meter</code>, <code>thermostat</code>, <code>sensor</code></td
+                      ></tr
+                    >
+                    <tr
+                      ><td class="py-2 pr-4 font-mono">status</td><td class="py-2 pr-4">string</td><td class="py-2"
+                        >Filter: <code>online</code>, <code>offline</code>, <code>all</code></td
+                      ></tr
+                    >
                   </tbody>
                 </table>
                 <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 200</h4>
                 <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{
+                  <pre>{`{
   "data": [
     {
       "id": "dev_7a3b9c",
@@ -109,22 +142,26 @@ import PageLayout from '~/layouts/PageLayout.astro';
   "total": 42,
   "page": 1,
   "limit": 20
-}</pre>
+}`}</pre>
                 </div>
               </div>
             </div>
 
             <!-- GET /devices/:id -->
             <div class="mb-8 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
+              <div
+                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
+              >
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">GET</span>
                 <code class="text-sm font-mono text-default dark:text-slate-200">/devices/:id</code>
               </div>
               <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">Get device details including current telemetry snapshot.</p>
+                <p class="text-sm text-muted dark:text-slate-400 mb-3">
+                  Get device details including current telemetry snapshot.
+                </p>
                 <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 200</h4>
                 <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{
+                  <pre>{`{
   "id": "dev_7a3b9c",
   "name": "Office Meter A1",
   "type": "smart-meter",
@@ -138,46 +175,54 @@ import PageLayout from '~/layouts/PageLayout.astro';
     "temperature": 34.2
   },
   "last_seen": "2026-07-10T08:30:00Z"
-}</pre>
+}`}</pre>
                 </div>
               </div>
             </div>
 
             <!-- POST /devices/:id/ota -->
             <div class="mb-8 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
+              <div
+                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
+              >
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-orange-500 text-white">POST</span>
                 <code class="text-sm font-mono text-default dark:text-slate-200">/devices/:id/ota</code>
               </div>
               <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">Trigger an OTA firmware update for a specific device.</p>
+                <p class="text-sm text-muted dark:text-slate-400 mb-3">
+                  Trigger an OTA firmware update for a specific device.
+                </p>
                 <h4 class="text-xs font-semibold uppercase text-muted mb-2">Request Body</h4>
                 <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto mb-3">
-                  <pre>{
+                  <pre>{`{
   "firmware_version": "2.2.0",
   "firmware_url": "https://firmware.owon-iot.com/v2.2.0.bin"
-}</pre>
+}`}</pre>
                 </div>
                 <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 202</h4>
                 <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{
+                  <pre>{`{
   "ota_id": "ota_9f2e1a",
   "device_id": "dev_7a3b9c",
   "status": "pending",
   "target_version": "2.2.0"
-}</pre>
+}`}</pre>
                 </div>
               </div>
             </div>
 
             <!-- GET /devices/:id/telemetry -->
             <div class="border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
+              <div
+                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
+              >
                 <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">GET</span>
                 <code class="text-sm font-mono text-default dark:text-slate-200">/devices/:id/telemetry</code>
               </div>
               <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">Query historical telemetry data with time range.</p>
+                <p class="text-sm text-muted dark:text-slate-400 mb-3">
+                  Query historical telemetry data with time range.
+                </p>
                 <h4 class="text-xs font-semibold uppercase text-muted mb-2">Query Parameters</h4>
                 <table class="w-full text-sm mb-4">
                   <thead>
@@ -188,21 +233,33 @@ import PageLayout from '~/layouts/PageLayout.astro';
                     </tr>
                   </thead>
                   <tbody class="text-default dark:text-slate-300">
-                    <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono">from</td><td class="py-2 pr-4">ISO 8601</td><td class="py-2">Start time (required)</td></tr>
-                    <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4 font-mono">to</td><td class="py-2 pr-4">ISO 8601</td><td class="py-2">End time (default: now)</td></tr>
-                    <tr><td class="py-2 pr-4 font-mono">interval</td><td class="py-2 pr-4">string</td><td class="py-2">Aggregation: <code>1m</code>, <code>15m</code>, <code>1h</code>, <code>1d</code></td></tr>
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">from</td><td class="py-2 pr-4">ISO 8601</td><td class="py-2"
+                        >Start time (required)</td
+                      ></tr
+                    >
+                    <tr class="border-b border-gray-100 dark:border-slate-800"
+                      ><td class="py-2 pr-4 font-mono">to</td><td class="py-2 pr-4">ISO 8601</td><td class="py-2"
+                        >End time (default: now)</td
+                      ></tr
+                    >
+                    <tr
+                      ><td class="py-2 pr-4 font-mono">interval</td><td class="py-2 pr-4">string</td><td class="py-2"
+                        >Aggregation: <code>1m</code>, <code>15m</code>, <code>1h</code>, <code>1d</code></td
+                      ></tr
+                    >
                   </tbody>
                 </table>
                 <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 200</h4>
                 <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{
+                  <pre>{`{
   "device_id": "dev_7a3b9c",
   "interval": "1h",
   "data": [
     { "ts": "2026-07-10T08:00:00Z", "power": 2710, "energy_kwh": 1847.6 },
     { "ts": "2026-07-10T09:00:00Z", "power": 2685, "energy_kwh": 1850.3 }
   ]
-}</pre>
+}`}</pre>
                 </div>
               </div>
             </div>
@@ -221,9 +278,17 @@ import PageLayout from '~/layouts/PageLayout.astro';
                   </tr>
                 </thead>
                 <tbody class="text-default dark:text-slate-300">
-                  <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4">Standard</td><td class="py-2 pr-4">120</td><td class="py-2">20</td></tr>
-                  <tr class="border-b border-gray-100 dark:border-slate-800"><td class="py-2 pr-4">Enterprise</td><td class="py-2 pr-4">600</td><td class="py-2">50</td></tr>
-                  <tr><td class="py-2 pr-4">Custom</td><td class="py-2 pr-4" colspan="2">Contact us for dedicated rate limits</td></tr>
+                  <tr class="border-b border-gray-100 dark:border-slate-800"
+                    ><td class="py-2 pr-4">Standard</td><td class="py-2 pr-4">120</td><td class="py-2">20</td></tr
+                  >
+                  <tr class="border-b border-gray-100 dark:border-slate-800"
+                    ><td class="py-2 pr-4">Enterprise</td><td class="py-2 pr-4">600</td><td class="py-2">50</td></tr
+                  >
+                  <tr
+                    ><td class="py-2 pr-4">Custom</td><td class="py-2 pr-4" colspan="2"
+                      >Contact us for dedicated rate limits</td
+                    ></tr
+                  >
                 </tbody>
               </table>
             </div>
@@ -231,8 +296,12 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
           <!-- Contact CTA -->
           <div class="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
-            <p class="text-default dark:text-slate-200 font-medium mb-2">Need API access or custom integration support?</p>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">Our engineering team can provision API keys and provide dedicated onboarding.</p>
+            <p class="text-default dark:text-slate-200 font-medium mb-2">
+              Need API access or custom integration support?
+            </p>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">
+              Our engineering team can provision API keys and provide dedicated onboarding.
+            </p>
             <a
               href="/contact-sales"
               class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm"

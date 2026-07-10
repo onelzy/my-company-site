@@ -19,9 +19,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
   <!-- Architecture Overview -->
   <section class="py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">
-        Integration Architecture
-      </h2>
+      <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">Integration Architecture</h2>
       <div class="grid gap-6 sm:grid-cols-4 text-center">
         <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
           <div class="text-3xl mb-3">🏠</div>
@@ -58,9 +56,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
   <!-- Quick Start Cards -->
   <section class="py-16 bg-gray-50 dark:bg-slate-900/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">
-        Quick Start
-      </h2>
+      <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">Quick Start</h2>
       <div class="grid gap-6 sm:grid-cols-3 text-left">
         <a
           href="/developers/api"
@@ -93,9 +89,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
           <p class="text-sm text-muted dark:text-slate-400">
             Native client libraries — Python (pip), Node.js (npm), Java (Maven), C# (NuGet). MQTT + REST support.
           </p>
-          <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline">
-            View SDKs →
-          </span>
+          <span class="inline-block mt-4 text-sm text-primary font-medium group-hover:underline"> View SDKs → </span>
         </a>
 
         <a
@@ -123,15 +117,32 @@ import Hero2 from '~/components/widgets/Hero2.astro';
   <section class="py-16">
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">MQTT Broker Access</h2>
-      <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 font-mono text-sm">
+      <div
+        class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 font-mono text-sm"
+      >
         <p class="text-muted dark:text-slate-400 mb-3"># Connect to OWON cloud MQTT broker</p>
-        <p class="mb-1"><span class="text-green-600 dark:text-green-400">Host:</span> <span class="text-default dark:text-slate-200">mqtt.owon-iot.com</span></p>
-        <p class="mb-1"><span class="text-green-600 dark:text-green-400">Port:</span> <span class="text-default dark:text-slate-200">8883 (TLS)</span></p>
-        <p class="mb-1"><span class="text-green-600 dark:text-green-400">Protocol:</span> <span class="text-default dark:text-slate-200">MQTT 3.1.1 / 5.0</span></p>
-        <p><span class="text-green-600 dark:text-green-400">Auth:</span> <span class="text-default dark:text-slate-200">Username + Password (issued per project)</span></p>
+        <p class="mb-1">
+          <span class="text-green-600 dark:text-green-400">Host:</span>
+          <span class="text-default dark:text-slate-200">mqtt.owon-iot.com</span>
+        </p>
+        <p class="mb-1">
+          <span class="text-green-600 dark:text-green-400">Port:</span>
+          <span class="text-default dark:text-slate-200">8883 (TLS)</span>
+        </p>
+        <p class="mb-1">
+          <span class="text-green-600 dark:text-green-400">Protocol:</span>
+          <span class="text-default dark:text-slate-200">MQTT 3.1.1 / 5.0</span>
+        </p>
+        <p>
+          <span class="text-green-600 dark:text-green-400">Auth:</span>
+          <span class="text-default dark:text-slate-200">Username + Password (issued per project)</span>
+        </p>
       </div>
       <p class="mt-4 text-sm text-muted dark:text-slate-500">
-        MQTT credentials are provisioned per project. Contact our <a href="/contact-sales" class="text-primary hover:underline">engineering team</a> to request access.
+        MQTT credentials are provisioned per project. Contact our <a
+          href="/contact-sales"
+          class="text-primary hover:underline">engineering team</a
+        > to request access.
       </p>
     </div>
   </section>
@@ -141,7 +152,8 @@ import Hero2 from '~/components/widgets/Hero2.astro';
     <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">OTA Firmware Updates</h2>
       <p class="text-muted dark:text-slate-400 mb-6">
-        All OWON devices support Over-The-Air firmware updates via MQTT or HTTP. Use our REST API to trigger firmware upgrades at scale.
+        All OWON devices support Over-The-Air firmware updates via MQTT or HTTP. Use our REST API to trigger firmware
+        upgrades at scale.
       </p>
       <a
         href="/developers/changelog"

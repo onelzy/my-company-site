@@ -10,10 +10,7 @@
   aria-labelledby="lead-modal-title"
 >
   <!-- Backdrop -->
-  <div
-    id="lead-modal-backdrop"
-    class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
-  ></div>
+  <div id="lead-modal-backdrop" class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"></div>
 
   <!-- Modal card -->
   <div
@@ -26,7 +23,7 @@
       aria-label="Close"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </button>
 
@@ -74,9 +71,11 @@
 
     <!-- Success state -->
     <div id="lead-modal-success" class="hidden text-center py-6">
-      <div class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
+      <div
+        class="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4"
+      >
         <svg class="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
       <h3 class="text-lg font-bold text-default dark:text-slate-100 mb-1">Thank You!</h3>
@@ -87,16 +86,28 @@
 
 <style is:global>
   @keyframes slide-up {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
   }
   .animate-slide-up {
     animation: slide-up 0.3s ease-out;
   }
   @media (min-width: 640px) {
     @keyframes slide-up {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
   }
 </style>

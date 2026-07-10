@@ -21,7 +21,9 @@ import PageLayout from '~/layouts/PageLayout.astro';
       <!-- Featured Video -->
       <div class="mb-16">
         <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">🎬 Featured</h2>
-        <div class="rounded-xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center border border-gray-200 dark:border-slate-700">
+        <div
+          class="rounded-xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center border border-gray-200 dark:border-slate-700"
+        >
           <div class="text-center">
             <div class="text-6xl mb-4">▶️</div>
             <p class="text-gray-400 text-lg">OWON Smart Energy — Company Overview</p>
@@ -34,30 +36,56 @@ import PageLayout from '~/layouts/PageLayout.astro';
       <div class="mb-16">
         <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Product Demos</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { title: 'Smart Meter Installation Guide', desc: 'Step-by-step installation for PC341 single-phase smart meter.', cat: 'Smart Meters' },
-            { title: 'Thermostat Smart Scheduling', desc: 'How to configure weekly schedules for radiator thermostats.', cat: 'Thermostats' },
-            { title: 'Hotel Room Panel Setup', desc: 'Installing and pairing the HCH-01 hotel control panel.', cat: 'Hotel Control' },
-            { title: 'Senior Care Pendant Tutorial', desc: 'Pairing the emergency pendant with the SCB-01 gateway.', cat: 'Senior Care' },
-            { title: 'Energy Dashboard Walkthrough', desc: 'Tour of the OWON energy monitoring web dashboard.', cat: 'Software' },
-            { title: '3-Phase Meter Wiring', desc: 'Professional installation wiring for PC342 3-phase meter.', cat: 'Smart Meters' },
-          ].map((video) => (
-            <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:border-primary/40 transition-colors">
-              <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <div class="text-center">
-                  <div class="text-4xl mb-2">▶️</div>
-                  <span class="text-xs text-muted">Coming soon</span>
+          {
+            [
+              {
+                title: 'Smart Meter Installation Guide',
+                desc: 'Step-by-step installation for PC341 single-phase smart meter.',
+                cat: 'Smart Meters',
+              },
+              {
+                title: 'Thermostat Smart Scheduling',
+                desc: 'How to configure weekly schedules for radiator thermostats.',
+                cat: 'Thermostats',
+              },
+              {
+                title: 'Hotel Room Panel Setup',
+                desc: 'Installing and pairing the HCH-01 hotel control panel.',
+                cat: 'Hotel Control',
+              },
+              {
+                title: 'Senior Care Pendant Tutorial',
+                desc: 'Pairing the emergency pendant with the SCB-01 gateway.',
+                cat: 'Senior Care',
+              },
+              {
+                title: 'Energy Dashboard Walkthrough',
+                desc: 'Tour of the OWON energy monitoring web dashboard.',
+                cat: 'Software',
+              },
+              {
+                title: '3-Phase Meter Wiring',
+                desc: 'Professional installation wiring for PC342 3-phase meter.',
+                cat: 'Smart Meters',
+              },
+            ].map((video) => (
+              <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:border-primary/40 transition-colors">
+                <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="text-4xl mb-2">▶️</div>
+                    <span class="text-xs text-muted">Coming soon</span>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <span class="text-xs text-primary font-medium">{video.cat}</span>
+                  <h3 class="font-semibold text-default dark:text-slate-200 mt-1 group-hover:text-primary transition-colors">
+                    {video.title}
+                  </h3>
+                  <p class="text-sm text-muted dark:text-slate-400 mt-1">{video.desc}</p>
                 </div>
               </div>
-              <div class="p-4">
-                <span class="text-xs text-primary font-medium">{video.cat}</span>
-                <h3 class="font-semibold text-default dark:text-slate-200 mt-1 group-hover:text-primary transition-colors">
-                  {video.title}
-                </h3>
-                <p class="text-sm text-muted dark:text-slate-400 mt-1">{video.desc}</p>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
@@ -65,29 +93,31 @@ import PageLayout from '~/layouts/PageLayout.astro';
       <div class="mb-16">
         <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">📖 Installation & Tutorials</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { title: 'MQTT Broker Configuration', desc: 'Connect OWON devices to your own MQTT broker.' },
-            { title: 'API Integration Quickstart', desc: 'First 10 minutes with the OWON REST API.' },
-            { title: 'OTA Firmware Update Demo', desc: 'How to push firmware updates to deployed devices.' },
-            { title: 'Zigbee Gateway Setup', desc: 'Adding Zigbee devices through the OWON gateway.' },
-            { title: 'RS-485 Modbus Wiring', desc: 'Industrial meter wiring for RS-485 Modbus RTU.' },
-            { title: 'Cloud Platform Onboarding', desc: 'Register and activate devices on the OWON cloud.' },
-          ].map((video) => (
-            <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:border-primary/40 transition-colors">
-              <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                <div class="text-center">
-                  <div class="text-4xl mb-2">🎓</div>
-                  <span class="text-xs text-muted">Coming soon</span>
+          {
+            [
+              { title: 'MQTT Broker Configuration', desc: 'Connect OWON devices to your own MQTT broker.' },
+              { title: 'API Integration Quickstart', desc: 'First 10 minutes with the OWON REST API.' },
+              { title: 'OTA Firmware Update Demo', desc: 'How to push firmware updates to deployed devices.' },
+              { title: 'Zigbee Gateway Setup', desc: 'Adding Zigbee devices through the OWON gateway.' },
+              { title: 'RS-485 Modbus Wiring', desc: 'Industrial meter wiring for RS-485 Modbus RTU.' },
+              { title: 'Cloud Platform Onboarding', desc: 'Register and activate devices on the OWON cloud.' },
+            ].map((video) => (
+              <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:border-primary/40 transition-colors">
+                <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="text-4xl mb-2">🎓</div>
+                    <span class="text-xs text-muted">Coming soon</span>
+                  </div>
+                </div>
+                <div class="p-4">
+                  <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
+                    {video.title}
+                  </h3>
+                  <p class="text-sm text-muted dark:text-slate-400 mt-1">{video.desc}</p>
                 </div>
               </div>
-              <div class="p-4">
-                <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
-                  {video.title}
-                </h3>
-                <p class="text-sm text-muted dark:text-slate-400 mt-1">{video.desc}</p>
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 
@@ -95,24 +125,42 @@ import PageLayout from '~/layouts/PageLayout.astro';
       <div class="mb-8">
         <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">🏗️ Customer Case Studies</h2>
         <div class="grid gap-6 sm:grid-cols-2">
-          {[
-            { title: '500-Room Hotel Energy Retrofit — Jakarta', desc: 'How a 5-star hotel reduced energy costs by 32% with OWON meters and hotel panels.', region: 'Southeast Asia' },
-            { title: 'Smart Senior Care — Tokyo Nursing Home', desc: 'Deploying 200+ senior care pendants across a multi-floor care facility.', region: 'Japan' },
-            { title: 'Apartment Sub-Metering — Dubai', desc: 'Real-time tenant energy billing for a 1200-unit residential complex.', region: 'Middle East' },
-            { title: 'Cold Chain Monitoring — Rotterdam', desc: 'Temperature monitoring for pharmaceutical cold storage using OWON sensors.', region: 'Europe' },
-          ].map((cs) => (
-            <div class="p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
-              <span class="text-xs text-primary font-medium">{cs.region}</span>
-              <h3 class="font-semibold text-default dark:text-slate-200 mt-1 mb-2">{cs.title}</h3>
-              <p class="text-sm text-muted dark:text-slate-400">{cs.desc}</p>
-              <div class="mt-4 aspect-video bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                <div class="text-center">
-                  <div class="text-3xl mb-1">▶️</div>
-                  <span class="text-xs text-muted">Case study video — coming soon</span>
+          {
+            [
+              {
+                title: '500-Room Hotel Energy Retrofit — Jakarta',
+                desc: 'How a 5-star hotel reduced energy costs by 32% with OWON meters and hotel panels.',
+                region: 'Southeast Asia',
+              },
+              {
+                title: 'Smart Senior Care — Tokyo Nursing Home',
+                desc: 'Deploying 200+ senior care pendants across a multi-floor care facility.',
+                region: 'Japan',
+              },
+              {
+                title: 'Apartment Sub-Metering — Dubai',
+                desc: 'Real-time tenant energy billing for a 1200-unit residential complex.',
+                region: 'Middle East',
+              },
+              {
+                title: 'Cold Chain Monitoring — Rotterdam',
+                desc: 'Temperature monitoring for pharmaceutical cold storage using OWON sensors.',
+                region: 'Europe',
+              },
+            ].map((cs) => (
+              <div class="p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+                <span class="text-xs text-primary font-medium">{cs.region}</span>
+                <h3 class="font-semibold text-default dark:text-slate-200 mt-1 mb-2">{cs.title}</h3>
+                <p class="text-sm text-muted dark:text-slate-400">{cs.desc}</p>
+                <div class="mt-4 aspect-video bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
+                  <div class="text-center">
+                    <div class="text-3xl mb-1">▶️</div>
+                    <span class="text-xs text-muted">Case study video — coming soon</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
       </div>
 

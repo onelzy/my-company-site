@@ -1,5 +1,72 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+
+const pythonCode = `from owon_iot import OWONClient
+
+client = OWONClient(api_key="YOUR_API_KEY")
+
+# List devices
+devices = client.devices.list()
+for d in devices:
+    print(f"{d.name}: {d.status}")
+
+# Subscribe to MQTT telemetry
+async def on_telemetry(device_id, data):
+    print(f"[{device_id}] Power: {data['power']}W")
+
+client.mqtt.subscribe("devices/+/telemetry", on_telemetry)
+await client.mqtt.connect()`;
+
+const nodeCode = `import { OWONClient } from '@owon/iot-sdk';
+
+const client = new OWONClient({ apiKey: 'YOUR_API_KEY' });
+
+// List all online devices
+const devices = await client.devices.list({ status: 'online' });
+console.log(\`Found \${devices.total} online devices\`);
+
+// Subscribe to telemetry
+client.mqtt.subscribe('devices/+/telemetry', (deviceId, data) => {
+  console.log(\`[\${deviceId}] Power: \${data.power}W\`);
+});`;
+
+const javaCode = `import com.owon.iot.OWONClient;
+import com.owon.iot.model.Device;
+
+var client = new OWONClient("YOUR_API_KEY");
+
+// List devices
+var devices = client.devices().list();
+devices.forEach(d -> System.out.println(d.getName()));
+
+// Query telemetry
+var telemetry = client.devices().getTelemetry(
+    "dev_7a3b9c",
+    Instant.now().minus(1, ChronoUnit.HOURS),
+    Instant.now()
+);`;
+
+const csharpCode = `using Owon.IoT;
+
+var client = new OwonClient("YOUR_API_KEY");
+
+// List devices
+var devices = await client.Devices.ListAsync();
+foreach (var d in devices.Data)
+    Console.WriteLine($"{d.Name}: {d.Status}");
+
+// Query historical telemetry
+var telemetry = await client.Devices.GetTelemetryAsync(
+    "dev_7a3b9c",
+    DateTime.UtcNow.AddHours(-1),
+    DateTime.UtcNow
+);`;
+
+const mavenDep = `<dependency>
+  <groupId>com.owon</groupId>
+  <artifactId>owon-iot-sdk</artifactId>
+  <version>1.0.2</version>
+</dependency>`;
 ---
 
 <PageLayout
@@ -48,7 +115,10 @@ import PageLayout from '~/layouts/PageLayout.astro';
             <div class="flex items-center gap-3 mb-4">
               <span class="text-2xl">🐍</span>
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">Python SDK</h2>
-              <span class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">v1.3.0</span>
+              <span
+                class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                >v1.3.0</span
+              >
             </div>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
               Full async support with asyncio. MQTT client via paho-mqtt, REST via httpx.
@@ -58,21 +128,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
               <p class="text-default dark:text-slate-200">pip install owon-iot-sdk</p>
             </div>
             <div class="rounded-lg bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto mb-4">
-              <pre>from owon_iot import OWONClient
-
-client = OWONClient(api_key="YOUR_API_KEY")
-
-# List devices
-devices = client.devices.list()
-for d in devices:
-    print(f"{d.name}: {d.status}")
-
-# Subscribe to MQTT telemetry
-async def on_telemetry(device_id, data):
-    print(f"[{device_id}] Power: {data['power']}W")
-
-client.mqtt.subscribe("devices/+/telemetry", on_telemetry)
-await client.mqtt.connect()</pre>
+              <pre>{pythonCode}</pre>
             </div>
             <a
               href="https://github.com/onelzy"
@@ -89,7 +145,10 @@ await client.mqtt.connect()</pre>
             <div class="flex items-center gap-3 mb-4">
               <span class="text-2xl">🟢</span>
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">Node.js SDK</h2>
-              <span class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">v1.2.1</span>
+              <span
+                class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                >v1.2.1</span
+              >
             </div>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
               TypeScript-first, Promise-based. MQTT via mqtt.js, REST via fetch (native).
@@ -99,18 +158,7 @@ await client.mqtt.connect()</pre>
               <p class="text-default dark:text-slate-200">npm install @owon/iot-sdk</p>
             </div>
             <div class="rounded-lg bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto mb-4">
-              <pre>import { OWONClient } from '@owon/iot-sdk';
-
-const client = new OWONClient({ apiKey: 'YOUR_API_KEY' });
-
-// List all online devices
-const devices = await client.devices.list({ status: 'online' });
-console.log(`Found ${devices.total} online devices`);
-
-// Subscribe to telemetry
-client.mqtt.subscribe('devices/+/telemetry', (deviceId, data) => {
-  console.log(`[${deviceId}] Power: ${data.power}W`);
-});</pre>
+              <pre>{nodeCode}</pre>
             </div>
             <a
               href="https://github.com/onelzy"
@@ -127,35 +175,20 @@ client.mqtt.subscribe('devices/+/telemetry', (deviceId, data) => {
             <div class="flex items-center gap-3 mb-4">
               <span class="text-2xl">☕</span>
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">Java SDK</h2>
-              <span class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">v1.0.2</span>
+              <span
+                class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                >v1.0.2</span
+              >
             </div>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
               Java 17+. MQTT via Eclipse Paho, REST via OkHttp + Gson.
             </p>
             <div class="rounded-lg bg-gray-50 dark:bg-slate-900/50 p-4 font-mono text-sm mb-4">
               <p class="text-muted dark:text-slate-500 mb-1">&lt;!-- pom.xml --&gt;</p>
-              <p class="text-default dark:text-slate-200 whitespace-pre-wrap">&lt;dependency&gt;
-  &lt;groupId&gt;com.owon&lt;/groupId&gt;
-  &lt;artifactId&gt;owon-iot-sdk&lt;/artifactId&gt;
-  &lt;version&gt;1.0.2&lt;/version&gt;
-&lt;/dependency&gt;</p>
+              <p class="text-default dark:text-slate-200 whitespace-pre-wrap">{mavenDep}</p>
             </div>
             <div class="rounded-lg bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto mb-4">
-              <pre>import com.owon.iot.OWONClient;
-import com.owon.iot.model.Device;
-
-var client = new OWONClient("YOUR_API_KEY");
-
-// List devices
-var devices = client.devices().list();
-devices.forEach(d -> System.out.println(d.getName()));
-
-// Query telemetry
-var telemetry = client.devices().getTelemetry(
-    "dev_7a3b9c",
-    Instant.now().minus(1, ChronoUnit.HOURS),
-    Instant.now()
-);</pre>
+              <pre>{javaCode}</pre>
             </div>
             <a
               href="https://github.com/onelzy"
@@ -172,7 +205,10 @@ var telemetry = client.devices().getTelemetry(
             <div class="flex items-center gap-3 mb-4">
               <span class="text-2xl">🟣</span>
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">C# SDK</h2>
-              <span class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">v1.0.0</span>
+              <span
+                class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                >v1.0.0</span
+              >
             </div>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
               .NET 8+. MQTT via MQTTnet, REST via HttpClient + System.Text.Json.
@@ -182,21 +218,7 @@ var telemetry = client.devices().getTelemetry(
               <p class="text-default dark:text-slate-200">dotnet add package Owon.IoT.Sdk</p>
             </div>
             <div class="rounded-lg bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto mb-4">
-              <pre>using Owon.IoT;
-
-var client = new OwonClient("YOUR_API_KEY");
-
-// List devices
-var devices = await client.Devices.ListAsync();
-foreach (var d in devices.Data)
-    Console.WriteLine($"{d.Name}: {d.Status}");
-
-// Query historical telemetry
-var telemetry = await client.Devices.GetTelemetryAsync(
-    "dev_7a3b9c",
-    DateTime.UtcNow.AddHours(-1),
-    DateTime.UtcNow
-);</pre>
+              <pre>{csharpCode}</pre>
             </div>
             <a
               href="https://github.com/onelzy"
@@ -209,7 +231,9 @@ var telemetry = await client.Devices.GetTelemetryAsync(
           </div>
 
           <!-- GitHub CTA -->
-          <div class="rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 text-center">
+          <div
+            class="rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 text-center"
+          >
             <p class="text-default dark:text-slate-200 font-medium mb-2">All SDKs are open source</p>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
               Contributions, issues, and feature requests are welcome on GitHub.

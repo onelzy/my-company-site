@@ -110,7 +110,14 @@ const industryIcons: Record<string, string> = {
             >
               <div class="h-40 bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-4xl">
                 {s.heroImage ? (
-                  <Image src={s.heroImage} alt={s.title} layout="cover" class="w-full h-full" width={400} height={200} />
+                  <Image
+                    src={s.heroImage}
+                    alt={s.title}
+                    layout="cover"
+                    class="w-full h-full"
+                    width={400}
+                    height={200}
+                  />
                 ) : (
                   <span>{industryIcons[s.industry] || '🏢'}</span>
                 )}
@@ -136,20 +143,17 @@ const industryIcons: Record<string, string> = {
     items={[
       {
         title: 'Multi-Protocol',
-        description:
-          'Tuya, MQTT open protocol, and ZigBee — adapts to diverse customer needs.',
+        description: 'Tuya, MQTT open protocol, and ZigBee — adapts to diverse customer needs.',
         icon: 'tabler:plug-connected',
       },
       {
         title: 'Global Compliance',
-        description:
-          'CE, FCC, RoHS certified — meeting regulatory requirements worldwide.',
+        description: 'CE, FCC, RoHS certified — meeting regulatory requirements worldwide.',
         icon: 'tabler:certificate',
       },
       {
         title: 'B2B Customization',
-        description:
-          'OEM / ODM from hardware to firmware, app, and cloud — full technical support.',
+        description: 'OEM / ODM from hardware to firmware, app, and cloud — full technical support.',
         icon: 'tabler:settings',
       },
       {
