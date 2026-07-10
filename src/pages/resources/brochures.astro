@@ -1,5 +1,26 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+
+const brochures = [
+  { category: 'Corporate', items: [
+    { name: 'Company Overview', desc: 'Brand, capabilities, global presence', icon: '🏢' },
+    { name: 'Product Catalogue 2025', desc: 'Full product line with specs', icon: '📖' },
+  ]},
+  { category: 'Smart Meters', items: [
+    { name: 'Single-Phase Meter Series', desc: 'PC321-TY, PC341 series datasheets', icon: '⚡' },
+    { name: 'Three-Phase Meter Series', desc: 'Industrial & commercial meters', icon: '🔌' },
+    { name: 'Multi-Circuit Monitors', desc: 'PC341-3M16S spec sheet', icon: '📊' },
+  ]},
+  { category: 'Thermostats', items: [
+    { name: 'PCT513 Touchscreen Thermostat', desc: 'ZigBee smart thermostat', icon: '🌡️' },
+    { name: 'Boiler & TRV Solutions', desc: 'Heating control systems', icon: '🔥' },
+  ]},
+  { category: 'Solutions', items: [
+    { name: 'Smart Hotel Solution Brief', desc: 'Energy management for hotels', icon: '🏨' },
+    { name: 'Senior Care Solution Overview', desc: 'Non-intrusive monitoring', icon: '🏥' },
+    { name: 'Industrial IoT Datasheet', desc: 'Submetering & SCADA integration', icon: '🏭' },
+  ]},
+];
 ---
 
 <PageLayout
@@ -8,35 +29,52 @@ import PageLayout from '~/layouts/PageLayout.astro';
     description: 'Download product brochures, datasheets, and technical documentation.',
   }}
 >
-  <section class="py-12">
+  <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">Brochures & Datasheets</h1>
-      <p class="text-lg text-muted dark:text-slate-400 mb-8 max-w-2xl">
-        Download product brochures, solution PDFs, and technical datasheets. Enter your work email to unlock downloads.
+      <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">Brochures & Datasheets</h1>
+      <p class="text-lg text-muted dark:text-slate-400 mb-10 max-w-2xl">
+        Download product brochures, solution briefs, and technical datasheets. Enter your business email to unlock each download.
       </p>
 
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {
-          ['Corporate Brochure', 'Smart Hotel Solution', 'Smart Meter Datasheet', 'User Manual'].map((item) => (
-            <div class="p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center">
-              <div class="text-4xl mb-3">📄</div>
-              <h3 class="font-semibold text-sm text-default dark:text-slate-200 mb-1">{item}</h3>
-              <p class="text-xs text-muted dark:text-slate-500 mb-4">PDF • 2.4 MB</p>
-              <button
-                type="button"
-                onclick="window.__openLeadModal?.({ scenario: 'pdf', pdfUrl: '#' })"
-                class="px-4 py-2 rounded-lg text-xs font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
-              >
-                Download
-              </button>
+      {
+        brochures.map((section) => (
+          <div class="mb-12">
+            <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-4 pb-2 border-b border-gray-200 dark:border-slate-700">
+              {section.category}
+            </h2>
+            <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {section.items.map((item) => (
+                <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:shadow-md transition-shadow flex items-start gap-4">
+                  <span class="text-3xl flex-shrink-0">{item.icon}</span>
+                  <div class="min-w-0 flex-1">
+                    <h3 class="font-semibold text-sm text-default dark:text-slate-200 mb-0.5 truncate">{item.name}</h3>
+                    <p class="text-xs text-muted dark:text-slate-500 mb-3">{item.desc}</p>
+                    <button
+                      type="button"
+                      onclick={`window.__openLeadModal({ scenario: 'pdf', productName: '${item.name}' })`}
+                      class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                      </svg>
+                      Download PDF
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))
-        }
-      </div>
+          </div>
+        ))
+      }
 
-      <div class="mt-8 text-center text-sm text-muted dark:text-slate-500">
-        More resources coming soon. <a href="/contact-sales" class="text-primary hover:underline">Contact sales</a> for custom
-        documentation.
+      <div class="mt-12 p-8 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/10 text-center">
+        <h2 class="text-xl font-bold mb-2 text-default dark:text-slate-100">Need custom documentation?</h2>
+        <p class="text-muted dark:text-slate-400 mb-4 text-sm">
+          We can provide customized datasheets, CAD drawings, or API documentation for your integration needs.
+        </p>
+        <a href="/contact-sales" class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+          Contact Sales →
+        </a>
       </div>
     </div>
   </section>
