@@ -1,5 +1,5 @@
 site:
-  name: OWON Technology
+  name: XIAMEN OWON TECHNOLOGY CO.,LTD
   site: 'https://my-company-site.onelzy.workers.dev'
   base: '/'
   trailingSlash: false
@@ -10,7 +10,7 @@ site:
 metadata:
   title:
     default: OWON Technology — Smart Energy Solutions
-    template: '%s | OWON Technology'
+    template: '%s | XIAMEN OWON TECHNOLOGY CO.,LTD'
   description: 'OWON Technology — Professional smart energy solutions provider. Smart meters, thermostats, senior care devices, hotel control systems, and IoT platforms for B2B customers worldwide.'
   robots:
     index: true

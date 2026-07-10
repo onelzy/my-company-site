@@ -106,6 +106,6 @@ export const footerData = {
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    © ${new Date().getFullYear()} OWON Technology Inc. All rights reserved.
+    © ${new Date().getFullYear()} XIAMEN OWON TECHNOLOGY CO.,LTD. All rights reserved.
   `,
 };
