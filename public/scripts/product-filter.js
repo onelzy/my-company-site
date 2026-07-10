@@ -35,6 +35,9 @@
   // ===========================================================================
   let currentDim = 'type';
 
+  /** Search term for text filtering */
+  let searchTerm = '';
+
   /** { type: string|null, subtype: string|null, sol: string|null, subsol: string|null, comm: Set<string> } */
   const filterState = {
     type: null,
@@ -160,6 +163,13 @@
     return true;
   }
 
+  /** Check if card matches search term */
+  function cardMatchesSearch(card) {
+    if (!searchTerm) return true;
+    const text = (card.textContent || '').toLowerCase();
+    return text.includes(searchTerm);
+  }
+
   // ===========================================================================
   // Apply filters to DOM
   // ===========================================================================
@@ -168,7 +178,7 @@
     let visible = 0;
 
     for (const card of cards) {
-      if (cardMatches(card)) {
+      if (cardMatches(card) && cardMatchesSearch(card)) {
         card.classList.remove('hidden');
         visible++;
       } else {
@@ -525,6 +535,19 @@
         if (sf) sf.classList.add('hidden');
       }
     });
+
+    // Product search input
+    var searchInput = $('#productSearch');
+    if (searchInput) {
+      var debounceTimer;
+      searchInput.addEventListener('input', function () {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(function () {
+          searchTerm = (searchInput.value || '').trim().toLowerCase();
+          applyFilters();
+        }, 200);
+      });
+    }
   }
 
   // ===========================================================================

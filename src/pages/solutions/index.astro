@@ -42,23 +42,52 @@ const preparedSolutions = solutions.map((s) => {
 });
 ---
 
-<PageLayout metadata={{ title: 'Solutions — OWON Technology', description: 'Industry-specific IoT solutions.' }}>
+<PageLayout metadata={{ title: 'Use Cases — OWON Technology', description: 'Industry-specific IoT use cases.' }}>
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">Solutions</h1>
-      <p class="text-lg text-muted dark:text-slate-400 mb-8 max-w-2xl">
-        Industry-proven IoT solutions built on OWON's hardware and software stack.
-      </p>
+      <h1 class="text-3xl font-bold sm:text-4xl mb-6 text-default dark:text-slate-100">Use Cases</h1>
 
-      <div id="solFilterRow" class="flex flex-wrap gap-3 mb-10">
+      <!-- Search -->
+      <div class="mb-6">
+        <div class="relative max-w-md">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg
+            >
+          </span>
+          <input
+            type="text"
+            id="solutionSearch"
+            placeholder="Search use cases by industry, keyword..."
+            class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow"
+          />
+        </div>
+      </div>
+
+      <!-- Count -->
+      <span class="text-sm text-muted dark:text-slate-400 mb-4 block">
+        Showing <strong id="solutionCount" class="text-default dark:text-slate-200 font-semibold"
+          >{preparedSolutions.length}</strong
+        > use cases
+      </span>
+
+      <!-- Filters -->
+      <div class="flex items-center gap-2 flex-wrap mb-6" id="industryFilters">
+        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0"
+          >Industry:</span
+        >
         <button
-          class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all bg-primary text-primary-foreground active"
-          data-industry="">All Solutions</button
+          class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-primary text-primary-foreground border border-primary active"
+          data-industry="">All</button
         >
         {
           industries.map((ind) => (
             <button
-              class="sol-filter-chip px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all border border-gray-300 dark:border-slate-600 text-gray-600 dark:text-slate-400 hover:border-primary dark:hover:border-primary hover:text-primary"
+              class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary"
               data-industry={ind.value}
             >
               {ind.label}
@@ -72,7 +101,7 @@ const preparedSolutions = solutions.map((s) => {
           preparedSolutions.map((s) => (
             <a
               href={`/solutions/${s.slug}`}
-              class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
+              class="solution-card group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
               data-industry={s.industry || ''}
             >
               <div class="h-48 bg-gray-100 dark:bg-slate-700 overflow-hidden relative flex items-center justify-center text-5xl">
@@ -118,19 +147,4 @@ const preparedSolutions = solutions.map((s) => {
   </section>
 </PageLayout>
 
-<script is:inline>
-  document.getElementById('solFilterRow')?.addEventListener('click', (e) => {
-    const chip = e.target?.closest?.('.sol-filter-chip');
-    if (!chip) return;
-    document.querySelectorAll('.sol-filter-chip').forEach((c) => {
-      c.classList.remove('active', 'bg-primary', 'text-primary-foreground');
-      c.classList.add('border', 'text-gray-600');
-    });
-    chip.classList.add('active', 'bg-primary', 'text-primary-foreground');
-    chip.classList.remove('border', 'text-gray-600');
-    const industry = chip.dataset.industry || '';
-    document.querySelectorAll('#solGrid > a').forEach((card) => {
-      card.style.display = !industry || card.dataset.industry === industry ? '' : 'none';
-    });
-  });
-</script>
+<script is:inline src="/scripts/solution-filter.js"></script>
