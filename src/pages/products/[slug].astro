@@ -79,7 +79,7 @@ const productSchema = {
   description: metaDescription,
   sku: model || product.slug,
   brand: { '@type': 'Brand', name: 'OWON Technology' },
-  ...(hasImage && { image: `${Astro.url.origin}${imageSrc}` }),
+  ...(hasImage && { image: `${Astro.url.origin}${images[0]}` }),
   offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
 };
 
