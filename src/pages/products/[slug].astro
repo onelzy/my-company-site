@@ -14,7 +14,10 @@ import { products as rawProducts } from '~/data/products';
 export const prerender = false;
 
 const { slug } = Astro.params;
-const entry = rawProducts.find((p) => p.slug === slug);
+const entry = rawProducts.find((p) => {
+  const dataSlug = (p.data as Record<string, unknown>).slug as { name?: string; slug?: string } | undefined;
+  return p.slug === slug || dataSlug?.slug === slug;
+});
 if (!entry) return Astro.redirect('/404', 302);
 
 const allProducts = rawProducts.map((p) => ({
