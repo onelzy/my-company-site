@@ -93,11 +93,58 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: typeLabel ? 4 : 3, name },
   ],
 };
----
 
+const faqItems = (() => {
+  const faqs: Record<string, Array<{q:string; a:string}>> = {
+    'smart-meters': [
+      {q:'What communication protocols are supported?', a:'OWON smart meters support MQTT, Modbus RTU/TCP, ZigBee 3.0, WiFi, and 4G depending on the model.'},
+      {q:'What is the accuracy class?', a:'Most OWON meters achieve Class 1.0 or Class 0.5S accuracy, compliant with IEC 62053-21/22 standards.'},
+      {q:'Can these meters integrate with existing BMS/EMS?', a:'Yes. Modbus TCP/RTU and MQTT support all major building and energy management systems.'},
+      {q:'Is cloud connectivity required?', a:'No. OWON meters support fully local operation. Cloud connectivity is optional via EdgeEco platform.'},
+    ],
+    'thermostats': [
+      {q:'Which HVAC systems are compatible?', a:'OWON thermostats work with water-based heating/cooling, fan coil units, heat pumps, and boiler systems.'},
+      {q:'Can I control multiple zones?', a:'Yes. Each thermostat controls its zone independently with unified multi-zone app management.'},
+      {q:'Does it support schedules and automation?', a:'Yes. Daily/weekly schedules, geo-fencing, scenes, and MQTT-based custom automation.'},
+      {q:'What happens if WiFi goes down?', a:'Local schedules and manual control continue to work. Settings are stored on-device.'},
+    ],
+    'senior-care': [
+      {q:'How does non-contact monitoring work?', a:'mmWave radar and passive infrared detect presence, breathing, heart rate, and movement without cameras or wearables.'},
+      {q:'Is the system privacy-compliant?', a:'Yes. No cameras or microphones. Radar-based sensing is fully GDPR and HIPAA compatible.'},
+      {q:'How are alerts delivered?', a:'Push notification, SMS, email, and phone call to designated caregivers with multi-level escalation.'},
+      {q:'Can I install it myself?', a:'Devices are plug-and-play. Professional installation recommended for multi-room and nurse call integration.'},
+    ],
+    'hotel-control': [
+      {q:'Does installation require rewiring?', a:'Most devices are wireless and mount on existing wall boxes. No new wiring needed.'},
+      {q:'Can it integrate with existing PMS systems?', a:'Yes. APIs and MQTT bridges for major Property Management Systems.'},
+      {q:'How many rooms can one system manage?', a:'EdgeEco scales to thousands of rooms. ZigBee mesh supports 200+ devices per coordinator.'},
+      {q:'Is there a guest-facing app?', a:'Yes. Branded mobile app or in-room touch panel for guest control of temperature, lighting, and services.'},
+    ],
+    'software-platforms': [
+      {q:'Is the platform white-label ready?', a:'Yes. Custom branding, domains, white-label apps, and tailored UI for OEM/ODM partners.'},
+      {q:'What APIs are available?', a:'REST API, MQTT broker, WebSocket streaming, webhooks. SDKs for Python, Node.js, Java, embedded C.'},
+      {q:'Is it cloud-based or on-premise?', a:'Both. EdgeEco Cloud (multi-tenant SaaS) and EdgeEco On-Premise for air-gapped environments.'},
+      {q:'Can I manage devices from other brands?', a:'Yes. Multi-vendor device management via MQTT and Modbus. Contact us for specific compatibility.'},
+    ],
+  };
+  const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
+  return (faqs[currentType] || faqs['smart-meters']).map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  }));
+})();
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems,
+};
+---
 <PageLayout metadata={{ title: metaTitle, description: metaDescription }}>
   <script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <nav class="mb-8 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
@@ -280,6 +327,179 @@ const breadcrumbSchema = {
             )
           }
         </section>
+        <!-- Key Benefits -->
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-6 pb-2 border-b border-gray-200 dark:border-slate-700">Key Benefits</h2>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {
+              (() => {
+                const benefits = {
+                  'smart-meters': [
+                    {icon:'📊', title:'Real-Time Monitoring', desc:'Track energy consumption with ±0.5% accuracy across single and three-phase circuits.'},
+                    {icon:'💰', title:'Cost Allocation', desc:'Sub-meter individual tenants, departments, or equipment with granular kWh data.'},
+                    {icon:'🔌', title:'Easy Integration', desc:'MQTT, Modbus, ZigBee, WiFi, and 4G — plug into any EMS or BMS platform.'},
+                    {icon:'🛡️', title:'Certified Quality', desc:'CE, FCC, RoHS certified. Built for commercial and industrial environments.'},
+                  ],
+                  'thermostats': [
+                    {icon:'🎯', title:'Precision Control', desc:'±0.5°C accuracy with PID algorithms for consistent comfort and efficiency.'},
+                    {icon:'⚡', title:'Energy Savings', desc:'Smart scheduling and occupancy detection reduce HVAC energy use by up to 30%.'},
+                    {icon:'📱', title:'Remote Management', desc:'Control and monitor temperature zones from anywhere via app or web dashboard.'},
+                    {icon:'🔄', title:'Open Protocol', desc:'ZigBee, WiFi, Modbus — works with any building management system.'},
+                  ],
+                  'senior-care': [
+                    {icon:'🫀', title:'Non-Contact Monitoring', desc:'Detect heart rate, breathing, and sleep patterns without wearables or cameras.'},
+                    {icon:'🚨', title:'Instant Alerts', desc:'Push notifications to caregivers and family within seconds of detected anomalies.'},
+                    {icon:'📈', title:'Health Trends', desc:'Long-term data tracking for proactive care and early intervention.'},
+                    {icon:'🔒', title:'Privacy First', desc:'No cameras, no audio recording — radar-based sensing protects resident dignity.'},
+                  ],
+                  'hotel-control': [
+                    {icon:'🛏️', title:'Guest Comfort', desc:'In-room thermostats, lighting panels, and door signage for a premium experience.'},
+                    {icon:'💡', title:'Energy Efficiency', desc:'Auto-off when rooms are vacant. Reduce energy costs by 25-40%.'},
+                    {icon:'🏨', title:'Central Management', desc:'Monitor and control hundreds of rooms from a single dashboard.'},
+                    {icon:'🔧', title:'Easy Retrofit', desc:'Wireless installation on existing wiring. No structural changes needed.'},
+                  ],
+                  'software-platforms': [
+                    {icon:'☁️', title:'Cloud-Native', desc:'Scalable IoT platform with multi-tenant architecture for B2B deployments.'},
+                    {icon:'🔗', title:'Open API', desc:'RESTful APIs, MQTT bridges, and WebSocket streaming for seamless integration.'},
+                    {icon:'📊', title:'Data Analytics', desc:'Real-time dashboards, historical reports, and exportable data for business intelligence.'},
+                    {icon:'🎨', title:'White-Label Ready', desc:'Custom branding, custom domains, and tailored UI for your business identity.'},
+                  ],
+                };
+                const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
+                const items = benefits[currentType] || benefits['smart-meters'];
+                return items.map(b => (
+                  <div class="group p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all">
+                    <span class="text-2xl mb-3 block">{b.icon}</span>
+                    <h4 class="font-semibold text-sm text-default dark:text-slate-200 mb-1.5">{b.title}</h4>
+                    <p class="text-xs text-muted dark:text-slate-400 leading-relaxed">{b.desc}</p>
+                  </div>
+                ));
+              })()
+            }
+          </div>
+        </section>
+
+        <!-- Ideal For -->
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-2 pb-2 border-b border-gray-200 dark:border-slate-700">Ideal For</h2>
+          <p class="text-sm text-muted dark:text-slate-400 mb-6">Common deployment scenarios where {name} delivers the most value.</p>
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {
+              (() => {
+                const scenarios = {
+                  'smart-meters': [
+                    {icon:'🏢', title:'Commercial Buildings', desc:'Sub-meter HVAC, lighting, and plug loads across tenant spaces for accurate billing.'},
+                    {icon:'🏭', title:'Industrial Facilities', desc:'Monitor production line energy consumption, identify waste, and optimize operations.'},
+                    {icon:'☀️', title:'Solar & Storage', desc:'Track generation, consumption, and grid export with bi-directional metering.'},
+                    {icon:'🏗️', title:'New Construction', desc:'Meet energy code requirements with integrated sub-metering from day one.'},
+                    {icon:'🔋', title:'EV Charging', desc:'Monitor EV charger circuits for usage-based billing and load management.'},
+                    {icon:'🏠', title:'Multi-Tenant Residential', desc:'Fair, transparent energy billing for apartments and condominiums.'},
+                  ],
+                  'thermostats': [
+                    {icon:'🏨', title:'Hotels & Resorts', desc:'In-room climate control with occupancy-based setbacks for guest comfort and savings.'},
+                    {icon:'🏢', title:'Office Buildings', desc:'Zone-based temperature management with schedules aligned to business hours.'},
+                    {icon:'🏥', title:'Healthcare', desc:'Precise temperature control for patient rooms, labs, and pharmaceutical storage.'},
+                    {icon:'🏫', title:'Schools', desc:'Classroom comfort with automatic setbacks during holidays and weekends.'},
+                    {icon:'🏠', title:'Smart Apartments', desc:'Individual unit control with central management for property operators.'},
+                    {icon:'🏬', title:'Retail Spaces', desc:'Maintain optimal shopping environment while reducing HVAC costs.'},
+                  ],
+                  'senior-care': [
+                    {icon:'🏥', title:'Nursing Homes', desc:'24/7 non-contact monitoring for fall detection, sleep quality, and vital signs.'},
+                    {icon:'🏠', title:'Aging in Place', desc:'Enable seniors to live independently with remote family monitoring and alerts.'},
+                    {icon:'🏨', title:'Assisted Living', desc:'Staff alerts for emergencies, wander detection, and health trend reports.'},
+                    {icon:'📱', title:'Telehealth Integration', desc:'Share health data with doctors for remote consultations and early intervention.'},
+                    {icon:'❤️', title:'Memory Care', desc:'Safe zone monitoring and instant alerts for residents with cognitive conditions.'},
+                    {icon:'🏘️', title:'Senior Communities', desc:'Community-wide safety net with centralized monitoring dashboard.'},
+                  ],
+                  'hotel-control': [
+                    {icon:'🏨', title:'Boutique Hotels', desc:'Elevate guest experience with smart room controls at an accessible price point.'},
+                    {icon:'🏢', title:'Hotel Chains', desc:'Standardize room automation across properties with centralized management.'},
+                    {icon:'🏖️', title:'Resorts', desc:'Scene-based controls for lighting, climate, and curtains tied to guest preferences.'},
+                    {icon:'💼', title:'Business Hotels', desc:'Energy-saving occupancy detection with seamless guest check-in/out integration.'},
+                    {icon:'🛎️', title:'Serviced Apartments', desc:'Long-stay comfort with individual climate control and usage-based billing.'},
+                    {icon:'🏛️', title:'Heritage Buildings', desc:'Wireless retrofit without structural changes — preserve architecture, add smarts.'},
+                  ],
+                  'software-platforms': [
+                    {icon:'🏭', title:'Equipment Manufacturers', desc:'White-label your own IoT platform with custom branding and API access.'},
+                    {icon:'🏢', title:'Building Operators', desc:'Unified dashboard for energy, HVAC, lighting, and security across portfolios.'},
+                    {icon:'🔌', title:'System Integrators', desc:'Open APIs and MQTT bridges to connect OWON hardware with third-party systems.'},
+                    {icon:'📊', title:'Energy Consultants', desc:'Data analytics and export for energy audits, ESG reporting, and compliance.'},
+                    {icon:'🏗️', title:'Property Developers', desc:'Pre-integrated smart building platform for new construction projects.'},
+                    {icon:'🌐', title:'Smart City Projects', desc:'Scalable multi-tenant platform for city-wide IoT device management.'},
+                  ],
+                };
+                const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
+                const items = scenarios[currentType] || scenarios['smart-meters'];
+                return items.slice(0, 6).map(s => (
+                  <div class="flex gap-3 p-4 rounded-xl border border-gray-100 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                    <span class="text-xl shrink-0 mt-0.5">{s.icon}</span>
+                    <div>
+                      <h4 class="font-semibold text-sm text-default dark:text-slate-200">{s.title}</h4>
+                      <p class="text-xs text-muted dark:text-slate-400 mt-0.5 leading-relaxed">{s.desc}</p>
+                    </div>
+                  </div>
+                ));
+              })()
+            }
+          </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="mt-12">
+          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-6 pb-2 border-b border-gray-200 dark:border-slate-700">
+            Frequently Asked Questions
+          </h2>
+          <div class="space-y-3">
+            {
+              (() => {
+                const faqs = {
+                  'smart-meters': [
+                    {q:'What communication protocols are supported?', a:'OWON smart meters support MQTT, Modbus RTU/TCP, ZigBee 3.0, WiFi, and 4G depending on the model. Multi-protocol models can operate on multiple protocols simultaneously.'},
+                    {q:'What is the meter accuracy class?', a:'Most OWON meters achieve Class 1.0 or Class 0.5S accuracy (±0.5%), compliant with IEC 62053-21/22 standards. Check individual product specifications for exact ratings.'},
+                    {q:'Can these meters integrate with existing BMS/EMS?', a:'Yes. With Modbus TCP/RTU and MQTT support, OWON meters integrate with all major building management and energy management systems. We also provide SDKs for custom integration.'},
+                    {q:'Is cloud connectivity required?', a:'No. OWON meters support fully local operation via Modbus and MQTT. Cloud connectivity is optional — available for remote monitoring via our EdgeEco platform.'},
+                  ],
+                  'thermostats': [
+                    {q:'Which HVAC systems are compatible?', a:'OWON thermostats work with water-based heating/cooling, fan coil units, heat pumps, and boiler systems. Check the specific model for voltage and wiring requirements.'},
+                    {q:'Can I control multiple zones?', a:'Yes. Each thermostat controls its zone independently. The OWON app or web dashboard provides unified multi-zone management for building-wide control.'},
+                    {q:'Does it support schedules and automation?', a:'Yes. Set daily/weekly schedules, geo-fencing triggers, and scene automations. Integrate with Home Assistant, Node-RED, or any MQTT-based platform for advanced logic.'},
+                    {q:'What happens if WiFi goes down?', a:'Local schedules and manual control continue to work. ZigBee models remain operational via the coordinator. Settings are stored on-device.'},
+                  ],
+                  'senior-care': [
+                    {q:'How does non-contact monitoring work?', a:'OWON senior care devices use mmWave radar technology and passive infrared to detect presence, breathing, heart rate, and movement — without cameras or wearable devices.'},
+                    {q:'Is the system privacy-compliant?', a:'Yes. No cameras, no microphones, no wearables. The system detects vital signs and movement patterns using radar and infrared — fully GDPR and HIPAA compatible.'},
+                    {q:'How are alerts delivered?', a:'Alerts are sent via push notification, SMS, email, and/or phone call to designated caregivers and family members. The AiJuan platform supports multi-level escalation.'},
+                    {q:'Can I install it myself?', a:'Devices are plug-and-play for basic setup. Professional installation is recommended for multi-room coverage and integration with nurse call systems.'},
+                  ],
+                  'hotel-control': [
+                    {q:'Does installation require rewiring?', a:'Most OWON hotel devices are wireless (ZigBee/WiFi) and mount on existing wall boxes. No new wiring is needed for standard installations.'},
+                    {q:'Can it integrate with existing PMS systems?', a:'Yes. OWON provides APIs and MQTT bridges for integration with major Property Management Systems (PMS). Custom integration support is available.'},
+                    {q:'How many rooms can one system manage?', a:'The EdgeEco platform scales to thousands of rooms. ZigBee mesh networks support 200+ devices per coordinator, with multiple coordinators for larger properties.'},
+                    {q:'Is there a guest-facing app?', a:'Yes. Guests can control room temperature, lighting, and services via a branded mobile app or in-room touch panel.'},
+                  ],
+                  'software-platforms': [
+                    {q:'Is the platform white-label ready?', a:'Yes. EdgeEco supports custom branding, custom domains, white-label mobile apps, and tailored UI for OEM/ODM partners.'},
+                    {q:'What APIs are available?', a:'Full REST API, MQTT broker integration, WebSocket streaming, and webhook support. SDKs available for Python, Node.js, Java, and embedded C.'},
+                    {q:'Is it cloud-based or on-premise?', a:'Both. EdgeEco Cloud is a multi-tenant SaaS platform. EdgeEco On-Premise can be deployed on your own servers for air-gapped or regulated environments.'},
+                    {q:'Can I manage devices from other brands?', a:'EdgeEco supports multi-vendor device management via MQTT and Modbus. Contact us for specific third-party device compatibility.'},
+                  ],
+                };
+                const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
+                const items = faqs[currentType] || faqs['smart-meters'];
+                return items.map((faq) => (
+                  <details class="group rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
+                    <summary class="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/60 transition-colors select-none">
+                      <span class="font-medium text-sm text-default dark:text-slate-200 pr-4">{faq.q}</span>
+                      <svg class="w-4 h-4 text-muted dark:text-slate-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </summary>
+                    <div class="px-5 pb-4 text-sm text-muted dark:text-slate-400 leading-relaxed border-t border-gray-100 dark:border-slate-700 pt-3">{faq.a}</div>
+                  </details>
+                ));
+              })()
+            }
+          </div>
+        </section>
+
         {
           relatedProducts.length > 0 && (
             <section>
@@ -351,6 +571,7 @@ const breadcrumbSchema = {
 
 {galleryMode && (
   <script is:inline>
+    /* eslint-disable no-var */
     (function () {
       var thumbs = document.querySelectorAll('#product-gallery-thumbs button');
       var mainImg = document.querySelector('.aspect-square img');
