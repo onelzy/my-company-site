@@ -1,4 +1,14 @@
-dist
-node_modules
-.github
-.changeset
+# External plan files with non-standard syntax
+.hermes/
+
+# Template demo files with frontmatter Prettier can't parse
+src/data/post/markdown-elements-demo-post.mdx
+
+# Auto-generated data files
+src/data/products.ts
+src/data/solutions.ts
+
+# is:inline script blocks in .astro — Prettier AST bug (var workaround)
+# Brackets need explicit escaping in glob patterns
+src/pages/products/\[slug\].astro
+src/pages/solutions/\[slug\].astro
