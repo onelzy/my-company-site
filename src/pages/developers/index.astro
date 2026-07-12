@@ -1,6 +1,5 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
 ---
 
 <PageLayout
@@ -9,12 +8,30 @@ import Hero2 from '~/components/widgets/Hero2.astro';
     description: 'API documentation, SDKs, MQTT broker access, and integration guides for OWON IoT devices.',
   }}
 >
-  <!-- Hero -->
-  <Hero2
-    title="Developer Center"
-    subtitle="Build with OWON"
-    tagline="Integrate our IoT devices into your platform — REST APIs, MQTT data streams, SDKs in Python, Node.js, Java, and C#."
-  />
+  <!-- Header -->
+  <section class="py-8 lg:py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl font-bold sm:text-4xl text-default dark:text-slate-100">Developers</h1>
+      <p class="mt-2 text-muted dark:text-slate-400 text-sm">REST APIs, MQTT streams, SDKs — integrate OWON devices into your platform.</p>
+
+      <!-- Search -->
+      <div class="mt-6 mb-8">
+        <div class="relative max-w-md">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg
+            >
+          </span>
+          <input
+            type="text"
+            id="devSearch"
+            placeholder="Search docs, APIs, SDKs..."
+            class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Content with Sidebar -->
   <section class="py-12">
@@ -66,7 +83,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
         <!-- Content -->
         <div class="flex-1 min-w-0">
           <!-- Architecture Overview -->
-          <section class="mb-12">
+          <section class="mb-12" data-dev-section>
             <h2 class="text-2xl font-bold mb-10 text-default dark:text-slate-100">Integration Architecture</h2>
             <div class="grid gap-6 sm:grid-cols-4 text-center">
               <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
@@ -101,12 +118,13 @@ import Hero2 from '~/components/widgets/Hero2.astro';
           </section>
 
           <!-- Quick Start Cards -->
-          <section class="mb-12">
+          <section class="mb-12" data-dev-section>
             <h2 class="text-2xl font-bold text-center mb-10 text-default dark:text-slate-100">Quick Start</h2>
             <div class="grid gap-6 sm:grid-cols-4 text-left">
               <a
                 href="/developers/mqtt"
                 class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+                data-dev-card
               >
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">📡</div>
@@ -125,6 +143,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
               <a
                 href="/developers/api"
                 class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+                data-dev-card
               >
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">🔌</div>
@@ -143,6 +162,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
               <a
                 href="/developers/zigbee"
                 class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+                data-dev-card
               >
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">🔷</div>
@@ -161,6 +181,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
               <a
                 href="/developers/ha"
                 class="group block p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-primary/40 dark:hover:border-primary/40 transition-colors"
+                data-dev-card
               >
                 <div class="flex items-center gap-3 mb-3">
                   <div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-xl">🏠</div>
@@ -179,7 +200,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
           </section>
 
           <!-- MQTT Broker Info -->
-          <section class="mb-12">
+          <section class="mb-12" data-dev-section>
             <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">MQTT Broker Access</h2>
             <div
               class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 font-mono text-sm"
@@ -211,7 +232,7 @@ import Hero2 from '~/components/widgets/Hero2.astro';
           </section>
 
           <!-- Firmware Updates -->
-          <section class="mb-12">
+          <section class="mb-12" data-dev-section>
             <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">OTA Firmware Updates</h2>
             <p class="text-muted dark:text-slate-400 mb-6">
               All OWON devices support Over-The-Air firmware updates via MQTT or HTTP. Use our REST API to trigger
@@ -229,3 +250,39 @@ import Hero2 from '~/components/widgets/Hero2.astro';
     </div>
   </section>
 </PageLayout>
+
+<script is:inline>
+  (function() {
+    var input = document.getElementById('devSearch');
+    if (!input) return;
+    input.addEventListener('input', function() {
+      var q = this.value.toLowerCase().trim();
+      // Filter sidebar nav links
+      var navLinks = document.querySelectorAll('nav a[href^="/developers"]');
+      navLinks.forEach(function(a) {
+        var text = (a.textContent || '').toLowerCase();
+        if (!q || text.includes(q)) {
+          a.style.display = '';
+        } else {
+          a.style.display = 'none';
+        }
+      });
+      // Filter Quick Start cards
+      var cards = document.querySelectorAll('[data-dev-card]');
+      cards.forEach(function(card) {
+        var text = (card.textContent || '').toLowerCase();
+        if (!q || text.includes(q)) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      // Hide empty sections
+      var sections = document.querySelectorAll('[data-dev-section]');
+      sections.forEach(function(sec) {
+        var visible = sec.querySelectorAll('[data-dev-card]:not([style*="display: none"])').length;
+        sec.style.display = visible > 0 ? '' : 'none';
+      });
+    });
+  })();
+</script>
