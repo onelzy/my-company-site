@@ -141,11 +141,27 @@ const sortedGroups = [...groupedProducts.entries()].sort(
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
         {
           [
-            {icon:'🔌', title:'Plug & Play Integration', desc:'Devices auto-discovered. MQTT, Modbus, ZigBee — connect in minutes, not days.'},
-            {icon:'🔒', title:'Local-First Architecture', desc:'No cloud dependency. All logic runs on-device or on your local network.'},
-            {icon:'📐', title:'Retrofit-Ready', desc:'Wireless installation on existing infrastructure. No rewiring, no downtime.'},
-            {icon:'📊', title:'Open Data Access', desc:'Full REST API, real-time WebSocket streaming, and exportable analytics.'},
-          ].map(card => (
+            {
+              icon: '🔌',
+              title: 'Plug & Play Integration',
+              desc: 'Devices auto-discovered. MQTT, Modbus, ZigBee — connect in minutes, not days.',
+            },
+            {
+              icon: '🔒',
+              title: 'Local-First Architecture',
+              desc: 'No cloud dependency. All logic runs on-device or on your local network.',
+            },
+            {
+              icon: '📐',
+              title: 'Retrofit-Ready',
+              desc: 'Wireless installation on existing infrastructure. No rewiring, no downtime.',
+            },
+            {
+              icon: '📊',
+              title: 'Open Data Access',
+              desc: 'Full REST API, real-time WebSocket streaming, and exportable analytics.',
+            },
+          ].map((card) => (
             <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-center hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all">
               <span class="text-2xl mb-3 block">{card.icon}</span>
               <h4 class="font-semibold text-sm text-default dark:text-slate-200 mb-1.5">{card.title}</h4>
@@ -175,55 +191,67 @@ const sortedGroups = [...groupedProducts.entries()].sort(
           <section class="mt-16">
             <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">Products Used in This Solution</h2>
             <p class="text-muted dark:text-slate-400 mb-8 text-sm">
-              The following OWON products are part of the <strong class="text-default dark:text-slate-200">{title}</strong> solution stack.
+              The following OWON products are part of the{' '}
+              <strong class="text-default dark:text-slate-200">{title}</strong> solution stack.
             </p>
-            {
-              sortedGroups.map(([productType, products]) => (
-                <div class="mb-10">
-                  <h3 class="text-lg font-semibold mb-3 text-default dark:text-slate-200 flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
-                    {getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en')}
-                  </h3>
-                  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {products.map((p) => {
-                      const name = p.data.name as string || p.slug;
-                      const imageSrc = p.data.image as string | undefined;
-                      return (
-                        <a
-                          href={`/products/${p.slug}`}
-                          class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all"
+            {sortedGroups.map(([productType, products]) => (
+              <div class="mb-10">
+                <h3 class="text-lg font-semibold mb-3 text-default dark:text-slate-200 flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-primary inline-block" />
+                  {getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en')}
+                </h3>
+                <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {products.map((p) => {
+                    const name = (p.data.name as string) || p.slug;
+                    const imageSrc = p.data.image as string | undefined;
+                    return (
+                      <a
+                        href={`/products/${p.slug}`}
+                        class="group flex items-center gap-4 p-4 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all"
+                      >
+                        <div class="w-14 h-14 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden border border-gray-200 dark:border-slate-600">
+                          {imageSrc ? (
+                            <Image
+                              src={imageSrc}
+                              alt={name}
+                              width={56}
+                              height={56}
+                              class="w-full h-full object-contain p-1"
+                            />
+                          ) : (
+                            <span class="text-xl">
+                              {p.slug.startsWith('edgeeco')
+                                ? '☁️'
+                                : p.slug.startsWith('pc')
+                                  ? '⚡'
+                                  : p.slug.startsWith('pct')
+                                    ? '🌡️'
+                                    : '🛏️'}
+                            </span>
+                          )}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                          <h4 class="font-medium text-sm text-default dark:text-slate-200 group-hover:text-primary transition-colors truncate">
+                            {name}
+                          </h4>
+                          <p class="text-xs text-muted dark:text-slate-500 mt-0.5 line-clamp-1">
+                            {(p.data.model || '') as string}
+                          </p>
+                        </div>
+                        <svg
+                          class="w-4 h-4 text-gray-300 dark:text-slate-600 group-hover:text-primary transition-colors flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
                         >
-                          <div class="w-14 h-14 rounded-lg bg-gray-100 dark:bg-slate-700 flex items-center justify-center flex-shrink-0 overflow-hidden border border-gray-200 dark:border-slate-600">
-                            {imageSrc ? (
-                              <Image
-                                src={imageSrc}
-                                alt={name}
-                                width={56}
-                                height={56}
-                                class="w-full h-full object-contain p-1"
-                              />
-                            ) : (
-                              <span class="text-xl">{p.slug.startsWith('edgeeco') ? '☁️' : p.slug.startsWith('pc') ? '⚡' : p.slug.startsWith('pct') ? '🌡️' : '🛏️'}</span>
-                            )}
-                          </div>
-                          <div class="min-w-0 flex-1">
-                            <h4 class="font-medium text-sm text-default dark:text-slate-200 group-hover:text-primary transition-colors truncate">
-                              {name}
-                            </h4>
-                            <p class="text-xs text-muted dark:text-slate-500 mt-0.5 line-clamp-1">
-                              {(p.data.model || '') as string}
-                            </p>
-                          </div>
-                          <svg class="w-4 h-4 text-gray-300 dark:text-slate-600 group-hover:text-primary transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                          </svg>
-                        </a>
-                      );
-                    })}
-                  </div>
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    );
+                  })}
                 </div>
-              ))
-            }
+              </div>
+            ))}
           </section>
         )
       }
@@ -234,11 +262,23 @@ const sortedGroups = [...groupedProducts.entries()].sort(
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
           {
             [
-              {icon:'✅', title:'CE Certified', desc:'Meets EU safety, health, and environmental requirements.'},
-              {icon:'✅', title:'FCC Certified', desc:'Compliant with US Federal Communications Commission standards.'},
-              {icon:'♻️', title:'RoHS Compliant', desc:'Free of hazardous substances — environmentally responsible.'},
-              {icon:'🛡️', title:'2–5 Year Warranty', desc:'Industry-leading warranty with global technical support.'},
-            ].map(badge => (
+              { icon: '✅', title: 'CE Certified', desc: 'Meets EU safety, health, and environmental requirements.' },
+              {
+                icon: '✅',
+                title: 'FCC Certified',
+                desc: 'Compliant with US Federal Communications Commission standards.',
+              },
+              {
+                icon: '♻️',
+                title: 'RoHS Compliant',
+                desc: 'Free of hazardous substances — environmentally responsible.',
+              },
+              {
+                icon: '🛡️',
+                title: '2–5 Year Warranty',
+                desc: 'Industry-leading warranty with global technical support.',
+              },
+            ].map((badge) => (
               <div class="flex items-start gap-3 p-3">
                 <span class="text-lg shrink-0 mt-0.5">{badge.icon}</span>
                 <div>

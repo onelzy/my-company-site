@@ -10,8 +10,21 @@ export const headerData = {
       href: getPermalink('/products'),
     },
     {
-      text: 'Use Cases',
-      href: getPermalink('/solutions'),
+      text: 'Solutions',
+      links: [
+        {
+          text: 'Smart Hotel Energy Management',
+          href: getPermalink('/solutions/smart-hotel-energy-management'),
+        },
+        {
+          text: 'Industrial Energy Submetering',
+          href: getPermalink('/solutions/industrial-energy-submetering'),
+        },
+        {
+          text: 'Senior Care Monitoring',
+          href: getPermalink('/solutions/senior-care-monitoring'),
+        },
+      ],
     },
     {
       text: 'Blog',
@@ -84,7 +97,7 @@ export const footerData = {
       ],
     },
     {
-      title: 'Use Cases',
+      title: 'Solutions',
       links: [
         { text: 'Smart Hotels', href: getPermalink('/solutions') },
         { text: 'Senior Care', href: getPermalink('/solutions') },
