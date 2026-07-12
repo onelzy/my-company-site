@@ -19,32 +19,7 @@ export const headerData = {
     },
     {
       text: 'Developers',
-      links: [
-        {
-          text: 'Overview',
-          href: getPermalink('/developers'),
-        },
-        {
-          text: 'MQTT Quick Start',
-          href: getPermalink('/developers/mqtt'),
-        },
-        {
-          text: 'HTTP Server API',
-          href: getPermalink('/developers/api'),
-        },
-        {
-          text: 'ZigBee Clusters',
-          href: getPermalink('/developers/zigbee'),
-        },
-        {
-          text: 'Home Assistant & Z2M',
-          href: getPermalink('/developers/ha'),
-        },
-        {
-          text: 'SDKs & Libraries',
-          href: getPermalink('/developers/sdks'),
-        },
-      ],
+      href: getPermalink('/developers'),
     },
     {
       text: 'Resources',
