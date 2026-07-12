@@ -8,9 +8,6 @@ import PageLayout from '~/layouts/PageLayout.astro';
     description: 'API documentation, SDKs, MQTT broker access, and integration guides for OWON IoT devices.',
   }}
 >
-  <!-- Header -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 lg:pt-12"></div>
-
   <!-- Content with Sidebar -->
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -62,6 +59,12 @@ import PageLayout from '~/layouts/PageLayout.astro';
         <div class="flex-1 min-w-0">
           <!-- Architecture Overview -->
           <section class="mb-12" data-dev-section>
+            <!-- Breadcrumb -->
+            <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+              <a href="/" class="hover:text-primary transition-colors">Home</a>
+              <span class="mx-2">/</span>
+              <span class="text-default dark:text-slate-200">Developers</span>
+            </nav>
             <h2 class="text-2xl font-bold mb-10 text-default dark:text-slate-100">Integration Architecture</h2>
             <div class="grid gap-6 sm:grid-cols-4 text-center">
               <div class="p-6 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700">
