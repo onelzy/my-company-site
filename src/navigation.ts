@@ -23,16 +23,7 @@ export const headerData = {
     },
     {
       text: 'Resources',
-      links: [
-        {
-          text: 'Datasheets & Brochures',
-          href: getPermalink('/resources/brochures'),
-        },
-        {
-          text: 'Video Center',
-          href: getPermalink('/resources/videos'),
-        },
-      ],
+      href: getPermalink('/resources/brochures'),
     },
   ],
   actions: [
