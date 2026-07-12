@@ -16,7 +16,7 @@ const { slug } = Astro.params;
 const entry = rawSolutions.find((s) => s.slug === slug);
 if (!entry) return Astro.redirect('/404', 302);
 
-const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry } = entry.data as Record<
+const { title, subtitle, heroImage, diagramImage, stats, productLines, techSolution, industry, caseStudies } = entry.data as Record<
   string,
   unknown
 >;
@@ -252,6 +252,44 @@ const sortedGroups = [...groupedProducts.entries()].sort(
                 </div>
               </div>
             ))}
+          </section>
+        )
+      }
+
+      <!-- Related Case Studies -->
+      {
+        caseStudies && (caseStudies as Array<any>).length > 0 && (
+          <section class="mt-16">
+            <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">Related Case Studies</h2>
+            <p class="text-muted dark:text-slate-400 mb-8 text-sm">
+              Real-world deployments and results from our customers.
+            </p>
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {(caseStudies as Array<{ title: string; excerpt: string; image: string; blogSlug: string }>).map((cs) => (
+                <a
+                  href={`/blog/${cs.blogSlug}/`}
+                  class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
+                >
+                  <div class="h-40 bg-gray-100 dark:bg-slate-700 overflow-hidden relative">
+                    <img
+                      src={cs.image}
+                      alt={cs.title}
+                      class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="p-5">
+                    <h3 class="font-semibold text-sm text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
+                      {cs.title}
+                    </h3>
+                    <p class="text-xs text-muted dark:text-slate-400 line-clamp-2">{cs.excerpt}</p>
+                    <span class="inline-block mt-3 text-xs font-medium text-primary group-hover:underline">
+                      Read full case study →
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
           </section>
         )
       }

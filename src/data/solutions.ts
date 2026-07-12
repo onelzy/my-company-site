@@ -33,6 +33,14 @@ export const solutions: SolutionsEntry[] = [
           "label": "Data Points per Day"
         }
       ],
+      "caseStudies": [
+        {
+          "title": "Automotive Manufacturer Saves 15% with Per-Machine Submetering",
+          "excerpt": "An automotive parts factory deployed OWON's PC341 multi-circuit monitors for per-machine energy tracking, integrating with existing SCADA via MQTT.",
+          "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          "blogSlug": "industrial-energy-submetering-owon-case-study"
+        }
+      ],
       "language": "en"
     },
     "body": "## The Challenge\n\nIndustrial facilities consume massive amounts of energy but lack per-machine visibility. A single production line may have 20+ machines, each with different energy profiles. Without granular data, energy waste goes undetected and unmanaged.\n\n## Our Solution\n\nOWON's Industrial Energy Submetering system provides per-machine energy monitoring with MQTT integration into existing industrial control systems.\n\n### Product Stack\n- **PC341-3M16S Multi-Circuit Monitors** — one unit monitors up to 16 machines\n- **PC321-TY Smart Meters** — for main feeder monitoring\n- **EdgeEco IoT Platform** — enterprise analytics and reporting\n\n### How It Works\n\n1. **Per-Machine Monitoring** — PC341 sub-CTs clamp onto individual machine circuits\n2. **MQTT Data Stream** — real-time energy data published to MQTT broker\n3. **SCADA Integration** — MQTT data consumed by existing industrial control systems\n4. **EdgeEco Analytics** — trend analysis, anomaly detection, cost allocation by machine\n\n## Results\n\nIndustrial facilities using OWON's system report:\n- **15% reduction** in energy costs through targeted optimization\n- **ROI within 8 months** from eliminating energy waste\n- **99.9% uptime** with local data buffering during network outages\n\n## Architecture\n\n[Topology Diagram: Production Line Machines → PC341 CT clamps → MQTT Broker → SCADA/BMS + EdgeEco Cloud Analytics]\n\n---\n\n> \"We identified a single compressor running 24/7 due to a stuck valve — something we would have never found without per-machine monitoring. The system paid for itself in the first quarter.\"\n> — Chief Engineer, Automotive Parts Manufacturer"
@@ -60,6 +68,14 @@ export const solutions: SolutionsEntry[] = [
         {
           "value": "3 min",
           "label": "Average Response Time"
+        }
+      ],
+      "caseStudies": [
+        {
+          "title": "200-Bed Senior Care Facility Cuts Night Staff by 40%",
+          "excerpt": "A senior care facility deployed OWON's SPM-915 sleep monitors and AiJuan platform, achieving 90% alert accuracy and 3-minute emergency response times.",
+          "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          "blogSlug": "senior-care-monitoring-owon-case-study"
         }
       ],
       "language": "en"
@@ -90,6 +106,14 @@ export const solutions: SolutionsEntry[] = [
         {
           "value": "24/7",
           "label": "Real-time Monitoring"
+        }
+      ],
+      "caseStudies": [
+        {
+          "title": "How a 200-Room European Hotel Cut Energy Costs by 30%",
+          "excerpt": "A European hotel chain deployed OWON's PC341 multi-circuit monitors and PCT513 thermostats across 200 rooms, achieving 30% HVAC energy savings.",
+          "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          "blogSlug": "hotel-energy-savings-owon-case-study"
         }
       ],
       "language": "en"
