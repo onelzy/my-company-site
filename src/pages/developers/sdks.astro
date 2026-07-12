@@ -120,6 +120,59 @@ const mavenDep = `<dependency>
           >
         </nav>
         <div class="flex-1 min-w-0">
+          <!-- Breadcrumb -->
+          <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-primary transition-colors">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/developers" class="hover:text-primary transition-colors">Developers</a>
+            <span class="mx-2">/</span>
+            <span class="text-default dark:text-slate-200">SDKs &amp; Libraries</span>
+          </nav>
+          <!-- Mobile tabs -->
+          <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
+            <div class="flex gap-1.5 min-w-max pb-1">
+              <a
+                href="/developers"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >Overview</a
+              >
+              <a
+                href="/developers/mqtt"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >MQTT Quick Start</a
+              >
+              <a
+                href="/developers/api"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >HTTP Server API</a
+              >
+              <a
+                href="/developers/zigbee"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >ZigBee Clusters</a
+              >
+              <a
+                href="/developers/ha"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >HA &amp; Z2M</a
+              >
+              <a
+                href="/developers/sdks"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold transition-all bg-primary text-primary-foreground border border-primary shadow-sm"
+                >SDKs</a
+              >
+              <a
+                href="/developers/examples"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >Examples</a
+              >
+              <a
+                href="/developers/changelog"
+                class="inline-flex shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
+                >Changelog</a
+              >
+            </div>
+          </div>
           <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">SDKs & Libraries</h1>
           <p class="text-muted dark:text-slate-400 mb-8">
             Official client libraries for the OWON IoT Platform. All SDKs support MQTT and REST API access.
