@@ -11,20 +11,7 @@ export const headerData = {
     },
     {
       text: 'Solutions',
-      links: [
-        {
-          text: 'Smart Hotel Energy Management',
-          href: getPermalink('/solutions/smart-hotel-energy-management'),
-        },
-        {
-          text: 'Industrial Energy Submetering',
-          href: getPermalink('/solutions/industrial-energy-submetering'),
-        },
-        {
-          text: 'Senior Care Monitoring',
-          href: getPermalink('/solutions/senior-care-monitoring'),
-        },
-      ],
+      href: getPermalink('/solutions'),
     },
     {
       text: 'Blog',
