@@ -63,6 +63,9 @@ for (const p of relatedProducts) {
 const sortedGroups = [...groupedProducts.entries()].sort(
   ([a], [b]) => productTypeOrder.indexOf(a) - productTypeOrder.indexOf(b)
 );
+
+const relatedCaseStudies = (Array.isArray(caseStudies) ? caseStudies : []) as Array<{ title: string; excerpt: string; image: string; blogSlug: string }>;
+const hasCaseStudies = relatedCaseStudies.length > 0;
 ---
 
 <PageLayout metadata={{ title: `${title} — OWON Solutions`, description: subtitle || title }}>
@@ -258,14 +261,14 @@ const sortedGroups = [...groupedProducts.entries()].sort(
 
       <!-- Related Case Studies -->
       {
-        caseStudies && (caseStudies as Array<any>).length > 0 && (
+        hasCaseStudies && (
           <section class="mt-16">
             <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">Related Case Studies</h2>
             <p class="text-muted dark:text-slate-400 mb-8 text-sm">
               Real-world deployments and results from our customers.
             </p>
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {(caseStudies as Array<{ title: string; excerpt: string; image: string; blogSlug: string }>).map((cs) => (
+              {relatedCaseStudies.map((cs) => (
                 <a
                   href={`/blog/${cs.blogSlug}/`}
                   class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
