@@ -10,6 +10,7 @@ import ProductGrid from '~/components/products/ProductGrid.astro';
 import { getPermalink } from '~/utils/permalinks';
 import { products as rawProducts } from '~/data/products';
 import { SITE } from 'astrowind:config';
+import { getCollection } from 'astro:content';
 
 const metadata = {
   title: 'Smart IoT Devices for Your Industry — OWON Technology',
@@ -19,6 +20,8 @@ const metadata = {
 const productsUrl = getPermalink('/products');
 const contactUrl = getPermalink('/contact-sales');
 const developersUrl = getPermalink('/developers');
+const solutionsUrl = getPermalink('/solutions');
+const blogUrl = getPermalink('/blog');
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
 
 // Top 4 products for homepage
@@ -62,6 +65,30 @@ const productCategories = [
     href: getPermalink('/products/software-platforms'),
   },
 ];
+
+const industries = [
+  { icon: '🏨', title: 'Smart Hotels', desc: 'Guest room automation & energy management' },
+  { icon: '⚡', title: 'Energy Management', desc: 'Sub-metering, monitoring & analytics' },
+  { icon: '🏢', title: 'Smart Building', desc: 'HVAC, lighting & access control' },
+  { icon: '🏥', title: 'Senior Care', desc: 'Non-contact monitoring & safety alerts' },
+  { icon: '🏭', title: 'Industrial IoT', desc: 'Factory monitoring & predictive maintenance' },
+];
+
+// Latest blog posts for homepage
+const blogPosts = await getCollection('post');
+const latestPosts = blogPosts
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => {
+    const dateA = a.data.publishDate ? new Date(a.data.publishDate).getTime() : 0;
+    const dateB = b.data.publishDate ? new Date(b.data.publishDate).getTime() : 0;
+    return dateB - dateA;
+  })
+  .slice(0, 3);
+
+const formatDate = (date: Date | undefined): string => {
+  if (!date) return '';
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+};
 ---
 
 <Layout metadata={metadata}>
@@ -147,6 +174,47 @@ const productCategories = [
     </div>
   </section>
 
+  <!-- ===== Solutions by Industry ===== -->
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+        <div>
+          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
+          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
+            Tailored IoT solutions for every sector — from concept to deployment.
+          </p>
+        </div>
+        <a
+          href={solutionsUrl}
+          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+        >
+          View Solutions &rarr;
+        </a>
+      </div>
+      <div class="grid gap-6 grid-cols-2 lg:grid-cols-5">
+        {
+          industries.map((item) => (
+            <a
+              href={solutionsUrl}
+              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 p-6"
+            >
+              <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4">
+                <span class="text-2xl">{item.icon}</span>
+              </div>
+              <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
+                {item.title}
+              </h3>
+              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed flex-1">{item.desc}</p>
+              <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
+                Learn More &rarr;
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- ===== Featured Products ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/30">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -168,38 +236,236 @@ const productCategories = [
     </div>
   </section>
 
-  <!-- ===== Trust Bar ===== -->
-  <section class="py-14 bg-slate-900 dark:bg-slate-950">
+  <!-- ===== Company Overview ===== -->
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        <div class="flex items-start gap-4 text-white">
-          <span class="text-2xl shrink-0 mt-0.5">&#x2705;</span>
-          <div>
-            <h4 class="font-semibold text-white">CE / FCC / RoHS Certified</h4>
-            <p class="text-sm text-slate-400 mt-1">Meets regulatory requirements worldwide</p>
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="text-3xl font-bold text-default dark:text-slate-100 mb-6">Company Overview</h2>
+          <p class="text-muted dark:text-slate-400 leading-relaxed">
+            XIAMEN OWON TECHNOLOGY CO.,LTD is a leading IoT device manufacturer with 15+ years of R&D expertise. We
+            design, manufacture, and deliver smart energy meters, thermostats, and IoT solutions to B2B customers across
+            50+ countries.
+          </p>
+          <div class="grid grid-cols-4 gap-6 mt-8">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">1M+</div>
+              <div class="text-xs text-muted dark:text-slate-400 mt-1">Devices</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">50+</div>
+              <div class="text-xs text-muted dark:text-slate-400 mt-1">Countries</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">15+</div>
+              <div class="text-xs text-muted dark:text-slate-400 mt-1">Years R&amp;D</div>
+            </div>
+            <div class="text-center">
+              <div class="text-2xl font-bold text-primary">200+</div>
+              <div class="text-xs text-muted dark:text-slate-400 mt-1">Employees</div>
+            </div>
           </div>
         </div>
-        <div class="flex items-start gap-4 text-white">
-          <span class="text-2xl shrink-0 mt-0.5">&#x1F4E1;</span>
-          <div>
-            <h4 class="font-semibold text-white">Open API &amp; MQTT Protocol</h4>
-            <p class="text-sm text-slate-400 mt-1">Integrate with any platform or ecosystem</p>
-          </div>
+        <div>
+          <ul class="space-y-4">
+            <li class="flex items-start gap-4">
+              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
+              <span class="text-default dark:text-slate-200">20,000m&sup2; manufacturing facility in Xiamen, China</span
+              >
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
+              <span class="text-default dark:text-slate-200">ISO 9001 certified quality management</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
+              <span class="text-default dark:text-slate-200">In-house SMT production lines</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
+              <span class="text-default dark:text-slate-200">Dedicated reliability testing lab</span>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
+              <span class="text-default dark:text-slate-200">24/7 production capability</span>
+            </li>
+          </ul>
         </div>
-        <div class="flex items-start gap-4 text-white">
-          <span class="text-2xl shrink-0 mt-0.5">&#x2699;&#xFE0F;</span>
-          <div>
-            <h4 class="font-semibold text-white">OEM / ODM Customization</h4>
-            <p class="text-sm text-slate-400 mt-1">Hardware, firmware, app &amp; cloud tailored to you</p>
-          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Certifications ===== -->
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl font-bold text-default dark:text-slate-100 text-center mb-12">
+        Certifications &amp; Compliance
+      </h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        <div>
+          <h3 class="text-xl font-semibold text-default dark:text-slate-200 mb-6">Product Certifications</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">CE</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">European Conformity</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">FCC</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Federal Communications Commission</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">RoHS</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Restriction of Hazardous Substances</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">UKCA</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">UK Conformity Assessed</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 dark:text-cyan-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">RED</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Radio Equipment Directive</span>
+              </div>
+            </li>
+          </ul>
         </div>
-        <div class="flex items-start gap-4 text-white">
-          <span class="text-2xl shrink-0 mt-0.5">&#x1F30D;</span>
-          <div>
-            <h4 class="font-semibold text-white">Global Technical Support</h4>
-            <p class="text-sm text-slate-400 mt-1">Multi-language engineering teams worldwide</p>
-          </div>
+        <div>
+          <h3 class="text-xl font-semibold text-default dark:text-slate-200 mb-6">Factory &amp; Quality</h3>
+          <ul class="space-y-4">
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">ISO 9001:2015</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Quality Management</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">ISO 14001</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Environmental Management</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">ISO 45001</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Occupational Health &amp; Safety</span>
+              </div>
+            </li>
+            <li class="flex items-center gap-3">
+              <span
+                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 text-sm font-bold shrink-0"
+                >&#10003;</span
+              >
+              <div>
+                <span class="font-medium text-default dark:text-slate-200">BSCI</span>
+                <span class="text-sm text-muted dark:text-slate-400 ml-1">Social Compliance Audit</span>
+              </div>
+            </li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Company Video ===== -->
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl font-bold text-default dark:text-slate-100">See Our Factory</h2>
+      <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto mb-10">
+        Take a virtual tour of our 20,000m&sup2; manufacturing facility in Xiamen, China.
+      </p>
+      <div
+        class="max-w-3xl mx-auto rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors"
+      >
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"></path>
+            </svg>
+          </div>
+          <p class="text-white font-medium text-lg">OWON Factory Tour — Xiamen, China</p>
+          <p class="text-slate-400 text-sm mt-1">Click to play video</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Latest from Blog ===== -->
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+        <div>
+          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
+          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
+            Case studies, product updates, and industry insights from the OWON team.
+          </p>
+        </div>
+        <a
+          href={blogUrl}
+          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+        >
+          View All Posts &rarr;
+        </a>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-3">
+        {
+          latestPosts.map((post) => (
+            <a
+              href={`/blog/${post.id}`}
+              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-all"
+            >
+              <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
+              <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">
+                {post.data.title}
+              </h3>
+              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">
+                {post.data.excerpt}
+              </p>
+              <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
+                Read more &rarr;
+              </span>
+            </a>
+          ))
+        }
       </div>
     </div>
   </section>
