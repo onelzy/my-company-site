@@ -3,7 +3,6 @@ export const prerender = false;
 
 import Layout from '~/layouts/PageLayout.astro';
 
-import Hero from '~/components/widgets/Hero.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import ProductGrid from '~/components/products/ProductGrid.astro';
 
@@ -24,8 +23,8 @@ const solutionsUrl = getPermalink('/solutions');
 const blogUrl = getPermalink('/blog');
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
 
-// Top 4 products for homepage
-const featuredProducts = rawProducts.slice(0, 4).map((p) => ({
+// All products from data
+const allProducts = rawProducts.map((p) => ({
   ...p.data,
   id: p.slug,
   slug: p.slug,
@@ -33,37 +32,58 @@ const featuredProducts = rawProducts.slice(0, 4).map((p) => ({
   data: p.data,
 }));
 
-const productCategories = [
+// Ecosystem groups
+const ecosystemGroups = [
   {
-    icon: '⚡',
-    title: 'Smart Meters',
-    desc: 'Single-phase, three-phase & multi-circuit energy meters with MQTT, ZigBee, and Modbus.',
-    href: getPermalink('/products/smart-meters'),
+    id: 'tuya',
+    label: 'Tuya',
+    desc: 'Tuya-enabled smart devices with ZigBee/WiFi',
+    icon: '🔵',
+    filter: (p) => p.techSolution === 'tuya' || (p.ecosystem || []).includes('tuya'),
   },
   {
-    icon: '🌡️',
-    title: 'Thermostats',
-    desc: 'Smart HVAC controllers with touchscreen, remote sensors, and Tuya / ZigBee integration.',
-    href: getPermalink('/products/thermostats'),
+    id: 'ha',
+    label: 'Home Assistant',
+    desc: 'Zigbee2MQTT & native HA integration',
+    icon: '🏠',
+    filter: (p) => (p.ecosystem || []).some((e) => e.includes('zigbee') || e.includes('ha')),
   },
   {
-    icon: '🏨',
-    title: 'Hotel Control',
-    desc: 'In-room thermostats, lighting panels, door signage, and energy management for hospitality.',
-    href: getPermalink('/products/hotel-control'),
+    id: 'mqtt',
+    label: 'MQTT Open',
+    desc: 'Standard MQTT 3.1.1/5.0 protocol devices',
+    icon: '📡',
+    filter: (p) => p.techSolution === 'mqtt' || (p.communication || []).includes('mqtt'),
   },
   {
-    icon: '🫀',
-    title: 'Senior Care',
-    desc: 'Non-contact sleep monitors, emergency call buttons, and the AiJuan senior care platform.',
-    href: getPermalink('/products/senior-care'),
+    id: 'http',
+    label: 'HTTP API',
+    desc: 'REST API & webhook-enabled products',
+    icon: '🔌',
+    filter: (p) => (p.ecosystem || []).includes('local-api') || (p.communication || []).includes('tcpip'),
   },
   {
-    icon: '☁️',
-    title: 'Software & Platforms',
-    desc: 'EdgeEco IoT platform, mobile apps, web dashboards, and open APIs for B2B integration.',
-    href: getPermalink('/products/software-platforms'),
+    id: 'modbus',
+    label: 'Modbus',
+    desc: 'RS-485 Modbus RTU industrial devices',
+    icon: '⚙️',
+    filter: (p) => (p.communication || []).includes('modbus'),
   },
+];
+
+// Protocol groups
+const protocolGroups = [
+  { id: 'wifi', label: 'WiFi', icon: '📶', filter: (p) => (p.communication || []).includes('wifi') },
+  { id: '4g', label: '4G / LTE', icon: '📱', filter: (p) => (p.communication || []).includes('4g') },
+  { id: 'zigbee', label: 'ZigBee', icon: '🔷', filter: (p) => (p.communication || []).includes('zigbee') },
+  {
+    id: 'rf',
+    label: 'RF 868/433',
+    icon: '📻',
+    filter: (p) => (p.communication || []).some((c) => c.includes('rf') || c.includes('868') || c.includes('433')),
+  },
+  { id: 'ethernet', label: 'Ethernet', icon: '🔗', filter: (p) => (p.communication || []).includes('tcpip') },
+  { id: 'rs485', label: 'RS-485', icon: '🔧', filter: (p) => (p.communication || []).includes('modbus') },
 ];
 
 const industries = [
@@ -92,89 +112,80 @@ const formatDate = (date: Date | undefined): string => {
 ---
 
 <Layout metadata={metadata}>
-  <!-- ===== Hero: Value Prop + Trust Badges + Key Stats ===== -->
-  <Hero
-    actions={[
-      { variant: 'primary', text: 'View Products', href: productsUrl, icon: 'tabler:apps' },
-      { text: 'Contact Sales', href: contactUrl },
-    ]}
-  >
-    <Fragment slot="title">Smart IoT Devices for Your Industry</Fragment>
-    <Fragment slot="subtitle">
-      Smart meters, thermostats, senior care, hotel control & IoT platforms — trusted by B2B customers worldwide.
-    </Fragment>
-    <Fragment slot="content">
-      <!-- Trust badges -->
-      <div class="flex flex-wrap justify-center gap-3 mt-6">
-        <span
-          class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300"
-        >
-          <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified
-        </span>
-        <span
-          class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300"
-        >
-          <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified
-        </span>
-        <span
-          class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300"
-        >
-          <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant
-        </span>
-      </div>
-
-      <!-- Key stats -->
-      <div class="mt-8 grid grid-cols-3 gap-4 max-w-xl mx-auto">
-        <div class="text-center">
-          <div class="text-3xl font-bold text-primary dark:text-blue-300">1M+</div>
-          <div class="text-sm text-muted dark:text-slate-400 mt-1">Devices Deployed</div>
-        </div>
-        <div class="text-center">
-          <div class="text-3xl font-bold text-primary dark:text-blue-300">50+</div>
-          <div class="text-sm text-muted dark:text-slate-400 mt-1">Countries</div>
-        </div>
-        <div class="text-center">
-          <div class="text-3xl font-bold text-primary dark:text-blue-300">15+</div>
-          <div class="text-sm text-muted dark:text-slate-400 mt-1">Years R&amp;D</div>
-        </div>
-      </div>
-    </Fragment>
-  </Hero>
-
-  <!-- ===== Product Categories ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-default dark:text-slate-100">Product Categories</h2>
-        <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto">
-          Explore our full range of IoT hardware and software, built for B2B scale and open integration.
-        </p>
-      </div>
-      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {
-          productCategories.map((cat) => (
+  <!-- ===== 1. Hero ===== -->
+  <section class="relative overflow-hidden bg-white dark:bg-slate-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="text-center lg:text-left">
+          <h1
+            class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200"
+          >
+            Smart IoT Devices for Your Industry
+          </h1>
+          <p class="text-xl text-muted mb-6 dark:text-slate-300 max-w-2xl lg:mx-0">
+            Smart meters, thermostats, senior care, hotel control & IoT platforms — trusted by B2B customers worldwide.
+          </p>
+          <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
             <a
-              href={cat.href}
-              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 p-6"
+              href={productsUrl}
+              class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-3 transition-colors"
             >
-              <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4">
-                <span class="text-2xl">{cat.icon}</span>
-              </div>
-              <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
-                {cat.title}
-              </h3>
-              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed flex-1">{cat.desc}</p>
-              <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
-                View Products &rarr;
-              </span>
+              View Products
             </a>
-          ))
-        }
+            <a
+              href={contactUrl}
+              class="inline-flex items-center gap-2 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-default dark:text-slate-200 font-medium px-8 py-3 transition-colors"
+            >
+              Contact Sales
+            </a>
+          </div>
+          <!-- Trust badges -->
+          <div class="flex flex-wrap justify-center lg:justify-start gap-3 mt-6">
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300"
+            >
+              <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300"
+            >
+              <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300"
+            >
+              <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant
+            </span>
+          </div>
+          <!-- Key stats -->
+          <div class="mt-8 grid grid-cols-3 gap-4 max-w-xl lg:mx-0">
+            <div class="text-center lg:text-left">
+              <div class="text-3xl font-bold text-primary dark:text-blue-300">1M+</div>
+              <div class="text-sm text-muted dark:text-slate-400 mt-1">Devices Deployed</div>
+            </div>
+            <div class="text-center lg:text-left">
+              <div class="text-3xl font-bold text-primary dark:text-blue-300">50+</div>
+              <div class="text-sm text-muted dark:text-slate-400 mt-1">Countries</div>
+            </div>
+            <div class="text-center lg:text-left">
+              <div class="text-3xl font-bold text-primary dark:text-blue-300">15+</div>
+              <div class="text-sm text-muted dark:text-slate-400 mt-1">Years R&amp;D</div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="relative rounded-2xl overflow-hidden bg-gray-100 dark:bg-slate-800 aspect-[4/3] max-w-md mx-auto lg:mx-0"
+        >
+          <div class="absolute inset-0 flex items-center justify-center text-6xl text-gray-300 dark:text-slate-600">
+            🏭
+          </div>
+          <div class="absolute bottom-3 left-3 text-xs text-gray-400">Smart Factory — Xiamen, China</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Solutions by Industry ===== -->
+  <!-- ===== 2. Solutions by Industry ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
@@ -196,18 +207,17 @@ const formatDate = (date: Date | undefined): string => {
           industries.map((item) => (
             <a
               href={solutionsUrl}
-              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 p-6"
+              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 overflow-hidden"
             >
-              <div class="w-12 h-12 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-4">
-                <span class="text-2xl">{item.icon}</span>
+              <div class="aspect-video bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-4xl">
+                {item.icon}
               </div>
-              <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
-                {item.title}
-              </h3>
-              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed flex-1">{item.desc}</p>
-              <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
-                Learn More &rarr;
-              </span>
+              <div class="p-5">
+                <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
+                  {item.title}
+                </h3>
+                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{item.desc}</p>
+              </div>
             </a>
           ))
         }
@@ -215,198 +225,215 @@ const formatDate = (date: Date | undefined): string => {
     </div>
   </section>
 
-  <!-- ===== Featured Products ===== -->
-  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/30">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Featured Products</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Multi-protocol support across ZigBee, WiFi, MQTT, Modbus, and 4G — with CE / FCC / RoHS certifications.
-          </p>
-        </div>
-        <a
-          href={productsUrl}
-          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
+  <!-- ===== 3. Products by Ecosystem & Protocol ===== -->
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" id="productsSection">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-default dark:text-slate-100">Products by Ecosystem &amp; Protocol</h2>
+        <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto">
+          Browse our product catalogue by ecosystem platform or communication protocol.
+        </p>
+      </div>
+
+      <!-- Dimension tabs -->
+      <div class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl w-fit mx-auto mb-6">
+        <button
+          class="dim-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all duration-200 bg-white dark:bg-slate-700 text-default dark:text-slate-200 shadow-sm active"
+          data-dim="ecosystem"
         >
+          By Ecosystem
+        </button>
+        <button
+          class="dim-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
+          data-dim="protocol"
+        >
+          By Protocol
+        </button>
+      </div>
+
+      <!-- Group tabs -->
+      <div id="groupTabs" class="flex flex-wrap gap-2 justify-center mb-8">
+        {
+          ecosystemGroups.map((g, i) => (
+            <button
+              class="group-tab inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-150 border"
+              data-dim="ecosystem"
+              data-group={g.id}
+              class:list={[
+                i === 0
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border-gray-300 dark:border-slate-600 hover:border-primary',
+              ]}
+            >
+              {g.icon} {g.label}
+            </button>
+          ))
+        }
+        {
+          protocolGroups.map((g, i) => (
+            <button
+              class="group-tab hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium cursor-pointer transition-all duration-150 border"
+              data-dim="protocol"
+              data-group={g.id}
+              class:list={[
+                i === 0
+                  ? 'bg-primary text-white border-primary'
+                  : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border-gray-300 dark:border-slate-600 hover:border-primary',
+              ]}
+            >
+              {g.icon} {g.label}
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Product grids -->
+      <div id="productGrids">
+        {
+          ecosystemGroups.map((g, i) => (
+            <div
+              id={`grid-${g.id}`}
+              class:list={['product-grid', i === 0 ? '' : 'hidden']}
+              data-dim="ecosystem"
+              data-group={g.id}
+            >
+              <p class="text-sm text-muted dark:text-slate-400 mb-4 text-center">{g.desc}</p>
+              <ProductGrid products={allProducts.filter(g.filter).slice(0, 4)} baseUrl="/products" />
+            </div>
+          ))
+        }
+        {
+          protocolGroups.map((g) => (
+            <div id={`grid-${g.id}`} class="product-grid hidden" data-dim="protocol" data-group={g.id}>
+              <ProductGrid products={allProducts.filter(g.filter).slice(0, 4)} baseUrl="/products" />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="text-center mt-8">
+        <a href={productsUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium">
           View All Products &rarr;
         </a>
       </div>
-      <ProductGrid products={featuredProducts} baseUrl="/products" />
     </div>
   </section>
 
-  <!-- ===== Company Overview ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
+  <!-- ===== 4. Company & Factory ===== -->
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 gap-12 items-start">
-        <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100 mb-6">Company Overview</h2>
-          <p class="text-muted dark:text-slate-400 leading-relaxed">
+      <div class="grid md:grid-cols-3 gap-10 md:divide-x md:divide-gray-200 dark:md:divide-slate-700">
+        <!-- Company -->
+        <div class="md:pr-10">
+          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Company</h2>
+          <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-6">
             XIAMEN OWON TECHNOLOGY CO.,LTD is a leading IoT device manufacturer with 15+ years of R&D expertise. We
             design, manufacture, and deliver smart energy meters, thermostats, and IoT solutions to B2B customers across
             50+ countries.
           </p>
-          <div class="grid grid-cols-4 gap-6 mt-8">
+          <div class="grid grid-cols-2 gap-4">
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">1M+</div>
-              <div class="text-xs text-muted dark:text-slate-400 mt-1">Devices</div>
+              <div class="text-xs text-muted dark:text-slate-400">Devices</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">50+</div>
-              <div class="text-xs text-muted dark:text-slate-400 mt-1">Countries</div>
+              <div class="text-xs text-muted dark:text-slate-400">Countries</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">15+</div>
-              <div class="text-xs text-muted dark:text-slate-400 mt-1">Years R&amp;D</div>
+              <div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div>
             </div>
             <div class="text-center">
               <div class="text-2xl font-bold text-primary">200+</div>
-              <div class="text-xs text-muted dark:text-slate-400 mt-1">Employees</div>
+              <div class="text-xs text-muted dark:text-slate-400">Employees</div>
             </div>
           </div>
         </div>
-        <div>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-4">
+        <!-- Factory -->
+        <div class="md:px-10">
+          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Factory</h2>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-default dark:text-slate-200">20,000m&sup2; manufacturing facility in Xiamen, China</span
+              <span class="text-sm text-default dark:text-slate-200"
+                >20,000m&sup2; manufacturing facility in Xiamen, China</span
               >
             </li>
-            <li class="flex items-start gap-4">
+            <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-default dark:text-slate-200">ISO 9001 certified quality management</span>
+              <span class="text-sm text-default dark:text-slate-200">ISO 9001 certified quality management</span>
             </li>
-            <li class="flex items-start gap-4">
+            <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-default dark:text-slate-200">In-house SMT production lines</span>
+              <span class="text-sm text-default dark:text-slate-200">In-house SMT production lines</span>
             </li>
-            <li class="flex items-start gap-4">
+            <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-default dark:text-slate-200">Dedicated reliability testing lab</span>
+              <span class="text-sm text-default dark:text-slate-200">Dedicated reliability testing lab</span>
             </li>
-            <li class="flex items-start gap-4">
+            <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-default dark:text-slate-200">24/7 production capability</span>
+              <span class="text-sm text-default dark:text-slate-200">24/7 production capability</span>
             </li>
           </ul>
+        </div>
+        <!-- Certifications -->
+        <div class="md:pl-10">
+          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Certifications</h2>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"
+            >
+              <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300"
+            >
+              <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-xs font-medium text-purple-700 dark:text-purple-300"
+            >
+              <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 dark:bg-amber-900/40 px-3 py-1.5 text-xs font-medium text-amber-700 dark:text-amber-300"
+            >
+              <span class="text-amber-600 dark:text-amber-400 text-xs font-bold">&#10003;</span> UKCA
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-cyan-100 dark:bg-cyan-900/40 px-3 py-1.5 text-xs font-medium text-cyan-700 dark:text-cyan-300"
+            >
+              <span class="text-cyan-600 dark:text-cyan-400 text-xs font-bold">&#10003;</span> RED
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"
+            >
+              <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> ISO 9001
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300"
+            >
+              <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> ISO 14001
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-xs font-medium text-purple-700 dark:text-purple-300"
+            >
+              <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> ISO 45001
+            </span>
+            <span
+              class="inline-flex items-center gap-1.5 rounded-full bg-rose-100 dark:bg-rose-900/40 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-300"
+            >
+              <span class="text-rose-600 dark:text-rose-400 text-xs font-bold">&#10003;</span> BSCI
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== Certifications ===== -->
-  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl font-bold text-default dark:text-slate-100 text-center mb-12">
-        Certifications &amp; Compliance
-      </h2>
-      <div class="grid md:grid-cols-2 gap-10">
-        <div>
-          <h3 class="text-xl font-semibold text-default dark:text-slate-200 mb-6">Product Certifications</h3>
-          <ul class="space-y-4">
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">CE</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">European Conformity</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">FCC</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Federal Communications Commission</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">RoHS</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Restriction of Hazardous Substances</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">UKCA</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">UK Conformity Assessed</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-cyan-100 dark:bg-cyan-900/40 text-cyan-600 dark:text-cyan-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">RED</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Radio Equipment Directive</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <h3 class="text-xl font-semibold text-default dark:text-slate-200 mb-6">Factory &amp; Quality</h3>
-          <ul class="space-y-4">
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">ISO 9001:2015</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Quality Management</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">ISO 14001</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Environmental Management</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">ISO 45001</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Occupational Health &amp; Safety</span>
-              </div>
-            </li>
-            <li class="flex items-center gap-3">
-              <span
-                class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 text-sm font-bold shrink-0"
-                >&#10003;</span
-              >
-              <div>
-                <span class="font-medium text-default dark:text-slate-200">BSCI</span>
-                <span class="text-sm text-muted dark:text-slate-400 ml-1">Social Compliance Audit</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Company Video ===== -->
+  <!-- ===== 5. Factory Video ===== -->
   <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-default dark:text-slate-100">See Our Factory</h2>
@@ -429,7 +456,7 @@ const formatDate = (date: Date | undefined): string => {
     </div>
   </section>
 
-  <!-- ===== Latest from Blog ===== -->
+  <!-- ===== 6. Latest from Blog ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
@@ -470,7 +497,7 @@ const formatDate = (date: Date | undefined): string => {
     </div>
   </section>
 
-  <!-- ===== Developer CTA ===== -->
+  <!-- ===== 7. Developer CTA ===== -->
   <section class="py-12 lg:py-16 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-default dark:text-slate-100">Open API. Full SDKs. Integrate in hours.</h2>
@@ -489,7 +516,7 @@ const formatDate = (date: Date | undefined): string => {
     </div>
   </section>
 
-  <!-- ===== Final CTA: Lead Gen ===== -->
+  <!-- ===== 8. Contact CTA ===== -->
   <CallToAction
     actions={[
       { variant: 'primary', text: 'Get Product Datasheet & Quote', href: contactUrl, icon: 'tabler:file-description' },
@@ -506,3 +533,126 @@ const formatDate = (date: Date | undefined): string => {
     </Fragment>
   </CallToAction>
 </Layout>
+
+<script>
+  (function () {
+    const section = document.getElementById('productsSection');
+    if (!section) return;
+
+    const dimBtns = section.querySelectorAll('.dim-btn');
+    const groupTabs = section.querySelectorAll('.group-tab');
+    const grids = section.querySelectorAll('.product-grid');
+
+    function deactivateAll() {
+      dimBtns.forEach((b) => {
+        b.classList.remove(
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm',
+          'active'
+        );
+        b.classList.add('text-gray-600', 'dark:text-slate-400', 'hover:bg-white/60', 'dark:hover:bg-slate-700/60');
+      });
+      groupTabs.forEach((t) => {
+        t.classList.remove('bg-primary', 'text-white', 'border-primary');
+        t.classList.add(
+          'bg-white',
+          'dark:bg-slate-800',
+          'text-gray-600',
+          'dark:text-slate-400',
+          'border-gray-300',
+          'dark:border-slate-600',
+          'hover:border-primary'
+        );
+      });
+      grids.forEach((g) => g.classList.add('hidden'));
+    }
+
+    function activateDim(dim) {
+      deactivateAll(dim);
+      dimBtns.forEach((b) => {
+        if (b.dataset.dim === dim) {
+          b.classList.remove('text-gray-600', 'dark:text-slate-400', 'hover:bg-white/60', 'dark:hover:bg-slate-700/60');
+          b.classList.add(
+            'bg-white',
+            'dark:bg-slate-700',
+            'text-default',
+            'dark:text-slate-200',
+            'shadow-sm',
+            'active'
+          );
+        }
+      });
+      groupTabs.forEach((t) => {
+        if (t.dataset.dim === dim) {
+          t.classList.remove('hidden');
+        } else {
+          t.classList.add('hidden');
+        }
+      });
+      // Activate first group tab in this dimension
+      const firstTab = section.querySelector(`.group-tab[data-dim="${dim}"]`);
+      if (firstTab) {
+        firstTab.classList.remove(
+          'bg-white',
+          'dark:bg-slate-800',
+          'text-gray-600',
+          'dark:text-slate-400',
+          'border-gray-300',
+          'dark:border-slate-600',
+          'hover:border-primary'
+        );
+        firstTab.classList.add('bg-primary', 'text-white', 'border-primary');
+        const grid = section.querySelector(`.product-grid[data-dim="${dim}"][data-group="${firstTab.dataset.group}"]`);
+        if (grid) grid.classList.remove('hidden');
+      }
+    }
+
+    function activateGroup(el) {
+      const dim = el.dataset.dim;
+      const group = el.dataset.group;
+      groupTabs.forEach((t) => {
+        if (t.dataset.dim === dim) {
+          t.classList.remove('bg-primary', 'text-white', 'border-primary');
+          t.classList.add(
+            'bg-white',
+            'dark:bg-slate-800',
+            'text-gray-600',
+            'dark:text-slate-400',
+            'border-gray-300',
+            'dark:border-slate-600',
+            'hover:border-primary'
+          );
+        }
+      });
+      el.classList.remove(
+        'bg-white',
+        'dark:bg-slate-800',
+        'text-gray-600',
+        'dark:text-slate-400',
+        'border-gray-300',
+        'dark:border-slate-600',
+        'hover:border-primary'
+      );
+      el.classList.add('bg-primary', 'text-white', 'border-primary');
+
+      grids.forEach((g) => {
+        if (g.dataset.dim === dim && g.dataset.group === group) {
+          g.classList.remove('hidden');
+        } else if (g.dataset.dim === dim) {
+          g.classList.add('hidden');
+        }
+      });
+    }
+
+    dimBtns.forEach((b) => {
+      b.addEventListener('click', () => activateDim(b.dataset.dim));
+    });
+
+    groupTabs.forEach((t) => {
+      t.addEventListener('click', () => activateGroup(t));
+    });
+  })();
+</script>
