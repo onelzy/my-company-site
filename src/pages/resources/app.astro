@@ -11,38 +11,24 @@ import PageLayout from '~/layouts/PageLayout.astro';
 >
   <section class="py-8 lg:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <!-- Breadcrumb -->
-      <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
-        <a href="/" class="hover:text-primary transition-colors">Home</a>
-        <span class="mx-2">/</span>
-        <span class="text-default dark:text-slate-200">App Downloads</span>
-      </nav>
-
-      <!-- Sub-navigation -->
-      <div
-        class="flex items-center gap-1.5 mb-8 pb-4 border-b border-gray-200 dark:border-slate-700 overflow-x-auto scrollbar-none"
-      >
+      <!-- Dimension Tabs -->
+      <div class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-8 w-fit">
         <a
           href="/resources/brochures"
-          class="inline-flex shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default"
-          >Brochures</a
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
+          >📄 Documentation</a
         >
         <a
           href="/resources/videos"
-          class="inline-flex shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default"
-          >Videos</a
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
+          >🎬 Videos</a
         >
         <a
           href="/resources/app"
-          class="inline-flex shrink-0 px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-primary/10 text-primary"
-          >App Downloads</a
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white dark:bg-slate-700 text-default dark:text-slate-200 shadow-sm"
+          >📱 App Downloads</a
         >
       </div>
-
-      <h1 class="text-3xl font-bold sm:text-4xl mb-2 text-default dark:text-slate-100">App Downloads</h1>
-      <p class="text-muted dark:text-slate-400 mb-10 text-sm">
-        Download OWON mobile applications for device debugging, energy monitoring, and system configuration.
-      </p>
 
       <!-- API Debugger -->
       <section class="mb-12">
