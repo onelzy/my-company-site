@@ -1,5 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import DevSidebar from '~/components/widgets/DevSidebar.astro';
 ---
 
 <PageLayout
@@ -12,48 +13,7 @@ import PageLayout from '~/layouts/PageLayout.astro';
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex gap-8">
-        <!-- Sidebar -->
-        <nav class="hidden lg:block w-56 shrink-0 sticky top-24 self-start space-y-1">
-          <p class="text-xs font-semibold uppercase text-muted mb-3 tracking-wider">Developers</p>
-          <a href="/developers" class="block px-3 py-2 rounded-lg text-sm font-medium bg-primary/10 text-primary"
-            >Overview</a
-          >
-          <a
-            href="/developers/mqtt"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >MQTT Quick Start</a
-          >
-          <a
-            href="/developers/api"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >HTTP Server API</a
-          >
-          <a
-            href="/developers/zigbee"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >ZigBee Clusters</a
-          >
-          <a
-            href="/developers/ha"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >Home Assistant &amp; Z2M</a
-          >
-          <a
-            href="/developers/sdks"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >SDKs &amp; Libraries</a
-          >
-          <a
-            href="/developers/examples"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >Code Examples</a
-          >
-          <a
-            href="/developers/changelog"
-            class="block px-3 py-2 rounded-lg text-sm text-muted hover:bg-gray-100 dark:hover:bg-slate-800 hover:text-default transition-colors"
-            >Firmware Changelog</a
-          >
-        </nav>
+        <DevSidebar currentPage="overview" />
 
         <!-- Content -->
         <div class="flex-1 min-w-0">
