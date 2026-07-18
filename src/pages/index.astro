@@ -2,7 +2,6 @@
 export const prerender = false;
 
 import Layout from '~/layouts/PageLayout.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
 
 import { getPermalink } from '~/utils/permalinks';
 import { SITE } from 'astrowind:config';
@@ -294,66 +293,67 @@ const solutionSlides = [
     </div>
   </section>
 
-  <!-- ===== 4. Company & Factory ===== -->
+  <!-- ===== 4. About OWON ===== -->
   <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-3 gap-10 md:divide-x md:divide-gray-200 dark:md:divide-slate-700">
-        <div class="md:pr-10">
-          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Company</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">About OWON</h2>
+
+      <!-- Top row: Company + Factory Video -->
+      <div class="grid lg:grid-cols-2 gap-10 mb-12">
+        <!-- Company + Stats -->
+        <div>
           <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-6">
             XIAMEN OWON TECHNOLOGY CO.,LTD is a leading IoT device manufacturer with 15+ years of R&D expertise. We design, manufacture, and deliver smart energy meters, thermostats, and IoT solutions to B2B customers across 50+ countries.
           </p>
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-4 gap-4 mb-6">
             <div class="text-center"><div class="text-2xl font-bold text-primary">1M+</div><div class="text-xs text-muted dark:text-slate-400">Devices</div></div>
             <div class="text-center"><div class="text-2xl font-bold text-primary">50+</div><div class="text-xs text-muted dark:text-slate-400">Countries</div></div>
             <div class="text-center"><div class="text-2xl font-bold text-primary">15+</div><div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div></div>
             <div class="text-center"><div class="text-2xl font-bold text-primary">200+</div><div class="text-xs text-muted dark:text-slate-400">Employees</div></div>
           </div>
-        </div>
-        <div class="md:px-10">
-          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Factory</h2>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">20,000m&sup2; manufacturing facility in Xiamen, China</span></li>
-            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">ISO 9001 certified quality management</span></li>
-            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">In-house SMT production lines</span></li>
-            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">Dedicated reliability testing lab</span></li>
-            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">24/7 production capability</span></li>
-          </ul>
-        </div>
-        <div class="md:pl-10">
-          <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Certifications</h2>
-          <div class="flex flex-wrap gap-2">
-            {['CE','FCC','RoHS','UKCA','RED','ISO 9001','ISO 14001','ISO 45001','BSCI'].map((c) => (
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"><span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> {c}</span>
-            ))}
+          <!-- Factory features -->
+          <div>
+            <h3 class="text-sm font-semibold text-default dark:text-slate-200 uppercase tracking-wider mb-3">Factory</h3>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2 text-sm text-muted dark:text-slate-400"><span class="text-green-500 shrink-0 mt-0.5 font-bold">&#10003;</span>20,000m&sup2; manufacturing facility in Xiamen, China</li>
+              <li class="flex items-start gap-2 text-sm text-muted dark:text-slate-400"><span class="text-green-500 shrink-0 mt-0.5 font-bold">&#10003;</span>ISO 9001 certified quality management</li>
+              <li class="flex items-start gap-2 text-sm text-muted dark:text-slate-400"><span class="text-green-500 shrink-0 mt-0.5 font-bold">&#10003;</span>In-house SMT production lines</li>
+              <li class="flex items-start gap-2 text-sm text-muted dark:text-slate-400"><span class="text-green-500 shrink-0 mt-0.5 font-bold">&#10003;</span>Dedicated reliability testing lab</li>
+              <li class="flex items-start gap-2 text-sm text-muted dark:text-slate-400"><span class="text-green-500 shrink-0 mt-0.5 font-bold">&#10003;</span>24/7 production capability</li>
+            </ul>
           </div>
+        </div>
+
+        <!-- Factory Video -->
+        <div class="rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+            </div>
+            <p class="text-white font-medium text-lg">Factory Tour — Xiamen, China</p>
+            <p class="text-slate-400 text-sm mt-1">Click to play</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certifications -->
+      <div>
+        <h3 class="text-sm font-semibold text-default dark:text-slate-200 uppercase tracking-wider mb-3 text-center">Certifications</h3>
+        <div class="flex flex-wrap justify-center gap-2">
+          {['CE','FCC','RoHS','UKCA','RED','ISO 9001','ISO 14001','ISO 45001','BSCI'].map((c) => (
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"><span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> {c}</span>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 5. Factory Video ===== -->
+  <!-- ===== 5. Latest from Blog ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-default dark:text-slate-100 mb-10">See Our Factory</h2>
-      <div class="max-w-3xl mx-auto rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
-            <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-          </div>
-          <p class="text-white font-medium text-lg">OWON Factory Tour — Xiamen, China</p>
-          <p class="text-slate-400 text-sm mt-1">Click to play video</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== 6. Latest from Blog ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <h2 class="text-3xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
-        <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">View All Posts &rarr;</a>
+        <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
+        <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">View All &rarr;</a>
       </div>
       <div class="grid gap-6 sm:grid-cols-3">
         {latestPosts.map((post) => (
@@ -379,25 +379,16 @@ const solutionSlides = [
     </div>
   </section>
 
-  <!-- ===== 7. Developer CTA ===== -->
-  <section class="py-12 lg:py-16 bg-gray-50 dark:bg-slate-800/50">
+  <!-- ===== 6. Developers ===== -->
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-default dark:text-slate-100 mb-8">Open API. Full SDKs. Integrate in hours.</h2>
+      <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100 mb-8">Open API. Full SDKs. Integrate in hours.</h2>
       <div>
         <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors">Explore Developer Docs &rarr;</a>
       </div>
     </div>
   </section>
 
-  <!-- ===== 8. Contact CTA ===== -->
-  <CallToAction
-    actions={[
-      { variant: 'primary', text: 'Get Product Datasheet & Quote', href: contactUrl, icon: 'tabler:file-description' },
-      { text: 'Talk to an Engineer', href: `https://wa.me/${whatsappNumber}`, icon: 'tabler:brand-whatsapp' },
-    ]}
-  >
-    <Fragment slot="title">Get Your Product Datasheet &amp; Custom Quote</Fragment>
-  </CallToAction>
 </Layout>
 
 <script>
