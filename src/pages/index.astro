@@ -220,23 +220,13 @@ const solutionSlides = [
   <!-- ===== 3. Solutions by Industry (Carousel) ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50" id="solutionsSection">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <div>
-          <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
-        </div>
-        <div class="flex items-center gap-2">
-          <button
-            id="solPrev"
-            class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:border-primary hover:text-primary transition-colors"
-            aria-label="Previous solution"
-          >
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100 mb-4">Solutions by Industry</h2>
+        <div class="flex items-center justify-center gap-2">
+          <button id="solPrev" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:border-primary hover:text-primary transition-colors" aria-label="Previous solution">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
-          <button
-            id="solNext"
-            class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:border-primary hover:text-primary transition-colors"
-            aria-label="Next solution"
-          >
+          <button id="solNext" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:border-primary hover:text-primary transition-colors" aria-label="Next solution">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </button>
         </div>
@@ -298,8 +288,19 @@ const solutionSlides = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">About OWON</h2>
 
-      <!-- Top row: Company + Factory Video -->
+      <!-- Top row: Factory Video + Company -->
       <div class="grid lg:grid-cols-2 gap-10 mb-12">
+        <!-- Factory Video -->
+        <div class="rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
+              <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+            </div>
+            <p class="text-white font-medium text-lg">Factory Tour — Xiamen, China</p>
+            <p class="text-slate-400 text-sm mt-1">Click to play</p>
+          </div>
+        </div>
+
         <!-- Company + Stats -->
         <div>
           <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-6">
@@ -323,17 +324,6 @@ const solutionSlides = [
             </ul>
           </div>
         </div>
-
-        <!-- Factory Video -->
-        <div class="rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
-          <div class="text-center">
-            <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
-              <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
-            </div>
-            <p class="text-white font-medium text-lg">Factory Tour — Xiamen, China</p>
-            <p class="text-slate-400 text-sm mt-1">Click to play</p>
-          </div>
-        </div>
       </div>
 
       <!-- Certifications -->
@@ -351,10 +341,7 @@ const solutionSlides = [
   <!-- ===== 5. Latest from Blog ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
-        <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">View All &rarr;</a>
-      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-default dark:text-slate-100">Latest from Blog</h2>
       <div class="grid gap-6 sm:grid-cols-3">
         {latestPosts.map((post) => (
           <a href={`/blog/${post.id}`} class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-md transition-all">
@@ -380,11 +367,58 @@ const solutionSlides = [
   </section>
 
   <!-- ===== 6. Developers ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100 mb-8">Open API. Full SDKs. Integrate in hours.</h2>
-      <div>
-        <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors">Explore Developer Docs &rarr;</a>
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">Built for Developers</h2>
+
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <!-- Left: Feature highlights -->
+        <div class="space-y-6">
+          {[
+            { title: 'RESTful API', desc: 'Full JSON REST API with token auth, pagination, webhooks. Swagger docs included.' },
+            { title: 'MQTT Protocol', desc: 'Standard MQTT 3.1.1/5.0 pub-sub. Direct device telemetry with per-topic ACLs.' },
+            { title: 'Multi-language SDKs', desc: 'Python, Node.js, Java, and embedded C SDKs. Clone the repo and run in 5 minutes.' },
+            { title: 'Private Cloud', desc: 'Deploy EdgeEco platform on your infrastructure. Docker Compose or Kubernetes.' },
+          ].map((item) => (
+            <div class="flex gap-4">
+              <div class="w-10 h-10 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+              </div>
+              <div>
+                <h3 class="text-base font-semibold text-default dark:text-slate-200">{item.title}</h3>
+                <p class="text-sm text-muted dark:text-slate-400">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+          <div class="pt-2 flex gap-3">
+            <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-6 py-3 transition-colors">Developer Portal &rarr;</a>
+            <a href={contactUrl} class="inline-flex items-center gap-2 rounded-full border border-gray-300 dark:border-slate-600 text-default dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 font-medium px-6 py-3 transition-colors">Request API Key</a>
+          </div>
+        </div>
+
+        <!-- Right: Code snippet visual -->
+        <div class="rounded-2xl bg-slate-900 dark:bg-slate-800 p-6 border border-slate-700 font-mono text-sm overflow-hidden">
+          <div class="flex gap-2 mb-4">
+            <span class="w-3 h-3 rounded-full bg-red-400"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-400"></span>
+            <span class="w-3 h-3 rounded-full bg-green-400"></span>
+          </div>
+          <div class="space-y-1.5">
+            <p class="text-slate-500"># GET /api/v2/devices</p>
+            <p><span class="text-purple-400">curl</span> <span class="text-green-400">-H "Authorization: Bearer $TOKEN"</span> \</p>
+            <p class="text-blue-300">  "https://api.owon-iot.com/v2/devices"</p>
+            <div class="mt-3"><p class="text-slate-500"># Response</p></div>
+            <p><span class="text-yellow-300">{</span></p>
+            <p class="pl-4"><span class="text-blue-300">"devices"</span><span>: [</span></p>
+            <p class="pl-8"><span class="text-yellow-300">{</span></p>
+            <p class="pl-12"><span class="text-blue-300">"id"</span>: <span class="text-green-400">"PC321-TY-001"</span>,</p>
+            <p class="pl-12"><span class="text-blue-300">"power"</span>: <span class="text-orange-400">1240.5</span>,</p>
+            <p class="pl-12"><span class="text-blue-300">"voltage"</span>: <span class="text-orange-400">228.3</span></p>
+            <p class="pl-8"><span class="text-yellow-300">}</span></p>
+            <p class="pl-4">]</p>
+            <p><span class="text-yellow-300">}</span></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
