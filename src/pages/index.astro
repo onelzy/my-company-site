@@ -23,7 +23,6 @@ const solutionsUrl = getPermalink('/solutions');
 const blogUrl = getPermalink('/blog');
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
 
-// Products for homepage display
 const allProducts = rawProducts.map((p) => ({
   ...p.data,
   id: p.slug,
@@ -31,6 +30,49 @@ const allProducts = rawProducts.map((p) => ({
   collection: 'products' as const,
   data: p.data,
 }));
+
+const heroSlides = [
+  {
+    title: 'Smart Energy Meters',
+    subtitle: 'Tuya & MQTT — Precision metering for residential and commercial energy management',
+    gradient: 'from-blue-700 via-blue-600 to-indigo-700',
+    dotColor: 'bg-blue-500',
+    badges: ['Tuya', 'MQTT'],
+    link: '/products?dim=type&type=smart-meters',
+    linkText: 'Explore Smart Meters',
+    imgSrc: '/images/products/pc321-ty.svg',
+  },
+  {
+    title: 'Smart Thermostats',
+    subtitle: 'Tuya & MQTT — Touchscreen HVAC control for North American and European markets',
+    gradient: 'from-orange-600 via-red-500 to-rose-600',
+    dotColor: 'bg-orange-500',
+    badges: ['Tuya', 'MQTT'],
+    link: '/products?dim=type&type=thermostats',
+    linkText: 'Explore Thermostats',
+    imgSrc: '/images/products/pct513.svg',
+  },
+  {
+    title: 'ZigBee Hotel Solution',
+    subtitle: 'Room thermostats, lighting panels & door sign displays — full hotel room automation',
+    gradient: 'from-purple-700 via-violet-600 to-indigo-700',
+    dotColor: 'bg-purple-500',
+    badges: ['ZigBee'],
+    link: '/products?dim=type&type=hotel-control',
+    linkText: 'Explore Hotel Solutions',
+    imgSrc: '/images/products/pc341-3m16s.svg',
+  },
+  {
+    title: 'ZigBee Senior Care',
+    subtitle: 'Non-contact sleep monitoring, emergency call & health tracking for elderly facilities',
+    gradient: 'from-teal-700 via-emerald-600 to-green-700',
+    dotColor: 'bg-teal-500',
+    badges: ['ZigBee'],
+    link: '/products?dim=type&type=senior-care',
+    linkText: 'Explore Senior Care',
+    imgSrc: '/images/products/spm-915.svg',
+  },
+];
 
 const industries = [
   { icon: '🏨', title: 'Smart Hotels', desc: 'Guest room automation & energy management' },
@@ -40,7 +82,6 @@ const industries = [
   { icon: '🏭', title: 'Industrial IoT', desc: 'Factory monitoring & predictive maintenance' },
 ];
 
-// Latest blog posts for homepage
 const blogPosts = await getCollection('post');
 const latestPosts = blogPosts
   .filter((p) => !p.data.draft)
@@ -58,106 +99,111 @@ const formatDate = (date: Date | undefined): string => {
 ---
 
 <Layout metadata={metadata}>
-  <!-- ===== 1. Hero ===== -->
-  <section class="relative overflow-hidden bg-white dark:bg-slate-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-      <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="text-center lg:text-left">
-          <h1
-            class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200"
-          >
-            Smart IoT Devices for Your Industry
-          </h1>
-          <p class="text-xl text-muted mb-6 dark:text-slate-300 max-w-2xl lg:mx-0">
-            Smart meters, thermostats, senior care, hotel control & IoT platforms — trusted by B2B customers worldwide.
-          </p>
-          <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <a
-              href={productsUrl}
-              class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-3 transition-colors"
-            >
-              View Products
-            </a>
-            <a
-              href={contactUrl}
-              class="inline-flex items-center gap-2 rounded-full bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700 text-default dark:text-slate-200 font-medium px-8 py-3 transition-colors"
-            >
-              Contact Sales
-            </a>
-          </div>
-          <!-- Trust badges -->
-          <div class="flex flex-wrap justify-center lg:justify-start gap-3 mt-6">
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300"
-            >
-              <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300"
-            >
-              <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300"
-            >
-              <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant
-            </span>
-          </div>
-          <!-- Key stats -->
-          <div class="mt-8 grid grid-cols-3 gap-4 max-w-xl lg:mx-0">
-            <div class="text-center lg:text-left">
-              <div class="text-3xl font-bold text-primary dark:text-blue-300">1M+</div>
-              <div class="text-sm text-muted dark:text-slate-400 mt-1">Devices Deployed</div>
-            </div>
-            <div class="text-center lg:text-left">
-              <div class="text-3xl font-bold text-primary dark:text-blue-300">50+</div>
-              <div class="text-sm text-muted dark:text-slate-400 mt-1">Countries</div>
-            </div>
-            <div class="text-center lg:text-left">
-              <div class="text-3xl font-bold text-primary dark:text-blue-300">15+</div>
-              <div class="text-sm text-muted dark:text-slate-400 mt-1">Years R&amp;D</div>
+  <!-- ===== 1. Hero Carousel ===== -->
+  <section
+    class="hero-carousel relative w-full overflow-hidden"
+    style="min-height: 500px;"
+    id="heroSection"
+  >
+    {
+      heroSlides.map((slide, i) => (
+        <div
+          class={`hero-slide absolute inset-0 flex items-center transition-opacity duration-700 bg-gradient-to-r ${slide.gradient}`}
+          class:list={[i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0']}
+          data-index={i}
+        >
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-20">
+            <div class="grid lg:grid-cols-2 gap-10 items-center">
+              <!-- Text -->
+              <div class="text-center lg:text-left">
+                <!-- Badges -->
+                <div class="flex gap-2 justify-center lg:justify-start mb-4">
+                  {slide.badges.map((b) => (
+                    <span class="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-semibold text-white border border-white/30">
+                      {b}
+                    </span>
+                  ))}
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+                  {slide.title}
+                </h1>
+                <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl lg:mx-0">
+                  {slide.subtitle}
+                </p>
+                <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+                  <a
+                    href={slide.link}
+                    class="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 transition-colors shadow-lg"
+                  >
+                    {slide.linkText} &rarr;
+                  </a>
+                  <a
+                    href={contactUrl}
+                    class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3.5 transition-colors border border-white/30 backdrop-blur-sm"
+                  >
+                    Contact Sales
+                  </a>
+                </div>
+              </div>
+              <!-- Product Image -->
+              <div class="flex items-center justify-center">
+                <div class="w-full max-w-sm rounded-2xl bg-white/10 backdrop-blur-sm p-6 border border-white/20">
+                  <img
+                    src={slide.imgSrc}
+                    alt={slide.title}
+                    class="w-full h-auto object-contain drop-shadow-2xl"
+                    loading="eager"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      ))
+    }
 
-        <!-- Hero Product Showcase: 2x2 product grid -->
-        <div class="grid grid-cols-2 gap-3 max-w-md mx-auto lg:mx-0">
-          {allProducts.slice(0, 4).map((p) => (
-            <a
-              href={`/products/${p.slug}`}
-              class="group relative rounded-xl overflow-hidden bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all"
-            >
-              <div class="aspect-square bg-gray-50 dark:bg-slate-700/50 flex items-center justify-center p-3">
-                <img
-                  src={p.image || '/images/products/placeholder.svg'}
-                  alt={p.name}
-                  class="w-full h-full object-contain"
-                  loading="eager"
-                />
-              </div>
-              <div class="p-2.5">
-                <p class="text-[11px] font-semibold text-default dark:text-slate-200 leading-tight truncate">
-                  {p.model || p.name}
-                </p>
-                <p class="text-[10px] text-muted dark:text-slate-400 truncate">{p.productType}</p>
-                {(p.communication || []).length > 0 && (
-                  <div class="flex gap-1 mt-1.5 flex-wrap">
-                    {[
-                      ...new Set([
-                        ...((p.ecosystem || []).map((e: string) =>
-                          e === 'tuya' ? 'Tuya' : e.includes('zigbee') ? 'ZigBee' : e.includes('mqtt') ? 'MQTT' : ''
-                        ).filter(Boolean)),
-                      ]),
-                    ].slice(0, 3).map((tag: string) => (
-                      <span class="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-primary/10 dark:bg-primary/20 text-primary dark:text-primary-foreground">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </a>
-          ))}
+    <!-- Navigation dots -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2.5">
+      {heroSlides.map((slide, i) => (
+        <button
+          class={`hero-dot w-3 h-3 rounded-full transition-all duration-300 border-2 border-white/60 ${i === 0 ? 'bg-white border-white scale-125' : 'bg-transparent hover:bg-white/40'}`}
+          data-dot={i}
+          aria-label={`Slide ${i + 1}`}
+        ></button>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== Trust Bar ===== -->
+  <section class="py-8 bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-center lg:justify-between gap-6">
+        <!-- Trust badges -->
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300">
+            <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300">
+            <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified
+          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300">
+            <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant
+          </span>
+        </div>
+        <!-- Stats -->
+        <div class="flex gap-8">
+          <div class="text-center">
+            <div class="text-2xl font-bold text-primary dark:text-blue-300">1M+</div>
+            <div class="text-xs text-muted dark:text-slate-400">Devices Deployed</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-primary dark:text-blue-300">50+</div>
+            <div class="text-xs text-muted dark:text-slate-400">Countries</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-primary dark:text-blue-300">15+</div>
+            <div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div>
+          </div>
         </div>
       </div>
     </div>
@@ -181,24 +227,22 @@ const formatDate = (date: Date | undefined): string => {
         </a>
       </div>
       <div class="grid gap-6 grid-cols-2 lg:grid-cols-5">
-        {
-          industries.map((item) => (
-            <a
-              href={solutionsUrl}
-              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 overflow-hidden"
-            >
-              <div class="aspect-video bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-4xl">
-                {item.icon}
-              </div>
-              <div class="p-5">
-                <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
-                  {item.title}
-                </h3>
-                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{item.desc}</p>
-              </div>
-            </a>
-          ))
-        }
+        {industries.map((item) => (
+          <a
+            href={solutionsUrl}
+            class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 overflow-hidden"
+          >
+            <div class="aspect-video bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-4xl">
+              {item.icon}
+            </div>
+            <div class="p-5">
+              <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
+                {item.title}
+              </h3>
+              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{item.desc}</p>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -210,7 +254,7 @@ const formatDate = (date: Date | undefined): string => {
         <div>
           <h2 class="text-3xl font-bold text-default dark:text-slate-100">Featured Products</h2>
           <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Our flagship IoT devices — ZigBee, WiFi, Tuya, and MQTT ready. Click for full specs.
+            Our flagship IoT devices — ZigBee, WiFi, Tuya, and MQTT ready.
           </p>
         </div>
         <a
@@ -230,7 +274,6 @@ const formatDate = (date: Date | undefined): string => {
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-3 gap-10 md:divide-x md:divide-gray-200 dark:md:divide-slate-700">
-        <!-- Company -->
         <div class="md:pr-10">
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Company</h2>
           <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-6">
@@ -257,15 +300,12 @@ const formatDate = (date: Date | undefined): string => {
             </div>
           </div>
         </div>
-        <!-- Factory -->
         <div class="md:px-10">
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Factory</h2>
           <ul class="space-y-3">
             <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-sm text-default dark:text-slate-200"
-                >20,000m&sup2; manufacturing facility in Xiamen, China</span
-              >
+              <span class="text-sm text-default dark:text-slate-200">20,000m&sup2; manufacturing facility in Xiamen, China</span>
             </li>
             <li class="flex items-start gap-3">
               <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
@@ -285,55 +325,14 @@ const formatDate = (date: Date | undefined): string => {
             </li>
           </ul>
         </div>
-        <!-- Certifications -->
         <div class="md:pl-10">
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Certifications</h2>
           <div class="flex flex-wrap gap-2">
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"
-            >
-              <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300"
-            >
-              <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-xs font-medium text-purple-700 dark:text-purple-300"
-            >
-              <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-amber-100 dark:bg-amber-900/40 px-3 py-1.5 text-xs font-medium text-amber-700 dark:text-amber-300"
-            >
-              <span class="text-amber-600 dark:text-amber-400 text-xs font-bold">&#10003;</span> UKCA
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-cyan-100 dark:bg-cyan-900/40 px-3 py-1.5 text-xs font-medium text-cyan-700 dark:text-cyan-300"
-            >
-              <span class="text-cyan-600 dark:text-cyan-400 text-xs font-bold">&#10003;</span> RED
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"
-            >
-              <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> ISO 9001
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-xs font-medium text-blue-700 dark:text-blue-300"
-            >
-              <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> ISO 14001
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-xs font-medium text-purple-700 dark:text-purple-300"
-            >
-              <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> ISO 45001
-            </span>
-            <span
-              class="inline-flex items-center gap-1.5 rounded-full bg-rose-100 dark:bg-rose-900/40 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-300"
-            >
-              <span class="text-rose-600 dark:text-rose-400 text-xs font-bold">&#10003;</span> BSCI
-            </span>
+            {['CE','FCC','RoHS','UKCA','RED','ISO 9001','ISO 14001','ISO 45001','BSCI'].map((c) => (
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300">
+                <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> {c}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -347,9 +346,7 @@ const formatDate = (date: Date | undefined): string => {
       <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto mb-10">
         Take a virtual tour of our 20,000m&sup2; manufacturing facility in Xiamen, China.
       </p>
-      <div
-        class="max-w-3xl mx-auto rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors"
-      >
+      <div class="max-w-3xl mx-auto rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
         <div class="text-center">
           <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
             <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
@@ -373,33 +370,19 @@ const formatDate = (date: Date | undefined): string => {
             Case studies, product updates, and industry insights from the OWON team.
           </p>
         </div>
-        <a
-          href={blogUrl}
-          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
-        >
+        <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">
           View All Posts &rarr;
         </a>
       </div>
       <div class="grid gap-6 sm:grid-cols-3">
-        {
-          latestPosts.map((post) => (
-            <a
-              href={`/blog/${post.id}`}
-              class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-all"
-            >
-              <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
-              <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">
-                {post.data.title}
-              </h3>
-              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">
-                {post.data.excerpt}
-              </p>
-              <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
-                Read more &rarr;
-              </span>
-            </a>
-          ))
-        }
+        {latestPosts.map((post) => (
+          <a href={`/blog/${post.id}`} class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-all">
+            <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
+            <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">{post.data.title}</h3>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">{post.data.excerpt}</p>
+            <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">Read more &rarr;</span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -409,14 +392,10 @@ const formatDate = (date: Date | undefined): string => {
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-default dark:text-slate-100">Open API. Full SDKs. Integrate in hours.</h2>
       <p class="mt-3 text-lg text-muted dark:text-slate-400 max-w-2xl mx-auto">
-        RESTful APIs, MQTT documentation, SDKs for Python, Node.js, and embedded C — everything your engineering team
-        needs.
+        RESTful APIs, MQTT documentation, SDKs for Python, Node.js, and embedded C — everything your engineering team needs.
       </p>
       <div class="mt-8">
-        <a
-          href={developersUrl}
-          class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors"
-        >
+        <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors">
           Explore Developer Docs &rarr;
         </a>
       </div>
@@ -427,11 +406,7 @@ const formatDate = (date: Date | undefined): string => {
   <CallToAction
     actions={[
       { variant: 'primary', text: 'Get Product Datasheet & Quote', href: contactUrl, icon: 'tabler:file-description' },
-      {
-        text: 'Talk to an Engineer',
-        href: `https://wa.me/${whatsappNumber}`,
-        icon: 'tabler:brand-whatsapp',
-      },
+      { text: 'Talk to an Engineer', href: `https://wa.me/${whatsappNumber}`, icon: 'tabler:brand-whatsapp' },
     ]}
   >
     <Fragment slot="title">Get Your Product Datasheet &amp; Custom Quote</Fragment>
@@ -440,3 +415,56 @@ const formatDate = (date: Date | undefined): string => {
     </Fragment>
   </CallToAction>
 </Layout>
+
+<script>
+  // ===== Hero Carousel =====
+  (function () {
+    var section = document.getElementById('heroSection');
+    if (!section) return;
+    var slides = section.querySelectorAll('.hero-slide');
+    var dots = section.querySelectorAll('.hero-dot');
+    if (slides.length === 0) return;
+
+    var current = 0;
+    var timer;
+
+    function showSlide(index) {
+      slides.forEach(function (s, i) {
+        s.classList.toggle('opacity-100', i === index);
+        s.classList.toggle('z-10', i === index);
+        s.classList.toggle('opacity-0', i !== index);
+        s.classList.toggle('z-0', i !== index);
+      });
+      dots.forEach(function (d, i) {
+        d.classList.toggle('bg-white', i === index);
+        d.classList.toggle('border-white', i === index);
+        d.classList.toggle('scale-125', i === index);
+        d.classList.toggle('bg-transparent', i !== index);
+      });
+      current = index;
+    }
+
+    function nextSlide() {
+      showSlide((current + 1) % slides.length);
+    }
+
+    function startTimer() {
+      stopTimer();
+      timer = setInterval(nextSlide, 5000);
+    }
+
+    function stopTimer() {
+      if (timer) clearInterval(timer);
+    }
+
+    dots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        var idx = parseInt(dot.getAttribute('data-dot'), 10);
+        showSlide(idx);
+        startTimer();
+      });
+    });
+
+    startTimer();
+  })();
+</script>
