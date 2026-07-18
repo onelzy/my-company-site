@@ -2,12 +2,9 @@
 export const prerender = false;
 
 import Layout from '~/layouts/PageLayout.astro';
-
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import ProductCard from '~/components/products/ProductCard.astro';
 
 import { getPermalink } from '~/utils/permalinks';
-import { products as rawProducts } from '~/data/products';
 import { SITE } from 'astrowind:config';
 import { getCollection } from 'astro:content';
 
@@ -22,14 +19,6 @@ const developersUrl = getPermalink('/developers');
 const solutionsUrl = getPermalink('/solutions');
 const blogUrl = getPermalink('/blog');
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
-
-const allProducts = rawProducts.map((p) => ({
-  ...p.data,
-  id: p.slug,
-  slug: p.slug,
-  collection: 'products' as const,
-  data: p.data,
-}));
 
 const heroSlides = [
   {
@@ -84,80 +73,92 @@ const formatDate = (date: Date | undefined): string => {
   if (!date) return '';
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 };
+
+const solutionSlides = [
+  {
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+    title: 'Smart Hotels',
+    subtitle: 'Complete room automation system for modern hospitality',
+    desc: 'OWON hotel solution integrates room thermostats, lighting control panels, and door sign displays into a unified ZigBee mesh network. PMS integration and energy analytics included.',
+    features: ['Room thermostat with guest profile', 'Lighting scene control panels', 'E-ink door sign displays', 'Central PMS integration', 'Per-room energy monitoring'],
+    img: '/images/products/pct513.svg',
+    color: 'from-blue-600 to-sky-500',
+  },
+  {
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+    title: 'Energy Management',
+    subtitle: 'Enterprise-grade sub-metering and energy analytics',
+    desc: 'Deploy OWON smart meters and multi-circuit monitors with Modbus/RS-485 or wireless connectivity. Real-time data feeds into EdgeEco cloud dashboard with automated reporting and anomaly detection.',
+    features: ['Single & three-phase smart meters', 'Multi-circuit CT monitoring', 'Real-time cloud dashboard', 'Automated anomaly alerts', 'Tenant billing ready'],
+    img: '/images/products/pc321-ty.svg',
+    color: 'from-amber-600 to-orange-500',
+  },
+  {
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+    title: 'Smart Building',
+    subtitle: 'HVAC optimization & intelligent lighting for commercial spaces',
+    desc: 'OWON building automation covers HVAC control, lighting management, and access systems. ZigBee mesh ensures reliable device communication with centralized web dashboard for facility managers.',
+    features: ['ZigBee HVAC thermostats', 'Zone-based lighting control', 'Access control integration', 'Web management dashboard', 'Energy saving analytics'],
+    img: '/images/products/pc341-3m16s.svg',
+    color: 'from-violet-600 to-purple-500',
+  },
+  {
+    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
+    title: 'Senior Care',
+    subtitle: 'Non-contact health monitoring for elderly facilities',
+    desc: 'OWON senior care solution uses non-invasive sleep monitors, emergency call buttons, and fall detection sensors. AiJuan platform provides nurse station dashboard with real-time alerts and health trend reports.',
+    features: ['Non-contact sleep monitoring', 'Emergency call system', 'Fall detection sensors', 'AiJuan nurse dashboard', 'Health trend reports'],
+    img: '/images/products/spm-915.svg',
+    color: 'from-rose-600 to-pink-500',
+  },
+  {
+    icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+    title: 'Industrial IoT',
+    subtitle: 'Factory monitoring & predictive maintenance',
+    desc: 'OWON industrial solution connects machinery sensors via Modbus RS-485 and wireless networks. Edge computing gateway processes data locally with predictive alerts, feeding into SCADA and MES systems.',
+    features: ['Modbus RS-485 connectivity', 'Edge computing gateway', 'Predictive maintenance alerts', 'SCADA/MES integration', 'Machinery energy tracking'],
+    img: '/images/products/edgeeco.svg',
+    color: 'from-emerald-600 to-teal-500',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
   <!-- ===== 1. Hero Carousel ===== -->
-  <section
-    class="hero-carousel relative w-full overflow-hidden"
-    style="min-height: 500px;"
-    id="heroSection"
-  >
-    {
-      heroSlides.map((slide, i) => (
-        <div
-          class={`hero-slide absolute inset-0 flex items-center transition-opacity duration-700 bg-gradient-to-r ${slide.gradient}`}
-          class:list={[i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0']}
-          data-index={i}
-        >
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-20">
-            <div class="grid lg:grid-cols-2 gap-10 items-center">
-              <!-- Text -->
-              <div class="text-center lg:text-left">
-                <!-- Badges -->
-                <div class="flex gap-2 justify-center lg:justify-start mb-4">
-                  {slide.badges.map((b) => (
-                    <span class="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-semibold text-white border border-white/30">
-                      {b}
-                    </span>
-                  ))}
-                </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
-                  {slide.title}
-                </h1>
-                <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl lg:mx-0">
-                  {slide.subtitle}
-                </p>
-                <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
-                  <a
-                    href={slide.link}
-                    class="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 transition-colors shadow-lg"
-                  >
-                    {slide.linkText} &rarr;
-                  </a>
-                  <a
-                    href={contactUrl}
-                    class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3.5 transition-colors border border-white/30 backdrop-blur-sm"
-                  >
-                    Contact Sales
-                  </a>
-                </div>
+  <section class="hero-carousel relative w-full overflow-hidden" style="min-height: 500px;" id="heroSection">
+    {heroSlides.map((slide, i) => (
+      <div
+        class={`hero-slide absolute inset-0 flex items-center transition-opacity duration-700 bg-gradient-to-r ${slide.gradient}`}
+        class:list={[i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0']}
+        data-index={i}
+      >
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-20">
+          <div class="grid lg:grid-cols-2 gap-10 items-center">
+            <div class="text-center lg:text-left">
+              <div class="flex gap-2 justify-center lg:justify-start mb-4">
+                {slide.badges.map((b) => (
+                  <span class="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-3 py-1 text-sm font-semibold text-white border border-white/30">{b}</span>
+                ))}
               </div>
-              <!-- Product Image -->
-              <div class="flex items-center justify-center">
-                <div class="w-full max-w-sm rounded-2xl bg-white/10 backdrop-blur-sm p-6 border border-white/20">
-                  <img
-                    src={slide.imgSrc}
-                    alt={slide.title}
-                    class="w-full h-auto object-contain drop-shadow-2xl"
-                    loading="eager"
-                  />
-                </div>
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">{slide.title}</h1>
+              <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl lg:mx-0">{slide.subtitle}</p>
+              <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+                <a href={slide.link} class="inline-flex items-center gap-2 rounded-full bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3.5 transition-colors shadow-lg">{slide.linkText} &rarr;</a>
+                <a href={contactUrl} class="inline-flex items-center gap-2 rounded-full bg-white/10 hover:bg-white/20 text-white font-semibold px-8 py-3.5 transition-colors border border-white/30 backdrop-blur-sm">Contact Sales</a>
+              </div>
+            </div>
+            <div class="flex items-center justify-center">
+              <div class="w-full max-w-sm rounded-2xl bg-white/10 backdrop-blur-sm p-6 border border-white/20">
+                <img src={slide.imgSrc} alt={slide.title} class="w-full h-auto object-contain drop-shadow-2xl" loading="eager" />
               </div>
             </div>
           </div>
         </div>
-      ))
-    }
-
-    <!-- Navigation dots -->
+      </div>
+    ))}
     <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2.5">
-      {heroSlides.map((slide, i) => (
-        <button
-          class={`hero-dot w-3 h-3 rounded-full transition-all duration-300 border-2 border-white/60 ${i === 0 ? 'bg-white border-white scale-125' : 'bg-transparent hover:bg-white/40'}`}
-          data-dot={i}
-          aria-label={`Slide ${i + 1}`}
-        ></button>
+      {heroSlides.map((_, i) => (
+        <button class={`hero-dot w-3 h-3 rounded-full transition-all duration-300 border-2 border-white/60 ${i === 0 ? 'bg-white border-white scale-125' : 'bg-transparent hover:bg-white/40'}`} data-dot={i} aria-label={`Slide ${i + 1}`}></button>
       ))}
     </div>
   </section>
@@ -166,177 +167,170 @@ const formatDate = (date: Date | undefined): string => {
   <section class="py-8 bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-wrap items-center justify-center lg:justify-between gap-6">
-        <!-- Trust badges -->
         <div class="flex flex-wrap justify-center gap-3">
-          <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300">
-            <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified
-          </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300">
-            <span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified
-          </span>
-          <span class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300">
-            <span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant
-          </span>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300"><span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified</span>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300"><span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified</span>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300"><span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant</span>
         </div>
-        <!-- Stats -->
         <div class="flex gap-8">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-primary dark:text-blue-300">1M+</div>
-            <div class="text-xs text-muted dark:text-slate-400">Devices Deployed</div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-primary dark:text-blue-300">50+</div>
-            <div class="text-xs text-muted dark:text-slate-400">Countries</div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-primary dark:text-blue-300">15+</div>
-            <div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div>
-          </div>
+          <div class="text-center"><div class="text-2xl font-bold text-primary dark:text-blue-300">1M+</div><div class="text-xs text-muted dark:text-slate-400">Devices Deployed</div></div>
+          <div class="text-center"><div class="text-2xl font-bold text-primary dark:text-blue-300">50+</div><div class="text-xs text-muted dark:text-slate-400">Countries</div></div>
+          <div class="text-center"><div class="text-2xl font-bold text-primary dark:text-blue-300">15+</div><div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== 2. Solutions by Industry ===== -->
-  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+  <!-- ===== 2. Product Categories ===== -->
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Purpose-built IoT solutions for mission-critical environments
-          </p>
-        </div>
-        <a
-          href={solutionsUrl}
-          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
-        >
-          View All Solutions &rarr;
-        </a>
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Product Categories</h2>
+        <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto text-lg">
+          ZigBee · WiFi · Tuya · MQTT · Modbus — enterprise-grade IoT devices
+        </p>
       </div>
-      <div class="grid gap-5 grid-cols-2 lg:grid-cols-5">
+      <div class="grid gap-5 grid-cols-2 lg:grid-cols-4">
         {[
-          { icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', title: 'Smart Hotels', desc: 'Guest room automation, lighting control, door sign displays & energy management', features: ['Room thermostat', 'Lighting panels', 'Door signs', 'Energy monitoring'] },
-          { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'Energy Management', desc: 'Sub-metering, real-time monitoring & analytics for commercial and industrial facilities', features: ['Smart meters', 'Multi-circuit CT', 'Cloud dashboard', 'Alarm & alerts'] },
-          { icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', title: 'Industrial IoT', desc: 'Factory monitoring, predictive maintenance & production line analytics', features: ['Machinery monitoring', 'Energy tracking', 'Modbus/RS-485', 'Predictive alerts'] },
-          { icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z', title: 'Senior Care', desc: 'Non-contact health monitoring, emergency call & safety tracking', features: ['Sleep monitoring', 'Emergency call', 'Fall detection', 'Nurse station'] },
-          { icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', title: 'Smart Building', desc: 'HVAC optimization, lighting automation & access control for commercial spaces', features: ['HVAC control', 'Lighting', 'Access control', 'Energy saving'] },
-        ].map((item) => (
-          <a
-            href={solutionsUrl}
-            class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-sm hover:shadow-md border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 overflow-hidden"
-          >
-            <div class="p-5 flex-1">
-              <div class="w-10 h-10 mb-4 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center">
-                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon}/>
-                </svg>
-              </div>
-              <h3 class="text-base font-semibold text-default dark:text-slate-200 mb-2">{item.title}</h3>
-              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">{item.desc}</p>
-              <ul class="space-y-1.5">
-                {item.features.map((f) => (
-                  <li class="flex items-start gap-2 text-xs text-muted dark:text-slate-400">
-                    <svg class="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+          { label: 'Smart Meters', desc: 'Single-phase, three-phase, multi-circuit DIN rail meters', img: '/images/products/pc321-ty.svg', link: '/products?dim=type&type=smart-meters', badges: ['Tuya', 'MQTT', 'ZigBee'] },
+          { label: 'Thermostats', desc: '24V AC, boiler, touchscreen & ZigBee HVAC controllers', img: '/images/products/pct513.svg', link: '/products?dim=type&type=thermostats', badges: ['Tuya', 'MQTT', 'ZigBee'] },
+          { label: 'Hotel Control', desc: 'Room thermostats, lighting, door signs & energy mgmt', img: '/images/products/pc341-3m16s.svg', link: '/products?dim=type&type=hotel-control', badges: ['ZigBee'] },
+          { label: 'Senior Care', desc: 'Sleep monitors, emergency call, fall detection & nurse station', img: '/images/products/spm-915.svg', link: '/products?dim=type&type=senior-care', badges: ['ZigBee'] },
+        ].map((cat) => (
+          <a href={cat.link} class="group relative rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+            <!-- Image -->
+            <div class="aspect-[4/3] bg-white dark:bg-slate-700/50 flex items-center justify-center p-6 group-hover:scale-105 transition-transform duration-500">
+              <img src={cat.img} alt={cat.label} class="w-full h-full object-contain" loading="lazy" />
             </div>
-            <div class="px-5 py-3 border-t border-gray-100 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/80">
-              <span class="text-xs font-medium text-primary group-hover:underline">Learn more &rarr;</span>
+            <!-- Content -->
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-default dark:text-slate-200 mb-1">{cat.label}</h3>
+              <p class="text-sm text-muted dark:text-slate-400 mb-3">{cat.desc}</p>
+              <div class="flex gap-1.5 flex-wrap">
+                {cat.badges.map((b) => (
+                  <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-primary/10 dark:bg-primary/20 text-primary">{b}</span>
+                ))}
+              </div>
             </div>
           </a>
         ))}
       </div>
+      <div class="text-center mt-10">
+        <a href={productsUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-3.5 transition-colors shadow-lg shadow-primary/25">View All Products &rarr;</a>
+      </div>
     </div>
   </section>
 
-  <!-- ===== 3. Featured Products ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
+  <!-- ===== 3. Solutions by Industry (Carousel) ===== -->
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50" id="solutionsSection">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
         <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Featured Products</h2>
+          <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
           <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            ZigBee · WiFi · Tuya · MQTT · Modbus — open protocols, enterprise ready
+            Purpose-built IoT solutions for mission-critical environments
           </p>
         </div>
-        <a
-          href={productsUrl}
-          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
-        >
-          View All Products &rarr;
-        </a>
+        <div class="flex items-center gap-2">
+          <button
+            id="solPrev"
+            class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:border-primary hover:text-primary transition-colors"
+            aria-label="Previous solution"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button
+            id="solNext"
+            class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-slate-600 flex items-center justify-center text-gray-500 dark:text-slate-400 hover:border-primary hover:text-primary transition-colors"
+            aria-label="Next solution"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
       </div>
-      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-        {allProducts.map((product) => <ProductCard product={product} href="/products" />)}
+
+      <!-- Carousel container -->
+      <div class="relative overflow-hidden rounded-2xl bg-white dark:bg-slate-800 shadow-md border border-gray-200 dark:border-slate-700" id="solCarousel">
+        <div class="flex transition-transform duration-500 ease-out" id="solTrack">
+          {solutionSlides.map((sol, i) => (
+            <div class="w-full flex-shrink-0" data-sol-index={i}>
+              <div class="grid lg:grid-cols-2 gap-0">
+                <!-- Text content -->
+                <div class="p-8 lg:p-12 flex flex-col justify-center">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class={`w-12 h-12 rounded-xl bg-gradient-to-br ${sol.color} flex items-center justify-center shadow-lg`}>
+                      <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={sol.icon}/>
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 class="text-xl font-bold text-default dark:text-slate-200">{sol.title}</h3>
+                      <p class="text-sm text-muted dark:text-slate-400">{sol.subtitle}</p>
+                    </div>
+                  </div>
+                  <p class="text-muted dark:text-slate-400 leading-relaxed mb-6">{sol.desc}</p>
+                  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mb-6">
+                    {sol.features.map((f) => (
+                      <li class="flex items-center gap-2 text-sm text-default dark:text-slate-300">
+                        <svg class="w-4 h-4 text-green-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <div>
+                    <a href={solutionsUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-3 transition-colors">Learn More &rarr;</a>
+                  </div>
+                </div>
+                <!-- Image -->
+                <div class={`bg-gradient-to-br ${sol.color} flex items-center justify-center p-8 lg:p-12 min-h-[280px]`}>
+                  <img src={sol.img} alt={sol.title} class="w-full max-w-xs h-auto object-contain drop-shadow-2xl" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Dots -->
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {solutionSlides.map((_, i) => (
+            <button class={`sol-dot w-2 h-2 rounded-full transition-all ${i === 0 ? 'bg-primary scale-125' : 'bg-gray-300 dark:bg-slate-600'}`} data-sol-dot={i} aria-label={`Solution ${i + 1}`}></button>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ===== 4. Company & Factory ===== -->
-  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-3 gap-10 md:divide-x md:divide-gray-200 dark:md:divide-slate-700">
         <div class="md:pr-10">
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Company</h2>
           <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-6">
-            XIAMEN OWON TECHNOLOGY CO.,LTD is a leading IoT device manufacturer with 15+ years of R&D expertise. We
-            design, manufacture, and deliver smart energy meters, thermostats, and IoT solutions to B2B customers across
-            50+ countries.
+            XIAMEN OWON TECHNOLOGY CO.,LTD is a leading IoT device manufacturer with 15+ years of R&D expertise. We design, manufacture, and deliver smart energy meters, thermostats, and IoT solutions to B2B customers across 50+ countries.
           </p>
           <div class="grid grid-cols-2 gap-4">
-            <div class="text-center">
-              <div class="text-2xl font-bold text-primary">1M+</div>
-              <div class="text-xs text-muted dark:text-slate-400">Devices</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-primary">50+</div>
-              <div class="text-xs text-muted dark:text-slate-400">Countries</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-primary">15+</div>
-              <div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div>
-            </div>
-            <div class="text-center">
-              <div class="text-2xl font-bold text-primary">200+</div>
-              <div class="text-xs text-muted dark:text-slate-400">Employees</div>
-            </div>
+            <div class="text-center"><div class="text-2xl font-bold text-primary">1M+</div><div class="text-xs text-muted dark:text-slate-400">Devices</div></div>
+            <div class="text-center"><div class="text-2xl font-bold text-primary">50+</div><div class="text-xs text-muted dark:text-slate-400">Countries</div></div>
+            <div class="text-center"><div class="text-2xl font-bold text-primary">15+</div><div class="text-xs text-muted dark:text-slate-400">Years R&amp;D</div></div>
+            <div class="text-center"><div class="text-2xl font-bold text-primary">200+</div><div class="text-xs text-muted dark:text-slate-400">Employees</div></div>
           </div>
         </div>
         <div class="md:px-10">
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Factory</h2>
           <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-sm text-default dark:text-slate-200">20,000m&sup2; manufacturing facility in Xiamen, China</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-sm text-default dark:text-slate-200">ISO 9001 certified quality management</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-sm text-default dark:text-slate-200">In-house SMT production lines</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-sm text-default dark:text-slate-200">Dedicated reliability testing lab</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span>
-              <span class="text-sm text-default dark:text-slate-200">24/7 production capability</span>
-            </li>
+            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">20,000m&sup2; manufacturing facility in Xiamen, China</span></li>
+            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">ISO 9001 certified quality management</span></li>
+            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">In-house SMT production lines</span></li>
+            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">Dedicated reliability testing lab</span></li>
+            <li class="flex items-start gap-3"><span class="text-green-500 shrink-0 mt-0.5 text-lg font-bold">&#10003;</span><span class="text-sm text-default dark:text-slate-200">24/7 production capability</span></li>
           </ul>
         </div>
         <div class="md:pl-10">
           <h2 class="text-2xl font-bold text-default dark:text-slate-100 mb-4">Certifications</h2>
           <div class="flex flex-wrap gap-2">
             {['CE','FCC','RoHS','UKCA','RED','ISO 9001','ISO 14001','ISO 45001','BSCI'].map((c) => (
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300">
-                <span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> {c}
-              </span>
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-xs font-medium text-green-700 dark:text-green-300"><span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> {c}</span>
             ))}
           </div>
         </div>
@@ -345,18 +339,14 @@ const formatDate = (date: Date | undefined): string => {
   </section>
 
   <!-- ===== 5. Factory Video ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
+  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-default dark:text-slate-100">See Our Factory</h2>
-      <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto mb-10">
-        Take a virtual tour of our 20,000m&sup2; manufacturing facility in Xiamen, China.
-      </p>
+      <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto mb-10">Take a virtual tour of our 20,000m&sup2; manufacturing facility in Xiamen, China.</p>
       <div class="max-w-3xl mx-auto rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
         <div class="text-center">
           <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
-            <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"></path>
-            </svg>
+            <svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
           </div>
           <p class="text-white font-medium text-lg">OWON Factory Tour — Xiamen, China</p>
           <p class="text-slate-400 text-sm mt-1">Click to play video</p>
@@ -366,22 +356,18 @@ const formatDate = (date: Date | undefined): string => {
   </section>
 
   <!-- ===== 6. Latest from Blog ===== -->
-  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
         <div>
           <h2 class="text-3xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Case studies, product updates, and industry insights from the OWON team.
-          </p>
+          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">Case studies, product updates, and industry insights.</p>
         </div>
-        <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">
-          View All Posts &rarr;
-        </a>
+        <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">View All Posts &rarr;</a>
       </div>
       <div class="grid gap-6 sm:grid-cols-3">
         {latestPosts.map((post) => (
-          <a href={`/blog/${post.id}`} class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-all">
+          <a href={`/blog/${post.id}`} class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-all">
             <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
             <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">{post.data.title}</h3>
             <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">{post.data.excerpt}</p>
@@ -393,16 +379,12 @@ const formatDate = (date: Date | undefined): string => {
   </section>
 
   <!-- ===== 7. Developer CTA ===== -->
-  <section class="py-12 lg:py-16 bg-white dark:bg-slate-900">
+  <section class="py-12 lg:py-16 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-3xl font-bold text-default dark:text-slate-100">Open API. Full SDKs. Integrate in hours.</h2>
-      <p class="mt-3 text-lg text-muted dark:text-slate-400 max-w-2xl mx-auto">
-        RESTful APIs, MQTT documentation, SDKs for Python, Node.js, and embedded C — everything your engineering team needs.
-      </p>
+      <p class="mt-3 text-lg text-muted dark:text-slate-400 max-w-2xl mx-auto">RESTful APIs, MQTT documentation, SDKs for Python, Node.js, and embedded C — everything your engineering team needs.</p>
       <div class="mt-8">
-        <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors">
-          Explore Developer Docs &rarr;
-        </a>
+        <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors">Explore Developer Docs &rarr;</a>
       </div>
     </div>
   </section>
@@ -415,9 +397,7 @@ const formatDate = (date: Date | undefined): string => {
     ]}
   >
     <Fragment slot="title">Get Your Product Datasheet &amp; Custom Quote</Fragment>
-    <Fragment slot="subtitle">
-      Contact us for product catalogues, technical documentation, and customized solution quotes
-    </Fragment>
+    <Fragment slot="subtitle">Contact us for product catalogues, technical documentation, and customized solution quotes</Fragment>
   </CallToAction>
 </Layout>
 
@@ -429,47 +409,40 @@ const formatDate = (date: Date | undefined): string => {
     var slides = section.querySelectorAll('.hero-slide');
     var dots = section.querySelectorAll('.hero-dot');
     if (slides.length === 0) return;
+    var current = 0, timer;
+    function showSlide(i) {
+      slides.forEach(function(s,j){s.classList.toggle('opacity-100',j===i);s.classList.toggle('z-10',j===i);s.classList.toggle('opacity-0',j!==i);s.classList.toggle('z-0',j!==i);});
+      dots.forEach(function(d,j){d.classList.toggle('bg-white',j===i);d.classList.toggle('border-white',j===i);d.classList.toggle('scale-125',j===i);d.classList.toggle('bg-transparent',j!==i);});
+      current = i;
+    }
+    function next() { showSlide((current + 1) % slides.length); }
+    function start() { stop(); timer = setInterval(next, 5000); }
+    function stop() { if (timer) clearInterval(timer); }
+    dots.forEach(function(d){d.addEventListener('click',function(){showSlide(parseInt(d.getAttribute('data-dot'),10));start();});});
+    start();
+  })();
 
+  // ===== Solutions Carousel =====
+  (function () {
+    var track = document.getElementById('solTrack');
+    var prev = document.getElementById('solPrev');
+    var next = document.getElementById('solNext');
+    var dots = document.querySelectorAll('.sol-dot');
+    if (!track || !prev || !next) return;
+    var slides = track.querySelectorAll('[data-sol-index]');
+    var total = slides.length;
     var current = 0;
-    var timer;
 
-    function showSlide(index) {
-      slides.forEach(function (s, i) {
-        s.classList.toggle('opacity-100', i === index);
-        s.classList.toggle('z-10', i === index);
-        s.classList.toggle('opacity-0', i !== index);
-        s.classList.toggle('z-0', i !== index);
-      });
-      dots.forEach(function (d, i) {
-        d.classList.toggle('bg-white', i === index);
-        d.classList.toggle('border-white', i === index);
-        d.classList.toggle('scale-125', i === index);
-        d.classList.toggle('bg-transparent', i !== index);
-      });
-      current = index;
+    function goTo(i) {
+      if (i < 0) i = total - 1;
+      if (i >= total) i = 0;
+      current = i;
+      track.style.transform = 'translateX(-' + (i * 100) + '%)';
+      dots.forEach(function(d,j){d.classList.toggle('bg-primary',j===i);d.classList.toggle('scale-125',j===i);d.classList.toggle('bg-gray-300',j!==i);d.classList.toggle('dark:bg-slate-600',j!==i);});
     }
 
-    function nextSlide() {
-      showSlide((current + 1) % slides.length);
-    }
-
-    function startTimer() {
-      stopTimer();
-      timer = setInterval(nextSlide, 5000);
-    }
-
-    function stopTimer() {
-      if (timer) clearInterval(timer);
-    }
-
-    dots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        var idx = parseInt(dot.getAttribute('data-dot'), 10);
-        showSlide(idx);
-        startTimer();
-      });
-    });
-
-    startTimer();
+    prev.addEventListener('click', function(){goTo(current - 1);});
+    next.addEventListener('click', function(){goTo(current + 1);});
+    dots.forEach(function(d){d.addEventListener('click',function(){goTo(parseInt(d.getAttribute('data-sol-dot'),10));});});
   })();
 </script>
