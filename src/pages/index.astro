@@ -186,9 +186,6 @@ const solutionSlides = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Product Categories</h2>
-        <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto text-lg">
-          ZigBee · WiFi · Tuya · MQTT · Modbus — enterprise-grade IoT devices
-        </p>
       </div>
       <div class="grid gap-5 grid-cols-2 lg:grid-cols-4">
         {[
@@ -227,9 +224,6 @@ const solutionSlides = [
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
         <div>
           <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Purpose-built IoT solutions for mission-critical environments
-          </p>
         </div>
         <div class="flex items-center gap-2">
           <button
@@ -341,8 +335,7 @@ const solutionSlides = [
   <!-- ===== 5. Factory Video ===== -->
   <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-default dark:text-slate-100">See Our Factory</h2>
-      <p class="mt-3 text-muted dark:text-slate-400 max-w-2xl mx-auto mb-10">Take a virtual tour of our 20,000m&sup2; manufacturing facility in Xiamen, China.</p>
+      <h2 class="text-3xl font-bold text-default dark:text-slate-100 mb-10">See Our Factory</h2>
       <div class="max-w-3xl mx-auto rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
         <div class="text-center">
           <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4">
@@ -359,19 +352,27 @@ const solutionSlides = [
   <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">Case studies, product updates, and industry insights.</p>
-        </div>
+        <h2 class="text-3xl font-bold text-default dark:text-slate-100">Latest from Blog</h2>
         <a href={blogUrl} class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap">View All Posts &rarr;</a>
       </div>
       <div class="grid gap-6 sm:grid-cols-3">
         {latestPosts.map((post) => (
-          <a href={`/blog/${post.id}`} class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:shadow-md transition-all">
-            <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
-            <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">{post.data.title}</h3>
-            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">{post.data.excerpt}</p>
-            <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">Read more &rarr;</span>
+          <a href={`/blog/${post.id}`} class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-md transition-all">
+            {post.data.image ? (
+              <div class="aspect-[16/10] overflow-hidden">
+                <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              </div>
+            ) : (
+              <div class="aspect-[16/10] bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/10 dark:to-transparent flex items-center justify-center">
+                <svg class="w-10 h-10 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+              </div>
+            )}
+            <div class="p-5 flex-1">
+              <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
+              <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">{post.data.title}</h3>
+              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">{post.data.excerpt}</p>
+              <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">Read more &rarr;</span>
+            </div>
           </a>
         ))}
       </div>
@@ -381,9 +382,8 @@ const solutionSlides = [
   <!-- ===== 7. Developer CTA ===== -->
   <section class="py-12 lg:py-16 bg-gray-50 dark:bg-slate-800/50">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl font-bold text-default dark:text-slate-100">Open API. Full SDKs. Integrate in hours.</h2>
-      <p class="mt-3 text-lg text-muted dark:text-slate-400 max-w-2xl mx-auto">RESTful APIs, MQTT documentation, SDKs for Python, Node.js, and embedded C — everything your engineering team needs.</p>
-      <div class="mt-8">
+      <h2 class="text-3xl font-bold text-default dark:text-slate-100 mb-8">Open API. Full SDKs. Integrate in hours.</h2>
+      <div>
         <a href={developersUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-8 py-4 transition-colors">Explore Developer Docs &rarr;</a>
       </div>
     </div>
@@ -397,7 +397,6 @@ const solutionSlides = [
     ]}
   >
     <Fragment slot="title">Get Your Product Datasheet &amp; Custom Quote</Fragment>
-    <Fragment slot="subtitle">Contact us for product catalogues, technical documentation, and customized solution quotes</Fragment>
   </CallToAction>
 </Layout>
 
