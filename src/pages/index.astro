@@ -36,7 +36,6 @@ const heroSlides = [
     title: 'Smart Energy Meters',
     subtitle: 'Tuya & MQTT — Precision metering for residential and commercial energy management',
     gradient: 'from-blue-700 via-blue-600 to-indigo-700',
-    dotColor: 'bg-blue-500',
     badges: ['Tuya', 'MQTT'],
     link: '/products?dim=type&type=smart-meters',
     linkText: 'Explore Smart Meters',
@@ -46,7 +45,6 @@ const heroSlides = [
     title: 'Smart Thermostats',
     subtitle: 'Tuya & MQTT — Touchscreen HVAC control for North American and European markets',
     gradient: 'from-orange-600 via-red-500 to-rose-600',
-    dotColor: 'bg-orange-500',
     badges: ['Tuya', 'MQTT'],
     link: '/products?dim=type&type=thermostats',
     linkText: 'Explore Thermostats',
@@ -56,7 +54,6 @@ const heroSlides = [
     title: 'ZigBee Hotel Solution',
     subtitle: 'Room thermostats, lighting panels & door sign displays — full hotel room automation',
     gradient: 'from-purple-700 via-violet-600 to-indigo-700',
-    dotColor: 'bg-purple-500',
     badges: ['ZigBee'],
     link: '/products?dim=type&type=hotel-control',
     linkText: 'Explore Hotel Solutions',
@@ -66,20 +63,11 @@ const heroSlides = [
     title: 'ZigBee Senior Care',
     subtitle: 'Non-contact sleep monitoring, emergency call & health tracking for elderly facilities',
     gradient: 'from-teal-700 via-emerald-600 to-green-700',
-    dotColor: 'bg-teal-500',
     badges: ['ZigBee'],
     link: '/products?dim=type&type=senior-care',
     linkText: 'Explore Senior Care',
     imgSrc: '/images/products/spm-915.svg',
   },
-];
-
-const industries = [
-  { icon: '🏨', title: 'Smart Hotels', desc: 'Guest room automation & energy management' },
-  { icon: '⚡', title: 'Energy Management', desc: 'Sub-metering, monitoring & analytics' },
-  { icon: '🏢', title: 'Smart Building', desc: 'HVAC, lighting & access control' },
-  { icon: '🏥', title: 'Senior Care', desc: 'Non-contact monitoring & safety alerts' },
-  { icon: '🏭', title: 'Industrial IoT', desc: 'Factory monitoring & predictive maintenance' },
 ];
 
 const blogPosts = await getCollection('post');
@@ -210,36 +198,55 @@ const formatDate = (date: Date | undefined): string => {
   </section>
 
   <!-- ===== 2. Solutions by Industry ===== -->
-  <section class="py-16 lg:py-20 bg-gray-50 dark:bg-slate-800/50">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Solutions by Industry</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Tailored IoT solutions for every sector — from concept to deployment.
-          </p>
-        </div>
-        <a
-          href={solutionsUrl}
-          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
-        >
-          View Solutions &rarr;
-        </a>
+  <section class="py-20 lg:py-24 relative overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0 bg-slate-900 dark:bg-slate-950">
+      <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4"></div>
+      <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/4"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-400 tracking-wide uppercase mb-4">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          Industry Solutions
+        </span>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Solutions by Industry</h2>
+        <p class="text-slate-400 max-w-xl mx-auto text-lg">
+          Purpose-built IoT solutions for mission-critical environments
+        </p>
       </div>
-      <div class="grid gap-6 grid-cols-2 lg:grid-cols-5">
-        {industries.map((item) => (
+
+      <!-- Solution cards -->
+      <div class="grid gap-4 sm:gap-5 grid-cols-2 lg:grid-cols-5">
+        {[
+          { icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6', title: 'Smart Hotels', desc: 'Guest room automation & energy management', link: solutionsUrl, gradient: 'from-blue-500/20 to-cyan-500/10', ring: 'ring-blue-500/30' },
+          { icon: 'M13 10V3L4 14h7v7l9-11h-7z', title: 'Energy Mgmt', desc: 'Sub-metering, monitoring & analytics', link: solutionsUrl, gradient: 'from-amber-500/20 to-orange-500/10', ring: 'ring-amber-500/30' },
+          { icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4', title: 'Smart Building', desc: 'HVAC, lighting & access control', link: solutionsUrl, gradient: 'from-violet-500/20 to-purple-500/10', ring: 'ring-violet-500/30' },
+          { icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z', title: 'Senior Care', desc: 'Non-contact monitoring & safety alerts', link: solutionsUrl, gradient: 'from-rose-500/20 to-pink-500/10', ring: 'ring-rose-500/30' },
+          { icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z', title: 'Industrial IoT', desc: 'Factory monitoring & predictive maintenance', link: solutionsUrl, gradient: 'from-emerald-500/20 to-teal-500/10', ring: 'ring-emerald-500/30' },
+        ].map((item) => (
           <a
-            href={solutionsUrl}
-            class="group flex flex-col rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-lg border border-gray-200 dark:border-slate-700 transition-all hover:-translate-y-0.5 overflow-hidden"
+            href={item.link}
+            class={`group relative rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 p-6 hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300 overflow-hidden`}
           >
-            <div class="aspect-video bg-gray-100 dark:bg-slate-700 flex items-center justify-center text-4xl">
-              {item.icon}
+            <!-- Gradient glow -->
+            <div class={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
+            <!-- Icon -->
+            <div class={`relative w-12 h-12 mb-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+              <svg class="w-6 h-6 text-white/80 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={item.icon}/>
+              </svg>
             </div>
-            <div class="p-5">
-              <h3 class="text-base font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2">
-                {item.title}
-              </h3>
-              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{item.desc}</p>
+            <!-- Text -->
+            <h3 class="relative text-base font-semibold text-white mb-1.5">{item.title}</h3>
+            <p class="relative text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+            <!-- Arrow -->
+            <div class="relative mt-4 flex items-center gap-1 text-xs font-medium text-slate-500 group-hover:text-blue-400 transition-colors">
+              Learn more
+              <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
             </div>
           </a>
         ))}
@@ -248,24 +255,34 @@ const formatDate = (date: Date | undefined): string => {
   </section>
 
   <!-- ===== 3. Featured Products ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
-        <div>
-          <h2 class="text-3xl font-bold text-default dark:text-slate-100">Featured Products</h2>
-          <p class="mt-2 text-muted dark:text-slate-400 max-w-xl">
-            Our flagship IoT devices — ZigBee, WiFi, Tuya, and MQTT ready.
-          </p>
-        </div>
-        <a
-          href={productsUrl}
-          class="inline-flex items-center gap-1 text-primary hover:underline font-medium text-sm whitespace-nowrap"
-        >
-          View All Products &rarr;
-        </a>
+  <section class="py-20 lg:py-24 relative overflow-hidden">
+    <!-- Tech background -->
+    <div class="absolute inset-0 bg-white dark:bg-slate-900">
+      <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]" style="background-image: linear-gradient(30deg, #0ea5e9 1px, transparent 1px), linear-gradient(-30deg, #06b6d4 1px, transparent 1px); background-size: 60px 60px;"></div>
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/[0.03] dark:bg-blue-500/[0.06] rounded-full blur-[80px] -translate-y-1/2"></div>
+    </div>
+
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-14">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-primary/10 border border-primary/20 px-3 py-1 text-xs font-semibold text-primary tracking-wide uppercase mb-4">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          Product Catalogue
+        </span>
+        <h2 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100 mb-4">Featured Products</h2>
+        <p class="text-muted dark:text-slate-400 max-w-xl mx-auto text-lg">
+          ZigBee &bull; WiFi &bull; Tuya &bull; MQTT &bull; Modbus — open protocols, enterprise ready
+        </p>
       </div>
+
       <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {allProducts.map((product) => <ProductCard product={product} href="/products" />)}
+      </div>
+
+      <div class="text-center mt-12">
+        <a href={productsUrl} class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-3.5 transition-colors shadow-lg shadow-primary/25">
+          View Full Catalogue &rarr;
+        </a>
       </div>
     </div>
   </section>
