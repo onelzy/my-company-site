@@ -480,60 +480,17 @@
   // Event binding
   // ===========================================================================
   function bindEvents() {
-    // Tab clicks
-    $$('.dimension-tab').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        switchDimension(tab.getAttribute('data-dim'));
-      });
-    });
-
-    // Chip clicks (event delegation on filter row)
+    // Chip clicks (event delegation on both filter rows)
     var filterRow = $('#filterRow');
-    if (filterRow) {
-      filterRow.addEventListener('click', handleChipClick);
-    }
+    if (filterRow) { filterRow.addEventListener('click', handleChipClick); }
+    var capRow = $('#capFilterRow');
+    if (capRow) { capRow.addEventListener('click', handleChipClick); }
 
     // Browser back/forward
     window.addEventListener('popstate', function () {
       readFiltersFromURL();
       syncChips();
       applyFilters();
-
-      // Update dimension tab UI
-      $$('.dimension-tab').forEach(function (tab) {
-        if (tab.getAttribute('data-dim') === currentDim) {
-          tab.classList.add(
-            'active',
-            'bg-white',
-            'dark:bg-slate-700',
-            'text-default',
-            'dark:text-slate-200',
-            'shadow-sm'
-          );
-          tab.classList.remove('text-gray-600', 'dark:text-slate-400');
-        } else {
-          tab.classList.remove(
-            'active',
-            'bg-white',
-            'dark:bg-slate-700',
-            'text-default',
-            'dark:text-slate-200',
-            'shadow-sm'
-          );
-          tab.classList.add('text-gray-600', 'dark:text-slate-400');
-        }
-      });
-
-      // Show correct filter dim
-      var tf = $('#typeFilters');
-      var sf = $('#solutionFilters');
-      if (currentDim === 'solution') {
-        if (tf) tf.classList.add('hidden');
-        if (sf) sf.classList.remove('hidden');
-      } else {
-        if (tf) tf.classList.remove('hidden');
-        if (sf) sf.classList.add('hidden');
-      }
     });
 
     // Product search input
@@ -555,43 +512,6 @@
   // ===========================================================================
   function init() {
     readFiltersFromURL();
-
-    // Apply initial dimension
-    $$('.dimension-tab').forEach(function (tab) {
-      if (tab.getAttribute('data-dim') === currentDim) {
-        tab.classList.add(
-          'active',
-          'bg-white',
-          'dark:bg-slate-700',
-          'text-default',
-          'dark:text-slate-200',
-          'shadow-sm'
-        );
-        tab.classList.remove('text-gray-600', 'dark:text-slate-400');
-      } else {
-        tab.classList.remove(
-          'active',
-          'bg-white',
-          'dark:bg-slate-700',
-          'text-default',
-          'dark:text-slate-200',
-          'shadow-sm'
-        );
-        tab.classList.add('text-gray-600', 'dark:text-slate-400');
-      }
-    });
-
-    // Show correct filter dimension
-    var tf = $('#typeFilters');
-    var sf = $('#solutionFilters');
-    if (currentDim === 'solution') {
-      if (tf) tf.classList.add('hidden');
-      if (sf) sf.classList.remove('hidden');
-    } else {
-      if (tf) tf.classList.remove('hidden');
-      if (sf) sf.classList.add('hidden');
-    }
-
     syncChips();
     applyFilters();
     bindEvents();
