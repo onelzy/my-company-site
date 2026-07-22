@@ -139,6 +139,45 @@ export const products: ProductsEntry[] = [
     "body": "## Overview\n\nThe PC341-3M16S is a multi-circuit energy monitor designed for commercial and industrial energy sub-metering. It supports 3 main current transformer ports plus 16 sub-CT channels, enabling precise per-circuit monitoring across entire electrical panels.\n\n## Key Features\n\n- **19 Total Channels** — 3 main circuits + 16 sub-circuits\n- **ZigBee 3.0 Mesh** — reliable multi-device networking\n- **Modbus RTU** — industrial protocol support\n- **Per-Circuit Analytics** — identify energy hogs by circuit\n- **DIN Rail Mount** — fits standard electrical panels\n\n## Applications\n\n- Commercial building sub-metering\n- Industrial facility energy monitoring\n- Tenant billing systems\n- Data center PUE tracking"
   },
   {
+    "slug": "pc341-w-ty-smart-meter",
+    "data": {
+      "name": "PC341-W-TY Three Phase WiFi Smart Energy Meter",
+      "model": "PC341-W-TY",
+      "slug": {
+        "name": "PC341-W-TY Three Phase WiFi Smart Energy Meter",
+        "slug": "pc341-w-ty"
+      },
+      "description": "Tuya-compatible three phase WiFi smart energy meter with 5 CT clamps, bidirectional measurement, ±2% accuracy. Ideal for solar net metering and home energy management.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "/images/products/pc321-ty.svg",
+      "specs": {
+        "accuracy": "Class 4 (±2%)",
+        "voltage": "90~380V AC",
+        "current": "Up to 250A",
+        "frequency": "50/60Hz",
+        "powerSupply": "100~240V AC",
+        "display": "Analog and Digital",
+        "dimensions": "111.3 x 81.2 x 41.4 mm",
+        "weight": "586g",
+        "operatingTemp": "-20C to +55C",
+        "protocol": "WiFi 802.11 b/g/n + BLE",
+        "certification": "CE, FCC",
+        "warranty": "Contact us"
+      },
+      "language": "en"
+    },
+    "body": "A three-phase WiFi energy meter with 5 CT clamps for bidirectional solar net metering. Track real-time consumption and production, monitor up to 2 individual circuits.\n\n## Key Features\n\n- **Tuya Compliant** — fully compatible with Tuya Smart and Smart Life apps\n- **Bi-Directional Metering** — measures both energy consumed and produced, ideal for solar PV systems\n- **Single/3-Phase Compatible** — works with both single and three phase installations\n- **Real-time Monitoring** — voltage, current, power factor, active power every 15 seconds\n- **Tap-to-Run and Automation** — integrates with other Tuya devices for smart home automation\n- **Easy Installation** — wall mount with external antenna, clamp-on CTs, no wiring to mains\n\n## Product Usage\n\nThe PC341-W-TY connects via clamp-on CTs to monitor real-time power without interrupting your electrical system. The external antenna ensures reliable WiFi signal even in shielded enclosures. Perfect for solar net metering, home energy management, and commercial sub-metering."
+  },
+  {
     "slug": "pct513-smart-thermostat",
     "data": {
       "name": "PCT513 Touchscreen Smart Thermostat",
@@ -217,44 +256,5 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "## Overview\n\nThe SPM-915 is a non-contact sleep monitoring pad that tracks sleep quality, heart rate, and respiratory rate without any wearables. Placed under the mattress, it provides continuous health data via ZigBee to the AiJuan senior care platform.\n\n## Key Features\n\n- **Non-Contact** — no wearables, placed under mattress\n- **Continuous Monitoring** — 24/7 sleep quality tracking\n- **Health Metrics** — heart rate, respiratory rate, sleep stages\n- **Alert System** — abnormal event detection and alerts\n- **ZigBee Mesh** — reliable data transmission\n\n## Applications\n\n- Senior care facilities\n- Nursing homes\n- Home health monitoring\n- Hospital patient monitoring"
-    },
-  {
-    "slug": "pc341-w-ty",
-    "data": {
-      "name": "PC341-W-TY Three Phase WiFi Smart Energy Meter",
-      "model": "PC341-W-TY",
-      "slug": {
-        "name": "PC341-W-TY Three Phase WiFi Smart Energy Meter",
-        "slug": "pc341-w-ty"
-      },
-      "description": "Tuya-compatible three phase WiFi smart energy meter with 5 CT clamps, bidirectional measurement, ±2% accuracy. Ideal for solar net metering and home energy management.",
-      "productType": "smart-meters",
-      "productSubType": "three-phase",
-      "techSolution": "tuya",
-      "techSubType": "tuya-meters",
-      "communication": [
-        "wifi"
-      ],
-      "ecosystem": [
-        "tuya"
-      ],
-      "image": "/images/products/pc321-ty.svg",
-      "specs": {
-        "accuracy": "Class 4 (+-2%)",
-        "voltage": "90~380V AC",
-        "current": "Up to 250A",
-        "frequency": "50/60Hz",
-        "powerSupply": "100~240V AC",
-        "display": "Analog and Digital",
-        "dimensions": "111.3 x 81.2 x 41.4 mm",
-        "weight": "586g",
-        "operatingTemp": "-20C to +55C",
-        "protocol": "WiFi 802.11 b/g/n + BLE",
-        "certification": "CE, FCC",
-        "warranty": "Contact us"
-      },
-      "language": "en"
-    },
-    "body": "## Overview\n\nThe OWON PC341-W-TY helps you monitor the amount of electricity consumed and produced in your facility by connecting the clamp onto the power cable. It monitors whole home energy and up to 2 individual circuits with bidirectional measurement capability, making it ideal for solar net metering applications.\n\n## Key Features\n\n- **Tuya Compliant** — fully compatible with Tuya Smart and Smart Life apps\n- **Tap-to-Run and Automation** — supports automation with other Tuya devices\n- **Single/3-Phase Compatible** — works with both single and three phase systems\n- **Three CTs for Single Phase** — three current transformers for single phase application\n- **Real-time Monitoring** — measures Voltage, Current, Power Factor, Active Power\n- **Bi-Directional Measurement** — supports both energy consumption and production measurement\n- **Residential and Commercial** — suitable for both home and business applications\n- **Lightweight and Easy Install** — wall mounting with external antenna\n- **Every 15s Reporting** — real-time data updates every 15 seconds\n\n## Specifications\n\n| Parameter | Value |\n|-----------|-------|\n| Accuracy Class | 4 (+-2%) |\n| Operating Voltage | 90~380 Vac |\n| Operating Frequency | 50/60Hz |\n| Current Range | Up to 250 Amps |\n| Display Type | Analog and Digital |\n| WiFi | 802.11 b/g/n @ 2.4GHz |\n| BLE | For Wi-Fi Pairing |\n| ZigBee Profile | Home Automation Profile |\n| Operating Temperature | -20C to +55C |\n| Humidity | up to 90% non-condensing |\n| Output Power | Up to +20dBm |\n| Range (outdoor/indoor) | 100m / 30m |\n| Reporting Cycle | Every 15 seconds |\n| Main CT | 3.5mm three-pole audio connector with 1m cable |\n| Sub CT | 2.5mm three-pole audio connector with 1m cable |\n\n## Product Usage\n\nThe PC341-W-TY three phase energy meter connects via clamp-on CTs to monitor real-time power consumption and production. The external antenna design ensures reliable signal transmission even in shielded environments. Perfect for solar PV systems, home energy management, and commercial sub-metering.\n\n## FAQ\n\n**Q: What services can you provide?**\nA: ODM/OEM services available.\n\n**Q: Is the APP charged?**\nA: No, the APP is free. Download from Google Play or App Store.\n\n**Q: How to install?**\nA: Installation manual included. Contact us by email for detailed guidance.\n\n**Q: Can I order samples?**\nA: Yes, MOQ is 1 piece. Order 1pc first to test, then larger orders."
-    }
+  }
 ];
