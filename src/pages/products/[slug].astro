@@ -97,13 +97,31 @@ const breadcrumbSchema = {
   ],
 };
 
+// Dynamic FAQ content based on product's actual communication/ecosystem tags
+const productProtocol = (specs?.protocol ?? '') as string;
+const prodComm = communication.length > 0 ? communication.map(c => c.toUpperCase()).join(', ') : '';
+const prodEco = ecosystem.length > 0 ? ecosystem.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(' & ') : '';
+const isTuyaWifi = ecosystem.includes('tuya') && communication.includes('wifi');
+
+const protocolAnswer = isTuyaWifi
+  ? `This model supports ${productProtocol || prodComm || 'WiFi'}, fully compatible with Tuya Smart and Smart Life apps.`
+  : `This model supports ${productProtocol || prodComm || 'standard communication protocols'}.`;
+
+const integrationAnswer = prodEco
+  ? `Yes. ${prodEco} compatibility enables integration with most energy management platforms. Custom SDK available for advanced integration.`
+  : 'Yes. Standard protocol integration with major building and energy management systems. Custom SDK available.';
+
+const cloudAnswer = isTuyaWifi
+  ? 'No — fully local operation. Remote monitoring available via the Tuya Smart / Smart Life app. WiFi required for cloud connectivity.'
+  : 'No. Supports fully local operation. Cloud connectivity is optional.';
+
 const faqItems = (() => {
   const faqs: Record<string, Array<{q:string; a:string}>> = {
     'smart-meters': [
-      {q:'What communication protocols are supported?', a:'OWON smart meters support MQTT, Modbus RTU/TCP, ZigBee 3.0, WiFi, and 4G depending on the model.'},
+      {q:'What communication protocols are supported?', a: protocolAnswer},
       {q:'What is the accuracy class?', a:'Most OWON meters achieve Class 1.0 or Class 0.5S accuracy, compliant with IEC 62053-21/22 standards.'},
-      {q:'Can these meters integrate with existing BMS/EMS?', a:'Yes. Modbus TCP/RTU and MQTT support all major building and energy management systems.'},
-      {q:'Is cloud connectivity required?', a:'No. OWON meters support fully local operation. Cloud connectivity is optional via EdgeEco platform.'},
+      {q:'Can these meters integrate with existing BMS/EMS?', a: integrationAnswer},
+      {q:'Is cloud connectivity required?', a: cloudAnswer},
     ],
     'thermostats': [
       {q:'Which HVAC systems are compatible?', a:'OWON thermostats work with water-based heating/cooling, fan coil units, heat pumps, and boiler systems.'},
@@ -338,16 +356,16 @@ const faqSchema = {
               (() => {
                 const benefits = {
                   'smart-meters': [
-                    {icon:'📊', title:'Real-Time Monitoring', desc:'Track energy consumption with ±0.5% accuracy across single and three-phase circuits.'},
+                    {icon:'📊', title:'Real-Time Monitoring', desc:'Track energy consumption with real-time data across single and three-phase circuits.'},
                     {icon:'💰', title:'Cost Allocation', desc:'Sub-meter individual tenants, departments, or equipment with granular kWh data.'},
-                    {icon:'🔌', title:'Easy Integration', desc:'MQTT, Modbus, ZigBee, WiFi, and 4G — plug into any EMS or BMS platform.'},
+                    {icon:'🔌', title:'Easy Integration', desc:'Seamless protocol connectivity for EMS and BMS platform integration.'},
                     {icon:'🛡️', title:'Certified Quality', desc:'CE, FCC, RoHS certified. Built for commercial and industrial environments.'},
                   ],
                   'thermostats': [
                     {icon:'🎯', title:'Precision Control', desc:'±0.5°C accuracy with PID algorithms for consistent comfort and efficiency.'},
                     {icon:'⚡', title:'Energy Savings', desc:'Smart scheduling and occupancy detection reduce HVAC energy use by up to 30%.'},
                     {icon:'📱', title:'Remote Management', desc:'Control and monitor temperature zones from anywhere via app or web dashboard.'},
-                    {icon:'🔄', title:'Open Protocol', desc:'ZigBee, WiFi, Modbus — works with any building management system.'},
+                    {icon:'🔄', title:'Open Protocol', desc:'Seamless protocol integration with any building management system.'},
                   ],
                   'senior-care': [
                     {icon:'🫀', title:'Non-Contact Monitoring', desc:'Detect heart rate, breathing, and sleep patterns without wearables or cameras.'},
@@ -457,10 +475,10 @@ const faqSchema = {
               (() => {
                 const faqs = {
                   'smart-meters': [
-                    {q:'What communication protocols are supported?', a:'OWON smart meters support MQTT, Modbus RTU/TCP, ZigBee 3.0, WiFi, and 4G depending on the model. Multi-protocol models can operate on multiple protocols simultaneously.'},
+                    {q:'What communication protocols are supported?', a: protocolAnswer},
                     {q:'What is the meter accuracy class?', a:'Most OWON meters achieve Class 1.0 or Class 0.5S accuracy (±0.5%), compliant with IEC 62053-21/22 standards. Check individual product specifications for exact ratings.'},
-                    {q:'Can these meters integrate with existing BMS/EMS?', a:'Yes. With Modbus TCP/RTU and MQTT support, OWON meters integrate with all major building management and energy management systems. We also provide SDKs for custom integration.'},
-                    {q:'Is cloud connectivity required?', a:'No. OWON meters support fully local operation via Modbus and MQTT. Cloud connectivity is optional — available for remote monitoring via our EdgeEco platform.'},
+                    {q:'Can these meters integrate with existing BMS/EMS?', a: integrationAnswer},
+                    {q:'Is cloud connectivity required?', a: cloudAnswer},
                   ],
                   'thermostats': [
                     {q:'Which HVAC systems are compatible?', a:'OWON thermostats work with water-based heating/cooling, fan coil units, heat pumps, and boiler systems. Check the specific model for voltage and wiring requirements.'},
