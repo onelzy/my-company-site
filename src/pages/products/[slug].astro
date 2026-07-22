@@ -364,7 +364,7 @@ const faqSchema = {
             {
               (() => {
                 const isTuyaWifiEco = ecosystem.includes('tuya') && communication.includes('wifi');
-                const benefits: Record<string, Array<{icon:string; title:string; desc:string}>> = {
+                const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
                     {icon:'📊', title:'Real-Time Monitoring', desc:'Track energy consumption in real time across single and three-phase circuits.'},
                     {icon:'📱', title:'Tuya Ecosystem', desc:'Fully compatible with Tuya Smart and Smart Life apps for monitoring, control, and automation.'},
