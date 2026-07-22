@@ -31,3 +31,9 @@ pnpm-lock.yaml
 !.dev.vars.example
 .env*
 !.env.example
+product_urls.json
+raw_data.jsonl
+progress.log
+failed_urls.json
+extract_products.py
+scraped_products/
