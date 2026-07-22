@@ -41,6 +41,7 @@ const techSolution = (entry.data as Record<string, unknown>).techSolution as str
 const communication = ((entry.data as Record<string, unknown>).communication ?? []) as string[];
 const ecosystem = ((entry.data as Record<string, unknown>).ecosystem ?? []) as string[];
 const specs = ((entry.data as Record<string, unknown>).specs ?? {}) as Record<string, string>;
+const faqs = ((entry.data as Record<string, unknown>).faqs ?? []) as Array<{q: string; a: string}>;
 const specEntries = Object.entries(specs).filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '');
 
 const specFieldLabels: Record<string, string> = {
@@ -116,7 +117,15 @@ const cloudAnswer = isTuyaWifi
   : 'No. Supports fully local operation. Cloud connectivity is optional.';
 
 const faqItems = (() => {
-  const faqs: Record<string, Array<{q:string; a:string}>> = {
+  // Product-specific FAQs from mdoc frontmatter take priority
+  if (faqs.length > 0) {
+    return faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    }));
+  }
+  const faqsGeneric: Record<string, Array<{q:string; a:string}>> = {
     'smart-meters': [
       {q:'What communication protocols are supported?', a: protocolAnswer},
       {q:'What is the accuracy class?', a:'Most OWON meters achieve Class 1.0 or Class 0.5S accuracy, compliant with IEC 62053-21/22 standards.'},
@@ -149,7 +158,7 @@ const faqItems = (() => {
     ],
   };
   const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
-  return (faqs[currentType] || faqs['smart-meters']).map(f => ({
+  return (faqsGeneric[currentType] || faqsGeneric['smart-meters']).map(f => ({
     '@type': 'Question',
     name: f.q,
     acceptedAnswer: { '@type': 'Answer', text: f.a },
@@ -354,8 +363,14 @@ const faqSchema = {
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {
               (() => {
-                const benefits = {
-                  'smart-meters': [
+                const isTuyaWifiEco = ecosystem.includes('tuya') && communication.includes('wifi');
+                const benefits: Record<string, Array<{icon:string; title:string; desc:string}>> = {
+                  'smart-meters': isTuyaWifiEco ? [
+                    {icon:'📊', title:'Real-Time Monitoring', desc:'Track energy consumption in real time across single and three-phase circuits.'},
+                    {icon:'📱', title:'Tuya Ecosystem', desc:'Fully compatible with Tuya Smart and Smart Life apps for monitoring, control, and automation.'},
+                    {icon:'⚡', title:'Bi-Directional Metering', desc:'Measures both energy consumed and produced — ideal for solar PV net metering.'},
+                    {icon:'🛡️', title:'Certified Quality', desc:'CE, FCC, RoHS certified. Built for commercial and industrial environments.'},
+                  ] : [
                     {icon:'📊', title:'Real-Time Monitoring', desc:'Track energy consumption with real-time data across single and three-phase circuits.'},
                     {icon:'💰', title:'Cost Allocation', desc:'Sub-meter individual tenants, departments, or equipment with granular kWh data.'},
                     {icon:'🔌', title:'Easy Integration', desc:'Seamless protocol connectivity for EMS and BMS platform integration.'},
@@ -473,7 +488,19 @@ const faqSchema = {
           <div class="space-y-3">
             {
               (() => {
-                const faqs = {
+                // Product-specific FAQs from mdoc frontmatter take priority
+                if (faqs.length > 0) {
+                  return faqs.map((faqItem) => (
+                    <details class="group rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
+                      <summary class="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/60 transition-colors select-none">
+                        <span class="font-medium text-sm text-default dark:text-slate-200 pr-4">{faqItem.q}</span>
+                        <svg class="w-4 h-4 text-muted dark:text-slate-400 shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                      </summary>
+                      <div class="px-5 pb-4 text-sm text-muted dark:text-slate-400 leading-relaxed border-t border-gray-100 dark:border-slate-700 pt-3">{faqItem.a}</div>
+                    </details>
+                  ));
+                }
+                const faqsGeneric = {
                   'smart-meters': [
                     {q:'What communication protocols are supported?', a: protocolAnswer},
                     {q:'What is the meter accuracy class?', a:'Most OWON meters achieve Class 1.0 or Class 0.5S accuracy (±0.5%), compliant with IEC 62053-21/22 standards. Check individual product specifications for exact ratings.'},
@@ -506,7 +533,7 @@ const faqSchema = {
                   ],
                 };
                 const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
-                const items = faqs[currentType] || faqs['smart-meters'];
+                const items = faqsGeneric[currentType] || faqsGeneric['smart-meters'];
                 return items.map((faq) => (
                   <details class="group rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden">
                     <summary class="flex items-center justify-between px-5 py-4 cursor-pointer hover:bg-gray-50 dark:hover:bg-slate-800/60 transition-colors select-none">
