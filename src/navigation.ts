@@ -2,6 +2,7 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 import { SITE } from 'astrowind:config';
 
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
+const contactEmail = SITE.contact?.email || 'info@owon-iot.com';
 
 export const headerData = {
   links: [
@@ -74,6 +75,7 @@ export const footerData = {
         { text: 'FAQ', href: getPermalink('/resources/faq') },
         { text: 'Contact Sales', href: getPermalink('/contact-sales') },
         { text: 'Blog', href: getBlogPermalink() },
+        { text: `✉️ ${contactEmail}`, href: `mailto:${contactEmail}` },
       ],
     },
   ],
