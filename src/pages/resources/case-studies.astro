@@ -3,153 +3,192 @@ import PageLayout from '~/layouts/PageLayout.astro';
 
 const stats = [
   { value: '60+', label: 'Countries Deployed' },
-  { value: '500+', label: 'Hotel Rooms Monitored' },
-  { value: '1,200+', label: 'Apartments Sub-Metered' },
-  { value: '32%', label: 'Avg Energy Savings' },
+  { value: '1,000+', label: 'Devices per Project' },
+  { value: '100+', label: 'Service Locations (Senior Care)' },
+  { value: 'Since 1993', label: 'Manufacturing Experience' },
 ];
 
 const industries = [
   'All',
+  'Carbon & Energy',
+  'HVAC & Heating',
   'Hospitality',
-  'Healthcare',
-  'Real Estate',
-  'Manufacturing',
-  'Energy',
-  'Logistics',
+  'Senior Care',
+  'Telecom & Utility',
 ];
 
 const caseStudies = [
   {
-    id: 'hotel-jakarta',
+    id: 'hotel-room-management',
     featured: true,
-    title: '500-Room Hotel Energy Retrofit',
-    location: 'Jakarta, Indonesia',
-    industry: 'Hospitality',
-    region: 'Southeast Asia',
+    category: 'Hospitality',
+    title: 'Guest Room Management System for a Chain Resort Hotel',
+    client: 'A Smart Hotel System Provider',
+    location: 'Global',
     challenge:
-      'A 5-star international hotel chain needed to reduce energy costs across 500 guest rooms without compromising guest comfort. Legacy thermostats and lack of per-room metering made it impossible to identify waste.',
+      'The client sought a wireless IoT system to replace traditional wired BMS, which is expensive and difficult to install. They needed faster deployment, lower costs, and the ability to integrate both OWON and third-party smart devices through a unified gateway with device-level MQTT API.',
     solution:
-      'Deployed OWON PCT513 smart thermostats with HCH-01 hotel control panels in every room. PC341 single-phase meters at each floor distribution panel provide real-time consumption data. The system integrates with the hotel PMS via MQTT API for automated check-in/check-out energy policies.',
+      'OWON provided a complete ZigBee 3.0 ecosystem: IoT gateway (Wi-Fi/Ethernet/4G), full MQTT device-level APIs, and a comprehensive line of hotel room devices — wall switches, relay switches, wall sockets, power meters, fan coil thermostats, curtain controllers, door/window sensors, occupancy sensors, and more. The gateway supports offline mode with local device-to-device logic, and OWON also supplied Android touchscreen control panels from its 20-year industrial tablet experience. Custom devices (DND buttons, door signage, relay switches) were developed for specific project needs.',
     results: [
-      { metric: '32%', label: 'Energy Cost Reduction' },
-      { metric: '500', label: 'Rooms Monitored' },
-      { metric: '14 mo', label: 'ROI Payback' },
-      { metric: '4.8★', label: 'Guest Satisfaction' },
+      { metric: 'Wireless', label: 'No Wiring Required' },
+      { metric: 'ZigBee 3.0', label: '3rd-Party Compatible' },
+      { metric: 'Offline', label: 'Works Without Internet' },
+      { metric: 'Full Line', label: 'All Room Devices' },
     ],
     pdfUrl: '/documents/smart-hotel-solution-brief.pdf',
     pdfLabel: 'Smart Hotel Solution Brief',
   },
   {
-    id: 'senior-tokyo',
+    id: '4g-clamp-meter-carbon',
     featured: false,
-    title: 'Smart Senior Care — Multi-Floor Nursing Home',
-    location: 'Tokyo, Japan',
-    industry: 'Healthcare',
-    region: 'Japan',
+    category: 'Carbon & Energy',
+    title: 'Carbon Emission Monitoring with 4G Clamp-Type Smart Meter',
+    client: 'A Global Energy Management Platform Provider',
+    location: 'Multi-Country',
     challenge:
-      'A 6-floor nursing facility needed non-intrusive monitoring for 200+ elderly residents. Traditional camera systems raised privacy concerns, and wired nurse-call buttons had high false-alarm rates.',
+      'Commissioned by national energy agencies to develop a carbon emission monitoring system for commercial incentive and penalty purposes. Required a smart meter that installs without disrupting existing billing systems, supports single/ split/ three-phase circuits from 50A to 1000A, adapts to different countries\' cellular networks, and complies with local data privacy regulations.',
     solution:
-      'Installed OWON SPM-915 sleep monitors and SCB-01 gateways in each resident room. Motion, presence, and emergency detection algorithms run locally on the gateway, sending alerts only when anomalies are detected — no cameras, no wearables.',
+      'OWON delivered a Smart Electric Meter with open-type CTs for non-invasive installation on existing circuits. A single model supports all phase types and current ranges by simply changing CT size. The meter communicates via LTE with swappable communication modules for different countries. Device-level local APIs enable direct data forwarding to each country\'s designated cloud server, avoiding intermediate data servers for full regulatory compliance.',
     results: [
-      { metric: '200+', label: 'Residents Protected' },
-      { metric: '60%', label: 'Faster Response' },
-      { metric: '0', label: 'False Alarms' },
-      { metric: '25%', label: 'Staff Workload Reduced' },
-    ],
-    pdfUrl: '/documents/senior-care-solution-overview.pdf',
-    pdfLabel: 'Senior Care Solution Overview',
-  },
-  {
-    id: 'dubai-apartments',
-    featured: false,
-    title: 'Apartment Sub-Metering — 1,200-Unit Complex',
-    location: 'Dubai, UAE',
-    industry: 'Real Estate',
-    region: 'Middle East',
-    challenge:
-      'A luxury residential complex with 1,200 units had no way to bill tenants individually for energy consumption. Flat-rate billing led to overuse and tenant disputes over fairness.',
-    solution:
-      'Deployed OWON PC341-TY single-phase WiFi meters in each apartment. Real-time data streams to a tenant portal and integrates with the property management ERP via MQTT API. Each tenant sees their own consumption, cost, and carbon footprint.',
-    results: [
-      { metric: '1,200', label: 'Meters Installed' },
-      { metric: '80%', label: 'Fewer Billing Disputes' },
-      { metric: '15%', label: 'Energy Savings' },
-      { metric: '24/7', label: 'Tenant Portal Uptime' },
-    ],
-    pdfUrl: '/documents/single-phase-meter-series.pdf',
-    pdfLabel: 'Smart Meter Datasheet',
-  },
-  {
-    id: 'rotterdam-coldchain',
-    featured: false,
-    title: 'Cold Chain Monitoring — Pharmaceutical Storage',
-    location: 'Rotterdam, Netherlands',
-    industry: 'Logistics',
-    region: 'Europe',
-    challenge:
-      'Three pharmaceutical cold storage warehouses needed 24/7 temperature monitoring to meet GDP (Good Distribution Practice) compliance. Manual loggers were prone to gaps and human error.',
-    solution:
-      'Deployed OWON temperature sensors with WiFi gateways across all storage zones. Real-time dashboard with SMS/email alerts triggers on any temperature excursion. Automated compliance reports generated daily.',
-    results: [
-      { metric: '100%', label: 'GDP Compliance' },
-      { metric: '3', label: 'Warehouses Monitored' },
-      { metric: '0', label: 'Temperature Excursions' },
-      { metric: 'Auto', label: 'Compliance Reports' },
+      { metric: '50A–1000A', label: 'Universal Range' },
+      { metric: '4G/Cat1/CatM', label: 'Multi-Network' },
+      { metric: 'Non-Invasive', label: 'Quick Install' },
+      { metric: 'Local API', label: 'Data Sovereignty' },
     ],
     pdfUrl: '/documents/industrial-iot-datasheet.pdf',
     pdfLabel: 'Industrial IoT Datasheet',
   },
   {
-    id: 'brazil-plant',
+    id: 'hybrid-thermostat',
     featured: false,
-    title: 'Industrial Submetering — Manufacturing Plant',
-    location: 'São Paulo, Brazil',
-    industry: 'Manufacturing',
-    region: 'South America',
+    category: 'HVAC & Heating',
+    title: 'Custom Dual Fuel Thermostat for Heat Pump + Furnace Systems',
+    client: 'A North American Furnace & Heat Pump Manufacturer',
+    location: 'North America',
     challenge:
-      'An automotive parts manufacturer with 40 production lines had a single utility meter for the entire facility. They couldn\'t identify which lines were energy-inefficient or allocate costs to specific product lines.',
+      'Heat pump adoption has grown rapidly, but many households retain conventional heating/cooling equipment. The manufacturer needed a thermostat that controls both systems simultaneously and intelligently switches between them for optimal cost-effectiveness. Additional requirements: outdoor temperature acquisition, compatibility with the manufacturer\'s proprietary Wi-Fi module and backend server, and the ability to control humidifiers/dehumidifiers.',
     solution:
-      'Installed OWON PC342 three-phase meters with RS-485 Modbus RTU on each production line. Data feeds into their SCADA system and energy management dashboard. Granular data revealed 3 high-consumption lines for targeted efficiency upgrades.',
+      'OWON customized an existing thermostat model: rewrote firmware for the manufacturer\'s dual-fuel switching logic, integrated outdoor temperature from both online weather data and a wireless outdoor sensor, replaced the communication module with the client\'s designated Wi-Fi module (MQTT protocol), and added extra relays and connection terminals for humidifier and dehumidifier control.',
     results: [
-      { metric: '$47K', label: 'Annual Savings' },
-      { metric: '40', label: 'Production Lines' },
-      { metric: '3', label: 'Lines Upgraded' },
-      { metric: 'ISO 50001', label: 'Certification Ready' },
+      { metric: 'Dual Fuel', label: 'Heat Pump + Furnace' },
+      { metric: 'Custom FW', label: 'Bespoke Control Logic' },
+      { metric: 'MQTT', label: 'Client Server Compatible' },
+      { metric: 'Extra Relays', label: 'Humidity Control' },
     ],
-    pdfUrl: '/documents/three-phase-meter-series.pdf',
-    pdfLabel: 'Three-Phase Meter Datasheet',
+    pdfUrl: '/documents/pct513-thermostat.pdf',
+    pdfLabel: 'PCT513 Thermostat Datasheet',
   },
   {
-    id: 'kenya-microgrid',
+    id: 'residential-heating-eu',
     featured: false,
-    title: 'Solar Microgrid Monitoring — Rural Community',
-    location: 'Nairobi, Kenya',
-    industry: 'Energy',
-    region: 'Africa',
+    category: 'HVAC & Heating',
+    title: 'Government-Driven Residential Heating Energy Saving System',
+    client: 'A European System Integrator',
+    location: 'Europe',
     challenge:
-      'A solar microgrid serving 200 rural households suffered from load imbalances during peak hours. Without per-household metering, fair billing was impossible and grid stability was unpredictable.',
+      'A government initiative to reduce residential heating energy consumption required a system that manages all mainstream European heating equipment: boilers, heat pumps, hot water, hydraulic/electrical radiators, and underfloor heating. Critical requirements: full offline operation without internet dependency, mobile app control even without a Wi-Fi router (AP mode), and complete device-level local APIs for custom cloud and mobile app development.',
     solution:
-      'Integrated OWON PC321-TY single-phase meters with a 4G gateway at each household connection point. Prepaid billing system with mobile money integration. Real-time load data enables dynamic load balancing across phases.',
+      'OWON provided a full ZigBee ecosystem centered on an Edge Gateway: PCT512 to control boilers/heat pumps, TRV517 for hydraulic radiators, PIR323 + SLC621 for electric heater control, and THS317-ET + SLC651 for underfloor heating. The gateway supports three modes — Local (same Wi-Fi), Internet (remote cloud), and AP (direct hotspot). OWON TCP/IP API and MQTT API are provided for system integration.',
     results: [
-      { metric: '200', label: 'Households Served' },
-      { metric: '40%', label: 'Grid Stability Improvement' },
-      { metric: 'Mobile', label: 'Pay-as-You-Go Billing' },
-      { metric: '4G', label: 'Remote Monitoring' },
+      { metric: '3 Modes', label: 'Local / Internet / AP' },
+      { metric: 'Offline', label: 'No Internet Required' },
+      { metric: 'Full API', label: 'TCP/IP + MQTT' },
+      { metric: 'All Equipment', label: 'Boiler to Underfloor' },
+    ],
+    pdfUrl: '/documents/boiler-trv-solutions.pdf',
+    pdfLabel: 'Boiler & TRV Solution Brief',
+  },
+  {
+    id: 'home-energy-telecom',
+    featured: false,
+    category: 'Telecom & Utility',
+    title: 'Utility-Driven Home Energy Management for Millions of Homes',
+    client: 'A European Telecommunication Company',
+    location: 'Europe',
+    challenge:
+      'The telecom operator planned a Home Energy Management System (HEMS) for mass deployment to millions of homes. Requirements: monitor and control overall energy consumption, solar generation, and EV chargers; control and schedule HVAC equipment (boilers, heat pumps, mini-split A/C); enable device-to-device interactions (e.g., turn off A/C when window opens, adjust EV charging based on solar surplus); and provide device-level local APIs for direct integration with the Telco\'s cloud.',
+    solution:
+      'OWON delivered a complete ZigBee device suite: clamp power meters, Din rail relays, and smart plugs for energy monitoring; thermostats and IR blasters for HVAC control; plus a Smart ZigBee Hub with local networking capabilities for device-to-device interaction logic. The hub\'s complete local API allows direct connection to the Telco\'s backend server with no intermediate cloud dependency.',
+    results: [
+      { metric: 'Millions', label: 'Target Deployment' },
+      { metric: 'ZigBee Hub', label: 'Local Intelligence' },
+      { metric: 'EV + Solar', label: 'Full Home Energy' },
+      { metric: 'Direct API', label: 'No Cloud Middleman' },
     ],
     pdfUrl: '/documents/single-phase-meter-series.pdf',
-    pdfLabel: 'Smart Meter Datasheet',
+    pdfLabel: 'Smart Meter Series Datasheet',
+  },
+  {
+    id: 'senior-care-platform',
+    featured: false,
+    category: 'Senior Care',
+    title: '三位一体智慧养老平台 — 居家·社区·机构一体化管理',
+    client: '湖北某综合养老服务公司（文旅集团下属国企）',
+    location: '湖北 · 中国',
+    challenge:
+      '该企业以武汉为核心覆盖湖北多市，运营近100个为老服务网点，承接家庭养老床位超1000张，累计服务超100万人次，月均上门超5万次。需要一个统一平台管理居家、社区、食堂三个独立场景，提供家属端App、服务端管理后台、食堂菜品销售统计与热销排行，以及机构床位管理功能，并能生成长者行为摘要辅助照护决策。',
+    solution:
+      '部署4G门磁、红外、烟感、水浸等安防设备，无需网关数据直传云端。长者活动数据接入爱居安平台自动生成行为摘要。家属端使用亲属App（爱居安·家），社区端使用Web集中看护平台。食堂管理模块支持菜品统计、菜谱管理、热销排行。平台内置机构床位管理，支持床位分配与入住管理。',
+    results: [
+      { metric: '100+', label: '服务网点覆盖' },
+      { metric: '1,000+', label: '家庭养老床位' },
+      { metric: '100万+', label: '累计服务人次' },
+      { metric: '三场景', label: '居家·社区·机构' },
+    ],
+    pdfUrl: '/documents/senior-care-solution-overview.pdf',
+    pdfLabel: 'Senior Care Solution Overview',
+  },
+  {
+    id: 'senior-care-nursing-home',
+    featured: false,
+    category: 'Senior Care',
+    title: '五星级养老护理院 · 爱居安无线监护系统部署',
+    client: '福建某五星级养老护理院',
+    location: '福建 · 中国',
+    challenge:
+      '项目分为新楼智能病房建设（16层，1.8万㎡，380张床位）与旧楼智能化改造（200张床位）。需覆盖老人监护、环境监测、能源管理、温度控制等功能。设备必须无线、电池供电、免打孔安装以免中断正常运营；软件须模块化配置无需定制开发；数据须本地服务器部署保障隐私和断网可用。',
+    solution:
+      '采用爱居安系统方案（ZigBee无线设备 + 可配置软件平台），部署网关、门磁、红外、烟感、水浸、温湿度传感器、睡眠监测带、跌倒雷达、温控器等近千个设备。电池供电、背胶安装，非专业人员即可部署。软件模块化勾选配置，按需启用各功能模块。本地服务器部署，数据不出院，断网正常运行。两期项目均仅数周完成交付。',
+    results: [
+      { metric: '近千台', label: '智能设备部署' },
+      { metric: '580张', label: '护理床位覆盖' },
+      { metric: '数周', label: '完成两期交付' },
+      { metric: '本地部署', label: '数据不出院' },
+    ],
+    pdfUrl: '/documents/senior-care-solution-overview.pdf',
+    pdfLabel: 'Senior Care Solution Overview',
+  },
+  {
+    id: 'senior-care-api-integration',
+    featured: false,
+    category: 'Senior Care',
+    title: '养老软件集成商 · 平台API对接与AI能力赋能',
+    client: '某省养老信息化软件开发商',
+    location: '中国',
+    challenge:
+      '该公司深耕养老行业多年，机构管理系统已在省内多地市广泛应用，服务数十家养老机构及社区网点。但其平台缺少物联网设备接入能力及AI行为分析模块，无法满足长者安全看护、行为报告、主动预警等智能化需求。面对养老服务升级，亟需快速补齐物联与AI短板以提升竞争力，且开发周期须短以尽快用于项目投标。',
+    solution:
+      'OWON提供硬件设备API：4G单品和ZigBee网关原生支持MQTT/HTTP协议，客户平台直接订阅设备数据。AI能力调用：OWON提供行为分析API与健康预警API，客户平台HTTP调用获取行为报告。私有化部署：中标后将爱居安平台（含AI引擎）部署在客户自有服务器，完全自主可控。',
+    results: [
+      { metric: 'MQTT/HTTP', label: '原生协议对接' },
+      { metric: 'AI API', label: '行为分析+健康预警' },
+      { metric: '短周期', label: '快速投标交付' },
+      { metric: '私有部署', label: '数据自主可控' },
+    ],
+    pdfUrl: '/documents/senior-care-solution-overview.pdf',
+    pdfLabel: 'Senior Care Solution Overview',
   },
 ];
 
-const featuredStudy = caseStudies.find((cs) => cs.featured);
+const featuredStudy = caseStudies.find((cs) => cs.featured)!;
 const gridStudies = caseStudies.filter((cs) => !cs.featured);
 ---
 
 <PageLayout
   metadata={{
-    title: 'Case Studies — OWON Technology',
+    title: 'Customer Case Studies — OWON Technology',
     description:
-      'Real-world IoT deployments — see how OWON smart meters, thermostats, and sensors deliver measurable results in hotels, healthcare, energy, and manufacturing worldwide.',
+      'Real-world deployments: smart meters for carbon monitoring, hotel room management, dual-fuel HVAC, government heating systems, telecom HEMS, and senior care IoT — all backed by verifiable client projects.',
   }}
 >
   <section class="py-8 lg:py-12">
@@ -166,9 +205,9 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
         <h1 class="text-3xl sm:text-4xl font-extrabold text-default dark:text-slate-100 mb-3">
           Proven Results. Real Deployments.
         </h1>
-        <p class="text-lg text-muted dark:text-slate-400 max-w-2xl mb-8">
-          OWON IoT solutions are deployed in 60+ countries. Explore how our customers
-          reduce costs, improve efficiency, and scale with confidence.
+        <p class="text-lg text-muted dark:text-slate-400 max-w-3xl mb-8">
+          Every case study on this page is based on actual OWON customer projects
+          documented in our product catalogs and solution brochures. No fabricated data.
         </p>
 
         <!-- Stats Row -->
@@ -185,7 +224,7 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
       <!-- Industry Filter -->
       <div class="flex items-center gap-2 flex-wrap mb-8" id="industryFilters">
         <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider mr-1">
-          Industry:
+          Category:
         </span>
         {industries.map((ind, i) => (
           <button
@@ -194,7 +233,7 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
                 ? 'bg-primary text-primary-foreground border border-primary shadow-sm'
                 : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
             }`}
-            data-industry={ind}
+            data-category={ind}
           >
             {ind}
           </button>
@@ -202,7 +241,7 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
       </div>
 
       <!-- Featured Case Study -->
-      <div class="case-study-item mb-12" data-industry={featuredStudy!.industry}>
+      <div class="case-study-item mb-12" data-category={featuredStudy.category}>
         <div class="relative bg-gradient-to-br from-primary/5 via-white to-blue-50 dark:from-primary/10 dark:via-slate-800 dark:to-slate-800/50 rounded-2xl border border-primary/20 dark:border-primary/20 overflow-hidden">
           <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-10">
             <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-primary text-primary-foreground shadow-sm">
@@ -212,29 +251,30 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
 
           <div class="p-6 sm:p-8 lg:p-10">
             <div class="flex flex-wrap items-center gap-2 mb-3">
-              <span class="text-xs font-medium text-muted dark:text-slate-400">{featuredStudy!.region}</span>
-              <span class="text-xs text-muted dark:text-slate-500">·</span>
-              <span class="text-xs font-medium text-muted dark:text-slate-400">{featuredStudy!.location}</span>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                {featuredStudy.category}
+              </span>
+              <span class="text-xs text-muted dark:text-slate-400">{featuredStudy.client}</span>
             </div>
 
             <h2 class="text-2xl sm:text-3xl font-bold text-default dark:text-slate-100 mb-4">
-              {featuredStudy!.title}
+              {featuredStudy.title}
             </h2>
 
             <div class="grid gap-6 lg:grid-cols-2 mb-6">
               <div>
-                <h3 class="text-sm font-semibold text-primary uppercase tracking-wide mb-2">Challenge</h3>
-                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{featuredStudy!.challenge}</p>
+                <h3 class="text-sm font-semibold text-primary uppercase tracking-wide mb-2">Requirement</h3>
+                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{featuredStudy.challenge}</p>
               </div>
               <div>
                 <h3 class="text-sm font-semibold text-primary uppercase tracking-wide mb-2">Solution</h3>
-                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{featuredStudy!.solution}</p>
+                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{featuredStudy.solution}</p>
               </div>
             </div>
 
             <!-- KPI Metrics -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-              {featuredStudy!.results.map((r) => (
+              {featuredStudy.results.map((r) => (
                 <div class="bg-white dark:bg-slate-800 rounded-xl p-4 text-center border border-gray-100 dark:border-slate-700 shadow-sm">
                   <div class="text-xl sm:text-2xl font-extrabold text-primary">{r.metric}</div>
                   <div class="text-xs text-muted dark:text-slate-500 mt-1">{r.label}</div>
@@ -250,14 +290,14 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
                 Request Full Case Study →
               </a>
               <a
-                href={featuredStudy!.pdfUrl}
+                href={featuredStudy.pdfUrl}
                 download
                 class="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors text-sm"
               >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                 </svg>
-                {featuredStudy!.pdfLabel}
+                {featuredStudy.pdfLabel}
               </a>
             </div>
           </div>
@@ -269,23 +309,22 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
         {gridStudies.map((cs) => (
           <div
             class="case-study-item group bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:border-primary/30 dark:hover:border-primary/30 transition-all flex flex-col"
-            data-industry={cs.industry}
+            data-category={cs.category}
           >
             <!-- Card Header -->
             <div class="px-5 pt-5 pb-0">
               <div class="flex items-center gap-2 mb-2">
                 <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
-                  {cs.industry}
+                  {cs.category}
                 </span>
-                <span class="text-xs text-muted dark:text-slate-500">{cs.region}</span>
               </div>
-              <h3 class="text-lg font-bold text-default dark:text-slate-100 mb-1 group-hover:text-primary transition-colors">
+              <h3 class="text-base font-bold text-default dark:text-slate-100 mb-1 group-hover:text-primary transition-colors leading-snug">
                 {cs.title}
               </h3>
-              <p class="text-xs text-muted dark:text-slate-500 mb-3">{cs.location}</p>
+              <p class="text-xs text-muted dark:text-slate-500 mb-3">{cs.client} · {cs.location}</p>
             </div>
 
-            <!-- Challenge/Solution -->
+            <!-- Challenge + Solution -->
             <div class="px-5 flex-1">
               <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-4 mb-4">
                 {cs.challenge}
@@ -310,13 +349,13 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
                 href="/contact-sales"
                 class="text-xs font-medium text-primary hover:underline"
               >
-                Request case study →
+                Request full case study →
               </a>
               <a
                 href={cs.pdfUrl}
                 download
                 class="inline-flex items-center gap-1 text-xs text-muted dark:text-slate-400 hover:text-primary transition-colors"
-                title="Download {cs.pdfLabel}"
+                title={`Download ${cs.pdfLabel}`}
               >
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -331,8 +370,8 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
       <!-- No Results -->
       <div id="noResults" class="hidden text-center py-16">
         <div class="text-4xl mb-4">🔍</div>
-        <h3 class="text-lg font-semibold text-default dark:text-slate-200 mb-2">No case studies in this industry yet</h3>
-        <p class="text-sm text-muted dark:text-slate-400 mb-4">We're working on it. Contact us to discuss your project.</p>
+        <h3 class="text-lg font-semibold text-default dark:text-slate-200 mb-2">No case studies in this category yet</h3>
+        <p class="text-sm text-muted dark:text-slate-400 mb-4">Contact us to discuss your project — you could be our next case study.</p>
         <a href="/contact-sales" class="inline-flex items-center px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
           Contact Sales →
         </a>
@@ -380,11 +419,11 @@ const gridStudies = caseStudies.filter((cs) => !cs.featured);
         });
         this.className = 'filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 bg-primary text-primary-foreground border border-primary shadow-sm';
 
-        var industry = this.getAttribute('data-industry');
+        var category = this.getAttribute('data-category');
         var anyVisible = false;
 
         items.forEach(function(item) {
-          if (industry === 'All' || item.getAttribute('data-industry') === industry) {
+          if (category === 'All' || item.getAttribute('data-category') === category) {
             item.style.display = '';
             anyVisible = true;
           } else {
