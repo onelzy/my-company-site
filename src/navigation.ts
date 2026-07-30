@@ -31,9 +31,9 @@ export const headerData = {
       text: 'Resources',
       links: [
         { text: 'Brochures', href: getPermalink('/resources/brochures') },
-        { text: 'Case Studies', href: getBlogPermalink() },
+        { text: 'Videos', href: getPermalink('/resources/videos') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
-        { text: 'Blog', href: getBlogPermalink() },
+        { text: 'Case Studies', href: getBlogPermalink() },
       ],
     },
     {
@@ -82,9 +82,9 @@ export const footerData = {
       title: 'Resources',
       links: [
         { text: 'Brochures', href: getPermalink('/resources/brochures') },
-        { text: 'Case Studies', href: getBlogPermalink() },
+        { text: 'Videos', href: getPermalink('/resources/videos') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
-        { text: 'Blog', href: getBlogPermalink() },
+        { text: 'Case Studies', href: getBlogPermalink() },
       ],
     },
     {
