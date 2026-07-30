@@ -5,223 +5,201 @@ import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import { SITE } from 'astrowind:config';
 
 const metadata = {
-  title: 'About us',
+  title: 'About Us',
 };
+
+const email = SITE.contact?.email || 'info@owon-iot.com';
 ---
 
 <Layout metadata={metadata}>
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="About us"
+    tagline="About OWON Technology"
     image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
+      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'OWON manufacturing facility',
     }}
   >
     <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
+      Smart IoT solutions for<br />
+      <span class="text-accent dark:text-white">energy management & building automation</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
+      XIAMEN OWON TECHNOLOGY CO.,LTD is a leading B2B IoT manufacturer specializing in smart energy meters,
+      thermostats, hotel control systems, and senior care devices. We help businesses worldwide reduce energy
+      costs, improve operational efficiency, and build smarter environments through reliable, interoperable
+      IoT solutions.
     </Fragment>
   </Hero>
 
   <!-- Stats Widget ****************** -->
 
   <Stats
-    title="Statistics about us"
+    title="OWON at a glance"
     stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
+      { title: 'Countries Served', amount: '60+' },
+      { title: 'Product Models', amount: '280+' },
+      { title: 'R&D Engineers', amount: '100+' },
+      { title: 'Years of IoT', amount: '10+' },
     ]}
   />
 
-  <!-- Features3 Widget ************** -->
+  <!-- Features3 Widget — Product Lines ************** -->
 
   <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
+    title="What we make"
+    subtitle="From precision energy meters to full building automation systems, OWON covers the complete IoT stack — hardware, software, and cloud platforms."
     columns={3}
     isBeforeContent={true}
     items={[
       {
-        title: 'Educational',
+        title: 'Smart Energy Meters',
         description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
+          'Single-phase and three-phase meters with ZigBee 3.0, WiFi, and Modbus RTU connectivity. Real-time voltage, current, power, and energy monitoring with Class 1.0 accuracy.',
+        icon: 'tabler:bolt',
       },
       {
-        title: 'Interior Design',
+        title: 'Smart Thermostats',
         description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
+          'Tuya and MQTT-enabled HVAC controllers for residential, commercial, and hotel applications. Touchscreen interfaces with scheduling, geofencing, and energy analytics.',
+        icon: 'tabler:temperature',
       },
       {
-        title: 'Photography',
+        title: 'Senior Care Systems',
         description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
+          'Non-contact sleep monitors, emergency call buttons, and fall detection sensors with AiJuan nurse station dashboard. Designed for elderly care facilities and nursing homes.',
+        icon: 'tabler:heart',
       },
     ]}
   />
 
-  <!-- Features3 Widget ************** -->
+  <!-- Features3 Widget — More Products ************** -->
 
   <Features3
     columns={3}
     isAfterContent={true}
     items={[
       {
-        title: 'E-commerce',
+        title: 'Hotel Control Systems',
         description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
+          'ZigBee hotel room automation including thermostats, lighting control panels, and E-ink door sign displays with PMS integration and per-room energy analytics.',
+        icon: 'tabler:building',
       },
       {
-        title: 'Blog',
+        title: 'IoT Gateways & Hubs',
         description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
+          'ZigBee 3.0 and WiFi smart gateways with local API, cloud-to-cloud integration, and ZigBee2MQTT support. Modern design for hotel, apartment, and office deployments.',
+        icon: 'tabler:router',
       },
       {
-        title: 'Business',
+        title: 'Smart Sensors & Controls',
         description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
+          'PIR motion sensors, door/window sensors, temperature & humidity sensors, smart plugs, relays, wall switches, and scene controllers — all ZigBee 3.0 mesh compatible.',
+        icon: 'tabler:sensor',
       },
       {
-        title: 'Branding',
+        title: 'Energy Monitors',
         description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
+          'Multi-circuit sub-metering with up to 19 channels per unit. Per-circuit energy analytics for commercial buildings, data centers, and industrial facilities.',
+        icon: 'tabler:chart-bar',
       },
       {
-        title: 'Medical',
+        title: 'EdgeEco IoT Platform',
         description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
+          'Private cloud IoT platform with device management, real-time energy dashboards, automated reporting, and multi-tenant support. MQTT + RESTful API for seamless integration.',
+        icon: 'tabler:cloud',
       },
       {
-        title: 'Fashion Design',
+        title: 'OEM / ODM Services',
         description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
+          'Custom hardware design, firmware development, branding, and packaging. We work with distributors and integrators to create tailored IoT solutions for local markets.',
+        icon: 'tabler:settings',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
+      src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'IoT technology',
     }}
   />
 
-  <!-- Steps2 Widget ****************** -->
+  <!-- Steps2 Widget — Our Values ****************** -->
 
   <Steps2
     title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
+    subtitle="Everything we build is guided by a commitment to quality, openness, and long-term partnership with our B2B customers worldwide."
     items={[
       {
-        title: 'Customer-centric approach',
+        title: 'Interoperability First',
         description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
+          'We design products that work with Tuya, ZigBee2MQTT, Home Assistant, and major cloud platforms — no vendor lock-in. Open APIs and standard protocols ensure your integration is future-proof.',
       },
       {
-        title: 'Constant Improvement',
+        title: 'Engineering Excellence',
         description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
+          'With 100+ R&D engineers and ISO 9001 certified manufacturing, every OWON product undergoes rigorous testing. From firmware to cloud, we control the full stack to ensure reliability.',
       },
       {
-        title: 'Ethical Practices',
+        title: 'Global Partnership',
         description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+          'We serve distributors, integrators, and OEM partners in 60+ countries. Our team provides multilingual technical support, product customization, and fast lead times from our Xiamen HQ.',
       },
     ]}
   />
 
-  <!-- Steps2 Widget ****************** -->
+  <!-- Steps2 Widget — Tech Stack ****************** -->
 
   <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
+    title="Protocols & ecosystems"
+    subtitle="OWON products are designed to integrate seamlessly into your existing infrastructure. We support all major IoT protocols and smart home ecosystems."
     isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
-    }}
     items={[
       {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
+        title: 'ZigBee 3.0 Mesh',
+        description:
+          'Our core wireless protocol — self-healing mesh networks with 100m+ range, low power consumption, and support for hundreds of devices per gateway.',
+        icon: 'tabler:network',
       },
       {
-        title: 'Positive customer feedback and reviews',
+        title: 'Tuya Smart & Smart Life',
         description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
+          'Tuya-certified products that work out of the box with the world\'s largest smart home ecosystem. Ideal for consumer-facing distributors and retailers.',
+        icon: 'tabler:apps',
       },
       {
-        title: 'Awards and recognition as industry experts',
+        title: 'MQTT & Modbus RTU',
         description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
+          'Industrial-grade protocols for BMS, SCADA, and enterprise integration. Standard JSON payloads, TLS security, and local data buffering during network outages.',
+        icon: 'tabler:plug-connected',
       },
     ]}
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Features2 Widget — Contact ************** -->
 
   <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
+    title="Get in touch"
     tagline="Contact us"
-    columns={2}
+    columns={3}
     items={[
       {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
+        title: 'Email',
+        description: email,
+        icon: 'tabler:mail',
       },
       {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
+        title: 'WhatsApp',
+        description: '+86 186 5013 9895',
+        icon: 'tabler:brand-whatsapp',
+      },
+      {
+        title: 'Headquarters',
+        description: 'Xiamen, Fujian, China',
+        icon: 'tabler:map-pin',
       },
     ]}
   />
