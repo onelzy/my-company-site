@@ -8,23 +8,42 @@ export const headerData = {
   links: [
     {
       text: 'Products',
-      href: getPermalink('/products'),
+      links: [
+        { text: 'Smart Energy Meters', href: getPermalink('/products?dim=type&type=smart-meters') },
+        { text: 'Smart Thermostats', href: getPermalink('/products?dim=type&type=thermostats') },
+        { text: 'Hotel Control', href: getPermalink('/products?dim=type&type=hotel-control') },
+        { text: 'Senior Care', href: getPermalink('/products?dim=type&type=senior-care') },
+        { text: 'Software & Platforms', href: getPermalink('/products?dim=type&type=software-platforms') },
+        { text: 'All Products →', href: getPermalink('/products') },
+      ],
     },
     {
       text: 'Solutions',
-      href: getPermalink('/solutions'),
+      links: [
+        { text: 'Smart Hotels', href: getPermalink('/solutions/smart-hotel-energy-management') },
+        { text: 'Senior Care', href: getPermalink('/solutions/senior-care-monitoring') },
+        { text: 'Energy Management', href: getPermalink('/solutions/industrial-energy-submetering') },
+        { text: 'Smart Building', href: getPermalink('/solutions') },
+        { text: 'Industrial IoT', href: getPermalink('/solutions') },
+      ],
     },
     {
-      text: 'Blog',
-      href: getBlogPermalink(),
+      text: 'Resources',
+      links: [
+        { text: '📥 Brochures', href: getPermalink('/resources/brochures') },
+        { text: '📝 Case Studies', href: getBlogPermalink() },
+        { text: '❓ FAQ', href: getPermalink('/resources/faq') },
+        { text: '🔌 API Docs', href: getPermalink('/developers/api') },
+        { text: '📰 Blog', href: getBlogPermalink() },
+      ],
     },
     {
       text: 'Developers',
       href: getPermalink('/developers'),
     },
     {
-      text: 'Resources',
-      href: getPermalink('/resources/brochures'),
+      text: 'About',
+      href: getPermalink('/about'),
     },
   ],
   actions: [
@@ -33,64 +52,61 @@ export const headerData = {
       href: `https://wa.me/${whatsappNumber}`,
       icon: 'tabler:brand-whatsapp',
     },
-    { text: 'Talk to Sales', href: getPermalink('/contact-sales'), icon: 'tabler:message' },
+    { text: 'Contact Sales', href: getPermalink('/contact-sales'), icon: 'tabler:message' },
   ],
 };
 
 export const footerData = {
   links: [
     {
-      title: 'Products',
+      title: 'Products & Solutions',
       links: [
-        { text: 'Smart Meters', href: getPermalink('/products/smart-meters') },
-        { text: 'Thermostats', href: getPermalink('/products/thermostats') },
-        { text: 'Senior Care', href: getPermalink('/products/senior-care') },
-        { text: 'Hotel Control', href: getPermalink('/products/hotel-control') },
-        { text: 'Software & Platforms', href: getPermalink('/products/software-platforms') },
-        { text: 'All Products', href: getPermalink('/products') },
+        { text: 'Smart Energy Meters', href: getPermalink('/products?dim=type&type=smart-meters') },
+        { text: 'Smart Thermostats', href: getPermalink('/products?dim=type&type=thermostats') },
+        { text: 'Hotel Control Systems', href: getPermalink('/products?dim=type&type=hotel-control') },
+        { text: 'Senior Care Solutions', href: getPermalink('/products?dim=type&type=senior-care') },
+        { text: 'EdgeEco IoT Platform', href: getPermalink('/products?dim=type&type=software-platforms') },
+        { text: 'All Products →', href: getPermalink('/products') },
       ],
     },
     {
       title: 'Solutions',
       links: [
-        { text: 'Smart Hotels', href: getPermalink('/solutions') },
-        { text: 'Senior Care', href: getPermalink('/solutions') },
-        { text: 'Energy Management', href: getPermalink('/solutions') },
+        { text: 'Smart Hotels', href: getPermalink('/solutions/smart-hotel-energy-management') },
+        { text: 'Senior Care', href: getPermalink('/solutions/senior-care-monitoring') },
+        { text: 'Energy Management', href: getPermalink('/solutions/industrial-energy-submetering') },
         { text: 'Smart Building', href: getPermalink('/solutions') },
         { text: 'Industrial IoT', href: getPermalink('/solutions') },
       ],
     },
     {
-      title: 'Developers',
+      title: 'Resources',
       links: [
-        { text: 'API Reference', href: getPermalink('/developers/api') },
-        { text: 'SDKs & Libraries', href: getPermalink('/developers/sdks') },
-        { text: 'Documentation', href: getPermalink('/developers') },
+        { text: '📥 Brochures', href: getPermalink('/resources/brochures') },
+        { text: '📝 Case Studies', href: getBlogPermalink() },
+        { text: '❓ FAQ', href: getPermalink('/resources/faq') },
+        { text: '🔌 API Documentation', href: getPermalink('/developers/api') },
+        { text: '📰 Blog', href: getBlogPermalink() },
       ],
     },
     {
       title: 'Company',
       links: [
         { text: 'About Us', href: getPermalink('/about') },
-        { text: 'FAQ', href: getPermalink('/resources/faq') },
         { text: 'Contact Sales', href: getPermalink('/contact-sales') },
-        { text: 'Blog', href: getBlogPermalink() },
         { text: `✉️ ${contactEmail}`, href: `mailto:${contactEmail}` },
+        { text: 'Privacy Policy', href: getPermalink('/privacy') },
+        { text: 'Terms of Use', href: getPermalink('/terms') },
       ],
     },
   ],
-  secondaryLinks: [
-    { text: 'Terms', href: getPermalink('/terms') },
-    { text: 'Privacy Policy', href: getPermalink('/privacy') },
-  ],
+  secondaryLinks: [],
   socialLinks: [
     { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: `https://wa.me/${whatsappNumber}` },
-    { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '#' },
-    { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: '#' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
+    { ariaLabel: 'Email', icon: 'tabler:mail', href: `mailto:${contactEmail}` },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
   footNote: `
-    © ${new Date().getFullYear()} XIAMEN OWON TECHNOLOGY CO.,LTD. All rights reserved.
+    © ${new Date().getFullYear()} XIAMEN OWON TECHNOLOGY CO.,LTD. · ISO 9001 Certified
   `,
 };
