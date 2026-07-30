@@ -30,11 +30,10 @@ export const headerData = {
     {
       text: 'Resources',
       links: [
-        { text: '📥 Brochures', href: getPermalink('/resources/brochures') },
-        { text: '📝 Case Studies', href: getBlogPermalink() },
-        { text: '❓ FAQ', href: getPermalink('/resources/faq') },
-        { text: '🔌 API Docs', href: getPermalink('/developers/api') },
-        { text: '📰 Blog', href: getBlogPermalink() },
+        { text: 'Brochures', href: getPermalink('/resources/brochures') },
+        { text: 'Case Studies', href: getBlogPermalink() },
+        { text: 'FAQ', href: getPermalink('/resources/faq') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
     {
@@ -82,11 +81,10 @@ export const footerData = {
     {
       title: 'Resources',
       links: [
-        { text: '📥 Brochures', href: getPermalink('/resources/brochures') },
-        { text: '📝 Case Studies', href: getBlogPermalink() },
-        { text: '❓ FAQ', href: getPermalink('/resources/faq') },
-        { text: '🔌 API Documentation', href: getPermalink('/developers/api') },
-        { text: '📰 Blog', href: getBlogPermalink() },
+        { text: 'Brochures', href: getPermalink('/resources/brochures') },
+        { text: 'Case Studies', href: getBlogPermalink() },
+        { text: 'FAQ', href: getPermalink('/resources/faq') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
     {
