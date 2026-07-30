@@ -30,10 +30,12 @@ export const headerData = {
     {
       text: 'Resources',
       links: [
-        { text: 'Brochures', href: getPermalink('/resources/brochures') },
+        { text: 'Documentation', href: getPermalink('/resources/brochures') },
         { text: 'Videos', href: getPermalink('/resources/videos') },
+        { text: 'App Downloads', href: getPermalink('/resources/app') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
-        { text: 'Case Studies', href: getBlogPermalink() },
+        { text: 'Case Studies', href: getPermalink('/resources/case-studies') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
     {
@@ -81,10 +83,12 @@ export const footerData = {
     {
       title: 'Resources',
       links: [
-        { text: 'Brochures', href: getPermalink('/resources/brochures') },
+        { text: 'Documentation', href: getPermalink('/resources/brochures') },
         { text: 'Videos', href: getPermalink('/resources/videos') },
+        { text: 'App Downloads', href: getPermalink('/resources/app') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
-        { text: 'Case Studies', href: getBlogPermalink() },
+        { text: 'Case Studies', href: getPermalink('/resources/case-studies') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
     {

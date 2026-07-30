@@ -1,0 +1,159 @@
+---
+import PageLayout from '~/layouts/PageLayout.astro';
+
+const caseStudies = [
+  {
+    region: 'Southeast Asia',
+    location: 'Jakarta, Indonesia',
+    title: '500-Room Hotel Energy Retrofit',
+    industry: 'Hospitality',
+    summary:
+      'A 5-star hotel deployed OWON smart meters and HCH-01 hotel control panels across 500 rooms. Achieved 32% reduction in energy costs within 6 months through real-time monitoring and automated guest-room energy policies.',
+    results: ['32% energy cost reduction', '500 rooms monitored', 'ROI in 14 months', 'Guest comfort maintained'],
+    image: '/images/case-studies/hotel-jakarta.jpg',
+  },
+  {
+    region: 'Japan',
+    location: 'Tokyo, Japan',
+    title: 'Smart Senior Care — Multi-Floor Nursing Home',
+    industry: 'Healthcare',
+    summary:
+      'Deployed 200+ OWON senior care pendants with SCB-01 gateways across a 6-floor nursing facility. Non-intrusive motion and emergency monitoring reduced staff response time by 60% while preserving resident privacy.',
+    results: ['200+ pendants deployed', '60% faster emergency response', 'Zero false alarms after tuning', 'Staff workload reduced 25%'],
+    image: '/images/case-studies/senior-care-tokyo.jpg',
+  },
+  {
+    region: 'Middle East',
+    location: 'Dubai, UAE',
+    title: 'Apartment Sub-Metering — 1200-Unit Complex',
+    industry: 'Real Estate',
+    summary:
+      'Installed OWON PC341 single-phase meters in 1,200 residential units for tenant-level energy billing. Integrated with existing property management system via MQTT API. Transparent billing reduced tenant disputes by 80%.',
+    results: ['1,200 meters installed', '80% fewer billing disputes', 'Real-time tenant portal', '15% average energy savings'],
+    image: '/images/case-studies/apartment-dubai.jpg',
+  },
+  {
+    region: 'Europe',
+    location: 'Rotterdam, Netherlands',
+    title: 'Cold Chain Monitoring — Pharmaceutical Storage',
+    industry: 'Logistics',
+    summary:
+      'Deployed OWON temperature sensors and gateways across 3 pharmaceutical cold storage warehouses. Real-time temperature monitoring with SMS/email alerts ensured 100% compliance with GDP guidelines.',
+    results: ['100% GDP compliance', '3 warehouses monitored', 'Zero temperature excursions', 'Automated compliance reports'],
+    image: '/images/case-studies/cold-chain-rotterdam.jpg',
+  },
+  {
+    region: 'South America',
+    location: 'São Paulo, Brazil',
+    title: 'Industrial Submetering — Manufacturing Plant',
+    industry: 'Manufacturing',
+    summary:
+      'A automotive parts manufacturer installed OWON three-phase meters on 40 production lines. Granular energy data identified 3 high-consumption lines for efficiency upgrades, saving $47K annually.',
+    results: ['$47K annual savings', '40 production lines', '3-phase meters deployed', 'ISO 50001 ready'],
+    image: '/images/case-studies/plant-brazil.jpg',
+  },
+  {
+    region: 'Africa',
+    location: 'Nairobi, Kenya',
+    title: 'Solar Microgrid Monitoring — Rural Community',
+    industry: 'Energy',
+    summary:
+      'OWON smart meters integrated with a solar microgrid serving 200 households. Real-time consumption data enables fair billing and load balancing, improving grid stability by 40% during peak hours.',
+    results: ['200 households served', '40% grid stability improvement', 'Fair pay-as-you-go billing', 'Remote monitoring via 4G'],
+    image: '/images/case-studies/microgrid-kenya.jpg',
+  },
+];
+---
+
+<PageLayout
+  metadata={{
+    title: 'Case Studies — OWON Technology',
+    description:
+      'Real-world IoT deployments — see how OWON solutions perform in hotels, factories, senior care, and energy management projects worldwide.',
+  }}
+>
+  <section class="py-8 lg:py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <!-- Breadcrumb -->
+      <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-primary transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <span class="text-default dark:text-slate-200">Case Studies</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="mb-10">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-default dark:text-slate-100 mb-3">Customer Case Studies</h1>
+        <p class="text-lg text-muted dark:text-slate-400 max-w-2xl">
+          Real-world deployments across 6 continents — see how OWON IoT solutions deliver measurable results in hospitality, healthcare, energy, and industrial applications.
+        </p>
+      </div>
+
+      <!-- Case Study Cards -->
+      <div class="space-y-8">
+        {caseStudies.map((cs) => (
+          <div class="group bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:border-primary/30 dark:hover:border-primary/30 transition-all">
+            <div class="p-6 sm:p-8">
+              <div class="flex flex-wrap items-center gap-3 mb-3">
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                  {cs.region}
+                </span>
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300">
+                  {cs.industry}
+                </span>
+                <span class="text-xs text-muted dark:text-slate-500">{cs.location}</span>
+              </div>
+
+              <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-3 group-hover:text-primary transition-colors">
+                {cs.title}
+              </h2>
+
+              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">
+                {cs.summary}
+              </p>
+
+              <!-- Key Results -->
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+                {cs.results.map((result) => (
+                  <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-3 text-center border border-green-100 dark:border-green-800/30">
+                    <span class="block text-xs font-semibold text-green-700 dark:text-green-300">{result}</span>
+                  </div>
+                ))}
+              </div>
+
+              <a
+                href="/contact-sales"
+                class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+              >
+                Request detailed case study →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-16 p-8 sm:p-10 bg-gradient-to-r from-primary/5 to-blue-500/5 dark:from-primary/10 dark:to-blue-500/10 rounded-2xl border border-primary/10 text-center">
+        <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Want to be our next case study?</h2>
+        <p class="text-muted dark:text-slate-400 mb-6 max-w-lg mx-auto text-sm">
+          We work closely with integrators and end-users to document successful deployments.
+          Share your project goals and we'll design a solution tailored to your requirements.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a
+            href="/contact-sales"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+          >
+            Start Your Project →
+          </a>
+          <a
+            href="/resources/brochures"
+            class="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"
+          >
+            Browse Documentation
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>
