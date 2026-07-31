@@ -178,10 +178,36 @@ const solutionSlides = [
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">About OWON</h2>
       <div class="grid lg:grid-cols-2 gap-10 mb-12">
-        <div class="rounded-2xl bg-slate-800 dark:bg-slate-700 aspect-video flex items-center justify-center cursor-pointer hover:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
-          <div class="text-center">
-            <div class="w-16 h-16 mx-auto rounded-full bg-white/20 flex items-center justify-center mb-4"><svg class="w-7 h-7 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg></div>
-            <p class="text-white font-medium text-lg">Factory Tour — Xiamen, China</p><p class="text-slate-400 text-sm mt-1">Click to play</p>
+        <div class="rounded-2xl bg-slate-800 dark:bg-slate-700 relative overflow-hidden group cursor-pointer" id="aboutVideo">
+          <!-- Thumbnail + Play overlay (click to load iframe) -->
+          <div class="absolute inset-0" id="videoThumb">
+            <img
+              src="https://img.youtube.com/vi/UGiYiyPsLLM/maxresdefault.jpg"
+              alt="About OWON Technology — Global Leader in IoT & Energy Management"
+              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+              loading="lazy"
+              onerror="this.src='https://img.youtube.com/vi/UGiYiyPsLLM/hqdefault.jpg'"
+            />
+            <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors">
+              <div class="w-16 h-16 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center shadow-xl transition-colors">
+                <svg class="w-7 h-7 text-red-600 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+              </div>
+            </div>
+            <div class="absolute bottom-3 left-3 right-3">
+              <p class="text-white font-medium text-sm drop-shadow-lg">About OWON Technology — Global Leader in IoT &amp; Energy Management</p>
+              <p class="text-slate-300 text-xs mt-0.5 drop-shadow">Watch on YouTube</p>
+            </div>
+          </div>
+          <!-- iframe injected on click -->
+          <div id="videoFrame" class="absolute inset-0 hidden">
+            <iframe
+              class="w-full h-full"
+              src="https://www.youtube.com/embed/UGiYiyPsLLM?autoplay=1&rel=0"
+              title="About OWON Technology — Global Leader in IoT &amp; Energy Management"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            ></iframe>
           </div>
         </div>
         <div>
@@ -270,5 +296,16 @@ const solutionSlides = [
     prev.addEventListener('click', function(){goTo(current - 1);});
     next.addEventListener('click', function(){goTo(current + 1);});
     dots.forEach(function(d){d.addEventListener('click',function(){goTo(parseInt(d.getAttribute('data-sol-dot'),10));});});
+  })();
+  (function () {
+    var video = document.getElementById('aboutVideo');
+    if (!video) return;
+    video.addEventListener('click', function () {
+      var thumb = document.getElementById('videoThumb');
+      var frame = document.getElementById('videoFrame');
+      if (!thumb || !frame) return;
+      thumb.style.display = 'none';
+      frame.classList.remove('hidden');
+    });
   })();
 </script>
