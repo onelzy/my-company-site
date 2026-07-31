@@ -2,6 +2,8 @@
 // 301 redirect: /resources/brochures → /resources/documentation
 // Preserves SEO equity from the old URL while consolidating on the
 // descriptive /resources/documentation path.
-export const prerender = true;
+// SSR mode required: Astro.redirect() returns a real 301 only when
+// the page is server-rendered (prerender=false).
+export const prerender = false;
 return Astro.redirect('/resources/documentation', 301);
 ---
