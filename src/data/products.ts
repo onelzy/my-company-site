@@ -7,4 +7,285 @@ export interface ProductsEntry {
   body: string;
 }
 
-export const products: ProductsEntry[] = [];
+export const products: ProductsEntry[] = [
+  {
+    "slug": "edgeeco-iot-platform",
+    "data": {
+      "name": "EdgeEco IoT Platform",
+      "model": "EdgeEco",
+      "slug": {
+        "name": "EdgeEco IoT Platform",
+        "slug": "edgeeco-iot-platform"
+      },
+      "description": "End-to-end IoT platform with private cloud deployment, MQTT/HTTP API, device management dashboard, and energy analytics. Built for B2B scale.",
+      "productType": "software-platforms",
+      "productSubType": "iot-platform",
+      "techSolution": "mqtt",
+      "techSubType": "mqtt-software",
+      "communication": [
+        "mqtt",
+        "tcpip",
+        "modbus"
+      ],
+      "ecosystem": [
+        "mqtt-open",
+        "local-api"
+      ],
+      "softwareType": [
+        "iot-platform",
+        "analytics",
+        "admin"
+      ],
+      "image": "/images/products/edgeeco.svg",
+      "specs": {
+        "accuracy": "N/A",
+        "voltage": "N/A",
+        "current": "N/A",
+        "frequency": "N/A",
+        "powerSupply": "Cloud / On-premise",
+        "display": "Web dashboard",
+        "dimensions": "N/A (software)",
+        "weight": "N/A",
+        "operatingTemp": "N/A",
+        "protocol": "MQTT / HTTP REST / Modbus TCP",
+        "certification": "ISO 27001 ready",
+        "warranty": "Annual subscription"
+      },
+      "language": "en"
+    },
+    "body": "EdgeEco is an end-to-end IoT platform designed for B2B energy management. It supports private cloud deployment, provides RESTful APIs and MQTT interfaces, and includes a web-based device management dashboard with real-time energy analytics.\n\n## Key Features\n\n- **Private Cloud** — deploy on your infrastructure\n- **MQTT + REST API** — open protocols for integration\n- **Device Management** — bulk provisioning, OTA updates\n- **Energy Analytics** — dashboards, reports, alerts\n- **Multi-Tenant** — support for sub-accounts and hierarchy\n- **Role-Based Access** — granular permissions\n\n## Applications\n\n- Enterprise energy management\n- Multi-site monitoring\n- Facility management\n- ESCO (Energy Service Company) platforms"
+  },
+  {
+    "slug": "pc321-ty-smart-meter",
+    "data": {
+      "name": "PC321-TY Single Phase Smart Meter",
+      "model": "PC321-TY",
+      "slug": {
+        "name": "PC321-TY Single Phase Smart Meter",
+        "slug": "pc321-ty"
+      },
+      "description": "Tuya-enabled single phase DIN rail smart meter with ZigBee/WiFi connectivity. Class 1.0 accuracy, ideal for residential and commercial energy monitoring.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "zigbee",
+        "wifi",
+        "mqtt"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "/images/products/pc321-ty.svg",
+      "specs": {
+        "accuracy": "Class 1.0",
+        "voltage": "100-240V AC",
+        "current": "5(80)A",
+        "frequency": "50/60Hz",
+        "powerSupply": "AC mains",
+        "display": "LCD backlit",
+        "dimensions": "35x98x65mm",
+        "weight": "210g",
+        "operatingTemp": "-25C to +60C",
+        "protocol": "ZigBee 3.0 / WiFi 802.11 b/g/n",
+        "certification": "CE, RoHS, FCC",
+        "warranty": "2 years"
+      },
+      "language": "en"
+    },
+    "body": "The PC321-TY is a Tuya-enabled single-phase smart energy meter with ZigBee 3.0 and WiFi dual connectivity and 1 CT clamp. Track real-time consumption with bidirectional measurement, compatible with Tuya Smart and Smart Life apps.\n\n## Key Features\n\n- **Class 1.0 Accuracy** — meets IEC 62053-21 standards\n- **Dual Connectivity** — ZigBee 3.0 + WiFi 802.11 b/g/n\n- **Tuya Certified** — ready for Tuya Smart and Smart Life apps\n- **DIN Rail Mount** — standard 35mm DIN rail\n- **Real-time Monitoring** — voltage, current, power, energy consumption\n- **OTA Updates** — firmware updates via ZigBee or WiFi\n\n## Applications\n\n- Residential energy monitoring\n- Commercial sub-metering\n- Smart building energy management\n- Solar PV system monitoring"
+  },
+  {
+    "slug": "pc341-3m16s-energy-monitor",
+    "data": {
+      "name": "PC341-3M16S Multi-Circuit Energy Monitor",
+      "model": "PC341-3M16S",
+      "slug": {
+        "name": "PC341-3M16S Multi-Circuit Energy Monitor",
+        "slug": "pc341-3m16s"
+      },
+      "description": "3 main CT ports + 16 sub-CT channels for granular energy sub-metering. ZigBee 3.0 communication, ideal for commercial buildings and industrial facilities.",
+      "productType": "smart-meters",
+      "productSubType": "multi-circuit",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-energy",
+      "communication": [
+        "zigbee",
+        "modbus",
+        "mqtt"
+      ],
+      "ecosystem": [
+        "zigbee-solution",
+        "local-api"
+      ],
+      "image": "/images/products/pc341-3m16s.svg",
+      "specs": {
+        "accuracy": "Class 1.0",
+        "voltage": "100-240V AC (3-phase support)",
+        "current": "3x 100A main + 16x 20A sub circuits",
+        "frequency": "50/60Hz",
+        "powerSupply": "AC mains",
+        "display": "LCD with backlight",
+        "dimensions": "72x100x65mm",
+        "weight": "380g",
+        "operatingTemp": "-20C to +55C",
+        "protocol": "ZigBee 3.0 / Modbus RTU / MQTT",
+        "certification": "CE, RoHS",
+        "warranty": "2 years"
+      },
+      "language": "en"
+    },
+    "body": "The PC341-3M16S is a multi-circuit energy monitor designed for commercial and industrial energy sub-metering. It supports 3 main current transformer ports plus 16 sub-CT channels, enabling precise per-circuit monitoring across entire electrical panels.\n\n**Key Features**\n- **19 Total Channels** — 3 main circuits + 16 sub-circuits\n- **ZigBee 3.0 Mesh** — reliable multi-device networking\n- **Modbus RTU** — industrial protocol support\n- **Per-Circuit Analytics** — identify energy hogs by circuit\n- **DIN Rail Mount** — fits standard electrical panels\n\n**Applications**\n- Commercial building sub-metering\n- Industrial facility energy monitoring\n- Tenant billing systems\n- Data center PUE tracking"
+  },
+  {
+    "slug": "pc341-w-ty-smart-meter",
+    "data": {
+      "name": "PC341-W-TY Three Phase WiFi Smart Energy Meter",
+      "model": "PC341-W-TY",
+      "slug": {
+        "name": "PC341-W-TY Three Phase WiFi Smart Energy Meter",
+        "slug": "pc341-w-ty"
+      },
+      "description": "Tuya-compatible three phase WiFi smart energy meter with 5 CT clamps, bidirectional measurement, ±2% accuracy. Ideal for solar net metering and home energy management.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "/images/products/pc321-ty.svg",
+      "specs": {
+        "accuracy": "Class 4 (±2%)",
+        "voltage": "90~380 Vac 50/60 Hz",
+        "current": "200A (up to 1000A max)",
+        "frequency": "50/60Hz",
+        "powerSupply": "100~240V AC",
+        "display": "Analog and Digital",
+        "dimensions": "111.3 x 81.2 x 41.4 mm",
+        "weight": "586g",
+        "operatingTemp": "-20C to +55C (≤90% non-condensing)",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE",
+        "material": "Plastic (flame retardant)",
+        "mountingType": "Wall Mounting",
+        "wirelessRange": "100m (outdoor) / 30m (indoor)",
+        "outputPower": "Up to +20dBm",
+        "measuredParams": "Voltage 0~240 Vac (phase to neutral), Current up to 250 Amps",
+        "certification": "CE, FCC",
+        "placeOfOrigin": "Fujian, China",
+        "brandName": "OEM/ODM",
+        "productLabel": "Power Monitor Clamp",
+        "reportingCycle": "Every 15 seconds",
+        "subCtCable": "2.5mm three-pole audio connector with 1m cable",
+        "mainCtCable": "3.5mm three-pole audio connector with 1m cable",
+        "packageSize": "111.6 x 81.2 x 41.4 cm",
+        "packageWeight": "6.0 kg",
+        "warranty": "Contact us"
+      },
+      "faqs": [
+        {
+          "q": "What services can you provide?",
+          "a": "ODM/OEM customization available. Contact our sales team for your specific requirements."
+        },
+        {
+          "q": "Is the app free?",
+          "a": "Yes, the Tuya Smart / Smart Life app is free to download from Google Play or App Store."
+        },
+        {
+          "q": "How to install?",
+          "a": "Installation manual included in the package. Contact us by email for detailed guidance or video walkthrough."
+        },
+        {
+          "q": "Can I order samples?",
+          "a": "Yes, MOQ is 1 piece for testing. Order 1pc first to evaluate, then place larger orders."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC341-W-TY helps you monitor the amount of electricity consumed and produced in your facility by connecting the clamp onto the power cable. Monitor whole home energy and up to 2 individual circuits with bi-directional measurement.\n\n**Product Description**\n\n| Attribute | Value |\n|---|---|\n| Product Name | Multi-Circuit Power Meter |\n| Material | Plastic |\n| Function | Measures real-time and total energy consumption, Bi-Directional measurement |\n| Dimension | 111.3(L) × 81.2(W) × 41.4(H) mm |\n| Weight | 586g |\n| Operating Frequency | 50/60Hz |\n| Operating Voltage | 90~380 Vac |\n| Mounting Type | Wall Mounting |\n| Operating Environment | Temperature: -20℃~+55℃, Humidity: ≤90% non-condensing |\n| Range outdoor/indoor | 100m / 30m |\n| Output Power | Up to +20dBm |\n| Measured Parameters | Voltage: 0~240 Vac (phase to neutral), Current: up to 250 Amps |\n| Wi-Fi | 802.11 b/g/n @ 2.4GHz |\n| BLE | For Wi-Fi Pairing |\n| Reporting Cycle | Every 15 seconds |\n| Calibrated Metering Accuracy | ±2% |\n| Sub CT Cable | 2.5mm three-pole audio connector with 1m cable |\n| Main CT Cable | 3.5mm three-pole audio connector with 1m cable |\n\n**Main Features**\n- Tuya compliant\n- Supports Tap-to-Run and automation with other Tuya devices\n- Single/3-phase electricity compatible\n- Three current transformers for single phase application\n- Measures real-time Voltage, Current, Power Factor, Active Power\n- Bi-Directional measurement — supports both energy consumption and production measurement\n- Suitable for both residential and commercial application\n- Lightweight and easy to install — wall mount with clamp-on CTs, no wiring to mains\n- External antenna prevents signal from being shielded even inside metal enclosures\n- 100m outdoor / 30m indoor wireless range with up to +20dBm output power\n\n**Packaging & Delivery**\n- Selling Units: Single item\n- Single package size: 111.6 × 81.2 × 41.4 cm\n- Single gross weight: 6.0 kg"
+  },
+  {
+    "slug": "pct513-smart-thermostat",
+    "data": {
+      "name": "PCT513 Touchscreen Smart Thermostat",
+      "model": "PCT513",
+      "slug": {
+        "name": "PCT513 Touchscreen Smart Thermostat",
+        "slug": "pct513"
+      },
+      "description": "4.3-inch touchscreen thermostat. 24V AC compatible, supports remote sensors, weather prediction, and full Tuya ecosystem integration.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "techSolution": "tuya",
+      "techSubType": "tuya-thermostats",
+      "communication": [
+        "wifi",
+        "zigbee"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "/images/products/pct513.svg",
+      "specs": {
+        "accuracy": "+-0.5C",
+        "voltage": "24V AC",
+        "current": "3A relay",
+        "frequency": "50/60Hz",
+        "powerSupply": "24V AC",
+        "display": "4.3 inch TFT touchscreen",
+        "dimensions": "120x80x25mm",
+        "weight": "180g",
+        "operatingTemp": "0C to +50C",
+        "protocol": "WiFi 802.11 b/g/n / ZigBee 3.0",
+        "certification": "CE, FCC, RoHS",
+        "warranty": "2 years"
+      },
+      "language": "en"
+    },
+    "body": "The PCT513 is a 4.3-inch touchscreen smart thermostat for residential and commercial HVAC systems. Compatible with 24V AC systems, it supports remote sensors, weather-based scheduling, and integrates seamlessly with Tuya Smart and Smart Life apps.\n\n## Key Features\n\n- **4.3\" Touchscreen** — intuitive color display with real-time data\n- **24V AC Compatible** — works with most HVAC systems\n- **Remote Sensors** — support for external temperature sensors\n- **Weather Prediction** — AI-based scheduling using weather forecasts\n- **Tuya Certified** — full Tuya ecosystem support\n- **Energy Reports** — weekly and monthly energy usage analytics\n\n## Applications\n\n- Residential HVAC control\n- Hotel room temperature management\n- Office climate control\n- Heat pump systems"
+  },
+  {
+    "slug": "spm-915-sleep-monitor",
+    "data": {
+      "name": "SPM-915 Smart Sleep Monitor",
+      "model": "SPM-915",
+      "slug": {
+        "name": "SPM-915 Smart Sleep Monitor",
+        "slug": "spm-915"
+      },
+      "description": "Non-contact sleep monitoring pad. Tracks sleep quality, heart rate, and respiratory rate without wearables. ZigBee connected, ideal for senior care facilities.",
+      "productType": "senior-care",
+      "productSubType": "health",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-senior",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution",
+        "local-api"
+      ],
+      "image": "/images/products/spm-915.svg",
+      "specs": {
+        "accuracy": "Heart rate +-2 bpm",
+        "voltage": "5V DC (USB)",
+        "current": "500mA",
+        "frequency": "N/A",
+        "powerSupply": "USB 5V DC",
+        "display": "LED indicator",
+        "dimensions": "800x90x2mm (pad)",
+        "weight": "450g",
+        "operatingTemp": "5C to +40C",
+        "protocol": "ZigBee 3.0",
+        "certification": "CE, FCC, RoHS",
+        "warranty": "1 year"
+      },
+      "language": "en"
+    },
+    "body": "The SPM-915 is a non-contact sleep monitoring pad that tracks sleep quality, heart rate, and respiratory rate without any wearables. Placed under the mattress, it provides continuous health data via ZigBee to the AiJuan senior care platform.\n\n## Key Features\n\n- **Non-Contact** — no wearables, placed under mattress\n- **Continuous Monitoring** — 24/7 sleep quality tracking\n- **Health Metrics** — heart rate, respiratory rate, sleep stages\n- **Alert System** — abnormal event detection and alerts\n- **ZigBee Mesh** — reliable data transmission\n\n## Applications\n\n- Senior care facilities\n- Nursing homes\n- Home health monitoring\n- Hospital patient monitoring"
+  }
+];
