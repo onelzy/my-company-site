@@ -30,7 +30,7 @@ export const headerData = {
     {
       text: 'Resources',
       links: [
-        { text: 'Documentation', href: getPermalink('/resources/brochures') },
+        { text: 'Documentation', href: getPermalink('/resources/documentation') },
         { text: 'Videos', href: getPermalink('/resources/videos') },
         { text: 'App Downloads', href: getPermalink('/resources/app') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
@@ -83,7 +83,7 @@ export const footerData = {
     {
       title: 'Resources',
       links: [
-        { text: 'Documentation', href: getPermalink('/resources/brochures') },
+        { text: 'Documentation', href: getPermalink('/resources/documentation') },
         { text: 'Videos', href: getPermalink('/resources/videos') },
         { text: 'App Downloads', href: getPermalink('/resources/app') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },

@@ -117,7 +117,7 @@ export const GET = async () => {
   // 2b. Resource pages (English only for now)
   // -------------------------------------------------------------------
   urls.push({
-    loc: `${baseUrl}/resources/brochures`,
+    loc: `${baseUrl}/resources/documentation`,
     changefreq: 'weekly',
     priority: '0.7',
   });
