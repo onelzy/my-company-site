@@ -13,6 +13,7 @@ import {
   getProductSubTypes,
 } from '~/utils/products';
 import { products as rawProducts } from '~/data/products';
+import { productDocs } from '~/data/documents';
 
 export const prerender = false;
 
@@ -171,6 +172,24 @@ const connectionTags = [
       <div class="flex justify-between items-center mb-6 flex-wrap gap-3" id="resultStats">
         <span class="text-sm text-muted dark:text-slate-400">Showing <strong id="countDisplay" class="text-default dark:text-slate-200 font-semibold">{enProducts.length}</strong> products</span>
       </div>
+
+      <!-- Empty state when no products published yet -->
+      {enProducts.length === 0 && (
+        <div class="text-center py-16 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700">
+          <div class="text-5xl mb-4">📦</div>
+          <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-2">Product Catalogue Coming Soon</h2>
+          <p class="text-sm text-muted dark:text-slate-400 mb-6 max-w-md mx-auto">
+            We're updating our product catalogue. Meanwhile, browse datasheets and user manuals
+            for all {productDocs.length} product models.
+          </p>
+          <a
+            href="/resources/brochures"
+            class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+          >
+            Browse Documentation →
+          </a>
+        </div>
+      )}
 
       <div id="productGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {enProducts.map((product) => <ProductCard product={product} href="/products" />)}
