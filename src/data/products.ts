@@ -229,13 +229,13 @@ export const products: ProductsEntry[] = [
       "ecosystem": [
         "tuya"
       ],
-      "image": "https://documents.owon-iot.com/product-images/pc4713/pc4713-04.jpg",
+      "image": "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-3w/pc4713-04.jpg",
       "images": [
-        "https://documents.owon-iot.com/product-images/pc4713/pc4713-04.jpg",
-        "https://documents.owon-iot.com/product-images/pc4713/pc4713-05.jpg",
-        "https://documents.owon-iot.com/product-images/pc4713/pc4713-06.jpg",
-        "https://documents.owon-iot.com/product-images/pc4713/pc4713-08.jpg",
-        "https://documents.owon-iot.com/product-images/pc4713/pc4713-11.jpg"
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-3w/pc4713-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-3w/pc4713-05.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-3w/pc4713-06.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-3w/pc4713-08.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-3w/pc4713-11.jpg"
       ],
       "specs": {
         "accuracy": "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating",
