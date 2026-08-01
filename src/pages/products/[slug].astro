@@ -10,6 +10,7 @@ import { SITE } from 'astrowind:config';
 import { PRODUCT_TYPE_LABELS, TECH_SOLUTION_LABELS, SPEC_LABELS, getLocalizedLabel } from '~/utils/products';
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { products as rawProducts } from '~/data/products';
+import { productDocs } from '~/data/documents';
 
 // Static page: build-time render → CDN-cached. All data comes from
 // src/data/products.ts (build-time), so each product slug is prerendered.
@@ -56,6 +57,32 @@ const ecosystem = ((entry.data as Record<string, unknown>).ecosystem ?? []) as s
 const specs = ((entry.data as Record<string, unknown>).specs ?? {}) as Record<string, string>;
 const faqs = ((entry.data as Record<string, unknown>).faqs ?? []) as Array<{q: string; a: string}>;
 const specEntries = Object.entries(specs).filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '');
+
+// Resolve real datasheet/manual URLs from the R2 document manifest
+// (documents.ts). Pick the doc whose name best matches this product's
+// model variant (e.g. "PC4713-W-E-TY/3W" → the "...W E TY 3W..." spec),
+// falling back to the first spec of the matching model family.
+const modelStr = String(entry.data.model || '');
+const docEntry = productDocs.find((d) => modelStr.startsWith(d.model));
+const modelKey = modelStr.toUpperCase().replace(/[^A-Z0-9]/g, '');
+const scoreName = (name: string) => {
+  const n = name.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  let score = 0;
+  // Prefer exact model-key containment (e.g. "WE-TY3W" in name)
+  if (modelKey.length >= 6 && n.includes(modelKey)) score += 100;
+  // Prefer the full model minus slashes (e.g. "PC4713-W-E-TY/3W" → "PC4713WETY3W")
+  const modelNoSuffix = modelKey.replace(/(PC\d+).*/, '$1');
+  if (n.includes(modelNoSuffix)) score += 10;
+  return score;
+};
+const pickBest = (files: { name: string; url: string }[]) => {
+  if (!files || files.length === 0) return undefined;
+  return [...files].sort((a, b) => scoreName(b.name) - scoreName(a.name))[0];
+};
+const bestSpec = pickBest(docEntry?.specs ?? []);
+const bestManual = pickBest(docEntry?.manuals ?? []);
+const datasheetUrl = bestSpec?.url ?? '';
+const manualUrl = bestManual?.url ?? '';
 
 const specFieldLabels: Record<string, string> = {
   accuracy: 'Accuracy',
@@ -452,7 +479,6 @@ const faqSchema = {
                   benefits['smart-meters'];
                 return items.map(b => (
                   <div class="group p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all">
-                    <span class="text-2xl mb-3 block">{b.icon}</span>
                     <h4 class="font-semibold text-sm text-default dark:text-slate-200 mb-1.5">{b.title}</h4>
                     <p class="text-xs text-muted dark:text-slate-400 leading-relaxed">{b.desc}</p>
                   </div>
@@ -469,6 +495,17 @@ const faqSchema = {
           <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {
               (() => {
+                // Product-specific Ideal For scenarios (highest priority — per-model)
+                const productSpecificScenarios = {
+                  'pc4713-w-e-ty-3w': [
+                    { title: 'Solar PV Self-Consumption', desc: 'Monitor generation and consumption in real time with bi-directional metering — see exactly how much solar you export vs. use.' },
+                    { title: 'Home Energy Management', desc: 'Track whole-home energy across three phases via the Tuya / Smart Life app, with historical data by day, week, month, and year.' },
+                    { title: 'Three-Phase Motor Monitoring', desc: 'Supports 3P3W and 3P4W wiring — ideal for monitoring three-phase motor loads and industrial equipment.' },
+                    { title: 'Regions Using 3-Phase 3-Wire Lines', desc: 'Works with three-phase three-wire grids (common in some countries) as well as the standard three-phase four-wire system.' },
+                    { title: 'Commercial & Industrial Submetering', desc: 'DIN-rail 1P 18mm form factor fits tight distribution boards for per-circuit or per-machine energy allocation.' },
+                    { title: 'Energy Storage Systems', desc: 'Bi-directional measurement tracks charging and discharging of battery storage alongside solar generation.' },
+                  ],
+                };
                 const scenarios = {
                   'smart-meters': [
                     {icon:'🏢', title:'Commercial Buildings', desc:'Sub-meter HVAC, lighting, and plug loads across tenant spaces for accurate billing.'},
@@ -512,10 +549,18 @@ const faqSchema = {
                   ],
                 };
                 const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
-                const items = scenarios[currentType] || scenarios['smart-meters'];
+                const productSlug = product.slug || '';
+                const items =
+                  productSpecificScenarios[productSlug] ||
+                  scenarios[currentType] ||
+                  scenarios['smart-meters'];
                 return items.slice(0, 6).map(s => (
                   <div class="flex gap-3 p-4 rounded-xl border border-gray-100 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                    <span class="text-xl shrink-0 mt-0.5">{s.icon}</span>
+                    {
+                      s.icon && (
+                        <span class="text-xl shrink-0 mt-0.5">{s.icon}</span>
+                      )
+                    }
                     <div>
                       <h4 class="font-semibold text-sm text-default dark:text-slate-200">{s.title}</h4>
                       <p class="text-xs text-muted dark:text-slate-400 mt-0.5 leading-relaxed">{s.desc}</p>
@@ -616,24 +661,36 @@ const faqSchema = {
           Download the datasheet or request pricing — our team will respond within 24 hours.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a
-            href={`/documents/datasheet-${slug}.pdf`}
-            download
-            class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              ></path>
-            </svg>
-            Download Datasheet
-          </a>
+          {
+            datasheetUrl ? (
+              <a
+                href={datasheetUrl}
+                target="_blank"
+                rel="noopener"
+                class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  ></path>
+                </svg>
+                Download Datasheet
+              </a>
+            ) : (
+              <a
+                href="/contact-sales"
+                class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+              >
+                Request Datasheet
+              </a>
+            )
+          }
           <button
             class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors inline-flex items-center gap-2"
-            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '/documents/datasheet-${slug}.pdf' })`}
+            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' })`}
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
