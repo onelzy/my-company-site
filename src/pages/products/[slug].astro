@@ -129,7 +129,7 @@ const relatedProducts: Product[] = allProducts
 const metaTitle = `${name} — OWON Technology`;
 const metaDescription = description?.trim() || `Learn about ${name} specifications and features.`;
 const typeLabel = productType ? getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en') : '';
-const htmlContent = renderMarkdown(entry.body || '');
+const htmlContent = renderMarkdown(entry.body || '', { headingOffset: 1 });
 const imageSrc = (entry.data as Record<string, unknown>).image as string | undefined;
 const images = ((entry.data as Record<string, unknown>).images as string[]) || (imageSrc ? [imageSrc] : []);
 const hasImage = images.length > 0;
@@ -386,7 +386,7 @@ const faqSchema = {
             Overview
           </h2>
           <div
-            class="prose prose-lg dark:prose-invert max-w-none prose-headings:text-default dark:prose-headings:text-slate-100 prose-p:text-default dark:prose-p:text-slate-300 prose-strong:text-default dark:prose-strong:text-slate-200 prose-li:text-default dark:prose-li:text-slate-300 prose-a:text-primary prose-code:bg-gray-100 dark:prose-code:bg-slate-800 prose-code:text-default prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
+            class="prose dark:prose-invert max-w-none prose-headings:text-default dark:prose-headings:text-slate-100 prose-h3:text-lg prose-h4:text-base prose-p:text-default dark:prose-p:text-slate-300 prose-strong:text-default dark:prose-strong:text-slate-200 prose-li:text-default dark:prose-li:text-slate-300 prose-a:text-primary prose-code:bg-gray-100 dark:prose-code:bg-slate-800 prose-code:text-default prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm"
           >
             {
               htmlContent ? (
@@ -485,8 +485,8 @@ const faqSchema = {
                   benefits['smart-meters'];
                 return items.map(b => (
                   <div class="group p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:border-primary/30 dark:hover:border-primary/30 hover:shadow-sm transition-all">
-                    <h4 class="font-semibold text-sm text-default dark:text-slate-200 mb-1.5">{b.title}</h4>
-                    <p class="text-xs text-muted dark:text-slate-400 leading-relaxed">{b.desc}</p>
+                    <h4 class="font-semibold text-base text-default dark:text-slate-200 mb-1.5">{b.title}</h4>
+                    <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{b.desc}</p>
                   </div>
                 ));
               })()
@@ -568,8 +568,8 @@ const faqSchema = {
                       )
                     }
                     <div>
-                      <h4 class="font-semibold text-sm text-default dark:text-slate-200">{s.title}</h4>
-                      <p class="text-xs text-muted dark:text-slate-400 mt-0.5 leading-relaxed">{s.desc}</p>
+                      <h4 class="font-semibold text-base text-default dark:text-slate-200">{s.title}</h4>
+                      <p class="text-sm text-muted dark:text-slate-400 mt-0.5 leading-relaxed">{s.desc}</p>
                     </div>
                   </div>
                 ));

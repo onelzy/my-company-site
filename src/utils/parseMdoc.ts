@@ -24,8 +24,19 @@ export function parseMdoc(raw: string): ParsedMdoc {
 
 /**
  * Render Markdown to HTML (for detail page body content).
+ * opts.headingOffset (default 0): shift all heading levels down by N (clamped at h6).
+ * Product pages pass 1 so in-body `##` sections render as `<h3>` (18px) instead of
+ * colliding with the page's own 24px `<h2>` section headings.
  */
-export function renderMarkdown(md: string): string {
+export function renderMarkdown(md: string, opts: { headingOffset?: number } = {}): string {
   if (!md) return '';
-  return marked.parse(md, { async: false }) as string;
+  const offset = opts.headingOffset ?? 0;
+  if (offset === 0) {
+    return marked.parse(md, { async: false }) as string;
+  }
+  const renderer = new marked.Renderer();
+  const origHeading = renderer.heading.bind(renderer);
+  renderer.heading = ({ tokens, depth }) =>
+    origHeading({ tokens, depth: Math.min(6, depth + offset) });
+  return marked.parse(md, { async: false, renderer }) as string;
 }
