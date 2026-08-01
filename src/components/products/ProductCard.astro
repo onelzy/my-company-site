@@ -45,11 +45,12 @@ const locale = (product.language as string) || 'en';
     )}
   >
     <!-- Product image (clickable link to detail) -->
+    <!-- Square container matches the square product master images (1200x1200);
+         fixed-height rectangles would crop/letterbox them -->
     <a
       href={detailUrl}
       class:list={[
-        'relative bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
-        compact ? 'h-28' : 'h-48 sm:h-56'
+        'relative aspect-square bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
       ]}
     >
       {
@@ -60,7 +61,7 @@ const locale = (product.language as string) || 'en';
             layout="cover"
             class="absolute inset-0 w-full h-full"
             width={600}
-            height={400}
+            height={600}
             format="webp"
             loading="lazy"
             decoding="async"
