@@ -209,6 +209,80 @@ export const products: ProductsEntry[] = [
     "body": "PC341-W-TY helps you monitor the amount of electricity consumed and produced in your facility by connecting the clamp onto the power cable. Monitor whole home energy and up to 2 individual circuits with bi-directional measurement.\n\n**Product Description**\n\n| Attribute | Value |\n|---|---|\n| Product Name | Multi-Circuit Power Meter |\n| Material | Plastic |\n| Function | Measures real-time and total energy consumption, Bi-Directional measurement |\n| Dimension | 111.3(L) × 81.2(W) × 41.4(H) mm |\n| Weight | 586g |\n| Operating Frequency | 50/60Hz |\n| Operating Voltage | 90~380 Vac |\n| Mounting Type | Wall Mounting |\n| Operating Environment | Temperature: -20℃~+55℃, Humidity: ≤90% non-condensing |\n| Range outdoor/indoor | 100m / 30m |\n| Output Power | Up to +20dBm |\n| Measured Parameters | Voltage: 0~240 Vac (phase to neutral), Current: up to 250 Amps |\n| Wi-Fi | 802.11 b/g/n @ 2.4GHz |\n| BLE | For Wi-Fi Pairing |\n| Reporting Cycle | Every 15 seconds |\n| Calibrated Metering Accuracy | ±2% |\n| Sub CT Cable | 2.5mm three-pole audio connector with 1m cable |\n| Main CT Cable | 3.5mm three-pole audio connector with 1m cable |\n\n**Main Features**\n- Tuya compliant\n- Supports Tap-to-Run and automation with other Tuya devices\n- Single/3-phase electricity compatible\n- Three current transformers for single phase application\n- Measures real-time Voltage, Current, Power Factor, Active Power\n- Bi-Directional measurement — supports both energy consumption and production measurement\n- Suitable for both residential and commercial application\n- Lightweight and easy to install — wall mount with clamp-on CTs, no wiring to mains\n- External antenna prevents signal from being shielded even inside metal enclosures\n- 100m outdoor / 30m indoor wireless range with up to +20dBm output power\n\n**Packaging & Delivery**\n- Selling Units: Single item\n- Single package size: 111.6 × 81.2 × 41.4 cm\n- Single gross weight: 6.0 kg"
   },
   {
+    "slug": "pc4713-w-e-ty-3w",
+    "data": {
+      "name": "PC4713-W-E-TY/3W Three Phase WiFi + Ethernet Smart Energy Meter",
+      "model": "PC4713-W-E-TY/3W",
+      "slug": {
+        "name": "PC4713-W-E-TY/3W Smart Energy Meter",
+        "slug": "pc4713-w-e-ty-3w"
+      },
+      "description": "Tuya-compatible three phase smart energy meter with WiFi 2.4GHz and Ethernet connectivity, 3 CT clamps up to 750A, bidirectional energy measurement for solar PV and home energy management.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi",
+        "tcpip"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "/images/products/pc4713-w-e-ty-3w.jpg",
+      "specs": {
+        "accuracy": "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating",
+        "voltage": "L-N: 90~277 Vac 50/60Hz; L-L: 156~480 Vac 50/60Hz",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing) + Ethernet 10/100 Mbps",
+        "dimensions": "19(W) x 69(D) x 90(H) mm",
+        "mountingType": "35mm DIN rail mounting",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power",
+        "reportingCycle": "Every 15 seconds",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (included 3-Phase 3-Wire)",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "ethernet": "10/100 Mbps"
+      },
+      "faqs": [
+        {
+          "q": "What electrical systems does the PC4713 support?",
+          "a": "The PC4713 supports single-phase, split-phase, three-phase four-wire, and three-phase three-wire electrical systems."
+        },
+        {
+          "q": "Can the PC4713 monitor solar energy production?",
+          "a": "Yes. The meter supports bidirectional energy measurement and can monitor both energy consumption and solar generation."
+        },
+        {
+          "q": "Why does the PC4713 include Ethernet connectivity?",
+          "a": "Ethernet provides a more reliable network connection than WiFi in many commercial and industrial environments, helping ensure stable communication and data reporting."
+        },
+        {
+          "q": "How many CT clamps can be connected?",
+          "a": "The PC4713 supports up to three CT clamps for monitoring multi-line electrical systems."
+        },
+        {
+          "q": "Can I view historical energy data?",
+          "a": "Yes. Historical energy records can be viewed through the Tuya platform by day, week, month, and year."
+        },
+        {
+          "q": "How do I configure the network for the first time?",
+          "a": "Download the Smart Life app, then either scan the QR code on the device or use Bluetooth pairing. For WiFi configuration you will need the 2.4GHz WiFi name and password; for Ethernet, plug in an internet-enabled Ethernet cable. If no device is detected, press and hold the Reset button for 5 seconds until the Net LED blinks slowly, then try again."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC4713-W-E-TY/3W helps you monitor the amount of electricity Consumed and Produced in your three-phase power system (included three phase three wire) by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n**Product Description**\n\n| Attribute | Value |\n|---|---|\n| Product Name | Smart Energy Meter (Three-Phase) |\n| Connectivity | Wi-Fi 802.11 b/g/n @ 2.4GHz; BLE (for pairing); Ethernet 10/100 Mbps |\n| Operating Voltage (RMS per phase) | L-N: 90~277 Vac 50/60Hz; L-L: 156~480 Vac 50/60Hz |\n| Supported Systems | Single-Phase; Split-Phase; Three-Phase (included 3-Phase 3-Wire) |\n| Power Consumption | <2W |\n| Voltmeters Accuracy | ±1% |\n| Ammeters Accuracy | 80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A) |\n| Clamp Inner Dimension | 80A (default): Ø10mm; 120A (optional): Ø16mm; 200A (optional): Ø20mm; 300A (optional): Ø24mm; 500A (optional): Ø36mm; 750A (optional): Ø51mm |\n| Reporting Cycle | Every 15 seconds |\n| Operating Environment | Temperature: -20℃~+55℃; Humidity: ≤90% non-condensing |\n| Mount Type | 35mm DIN rail mounting |\n| Dimension | 19(W) x 69(D) x 90(H) mm |\n| Certification | CE |\n\n**Main Features**\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase (included 3P3W), Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Ethernet helps you improve the Network stability\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n\n**Packaging & Delivery**\n- Selling Units: Single item"
+  },
+  {
     "slug": "pct513-smart-thermostat",
     "data": {
       "name": "PCT513 Touchscreen Smart Thermostat",
