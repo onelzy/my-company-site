@@ -333,7 +333,9 @@ const faqSchema = {
               ))
             }
             {
-              ecosystem.map((e: string) => (
+              // Skip ecosystem values already shown by techSolution — avoids
+              // duplicate badge (e.g. Tuya shown twice for Tuya devices)
+              ecosystem.filter((e: string) => e !== techSolution).map((e: string) => (
                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border border-purple-200 dark:border-purple-700">
                   {getLocalizedLabel(SPEC_LABELS, e, 'en')}
                 </span>
