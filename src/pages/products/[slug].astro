@@ -11,7 +11,20 @@ import { PRODUCT_TYPE_LABELS, TECH_SOLUTION_LABELS, SPEC_LABELS, getLocalizedLab
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { products as rawProducts } from '~/data/products';
 
-export const prerender = false;
+// Static page: build-time render → CDN-cached. All data comes from
+// src/data/products.ts (build-time), so each product slug is prerendered.
+export const prerender = true;
+
+export function getStaticPaths() {
+  // Support both canonical slug (data.slug.slug) and legacy entry slug
+  const slugs = new Set<string>();
+  for (const p of rawProducts) {
+    const dataSlug = (p.data as Record<string, unknown>).slug as { name?: string; slug?: string } | undefined;
+    slugs.add(p.slug);
+    if (dataSlug?.slug) slugs.add(dataSlug.slug);
+  }
+  return [...slugs].map((slug) => ({ params: { slug } }));
+}
 
 const { slug } = Astro.params;
 const entry = rawProducts.find((p) => {

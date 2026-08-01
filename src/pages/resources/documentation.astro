@@ -2,6 +2,10 @@
 import PageLayout from '~/layouts/PageLayout.astro';
 import { productDocs } from '~/data/documents';
 
+// Static page: build-time render → Cloudflare CDN caches the 449KB HTML,
+// eliminating per-request SSR re-render (TTFB 1.5s → ~50ms).
+export const prerender = true;
+
 // Group by category for the filter
 const categories = ['All', ...Array.from(new Set(productDocs.map((d) => d.category)))];
 const totalCount = productDocs.reduce((sum, d) => sum + d.specs.length + d.manuals.length, 0);
@@ -248,7 +252,11 @@ const totalCount = productDocs.reduce((sum, d) => sum + d.specs.length + d.manua
     }
 
     if (search) {
-      search.addEventListener('input', applyFilter);
+      var searchTimer;
+      search.addEventListener('input', function() {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(applyFilter, 300);
+      });
     }
   })();
 </script>

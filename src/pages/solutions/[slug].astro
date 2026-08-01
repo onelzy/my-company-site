@@ -10,7 +10,13 @@ import { products as rawProducts } from '~/data/products';
 import { SITE } from 'astrowind:config';
 import { PRODUCT_TYPE_LABELS, getLocalizedLabel } from '~/utils/products';
 
-export const prerender = false;
+// Static page: build-time render → CDN-cached. Solution data comes from
+// src/data/solutions.ts (build-time).
+export const prerender = true;
+
+export function getStaticPaths() {
+  return rawSolutions.map((s) => ({ params: { slug: s.slug } }));
+}
 
 const { slug } = Astro.params;
 const entry = rawSolutions.find((s) => s.slug === slug);

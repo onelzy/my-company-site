@@ -1,5 +1,6 @@
 ---
-export const prerender = false;
+// Static page: build-time render → CDN-cached (homepage is 84KB HTML).
+export const prerender = true;
 
 import Layout from '~/layouts/PageLayout.astro';
 

@@ -15,7 +15,10 @@ import {
 import { products as rawProducts } from '~/data/products';
 import { productDocs } from '~/data/documents';
 
-export const prerender = false;
+// Static page: build-time render → CDN-cached (TTFB ~50ms vs 1.5s SSR).
+// Filtering is 100% client-side (URL params + DOM), so static HTML keeps
+// ?dim=type&type=X deep links working.
+export const prerender = true;
 
 const allProducts = rawProducts.map((entry) => {
   const dataSlug = entry.data?.slug as { name?: string; slug?: string } | undefined;

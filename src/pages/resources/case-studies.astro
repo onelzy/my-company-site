@@ -1,6 +1,9 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
 
+// Static page: build-time render → CDN-cached.
+export const prerender = true;
+
 const stats = [
   { value: '60+', label: 'Countries Deployed' },
   { value: '~1,000', label: 'Devices per Project' },

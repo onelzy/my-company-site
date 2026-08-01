@@ -5,7 +5,8 @@ import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
 import { solutions as rawSolutions } from '~/data/solutions';
 
-export const prerender = false;
+// Static page: build-time render → CDN-cached.
+export const prerender = true;
 
 // English MVP — all content is English, skip language filter
 const solutions = rawSolutions;

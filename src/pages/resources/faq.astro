@@ -1,6 +1,9 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
 
+// Static page: build-time render → CDN-cached.
+export const prerender = true;
+
 const faqCategories = [
   {
     category: 'Products & Specifications',
@@ -218,36 +221,40 @@ const totalFAQs = faqCategories.reduce((sum, cat) => sum + cat.items.length, 0);
   (function() {
     var search = document.getElementById('faqSearch');
     if (!search) return;
+    var searchTimer;
     search.addEventListener('input', function() {
-      var term = this.value.toLowerCase().trim();
-      var sections = document.querySelectorAll('.faq-section');
-      var items = document.querySelectorAll('.faq-item');
-      var noResults = document.getElementById('faqNoResults');
-      var anyVisible = false;
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function() {
+        var term = search.value.toLowerCase().trim();
+        var sections = document.querySelectorAll('.faq-section');
+        var items = document.querySelectorAll('.faq-item');
+        var noResults = document.getElementById('faqNoResults');
+        var anyVisible = false;
 
-      items.forEach(function(item) {
-        var text = item.textContent.toLowerCase();
-        if (!term || text.indexOf(term) !== -1) {
-          item.style.display = '';
-          anyVisible = true;
-        } else {
-          item.style.display = 'none';
+        items.forEach(function(item) {
+          var text = item.textContent.toLowerCase();
+          if (!term || text.indexOf(term) !== -1) {
+            item.style.display = '';
+            anyVisible = true;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+
+        // Show/hide section headers based on visible items
+        sections.forEach(function(section) {
+          var visibleItems = section.querySelectorAll('.faq-item[style*="display: none"]');
+          if (section.querySelectorAll('.faq-item').length === visibleItems.length) {
+            section.style.display = 'none';
+          } else {
+            section.style.display = '';
+          }
+        });
+
+        if (noResults) {
+          noResults.style.display = anyVisible ? 'none' : '';
         }
-      });
-
-      // Show/hide section headers based on visible items
-      sections.forEach(function(section) {
-        var visibleItems = section.querySelectorAll('.faq-item[style*="display: none"]');
-        if (section.querySelectorAll('.faq-item').length === visibleItems.length) {
-          section.style.display = 'none';
-        } else {
-          section.style.display = '';
-        }
-      });
-
-      if (noResults) {
-        noResults.style.display = anyVisible ? 'none' : '';
-      }
+      }, 300);
     });
   })();
 </script>
