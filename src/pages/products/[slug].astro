@@ -397,7 +397,7 @@ const faqSchema = {
               (() => {
                 const isTuyaWifiEco = ecosystem.includes('tuya') && communication.includes('wifi');
                 // Product-specific Key Benefits (highest priority — per-model content)
-                const productSpecificBenefits: Record<string, { icon: string; title: string; desc: string }[]> = {
+                const productSpecificBenefits = {
                   'pc4713-w-e-ty-3w': [
                     { icon: '🔌', title: 'Dual Connectivity — Ethernet & WiFi', desc: 'Plug in an Ethernet cable and the meter automatically switches to the stable wired connection; WiFi 2.4GHz keeps it online when no cable is available.' },
                     { icon: '🔀', title: '3P3W & 3P4W Compatible', desc: 'Works with both three-phase three-wire and three-phase four-wire systems — ideal for three-phase motor monitoring and regions using 3-phase 3-wire lines.' },
