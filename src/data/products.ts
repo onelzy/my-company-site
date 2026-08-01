@@ -224,8 +224,7 @@ export const products: ProductsEntry[] = [
       "techSubType": "tuya-meters",
       "communication": [
         "wifi",
-        "rj45",
-        "tcpip"
+        "rj45"
       ],
       "ecosystem": [
         "tuya"
