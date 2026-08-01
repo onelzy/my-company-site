@@ -230,6 +230,10 @@ export const products: ProductsEntry[] = [
         "tuya"
       ],
       "image": "/images/products/pc4713-w-e-ty-3w.jpg",
+      "images": [
+        "/images/products/pc4713-w-e-ty-3w.jpg",
+        "/images/products/pc4713-w-e-ty-3w-2.jpg"
+      ],
       "specs": {
         "accuracy": "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating",
         "voltage": "L-N: 90~277 Vac 50/60Hz; L-L: 156~480 Vac 50/60Hz",

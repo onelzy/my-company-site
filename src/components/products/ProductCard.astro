@@ -8,9 +8,11 @@ export interface Props {
   product: Product;
   href: string;
   class?: string;
+  /** Compact card: smaller image, hidden description, slim buttons — for Related Products row */
+  compact?: boolean;
 }
 
-const { product, href, class: className } = Astro.props;
+const { product, href, class: className, compact = false } = Astro.props;
 const description = product.description?.trim() ?? '';
 const commMethods = product.communication ?? [];
 const visibleComms = commMethods.slice(0, 4);
@@ -45,8 +47,10 @@ const locale = (product.language as string) || 'en';
     <!-- Product image (clickable link to detail) -->
     <a
       href={detailUrl}
-      class="relative h-48 sm:h-56 bg-gray-100 dark:bg-slate-700 overflow-hidden block
-              focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      class:list={[
+        'relative bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
+        compact ? 'h-28' : 'h-48 sm:h-56'
+      ]}
     >
       {
         hasImage ? (
@@ -77,16 +81,20 @@ const locale = (product.language as string) || 'en';
     </a>
 
     <!-- Card content (clickable) -->
-    <a href={detailUrl} class="flex-1 p-4 sm:p-5 block">
+    <a href={detailUrl} class:list={['flex-1 block', compact ? 'p-3' : 'p-4 sm:p-5']}>
       <h3
-        class="text-lg font-semibold leading-snug text-default dark:text-slate-200
-                 group-hover:text-primary transition-colors duration-200 mb-1"
+        class:list={[
+          'font-semibold leading-snug text-default dark:text-slate-200 group-hover:text-primary transition-colors duration-200 mb-1',
+          compact ? 'text-sm' : 'text-lg'
+        ]}
       >
         {product.name}
       </h3>
-      {modelDisplay && <p class="text-sm text-muted dark:text-slate-400 font-mono mb-2">{modelDisplay}</p>}
+      {modelDisplay && (
+        <p class:list={['text-muted dark:text-slate-400 font-mono mb-2', compact ? 'text-xs' : 'text-sm']}>{modelDisplay}</p>
+      )}
       {
-        description && (
+        description && !compact && (
           <p class="text-sm text-muted dark:text-slate-400 line-clamp-2 mb-3 leading-relaxed">{description}</p>
         )
       }
@@ -105,7 +113,7 @@ const locale = (product.language as string) || 'en';
             {overflowCount > 0 && (
               <span
                 class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                           bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400"
+                          bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400"
               >
                 +{overflowCount}
               </span>
@@ -118,7 +126,7 @@ const locale = (product.language as string) || 'en';
           <div class="mt-2">
             <span
               class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium
-                         bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400"
+                        bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400"
             >
               See details
             </span>
@@ -128,13 +136,13 @@ const locale = (product.language as string) || 'en';
     </a>
 
     <!-- Action buttons -->
-    <div class="px-4 sm:px-5 pb-4 sm:pb-5 flex gap-2">
+    <div class:list={['flex gap-2', compact ? 'px-3 pb-3' : 'px-4 sm:px-5 pb-4 sm:pb-5']}>
       <a
         href={detailUrl}
         class="flex-1 text-center px-3 py-2 rounded-lg text-xs font-medium
-                border border-gray-300 dark:border-slate-600
-                text-default dark:text-slate-300
-                hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
+               border border-gray-300 dark:border-slate-600
+               text-default dark:text-slate-300
+               hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors"
       >
         View Details
       </a>
@@ -142,7 +150,7 @@ const locale = (product.language as string) || 'en';
         type="button"
         onclick="window.__openLeadModal?.({ scenario: 'price', productName: '{product.name}' })"
         class="flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-colors
-                     bg-[#FF6B00] text-white hover:bg-[#E55D00]"
+                    bg-[#FF6B00] text-white hover:bg-[#E55D00]"
       >
         Get Base Price
       </button>
