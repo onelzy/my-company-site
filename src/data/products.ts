@@ -9,6 +9,126 @@ export interface ProductsEntry {
 
 export const products: ProductsEntry[] = [
   {
+    "slug": "cb432-dp",
+    "data": {
+      "name": "CB432-DP Din-rail Relay (Double Pole)",
+      "model": "CB432-DP",
+      "slug": {
+        "name": "CB432-DP Din-rail Relay (Double Pole)",
+        "slug": "cb432-dp"
+      },
+      "description": "ZigBee 3.0 double-pole din-rail relay with energy metering — breaks both neutral and live for safer zone control.",
+      "productType": "smart-meters",
+      "productSubType": "din-rail",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-meter",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/cb432-dp/cb432-dp-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/cb432-dp/cb432-dp-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "relayType": "Double break (neutral and live)",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "accuracy": "≤ 100W: ±2W; > 100W: ±2%",
+        "maxLoad": "50A",
+        "measuredParams": "W and kWh metering",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What is the CB432-DP?",
+          "a": "A din-rail relay with double-break mode — it breaks both neutral and live wires for safer disconnection of special zones."
+        },
+        {
+          "q": "Does it measure energy?",
+          "a": "Yes — W and kWh energy consumption measuring with ±2W/±2% calibrated accuracy."
+        },
+        {
+          "q": "What is the maximum load?",
+          "a": "50A."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, works with any standard ZigBee hub."
+        },
+        {
+          "q": "What is it used for?",
+          "a": "Controlling special zone on/off status while checking real-time energy usage wirelessly from the mobile app."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Din-Rail Circuit Breaker CB432-DP is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control special zone On/Off status as well as to check real-time energy usage wirelessly via your mobile App.\n\n## Key Features\n\n- ZigBee 3.0, works with any standard ZigBee hub\n- Double-break relay — neutral and live wire disconnection\n- Energy consumption measuring (W and kWh)\n- 50A maximum load current\n- Extends the range and strengthens ZigBee network communication"
+  },
+  {
+    "slug": "cb432",
+    "data": {
+      "name": "CB432 Din-rail Relay with Power Meter",
+      "model": "CB432",
+      "slug": {
+        "name": "CB432 Din-rail Relay",
+        "slug": "cb432"
+      },
+      "description": "ZigBee 3.0 din-rail relay with calibrated W/kWh metering — on/off control and real-time energy usage in one module.",
+      "productType": "smart-meters",
+      "productSubType": "din-rail",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-meter",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/cb432/cb432-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/cb432/cb432-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "relayType": "Single break",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "accuracy": "≤ 100W: ±2W; > 100W: ±2%",
+        "maxLoad": "32A or 63A models",
+        "measuredParams": "W and kWh metering; real-time energy usage",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What can the CB432 do?",
+          "a": "Control on/off status of the connected circuit and check real-time energy usage via the mobile app."
+        },
+        {
+          "q": "Does it measure energy?",
+          "a": "Yes — calibrated metering measures instantaneous and accumulative energy (W and kWh) with ±2W/±2% accuracy."
+        },
+        {
+          "q": "What load ratings are available?",
+          "a": "Two models: 32A and 63A maximum load current."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, working with any standard ZigBee hub."
+        },
+        {
+          "q": "Does it strengthen the ZigBee network?",
+          "a": "Yes — it extends the range and strengthens ZigBee network communication."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Din-Rail Relay CB432 is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and check real-time energy usage via the mobile App.\n\n## Key Features\n\n- ZigBee 3.0, works with any standard ZigBee hub\n- Measures instantaneous and accumulative energy consumption (W and kWh)\n- Calibrated metering: ≤100W within ±2W, >100W within ±2%\n- Schedule devices to automatically power on and off\n- 32A or 63A load models\n- Extends the range and strengthens ZigBee network communication"
+  },
+  {
     "slug": "pc311-ty",
     "data": {
       "name": "PC311-TY Single-Phase WiFi Smart Energy Clamp",
@@ -2542,6 +2662,192 @@ export const products: ProductsEntry[] = [
     "body": "The SEG-X5 ZigBee Gateway acts as a central platform for your smart home system. It allows you to add up to 200 EPs into the system (Zigbee repeaters required). Automatic control, schedule, scene, remote monitoring and control for ZigBee devices can enrich your IoT experience.\n\n## Key Features\n\n- ZigBee 3.0, connects up to 200 EPs (min. 24 ZigBee repeaters required)\n- BLE 4.2 (optional)\n- Stable internet connection via Ethernet\n- ZigBee coordinator of the home area network and provide stable ZigBee connection\n- Flexible installation with USB power\n- Built-in buzzer\n- Local linkage, scenes, schedules\n- High-performance for complicated calculation\n- Real time, efficiently interoperability and encrypted communication with cloud server\n- Support backup & transfer to replace gateway — existing sub-devices, linkage, scenes and schedules synchronize to the new gateway in easy steps\n- Reliable configuration via Bonjour"
   },
   {
+    "slug": "slc600-d",
+    "data": {
+      "name": "SLC600-D Dimmer Switch",
+      "model": "SLC600-D",
+      "slug": {
+        "name": "SLC600-D Dimmer Switch",
+        "slug": "slc600-d"
+      },
+      "description": "ZigBee 3.0 dimmer switch that controls on/off and brightness of up to 2 dimmable devices, available in 3 colors.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc600-d/slc600-d-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc600-d/slc600-d-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna (TX power 19dB)",
+        "voltage": "100~250 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "pairedDevices": "Up to 2 dimmable devices",
+        "compatibleSystems": "3-wire lighting systems",
+        "dimensions": "92(L) x 92(W) x 35(H) mm; in-wall 60(L) x 61(W) x 24(H) mm",
+        "operatingTemp": "-20℃ ~ +50℃ (≤ 90% non-condensing)",
+        "colors": "3 colors"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC600-D do?",
+          "a": "Controls your devices on/off and adjusts brightness. Bind it with up to 2 dimmable devices and control them at the same time."
+        },
+        {
+          "q": "How many devices can it pair?",
+          "a": "Up to 2 dimmable devices."
+        },
+        {
+          "q": "Which lighting systems does it support?",
+          "a": "3-wire lighting systems."
+        },
+        {
+          "q": "What are the color options?",
+          "a": "Available in 3 colors."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, works with any standard ZigBee hub."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Dimmer Switch SLC600-D is designed to control your device On/Off and adjust the brightness. You can bind it with multiple devices and control them at the same time.\n\n## Key Features\n\n- ZigBee 3.0 compliant, works with any standard ZigBee hub\n- Supports up to 2 dimmable devices to pair\n- Controls multiple devices at the same time\n- 86-type wire junction box installation\n- Available in 3 colors\n- 3-wire lighting systems"
+  },
+  {
+    "slug": "slc600-s",
+    "data": {
+      "name": "SLC600-S Scene Switch",
+      "model": "SLC600-S",
+      "slug": {
+        "name": "SLC600-S Scene Switch",
+        "slug": "slc600-s"
+      },
+      "description": "ZigBee 3.0 scene switch that triggers scenes and automations — 1/2/3/4/6 gang options, 3 colors, customizable text.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc600-s/slc600-s-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc600-s/slc600-s-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna (TX power 19dB)",
+        "voltage": "100~250 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "gangOptions": "1/2/3/4/6 gang optional",
+        "customization": "Customizable text",
+        "dimensions": "92(L) x 92(W) x 35.4(H) mm; in-wall 63.3(L) x 61.9(W) x 22.4(D) mm",
+        "operatingTemp": "-20℃ ~ +50℃ (≤ 90% non-condensing)",
+        "colors": "3 colors"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC600-S do?",
+          "a": "Triggers your scenes and automates your home. Connect devices via your gateway and activate them through scene settings."
+        },
+        {
+          "q": "How many gangs are available?",
+          "a": "1/2/3/4/6 gang options."
+        },
+        {
+          "q": "Can the buttons be customized?",
+          "a": "Yes — customizable text is available."
+        },
+        {
+          "q": "What are the color options?",
+          "a": "Available in 3 colors."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, works with any standard ZigBee hub."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Scene Switch SLC600-S is designed to trigger your scenes and automate your home. You can connect your devices together via your gateway and activate them via your scene settings.\n\n## Key Features\n\n- ZigBee 3.0 compliant, works with any standard ZigBee hub\n- Triggers scenes and automates your home\n- Controls multiple devices at the same time\n- 1/2/3/4/6 gang optional\n- Available in 3 colors\n- Customizable text"
+  },
+  {
+    "slug": "slc601",
+    "data": {
+      "name": "SLC601 ZigBee Smart Relay Module",
+      "model": "SLC601",
+      "slug": {
+        "name": "SLC601 Smart Relay Module",
+        "slug": "slc601"
+      },
+      "description": "ZigBee HA1.2 smart relay module that upgrades existing lighting to remote control — insert into the power line, no rewiring.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc601/slc601-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc601/slc601-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 0.7W",
+        "maxLoad": "5A resistive: 500W incandescent/halogen, 100W fluorescent, 60W LED",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)",
+        "dimensions": "55.3(L) x 39(W) x 17.7(H) mm",
+        "weight": "42g",
+        "certification": "CE"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC601 do?",
+          "a": "It turns the power of connected lighting on and off remotely and supports on/off schedules from the mobile app."
+        },
+        {
+          "q": "How is it installed?",
+          "a": "Simply insert the Power Relay into the existing power line — extra control cables are available to integrate with an existing physical switch."
+        },
+        {
+          "q": "What load can it handle?",
+          "a": "5A resistive load: 500W incandescent/halogen bulbs, 100W fluorescent lamps or 60W LED lamps."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2, working with any standard ZHA hub."
+        },
+        {
+          "q": "Can it integrate with my existing switch?",
+          "a": "Yes — extra control cables allow connection to your existing wall switch."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC601 is a smart relay module that allows you to turn the power on and off remotely as well as set on/off schedules from the mobile app.\n\n## Key Features\n\n- ZigBee HA1.2 compliant\n- Upgrades existing lighting to a remote control lighting system\n- Easy installation by inserting the Power Relay into the existing power line\n- Extra control cables available to integrate with existing physical switch\n- Compact 55.3 x 39 x 17.7mm module, CE certified"
+  },
+  {
     "slug": "slc611-z",
     "data": {
       "name": "SLC611-Z ZigBee Power Meter with Relay",
@@ -2665,6 +2971,65 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "The SLC621 is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Schedule the device to automatically power electronics on and off\n- 16A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication"
+  },
+  {
+    "slug": "slc631",
+    "data": {
+      "name": "SLC631 Lighting Relay",
+      "model": "SLC631",
+      "slug": {
+        "name": "SLC631 Lighting Relay",
+        "slug": "slc631"
+      },
+      "description": "ZigBee HA1.2 lighting relay for standard in-wall junction boxes — 1-3 channels, scene support and existing switch integration.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc631/slc631-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc631/slc631-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "channels": "1-3 channels (optional)",
+        "maxLoad": "16A",
+        "sceneSupport": "Up to 16 scenes",
+        "compatibleWith": "Heating, ventilation, LED drivers",
+        "mountingType": "Any global standard in-wall junction box"
+      },
+      "faqs": [
+        {
+          "q": "What is the SLC631?",
+          "a": "A lighting relay that embeds in any standard in-wall junction box, connecting the traditional switch panel without destroying the original home decoration style."
+        },
+        {
+          "q": "How many channels does it have?",
+          "a": "Optional 1-3 channels."
+        },
+        {
+          "q": "Does it support scenes?",
+          "a": "Yes — linkage (on/off) and scene support, adding each gang to a scene with a maximum of 16 scenes."
+        },
+        {
+          "q": "What can it control?",
+          "a": "Lighting, heating, ventilation and LED drivers for on/off control."
+        },
+        {
+          "q": "Can I keep my existing switch?",
+          "a": "Yes — it connects to the traditional switch panel, with outside leads for control."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC631 Lighting Relay could be embedded in any global standard in-wall junction box, connecting the traditional switch panel without destroying the original home decoration style. It could remotely control the in-wall switch when it works with a gateway.\n\n## Key Features\n\n- ZigBee HA1.2 compliant, works with any standard ZHA ZigBee hub\n- Upgrades existing lighting to a remote control lighting system\n- Optional 1-3 channels\n- Remote control, schedules, linkage (on/off) and scene support (max. 16 scenes)\n- Compatible with heating, ventilation and LED drivers for on/off control\n- Outside leads for control"
   },
   {
     "slug": "trv527-z",
