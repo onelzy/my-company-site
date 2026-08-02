@@ -75,9 +75,9 @@ export const products: ProductsEntry[] = [
       "ecosystem": [
         "tuya"
       ],
-      "image": "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg",
+      "image": "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg?v=2",
       "images": [
-        "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg?v=2",
         "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-02.jpg",
         "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-03.jpg",
         "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-04.jpg",
