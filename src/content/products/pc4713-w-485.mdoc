@@ -1,0 +1,69 @@
+---
+name: PC4713-W-485 Three-Phase WiFi + RS485 Smart Energy Meter
+model: PC4713-W-485
+slug:
+  name: PC4713-W-485 Smart Energy Meter
+  slug: pc4713-w-485
+description: Open-protocol three-phase smart energy meter with WiFi (HTTP/MQTT/Modbus TCP) and RS485 (Modbus RTU) communication. Direct-to-cloud or local reading with 50ms data refresh — no third-party cloud required.
+productType: smart-meters
+productSubType: three-phase
+techSolution: mqtt
+techSubType: mqtt-meters
+communication:
+  - wifi
+  - rs485
+ecosystem:
+  - mqtt-open
+  - local-api
+image: https://documents.owon-iot.com/product-images/pc4713-w-485/pc4713-w-485-01.jpg
+images:
+  - https://documents.owon-iot.com/product-images/pc4713-w-485/pc4713-w-485-01.jpg
+specs:
+  accuracy: "±1% (Voltmeters)"
+  ammeterAccuracy: "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)"
+  voltage: "90~277 Vac 50/60Hz (RMS per phase)"
+  current: 80A~750A (CT dependent)
+  frequency: 50/60Hz
+  powerSupply: <2W
+  protocol: "WiFi 802.11 b/g/n @ 2.4GHz (HTTP / MQTT / Modbus TCP) + RS485 (Modbus RTU)"
+  wifi: "802.11 b/g/n @ 2.4GHz — HTTP / MQTT / Modbus TCP"
+  rs485: Modbus RTU
+  dataRefresh: 50ms
+  responseTime: "50ms (RS485); 200ms (WiFi)"
+  supportedSystems: "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)"
+  mountingType: 35mm DIN rail mounting
+  dimensions: 19(W) x 69(D) x 90(H) mm
+  operatingTemp: -20℃ to +55℃ (≤90% non-condensing)
+  measuredParams: "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power; Energy Usage / Solar Production"
+  clampInnerDimension: "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm"
+  certification: CE
+  placeOfOrigin: China
+  brandName: OWON
+faqs:
+  - q: What is an RS485 energy meter used for?
+    a: An RS485 energy meter is commonly used for industrial power monitoring, EMS integration, BMS systems, solar PV monitoring, and energy storage applications where reliable Modbus communication is required.
+  - q: Can PC4713 integrate with EMS and BMS platforms?
+    a: Yes. The PC4713 supports RS485 Modbus RTU, Modbus TCP, MQTT, and HTTP communication, enabling seamless integration with EMS, BMS, SCADA, PLC, and industrial automation platforms.
+  - q: Is PC4713 suitable for anti-backflow applications?
+    a: Yes. The meter provides real-time import and export energy data required for export limitation, zero-export control, and anti-backflow monitoring applications.
+  - q: What electrical systems are supported?
+    a: The PC4713 supports single-phase, split-phase, three-phase 3-wire, and three-phase 4-wire electrical systems.
+  - q: What CT options are available for the PC4713?
+    a: The PC4713 supports external CT clamps from 80A to 750A, making it suitable for commercial buildings, industrial facilities, solar PV systems, battery energy storage systems, and utility sub-metering projects.
+  - q: What is the difference between a Modbus energy meter and an RS485 energy meter?
+    a: RS485 refers to the physical communication interface, while Modbus RTU is the communication protocol commonly transmitted over RS485 networks. In industrial applications, the terms 'Modbus energy meter' and 'RS485 energy meter' are often used interchangeably because most RS485 energy meters communicate using the Modbus RTU protocol.
+language: en
+---
+
+PC4713-W-485 helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. The real-time data can be reported directly to your cloud server or be read locally without going through a third-party public cloud.
+
+## Key Features
+
+- Supports both Wi-Fi wireless communication and RS485 wired communication
+- Three-Phase, Split-Phase and Single-Phase electricity system compatible
+- Remotely monitor whole home Energy with three current transformers
+- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement
+- Bidirectional measurement: Energy Usage / Solar Production
+- Wi-Fi communication supports HTTP, MQTT, Modbus TCP protocols
+- RS485 communication supports Modbus RTU protocol
+- No requirement of APP, you could directly connect to device's hotspot and view real-time data through a browser

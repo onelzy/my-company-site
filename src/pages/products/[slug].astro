@@ -147,6 +147,9 @@ const specFieldLabels: Record<string, string> = {
   dataStorage: 'Data Storage',
   ota: 'OTA',
   relayType: 'Relay Type',
+  rs485: 'RS485',
+  dataRefresh: 'Data Refresh',
+  responseTime: 'Response Time',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -533,6 +536,36 @@ const faqSchema = {
                     { icon: '🌞', title: 'Energy Production', desc: 'Measures generated energy with daily, weekly and monthly usage trends.' },
                     { icon: '🔄', title: 'OTA Updates', desc: 'Firmware updates over the air — no physical access required.' },
                   ],
+                  'pc4713-w-ty': [
+                    { icon: '🏠', title: 'Three-Phase Whole-Home Monitoring', desc: 'Three CT clamps monitor the entire home or facility across single, split or three-phase supplies.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production — ideal for solar PV self-consumption.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: 'WiFi 2.4GHz with BLE pairing; monitor and automate in real time via the Tuya platform.' },
+                    { icon: '📊', title: 'Historical Data Export', desc: 'Historical data viewable and exportable in the App by day, week, month and year.' },
+                  ],
+                  'pc4713-w-e-ty': [
+                    { icon: '🔌', title: 'WiFi + Ethernet Dual Link', desc: 'Ethernet 10/100 Mbps improves network stability over WiFi in commercial environments.' },
+                    { icon: '🏠', title: 'Three-Phase Whole-Home Monitoring', desc: 'Three CT clamps monitor the entire home or facility across single, split or three-phase supplies.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production — ideal for solar PV self-consumption.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: 'WiFi 2.4GHz with BLE pairing; monitor and automate in real time via the Tuya platform.' },
+                  ],
+                  'pc4713-w-ty-r': [
+                    { icon: '🔘', title: 'Remote Relay Control', desc: 'Dry-contact relay (3A rated, 5A max) turns a connected load on or off from the App.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production on three-phase systems.' },
+                    { icon: '⚡', title: 'Instant Relay Status', desc: 'Relay status reported immediately while energy data updates every 15 seconds.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: 'WiFi 2.4GHz with BLE pairing; monitor and control via the Tuya platform.' },
+                  ],
+                  'pc4713-w-e-ty-r': [
+                    { icon: '🔌', title: 'WiFi + Ethernet + Relay', desc: 'The most complete PC4713 — dual connectivity plus dry-contact relay for remote control.' },
+                    { icon: '🔘', title: 'Remote Relay Control', desc: 'Dry-contact relay (3A rated, 5A max) turns a connected load on or off from the App.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production on three-phase systems.' },
+                    { icon: '⚡', title: 'Instant Relay Status', desc: 'Relay status reported immediately while energy data updates every 15 seconds.' },
+                  ],
+                  'pc4713-w-485': [
+                    { icon: '🔌', title: 'WiFi + RS485 Dual Link', desc: 'WiFi (HTTP/MQTT/Modbus TCP) plus wired RS485 (Modbus RTU) for flexible integration.' },
+                    { icon: '⚡', title: '50ms Data Refresh', desc: 'Industrial-grade 50ms refresh with 50ms RS485 / 200ms WiFi response time.' },
+                    { icon: '☁️', title: 'Direct-to-Cloud or Local', desc: 'Report to your own cloud server or read locally — no third-party public cloud required.' },
+                    { icon: '📡', title: 'No App Required', desc: 'Connect to the device hotspot and view real-time data through a browser.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -676,6 +709,46 @@ const faqSchema = {
                     { title: 'Single-Phase Whole-Home', desc: 'Residential consumption monitoring with daily, weekly and monthly trends.' },
                     { title: 'Two-Load Submetering', desc: 'Optional second CT monitors two loads from one device.' },
                     { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc4713-w-ty': [
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation, grid import/export and home consumption.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Three CT clamps monitor total household consumption on single, split or three-phase supplies.' },
+                    { title: 'Commercial Submetering', desc: '90-277V per phase and CT options to 750A cover commercial building loads.' },
+                    { title: 'Residential Smart Home', desc: 'Tuya App with historical data export for daily, weekly, monthly and yearly analysis.' },
+                    { title: 'Energy Analytics & BMS', desc: '15-second reporting feeds energy analytics and building management platforms.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc4713-w-e-ty': [
+                    { title: 'Commercial Buildings & Facilities', desc: 'Ethernet provides stable connectivity where WiFi is unreliable in industrial environments.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption across the phases.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Three CT clamps monitor the entire installation on single, split or three-phase supplies.' },
+                    { title: 'Residential Smart Home', desc: 'Tuya App with historical data viewable by day, week, month and year.' },
+                    { title: 'Energy Analytics & BMS', desc: 'Stable 15-second reporting feeds analytics and building management platforms.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc4713-w-ty-r': [
+                    { title: 'Remote Load On/Off Control', desc: 'Turn water heaters, EV chargers or lighting on/off remotely via the dry-contact relay.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption; relay can shed load.' },
+                    { title: 'Smart Home Automation', desc: 'Tuya ecosystem automation — schedule and control the relay alongside other devices.' },
+                    { title: 'Demand Response & Load Management', desc: 'Energy data plus relay control enable demand-response and load-shedding programs.' },
+                    { title: 'Commercial & Residential Installations', desc: 'Three-phase, split-phase and single-phase monitoring with DIN-rail mounting.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc4713-w-e-ty-r': [
+                    { title: 'Commercial Energy Management', desc: 'Ethernet stability plus relay control for facility-wide energy management.' },
+                    { title: 'Remote Load On/Off Control', desc: 'Turn loads on/off remotely via the dry-contact relay from the Tuya App.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption across the phases.' },
+                    { title: 'Demand Response Programs', desc: 'Relay control enables load shedding and demand response on three-phase supplies.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Three CT clamps monitor the entire installation on single, split or three-phase supplies.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc4713-w-485': [
+                    { title: 'Industrial Power Monitoring', desc: 'RS485 Modbus RTU with 50ms refresh suits industrial SCADA and PLC integration.' },
+                    { title: 'EMS / BMS Integration', desc: 'Modbus RTU/TCP, MQTT and HTTP enable seamless EMS, BMS and automation platform integration.' },
+                    { title: 'Solar & Energy Storage', desc: 'Real-time import/export data for export limitation, zero-export and anti-backflow control.' },
+                    { title: 'Commercial & Utility Submetering', desc: 'CT options 80A-750A cover commercial buildings and utility sub-metering projects.' },
+                    { title: 'Direct-to-Cloud Deployments', desc: 'Report data straight to your own cloud server without a third-party public cloud.' },
+                    { title: 'Local-Read Installations', desc: 'No App needed — connect to the device hotspot and view real-time data in a browser.' },
                   ],
                 };
                 const scenarios = {

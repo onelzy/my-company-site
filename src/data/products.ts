@@ -680,6 +680,84 @@ export const products: ProductsEntry[] = [
     "body": "PC321 ZigBee Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- ZigBee 3.0 compliant\n- Extend the range and strengthen ZigBee network communication\n- Single/3 - phase electricity compatible\n- Three current transformers for Single phase application\n- Measures real-time Voltage, Current, PowerFactor, ActivePower and total energy consumption\n- Statistical historical energy consumption\n- Suitable for both residential and commercial application\n- Optional antenna to enhance the signal strength\n- Lightweight and easy to install"
   },
   {
+    "slug": "pc4713-w-485",
+    "data": {
+      "name": "PC4713-W-485 Three-Phase WiFi + RS485 Smart Energy Meter",
+      "model": "PC4713-W-485",
+      "slug": {
+        "name": "PC4713-W-485 Smart Energy Meter",
+        "slug": "pc4713-w-485"
+      },
+      "description": "Open-protocol three-phase smart energy meter with WiFi (HTTP/MQTT/Modbus TCP) and RS485 (Modbus RTU) communication. Direct-to-cloud or local reading with 50ms data refresh — no third-party cloud required.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "mqtt",
+      "techSubType": "mqtt-meters",
+      "communication": [
+        "wifi",
+        "rs485"
+      ],
+      "ecosystem": [
+        "mqtt-open",
+        "local-api"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc4713-w-485/pc4713-w-485-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc4713-w-485/pc4713-w-485-01.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz (HTTP / MQTT / Modbus TCP) + RS485 (Modbus RTU)",
+        "wifi": "802.11 b/g/n @ 2.4GHz — HTTP / MQTT / Modbus TCP",
+        "rs485": "Modbus RTU",
+        "dataRefresh": "50ms",
+        "responseTime": "50ms (RS485); 200ms (WiFi)",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "19(W) x 69(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power; Energy Usage / Solar Production",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What is an RS485 energy meter used for?",
+          "a": "An RS485 energy meter is commonly used for industrial power monitoring, EMS integration, BMS systems, solar PV monitoring, and energy storage applications where reliable Modbus communication is required."
+        },
+        {
+          "q": "Can PC4713 integrate with EMS and BMS platforms?",
+          "a": "Yes. The PC4713 supports RS485 Modbus RTU, Modbus TCP, MQTT, and HTTP communication, enabling seamless integration with EMS, BMS, SCADA, PLC, and industrial automation platforms."
+        },
+        {
+          "q": "Is PC4713 suitable for anti-backflow applications?",
+          "a": "Yes. The meter provides real-time import and export energy data required for export limitation, zero-export control, and anti-backflow monitoring applications."
+        },
+        {
+          "q": "What electrical systems are supported?",
+          "a": "The PC4713 supports single-phase, split-phase, three-phase 3-wire, and three-phase 4-wire electrical systems."
+        },
+        {
+          "q": "What CT options are available for the PC4713?",
+          "a": "The PC4713 supports external CT clamps from 80A to 750A, making it suitable for commercial buildings, industrial facilities, solar PV systems, battery energy storage systems, and utility sub-metering projects."
+        },
+        {
+          "q": "What is the difference between a Modbus energy meter and an RS485 energy meter?",
+          "a": "RS485 refers to the physical communication interface, while Modbus RTU is the communication protocol commonly transmitted over RS485 networks. In industrial applications, the terms 'Modbus energy meter' and 'RS485 energy meter' are often used interchangeably because most RS485 energy meters communicate using the Modbus RTU protocol."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC4713-W-485 helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. The real-time data can be reported directly to your cloud server or be read locally without going through a third-party public cloud.\n\n## Key Features\n\n- Supports both Wi-Fi wireless communication and RS485 wired communication\n- Three-Phase, Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Wi-Fi communication supports HTTP, MQTT, Modbus TCP protocols\n- RS485 communication supports Modbus RTU protocol\n- No requirement of APP, you could directly connect to device's hotspot and view real-time data through a browser"
+  },
+  {
     "slug": "pc4713-w-e-ty-3w",
     "data": {
       "name": "PC4713-W-E-TY/3W Three Phase WiFi + Ethernet Smart Energy Meter",
@@ -759,5 +837,310 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "PC4713-W-E-TY/3W helps you monitor the amount of electricity Consumed and Produced in your three-phase power system (included three phase three wire) by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n## Key Features\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase (included 3P3W), Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Ethernet helps you improve the Network stability\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n\n## Packaging & Delivery\n- Selling Units: Single item"
+  },
+  {
+    "slug": "pc4713-w-e-ty-r",
+    "data": {
+      "name": "PC4713-W-E-TY/R Three-Phase WiFi + Ethernet Smart Energy Meter with Relay",
+      "model": "PC4713-W-E-TY/R",
+      "slug": {
+        "name": "PC4713-W-E-TY/R Smart Energy Meter",
+        "slug": "pc4713-w-e-ty-r"
+      },
+      "description": "Tuya-compatible three-phase smart energy meter with WiFi + Ethernet connectivity and dry-contact relay (3A rated, 5A max) for remote on/off control. Three CT clamps, bidirectional measurement.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi",
+        "rj45"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-r/pc4713-w-e-ty-r-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-r/pc4713-w-e-ty-r-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-r/pc4713-w-e-ty-r-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-r/pc4713-w-e-ty-r-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-r/pc4713-w-e-ty-r-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty-r/pc4713-w-e-ty-r-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + Ethernet 10/100 Mbps + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ethernet": "10/100 Mbps",
+        "ble": "For Pairing",
+        "relayType": "Dry contact relay, resistive current rated 3A, max.5A, overload protection and relay setting",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "19(W) x 69(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power; Energy Usage / Solar Production; relay on/off control",
+        "reportingCycle": "Energy data: every 15 seconds; relay status: immediately",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What makes the PC4713-W-E-TY/R different from other PC4713 variants?",
+          "a": "It combines WiFi and Ethernet connectivity with a dry-contact relay (3A rated, 5A max) for remote load control — the most feature-complete PC4713 variant."
+        },
+        {
+          "q": "Why include Ethernet in addition to WiFi?",
+          "a": "Ethernet provides a more reliable network connection than WiFi in commercial and industrial environments, ensuring stable communication and data reporting."
+        },
+        {
+          "q": "How fast does the relay react?",
+          "a": "Relay status is reported immediately, while energy data is reported every 15 seconds."
+        },
+        {
+          "q": "Can it monitor solar energy?",
+          "a": "Yes — bidirectional measurement tracks both energy usage and solar production on three-phase systems."
+        },
+        {
+          "q": "How many CT clamps can be connected?",
+          "a": "Up to three CT clamps (80A-750A) monitor multi-line three-phase electrical systems."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC4713-W-E-TY/R helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase, Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Ethernet helps you improve the Network stability\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n- Dry contact relay, resistive current rated 3A, max.5A, overload protection and relay setting"
+  },
+  {
+    "slug": "pc4713-w-e-ty",
+    "data": {
+      "name": "PC4713-W-E-TY Three-Phase WiFi + Ethernet Smart Energy Meter",
+      "model": "PC4713-W-E-TY",
+      "slug": {
+        "name": "PC4713-W-E-TY Smart Energy Meter",
+        "slug": "pc4713-w-e-ty"
+      },
+      "description": "Tuya-compatible three-phase smart energy meter with WiFi 2.4GHz and Ethernet 10/100 Mbps for stable connectivity. Three CT clamps, bidirectional measurement, 15-second reporting, 35mm DIN rail mounting.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi",
+        "rj45"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc4713-w-e-ty/pc4713-w-e-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty/pc4713-w-e-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty/pc4713-w-e-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty/pc4713-w-e-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-e-ty/pc4713-w-e-ty-04.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + Ethernet 10/100 Mbps + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ethernet": "10/100 Mbps",
+        "ble": "For Pairing",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "19(W) x 69(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power; Energy Usage / Solar Production",
+        "reportingCycle": "15 seconds",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What electrical systems does the PC4713 support?",
+          "a": "The PC4713 supports single-phase, split-phase, three-phase four-wire, and three-phase three-wire electrical systems."
+        },
+        {
+          "q": "Can the PC4713 monitor solar energy production?",
+          "a": "Yes. The meter supports bidirectional energy measurement and can monitor both energy consumption and solar generation."
+        },
+        {
+          "q": "Why does the PC4713 include Ethernet connectivity?",
+          "a": "Ethernet provides a more reliable network connection than WiFi in many commercial and industrial environments, helping ensure stable communication and data reporting."
+        },
+        {
+          "q": "How many CT clamps can be connected?",
+          "a": "The PC4713 supports up to three CT clamps for monitoring multi-line electrical systems."
+        },
+        {
+          "q": "Can I view historical energy data?",
+          "a": "Yes. Historical energy records can be viewed through the Tuya platform by day, week, month, and year."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC4713-W-E-TY helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase, Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Ethernet helps you improve the Network stability\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App"
+  },
+  {
+    "slug": "pc4713-w-ty-r",
+    "data": {
+      "name": "PC4713-W-TY/R Three-Phase WiFi Smart Energy Meter with Relay",
+      "model": "PC4713-W-TY/R",
+      "slug": {
+        "name": "PC4713-W-TY/R Smart Energy Meter",
+        "slug": "pc4713-w-ty-r"
+      },
+      "description": "Tuya-compatible three-phase WiFi smart energy meter with dry-contact relay (3A rated, 5A max) for remote on/off control. Three CT clamps, bidirectional measurement, instant relay status reporting.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc4713-w-ty-r/pc4713-w-ty-r-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty-r/pc4713-w-ty-r-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty-r/pc4713-w-ty-r-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty-r/pc4713-w-ty-r-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty-r/pc4713-w-ty-r-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty-r/pc4713-w-ty-r-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "relayType": "Dry contact relay, resistive current rated 3A, max.5A, overload protection and relay setting",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "19(W) x 69(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power; Energy Usage / Solar Production; relay on/off control",
+        "reportingCycle": "Energy data: every 15 seconds; relay status: immediately",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What makes the PC4713-W-TY/R different from a standard smart energy meter?",
+          "a": "It integrates a dry-contact relay (resistive current rated 3A, max 5A) so a connected load can be turned on or off remotely from the App."
+        },
+        {
+          "q": "How fast does the relay react?",
+          "a": "Relay status is reported immediately, while energy data is reported every 15 seconds."
+        },
+        {
+          "q": "Can it monitor solar energy?",
+          "a": "Yes — bidirectional measurement tracks both energy usage and solar production on three-phase systems."
+        },
+        {
+          "q": "What electrical systems are supported?",
+          "a": "Single-phase, split-phase and three-phase systems (three-phase 3-wire and Delta wiring are not supported)."
+        },
+        {
+          "q": "How is the relay protected?",
+          "a": "The relay includes overload protection and relay settings, with a resistive rating of 3A and a maximum of 5A."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC4713-W-TY/R helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase, Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n- Dry contact relay, resistive current rated 3A, max.5A, overload protection and relay setting"
+  },
+  {
+    "slug": "pc4713-w-ty",
+    "data": {
+      "name": "PC4713-W-TY Three-Phase WiFi Smart Energy Meter",
+      "model": "PC4713-W-TY",
+      "slug": {
+        "name": "PC4713-W-TY Smart Energy Meter",
+        "slug": "pc4713-w-ty"
+      },
+      "description": "Tuya-compatible three-phase WiFi smart energy meter with three CT clamps and bidirectional measurement. 90-277V per phase, 15-second reporting, 35mm DIN rail mounting.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc4713-w-ty/pc4713-w-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty/pc4713-w-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty/pc4713-w-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty/pc4713-w-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty/pc4713-w-ty-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc4713-w-ty/pc4713-w-ty-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "19(W) x 69(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power, Reactive Power, Apparent Power; Energy Usage / Solar Production",
+        "reportingCycle": "15 seconds",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What electrical systems does the PC4713-W-TY support?",
+          "a": "Single-phase, split-phase and three-phase systems (three-phase 3-wire and Delta wiring are not supported)."
+        },
+        {
+          "q": "Can it monitor solar energy production?",
+          "a": "Yes — the meter measures bidirectionally, tracking both energy consumption and solar generation."
+        },
+        {
+          "q": "How many CT clamps can be connected?",
+          "a": "Three current transformers monitor the whole home or facility across the phases."
+        },
+        {
+          "q": "How often does it report data?",
+          "a": "Energy data is reported every 15 seconds."
+        },
+        {
+          "q": "Can I view historical energy data?",
+          "a": "Yes — historical records can be viewed in the Tuya platform App by day, week, month and year, and exported."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC4713-W-TY helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase, Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App"
   }
 ];
