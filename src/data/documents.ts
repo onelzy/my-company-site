@@ -672,6 +672,10 @@ export const productDocs: ProductDoc[] = [
       {
         "name": "PC341 W TY N Multi Circuit Power Meter260615",
         "url": "https://documents.owon-iot.com/specs/Tuya/Datasheet_-_PC341-W-TY_N_Multi-Circuit_Power_Meter260615.pdf"
+      },
+      {
+        "name": "PC341 W MQTT 0626",
+        "url": "https://documents.owon-iot.com/specs/Datasheet_-_PC341-W-MQTT_0626.pdf"
       }
     ],
     "manuals": [
