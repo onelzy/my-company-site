@@ -1517,5 +1517,130 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "PC473-W-TY/R/N helps you monitor the amount of electricity Consumed and Produced in your three phase power system by connecting the clamp on to the power cable. It is also compatible with single phase. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Single Phase, 3-Phase 4-Wire electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting\n- Support Alexa, Google Assistant voice control relay"
+  },
+  {
+    "slug": "slc611-z",
+    "data": {
+      "name": "SLC611-Z ZigBee Power Meter with Relay",
+      "model": "SLC611-Z",
+      "slug": {
+        "name": "SLC611-Z Power Meter with Relay",
+        "slug": "slc611-z"
+      },
+      "description": "ZigBee 3.0 DIN-rail module combining wattage/kWh measurement with 10A dry-contact relay control. Measures voltage, current, power factor and active power, supports switch input and scheduled on/off.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc611-z/slc611-z-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc611-z/slc611-z-01.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "90~250 Vac 50/60Hz",
+        "maxLoad": "10A dry contact",
+        "frequency": "50/60Hz",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power; W and kWh; Energy Usage / Production",
+        "switchInput": "Switch input terminal",
+        "relayType": "10A dry contact output",
+        "mountingType": "DIN rail 35mm",
+        "dimensions": "50.6(L) x 23.3(W) x 46.0(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC611-Z do?",
+          "a": "It measures wattage (W) and kilowatt-hours (kWh) of the connected load and controls its on/off status via the mobile App over the ZigBee network."
+        },
+        {
+          "q": "What is the maximum load current?",
+          "a": "10A dry-contact output, suitable for lighting circuits and small appliances."
+        },
+        {
+          "q": "Does it support energy production measurement?",
+          "a": "Yes — it supports both energy usage and energy production measurement."
+        },
+        {
+          "q": "Can it be scheduled to switch automatically?",
+          "a": "Yes, the device can be scheduled to automatically power electronics on and off, with power-on status settings."
+        },
+        {
+          "q": "What is the switch input terminal used for?",
+          "a": "The switch input terminal allows connection of an external switch for local control of the connected load."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC611-Z is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Single phase electricity compatible\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Measures real-time Voltage, Current, PowerFactor, Active Power\n- Support Energy Usage/Production measurement\n- Support Switch input terminal\n- Schedule the device to automatically power electronics on and off\n- 10A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication\n- Power-on status setting"
+  },
+  {
+    "slug": "slc621-m-z",
+    "data": {
+      "name": "SLC621-M-Z ZigBee Smart Switch with Power Meter",
+      "model": "SLC621-M-Z",
+      "slug": {
+        "name": "SLC621-M-Z Smart Switch with Power Meter",
+        "slug": "slc621-m-z"
+      },
+      "description": "ZigBee 3.0 DIN-rail smart switch with 16A dry-contact output and wattage/kWh metering. Instantaneous and accumulative energy measurement with scheduled on/off control.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc621-m-z/slc621-m-z-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc621-m-z/slc621-m-z-01.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "90~250 Vac 50/60Hz",
+        "maxLoad": "16A dry contact",
+        "frequency": "50/60Hz",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power; W and kWh",
+        "relayType": "16A dry contact output",
+        "mountingType": "DIN rail 35mm",
+        "dimensions": "50.6(L) x 23.3(W) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC621-M-Z do?",
+          "a": "It combines a smart switch with a power meter — measuring wattage (W) and kilowatt-hours (kWh) of the connected load while allowing on/off control via the mobile App."
+        },
+        {
+          "q": "What is the maximum load current?",
+          "a": "16A dry-contact output — suitable for heavier loads such as water heaters and larger appliances."
+        },
+        {
+          "q": "Does it support scheduled switching?",
+          "a": "Yes, the device can be scheduled to automatically power electronics on and off."
+        },
+        {
+          "q": "What electrical system does it work with?",
+          "a": "Single-phase systems at 90~250 Vac 50/60Hz."
+        },
+        {
+          "q": "Can it extend the ZigBee network?",
+          "a": "Yes, as a mains-powered ZigBee device it acts as a router, extending the range and strengthening ZigBee network communication."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC621 is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Schedule the device to automatically power electronics on and off\n- 16A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication"
   }
 ];

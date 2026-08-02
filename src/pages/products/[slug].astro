@@ -152,6 +152,12 @@ const specFieldLabels: Record<string, string> = {
   responseTime: 'Response Time',
   mainCts: 'Main CT',
   subCts: 'Sub CT',
+  maxLoad: 'Max. Load Current',
+  switchInput: 'Switch Input',
+  standbyTime: 'Standby Time',
+  charging: 'Charging',
+  cableLength: 'Cable Length',
+  compatibleWith: 'Compatible With',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -598,6 +604,18 @@ const faqSchema = {
                     { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production on three-phase systems.' },
                     { icon: '⚡', title: 'Instant Relay Status', desc: 'Relay status reported immediately while energy data updates every 15 seconds.' },
                   ],
+                  'slc611-z': [
+                    { icon: '🔌', title: 'Meter + Relay in One', desc: 'Measures W/kWh of the connected load and switches it on/off from the App.' },
+                    { icon: '🔀', title: 'Switch Input Terminal', desc: 'Connect an external switch for local control of the load.' },
+                    { icon: '⏰', title: 'Scheduled On/Off', desc: 'Schedule electronics to power on/off automatically, with power-on status settings.' },
+                    { icon: '📶', title: 'ZigBee Network Extender', desc: 'Mains-powered router node extends range and strengthens ZigBee mesh communication.' },
+                  ],
+                  'slc621-m-z': [
+                    { icon: '🔌', title: 'Meter + Switch in One', desc: 'Measures W/kWh of the connected load with on/off control from the App.' },
+                    { icon: '💪', title: '16A Dry-Contact Output', desc: 'Handles heavier loads — water heaters, large appliances and lighting circuits.' },
+                    { icon: '⏰', title: 'Scheduled On/Off', desc: 'Schedule electronics to power on/off automatically via the App.' },
+                    { icon: '📶', title: 'ZigBee Network Extender', desc: 'Mains-powered router node extends range and strengthens ZigBee mesh communication.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -821,6 +839,22 @@ const faqSchema = {
                     { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption; relay can shed load.' },
                     { title: 'Demand Response Programs', desc: 'Energy data plus relay control enable demand-response and load-shedding programs.' },
                     { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'slc611-z': [
+                    { title: 'Hotel Room Control', desc: 'DIN-rail module controls and meters lighting and appliance circuits in guest rooms.' },
+                    { title: 'Lighting Control with Metering', desc: 'Switch lighting on/off while tracking W/kWh consumption per circuit.' },
+                    { title: 'Energy Submetering', desc: 'Accumulative kWh measurement for per-room or per-circuit energy billing.' },
+                    { title: 'Scheduled Automation', desc: 'Power-on status and schedules for automatic load switching.' },
+                    { title: 'Solar & Production Monitoring', desc: 'Energy usage/production measurement for distributed energy setups.' },
+                    { title: 'ZigBee Mesh Expansion', desc: 'Router node strengthens the ZigBee network while controlling loads.' },
+                  ],
+                  'slc621-m-z': [
+                    { title: 'Hotel Room Control', desc: '16A DIN-rail switch controls and meters heavier guest-room circuits.' },
+                    { title: 'Water Heater Control', desc: '16A dry-contact output switches water heaters and large appliances.' },
+                    { title: 'Lighting & Appliance Switching', desc: 'On/off control with W/kWh metering for lighting and appliance circuits.' },
+                    { title: 'Energy Submetering', desc: 'Accumulative kWh measurement for per-room or per-circuit billing.' },
+                    { title: 'Scheduled Automation', desc: 'Schedule electronics to power on/off automatically.' },
+                    { title: 'ZigBee Mesh Expansion', desc: 'Router node strengthens the ZigBee network while controlling loads.' },
                   ],
                 };
                 const scenarios = {

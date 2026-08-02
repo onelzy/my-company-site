@@ -60,7 +60,7 @@ export const PRODUCT_TYPE_LABELS: Record<string, LocalizedRecord> = {
     en: 'Software & Platforms',
     zh: '软件与平台',
     es: 'Software y Plataformas',
-    ru: 'ПО и платформы',
+    ru: 'Программы и платформы',
     fr: 'Logiciels et Plateformes',
     de: 'Software & Plattformen',
     ar: 'برمجيات ومنصات',

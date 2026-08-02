@@ -153,7 +153,7 @@ const productsCollection = defineCollection({
 
     // Technical Specs (multi-select arrays)
     communication: z
-      .array(z.enum(['zigbee', 'wifi', '4g', 'lora', 'nb-iot', 'modbus', 'mqtt', 'tcpip', 'rj45']))
+      .array(z.enum(['zigbee', 'wifi', 'ble', '4g', 'lora', 'nb-iot', 'modbus', 'mqtt', 'tcpip', 'rj45']))
       .optional(),
     ecosystem: z.array(z.enum(['tuya', 'mqtt-open', 'zigbee-solution', 'home-assistant', 'local-api'])).optional(),
     extraTags: z.array(z.enum(['modbus-rtu', 'modbus-tcp'])).optional(),
