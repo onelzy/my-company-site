@@ -1,51 +1,68 @@
 ---
-name: PC321-TY Single Phase Smart Meter
-model: PC321-TY
+name: PC321-W-TY Single/Three-Phase WiFi Smart Energy Clamp
+model: PC321-W-TY
 slug:
-  name: PC321-TY Single Phase Smart Meter
-  slug: pc321-ty
-description: Tuya-enabled single phase DIN rail smart meter with ZigBee/WiFi connectivity. Class 1.0 accuracy, ideal for residential and commercial energy monitoring.
+  name: PC321-W-TY Smart Energy Clamp
+  slug: pc321-w-ty
+description: Tuya-compatible WiFi smart energy clamp for single-phase, split-phase and three-phase systems. Three CT clamps up to 750A, bidirectional measurement for solar PV, real-time monitoring via Tuya Smart / Smart Life apps.
 productType: smart-meters
-productSubType: single-phase
+productSubType: three-phase
 techSolution: tuya
 techSubType: tuya-meters
 communication:
-  - zigbee
   - wifi
-  - mqtt
 ecosystem:
   - tuya
-image: /images/products/pc321-ty.svg
+image: https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg
+images:
+  - https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg
 specs:
-  accuracy: Class 1.0
-  voltage: 100-240V AC
-  current: 5(80)A
+  accuracy: "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating"
+  voltage: "90~277 Vac 50/60Hz (RMS per phase)"
+  current: 80A~750A (CT dependent)
   frequency: 50/60Hz
-  powerSupply: AC mains
-  display: LCD backlit
-  dimensions: 35x98x65mm
-  weight: 210g
-  operatingTemp: -25C to +60C
-  protocol: ZigBee 3.0 / WiFi 802.11 b/g/n
-  certification: CE, RoHS, FCC
-  warranty: 2 years
+  powerSupply: <2W
+  protocol: WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)
+  dimensions: 86(W) x 37(D) x 86(H) mm
+  mountingType: Wall mounting (default); DIN rail mounting (optional)
+  operatingTemp: -20℃ to +55℃ (≤90% non-condensing)
+  measuredParams: Voltage, Current, Power Factor, Frequency, Active Power
+  reportingCycle: Every 15 seconds
+  certification: CE
+  placeOfOrigin: China
+  brandName: OWON
+  supportedSystems: "Single-Phase, Split-Phase, Three-Phase 4-Wire (3-Phase 3-Wire & Delta not supported)"
+  clampInnerDimension: "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm"
+  ammeterAccuracy: "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)"
+  wifi: 802.11 b/g/n @ 2.4GHz
+  ble: For Pairing
+faqs:
+  - q: Does the Smart Power Meter (PC321) support both single-phase and three-phase systems?
+    a: Yes, it supports Single Phase / Split Phase / Three Phase power monitoring, making it flexible for residential and commercial projects.
+  - q: What CT clamp ranges are available?
+    a: The PC321 works with CT clamps from 80A up to 750A, suitable for HVAC, solar, and EV energy management applications.
+  - q: Is this WiFi energy meter Tuya-compatible?
+    a: Yes, it fully integrates with the Tuya IoT platform for remote monitoring and control.
+  - q: Can the PC321 integrate with BMS/EMS through MQTT?
+    a: Yes. The MQTT version supports custom integration with third-party IoT platforms.
+  - q: Does the PC321 support bidirectional metering?
+    a: Yes. It measures both energy import and export, ideal for solar PV systems.
 language: en
 ---
 
-The PC321-TY is a Tuya-enabled single-phase smart energy meter with ZigBee 3.0 and WiFi dual connectivity and 1 CT clamp. Track real-time consumption with bidirectional measurement, compatible with Tuya Smart and Smart Life apps.
+PC321-W-TY helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with single phase and split phase.
 
 ## Key Features
 
-- **Class 1.0 Accuracy** — meets IEC 62053-21 standards
-- **Dual Connectivity** — ZigBee 3.0 + WiFi 802.11 b/g/n
-- **Tuya Certified** — ready for Tuya Smart and Smart Life apps
-- **DIN Rail Mount** — standard 35mm DIN rail
-- **Real-time Monitoring** — voltage, current, power, energy consumption
-- **OTA Updates** — firmware updates via ZigBee or WiFi
+- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values
+- Single Phase, Split Phase, 3-Phase 4-Wire electricity system compatible
+- Remotely monitor whole home Energy with three current transformers
+- Wireless communication via Wi-Fi 2.4GHz
+- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency measurement
+- Bidirectional measurement: Energy Usage / Solar Production
+- Historical data can be displayed and exported in the App
+- External antenna prevents signal from being shielded
 
-## Applications
+## Packaging & Delivery
 
-- Residential energy monitoring
-- Commercial sub-metering
-- Smart building energy management
-- Solar PV system monitoring
+- Selling Units: Single item

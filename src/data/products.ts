@@ -58,43 +58,73 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc321-ty-smart-meter",
     "data": {
-      "name": "PC321-TY Single Phase Smart Meter",
-      "model": "PC321-TY",
+      "name": "PC321-W-TY Single/Three-Phase WiFi Smart Energy Clamp",
+      "model": "PC321-W-TY",
       "slug": {
-        "name": "PC321-TY Single Phase Smart Meter",
-        "slug": "pc321-ty"
+        "name": "PC321-W-TY Smart Energy Clamp",
+        "slug": "pc321-w-ty"
       },
-      "description": "Tuya-enabled single phase DIN rail smart meter with ZigBee/WiFi connectivity. Class 1.0 accuracy, ideal for residential and commercial energy monitoring.",
+      "description": "Tuya-compatible WiFi smart energy clamp for single-phase, split-phase and three-phase systems. Three CT clamps up to 750A, bidirectional measurement for solar PV, real-time monitoring via Tuya Smart / Smart Life apps.",
       "productType": "smart-meters",
-      "productSubType": "single-phase",
+      "productSubType": "three-phase",
       "techSolution": "tuya",
       "techSubType": "tuya-meters",
       "communication": [
-        "zigbee",
-        "wifi",
-        "mqtt"
+        "wifi"
       ],
       "ecosystem": [
         "tuya"
       ],
-      "image": "/images/products/pc321-ty.svg",
+      "image": "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc321-w-ty/pc321-w-ty-01.jpg"
+      ],
       "specs": {
-        "accuracy": "Class 1.0",
-        "voltage": "100-240V AC",
-        "current": "5(80)A",
+        "accuracy": "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
         "frequency": "50/60Hz",
-        "powerSupply": "AC mains",
-        "display": "LCD backlit",
-        "dimensions": "35x98x65mm",
-        "weight": "210g",
-        "operatingTemp": "-25C to +60C",
-        "protocol": "ZigBee 3.0 / WiFi 802.11 b/g/n",
-        "certification": "CE, RoHS, FCC",
-        "warranty": "2 years"
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "dimensions": "86(W) x 37(D) x 86(H) mm",
+        "mountingType": "Wall mounting (default); DIN rail mounting (optional)",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Frequency, Active Power",
+        "reportingCycle": "Every 15 seconds",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase 4-Wire (3-Phase 3-Wire & Delta not supported)",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing"
       },
+      "faqs": [
+        {
+          "q": "Does the Smart Power Meter (PC321) support both single-phase and three-phase systems?",
+          "a": "Yes, it supports Single Phase / Split Phase / Three Phase power monitoring, making it flexible for residential and commercial projects."
+        },
+        {
+          "q": "What CT clamp ranges are available?",
+          "a": "The PC321 works with CT clamps from 80A up to 750A, suitable for HVAC, solar, and EV energy management applications."
+        },
+        {
+          "q": "Is this WiFi energy meter Tuya-compatible?",
+          "a": "Yes, it fully integrates with the Tuya IoT platform for remote monitoring and control."
+        },
+        {
+          "q": "Can the PC321 integrate with BMS/EMS through MQTT?",
+          "a": "Yes. The MQTT version supports custom integration with third-party IoT platforms."
+        },
+        {
+          "q": "Does the PC321 support bidirectional metering?",
+          "a": "Yes. It measures both energy import and export, ideal for solar PV systems."
+        }
+      ],
       "language": "en"
     },
-    "body": "The PC321-TY is a Tuya-enabled single-phase smart energy meter with ZigBee 3.0 and WiFi dual connectivity and 1 CT clamp. Track real-time consumption with bidirectional measurement, compatible with Tuya Smart and Smart Life apps.\n\n## Key Features\n\n- **Class 1.0 Accuracy** — meets IEC 62053-21 standards\n- **Dual Connectivity** — ZigBee 3.0 + WiFi 802.11 b/g/n\n- **Tuya Certified** — ready for Tuya Smart and Smart Life apps\n- **DIN Rail Mount** — standard 35mm DIN rail\n- **Real-time Monitoring** — voltage, current, power, energy consumption\n- **OTA Updates** — firmware updates via ZigBee or WiFi\n\n## Applications\n\n- Residential energy monitoring\n- Commercial sub-metering\n- Smart building energy management\n- Solar PV system monitoring"
+    "body": "PC321-W-TY helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with single phase and split phase.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Single Phase, Split Phase, 3-Phase 4-Wire electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- External antenna prevents signal from being shielded\n\n## Packaging & Delivery\n\n- Selling Units: Single item"
   },
   {
     "slug": "pc341-3m16s-energy-monitor",
@@ -136,7 +166,7 @@ export const products: ProductsEntry[] = [
       },
       "language": "en"
     },
-    "body": "The PC341-3M16S is a multi-circuit energy monitor designed for commercial and industrial energy sub-metering. It supports 3 main current transformer ports plus 16 sub-CT channels, enabling precise per-circuit monitoring across entire electrical panels.\n\n**Key Features**\n- **19 Total Channels** — 3 main circuits + 16 sub-circuits\n- **ZigBee 3.0 Mesh** — reliable multi-device networking\n- **Modbus RTU** — industrial protocol support\n- **Per-Circuit Analytics** — identify energy hogs by circuit\n- **DIN Rail Mount** — fits standard electrical panels\n\n**Applications**\n- Commercial building sub-metering\n- Industrial facility energy monitoring\n- Tenant billing systems\n- Data center PUE tracking"
+    "body": "The PC341-3M16S is a multi-circuit energy monitor designed for commercial and industrial energy sub-metering. It supports 3 main current transformer ports plus 16 sub-CT channels, enabling precise per-circuit monitoring across entire electrical panels.\n\n## Key Features\n- **19 Total Channels** — 3 main circuits + 16 sub-circuits\n- **ZigBee 3.0 Mesh** — reliable multi-device networking\n- **Modbus RTU** — industrial protocol support\n- **Per-Circuit Analytics** — identify energy hogs by circuit\n- **DIN Rail Mount** — fits standard electrical panels\n\n## Applications\n- Commercial building sub-metering\n- Industrial facility energy monitoring\n- Tenant billing systems\n- Data center PUE tracking"
   },
   {
     "slug": "pc341-w-ty-smart-meter",
@@ -206,7 +236,7 @@ export const products: ProductsEntry[] = [
       ],
       "language": "en"
     },
-    "body": "PC341-W-TY helps you monitor the amount of electricity consumed and produced in your facility by connecting the clamp onto the power cable. Monitor whole home energy and up to 2 individual circuits with bi-directional measurement.\n\n**Product Description**\n\n| Attribute | Value |\n|---|---|\n| Product Name | Multi-Circuit Power Meter |\n| Material | Plastic |\n| Function | Measures real-time and total energy consumption, Bi-Directional measurement |\n| Dimension | 111.3(L) × 81.2(W) × 41.4(H) mm |\n| Weight | 586g |\n| Operating Frequency | 50/60Hz |\n| Operating Voltage | 90~380 Vac |\n| Mounting Type | Wall Mounting |\n| Operating Environment | Temperature: -20℃~+55℃, Humidity: ≤90% non-condensing |\n| Range outdoor/indoor | 100m / 30m |\n| Output Power | Up to +20dBm |\n| Measured Parameters | Voltage: 0~240 Vac (phase to neutral), Current: up to 250 Amps |\n| Wi-Fi | 802.11 b/g/n @ 2.4GHz |\n| BLE | For Wi-Fi Pairing |\n| Reporting Cycle | Every 15 seconds |\n| Calibrated Metering Accuracy | ±2% |\n| Sub CT Cable | 2.5mm three-pole audio connector with 1m cable |\n| Main CT Cable | 3.5mm three-pole audio connector with 1m cable |\n\n**Main Features**\n- Tuya compliant\n- Supports Tap-to-Run and automation with other Tuya devices\n- Single/3-phase electricity compatible\n- Three current transformers for single phase application\n- Measures real-time Voltage, Current, Power Factor, Active Power\n- Bi-Directional measurement — supports both energy consumption and production measurement\n- Suitable for both residential and commercial application\n- Lightweight and easy to install — wall mount with clamp-on CTs, no wiring to mains\n- External antenna prevents signal from being shielded even inside metal enclosures\n- 100m outdoor / 30m indoor wireless range with up to +20dBm output power\n\n**Packaging & Delivery**\n- Selling Units: Single item\n- Single package size: 111.6 × 81.2 × 41.4 cm\n- Single gross weight: 6.0 kg"
+    "body": "PC341-W-TY helps you monitor the amount of electricity consumed and produced in your facility by connecting the clamp onto the power cable. Monitor whole home energy and up to 2 individual circuits with bi-directional measurement.\n\n## Product Description\n\n| Attribute | Value |\n|---|---|\n| Product Name | Multi-Circuit Power Meter |\n| Material | Plastic |\n| Function | Measures real-time and total energy consumption, Bi-Directional measurement |\n| Dimension | 111.3(L) × 81.2(W) × 41.4(H) mm |\n| Weight | 586g |\n| Operating Frequency | 50/60Hz |\n| Operating Voltage | 90~380 Vac |\n| Mounting Type | Wall Mounting |\n| Operating Environment | Temperature: -20℃~+55℃, Humidity: ≤90% non-condensing |\n| Range outdoor/indoor | 100m / 30m |\n| Output Power | Up to +20dBm |\n| Measured Parameters | Voltage: 0~240 Vac (phase to neutral), Current: up to 250 Amps |\n| Wi-Fi | 802.11 b/g/n @ 2.4GHz |\n| BLE | For Wi-Fi Pairing |\n| Reporting Cycle | Every 15 seconds |\n| Calibrated Metering Accuracy | ±2% |\n| Sub CT Cable | 2.5mm three-pole audio connector with 1m cable |\n| Main CT Cable | 3.5mm three-pole audio connector with 1m cable |\n\n## Key Features\n- Tuya compliant\n- Supports Tap-to-Run and automation with other Tuya devices\n- Single/3-phase electricity compatible\n- Three current transformers for single phase application\n- Measures real-time Voltage, Current, Power Factor, Active Power\n- Bi-Directional measurement — supports both energy consumption and production measurement\n- Suitable for both residential and commercial application\n- Lightweight and easy to install — wall mount with clamp-on CTs, no wiring to mains\n- External antenna prevents signal from being shielded even inside metal enclosures\n- 100m outdoor / 30m indoor wireless range with up to +20dBm output power\n\n## Packaging & Delivery\n- Selling Units: Single item\n- Single package size: 111.6 × 81.2 × 41.4 cm\n- Single gross weight: 6.0 kg"
   },
   {
     "slug": "pc4713-w-e-ty-3w",
@@ -287,7 +317,7 @@ export const products: ProductsEntry[] = [
       ],
       "language": "en"
     },
-    "body": "PC4713-W-E-TY/3W helps you monitor the amount of electricity Consumed and Produced in your three-phase power system (included three phase three wire) by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n**Main Features**\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase (included 3P3W), Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Ethernet helps you improve the Network stability\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n\n**Packaging & Delivery**\n- Selling Units: Single item"
+    "body": "PC4713-W-E-TY/3W helps you monitor the amount of electricity Consumed and Produced in your three-phase power system (included three phase three wire) by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n## Key Features\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase (included 3P3W), Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Ethernet helps you improve the Network stability\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n\n## Packaging & Delivery\n- Selling Units: Single item"
   },
   {
     "slug": "pct513-smart-thermostat",

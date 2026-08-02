@@ -457,6 +457,12 @@ const faqSchema = {
                     { icon: '📏', title: 'Ultra-Slim 1P Design', desc: 'Only 18mm wide — a single DIN module that fits the tightest distribution boards.' },
                     { icon: '🔄', title: 'Swappable CT Clamps', desc: 'Replace CT clamps with different ratings (80A to 750A) without resetting device data.' },
                   ],
+                  'pc321-w-ty': [
+                    { icon: '🔌', title: 'Single, Split & 3-Phase Compatible', desc: 'One clamp meter covers single-phase, split-phase and three-phase 4-wire systems — three CT clamps monitor the whole installation.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Measures both energy consumed and produced — ideal for solar PV self-consumption and net-metering setups.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: '2.4GHz WiFi with BLE-assisted pairing; monitor and control in real time via Tuya Smart / Smart Life apps.' },
+                    { icon: '📡', title: 'External Magnetic Antenna', desc: 'Keeps the signal reliable even inside metal distribution boxes — no shielding interference.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -528,6 +534,14 @@ const faqSchema = {
                     { title: 'Regions Using 3-Phase 3-Wire Lines', desc: 'Works with three-phase three-wire grids (common in some countries) as well as the standard three-phase four-wire system.' },
                     { title: 'Commercial & Industrial Submetering', desc: 'DIN-rail 1P 18mm form factor fits tight distribution boards for per-circuit or per-machine energy allocation.' },
                     { title: 'Energy Storage Systems', desc: 'Bi-directional measurement tracks charging and discharging of battery storage alongside solar generation.' },
+                  ],
+                  'pc321-w-ty': [
+                    { title: 'Solar PV Self-Consumption', desc: 'Bi-directional metering tracks solar generation, grid import/export and household consumption in real time.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Three CT clamps monitor total household consumption across single, split or three-phase supplies via the Tuya app.' },
+                    { title: 'Split-Phase & 3-Phase 4-Wire Installations', desc: 'Covers North American split-phase and standard three-phase four-wire systems (3-wire & Delta not supported).' },
+                    { title: 'Residential & Commercial Submetering', desc: 'Non-invasive CT clamp installation from 80A to 750A, wall or DIN-rail mounting — no rewiring required.' },
+                    { title: 'HVAC & EV Charging Circuits', desc: 'CT range and 15-second reporting cycle suit HVAC systems and EV charger energy management.' },
+                    { title: 'Solar Installer Commissioning', desc: 'Verify PV system performance and validate inverter output during installation using real-time clamp data.' },
                   ],
                 };
                 const scenarios = {
