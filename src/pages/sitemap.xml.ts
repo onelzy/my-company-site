@@ -8,19 +8,15 @@
  * Product/solution detail pages use trailing-slash URLs to match the actual
  * served URLs (the adapter 307-redirects the non-slash form).
  */
-import { getCollection } from 'astro:content';
 import { SITE } from 'astrowind:config';
+import { products } from '~/data/products';
 
 export const prerender = false;
 
 /** Derive the canonical Keystatic slug for a product entry. */
-function productSlug(p: { data: { slug?: { slug?: string }; name?: string }; id: string }): string {
-  return (
-    p.data.slug?.slug ||
-    p.id.split('/').pop()?.replace('.mdoc', '') ||
-    p.data.name?.toLowerCase().replace(/\s+/g, '-') ||
-    ''
-  );
+function productSlug(p: { data?: { slug?: { slug?: string }; name?: string }; slug: string }): string {
+  const d = (p.data ?? {}) as { slug?: { slug?: string }; name?: string };
+  return d.slug?.slug || p.slug || d.name?.toLowerCase().replace(/\s+/g, '-') || '';
 }
 
 // ---------------------------------------------------------------------------
@@ -37,7 +33,6 @@ interface UrlEntry {
 // ---------------------------------------------------------------------------
 export const GET = async () => {
   const baseUrl = SITE.site.replace(/\/+$/, '');
-  const products = await getCollection('products');
 
   const urls: UrlEntry[] = [];
 
@@ -63,7 +58,7 @@ export const GET = async () => {
     ['/developers/mqtt', 'monthly', '0.7'],
     ['/developers/zigbee', 'monthly', '0.7'],
     ['/developers/ha', 'monthly', '0.7'],
-    ['/blog', 'weekly', '0.8'],
+    ['/blog/', 'weekly', '0.8'],
   ];
   for (const [path, changefreq, priority] of staticRoutes) {
     urls.push({ loc: `${baseUrl}${path}`, changefreq, priority });
