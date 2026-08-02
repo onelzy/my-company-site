@@ -140,6 +140,7 @@ const specFieldLabels: Record<string, string> = {
   ble: 'BLE',
   ethernet: 'Ethernet',
   mqtt: 'MQTT',
+  http: 'HTTP',
   rfRange: 'RF Range',
   antenna: 'Antenna',
   gatewayCompatibility: 'Gateway Compatibility',
@@ -484,7 +485,7 @@ const faqSchema = {
                     { icon: '📡', title: 'External Magnetic Antenna', desc: 'Keeps the signal reliable even inside metal distribution boxes — no shielding interference.' },
                   ],
                   'pc321-w-3w': [
-                    { icon: '☁️', title: 'Direct-to-Cloud MQTT', desc: 'Reports real-time data straight to your own cloud server via the MQTT API — no third-party public cloud required.' },
+                    { icon: '☁️', title: 'MQTT + HTTP API', desc: 'Reports real-time data straight to your own cloud server via MQTT or HTTP API — no third-party public cloud required.' },
                     { icon: '🔀', title: '3P3W & Split-Phase Compatible', desc: 'Supports three-phase 4-wire, 3-phase 3-wire, split-phase and single-phase systems with three CT clamps.' },
                     { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks both energy consumed and produced — ideal for solar PV self-consumption monitoring.' },
                     { icon: '📡', title: 'External Magnetic Antenna', desc: 'Avoids signal shielding inside metal distribution boxes for reliable wireless reporting.' },
@@ -498,7 +499,7 @@ const faqSchema = {
                   'pc321-w': [
                     { icon: '⏱️', title: '2-Second Reporting', desc: 'Near-real-time energy data reported every 2 seconds for responsive monitoring.' },
                     { icon: '🔩', title: 'CT Options 80A-1000A', desc: 'Interchangeable CT clamps from 80A up to 1000A cover HVAC, EV and industrial loads.' },
-                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: '2.4GHz WiFi connectivity with remote monitoring via the Tuya platform.' },
+                    { icon: '🔌', title: 'MQTT + HTTP API', desc: 'Direct-to-cloud integration via MQTT or HTTP API — no third-party cloud required.' },
                     { icon: '📡', title: 'External Antenna', desc: 'Prevents signal shielding for reliable wireless communication in metal enclosures.' },
                   ],
                   'pc321-z-ty': [

@@ -92,7 +92,7 @@ export const products: ProductsEntry[] = [
         "name": "PC321-W/3W Smart Energy Clamp",
         "slug": "pc321-w-3w"
       },
-      "description": "Open-protocol WiFi smart energy clamp for single, split and three-phase systems (incl. 3P3W). MQTT API with direct-to-cloud reporting — no third-party cloud required. Three CT clamps up to 750A, bidirectional measurement for solar PV.",
+      "description": "Open-protocol WiFi smart energy clamp for single, split and three-phase systems (incl. 3P3W). MQTT & HTTP API with direct-to-cloud reporting — no third-party cloud required. Three CT clamps up to 750A, bidirectional measurement for solar PV.",
       "productType": "smart-meters",
       "productSubType": "three-phase",
       "techSolution": "mqtt",
@@ -115,8 +115,9 @@ export const products: ProductsEntry[] = [
         "current": "80A~750A (CT dependent)",
         "frequency": "50/60Hz",
         "powerSupply": "<2W",
-        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing); MQTT API",
-        "mqtt": "Direct-to-cloud MQTT API — no third-party public cloud required",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing); MQTT & HTTP API",
+        "mqtt": "MQTT API — direct-to-cloud integration",
+        "http": "HTTP API — direct-to-cloud integration",
         "dimensions": "86(W) x 37(D) x 86(H) mm",
         "mountingType": "Wall mounting (default); DIN rail mounting (optional)",
         "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
@@ -166,16 +167,17 @@ export const products: ProductsEntry[] = [
         "name": "PC321-W Smart Energy Clamp",
         "slug": "pc321-w"
       },
-      "description": "Tuya-compatible WiFi smart energy clamp with 2-second reporting and CT options from 80A to 1000A. Measures real-time voltage, current, power factor, active power and total energy for single and three-phase systems.",
+      "description": "WiFi smart energy clamp with MQTT & HTTP API for direct-to-cloud integration. 2-second reporting, CT options from 80A to 1000A. Measures real-time voltage, current, power factor, active power and total energy for single and three-phase systems.",
       "productType": "smart-meters",
       "productSubType": "three-phase",
-      "techSolution": "tuya",
-      "techSubType": "tuya-meters",
+      "techSolution": "mqtt",
+      "techSubType": "mqtt-meters",
       "communication": [
-        "wifi"
+        "wifi",
+        "mqtt"
       ],
       "ecosystem": [
-        "tuya"
+        "mqtt-open"
       ],
       "image": "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-01.jpg",
       "images": [
@@ -189,6 +191,8 @@ export const products: ProductsEntry[] = [
         "frequency": "50/60Hz",
         "protocol": "WiFi 802.11 b/g/n (20/40MHz)",
         "wifi": "802.11 b/g/n (20/40MHz)",
+        "mqtt": "MQTT API — direct-to-cloud integration",
+        "http": "HTTP API — direct-to-cloud integration",
         "rfRange": "Output Power: Up to +20dBm; external antenna",
         "dimensions": "86(L) x 86(W) x 37(H) mm",
         "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
