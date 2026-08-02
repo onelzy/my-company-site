@@ -437,6 +437,125 @@ export const products: ProductsEntry[] = [
     "body": "The FDS315 Fall Detection Sensor can detect if a person falls, so you can know the risk in time. It can be tremendously beneficial in nursing homes to monitor and link with other devices to make your home smarter.\n\n## Key Features\n\n- ZigBee 3.0\n- Fall detection (works on single person)\n- Identifies the location of human activity\n- Out-of-bed detection\n- Real-time breathing rate detection during sleep\n- Extends the range and strengthens ZigBee network communication\n- Suitable for residential and commercial applications"
   },
   {
+    "slug": "kf205",
+    "data": {
+      "name": "KF205 ZigBee Key Fob",
+      "model": "KF205",
+      "slug": {
+        "name": "KF205 ZigBee Key Fob",
+        "slug": "kf205"
+      },
+      "description": "Portable ZigBee HA1.2 key fob — arm/disarm your security system and control lights or energy equipment remotely.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/kf205/kf205-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/kf205/kf205-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Indoor/outdoor: 30m ~ 100m",
+        "battery": "1 x CR2450 button battery (DC 3V)",
+        "powerConsumption": "Standby ≤4μA; trigger ≤30mA",
+        "buttons": "Up/down: security arm/disarm; left/right: light or energy equipment control",
+        "operatingTemp": "-20℃ ~ +55℃"
+      },
+      "faqs": [
+        {
+          "q": "What can the KF205 do?",
+          "a": "Deploy and remove the security system through the upper and lower buttons, and control light or energy equipment remotely with the left and right buttons."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "One CR2450 button battery at DC 3V, with standby current of ≤4μA."
+        },
+        {
+          "q": "Is it portable?",
+          "a": "Yes — mini size key fob design, easy to carry and install."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee Home Automation 1.2."
+        },
+        {
+          "q": "What is the transmission range?",
+          "a": "Wide area, 30m~100m indoor/outdoor."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "ZigBee Key Fob 205 is a multi-functional key fob for sensing monitoring. It is portable and easy to install. KF205 can deploy and remove the security system through the upper and lower buttons and control the light equipment or energy equipment remotely by the left and right buttons.\n\n## Key Features\n\n- ZigBee HA 1.2\n- Remote switch controlling\n- Remote security system deployment and removal\n- Low power consumption (standby ≤4μA)\n- Mini size, easy installation"
+  },
+  {
+    "slug": "lc421",
+    "data": {
+      "name": "LC421 ZigBee Load Control",
+      "model": "LC421",
+      "slug": {
+        "name": "LC421 ZigBee Load Control",
+        "slug": "lc421"
+      },
+      "description": "ZigBee HA1.2 heavy-duty load control — switches 25A circuits like pools, pumps, heaters and AC compressors from your phone.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/lc421/lc421-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/lc421/lc421-01.jpg",
+        "https://documents.owon-iot.com/product-images/lc421/lc421-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "maxLoad": "220VAC 25A",
+        "voltage": "AC 100~240V, 50/60Hz",
+        "standbyPower": "< 0.7W",
+        "control": "Remote on/off; manual toggle button; scheduling",
+        "dimensions": "171(L) x 118(W) x 48.2(H) mm",
+        "weight": "300g"
+      },
+      "faqs": [
+        {
+          "q": "What can the LC421 control?",
+          "a": "Heavy duty equipment remotely — suitable for pools, pumps, space heaters, air conditioner compressors and similar loads."
+        },
+        {
+          "q": "What is the maximum load?",
+          "a": "220VAC 25A."
+        },
+        {
+          "q": "Can I schedule it?",
+          "a": "Yes — automates your home by setting schedules."
+        },
+        {
+          "q": "Is there a manual control?",
+          "a": "Yes — a toggle button switches the circuit on/off manually."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The LC421 ZigBee Load Control controls heavy duty equipment remotely using your mobile phone, automates your home by setting schedules, and switches the circuit on/off manually using the toggle button.\n\n## Key Features\n\n- ZigBee HA 1.2 compliant\n- Controls heavy duty equipment remotely using mobile phone\n- Automates your home by setting schedules\n- Switches on/off the circuit manually using the toggle button\n- Suitable for pools, pumps, space heaters, air conditioner compressors etc.\n- 220VAC 25A maximum load"
+  },
+  {
     "slug": "ops305",
     "data": {
       "name": "OPS305 Occupancy Sensor",
@@ -494,6 +613,124 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "The OPS305 Occupancy Sensor can detect presence, even if you are asleep or in a stationary posture. Presence is detected via radar technology, which is more sensitive and accurate than PIR detection.\n\n## Key Features\n\n- ZigBee 3.0\n- Intelligent recognition of three modes: large movement, micro movement and no presence\n- Discerns presence even in a stationary posture\n- More sensitive and accurate than PIR detection\n- Extends the range and strengthens ZigBee network communication\n- Suitable for residential and commercial applications"
+  },
+  {
+    "slug": "pb206",
+    "data": {
+      "name": "PB206 ZigBee Panic Button",
+      "model": "PB206",
+      "slug": {
+        "name": "PB206 ZigBee Panic Button",
+        "slug": "pb206"
+      },
+      "description": "ZigBee HA1.2 panic button that sends an instant notification to your phone — CR2450 powered, 1-year battery, mini size.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pb206/pb206-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pb206/pb206-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "battery": "CR2450 3V lithium, 1 year battery life",
+        "operation": "Press the panic button to send a notification to the phone",
+        "dimensions": "37.6(W) x 75.66(L) x 14.48(H) mm",
+        "weight": "31g",
+        "operatingTemp": "-10℃ ~ +45℃ (up to 85% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the PB206 do?",
+          "a": "Press the panic button to send an instant notification to your phone."
+        },
+        {
+          "q": "How long does the battery last?",
+          "a": "1 year with a CR2450 3V lithium battery."
+        },
+        {
+          "q": "How big is it?",
+          "a": "Mini size — 37.6 x 75.66 x 14.48 mm, 31g."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2, compatible with other ZigBee products."
+        },
+        {
+          "q": "Where can it be used?",
+          "a": "Senior care, emergency alerting and personal safety applications."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PB206 ZigBee Panic Button sends a notification to your phone when pressed. It features low power consumption, easy installation and a mini size.\n\n## Key Features\n\n- ZigBee HA 1.2 compliant, compatible with other ZigBee products\n- Press the panic button to send a notification to the phone\n- Low power consumption\n- Easy installation\n- Mini size, 31g\n- 1-year battery life with CR2450"
+  },
+  {
+    "slug": "pb236",
+    "data": {
+      "name": "PB236 ZigBee Panic Button with Pull Cord",
+      "model": "PB236",
+      "slug": {
+        "name": "PB236 ZigBee Panic Button (Pull Cord)",
+        "slug": "pb236"
+      },
+      "description": "ZigBee 3.0 panic button with pull cord — send a panic alarm to the mobile app by button or cord in emergencies.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pb236/pb236-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pb236/pb236-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Indoor: 30m (open area)",
+        "antenna": "Internal PCB Antenna (TX power 8dB)",
+        "battery": "DC 3V (2 x AA); low voltage alarm at 2.4V",
+        "powerConsumption": "Standby <3μA; trigger <30mA",
+        "operation": "Button or pull cord sends panic alarm to the mobile app",
+        "cordOptions": "With button or without button (customizable)"
+      },
+      "faqs": [
+        {
+          "q": "How do I send an alarm?",
+          "a": "Simply press the button on the device, or pull the cord — both send a panic alarm to the mobile app."
+        },
+        {
+          "q": "What cord options are available?",
+          "a": "One kind of cord has a button, the other doesn't. It can be customized according to your demand."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "DC 3V with 2 x AA batteries, with a low voltage alarm at 2.4V."
+        },
+        {
+          "q": "What is the power consumption?",
+          "a": "Standby current below 3μA; trigger current below 30mA."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, compatible with other ZigBee products."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PB236 sends a panic alarm to the mobile app by simply pressing the button on the device. You can also send a panic alarm by cord — one kind of cord has a button, the other doesn't, customizable according to your demand.\n\n## Key Features\n\n- ZigBee 3.0, compatible with other ZigBee products\n- Sends panic alarm to the mobile app\n- Pull cord for easy emergency alarms\n- Low power consumption (standby <3μA)\n- Low voltage alarm at 2.4V"
   },
   {
     "slug": "pc311-ty",
@@ -2801,6 +3038,66 @@ export const products: ProductsEntry[] = [
     "body": "The PIR323 Multi-sensor is used to measure the ambient temperature & humidity with built-in sensor and external temperature with remote probe. It is available to detect motion, vibration and receive notifications from the mobile app.\n\n## Key Features\n\n- ZigBee 3.0\n- PIR motion detection\n- Vibration detection\n- Environmental temperature & humidity measuring\n- Remote probe (external temperature)\n- Low power consumption"
   },
   {
+    "slug": "pr412",
+    "data": {
+      "name": "PR412 ZigBee Curtain Control",
+      "model": "PR412",
+      "slug": {
+        "name": "PR412 ZigBee Curtain Control",
+        "slug": "pr412"
+      },
+      "description": "ZigBee HA1.2 curtain control module — remote open/close for curtains and blinds, 6A rated, compact 77g design.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pr412/pr412-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pr412/pr412-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "voltage": "100~240 VAC 50/60 Hz",
+        "maxLoad": "6A (220VAC / 110VAC)",
+        "control": "Remote open/close control",
+        "dimensions": "64 x 45 x 15 mm",
+        "weight": "77g"
+      },
+      "faqs": [
+        {
+          "q": "What does the PR412 do?",
+          "a": "Remotely opens and closes curtains and blinds via the ZigBee network."
+        },
+        {
+          "q": "What is the load rating?",
+          "a": "6A at both 220VAC and 110VAC."
+        },
+        {
+          "q": "How is it installed?",
+          "a": "Compact module (64 x 45 x 15mm, 77g) wired into the curtain motor circuit."
+        },
+        {
+          "q": "Does it extend the ZigBee network?",
+          "a": "Yes — it extends the range and strengthens ZigBee network communication."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2 (Home Automation Profile)."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PR412 ZigBee Curtain Control provides remote open/close control for curtains and blinds, extending the range and strengthening ZigBee network communication.\n\n## Key Features\n\n- ZigBee HA 1.2 compliant\n- Remote open/close control\n- Extends the range and strengthens ZigBee network communication\n- 6A load rating (220VAC / 110VAC)\n- Compact size: 64 x 45 x 15mm, 77g"
+  },
+  {
     "slug": "rc204",
     "data": {
       "name": "RC204 ZigBee Mini Remote Control",
@@ -3392,6 +3689,125 @@ export const products: ProductsEntry[] = [
     "body": "The SLC601 is a smart relay module that allows you to turn the power on and off remotely as well as set on/off schedules from the mobile app.\n\n## Key Features\n\n- ZigBee HA1.2 compliant\n- Upgrades existing lighting to a remote control lighting system\n- Easy installation by inserting the Power Relay into the existing power line\n- Extra control cables available to integrate with existing physical switch\n- Compact 55.3 x 39 x 17.7mm module, CE certified"
   },
   {
+    "slug": "slc602",
+    "data": {
+      "name": "SLC602 ZigBee Wireless Switch",
+      "model": "SLC602",
+      "slug": {
+        "name": "SLC602 ZigBee Wireless Switch",
+        "slug": "slc602"
+      },
+      "description": "Wireless ZigBee HA1.2/ZLL switch — stick it anywhere to control lights on/off, 2x AAA powered with 1-year battery life.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc602/slc602-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc602/slc602-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 + ZLL (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "battery": "2 x AAA (3V), 1 year battery life",
+        "mounting": "Adhere anywhere in the house",
+        "dimensions": "80mm diameter x 18mm thickness",
+        "weight": "52g"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC602 do?",
+          "a": "A wireless on/off switch for lights — easy to install or adhere anywhere in the house."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "2 x AAA batteries (3V) with 1-year battery life."
+        },
+        {
+          "q": "How big is it?",
+          "a": "80mm diameter, 18mm thick, 52g."
+        },
+        {
+          "q": "Which ZigBee profiles does it support?",
+          "a": "Home Automation Profile and ZigBee Light Link Profile."
+        },
+        {
+          "q": "Is it easy to install?",
+          "a": "Yes — no wiring, adhere it anywhere."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC602 ZigBee Wireless Switch provides wireless on/off control with extremely low power consumption. It is easy to install or adhere anywhere in the house.\n\n## Key Features\n\n- ZigBee HA1.2 and ZLL compliant\n- Wireless on/off switch\n- Easy to install or adhere anywhere in the house\n- Extremely low power consumption\n- 2 x AAA batteries, 1-year battery life\n- 80mm diameter, 52g"
+  },
+  {
+    "slug": "slc603",
+    "data": {
+      "name": "SLC603 ZigBee Wireless Dimmer Switch",
+      "model": "SLC603",
+      "slug": {
+        "name": "SLC603 ZigBee Wireless Dimmer Switch",
+        "slug": "slc603"
+      },
+      "description": "Wireless ZigBee HA1.2/ZLL dimmer switch — on/off, brightness dimming and color temperature tuning, 2x AAA powered.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc603/slc603-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc603/slc603-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 + ZLL (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "battery": "2 x AAA (3V), 1 year battery life",
+        "controls": "On/off, brightness dimmer, color temperature tuner",
+        "mounting": "Adhere anywhere in the house",
+        "dimensions": "90.2mm diameter x 26.4mm thickness",
+        "weight": "66g"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC603 do?",
+          "a": "Wireless on/off switch with brightness dimming and color temperature tuning for compatible lights."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "2 x AAA batteries (3V) with 1-year battery life."
+        },
+        {
+          "q": "How big is it?",
+          "a": "90.2mm diameter, 26.4mm thick, 66g."
+        },
+        {
+          "q": "Which ZigBee profiles does it support?",
+          "a": "Home Automation Profile and ZigBee Light Link Profile."
+        },
+        {
+          "q": "Is it easy to install?",
+          "a": "Yes — adhere it anywhere in the house, no wiring."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC603 ZigBee Wireless Dimmer Switch provides wireless on/off control, brightness dimming and color temperature tuning. It is easy to install or adhere anywhere in the house.\n\n## Key Features\n\n- ZigBee HA1.2 and ZLL compliant\n- Wireless on/off switch\n- Brightness dimmer\n- Color temperature tuner\n- Easy to install or adhere anywhere in the house\n- Extremely low power consumption, 2 x AAA batteries"
+  },
+  {
     "slug": "slc611-z",
     "data": {
       "name": "SLC611-Z ZigBee Power Meter with Relay",
@@ -3455,6 +3871,67 @@ export const products: ProductsEntry[] = [
     "body": "The SLC611-Z is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Single phase electricity compatible\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Measures real-time Voltage, Current, PowerFactor, Active Power\n- Support Energy Usage/Production measurement\n- Support Switch input terminal\n- Schedule the device to automatically power electronics on and off\n- 10A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication\n- Power-on status setting"
   },
   {
+    "slug": "slc620",
+    "data": {
+      "name": "SLC620 In-wall Mechanical Switch",
+      "model": "SLC620",
+      "slug": {
+        "name": "SLC620 In-wall Mechanical Switch",
+        "slug": "slc620"
+      },
+      "description": "ZigBee HA1.2 in-wall mechanical switch (CN standard) with 1-4 channels — remote on/off and scheduled switching.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc620/slc620-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc620/slc620-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "channels": "1~4 channel on/off",
+        "voltage": "100 - 240 VAC 50/60 Hz",
+        "control": "Remote on/off; scheduling",
+        "dimensions": "86 x 86 x 47 mm",
+        "weight": "200g",
+        "operatingTemp": "-10℃ ~ +50℃ (0-95% RH)"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC620 do?",
+          "a": "Remote on/off control for lighting with 1~4 channels and scheduling for automatic switching."
+        },
+        {
+          "q": "How many channels does it have?",
+          "a": "1~4 channel on/off."
+        },
+        {
+          "q": "What are the dimensions?",
+          "a": "86 x 86 x 47 mm, 200g — standard in-wall switch form factor."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2."
+        },
+        {
+          "q": "What is the working environment?",
+          "a": "-10℃ to +50℃, 0-95% RH."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC620 In-wall Mechanical Switch provides remote on/off control and enables scheduling for automatic switching, with 1~4 channel options.\n\n## Key Features\n\n- ZigBee HA 1.2 compliant\n- Remote on/off control\n- Enables scheduling for automatic switching\n- 1~4 channel on/off\n- 86 x 86 x 47mm standard in-wall size"
+  },
+  {
     "slug": "slc621-m-z",
     "data": {
       "name": "SLC621-M-Z ZigBee Smart Switch with Power Meter",
@@ -3515,6 +3992,126 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "The SLC621 is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Schedule the device to automatically power electronics on and off\n- 16A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication"
+  },
+  {
+    "slug": "slc627",
+    "data": {
+      "name": "SLC627 In-Wall Touch Switch (US)",
+      "model": "SLC627",
+      "slug": {
+        "name": "SLC627 In-Wall Touch Switch (US)",
+        "slug": "slc627"
+      },
+      "description": "ZigBee 3.0 in-wall touch switch for US standard boxes — 1/2/3 gang, remote control and scheduling from your phone.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc627/slc627-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc627/slc627-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "buttonType": "Touch screen",
+        "gangOptions": "1/2/3 gang available",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "maxLoadPerGang": "< 700W resistive; < 200W inductive"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC627 do?",
+          "a": "Remotely controls your lighting with touch buttons, and applies schedules for automatic switching from the mobile app."
+        },
+        {
+          "q": "How many gangs are available?",
+          "a": "1/2/3 gang options for selection."
+        },
+        {
+          "q": "What is the load per gang?",
+          "a": "< 700W resistive and < 200W inductive per gang."
+        },
+        {
+          "q": "Which standard is it for?",
+          "a": "US in-wall boxes."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, works with any standard ZigBee hub."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The In-Wall Touch Switch SLC627 allows you to remotely control your lighting or even apply schedules for automatic switching from the mobile app.\n\n## Key Features\n\n- ZigBee 3.0 compliant, works with any standard ZigBee hub\n- Remote on/off control using your smartphone\n- Set schedules to automatically power on and off\n- 1/2/3 gang available for selection\n- Touch screen buttons\n- < 700W resistive / < 200W inductive per gang"
+  },
+  {
+    "slug": "slc628",
+    "data": {
+      "name": "SLC628 In-Wall Touch Switch",
+      "model": "SLC628",
+      "slug": {
+        "name": "SLC628 In-Wall Touch Switch",
+        "slug": "slc628"
+      },
+      "description": "ZigBee 3.0 in-wall touch switch — 1/2/3 gang, remote on/off and scheduling, up to 700W resistive per gang.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc628/slc628-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc628/slc628-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "buttonType": "Touch screen",
+        "gangOptions": "1/2/3 gang available",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "maxLoadPerGang": "< 700W resistive; < 200W inductive"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC628 do?",
+          "a": "Remotely controls your lighting with touch buttons, and applies schedules for automatic switching from the mobile app."
+        },
+        {
+          "q": "How many gangs are available?",
+          "a": "1/2/3 gang options for selection."
+        },
+        {
+          "q": "What is the load per gang?",
+          "a": "< 700W resistive and < 200W inductive per gang."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, works with any standard ZigBee hub."
+        },
+        {
+          "q": "What is the power consumption?",
+          "a": "Less than 1W."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The In-Wall Touch Switch SLC628 allows you to remotely control your lighting or even apply schedules for automatic switching from the mobile app.\n\n## Key Features\n\n- ZigBee 3.0 compliant, works with any standard ZigBee hub\n- Remote on/off control using your smartphone\n- Set schedules to automatically power on and off\n- 1/2/3 gang available for selection\n- Touch screen buttons\n- < 700W resistive / < 200W inductive per gang"
   },
   {
     "slug": "slc631",
@@ -3817,6 +4414,68 @@ export const products: ProductsEntry[] = [
     "body": "The Water Leakage Sensor is used to detect water leakage and receive notifications from the mobile app. It uses an extra-low power consumption ZigBee wireless module and has a long battery life.\n\n## Key Features\n\n- ZigBee 3.0\n- Water leakage detection\n- Low power consumption\n- Linkage with smart devices\n- Tabletop stand or wall mounting"
   },
   {
+    "slug": "wsp403",
+    "data": {
+      "name": "WSP403 ZigBee Smart Plug",
+      "model": "WSP403",
+      "slug": {
+        "name": "WSP403 ZigBee Smart Plug",
+        "slug": "wsp403"
+      },
+      "description": "ZigBee 3.0 pass-through smart plug — remote on/off, energy metering and scheduling, 10A, with multi-country plugs.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/wsp403/wsp403-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/wsp403/wsp403-01.jpg",
+        "https://documents.owon-iot.com/product-images/wsp403/wsp403-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB Antenna",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 0.5W",
+        "maxLoad": "10A",
+        "measuredParams": "Energy consumption measuring",
+        "control": "Remote On/Off; physical button; scheduling",
+        "plugStandards": "Pass-through socket: EU, UK, AU, IT, ZA, CN, FR"
+      },
+      "faqs": [
+        {
+          "q": "What can the WSP403 control?",
+          "a": "Home appliances — remote on/off control from your mobile phone, with schedules for automatic switching."
+        },
+        {
+          "q": "Does it measure energy?",
+          "a": "Yes — it monitors the energy consumption of the connected load remotely."
+        },
+        {
+          "q": "What is the maximum load?",
+          "a": "10A at 100~240 Vac."
+        },
+        {
+          "q": "What plug standards are available?",
+          "a": "Pass-through socket for EU, UK, AU, IT, ZA, CN and FR standards."
+        },
+        {
+          "q": "Does it strengthen the ZigBee network?",
+          "a": "Yes — it extends the range and strengthens ZigBee network communication."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The WSP403 ZigBee Smart Plug allows you to remotely control your home appliances and set schedules to automate via mobile phone. It also helps users to monitor the energy consumption remotely.\n\n## Key Features\n\n- ZigBee 3.0 compliant\n- Remote on/off control, ideal for home appliance control\n- Energy consumption measuring\n- Enables scheduling for automatic switching\n- Physical button to switch on/off manually\n- Extends the range and strengthens ZigBee network communication\n- Pass-through socket for EU, UK, AU, IT, ZA, CN, FR standards"
+  },
+  {
     "slug": "wsp406-uk",
     "data": {
       "name": "WSP406 In-wall Smart Plug (UK)",
@@ -3876,5 +4535,65 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "The WSP406 In-wall Smart Plug allows you to remotely control your home appliances and set schedules to automate via mobile phone. It also helps users to monitor the energy consumption remotely.\n\n## Key Features\n\n- ZigBee 3.0 compliant\n- Remote On/Off control, ideal for home appliance control\n- Physical button to switch on/off manually\n- Energy consumption measuring\n- Enables scheduling for automatic switching\n- Extends the range and strengthens ZigBee network communication\n- In-wall design for UK back boxes"
+  },
+  {
+    "slug": "wsp406-z-ty",
+    "data": {
+      "name": "WSP406-Z-TY ZigBee Wall Socket",
+      "model": "WSP406-Z-TY",
+      "slug": {
+        "name": "WSP406-Z-TY ZigBee Wall Socket",
+        "slug": "wsp406-z-ty"
+      },
+      "description": "Tuya-compatible ZigBee 3.0 wall socket — remote on/off, energy monitoring and scheduling for home appliances.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "tuya",
+      "techSubType": "tuya-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/wsp406-z-ty/wsp406-z-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/wsp406-z-ty/wsp406-z-ty-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB Antenna",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "maxLoad": "13A",
+        "measuredParams": "Energy consumption measuring",
+        "control": "Remote On/Off; physical button; scheduling",
+        "ecosystem": "Tuya ZigBee — works with Tuya gateway and app"
+      },
+      "faqs": [
+        {
+          "q": "What can the WSP406-Z-TY control?",
+          "a": "Home appliances connected to the wall socket — remote on/off control from your mobile phone."
+        },
+        {
+          "q": "Does it measure energy?",
+          "a": "Yes — it monitors the energy consumption of the connected load remotely."
+        },
+        {
+          "q": "What is the maximum load?",
+          "a": "13A at 100~240 Vac 50/60 Hz."
+        },
+        {
+          "q": "Which ecosystem does it belong to?",
+          "a": "Tuya ZigBee — pairs with Tuya gateways and the Tuya app."
+        },
+        {
+          "q": "Does it strengthen the ZigBee network?",
+          "a": "Yes — it acts as a ZigBee router, extending range and strengthening network communication."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The WSP406 Wall Socket allows you to remotely control your home appliances and set schedules to automate via mobile phone. It also helps users to monitor the energy consumption remotely.\n\n## Key Features\n\n- ZigBee 3.0 compliant (Tuya ecosystem)\n- Remote on/off control, ideal for home appliance control\n- Physical button to switch on/off manually\n- Energy consumption measuring\n- Enables scheduling for automatic switching\n- Extends the range and strengthens ZigBee network communication"
   }
 ];
