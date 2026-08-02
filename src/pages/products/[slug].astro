@@ -193,6 +193,12 @@ const specFieldLabels: Record<string, string> = {
   fan: 'Fan',
   powerConsumption: 'Power Consumption',
   control: 'Control',
+  channels: 'Channels',
+  sceneSupport: 'Scene Support',
+  pairedDevices: 'Paired Devices',
+  gangOptions: 'Gang Options',
+  customization: 'Customization',
+  colors: 'Colors',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -759,6 +765,42 @@ const faqSchema = {
                     { icon: '⏰', title: 'Scheduling', desc: 'Automatic on/off switching by schedule.' },
                     { icon: '🕸️', title: 'ZigBee 3.0 Router', desc: 'Extends mesh range and strengthens network communication.' },
                   ],
+                  'slc601': [
+                    { icon: '💡', title: 'Lighting Retrofit', desc: 'Inserts into the existing power line — no rewiring needed.' },
+                    { icon: '🔀', title: 'Existing Switch Integration', desc: 'Extra control cables connect to your current wall switch.' },
+                    { icon: '⏰', title: 'Scheduling', desc: 'Set on/off schedules from the mobile app.' },
+                    { icon: '🕸️', title: 'ZigBee HA1.2', desc: 'Works with any standard ZHA hub.' },
+                  ],
+                  'cb432': [
+                    { icon: '⚡', title: 'Relay + Meter', desc: 'On/off control plus calibrated W/kWh metering in one din-rail module.' },
+                    { icon: '📊', title: 'Calibrated Accuracy', desc: '±2W within 100W, ±2% above 100W.' },
+                    { icon: '🔟', title: '32A / 63A Models', desc: 'Choose the rating that fits the circuit.' },
+                    { icon: '🕸️', title: 'ZigBee 3.0', desc: 'Works with any standard ZigBee hub.' },
+                  ],
+                  'cb432-dp': [
+                    { icon: '⚡', title: 'Double-Pole Disconnect', desc: 'Breaks both neutral and live for safer zone control.' },
+                    { icon: '📊', title: 'Energy Metering', desc: 'W and kWh measurement with ±2W/±2% accuracy.' },
+                    { icon: '🔟', title: '50A Rating', desc: 'Handles high-current circuits.' },
+                    { icon: '🕸️', title: 'ZigBee 3.0', desc: 'Works with any standard ZigBee hub.' },
+                  ],
+                  'slc631': [
+                    { icon: '🔧', title: 'Hidden Install', desc: 'Embeds in the standard junction box — decoration untouched.' },
+                    { icon: '🔢', title: '1-3 Channels', desc: 'Multi-channel control in a single relay.' },
+                    { icon: '🎬', title: 'Scene Support', desc: 'Up to 16 scenes with per-gang linkage.' },
+                    { icon: '🔀', title: 'Switch Panel Compatible', desc: 'Connects your traditional switch panel.' },
+                  ],
+                  'slc600-d': [
+                    { icon: '💡', title: 'On/Off + Brightness', desc: 'Dims and switches connected lighting devices.' },
+                    { icon: '🔗', title: 'Bind 2 Devices', desc: 'Controls up to 2 dimmable devices at once.' },
+                    { icon: '🎨', title: '3 Colors', desc: 'Match the switch to the décor.' },
+                    { icon: '🕸️', title: 'ZigBee 3.0', desc: 'Works with any standard ZigBee hub.' },
+                  ],
+                  'slc600-s': [
+                    { icon: '🎬', title: 'Scene Trigger', desc: 'One touch activates your configured scenes.' },
+                    { icon: '🔢', title: '1-6 Gang Options', desc: '1/2/3/4/6 gang to fit any room layout.' },
+                    { icon: '📝', title: 'Custom Text', desc: 'Buttons with customizable labels.' },
+                    { icon: '🎨', title: '3 Colors', desc: 'Match the switch to the décor.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -1142,6 +1184,54 @@ const faqSchema = {
                     { title: 'Energy Monitoring Programs', desc: 'Track appliance consumption to identify waste.' },
                     { title: 'Retrofit Projects', desc: 'In-wall install with no external plug footprint.' },
                     { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                  ],
+                  'slc601': [
+                    { title: 'Home Lighting Retrofit', desc: 'Turn existing lights into smart lights without rewiring.' },
+                    { title: 'Hotel Room Control', desc: 'Remote and scheduled lighting for guest rooms.' },
+                    { title: 'Small Offices', desc: 'Affordable smart relay for individual circuits.' },
+                    { title: 'Switch-Panel Upgrades', desc: 'Keep the physical switch while adding app control.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                    { title: 'ZigBee Smart Homes', desc: 'Works with any ZHA hub.' },
+                  ],
+                  'cb432': [
+                    { title: 'Sub-metering Panels', desc: 'DIN-rail W/kWh metering with relay control per circuit.' },
+                    { title: 'Hotel Floor Distribution', desc: 'Controlled circuits with energy insight for BMS.' },
+                    { title: 'Commercial Lighting', desc: 'Switch and meter lighting circuits centrally.' },
+                    { title: 'Energy Efficiency Programs', desc: 'Identify consumption and schedule off-hours.' },
+                    { title: 'Retrofit Distribution Boards', desc: 'Drop-in DIN-rail module for existing panels.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                  ],
+                  'cb432-dp': [
+                    { title: 'Safer Zone Control', desc: 'Double-pole disconnect for equipment isolation.' },
+                    { title: 'Special Load Circuits', desc: '50A rating for heavy appliances and machinery.' },
+                    { title: 'Energy Sub-metering', desc: 'W/kWh metering on high-current circuits.' },
+                    { title: 'Hotel & Commercial Panels', desc: 'Controlled breakers with ZigBee monitoring.' },
+                    { title: 'Retrofit Distribution Boards', desc: 'Drop-in DIN-rail module for existing panels.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                  ],
+                  'slc631': [
+                    { title: 'Hotel Room Lighting', desc: 'Multi-channel relay control behind existing switch panels.' },
+                    { title: 'Apartment Renovations', desc: 'Smart lighting without changing the interior design.' },
+                    { title: 'Scene-Based Homes', desc: 'Up to 16 scenes per relay.' },
+                    { title: 'LED & HVAC On/Off', desc: 'Controls LED drivers, heating and ventilation.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                    { title: 'ZigBee Smart Homes', desc: 'Works with any ZHA hub.' },
+                  ],
+                  'slc600-d': [
+                    { title: 'Hotel Rooms', desc: 'Smart dimming control with stylish switch plates.' },
+                    { title: 'Living Rooms', desc: 'Dim lights from a wall-mounted switch.' },
+                    { title: 'Multi-Device Setups', desc: 'Bind two dimmable devices to one switch.' },
+                    { title: 'Retrofit Projects', desc: '86-type junction box install.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                    { title: 'ZigBee Smart Homes', desc: 'Works with any standard ZigBee hub.' },
+                  ],
+                  'slc600-s': [
+                    { title: 'Hotel Rooms', desc: 'One-touch scene control for lighting presets.' },
+                    { title: 'Smart Homes', desc: 'Trigger scenes from the wall.' },
+                    { title: 'Meeting Rooms', desc: 'Scene buttons for presentations and cleaning modes.' },
+                    { title: 'Retail & Showrooms', desc: 'Custom-labeled scene buttons.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                    { title: 'ZigBee Smart Homes', desc: 'Works with any standard ZigBee hub.' },
                   ],
                 };
                 const scenarios = {
