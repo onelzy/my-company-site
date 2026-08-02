@@ -9,6 +9,82 @@ export interface ProductsEntry {
 
 export const products: ProductsEntry[] = [
   {
+    "slug": "pc311-ty",
+    "data": {
+      "name": "PC311-TY Single-Phase WiFi Smart Energy Clamp",
+      "model": "PC311-TY",
+      "slug": {
+        "name": "PC311-TY Smart Energy Clamp",
+        "slug": "pc311-ty"
+      },
+      "description": "Tuya-compatible single-phase WiFi smart energy clamp with 15-second reporting and 80A/120A CT options. Measures real-time energy usage, voltage, current, power factor, active power and frequency — with energy production measurement for solar monitoring.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc311-ty/pc311-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc311-ty/pc311-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-ty/pc311-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-ty/pc311-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-ty/pc311-ty-04.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "90~250 Vac 50/60Hz",
+        "current": "80A~120A (CT dependent)",
+        "frequency": "50/60Hz",
+        "protocol": "WiFi 802.11 b/g/n (20/40MHz) @ 2.4GHz + BLE 4.2 (pairing)",
+        "wifi": "802.11 B/G/N20/N40 @ 2.4GHz",
+        "ble": "Bluetooth 4.2 Low Energy (pairing)",
+        "antenna": "Internal antenna",
+        "mountingType": "DIN rail 35mm",
+        "weight": "85g (one 80A CT); 150g (two 80A CT)",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Energy Usage, Frequency; Energy Production",
+        "reportingCycle": "Every 15 seconds",
+        "clampInnerDimension": "80A (default): Ø10.6mm; 120A (optional): Ø16.7mm; clamp cable 1m",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What projects is the WiFi energy meter (PC311) best suited for?",
+          "a": "Designed for BMS platforms, solar energy monitoring, HVAC systems, and OEM integration projects."
+        },
+        {
+          "q": "What CT clamp ranges are available?",
+          "a": "Supports 20A, 80A, 120A, 200A clamps, covering light commercial to industrial applications."
+        },
+        {
+          "q": "Can it integrate with third-party systems?",
+          "a": "Yes, Tuya-compliant and customizable for cloud platforms, works seamlessly with BMS, EMS, and solar inverters."
+        },
+        {
+          "q": "What certifications does the Smart power monitor (PC311) hold?",
+          "a": "CE/FCC certified and manufactured under ISO9001 quality system, suitable for EU/US market compliance."
+        },
+        {
+          "q": "Do you provide OEM/ODM customization?",
+          "a": "Yes, OEM branding, ODM development, and bulk supply options are available for distributors and system integrators."
+        },
+        {
+          "q": "How is the installation carried out?",
+          "a": "Compact DIN-rail design for quick installation in distribution boxes."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC311-TY Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- Tuya compliant\n- Support automation with other Tuya device\n- Single phase electricity compatible\n- Measures real-time Energy Usage, Voltage, Current, PowerFactor, Active Power and frequency.\n- Support Energy Production measurement\n- Usage trends by day, week, month\n- Suitable for both residential and commercial application\n- Lightweight and easy to install\n- Support two loads measurement with 2 CTs (Optional)"
+  },
+  {
     "slug": "pc321-ty-smart-meter",
     "data": {
       "name": "PC321-W-TY Single/Three-Phase WiFi Smart Energy Clamp",
