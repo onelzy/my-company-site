@@ -2126,6 +2126,7 @@ export const productDocs: ProductDoc[] = [
         url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP406-2G%28uk%29_-_220330.pdf',
       },
     ],
+    manuals: [],
   },
   {
     model: 'WSP406-Z-TY',
@@ -2136,6 +2137,7 @@ export const productDocs: ProductDoc[] = [
         url: 'https://documents.owon-iot.com/specs/Tuya/Datasheet_-_WSP406-Z-TY_ZigBee_Wall_Socket.pdf',
       },
     ],
+    manuals: [],
   },
   {
     model: 'WSP406EU',
