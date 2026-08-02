@@ -72,7 +72,9 @@ const specEntries = Object.entries(specs).filter(([, v]) => v !== undefined && v
 // model variant (e.g. "PC4713-W-E-TY/3W" → the "...W E TY 3W..." spec),
 // falling back to the first spec of the matching model family.
 const modelStr = String(entry.data.model || '');
-const docEntry = productDocs.find((d) => modelStr.startsWith(d.model));
+const docEntry = productDocs
+  .filter((d) => modelStr.startsWith(d.model))
+  .sort((a, b) => b.model.length - a.model.length)[0];
 const modelTokens = modelStr.toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim().split(' ');
 const scoreName = (name: string) => {
   const nt = name.toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim().split(' ');
