@@ -208,6 +208,231 @@ export const products: ProductsEntry[] = [
     "body": "PC321-W/3W helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. The real-time data can be reported directly to your cloud server without going through a third-party public cloud.\n\n## Key Features\n\n- Supports Wi-Fi 2.4GHz wireless communication, MQTT API provided.\n- External magnetic antenna can avoid shielding of wireless signals by metal distribution boxes\n- Three-Phase (included 3P3W), Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower measurement\n- Bidirectional measurement: Energy Usage / Solar Production"
   },
   {
+    "slug": "pc321-w",
+    "data": {
+      "name": "PC321-W Single/Three-Phase WiFi Smart Energy Clamp",
+      "model": "PC321-W",
+      "slug": {
+        "name": "PC321-W Smart Energy Clamp",
+        "slug": "pc321-w"
+      },
+      "description": "Tuya-compatible WiFi smart energy clamp with 2-second reporting and CT options from 80A to 1000A. Measures real-time voltage, current, power factor, active power and total energy for single and three-phase systems.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "100~240 Vac 50/60Hz",
+        "current": "80A~1000A (CT dependent)",
+        "frequency": "50/60Hz",
+        "protocol": "WiFi 802.11 b/g/n (20/40MHz)",
+        "wifi": "802.11 b/g/n (20/40MHz)",
+        "rfRange": "Output Power: Up to +20dBm; external antenna",
+        "dimensions": "86(L) x 86(W) x 37(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Total Energy; device temperature display",
+        "reportingCycle": "Every 2 seconds",
+        "clampInnerDimension": "80A (default): Ø10.6mm; 120A: Ø16.7mm; 200A: Ø21.1mm; 300A: Ø25.1mm; 500A: Ø36.7mm; 750A: Ø51.3mm; 1000A: Ø51.3mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What is the PC321-W power clamp used for?",
+          "a": "The PC321-W is a WiFi enabled energy monitoring device that measures electricity usage by attaching current transformer clamps to power cables, allowing installers and facility managers to track voltage, current, power, and total energy consumption in real time across electrical systems."
+        },
+        {
+          "q": "Can the meter monitor single-phase and three-phase electrical systems?",
+          "a": "Yes, the PC321-W supports single phase, split phase, and three phase electrical systems, making it suitable for residential homes, commercial buildings, and industrial facilities where different electrical configurations are used."
+        },
+        {
+          "q": "What electrical parameters can the device measure?",
+          "a": "The meter can measure voltage, current, active power, power factor, frequency, and total energy consumption, providing detailed energy data that helps users analyze load behavior and optimize energy efficiency."
+        },
+        {
+          "q": "What current transformer options are available?",
+          "a": "The device supports multiple CT clamp ranges including 80A, 120A, 200A, 300A, 500A, and up to 750A (1000A available), allowing it to be used for different loads such as HVAC equipment, EV chargers, industrial machines, and building power distribution systems."
+        },
+        {
+          "q": "What types of projects typically deploy this power meter?",
+          "a": "The PC321-W is commonly used in smart building energy monitoring, solar power systems, EV charging infrastructure, and facility energy management projects where real time electricity measurement and load analysis are required."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC321-W Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- Single/3 - phase electricity compatible\n- Three current transformers for Single phase application\n- Measures real-time Voltage, Current, PowerFactor, ActivePower and total energy consumption\n- Display the current temperature of the device\n- Suitable for both residential and commercial application\n- Lightweight and easy to install\n- External antenna prevents signal from being shielded"
+  },
+  {
+    "slug": "pc321-z-ty",
+    "data": {
+      "name": "PC321-Z-TY Single/Three-Phase ZigBee Smart Energy Clamp",
+      "model": "PC321-Z-TY",
+      "slug": {
+        "name": "PC321-Z-TY Smart Energy Clamp",
+        "slug": "pc321-z-ty"
+      },
+      "description": "Tuya-compatible ZigBee 3.0 smart energy clamp for single, split and three-phase systems. External antenna, OTA updates, real-time monitoring and automation via the Tuya platform.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc321-z-ty/pc321-z-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc321-z-ty/pc321-z-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-z-ty/pc321-z-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-z-ty/pc321-z-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-z-ty/pc321-z-ty-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc321-z-ty/pc321-z-ty-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "100~240 Vac 50/60Hz",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Output Power: Up to +20dBm; external antenna",
+        "ota": "Support OTA",
+        "dimensions": "86(L) x 86(W) x 37(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Active Power, Power Factor, Frequency, Total Energy",
+        "reportingCycle": "Every 3 seconds",
+        "clampInnerDimension": "80A (default): Ø10.6mm; 120A: Ø16.7mm; 200A: Ø21.1mm; 300A: Ø25.1mm; 500A: Ø36.7mm; 750A: Ø51.3mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What is the Zigbee Power Clamp PC321-Z-TY used for?",
+          "a": "The PC321-Z-TY is a Zigbee enabled energy monitoring device designed to measure electricity consumption by attaching clamp on current transformers to power cables, allowing system integrators and facility managers to track voltage, current, power, and total energy usage in real time across electrical systems."
+        },
+        {
+          "q": "Can this power clamp monitor both single-phase and three-phase systems?",
+          "a": "Yes, the device supports single phase, split phase, and three phase electrical systems, making it suitable for a wide range of installations including residential energy monitoring, commercial buildings, and industrial facilities where multiple phases must be monitored simultaneously."
+        },
+        {
+          "q": "How does the device integrate into smart energy management platforms?",
+          "a": "Operating on the Zigbee 3.0 protocol, the meter can transmit real time power data to Zigbee gateways and IoT platforms, enabling integration with energy management systems, building management systems (BMS), and dashboards for centralized monitoring and automation."
+        },
+        {
+          "q": "What electrical parameters can the meter measure?",
+          "a": "The PC321-Z-TY can measure key electrical metrics including voltage, current, active power, power factor, frequency, and cumulative energy consumption, providing detailed data for energy analysis, load balancing, and efficiency optimization."
+        },
+        {
+          "q": "What types of projects typically use this energy monitoring device?",
+          "a": "This power clamp is commonly deployed in projects such as smart buildings, energy management systems, solar energy monitoring, EV charging infrastructure, and facility power monitoring where accurate measurement of electrical consumption is required for operational insights."
+        },
+        {
+          "q": "How is the device installed in real project environments?",
+          "a": "Installers typically mount the unit in an electrical panel and attach the clamp on current transformers around the monitored conductors, allowing non intrusive measurement of power usage without cutting or modifying existing wiring, which simplifies deployment in both retrofit and new installations."
+        },
+        {
+          "q": "Does the meter support renewable energy monitoring such as solar systems?",
+          "a": "Yes, the device supports bidirectional energy measurement, allowing it to monitor both electricity consumption and power generation from systems such as solar installations, which makes it suitable for smart energy and distributed energy management projects."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC321-Z-TY Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, ActivePower, total energy consumption.\n\n## Key Features\n\n- Tuya compliant\n- Support automation with other Tuya device\n- Single/3 - phase electricity compatible\n- Three current transformers for Single phase application\n- Measures real-time Voltage, Current, ActivePower and total energy consumption\n- Suitable for both residential and commercial application\n- Lightweight and easy to install\n- External antenna prevents signal from being shielded\n- Support OTA"
+  },
+  {
+    "slug": "pc321",
+    "data": {
+      "name": "PC321 Single/Three-Phase ZigBee Smart Energy Clamp",
+      "model": "PC321",
+      "slug": {
+        "name": "PC321 Smart Energy Clamp",
+        "slug": "pc321"
+      },
+      "description": "ZigBee 3.0 smart energy clamp for single and three-phase systems. Works with SEG-X1/X3 gateways — up to 20 clamps per coordinator. Measures voltage, current, power and energy with 3-year server data storage.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-meters",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc321/pc321-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc321/pc321-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc321/pc321-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc321/pc321-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc321/pc321-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc321/pc321-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "100~240 Vac 50/60Hz",
+        "current": "80A~300A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<1W",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m; Output Power: Up to +19dBm",
+        "antenna": "Internal antenna (default); external antenna (optional)",
+        "gatewayCompatibility": "SEG-X1: up to 20 pcs; SEG-X3: up to 10 pcs",
+        "dataStorage": "3 years on server",
+        "dimensions": "86(L) x 86(W) x 37(H) mm",
+        "weight": "415g",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Irms, Vrms, Active Power & Energy, Reactive Power & Energy",
+        "reportingCycle": "10s min (power change ≥1%) to 1min max (power change <1%); threshold settable in App",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What is the Three-Phase Energy Power Clamp PC321 and what does it monitor?",
+          "a": "The PC321 is a three-phase power monitoring device that uses clamp-on current transformers to measure voltage, current, power, energy consumption, power factor, frequency, and other parameters across all three phases in real time, delivering essential insights for energy analysis, load balancing, and power quality management in industrial, commercial, and large residential installations."
+        },
+        {
+          "q": "How does this device support smart energy management projects?",
+          "a": "By transmitting comprehensive three-phase electrical data to networked dashboards, cloud platforms, or energy management systems (EMS), the PC321 enables energy service providers and building operators to analyze consumption patterns, optimize load distribution, reduce peak demand charges, and implement automated energy strategies that improve operational efficiency and lower utility costs."
+        },
+        {
+          "q": "Can the PC321 integrate with building automation systems (BMS) and IoT platforms?",
+          "a": "Yes, with appropriate network connectivity and APIs, the PC321 can share real-time and historical energy data with BMS, IoT platforms, and third-party dashboards, enabling centralized monitoring, threshold alerts, automated responses, and seamless integration into broader smart building or facility management solutions."
+        },
+        {
+          "q": "What advantages does three-phase monitoring offer compared to single-phase meters?",
+          "a": "Three-phase monitoring provides a complete picture of energy usage and balance across all power legs, helping identify phase imbalance issues, inefficiencies, and load spikes that single-phase meters cannot detect, making it especially valuable in commercial and industrial environments where power quality affects equipment performance and operational costs."
+        },
+        {
+          "q": "Is this equipment suitable for large-scale energy efficiency and sustainability programs?",
+          "a": "Absolutely — the PC321 supports scalable multi-point deployments across facilities, enabling enterprise-level energy tracking, reporting, benchmarking, and analytics, which are essential for sustainability initiatives, ISO 50001 energy management programs, and long-term cost reduction strategies."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC321 ZigBee Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- ZigBee 3.0 compliant\n- Extend the range and strengthen ZigBee network communication\n- Single/3 - phase electricity compatible\n- Three current transformers for Single phase application\n- Measures real-time Voltage, Current, PowerFactor, ActivePower and total energy consumption\n- Statistical historical energy consumption\n- Suitable for both residential and commercial application\n- Optional antenna to enhance the signal strength\n- Lightweight and easy to install"
+  },
+  {
     "slug": "pc341-3m16s-energy-monitor",
     "data": {
       "name": "PC341-3M16S Multi-Circuit Energy Monitor",

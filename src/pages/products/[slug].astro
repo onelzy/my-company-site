@@ -79,14 +79,23 @@ const scoreName = (name: string) => {
   let score = 0;
   // Prefer exact model-key containment (e.g. "WE-TY3W" in name)
   if (modelKey.length >= 6 && n.includes(modelKey)) score += 100;
-  // Prefer the full model minus slashes (e.g. "PC4713-W-E-TY/3W" → "PC4713WETY3W")
   const modelNoSuffix = modelKey.replace(/(PC\d+).*/, '$1');
   if (n.includes(modelNoSuffix)) score += 10;
+  // Variant remainder: "PC321-W-TY" → "WTY" — names containing it win.
+  // For base models (remainder "") all family specs tie → shortest name wins.
+  const remainder = modelKey.replace(modelNoSuffix, '');
+  if (remainder && n.includes(remainder)) score += 50;
   return score;
 };
 const pickBest = (files: { name: string; url: string }[]) => {
   if (!files || files.length === 0) return undefined;
-  return [...files].sort((a, b) => scoreName(b.name) - scoreName(a.name))[0];
+  return [...files].sort((a, b) => {
+    const d = scoreName(b.name) - scoreName(a.name);
+    if (d !== 0) return d;
+    // Tie-break: shortest normalized name = base variant (e.g. PC321 base
+    // datasheet "PC321 Single..." beats "PC321 W 3W Single...")
+    return a.name.length - b.name.length;
+  })[0];
 };
 const bestSpec = pickBest(docEntry?.specs ?? []);
 const bestManual = pickBest(docEntry?.manuals ?? []);
@@ -126,6 +135,11 @@ const specFieldLabels: Record<string, string> = {
   ble: 'BLE',
   ethernet: 'Ethernet',
   mqtt: 'MQTT',
+  rfRange: 'RF Range',
+  antenna: 'Antenna',
+  gatewayCompatibility: 'Gateway Compatibility',
+  dataStorage: 'Data Storage',
+  ota: 'OTA',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -470,6 +484,24 @@ const faqSchema = {
                     { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks both energy consumed and produced — ideal for solar PV self-consumption monitoring.' },
                     { icon: '📡', title: 'External Magnetic Antenna', desc: 'Avoids signal shielding inside metal distribution boxes for reliable wireless reporting.' },
                   ],
+                  'pc321': [
+                    { icon: '🕸️', title: 'ZigBee 3.0 Mesh', desc: 'Extends the range and strengthens network communication through the ZigBee 3.0 mesh.' },
+                    { icon: '🔌', title: 'Gateway-Ready', desc: 'Works with SEG-X1 (up to 20 clamps) and SEG-X3 (up to 10 clamps) ZigBee gateways.' },
+                    { icon: '⚡', title: 'Reactive Power & Energy', desc: 'Measures Irms, Vrms, active and reactive power & energy for power quality analysis.' },
+                    { icon: '🏢', title: 'Single & Three-Phase', desc: 'Three CT clamps cover single-phase, split-phase and three-phase monitoring.' },
+                  ],
+                  'pc321-w': [
+                    { icon: '⏱️', title: '2-Second Reporting', desc: 'Near-real-time energy data reported every 2 seconds for responsive monitoring.' },
+                    { icon: '🔩', title: 'CT Options 80A-1000A', desc: 'Interchangeable CT clamps from 80A up to 1000A cover HVAC, EV and industrial loads.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: '2.4GHz WiFi connectivity with remote monitoring via the Tuya platform.' },
+                    { icon: '📡', title: 'External Antenna', desc: 'Prevents signal shielding for reliable wireless communication in metal enclosures.' },
+                  ],
+                  'pc321-z-ty': [
+                    { icon: '🕸️', title: 'Tuya ZigBee Ecosystem', desc: 'ZigBee 3.0 with Tuya compliance — automate and monitor together with other Tuya devices.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Monitors both electricity consumption and solar power generation.' },
+                    { icon: '🔄', title: 'OTA Updates', desc: 'Firmware updates over the air — no physical access required.' },
+                    { icon: '📡', title: 'External Antenna', desc: 'Stronger signal even when the clamp is mounted inside metal distribution boxes.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -557,6 +589,30 @@ const faqSchema = {
                     { title: 'Whole-Home Energy Monitoring', desc: 'Three CT clamps monitor total household consumption across single, split or three-phase supplies.' },
                     { title: 'Residential & Commercial Submetering', desc: 'Non-invasive CT clamps from 80A to 750A, wall or DIN-rail mounting — no rewiring required.' },
                     { title: 'System Integrators & Platform Builders', desc: 'MQTT API makes it straightforward to onboard the meter into custom EMS/BMS or energy analytics platforms.' },
+                  ],
+                  'pc321': [
+                    { title: 'Commercial & Industrial Monitoring', desc: 'Three-phase energy analysis, load balancing and power quality insights across all power legs.' },
+                    { title: 'EMS & BMS Integration', desc: 'Share real-time and historical data with energy and building management systems via gateway connectivity.' },
+                    { title: 'Multi-Point Facility Deployments', desc: 'Scale to 20 clamps per SEG-X1 gateway for enterprise-level energy tracking and benchmarking.' },
+                    { title: 'Residential Whole-Home Monitoring', desc: 'Three CT clamps monitor total household consumption on single-phase and split-phase supplies.' },
+                    { title: 'Sustainability & ISO 50001 Programs', desc: 'Scalable reporting and analytics support energy efficiency initiatives and ISO 50001 management.' },
+                    { title: 'Power Quality Analysis', desc: 'Reactive power and energy measurement helps identify phase imbalance and load spikes.' },
+                  ],
+                  'pc321-w': [
+                    { title: 'Smart Building Energy Monitoring', desc: 'Real-time consumption data for commercial buildings with 2-second reporting granularity.' },
+                    { title: 'Solar Power Systems', desc: 'Monitor generation and consumption to validate PV performance and self-consumption.' },
+                    { title: 'EV Charging Infrastructure', desc: 'CT options up to 1000A suit EV charger circuits and charging station load tracking.' },
+                    { title: 'Facility Energy Management', desc: 'Load analysis and efficiency optimization across industrial and commercial facilities.' },
+                    { title: 'Residential & Commercial Installations', desc: 'Single, split and three-phase support with non-invasive CT clamp mounting.' },
+                    { title: 'HVAC Load Monitoring', desc: 'CT range covers HVAC equipment circuits for energy allocation and efficiency checks.' },
+                  ],
+                  'pc321-z-ty': [
+                    { title: 'Smart Building Monitoring', desc: 'ZigBee 3.0 mesh delivers real-time power data to gateways and building dashboards.' },
+                    { title: 'Solar & Distributed Energy', desc: 'Bidirectional measurement monitors consumption and generation from solar installations.' },
+                    { title: 'EV Charging Infrastructure', desc: 'Accurate consumption measurement for EV charging and facility power monitoring.' },
+                    { title: 'EMS / BMS Integration', desc: 'Transmit real-time data to energy and building management systems via ZigBee gateways.' },
+                    { title: 'Retrofit Installations', desc: 'Non-intrusive clamp-on measurement — no cutting or modifying existing wiring.' },
+                    { title: 'Tuya Home & Facility Automation', desc: 'Automate and monitor together with other Tuya devices on the same platform.' },
                   ],
                 };
                 const scenarios = {
