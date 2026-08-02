@@ -796,7 +796,7 @@ export const productDocs: ProductDoc[] = [
     "manuals": []
   },
   {
-    "model": "PCT501-",
+    "model": "PCT501",
     "category": "Thermostats & Heating",
     "specs": [
       {
@@ -816,7 +816,7 @@ export const productDocs: ProductDoc[] = [
     ]
   },
   {
-    "model": "PCT502-",
+    "model": "PCT502",
     "category": "Thermostats & Heating",
     "specs": [
       {
@@ -836,7 +836,7 @@ export const productDocs: ProductDoc[] = [
     ]
   },
   {
-    "model": "PCT503-",
+    "model": "PCT503",
     "category": "Thermostats & Heating",
     "specs": [
       {
@@ -902,7 +902,7 @@ export const productDocs: ProductDoc[] = [
     ]
   },
   {
-    "model": "PCT504-",
+    "model": "PCT504",
     "category": "Thermostats & Heating",
     "specs": [
       {
@@ -940,7 +940,7 @@ export const productDocs: ProductDoc[] = [
     "manuals": []
   },
   {
-    "model": "PCT504A-",
+    "model": "PCT504A",
     "category": "Thermostats & Heating",
     "specs": [],
     "manuals": [
@@ -967,7 +967,7 @@ export const productDocs: ProductDoc[] = [
     ]
   },
   {
-    "model": "PCT513-",
+    "model": "PCT513",
     "category": "Thermostats & Heating",
     "specs": [
       {
@@ -1031,7 +1031,12 @@ export const productDocs: ProductDoc[] = [
   {
     "model": "PCT523-W",
     "category": "Thermostats & Heating",
-    "specs": [],
+    "specs": [
+      {
+        "name": "PCT 523 W TY BK WiFi 24VAC Thermostat (Touch Button Black Screen) 260410",
+        "url": "https://documents.owon-iot.com/specs/Tuya/%E6%B8%A9%E6%8E%A7%E5%99%A8/523/Datasheet_-_PCT_523-W-TY_BK_WiFi_24VAC_Thermostat_%28Touch_Button_Black_Screen%29_-_260410.pdf"
+      }
+    ],
     "manuals": [
       {
         "name": "PCT523 W TY Wi Fi Thermostat 260416",
@@ -1042,7 +1047,12 @@ export const productDocs: ProductDoc[] = [
   {
     "model": "PCT5231-W",
     "category": "Thermostats & Heating",
-    "specs": [],
+    "specs": [
+      {
+        "name": "PCT 5231 W TY WB WiFi 24VAC Thermostat 260728",
+        "url": "https://documents.owon-iot.com/specs/Tuya/%E6%B8%A9%E6%8E%A7%E5%99%A8/5231/%E9%BB%91%E8%89%B2/Datasheet_-_PCT_5231-W-TY_WB_WiFi_24VAC_Thermostat_-_260728.pdf"
+      }
+    ],
     "manuals": [
       {
         "name": "PCT5231 W TY Wi Fi Thermostat 20260410",
