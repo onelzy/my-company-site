@@ -107,10 +107,7 @@ export const products: ProductsEntry[] = [
       "image": "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg",
       "images": [
         "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-02.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-03.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-04.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-05.jpg"
+        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-02.jpg"
       ],
       "specs": {
         "accuracy": "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating",
@@ -183,10 +180,7 @@ export const products: ProductsEntry[] = [
       "image": "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-01.jpg",
       "images": [
         "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-01.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-02.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-03.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-04.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-05.jpg"
+        "https://documents.owon-iot.com/product-images/pc321-w/pc321-w-02.jpg"
       ],
       "specs": {
         "accuracy": "≤100W: ±2W; >100W: ±2%",
