@@ -150,6 +150,8 @@ const specFieldLabels: Record<string, string> = {
   rs485: 'RS485',
   dataRefresh: 'Data Refresh',
   responseTime: 'Response Time',
+  mainCts: 'Main CT',
+  subCts: 'Sub CT',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -566,6 +568,36 @@ const faqSchema = {
                     { icon: '☁️', title: 'Direct-to-Cloud or Local', desc: 'Report to your own cloud server or read locally — no third-party public cloud required.' },
                     { icon: '📡', title: 'No App Required', desc: 'Connect to the device hotspot and view real-time data through a browser.' },
                   ],
+                  'pc341-w-ty-n': [
+                    { icon: '🔌', title: 'Whole-Home + 16 Circuits', desc: 'Monitors whole-home energy and up to 16 individual circuits — solar, lighting, receptacles.' },
+                    { icon: '🔩', title: '200A Main + 50A Sub CTs', desc: 'Dual-level CT system: 200A main CTs (300A/500A optional) plus 16 sub CT channels.' },
+                    { icon: '📡', title: 'External Magnetic Antenna', desc: 'Prevents signal shielding for reliable WiFi inside metal distribution panels.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production across the whole installation.' },
+                  ],
+                  'pc341-w-mqtt': [
+                    { icon: '🔌', title: 'Whole-Home + 16 Circuits', desc: 'Monitors whole-home energy and up to 16 individual circuits with 50A sub CTs.' },
+                    { icon: '🔁', title: 'Bi-Directional Measurement', desc: 'Shows energy produced, energy consumed and excess energy back to the grid.' },
+                    { icon: '☁️', title: 'Open-Protocol Integration', desc: 'Direct-to-cloud integration without a third-party public cloud.' },
+                    { icon: '📡', title: 'External Magnetic Antenna', desc: 'Prevents signal shielding for reliable WiFi inside metal distribution panels.' },
+                  ],
+                  'pc472-w-ty-n': [
+                    { icon: '🔌', title: 'Dual-CT Two-Load Monitoring', desc: 'Two current transformers monitor a single-phase circuit or two loads from one device.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production — ideal for single-phase PV self-consumption.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: 'WiFi 2.4GHz with BLE pairing; monitor and automate via the Tuya platform.' },
+                    { icon: '📊', title: 'Historical Data Export', desc: 'Historical data viewable and exportable in the App for reporting and analysis.' },
+                  ],
+                  'pc472-w-ty-r-n': [
+                    { icon: '🔘', title: 'Remote Relay Control', desc: 'Dry-contact relay (10A rated, 16A max) turns a connected load on or off from the App.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production on a single-phase system.' },
+                    { icon: '⚡', title: 'Instant Relay Status', desc: 'Relay status reported immediately while energy data updates every 15 seconds.' },
+                    { icon: '🛡️', title: 'Relay Protection', desc: 'Overload protection and relay settings safeguard the connected load.' },
+                  ],
+                  'pc473-w-ty-r-n': [
+                    { icon: '🗣️', title: 'Voice Control Relay', desc: 'Alexa and Google Assistant voice control for the dry-contact relay.' },
+                    { icon: '🔘', title: 'Remote Relay Control', desc: 'Dry-contact relay (10A rated, 16A max) turns loads on or off from the App.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production on three-phase systems.' },
+                    { icon: '⚡', title: 'Instant Relay Status', desc: 'Relay status reported immediately while energy data updates every 15 seconds.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -749,6 +781,46 @@ const faqSchema = {
                     { title: 'Commercial & Utility Submetering', desc: 'CT options 80A-750A cover commercial buildings and utility sub-metering projects.' },
                     { title: 'Direct-to-Cloud Deployments', desc: 'Report data straight to your own cloud server without a third-party public cloud.' },
                     { title: 'Local-Read Installations', desc: 'No App needed — connect to the device hotspot and view real-time data in a browser.' },
+                  ],
+                  'pc341-w-ty-n': [
+                    { title: 'Solar PV Whole-System Monitoring', desc: 'Monitors PV generation, home load and net energy across main and sub circuits.' },
+                    { title: 'Multi-Circuit Energy Management', desc: 'Up to 16 sub circuits tracked independently — lighting, sockets, appliances, HVAC.' },
+                    { title: 'Residential & Commercial Solar', desc: 'Scalable multi-circuit metering for homes, commercial buildings and industrial PV.' },
+                    { title: 'Energy Dashboards & Analytics', desc: 'Per-circuit real-time data plus historical export for dashboards and reporting.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'One device replaces multiple meters — whole-home plus circuit-level visibility.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc341-w-mqtt': [
+                    { title: 'Solar & Grid Interactive Systems', desc: 'Bi-directional measurement shows production, consumption and excess fed back to the grid.' },
+                    { title: 'Multi-Circuit Energy Management', desc: '16 sub circuits plus whole-home monitoring for complete facility visibility.' },
+                    { title: 'Energy Management Platforms', desc: 'Open-protocol integration feeds data into EMS, dashboards and analytics platforms.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Tracks main and sub circuits for residential and commercial installations.' },
+                    { title: 'Demand & Load Analysis', desc: 'Per-circuit real-time data for demand profiling and energy efficiency programs.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc472-w-ty-n': [
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption on single-phase systems.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Single-phase household monitoring with two CT clamps on the main feed.' },
+                    { title: 'Two-Load Submetering', desc: 'Monitor two separate circuits from one clamp meter.' },
+                    { title: 'Residential Smart Home', desc: 'Tuya App with historical data export for daily, weekly and monthly analysis.' },
+                    { title: 'Commercial & OEM Projects', desc: 'Compact DIN-rail mounting suits distribution boxes and OEM integration.' },
+                    { title: 'Energy Analytics', desc: '15-second reporting feeds energy analytics and management platforms.' },
+                  ],
+                  'pc472-w-ty-r-n': [
+                    { title: 'Remote Load On/Off Control', desc: 'Turn water heaters, pumps or lighting on/off remotely via the dry-contact relay.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption; relay can shed load.' },
+                    { title: 'Smart Home Automation', desc: 'Tuya ecosystem automation — schedule and control the relay alongside other devices.' },
+                    { title: 'Distribution Box Installations', desc: 'Compact 35mm DIN-rail mounting for single-phase distribution panels.' },
+                    { title: 'Energy Management Projects', desc: 'Real-time energy data plus relay control for demand-response and load management.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc473-w-ty-r-n': [
+                    { title: 'Voice-Controlled Energy Management', desc: 'Alexa and Google Assistant voice control for the relay — hands-free load switching.' },
+                    { title: 'Three-Phase Whole-Home Monitoring', desc: 'Three CT clamps monitor the entire installation on three-phase or single-phase supplies.' },
+                    { title: 'Remote Load On/Off Control', desc: 'Turn water heaters, EV chargers or lighting on/off remotely via the dry-contact relay.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption; relay can shed load.' },
+                    { title: 'Demand Response Programs', desc: 'Energy data plus relay control enable demand-response and load-shedding programs.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
                   ],
                 };
                 const scenarios = {

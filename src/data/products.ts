@@ -680,6 +680,153 @@ export const products: ProductsEntry[] = [
     "body": "PC321 ZigBee Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- ZigBee 3.0 compliant\n- Extend the range and strengthen ZigBee network communication\n- Single/3 - phase electricity compatible\n- Three current transformers for Single phase application\n- Measures real-time Voltage, Current, PowerFactor, ActivePower and total energy consumption\n- Statistical historical energy consumption\n- Suitable for both residential and commercial application\n- Optional antenna to enhance the signal strength\n- Lightweight and easy to install"
   },
   {
+    "slug": "pc341-w-mqtt",
+    "data": {
+      "name": "PC341-W-MQTT Multi-Circuit WiFi Power Meter",
+      "model": "PC341-W-MQTT",
+      "slug": {
+        "name": "PC341-W-MQTT Multi-Circuit Power Meter",
+        "slug": "pc341-w-mqtt"
+      },
+      "description": "Open-protocol WiFi multi-circuit power meter monitoring whole-home energy and up to 16 individual circuits. Bidirectional measurement, 15-second reporting, external magnetic antenna, direct integration without third-party cloud.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "mqtt",
+      "techSubType": "mqtt-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "mqtt-open"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc341-w-mqtt/pc341-w-mqtt-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc341-w-mqtt/pc341-w-mqtt-01.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "90~277 Vac 50/60Hz — Single-Phase 240VAC L-N; Split-Phase 120/240VAC; Three-Phase up to 480Y/277VAC (no Delta)",
+        "current": "200A main CT (120A/80A optional); 50A sub CT",
+        "frequency": "50/60Hz",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Wi-Fi Pairing",
+        "antenna": "External magnetic antenna",
+        "mainCts": "3.5mm three-pole audio connector with 1m cable — 200A default; 120A/80A optional",
+        "subCts": "2.5mm three-pole audio connector with 1m cable — 50A",
+        "supportedSystems": "Single-Phase 240VAC; Split-Phase 120/240VAC; Three-Phase up to 480Y/277VAC (no Delta connection)",
+        "mountingType": "Wall or DIN rail mounting",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency per circuit; Energy Consumed / Energy Produced / excess to grid",
+        "reportingCycle": "Every 15 seconds",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What power systems does PC341 support?",
+          "a": "It is compatible with single-phase (240VAC), split-phase (120/240VAC, North America), and three-phase four-wire systems up to 480Y/277VAC. (Delta connection is not supported.)"
+        },
+        {
+          "q": "How many circuits can be monitored simultaneously?",
+          "a": "In addition to the main CT sensors (200A/250A), PC341 supports up to 16 channels of 50A sub-circuit CTs, enabling monitoring of lighting, socket, or solar branch circuits independently."
+        },
+        {
+          "q": "Does it support bidirectional energy measurement?",
+          "a": "Yes, bidirectional measurement shows how much energy you are producing, energy consumed, and excess energy fed back to the grid."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC341-W helps you monitor the amount of electricity Consumed and Produced in your facility by connecting the clamp on to the power cable. Monitor whole home Energy and up to 16 individual circuits.\n\n## Key Features\n\n- Single, Split-Phase 120/240VAC, 3-Phase/4-wire 480Y/277VAC electricity system compatible.\n- Remotely monitor whole home Energy and up to 16 individual circuits with 50A Sub CT, like Solar, lighting, receptacles.\n- Bi-Directional measurement: Show how much energy you are producing, energy consumed and excess energy back to the grid.\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency measurement.\n- Historical data of Energy Consumed and Energy Production is displayed in Day, Month, Year.\n- External antenna prevents signal from being shielded.\n\n**Standard models:** Split-Phase (US): PC341-2M-W, PC341-2M16S-W. Three-Phase (EU): PC341-3M-W, PC341-3M16S-W."
+  },
+  {
+    "slug": "pc341-w-ty-n",
+    "data": {
+      "name": "PC341-W-TY/N Multi-Circuit WiFi Energy Monitor",
+      "model": "PC341-W-TY/N",
+      "slug": {
+        "name": "PC341-W-TY/N Multi-Circuit Energy Monitor",
+        "slug": "pc341-w-ty-n"
+      },
+      "description": "Tuya-compatible WiFi multi-circuit energy monitor tracking whole-home energy and up to 16 individual circuits with 200A main CTs and 50A sub CTs. 15-second reporting, bidirectional measurement, external magnetic antenna.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc341-w-ty-n/pc341-w-ty-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc341-w-ty-n/pc341-w-ty-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc341-w-ty-n/pc341-w-ty-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc341-w-ty-n/pc341-w-ty-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc341-w-ty-n/pc341-w-ty-n-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc341-w-ty-n/pc341-w-ty-n-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "200A CT: ±1% (2-200A), ±2% (0-2A); 50A CT: ±1% (1-50A), ±2% (0-1A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "200A main CT (300A/500A optional); 50A sub CT (80A/120A optional)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "antenna": "External magnetic antenna",
+        "mainCts": "3.5mm three-pole audio connector with 1m cable — 200A default; 300A/500A optional",
+        "subCts": "2.5mm three-pole audio connector with 1m cable — 50A default; 80A/120A optional",
+        "supportedSystems": "Single-Phase, Split-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "Wall or DIN rail mounting",
+        "dimensions": "81(W) x 41(D) x 111(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency per circuit; Energy Usage / Solar Production",
+        "reportingCycle": "Every 15 seconds",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What type of device is this meter?",
+          "a": "The PC341-W-TY is a smart multi-circuit energy meter and WiFi multi-circuit power meter designed for solar energy monitoring systems, multi-circuit power monitoring systems, and multi-channel energy monitoring applications."
+        },
+        {
+          "q": "Can this meter be used in solar power monitoring projects?",
+          "a": "Yes, it functions as a solar power monitoring device and solar electricity monitoring device, collecting real-time data from solar PV systems and multiple subcircuits for generation, load, and net energy tracking."
+        },
+        {
+          "q": "How does this multi-circuit power meter support energy management?",
+          "a": "With 3 main CT clamps and 16 sub CT clamps, this multi-circuit energy monitor can measure voltage, current, active power, power factor, and cumulative energy across multiple circuits, making it ideal for solar energy meters for solar systems and multi-channel power meters."
+        },
+        {
+          "q": "Is this suitable for large multi-circuit energy monitoring system deployments?",
+          "a": "Yes, the meter is designed for multi-circuit energy meter installations in residential, commercial, and industrial solar PV projects, providing a scalable solution for energy optimization, reporting, and demand management."
+        },
+        {
+          "q": "What types of data can this multi-circuit electricity monitor measure?",
+          "a": "This device provides detailed measurements including real-time voltage, current, active power, power factor, frequency, and cumulative energy for each circuit, supporting solar power consumption monitors and energy dashboards."
+        },
+        {
+          "q": "How is the WiFi multi-circuit power meter installed in real projects?",
+          "a": "Installers mount the device inside electrical panels and attach CT clamps to main and sub circuits, enabling non-intrusive monitoring and quick commissioning for both solar energy monitoring meters and multi-channel energy monitoring systems."
+        },
+        {
+          "q": "Can this smart multi-circuit energy meter integrate with dashboards or management platforms?",
+          "a": "Yes, it transmits data to Tuya-compatible apps or third-party platforms, allowing integrators to create solar power monitoring systems, multi-circuit power monitoring dashboards, and advanced energy analytics."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC341-W-TY/N helps you monitor the amount of electricity Consumed and Produced in your facility by connecting the clamp on to the power cable. Monitor whole home Energy and up to 16 individual circuits.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Single Phase, Split Phase, 3-Phase 4-Wire electricity system compatible\n- Remotely monitor whole home Energy and up to 16 individual circuits with 50A Sub CT, like Solar, lighting, receptacles\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional Measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App\n- External antenna prevents signal from being shielded\n\n**Standard models:** Split-Phase (US): PC341-W-TY/200A\\*2, PC341-W-TY/200A\\*2/50A\\*16. Three-Phase (EU): PC341-W-TY/200A\\*3, PC341-W-TY/200A\\*3/50A\\*16."
+  },
+  {
     "slug": "pc4713-w-485",
     "data": {
       "name": "PC4713-W-485 Three-Phase WiFi + RS485 Smart Energy Meter",
@@ -1142,5 +1289,233 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "PC4713-W-TY helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. It allows you to check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Three-Phase, Split-Phase and Single-Phase electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower, ReactivePower, ApparentPower measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data could be displayed and exported in App"
+  },
+  {
+    "slug": "pc472-w-ty-n",
+    "data": {
+      "name": "PC472-W-TY/N Single-Phase WiFi Power Meter",
+      "model": "PC472-W-TY/N",
+      "slug": {
+        "name": "PC472-W-TY/N Power Meter",
+        "slug": "pc472-w-ty-n"
+      },
+      "description": "Tuya-compatible single-phase WiFi power meter with two CT clamps and bidirectional measurement. 15-second reporting, CT options 20A-300A, 35mm DIN rail mounting.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc472-w-ty-n/pc472-w-ty-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-n/pc472-w-ty-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-n/pc472-w-ty-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-n/pc472-w-ty-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-n/pc472-w-ty-n-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-n/pc472-w-ty-n-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "20A CT: ±1% (1-20A), ±2% (0-1A); 80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz",
+        "current": "20A~300A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "antenna": "Internal antenna",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "35(W) x 65(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency; Energy Usage / Solar Production",
+        "reportingCycle": "Every 15 seconds",
+        "clampInnerDimension": "20A (optional): Ø5mm; 80A (default): Ø10mm; 120A (optional): Ø16mm; 200A (optional): Ø20mm; 300A (optional): Ø24mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What electrical systems does the PC472-W-TY/N support?",
+          "a": "Single-phase electricity systems — one clamp meter monitors a single-phase circuit or two loads with two CT clamps."
+        },
+        {
+          "q": "Can it monitor solar energy?",
+          "a": "Yes — bidirectional measurement tracks both energy usage and solar production on a single-phase system."
+        },
+        {
+          "q": "How often does it report data?",
+          "a": "Energy data is reported every 15 seconds."
+        },
+        {
+          "q": "What CT clamp ranges are available?",
+          "a": "20A (Ø5mm), 80A default (Ø10mm), 120A (Ø16mm), 200A (Ø20mm) and 300A (Ø24mm) options."
+        },
+        {
+          "q": "Can I view historical energy data?",
+          "a": "Yes — historical records can be viewed in the Tuya platform App and exported."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC472-W-TY/N helps you monitor the amount of electricity Consumed and Produced in your single-phase power system by connecting the clamp on to the power cable.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device\n- Single-Phase electricity system Suitable\n- Remotely monitor a single-phase circuit/load, with 2 current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App"
+  },
+  {
+    "slug": "pc472-w-ty-r-n",
+    "data": {
+      "name": "PC472-W-TY/R/N Single-Phase WiFi Power Meter with Relay",
+      "model": "PC472-W-TY/R/N",
+      "slug": {
+        "name": "PC472-W-TY/R/N Power Meter with Relay",
+        "slug": "pc472-w-ty-r-n"
+      },
+      "description": "Tuya-compatible single-phase WiFi power meter with dry-contact relay (10A rated, 16A max) for remote on/off control. Two CT clamps, bidirectional measurement, instant relay status reporting.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc472-w-ty-r-n/pc472-w-ty-r-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-r-n/pc472-w-ty-r-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-r-n/pc472-w-ty-r-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-r-n/pc472-w-ty-r-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-r-n/pc472-w-ty-r-n-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc472-w-ty-r-n/pc472-w-ty-r-n-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "20A CT: ±1% (1-20A), ±2% (0-1A); 80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz",
+        "current": "20A~300A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "antenna": "Internal antenna",
+        "relayType": "Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "35(W) x 65(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency; Energy Usage / Solar Production; relay on/off control",
+        "reportingCycle": "Energy data: every 15 seconds; relay status: immediately",
+        "clampInnerDimension": "20A (optional): Ø5mm; 80A (default): Ø10mm; 120A (optional): Ø16mm; 200A (optional): Ø20mm; 300A (optional): Ø24mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What makes the PC472-W-TY/R/N different from a standard power meter?",
+          "a": "It integrates a dry-contact relay (resistive current rated 10A, max 16A) so a connected load can be turned on or off remotely from the App."
+        },
+        {
+          "q": "How fast does the relay react?",
+          "a": "Relay status is reported immediately, while energy data is reported every 15 seconds."
+        },
+        {
+          "q": "Can it monitor solar energy?",
+          "a": "Yes — bidirectional measurement tracks both energy usage and solar production on a single-phase system."
+        },
+        {
+          "q": "How is the relay protected?",
+          "a": "The relay includes overload protection and relay settings, with a resistive rating of 10A and a maximum of 16A."
+        },
+        {
+          "q": "What CT clamp ranges are available?",
+          "a": "20A (Ø5mm), 80A default (Ø10mm), 120A (Ø16mm), 200A (Ø20mm) and 300A (Ø24mm) options."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC472-W-TY/R/N helps you monitor the amount of electricity Consumed and Produced in your single-phase power system by connecting the clamp on to the power cable.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device\n- Single-Phase electricity system Suitable\n- Remotely monitor a single-phase circuit/load, with 2 current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting"
+  },
+  {
+    "slug": "pc473-w-ty-r-n",
+    "data": {
+      "name": "PC473-W-TY/R/N Three-Phase WiFi Power Meter with Relay",
+      "model": "PC473-W-TY/R/N",
+      "slug": {
+        "name": "PC473-W-TY/R/N Power Meter with Relay",
+        "slug": "pc473-w-ty-r-n"
+      },
+      "description": "Tuya-compatible three-phase WiFi power meter with dry-contact relay (10A rated, 16A max) for remote on/off control. Three CT clamps, bidirectional measurement, Alexa and Google Assistant voice control.",
+      "productType": "smart-meters",
+      "productSubType": "three-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc473-w-ty-r-n/pc473-w-ty-r-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc473-w-ty-r-n/pc473-w-ty-r-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc473-w-ty-r-n/pc473-w-ty-r-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc473-w-ty-r-n/pc473-w-ty-r-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc473-w-ty-r-n/pc473-w-ty-r-n-04.jpg",
+        "https://documents.owon-iot.com/product-images/pc473-w-ty-r-n/pc473-w-ty-r-n-05.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz (RMS per phase)",
+        "current": "80A~750A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "antenna": "Internal antenna",
+        "relayType": "Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting",
+        "supportedSystems": "Single-Phase, Three-Phase (3P3W & Delta not supported)",
+        "mountingType": "35mm DIN rail mounting",
+        "dimensions": "35(W) x 65(D) x 90(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency; Energy Usage / Solar Production; relay on/off control",
+        "reportingCycle": "Energy data: every 15 seconds; relay status: immediately",
+        "clampInnerDimension": "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "Do I need a gateway to use this device?",
+          "a": "No, it connects directly via WiFi and works with the Tuya Smart app without any additional gateway."
+        },
+        {
+          "q": "Can I control devices remotely?",
+          "a": "Yes, the built-in relay allows you to switch connected loads on or off remotely via the mobile app."
+        },
+        {
+          "q": "What types of electrical systems are supported?",
+          "a": "It supports single-phase, split-phase, and three-phase systems, making it suitable for most residential and light commercial setups."
+        },
+        {
+          "q": "Can I monitor energy usage with the relay?",
+          "a": "Yes — the meter measures voltage, current, power factor, active power and frequency bidirectionally, while the relay adds load control on the same device."
+        },
+        {
+          "q": "Can I control the relay by voice?",
+          "a": "Yes, the relay supports Alexa and Google Assistant voice control."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC473-W-TY/R/N helps you monitor the amount of electricity Consumed and Produced in your three phase power system by connecting the clamp on to the power cable. It is also compatible with single phase. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Single Phase, 3-Phase 4-Wire electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting\n- Support Alexa, Google Assistant voice control relay"
   }
 ];
