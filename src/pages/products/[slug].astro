@@ -85,6 +85,12 @@ const scoreName = (name: string) => {
   // For base models (remainder "") all family specs tie → shortest name wins.
   const remainder = modelKey.replace(modelNoSuffix, '');
   if (remainder && n.includes(remainder)) score += 50;
+  // First-word-after-model bonus: variant codes are short (W, Z, W3W) while
+  // base descriptions are long words (SINGLE, THREE...) — breaks the base-vs-
+  // variant tie so the base PC321 resolves its own datasheet, not a sibling's.
+  const after = n.slice(modelNoSuffix.length);
+  const firstWord = (after.match(/^[A-Z]+/) || [''])[0];
+  score += firstWord.length / 100;
   return score;
 };
 const pickBest = (files: { name: string; url: string }[]) => {
