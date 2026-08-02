@@ -1619,12 +1619,12 @@ export const productDocs: ProductDoc[] = [
     category: 'Switches & Relays',
     specs: [
       {
-        name: 'SLC611 Z Power Meter with Relay 20250807',
-        url: 'https://documents.owon-iot.com/specs/Datasheet_-_SLC611-Z_Power_Meter_with_Relay_-_20250807.pdf',
-      },
-      {
         name: 'SLC611 LED Lighting Driver',
         url: 'https://documents.owon-iot.com/specs/Datasheet_-_SLC611_LED_Lighting_Driver.pdf',
+      },
+      {
+        name: 'SLC611 Z Power Meter with Relay 20250807',
+        url: 'https://documents.owon-iot.com/specs/Datasheet_-_SLC611-Z_Power_Meter_with_Relay_-_20250807.pdf',
       },
     ],
     manuals: [

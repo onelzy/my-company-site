@@ -3871,6 +3871,67 @@ export const products: ProductsEntry[] = [
     "body": "The SLC611-Z is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Single phase electricity compatible\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Measures real-time Voltage, Current, PowerFactor, Active Power\n- Support Energy Usage/Production measurement\n- Support Switch input terminal\n- Schedule the device to automatically power electronics on and off\n- 10A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication\n- Power-on status setting"
   },
   {
+    "slug": "slc611",
+    "data": {
+      "name": "SLC611 LED Lighting Driver (0-10V Dimmable)",
+      "model": "SLC611",
+      "slug": {
+        "name": "SLC611 LED Lighting Driver",
+        "slug": "slc611"
+      },
+      "description": "ZigBee HA1.2 LED lighting driver with 0-10V dimming — remote on/off and scheduled dimming for dimmable LED lights.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/slc611/slc611-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/slc611/slc611-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "dimming": "0~10V dimmable (works with dimmable LED lights)",
+        "control": "Remote on/off; scheduling for automatic switching",
+        "voltage": "110~277 VAC",
+        "dimensions": "140 x 50 x 30 mm",
+        "weight": "120g",
+        "operatingTemp": "-20℃ ~ +70℃"
+      },
+      "faqs": [
+        {
+          "q": "What does the SLC611 do?",
+          "a": "Remote on/off control with 0~10V dimming for dimmable LED lights, plus scheduling for automatic switching."
+        },
+        {
+          "q": "What voltage does it accept?",
+          "a": "110~277 VAC."
+        },
+        {
+          "q": "Which lights does it work with?",
+          "a": "Dimmable LED lights (0~10V dimming input)."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee Lighting Link Profile (HA 1.2 compliant)."
+        },
+        {
+          "q": "What are the dimensions?",
+          "a": "140 x 50 x 30 mm, 120g."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SLC611 LED Lighting Driver provides remote on/off control with 0~10V dimming, and enables scheduling for automatic switching. It works with dimmable LED lights.\n\n## Key Features\n\n- ZigBee HA 1.2 compliant\n- Remote on/off control\n- 0~10V dimmable\n- Enables scheduling for automatic switching\n- 110~277 VAC power input\n- Compact 140 x 50 x 30mm design, 120g"
+  },
+  {
     "slug": "slc620",
     "data": {
       "name": "SLC620 In-wall Mechanical Switch",
