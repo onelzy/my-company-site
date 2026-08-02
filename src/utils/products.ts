@@ -66,6 +66,26 @@ export const PRODUCT_TYPE_LABELS: Record<string, LocalizedRecord> = {
     ar: 'برمجيات ومنصات',
     pt: 'Software e Plataformas',
   },
+  gateways: {
+    en: 'Gateways',
+    zh: '网关',
+    es: 'Puertas de Enlace',
+    ru: 'Шлюзы',
+    fr: 'Passerelles',
+    de: 'Gateways',
+    ar: 'بوابات',
+    pt: 'Gateways',
+  },
+  'zigbee-gateways': {
+    en: 'ZigBee Gateways',
+    zh: 'ZigBee 网关',
+    es: 'Puertas ZigBee',
+    ru: 'ZigBee шлюзы',
+    fr: 'Passerelles ZigBee',
+    de: 'ZigBee-Gateways',
+    ar: 'بوابات ZigBee',
+    pt: 'Gateways ZigBee',
+  },
 
   // ----- Smart Meters sub-types -----
   'single-phase': {

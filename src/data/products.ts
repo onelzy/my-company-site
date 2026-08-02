@@ -1519,6 +1519,350 @@ export const products: ProductsEntry[] = [
     "body": "PC473-W-TY/R/N helps you monitor the amount of electricity Consumed and Produced in your three phase power system by connecting the clamp on to the power cable. It is also compatible with single phase. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Single Phase, 3-Phase 4-Wire electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting\n- Support Alexa, Google Assistant voice control relay"
   },
   {
+    "slug": "seg-x3-a",
+    "data": {
+      "name": "SEG-X3-A ZigBee Gateway",
+      "model": "SEG-X3-A",
+      "slug": {
+        "name": "SEG-X3-A ZigBee Gateway",
+        "slug": "seg-x3-a"
+      },
+      "description": "ZigBee 3.0 + BLE 4.2 gateway for up to 50 ZigBee devices, with local linkage, scenes and schedules, encrypted cloud communication and fast Bluetooth network pairing.",
+      "productType": "gateways",
+      "productSubType": "zigbee-gateways",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-gateways",
+      "communication": [
+        "zigbee",
+        "wifi",
+        "ble"
+      ],
+      "ecosystem": [
+        "zigbee-solution",
+        "mqtt-open"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/seg-x3-a/seg-x3-a-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/seg-x3-a/seg-x3-a-01.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-a/seg-x3-a-02.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-a/seg-x3-a-03.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-a/seg-x3-a-04.jpg"
+      ],
+      "specs": {
+        "cpu": "ESP32-WROVER-E",
+        "flash": "16MB",
+        "ram": "8MB",
+        "wifi": "IEEE 802.11 b/g/n 2.4GHz",
+        "ble": 4.2,
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4) + Wi-Fi + BLE 4.2",
+        "epCapacity": "Up to 50 EPs (min. 5 ZigBee repeaters); 32 end devices without repeaters",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB antenna",
+        "dimensions": "66(L) x 56(W) x 36(H) mm",
+        "weight": "56.2g"
+      },
+      "faqs": [
+        {
+          "q": "How many ZigBee devices can the SEG-X3-A connect?",
+          "a": "Up to 50 endpoints (EPs) with at least 5 ZigBee repeaters in the network; without repeaters it connects up to 32 end devices."
+        },
+        {
+          "q": "Does it support BLE pairing?",
+          "a": "Yes — BLE 4.2 enables fast, high-probability Bluetooth network pairing during onboarding."
+        },
+        {
+          "q": "Can automation run without internet?",
+          "a": "Yes — local linkage, scenes and schedules run on the gateway itself."
+        },
+        {
+          "q": "How does it integrate with third-party systems?",
+          "a": "Open integration options include Cloud-to-Cloud HTTP Server API, MQTT Gateway API, UART Gateway API and the Zigbee Cluster List for device-level integration."
+        },
+        {
+          "q": "Is cloud communication encrypted?",
+          "a": "Yes — real-time, efficient and encrypted communication with the cloud server."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SEG-X3-A ZigBee Gateway acts as a central platform for your smart home system. It allows you to add up to 50 EPs into the system (Zigbee repeaters required). Automatic control, schedule, scene, remote monitoring and control for ZigBee devices can enrich your IoT experience.\n\n## Key Features\n\n- ZigBee 3.0\n- BLE 4.2 — fast, high-probability Bluetooth network pairing\n- ZigBee coordinator of the home area network\n- Local linkage, scenes, schedules\n- Real time, efficiently interoperability and encrypted communication with cloud server\n- Open Server API and Gateway API (HTTP Server API / MQTT Gateway API / UART Gateway API / Zigbee Cluster List)"
+  },
+  {
+    "slug": "seg-x3-c",
+    "data": {
+      "name": "SEG-X3-C ZigBee Gateway",
+      "model": "SEG-X3-C",
+      "slug": {
+        "name": "SEG-X3-C ZigBee Gateway",
+        "slug": "seg-x3-c"
+      },
+      "description": "ZigBee 3.0 + BLE 4.2 gateway for up to 50 ZigBee devices, with local linkage, scenes and schedules, encrypted cloud communication and fast Bluetooth network pairing.",
+      "productType": "gateways",
+      "productSubType": "zigbee-gateways",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-gateways",
+      "communication": [
+        "zigbee",
+        "wifi",
+        "ble"
+      ],
+      "ecosystem": [
+        "zigbee-solution",
+        "mqtt-open"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/seg-x3-c/seg-x3-c-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/seg-x3-c/seg-x3-c-01.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-c/seg-x3-c-02.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-c/seg-x3-c-03.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-c/seg-x3-c-04.jpg"
+      ],
+      "specs": {
+        "cpu": "ESP32-WROVER-E",
+        "flash": "16MB",
+        "ram": "8MB",
+        "wifi": "IEEE 802.11 b/g/n 2.4GHz",
+        "ble": 4.2,
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4) + Wi-Fi + BLE 4.2",
+        "epCapacity": "Up to 50 EPs (min. 5 ZigBee repeaters); 32 end devices without repeaters",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB antenna",
+        "dimensions": "66(L) x 56(W) x 36(H) mm",
+        "weight": "56.2g"
+      },
+      "faqs": [
+        {
+          "q": "How many ZigBee devices can the SEG-X3-C connect?",
+          "a": "Up to 50 endpoints (EPs) with at least 5 ZigBee repeaters in the network; without repeaters it connects up to 32 end devices."
+        },
+        {
+          "q": "Does it support BLE pairing?",
+          "a": "Yes — BLE 4.2 enables fast, high-probability Bluetooth network pairing during onboarding."
+        },
+        {
+          "q": "Can automation run without internet?",
+          "a": "Yes — local linkage, scenes and schedules run on the gateway itself."
+        },
+        {
+          "q": "How does it integrate with third-party systems?",
+          "a": "Open integration options include Cloud-to-Cloud HTTP Server API, MQTT Gateway API, UART Gateway API and the Zigbee Cluster List for device-level integration."
+        },
+        {
+          "q": "Is cloud communication encrypted?",
+          "a": "Yes — real-time, efficient and encrypted communication with the cloud server."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SEG-X3-C ZigBee Gateway acts as a central platform for your smart home system. It allows you to add up to 50 EPs into the system (Zigbee repeaters required). Automatic control, schedule, scene, remote monitoring and control for ZigBee devices can enrich your IoT experience.\n\n## Key Features\n\n- ZigBee 3.0\n- BLE 4.2 — fast, high-probability Bluetooth network pairing\n- ZigBee coordinator of the home area network\n- Local linkage, scenes, schedules\n- Real time, efficiently interoperability and encrypted communication with cloud server\n- Open Server API and Gateway API (HTTP Server API / MQTT Gateway API / UART Gateway API / Zigbee Cluster List)"
+  },
+  {
+    "slug": "seg-x3-n",
+    "data": {
+      "name": "SEG-X3-N ZigBee Home Automation Gateway",
+      "model": "SEG-X3-N",
+      "slug": {
+        "name": "SEG-X3-N ZigBee Gateway",
+        "slug": "seg-x3-n"
+      },
+      "description": "ZigBee 3.0 home automation gateway with Wi-Fi uplink, ARM Cortex-M4 processor, 16MB SPI flash and open Server API / Gateway API for third-party cloud integration.",
+      "productType": "gateways",
+      "productSubType": "zigbee-gateways",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-gateways",
+      "communication": [
+        "zigbee",
+        "wifi"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/seg-x3-n/seg-x3-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/seg-x3-n/seg-x3-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-n/seg-x3-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-n/seg-x3-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3-n/seg-x3-n-04.jpg"
+      ],
+      "specs": {
+        "cpu": "ARM Cortex-M4 192MHz",
+        "flash": "2MB",
+        "spiFlash": "16MB",
+        "dataInterface": "Micro USB port",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4) + Wi-Fi",
+        "rfRange": "Outdoor/indoor: 100m/30m (open area)",
+        "antenna": "Internal PCB antenna",
+        "powerSupply": "AC 100~240V 50/60Hz; rated power 1W"
+      },
+      "faqs": [
+        {
+          "q": "What is the SEG-X3-N?",
+          "a": "A ZigBee 3.0 home automation gateway that connects all smart ZigBee devices in one central place, with Wi-Fi uplink and remote control via the mobile app."
+        },
+        {
+          "q": "What processor does it use?",
+          "a": "ARM Cortex-M4 at 192MHz with 2MB flash and 16MB SPI flash for complicated calculations."
+        },
+        {
+          "q": "Can it integrate with third-party cloud servers?",
+          "a": "Yes — OWON offers open Server API and Gateway API to integrate the gateway with a designated cloud server or mobile app."
+        },
+        {
+          "q": "What is the ZigBee range?",
+          "a": "100m outdoor / 30m indoor (open area) at 2.4GHz with internal PCB antenna."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "AC 100~240V 50/60Hz, rated power consumption 1W."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SEG-X3-N gateway acts as a central platform of your entire smart home system. It is equipped with ZigBee and Wi-Fi communication that connects all smart ZigBee devices in one central place, allowing you to control all the ZigBee devices remotely through the mobile app.\n\n## Key Features\n\n- ZigBee 3.0\n- ZigBee coordinator of the home area network\n- Powerful CPU for complicated calculation\n- Real time and efficiently interoperability with cloud server\n- Open Server API and Gateway API for third-party cloud server and mobile app integration"
+  },
+  {
+    "slug": "seg-x3",
+    "data": {
+      "name": "SEG-X3 ZigBee Home Automation Gateway",
+      "model": "SEG-X3",
+      "slug": {
+        "name": "SEG-X3 ZigBee Gateway",
+        "slug": "seg-x3"
+      },
+      "description": "ZigBee 3.0 home automation gateway with Wi-Fi uplink, TF card local storage, open Server API and Gateway API for third-party cloud integration.",
+      "productType": "gateways",
+      "productSubType": "zigbee-gateways",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-gateways",
+      "communication": [
+        "zigbee",
+        "wifi"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/seg-x3/seg-x3-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/seg-x3/seg-x3-01.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3/seg-x3-02.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3/seg-x3-03.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x3/seg-x3-04.jpg"
+      ],
+      "specs": {
+        "cpu": "ARM Cortex-M3",
+        "flash": "1M",
+        "dataStorage": "TF Card: 8G",
+        "dataInterface": "Micro USB port",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4) + Wi-Fi",
+        "rfRange": "Outdoor/indoor: 100m/30m (open area)",
+        "antenna": "Internal PCB antenna",
+        "powerSupply": "AC 100~240V 50/60Hz; rated power 1W",
+        "dimensions": "56(W) x 66(L) x 36(H) mm",
+        "weight": "103g"
+      },
+      "faqs": [
+        {
+          "q": "What is the ZigBee Smart Home Automation Gateway X3 and what does it do?",
+          "a": "The X3 gateway is a central hub for ZigBee 3.0 networks that connects smart sensors, switches, plugs, and other ZigBee devices to cloud or local management systems, enabling unified control, automation, data collection, and remote access, making it a foundational component for comprehensive smart home and energy management solutions."
+        },
+        {
+          "q": "How does the X3 gateway support home energy management projects?",
+          "a": "By aggregating real-time data from connected ZigBee energy-aware devices such as smart plugs, lighting sensors, and thermostats, the gateway enables energy dashboards, consumption analytics, rule-based automation, and alerts that help homeowners and integrators optimize power usage, reduce costs, and implement proactive energy strategies."
+        },
+        {
+          "q": "Is this gateway suitable for professional system integrators and installers?",
+          "a": "Yes, the X3 is designed with open integration capabilities and compatibility with mainstream smart home platforms, allowing system integrators to deploy customized smart home systems, integrate with building management systems (BMS), and provide turnkey services that include automated scenes, security, energy monitoring, and device orchestration."
+        },
+        {
+          "q": "Can it be used in larger residential or multi-unit projects?",
+          "a": "The gateway supports scalable ZigBee mesh networking, making it suitable for single homes, multi-room apartments, and even multi-unit residential projects where centralized control and coordinated automation across floors and zones are required."
+        },
+        {
+          "q": "How does the X3 handle connectivity and protocol support?",
+          "a": "The X3 uses ZigBee 3.0 for reliable, low-power device communication, and offers Ethernet (and optional Wi-Fi) connectivity to cloud or edge servers, supporting secure device onboarding."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SEG-X3 gateway acts as a central platform of your entire smart home system. It is equipped with ZigBee and Wi-Fi communication that connects all smart ZigBee devices in one central place, allowing you to control all the ZigBee devices remotely through the mobile app.\n\n## Key Features\n\n- ZigBee 3.0\n- ZigBee coordinator of the home area network\n- Powerful CPU for complicated calculation\n- Real time and efficiently interoperability with cloud server\n- Open Server API and Gateway API for third-party cloud server and mobile app integration"
+  },
+  {
+    "slug": "seg-x5",
+    "data": {
+      "name": "SEG-X5 ZigBee Gateway",
+      "model": "SEG-X5",
+      "slug": {
+        "name": "SEG-X5 ZigBee Gateway",
+        "slug": "seg-x5"
+      },
+      "description": "High-capacity ZigBee 3.0 gateway for up to 200 devices with stable Ethernet connection, USB power, local automation and one-step backup & transfer for gateway replacement.",
+      "productType": "gateways",
+      "productSubType": "zigbee-gateways",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-gateways",
+      "communication": [
+        "zigbee",
+        "ethernet",
+        "ble"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/seg-x5/seg-x5-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/seg-x5/seg-x5-01.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x5/seg-x5-02.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x5/seg-x5-03.jpg",
+        "https://documents.owon-iot.com/product-images/seg-x5/seg-x5-04.jpg"
+      ],
+      "specs": {
+        "cpu": "MTK7628",
+        "flash": "32MB",
+        "ram": "128MB",
+        "ethernet": "10/100M bps RJ45, Auto MDIX",
+        "ble": "4.2 (Optional)",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4) + Ethernet; BLE 4.2 optional",
+        "epCapacity": "Up to 200 EPs (min. 24 ZigBee repeaters); 32 end devices without repeaters",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB antenna",
+        "powerSupply": "Micro-USB DC 5V/2A",
+        "dimensions": "133(L) x 91.5(W) x 28.2(H) mm"
+      },
+      "faqs": [
+        {
+          "q": "What role does this gateway play in multi-room building control systems?",
+          "a": "The gateway acts as a central ZigBee coordinator that connects and manages multiple devices such as thermostats, sensors, and switches across rooms, enabling unified control and monitoring in hotels, apartments, and care facilities."
+        },
+        {
+          "q": "Why is this gateway suitable for projects like hotels, apartments, and nursing homes?",
+          "a": "It supports large scale device networks and stable communication, making it ideal for environments where multiple rooms require synchronized control, monitoring, and automation."
+        },
+        {
+          "q": "How does Ethernet connectivity benefit system integrators?",
+          "a": "Ethernet provides a stable and low latency connection compared to WiFi, which is critical in commercial environments where reliability and continuous operation are required."
+        },
+        {
+          "q": "Can the gateway support centralized device management across multiple rooms or floors?",
+          "a": "Yes, it allows integrators to connect and manage a large number of ZigBee devices, enabling centralized control of lighting, HVAC, sensors, and energy systems across rooms and building zones."
+        },
+        {
+          "q": "How does the gateway support integration with third party systems?",
+          "a": "The device provides open server API and gateway API, allowing system integrators to connect it with BMS, property management systems, or custom platforms for seamless system integration."
+        },
+        {
+          "q": "What advantages does local control bring in building projects?",
+          "a": "The gateway supports local automation and scene control, allowing the system to continue operating even if the cloud connection is lost, which is critical for hotels and care facilities."
+        },
+        {
+          "q": "How does this gateway support energy management use cases?",
+          "a": "By connecting energy meters, thermostats, and sensors, the gateway enables real time data collection and automation logic, helping integrators build energy monitoring and optimization systems."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The SEG-X5 ZigBee Gateway acts as a central platform for your smart home system. It allows you to add up to 200 EPs into the system (Zigbee repeaters required). Automatic control, schedule, scene, remote monitoring and control for ZigBee devices can enrich your IoT experience.\n\n## Key Features\n\n- ZigBee 3.0, connects up to 200 EPs (min. 24 ZigBee repeaters required)\n- BLE 4.2 (optional)\n- Stable internet connection via Ethernet\n- ZigBee coordinator of the home area network and provide stable ZigBee connection\n- Flexible installation with USB power\n- Built-in buzzer\n- Local linkage, scenes, schedules\n- High-performance for complicated calculation\n- Real time, efficiently interoperability and encrypted communication with cloud server\n- Support backup & transfer to replace gateway — existing sub-devices, linkage, scenes and schedules synchronize to the new gateway in easy steps\n- Reliable configuration via Bonjour"
+  },
+  {
     "slug": "slc611-z",
     "data": {
       "name": "SLC611-Z ZigBee Power Meter with Relay",

@@ -158,6 +158,12 @@ const specFieldLabels: Record<string, string> = {
   charging: 'Charging',
   cableLength: 'Cable Length',
   compatibleWith: 'Compatible With',
+  cpu: 'CPU',
+  flash: 'Flash ROM',
+  ram: 'RAM',
+  spiFlash: 'SPI Flash',
+  dataInterface: 'Data Interface',
+  epCapacity: 'Device Capacity',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -616,6 +622,36 @@ const faqSchema = {
                     { icon: '⏰', title: 'Scheduled On/Off', desc: 'Schedule electronics to power on/off automatically via the App.' },
                     { icon: '📶', title: 'ZigBee Network Extender', desc: 'Mains-powered router node extends range and strengthens ZigBee mesh communication.' },
                   ],
+                  'seg-x3': [
+                    { icon: '🕸️', title: 'ZigBee 3.0 Coordinator', desc: 'Central hub connecting sensors, switches and plugs into one ZigBee mesh network.' },
+                    { icon: '☁️', title: 'Open Server API', desc: 'Integrate with your own cloud server or mobile app via open Server API and Gateway API.' },
+                    { icon: '💾', title: 'TF Card Storage', desc: '8G TF card for local data storage.' },
+                    { icon: '🔌', title: 'AC Powered', desc: 'Direct AC 100~240V supply with only 1W rated consumption.' },
+                  ],
+                  'seg-x3-a': [
+                    { icon: '🕸️', title: 'ZigBee 3.0 + BLE 4.2', desc: 'ZigBee coordinator with fast, high-probability Bluetooth network pairing.' },
+                    { icon: '⚙️', title: '50-Device Capacity', desc: 'Connects up to 50 endpoints with at least 5 ZigBee repeaters.' },
+                    { icon: '🏠', title: 'Local Automation', desc: 'Linkage, scenes and schedules run locally even without internet.' },
+                    { icon: '🔐', title: 'Encrypted Cloud', desc: 'Real-time, encrypted communication with the cloud server.' },
+                  ],
+                  'seg-x3-c': [
+                    { icon: '🕸️', title: 'ZigBee 3.0 + BLE 4.2', desc: 'ZigBee coordinator with fast, high-probability Bluetooth network pairing.' },
+                    { icon: '⚙️', title: '50-Device Capacity', desc: 'Connects up to 50 endpoints with at least 5 ZigBee repeaters.' },
+                    { icon: '🏠', title: 'Local Automation', desc: 'Linkage, scenes and schedules run locally even without internet.' },
+                    { icon: '🔐', title: 'Encrypted Cloud', desc: 'Real-time, encrypted communication with the cloud server.' },
+                  ],
+                  'seg-x3-n': [
+                    { icon: '🕸️', title: 'ZigBee 3.0 Coordinator', desc: 'Central hub connecting all smart ZigBee devices in one place.' },
+                    { icon: '⚡', title: 'Cortex-M4 CPU', desc: '192MHz ARM Cortex-M4 with 16MB SPI flash for complicated calculations.' },
+                    { icon: '☁️', title: 'Open Server API', desc: 'Integrate with your own cloud server or mobile app via open Server API and Gateway API.' },
+                    { icon: '🔌', title: 'AC Powered', desc: 'Direct AC 100~240V supply with only 1W rated consumption.' },
+                  ],
+                  'seg-x5': [
+                    { icon: '📶', title: 'Ethernet Stability', desc: '10/100M wired connection — stable, low-latency uplink for commercial deployments.' },
+                    { icon: '🚀', title: '200-Device Capacity', desc: 'Connects up to 200 ZigBee endpoints for multi-room and multi-floor projects.' },
+                    { icon: '🔁', title: 'Backup & Transfer', desc: 'One-step gateway replacement — sub-devices, linkages, scenes and schedules sync automatically.' },
+                    { icon: '🔌', title: 'USB Power, Buzzer', desc: 'Flexible Micro-USB 5V/2A power with built-in buzzer for local feedback.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -855,6 +891,46 @@ const faqSchema = {
                     { title: 'Energy Submetering', desc: 'Accumulative kWh measurement for per-room or per-circuit billing.' },
                     { title: 'Scheduled Automation', desc: 'Schedule electronics to power on/off automatically.' },
                     { title: 'ZigBee Mesh Expansion', desc: 'Router node strengthens the ZigBee network while controlling loads.' },
+                  ],
+                  'seg-x3': [
+                    { title: 'Whole-Home Smart Systems', desc: 'Central ZigBee hub for a complete smart home — sensors, switches and plugs in one mesh.' },
+                    { title: 'Energy Management Projects', desc: 'Aggregates ZigBee energy data for dashboards, analytics and rule-based automation.' },
+                    { title: 'System Integrator Deployments', desc: 'Open APIs and BMS integration for customized smart home and building systems.' },
+                    { title: 'Multi-Unit Residential', desc: 'Scalable mesh networking across apartments, floors and zones.' },
+                    { title: 'Senior Care Facilities', desc: 'Connects care sensors and devices for centralized monitoring and alerts.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'seg-x3-a': [
+                    { title: 'Smart Home Hub', desc: '50-device ZigBee network for whole-home automation and scenes.' },
+                    { title: 'Local-First Installations', desc: 'Linkage and schedules keep running even if cloud is unreachable.' },
+                    { title: 'Integrator Projects', desc: 'HTTP Server API, MQTT Gateway API and UART Gateway API for custom platforms.' },
+                    { title: 'Fast Onboarding', desc: 'BLE 4.2 pairing speeds up device commissioning on site.' },
+                    { title: 'Building Management', desc: 'Encrypted cloud communication for BMS and property management integration.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'seg-x3-c': [
+                    { title: 'Smart Home Hub', desc: '50-device ZigBee network for whole-home automation and scenes.' },
+                    { title: 'Local-First Installations', desc: 'Linkage and schedules keep running even if cloud is unreachable.' },
+                    { title: 'Integrator Projects', desc: 'HTTP Server API, MQTT Gateway API and UART Gateway API for custom platforms.' },
+                    { title: 'Fast Onboarding', desc: 'BLE 4.2 pairing speeds up device commissioning on site.' },
+                    { title: 'Building Management', desc: 'Encrypted cloud communication for BMS and property management integration.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'seg-x3-n': [
+                    { title: 'Whole-Home Smart Systems', desc: 'Central ZigBee hub for a complete smart home — sensors, switches and plugs in one mesh.' },
+                    { title: 'Energy Management Projects', desc: 'Aggregates ZigBee energy data for dashboards, analytics and rule-based automation.' },
+                    { title: 'System Integrator Deployments', desc: 'Open APIs and BMS integration for customized smart home and building systems.' },
+                    { title: 'Multi-Unit Residential', desc: 'Scalable mesh networking across apartments, floors and zones.' },
+                    { title: 'Remote Monitoring', desc: 'Real-time cloud interoperability with mobile app control.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'seg-x5': [
+                    { title: 'Hotel Room Automation', desc: '200-device ZigBee network for synchronized control across guest rooms.' },
+                    { title: 'Apartment & Care Facilities', desc: 'Stable Ethernet uplink and local automation for care and multi-unit buildings.' },
+                    { title: 'Commercial Building Control', desc: 'Centralized lighting, HVAC, sensor and energy management across zones.' },
+                    { title: 'BMS Integration', desc: 'Open server API and gateway API connect to BMS and property management systems.' },
+                    { title: 'Energy Monitoring Systems', desc: 'Real-time data from meters and thermostats for optimization logic.' },
+                    { title: 'Large-Scale Deployments', desc: 'High capacity plus backup & transfer make fleet replacement painless.' },
                   ],
                 };
                 const scenarios = {

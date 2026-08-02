@@ -83,7 +83,7 @@ const productsCollection = defineCollection({
 
     // Dimension 1: Product Type
     productType: z
-      .enum(['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms'])
+      .enum(['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms', 'gateways'])
       .optional(),
     productSubType: z
       .enum([
@@ -117,6 +117,8 @@ const productsCollection = defineCollection({
         'energy-monitor-web',
         'partner-platform',
         'iot-platform',
+        // Gateways
+        'zigbee-gateways',
       ])
       .optional(),
 
