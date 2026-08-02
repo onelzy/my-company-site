@@ -73,33 +73,32 @@ const specEntries = Object.entries(specs).filter(([, v]) => v !== undefined && v
 // falling back to the first spec of the matching model family.
 const modelStr = String(entry.data.model || '');
 const docEntry = productDocs.find((d) => modelStr.startsWith(d.model));
-const modelKey = modelStr.toUpperCase().replace(/[^A-Z0-9]/g, '');
+const modelTokens = modelStr.toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim().split(' ');
 const scoreName = (name: string) => {
-  const n = name.toUpperCase().replace(/[^A-Z0-9]/g, '');
-  let score = 0;
-  // Prefer exact model-key containment (e.g. "WE-TY3W" in name)
-  if (modelKey.length >= 6 && n.includes(modelKey)) score += 100;
-  const modelNoSuffix = modelKey.replace(/(PC\d+).*/, '$1');
-  if (n.includes(modelNoSuffix)) score += 10;
-  // Variant remainder: "PC321-W-TY" → "WTY" — names containing it win.
-  // For base models (remainder "") all family specs tie → shortest name wins.
-  const remainder = modelKey.replace(modelNoSuffix, '');
-  if (remainder && n.includes(remainder)) score += 50;
-  // First-word-after-model bonus: variant codes are short (W, Z, W3W) while
-  // base descriptions are long words (SINGLE, THREE...) — breaks the base-vs-
-  // variant tie so the base PC321 resolves its own datasheet, not a sibling's.
-  const after = n.slice(modelNoSuffix.length);
-  const firstWord = (after.match(/^[A-Z]+/) || [''])[0];
-  score += firstWord.length / 100;
-  return score;
+  const nt = name.toUpperCase().replace(/[^A-Z0-9]+/g, ' ').trim().split(' ');
+  // Token-prefix match: every model token that leads the doc name scores 100.
+  // "PC321-W/3W" → ["PC321","W","3W"] matches "PC321 W 3W Single..." (300) but
+  // only partially matches "PC321 W Single..." (200) or "PC321 Z TY..." (100).
+  let s = 0;
+  let i = 0;
+  while (i < modelTokens.length && i < nt.length && nt[i] === modelTokens[i]) {
+    s += 100;
+    i++;
+  }
+  // Next-token bonus: description words (SINGLE, THREE...) are long, variant
+  // codes (W, Z, TY, 3W, N) are short — so the base PC321 resolves its own
+  // "PC321 Single..." datasheet over "PC321 W TY N..." (1 vs 6 chars).
+  const next = nt[i] || '';
+  s += Math.min(next.length, 10);
+  return s;
 };
 const pickBest = (files: { name: string; url: string }[]) => {
   if (!files || files.length === 0) return undefined;
   return [...files].sort((a, b) => {
     const d = scoreName(b.name) - scoreName(a.name);
     if (d !== 0) return d;
-    // Tie-break: shortest normalized name = base variant (e.g. PC321 base
-    // datasheet "PC321 Single..." beats "PC321 W 3W Single...")
+    // Tie-break: shortest name = base variant (e.g. PC321 base datasheet
+    // "PC321 Single..." beats "PC321 W 3W Single...")
     return a.name.length - b.name.length;
   })[0];
 };
