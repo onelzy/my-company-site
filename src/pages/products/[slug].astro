@@ -214,6 +214,14 @@ const specFieldLabels: Record<string, string> = {
   controlGroups: 'Control Groups',
   specialFunctions: 'Special Functions',
   notifications: 'Notifications',
+  irAngle: 'IR Coverage',
+  irCodes: 'IR Codes',
+  irLearning: 'IR Learning',
+  irCapacity: 'IR Capacity',
+  plugTypes: 'Plug Types',
+  temperatureSensor: 'Temperature Sensor',
+  txPower: 'TX Power',
+  receiverSensitivity: 'Receiver Sensitivity',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -876,6 +884,18 @@ const faqSchema = {
                     { icon: '🔗', title: 'Smart Linkage', desc: 'Link with other smart devices.' },
                     { icon: '🔋', title: '2x AAA Powered', desc: 'Long battery life, low consumption.' },
                   ],
+                  'ac201': [
+                    { icon: '❄️', title: 'ZigBee → IR Control', desc: 'Turns any split AC smart via gateway IR commands.' },
+                    { icon: '📚', title: 'Pre-Installed Codes', desc: 'Mainstream split ACs covered out of the box.' },
+                    { icon: '🌡️', title: 'Temperature Sensing', desc: '-10℃ ~ +85℃ built-in sensor.' },
+                    { icon: '🔌', title: '4 Plug Standards', desc: 'Switchable US/AU/EU/UK plugs.' },
+                  ],
+                  'ac201-a': [
+                    { icon: '🎯', title: 'IR Learning', desc: 'Learns codes from unknown brand IR devices.' },
+                    { icon: '📺', title: 'Beyond ACs', desc: 'Controls TVs, fans and other IR devices.' },
+                    { icon: '🔢', title: '5 ACs + 5 Remotes', desc: 'Pairs 5 ACs and learns 5 remotes (5 buttons each).' },
+                    { icon: '🔘', title: 'One-Click Pairing', desc: 'Pair with your remote in one step.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -1387,6 +1407,22 @@ const faqSchema = {
                     { title: 'Boiler Rooms', desc: 'Leak detection near heating equipment.' },
                     { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
                     { title: 'ZigBee Smart Homes', desc: 'Works with any standard ZigBee hub.' },
+                  ],
+                  'ac201': [
+                    { title: 'Hotel Rooms', desc: 'Central AC control per room via ZigBee gateway.' },
+                    { title: 'Smart Homes', desc: 'Phone control for existing split ACs.' },
+                    { title: 'Villas & Apartments', desc: 'Multiple ACs with mode/temp/fan control.' },
+                    { title: 'Retrofit Projects', desc: 'No AC rewiring — plug-in IR control.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                    { title: 'ZigBee Smart Homes', desc: 'Works with any ZHA hub.' },
+                  ],
+                  'ac201-a': [
+                    { title: 'Hotel Rooms', desc: 'AC + TV control from one IR device.' },
+                    { title: 'Multi-Device Rooms', desc: 'Learn remotes for unknown brand devices.' },
+                    { title: 'Smart Homes', desc: 'AC, TV, fan and more in one controller.' },
+                    { title: 'Retrofit Projects', desc: 'Plug-in IR learning, no rewiring.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
+                    { title: 'ZigBee Smart Homes', desc: 'Works with any ZHA hub.' },
                   ],
                 };
                 const scenarios = {

@@ -9,6 +9,134 @@ export interface ProductsEntry {
 
 export const products: ProductsEntry[] = [
   {
+    "slug": "ac201-a",
+    "data": {
+      "name": "AC201-A ZigBee Split AC Control (IR Learning)",
+      "model": "AC201-A",
+      "slug": {
+        "name": "AC201-A ZigBee Split AC Control",
+        "slug": "ac201-a"
+      },
+      "description": "ZigBee-to-IR controller with IR code learning — controls AC, TV, fans and other IR devices, up to 5 ACs and 5 learned remotes.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-hvac",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/ac201-a/ac201-a-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/ac201-a/ac201-a-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "txPower": "6~7mW (+8dBm)",
+        "receiverSensitivity": "-102dBm",
+        "irAngle": "120° coverage; carrier 15kHz-85kHz",
+        "irLearning": "IR code study for unknown brands; one-click pairing with remote control",
+        "irCapacity": "Up to 5 ACs + 5 learned IR remotes (5 buttons each)",
+        "temperatureSensor": "-10℃ ~ +85℃",
+        "voltage": "Direct plug-in AC 100~240V (50-60Hz)",
+        "powerConsumption": "1W",
+        "plugTypes": "US, AU, EU, UK",
+        "dimensions": "66.5(L) x 85(W) x 43(H) mm",
+        "weight": "116g",
+        "operatingTemp": "-10℃ ~ +55℃ (up to 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What can the AC201-A control?",
+          "a": "Air conditioners, TVs, fans and other IR devices in your home network — not just ACs."
+        },
+        {
+          "q": "Does it support unknown IR brands?",
+          "a": "Yes — IR code study functionality learns codes from unknown brand IR devices."
+        },
+        {
+          "q": "How many devices can it manage?",
+          "a": "Up to 5 air conditioners with pairing and 5 IR remote controls for learning; each IR control supports learning with five button functions."
+        },
+        {
+          "q": "How do I pair it?",
+          "a": "One-click pairing with your remote control."
+        },
+        {
+          "q": "What is the plug type?",
+          "a": "Direct plug-in with switchable US, AU, EU, UK plugs."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The AC201-A converts the home automation gateway's ZigBee signal into IR commands to control the air conditioner, TV, fan or other IR devices in your home network. It adds IR code study for unknown brands and supports up to 5 ACs plus 5 learned remote controls.\n\n## Key Features\n\n- Controls AC, TV, fan or other IR devices\n- Pre-installed IR codes for mainstream split air conditioners\n- IR code study functionality for unknown brand IR devices\n- One-click pairing with remote control\n- Supports up to 5 ACs + 5 IR remote controls for learning (5 button functions each)\n- Temperature sensor, 120° IR coverage, switchable plugs (US, AU, EU, UK)"
+  },
+  {
+    "slug": "ac201",
+    "data": {
+      "name": "AC201 ZigBee Split AC Control",
+      "model": "AC201",
+      "slug": {
+        "name": "AC201 ZigBee Split AC Control",
+        "slug": "ac201"
+      },
+      "description": "ZigBee-to-IR air conditioner controller with pre-installed codes for mainstream split ACs — control mode, temperature, fan and ventilation from your phone.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-hvac",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/ac201/ac201-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/ac201/ac201-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "irAngle": "120° coverage; carrier 15kHz-85kHz",
+        "irCodes": "Pre-installed IR codes for mainstream split ACs; pairing via full scan, brand scan or manual input",
+        "temperatureSensor": "-10℃ ~ +85℃",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "1W",
+        "plugTypes": "Switchable plugs: US, AU, EU, UK",
+        "dimensions": "66.5(L) x 85(W) x 43(H) mm",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the AC201 do?",
+          "a": "Converts control commands sent over ZigBee into IR signals to control your split air conditioner — mode, temperature, fan speed and ventilation from the mobile app."
+        },
+        {
+          "q": "How is it paired with an AC?",
+          "a": "Pre-installed IR codes for mainstream split ACs, with pairing via full IR code scan, brand scan, or manual IR code input."
+        },
+        {
+          "q": "Does it measure temperature?",
+          "a": "Yes — built-in temperature sensor with a sensing range of -10℃ to +85℃."
+        },
+        {
+          "q": "What plug types are available?",
+          "a": "Switchable power plugs for US, AU, EU and UK standards."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2, controlled through a home automation gateway."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The AC201 ZigBee Split AC Control converts control commands sent using a ZigBee signal into IR (Infra-Red) signal to control your AC system. It allows you to control the system mode, temperature, fan speed and ventilation of the air conditioner remotely from the mobile app.\n\n## Key Features\n\n- Converts the home automation gateway's ZigBee signal into IR commands\n- Pre-installed IR codes for mainstream split air conditioners\n- Pairing: full IR code scan, brand scan, or manual IR code input\n- Temperature measurement\n- Switchable power plugs for US, AU, EU, UK\n- 120° IR angle coverage"
+  },
+  {
     "slug": "cb432-dp",
     "data": {
       "name": "CB432-DP Din-rail Relay (Double Pole)",
