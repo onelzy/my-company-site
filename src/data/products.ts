@@ -1519,6 +1519,685 @@ export const products: ProductsEntry[] = [
     "body": "PC473-W-TY/R/N helps you monitor the amount of electricity Consumed and Produced in your three phase power system by connecting the clamp on to the power cable. It is also compatible with single phase. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device by export and import of grid or other energy values\n- Single Phase, 3-Phase 4-Wire electricity system compatible\n- Remotely monitor whole home Energy with three current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting\n- Support Alexa, Google Assistant voice control relay"
   },
   {
+    "slug": "pct501",
+    "data": {
+      "name": "PCT501 ZigBee Programmable Communicating Thermostat",
+      "model": "PCT501",
+      "slug": {
+        "name": "PCT501 ZigBee Thermostat",
+        "slug": "pct501"
+      },
+      "description": "ZigBee HA1.2 programmable communicating thermostat with 3-inch LCD, temperature and humidity display, 7-day programming and single-stage heating/cooling control.",
+      "productType": "thermostats",
+      "productSubType": "zigbee-hvac",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-thermostats",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct501/pct501-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct501/pct501-01.jpg"
+      ],
+      "specs": {
+        "cpu": "ARM Cortex-M3",
+        "protocol": "ZigBee 2.4GHz IEEE 802.15.4 (HA1.2)",
+        "display": "3\" LCD (128 x 64 pixels)",
+        "measuredParams": "Temperature and humidity display",
+        "programmability": "7-day programming with multiple HOLD options",
+        "battery": "Built-in Li-ion 500mAh",
+        "powerSupply": "AC 24V; rated power 1W",
+        "dataInterface": "UART (Micro USB port)",
+        "dimensions": "120(L) x 22(W) x 76(H) mm",
+        "weight": "186g",
+        "stages": "Single heating and single cooling; HEAT-OFF-COOL",
+        "mountingType": "Wall mounting"
+      },
+      "faqs": [
+        {
+          "q": "What does the PCT501 control?",
+          "a": "Single-stage heating and single-stage cooling systems with HEAT-OFF-COOL system switch positions."
+        },
+        {
+          "q": "Does it support scheduling?",
+          "a": "Yes — 7-day programming with multiple HOLD options (permanent, temporary, back to schedule)."
+        },
+        {
+          "q": "What protocol does it use?",
+          "a": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4) with optional Home Automation or Smart Energy Profile."
+        },
+        {
+          "q": "What is displayed on the screen?",
+          "a": "A 3-inch LCD (128x64) shows temperature, humidity, heating and cooling status."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "Hardwired AC 24V with 1W rated consumption and a 500mAh built-in Li-ion backup battery."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PCT501 is a ZigBee programmable communicating thermostat with a 3-inch LCD display, temperature and humidity sensing, and single-stage heating/cooling control.\n\n## Key Features\n\n- ZigBee HA1.2 compliant (HA)\n- Temperature remote control (HA)\n- Single stage heating and single cooling control\n- 3\" LCD display\n- Temperature and humidity display\n- Supports 7-day programming\n- Multiple HOLD options\n- Heating & cooling indicator\n- Built-in 500mAh Li-ion backup battery"
+  },
+  {
+    "slug": "pct503-w",
+    "data": {
+      "name": "PCT503-W Wi-Fi Programmable Communicating Thermostat",
+      "model": "PCT503-W",
+      "slug": {
+        "name": "PCT503-W Wi-Fi Thermostat",
+        "slug": "pct503-w"
+      },
+      "description": "Wi-Fi programmable communicating thermostat for 2H/2C multistage conventional and heat pump systems, with 3.5-inch color TFT display, smart rotary control and OTA firmware updates.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "communication": [
+        "wifi"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct503-w/pct503-w-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct503-w/pct503-w-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct503-w/pct503-w-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct503-w/pct503-w-03.jpg"
+      ],
+      "specs": {
+        "wifi": "Wi-Fi 802.11b/g/n 2.4GHz",
+        "rfPower": "17dBm@11b, 14dBm@11g, 13dBm@11n",
+        "sensitivity": "-92dBm@1M to -72dBm@54M",
+        "display": "3.5\" TFT color LCD",
+        "compatibleSystems": "2H/2C multistage conventional and heat pump; gas, electric, hot water, steam, oil heat sources",
+        "ota": "Over-the-Air firmware upgradable"
+      },
+      "faqs": [
+        {
+          "q": "What HVAC systems does the PCT503-W support?",
+          "a": "2-stage heating and 2-stage cooling conventional systems and heat pump systems, supporting natural gas, heat pump, electric, hot water, steam or gravity, gas fireplaces (24V) and oil heat sources in any combination."
+        },
+        {
+          "q": "How does remote control work?",
+          "a": "Connect to the OWON cloud server via Wi-Fi and control the thermostat from a single mobile app, with multiple thermostats accessible from one account."
+        },
+        {
+          "q": "Does it support scheduling?",
+          "a": "Yes — 4-period, 7-day programming with Permanent Hold, Temporary Hold and Back to Schedule options."
+        },
+        {
+          "q": "Can firmware be updated?",
+          "a": "Yes — Over-the-Air firmware upgradable via Wi-Fi."
+        },
+        {
+          "q": "What is the Wi-Fi range and power?",
+          "a": "802.11b/g/n at 2.4GHz with RF power up to 17dBm (11b), 14dBm (11g), 13dBm (11n)."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PCT503-W is a Wi-Fi programmable communicating thermostat with a 3.5-inch TFT color LCD and full multistage HVAC support.\n\n## Key Features\n\n- Wi-Fi 802.11b/g/n 2.4GHz with cloud connection\n- Supports 2H/2C multistage conventional and heat pump systems\n- One-touch AWAY button to save energy\n- 4-period and 7-day programming\n- Multiple HOLD options\n- Automatic heating and cooling changeover\n- Fan cycle mode periodically circulates air for comfort\n- Compressor short cycle protection delay\n- Failure protection by cutting off all circuit relays after power outage\n- 3.5\" TFT color LCD with backlit status colors (red heat / blue cool / green fan)\n- Screen lights up for 20 seconds when motion is detected\n- Smart rotary control wheel + 3 side-buttons\n- Over-the-Air firmware upgradable"
+  },
+  {
+    "slug": "pct503",
+    "data": {
+      "name": "PCT503 ZigBee Smart Thermostat (ZHA)",
+      "model": "PCT503",
+      "slug": {
+        "name": "PCT503 ZigBee Smart Thermostat",
+        "slug": "pct503"
+      },
+      "description": "ZigBee HA1.2 smart thermostat for 2H/2C multistage conventional and heat pump systems, with 3.5-inch color TFT display, smart rotary control, AWAY button and OTA firmware updates.",
+      "productType": "thermostats",
+      "productSubType": "zigbee-hvac",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-thermostats",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct503/pct503-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct503/pct503-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct503/pct503-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct503/pct503-03.jpg",
+        "https://documents.owon-iot.com/product-images/pct503/pct503-04.jpg",
+        "https://documents.owon-iot.com/product-images/pct503/pct503-05.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 2.4GHz IEEE 802.15.4, ZHA1.2 Profile, Router Device",
+        "outputPower": "+3dBm (up to +8dBm)",
+        "receiveSensitivity": "-100dBm",
+        "display": "3.5\" TFT color LCD",
+        "compatibleSystems": "2H/2C multistage conventional and heat pump; gas, electric, hot water, steam, oil heat sources",
+        "fan": "Fan cycle mode; AUTO-ON-CIRC",
+        "programming": "4-period 7-day programming",
+        "hold": "Permanent / Temporary / Back to Schedule",
+        "ota": "Optional Over-the-Air upgrade via WiFi",
+        "dimmer": "Smart rotary control wheel + 3 side buttons",
+        "motionDetection": "Screen lights up 20s on motion",
+        "sensing": "Motion sensor; backlit color status (red=heat, blue=cool, green=fan)"
+      },
+      "faqs": [
+        {
+          "q": "What HVAC systems does the PCT503 support?",
+          "a": "2-stage heating and 2-stage cooling conventional systems and heat pump systems, supporting natural gas, heat pump, electric, hot water, steam or gravity, gas fireplaces (24V) and oil heat sources in any combination."
+        },
+        {
+          "q": "How is it controlled?",
+          "a": "A smart rotary control wheel plus 3 side buttons, with a screen that lights up for 20 seconds when motion is detected."
+        },
+        {
+          "q": "Does it support scheduling?",
+          "a": "Yes — 4-period, 7-day programming with Permanent Hold, Temporary Hold and Back to Schedule options."
+        },
+        {
+          "q": "What does the AWAY button do?",
+          "a": "One-touch AWAY saves energy while you are away from home."
+        },
+        {
+          "q": "Can firmware be updated?",
+          "a": "Yes — optional Over-the-Air firmware upgrades via WiFi."
+        },
+        {
+          "q": "How does it integrate with smart home systems?",
+          "a": "Compatible with ZigBee HA1.2 hubs with complete technical documentation for third-party integration, controllable from a single app."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PCT503 is a ZigBee smart thermostat with a 3.5-inch TFT color LCD, smart rotary control and full multistage HVAC support.\n\n## Key Features\n\n- ZigBee HA1.2, router device\n- Supports 2H/2C multistage conventional and heat pump systems\n- One-touch AWAY button to save energy\n- 4-period and 7-day programming\n- Multiple HOLD options\n- Automatic heating and cooling changeover\n- Fan cycle mode periodically circulates air for comfort\n- Compressor short cycle protection delay\n- Failure protection by cutting off all circuit relays after power outage\n- 3.5\" TFT color LCD with backlit status colors (red heat / blue cool / green fan)\n- Screen lights up for 20 seconds when motion is detected\n- Smart rotary control wheel + 3 side-buttons\n- OTA firmware upgrade (optional, via WiFi)"
+  },
+  {
+    "slug": "pct504-z",
+    "data": {
+      "name": "PCT504-Z ZigBee Fan Coil Thermostat (DC12V)",
+      "model": "PCT504-Z",
+      "slug": {
+        "name": "PCT504-Z Fan Coil Thermostat (DC12V)",
+        "slug": "pct504-z"
+      },
+      "description": "ZigBee 3.0 fan coil thermostat for 4-pipe heating & cooling systems, DC12V powered, with temperature and humidity display, motion detection and scheduling.",
+      "productType": "thermostats",
+      "productSubType": "zigbee-hvac",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-thermostats",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct504-z/pct504-z-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct504-z/pct504-z-01.jpg"
+      ],
+      "specs": {
+        "cpu": "32-bit ARM Cortex-M4",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "powerSupply": "DC 12V",
+        "compatibleSystems": "4-pipe heating & cooling fan coil; 2-pipe heat-only; 2-pipe cool-only",
+        "systemModes": "Heat-Off-Cool-Ventilation",
+        "fanModes": "AUTO-Low-Medium-High",
+        "display": "Temperature and humidity display",
+        "rfRange": "Outdoor/indoor: 100m/30m (open area)",
+        "motionDetection": "Motion detection"
+      },
+      "faqs": [
+        {
+          "q": "What is the difference between PCT504 and PCT504-Z?",
+          "a": "The PCT504-Z is the DC12V-powered version of the ZigBee 3.0 fan coil thermostat, ideal for projects using 12V DC supply."
+        },
+        {
+          "q": "What fan coil systems does it support?",
+          "a": "Up to 4-pipe heating & cooling fan coil systems, 2-pipe heat-only and 2-pipe cool-only systems."
+        },
+        {
+          "q": "What modes are available?",
+          "a": "System modes Heat-Off-Cool-Ventilation and fan modes AUTO-Low-Medium-High, plus Sleep/Eco mode."
+        },
+        {
+          "q": "Can it be scheduled?",
+          "a": "Yes — ON/OFF scheduling with remote control via the mobile app."
+        },
+        {
+          "q": "Does it work with ZigBee gateways?",
+          "a": "Yes — ZigBee 3.0 with integration into ZigBee gateways, ZigBee2MQTT platforms and smart BMS environments."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The smart thermostat makes it easier to control your household temperature. You can schedule your thermostat working hours so it will work based on your plan. With a smart thermostat, you will be able to remotely control the temperature anytime through your mobile phone.\n\n## Key Features\n\n- ZigBee 3.0\n- DC 12V powered\n- Support up to 4 pipes Heating & Cooling Fan coil system\n- Vertical Alignment panel\n- Temperature and humidity display\n- System mode: Heat-Off-Cool-Ventilation\n- Fan mode: AUTO-Low-Medium-High\n- Sleep/Eco mode\n- Motion detection\n- ON/OFF Scheduling\n- Heating & cooling indicator\n- Remote control"
+  },
+  {
+    "slug": "pct504",
+    "data": {
+      "name": "PCT504 ZigBee Fan Coil Thermostat",
+      "model": "PCT504",
+      "slug": {
+        "name": "PCT504 ZigBee Fan Coil Thermostat",
+        "slug": "pct504"
+      },
+      "description": "ZigBee 3.0 fan coil thermostat supporting 4-pipe heating & cooling systems, with temperature and humidity display, motion detection and scheduling.",
+      "productType": "thermostats",
+      "productSubType": "zigbee-hvac",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-thermostats",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct504/pct504-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct504/pct504-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct504/pct504-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct504/pct504-03.jpg"
+      ],
+      "specs": {
+        "cpu": "32-bit ARM Cortex-M4",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "compatibleSystems": "4-pipe heating & cooling fan coil; 2-pipe heat-only; 2-pipe cool-only",
+        "systemModes": "Heat-Off-Cool-Ventilation",
+        "fanModes": "AUTO-Low-Medium-High",
+        "display": "Temperature and humidity display",
+        "rfRange": "Outdoor/indoor: 100m/30m (open area)",
+        "motionDetection": "Motion detection",
+        "scheduling": "ON/OFF scheduling"
+      },
+      "faqs": [
+        {
+          "q": "Why is the PCT504 suitable for hotel room HVAC projects?",
+          "a": "The PCT504 is designed for fan coil unit control in hospitality environments, allowing integrators to deploy standardized room temperature control across guest rooms while supporting energy-saving strategies and centralized management."
+        },
+        {
+          "q": "How does ZigBee benefit hotel and apartment deployments?",
+          "a": "ZigBee mesh networking provides reliable communication across multiple rooms and floors, reducing wiring requirements and making the thermostat suitable for large-scale hotel, apartment, and mixed-use building projects."
+        },
+        {
+          "q": "Can the thermostat be integrated into existing building management systems?",
+          "a": "Yes, the PCT504 is designed for integration with ZigBee gateways, ZigBee2MQTT platforms, and smart BMS environments, allowing system integrators to incorporate HVAC control into their existing building automation architecture."
+        },
+        {
+          "q": "How does this thermostat help reduce energy consumption in hotels?",
+          "a": "The thermostat supports scheduling, occupancy detection, and Eco mode functions, enabling room temperature adjustments based on occupancy status and reducing unnecessary HVAC operation in vacant rooms."
+        },
+        {
+          "q": "Is the PCT504 suitable for apartment and multi-family buildings?",
+          "a": "Yes, the thermostat is ideal for serviced apartments, multi-family residential buildings, and student housing projects where property operators require scalable HVAC control and centralized device management."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The smart thermostat makes it easier to control your household temperature. You can schedule your thermostat working hours so it will work based on your plan. With a smart thermostat, you will be able to remotely control the temperature anytime through your mobile phone.\n\n## Key Features\n\n- ZigBee 3.0\n- Support up to 4 pipes Heating & Cooling Fan coil system\n- Vertical Alignment panel\n- Temperature and humidity display\n- System mode: Heat-Off-Cool-Ventilation\n- Fan mode: AUTO-Low-Medium-High\n- Sleep/Eco mode\n- Motion detection\n- ON/OFF Scheduling\n- Heating & cooling indicator\n- Remote control"
+  },
+  {
+    "slug": "pct513-ty",
+    "data": {
+      "name": "PCT513-TY Wi-Fi Touchscreen Thermostat",
+      "model": "PCT513-TY",
+      "slug": {
+        "name": "PCT513-TY Wi-Fi Touchscreen Thermostat",
+        "slug": "pct513-ty"
+      },
+      "description": "Tuya-compatible Wi-Fi touchscreen thermostat for 2H/2C conventional or 4H/2C heat pump systems, supporting up to 16 remote zone sensors and geofencing.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "techSolution": "tuya",
+      "techSubType": "tuya-thermostats",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct513-ty/pct513-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct513-ty/pct513-ty-01.jpg"
+      ],
+      "specs": {
+        "wifi": "Wi-Fi 2.4GHz",
+        "compatibleSystems": "2H/2C multistage conventional; 4H/2C heat pump",
+        "remoteSensors": "Up to 16 remote zone sensors (915MHz)",
+        "geofencing": "Geofencing",
+        "motionDetection": "Motion sensor"
+      },
+      "faqs": [
+        {
+          "q": "What HVAC systems does the PCT513-TY support?",
+          "a": "North American 24VAC systems: 2H/2C conventional (gas/electric/oil) and 4H/2C heat pumps, plus dual-fuel setups."
+        },
+        {
+          "q": "How many remote zone sensors can it connect?",
+          "a": "Up to 16 remote zone sensors using 915MHz communication to measure room temperature and detect occupancy, balancing hot/cold spots across large spaces."
+        },
+        {
+          "q": "What ecosystem does it work with?",
+          "a": "Tuya-compatible — control via the Tuya App with automation alongside other Tuya devices."
+        },
+        {
+          "q": "Does it support geofencing?",
+          "a": "Yes, geofencing adjusts temperature based on your location."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Wi-Fi Touchscreen thermostat makes it easier and smarter to control your household temperature. With remote zone sensors, you can balance hot or cold spots throughout the home to achieve best comfort. And you will be able to remotely control the temperature anytime through your mobile phone.\n\n## Key Features\n\n- Tuya compliant\n- Supports 2H/2C multistage conventional system or 4H/2C Heat Pump system\n- Support up to 16 remote zone sensors\n- Geofencing\n- Remote control via mobile phone\n- Motion sensor"
+  },
+  {
+    "slug": "pct513",
+    "data": {
+      "name": "PCT513 Wi-Fi Touchscreen Thermostat",
+      "model": "PCT513",
+      "slug": {
+        "name": "PCT513 Wi-Fi Touchscreen Thermostat",
+        "slug": "pct513"
+      },
+      "description": "Wi-Fi touchscreen thermostat for 2H/2C conventional or 4H/2C heat pump systems, supporting up to 16 remote zone sensors and geofencing.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "communication": [
+        "wifi"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct513/pct513-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct513/pct513-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct513/pct513-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct513/pct513-03.jpg",
+        "https://documents.owon-iot.com/product-images/pct513/pct513-04.jpg"
+      ],
+      "specs": {
+        "wifi": "Wi-Fi 2.4GHz",
+        "compatibleSystems": "2H/2C multistage conventional; 4H/2C heat pump",
+        "remoteSensors": "Up to 16 remote zone sensors (915MHz)",
+        "geofencing": "Geofencing",
+        "motionDetection": "Motion sensor",
+        "cWire": "C-wire required; SWB511 adapter for no-C-wire installations"
+      },
+      "faqs": [
+        {
+          "q": "Does PCT513 work with North American HVAC systems?",
+          "a": "Yes, it supports North American 24VAC systems: 2H/2C conventional (gas/electric/oil) and 4H/2C heat pumps, plus dual-fuel setups."
+        },
+        {
+          "q": "Need a C-Wire? What if my building does not have one?",
+          "a": "If you have R, Y, and G wires, you can use the C wire adapter (SWB511) to supply power to the thermostat when there is no C wire."
+        },
+        {
+          "q": "Can we manage multiple units (e.g., hotel) from one platform?",
+          "a": "It supports MQTT/cloud API for seamless integration with North American BMS tools."
+        },
+        {
+          "q": "Can the PCT513 work with a thermostat remote sensor?",
+          "a": "Yes. Up to 16 remote zone sensors use 915MHz communication to measure room temperature and detect occupancy, balancing hot/cold spots across large spaces (e.g., offices, hotels)."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Wi-Fi Touchscreen thermostat makes it easier and smarter to control your household temperature. With remote zone sensors, you can balance hot or cold spots throughout the home to achieve best comfort. And you will be able to remotely control the temperature anytime through your mobile phone and web portal.\n\n## Key Features\n\n- Supports 2H/2C multistage conventional system or 4H/2C Heat Pump system\n- Support up to 16 remote zone sensors\n- Geofencing\n- Remote control via mobile phone and web portal\n- Motion sensor"
+  },
+  {
+    "slug": "pct523-w-ty",
+    "data": {
+      "name": "PCT523-W-TY WiFi 24VAC Thermostat (Touch Button)",
+      "model": "PCT523-W-TY",
+      "slug": {
+        "name": "PCT523-W-TY WiFi Thermostat",
+        "slug": "pct523-w-ty"
+      },
+      "description": "Tuya-compatible WiFi 24VAC thermostat with touch buttons and black screen, dual-fuel switching, up to 9 remote sensors and 7-day programming.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "techSolution": "tuya",
+      "techSubType": "tuya-thermostats",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct523-w-ty/pct523-w-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct523-w-ty/pct523-w-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct523-w-ty/pct523-w-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct523-w-ty/pct523-w-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pct523-w-ty/pct523-w-ty-04.jpg"
+      ],
+      "specs": {
+        "wifi": "Wi-Fi 2.4GHz (Tuya)",
+        "compatibleSystems": "2H/2C conventional; 2H/2C heat pump with 2-stage aux/emergency; Dual Fuel / Hybrid Heat",
+        "remoteSensors": "Up to 9 remote sensors",
+        "programming": "7-day Fan/Temp/Sensor schedule",
+        "hold": "Permanent / Temporary / Follow Schedule",
+        "energyReporting": "Daily / Weekly / Monthly energy usage",
+        "preheat": "Preheat or precool to target temperature on schedule",
+        "safety": "Lock feature; maintenance reminders; adjustable temperature swing",
+        "wiring": "Rc/Rh/C 24VAC terminals",
+        "display": "Touch button, black screen"
+      },
+      "faqs": [
+        {
+          "q": "What HVAC systems does the WiFi thermostat support?",
+          "a": "Most 24VAC heating and cooling systems including furnaces, boilers, air conditioners and heat pumps. It supports 2-stage heating/cooling, dual fuel switching and hybrid heat for North American projects."
+        },
+        {
+          "q": "How many remote sensors can it connect?",
+          "a": "Up to 9 remote sensors, prioritizing heating and cooling to specific rooms for whole-home temperature control."
+        },
+        {
+          "q": "Does it provide energy usage reporting?",
+          "a": "Yes — daily, weekly and monthly energy usage reports."
+        },
+        {
+          "q": "Is it suitable for large-scale deployments?",
+          "a": "Yes — quick-install design, trim plate and optional C-wire adapter simplify retrofit installation for bulk projects."
+        },
+        {
+          "q": "Is OEM/ODM or bulk supply available?",
+          "a": "Yes, designed for OEM/ODM partnerships with custom branding, large-volume supply and MOQ options upon request."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Wi-Fi thermostat makes it easier and smarter to control your household temperature. With remote zone sensors, you can balance hot or cold spots throughout the home to achieve best comfort. And you will be able to remotely control the temperature anytime through your mobile phone.\n\n## Key Features\n\n- Works with most 24V heating and cooling systems\n- Support Dual Fuel switching or Hybrid Heat\n- Add up to 9 Remote Sensors and prioritize heating and cooling to specific rooms\n- 7-day customizable Fan/Temp/Sensor programming schedule\n- Multiple HOLD options: Permanent Hold, Temporary Hold, Follow Schedule\n- Fan periodically circulates fresh air in circulate mode\n- Preheat or precool to reach the temperature at the time you scheduled\n- Provides Daily/Weekly/Monthly energy usage\n- Lock feature, maintenance reminders, adjustable temperature swing"
+  },
+  {
+    "slug": "pct5231-w-ty",
+    "data": {
+      "name": "PCT5231-W-TY WiFi 24VAC Thermostat (Wall Box)",
+      "model": "PCT5231-W-TY",
+      "slug": {
+        "name": "PCT5231-W-TY WiFi Thermostat",
+        "slug": "pct5231-w-ty"
+      },
+      "description": "Tuya-compatible WiFi 24VAC thermostat mounting to standard 83.3mm electrical boxes, with dual-fuel switching, up to 9 remote sensors and 7-day programming.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "techSolution": "tuya",
+      "techSubType": "tuya-thermostats",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct5231-w-ty/pct5231-w-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct5231-w-ty/pct5231-w-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct5231-w-ty/pct5231-w-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct5231-w-ty/pct5231-w-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pct5231-w-ty/pct5231-w-ty-04.jpg",
+        "https://documents.owon-iot.com/product-images/pct5231-w-ty/pct5231-w-ty-05.jpg"
+      ],
+      "specs": {
+        "wifi": "Wi-Fi 2.4GHz (Tuya)",
+        "compatibleSystems": "2H/2C conventional; 2H/2C heat pump with 2-stage aux/emergency; Dual Fuel / Hybrid Heat",
+        "remoteSensors": "Up to 9 remote sensors",
+        "programming": "7-day Fan/Temp/Sensor schedule",
+        "hold": "Permanent / Temporary / Follow Schedule",
+        "energyReporting": "Daily / Weekly / Monthly energy usage",
+        "preheat": "Preheat or precool to target temperature on schedule",
+        "mountingType": "Standard 83.3mm-spaced electrical/junction boxes with trim plate",
+        "wiring": "Rc/Rh/C 24VAC terminals"
+      },
+      "faqs": [
+        {
+          "q": "What is the 5231 thermostat designed for in hotel and apartment projects?",
+          "a": "The 5231 is a smart thermostat designed for HVAC control in multi-room environments such as hotels, serviced apartments, and multi-family residential buildings, enabling integrators to deploy scalable room-by-room temperature management."
+        },
+        {
+          "q": "How does this thermostat support system integration in building projects?",
+          "a": "The device connects to Tuya cloud and ZigBee-type gateways and can be integrated into third-party hotel systems, property management platforms, or building automation systems through a centralized control architecture."
+        },
+        {
+          "q": "How does this thermostat help improve energy efficiency?",
+          "a": "It enables scheduled control and occupancy-based temperature adjustment, helping reduce HVAC energy waste in unoccupied rooms while maintaining comfort in active spaces."
+        },
+        {
+          "q": "What is the installation advantage?",
+          "a": "It mounts to standard 83.3mm-spaced electrical/junction boxes using a trim plate — ideal for retrofit projects."
+        },
+        {
+          "q": "Is OEM/ODM or bulk supply available?",
+          "a": "Yes — designed for OEM/ODM partnerships with distributors, system integrators and property developers, with custom branding and volume supply options."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Wi-Fi thermostat makes it easier and smarter to control your household temperature. With remote zone sensors, you can balance hot or cold spots throughout the home to achieve best comfort. And you will be able to remotely control the temperature anytime through your mobile phone.\n\n## Key Features\n\n- Works with most 24V heating and cooling systems\n- Support Dual Fuel switching or Hybrid Heat\n- Add up to 9 Remote Sensors and prioritize heating and cooling to specific rooms\n- 7-day customizable Fan/Temp/Sensor programming schedule\n- Multiple HOLD options: Permanent Hold, Temporary Hold, Follow Schedule\n- Fan periodically circulates fresh air in circulate mode\n- Preheat or precool to reach the temperature at the time you scheduled\n- Provides Daily/Weekly/Monthly energy usage\n- Mounts to standard 83.3mm-spaced electrical/junction boxes using a trim plate"
+  },
+  {
+    "slug": "pct533-w-ty",
+    "data": {
+      "name": "PCT533-W-TY WiFi Thermostat with Remote Sensors and Humidity Control",
+      "model": "PCT533-W-TY",
+      "slug": {
+        "name": "PCT533-W-TY WiFi Thermostat",
+        "slug": "pct533-w-ty"
+      },
+      "description": "Tuya-compatible WiFi thermostat with 4.3-inch touchscreen, remote zone sensors, humidity control (HUM/DEHUM), dual-fuel switching and 7-day programming.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "techSolution": "tuya",
+      "techSubType": "tuya-thermostats",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct533-w-ty/pct533-w-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct533-w-ty/pct533-w-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct533-w-ty/pct533-w-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct533-w-ty/pct533-w-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pct533-w-ty/pct533-w-ty-04.jpg",
+        "https://documents.owon-iot.com/product-images/pct533-w-ty/pct533-w-ty-05.jpg"
+      ],
+      "specs": {
+        "display": "4.3\" full-color LCD touchscreen",
+        "wifi": "Wi-Fi 2.4GHz (Tuya)",
+        "compatibleSystems": "2H/2C conventional; 2H/2C heat pump with 2-stage aux/emergency; Dual Fuel / Hybrid Heat",
+        "humidityControl": "1-wire or 2-wire humidifier / dehumidifier (HUM, DEHUM)",
+        "remoteSensors": "Remote zone sensors",
+        "programming": "7-day Fan/Temp schedule",
+        "hold": "Permanent / Temporary / Follow Schedule",
+        "energyReporting": "Daily / Weekly / Monthly energy usage",
+        "preheat": "Preheat or precool to target temperature on schedule",
+        "design": "2.5D curved edge"
+      },
+      "faqs": [
+        {
+          "q": "What type of thermostat is this product?",
+          "a": "This is a smart WiFi 24VAC thermostat designed for residential use, offering convenient remote HVAC control through mobile apps or cloud platforms."
+        },
+        {
+          "q": "Can this thermostat be used for residential energy projects?",
+          "a": "Yes, the device functions as a WiFi thermostat for house and residential energy projects, enabling users to monitor and adjust temperature settings for better comfort and reduced energy consumption."
+        },
+        {
+          "q": "Does this thermostat help with energy savings?",
+          "a": "Yes, the energy saving thermostat features programmable schedules and intelligent HVAC control, helping homeowners reduce heating and cooling waste while improving overall efficiency."
+        },
+        {
+          "q": "What user interface does this thermostat provide?",
+          "a": "The unit features a 4.3-inch full-color touchscreen display that offers intuitive control for temperature, schedule settings, and system status right from the wall."
+        },
+        {
+          "q": "Can this device be used in retrofit projects?",
+          "a": "Yes, the thermostat can be installed as a programmable thermostat for house retrofit applications, replacing legacy thermostats with modern WiFi-enabled control."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Wi-Fi thermostat makes it easier and smarter to control your household temperature. With remote zone sensors, you can balance hot or cold spots throughout the home to achieve best comfort.\n\n## Key Features\n\n- Works with most 24V heating and cooling systems\n- 4.3 in. full-color LCD touchscreen\n- 2.5D curved edge design\n- 7-day customizable Fan/Temp programming schedule\n- Multiple HOLD options: Permanent Hold, Temporary Hold, Follow Schedule\n- Fan periodically circulates fresh air in circulate mode\n- Preheat or precool to reach the temperature at the time you scheduled\n- Provides Daily/Weekly/Monthly energy usage\n- Lock feature, maintenance reminders, adjustable temperature swing\n- Support 1-wire or 2-wire Humidifier / Dehumidifier (HUM, DEHUM)"
+  },
+  {
+    "slug": "pct533c-w-ty",
+    "data": {
+      "name": "PCT533C-W-TY WiFi Thermostat (Core)",
+      "model": "PCT533C-W-TY",
+      "slug": {
+        "name": "PCT533C-W-TY WiFi Thermostat (Core)",
+        "slug": "pct533c-w-ty"
+      },
+      "description": "Tuya-compatible WiFi thermostat with 4.3-inch full-color touchscreen, dual-fuel switching and 7-day programming — the Core edition of the 533 series.",
+      "productType": "thermostats",
+      "productSubType": "24vac",
+      "techSolution": "tuya",
+      "techSubType": "tuya-thermostats",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-04.jpg"
+      ],
+      "specs": {
+        "display": "4.3\" full-color LCD touchscreen",
+        "wifi": "Wi-Fi 2.4GHz (Tuya)",
+        "compatibleSystems": "2H/2C conventional; 2H/2C heat pump with 2-stage aux/emergency; Dual Fuel / Hybrid Heat",
+        "programming": "7-day Fan/Temp schedule",
+        "hold": "Permanent / Temporary / Follow Schedule",
+        "energyReporting": "Daily / Weekly / Monthly energy usage",
+        "preheat": "Preheat or precool to target temperature on schedule",
+        "design": "2.5D curved edge"
+      },
+      "faqs": [
+        {
+          "q": "What is the PCT533C?",
+          "a": "The PCT533C is the Core edition of the 533 series — a Tuya-compatible WiFi 24VAC thermostat with a 4.3-inch full-color touchscreen and 2.5D curved edge design."
+        },
+        {
+          "q": "What HVAC systems does it support?",
+          "a": "Most 24V heating and cooling systems: 2-stage heating/cooling conventional, heat pumps with 2-stage auxiliary/emergency heat, and Dual Fuel / Hybrid Heat setups."
+        },
+        {
+          "q": "Does it provide energy usage reporting?",
+          "a": "Yes — daily, weekly and monthly energy usage reports."
+        },
+        {
+          "q": "Does it support scheduling?",
+          "a": "Yes — 7-day customizable Fan/Temp programming with Permanent Hold, Temporary Hold and Follow Schedule."
+        },
+        {
+          "q": "What is the difference between PCT533 and PCT533C?",
+          "a": "The PCT533 adds remote zone sensors and humidity control (HUM/DEHUM); the PCT533C Core edition focuses on the touchscreen, scheduling and energy reporting essentials."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Wi-Fi thermostat makes it easier and smarter to control your household temperature. Interact with your home on a brilliant 4.3\" full-color display. The high-resolution screen brings your controls to life with stunning clarity and rich, vibrant colors.\n\n## Key Features\n\n- Works with most 24V heating and cooling systems\n- 4.3 in. full-color LCD touchscreen\n- 2.5D curved edge design\n- 7-day customizable Fan/Temp programming schedule\n- Multiple HOLD options: Permanent Hold, Temporary Hold, Follow Schedule\n- Fan periodically circulates fresh air in circulate mode\n- Preheat or precool to reach the temperature at the time you scheduled\n- Provides Daily/Weekly/Monthly energy usage\n- Lock feature, maintenance reminders, adjustable temperature swing"
+  },
+  {
     "slug": "seg-x3-a",
     "data": {
       "name": "SEG-X3-A ZigBee Gateway",
@@ -1986,5 +2665,69 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "The SLC621 is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and to check real-time energy usage via mobile App.\n\n## Key Features\n\n- ZigBee 3.0\n- Measure the instantaneous and accumulative energy usage of the connected devices\n- Schedule the device to automatically power electronics on and off\n- 16A Dry contact output\n- Lightweight and easy to install\n- Extend the range and strengthen ZigBee network communication"
+  },
+  {
+    "slug": "trv527-z",
+    "data": {
+      "name": "TRV527-Z ZigBee Smart Radiator Valve",
+      "model": "TRV527-Z",
+      "slug": {
+        "name": "TRV527-Z Smart Radiator Valve",
+        "slug": "trv527-z"
+      },
+      "description": "ZigBee 3.0 smart radiator valve with touch-sensitive controls, ECO & holiday modes, open-window detection and M30 x 1.5 connection.",
+      "productType": "thermostats",
+      "productSubType": "boiler-trv",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-thermostats",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/trv527-z/trv527-z-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/trv527-z/trv527-z-01.jpg",
+        "https://documents.owon-iot.com/product-images/trv527-z/trv527-z-02.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "display": "LCD screen display with touch-sensitive buttons",
+        "adapter": "RA / RAV / RAVL",
+        "powerSupply": "3 x AA alkaline batteries",
+        "displayTemp": "0~70℃",
+        "accuracy": "±0.5℃",
+        "connection": "M30 x 1.5mm",
+        "dimensions": "87(L) x 53(W) x 52.5(H) mm",
+        "detection": "Open window detection",
+        "modes": "ECO mode & Holiday mode",
+        "safety": "Child Lock, Anti-scale, Low battery alert"
+      },
+      "faqs": [
+        {
+          "q": "What heating systems is the TRV527 designed for?",
+          "a": "TRV527 is designed for radiator-based heating systems and is ideal for hotels, apartments, residential buildings and other HVAC retrofit projects that require room-level temperature control."
+        },
+        {
+          "q": "Can the TRV527 be integrated into existing ZigBee systems?",
+          "a": "Yes. The TRV527 supports ZigBee 3.0 communication and can work with compatible ZigBee gateways, including the OWON ZigBee Gateway. It is also compatible with Home Assistant-based solutions for flexible system integration."
+        },
+        {
+          "q": "Does the TRV527 require additional wiring?",
+          "a": "No. The valve communicates wirelessly via ZigBee, making it an excellent choice for retrofit projects where running new cables is difficult or costly."
+        },
+        {
+          "q": "Can multiple radiator valves be managed together?",
+          "a": "Yes. Multiple TRV527 devices can be connected through a ZigBee gateway, allowing centralized monitoring and room-by-room heating management across apartments, hotels or commercial buildings."
+        },
+        {
+          "q": "Which radiator valve adapters are supported?",
+          "a": "TRV527 is compatible with common European radiator valve adapters, including RA, RAV and RAVL. Compatible adapters are available separately to fit different valve types."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "TRV527-Z helps you manage your Radiator heating from your App. It can replace your existing thermostatic radiator valve (TRV) directly or with one of the 3 included adapters.\n\n## Key Features\n\n- Automatically turn on or off the radiator valve according to the schedule you set\n- Set temperatures from the App or directly on the valve by touch-sensitive buttons\n- ECO mode & Holiday Mode: maintain a lower temperature when you temporarily leave home\n- Open Window Detection: automatically turn off heating when you open a window\n- Child Lock, Anti-scale, Low battery alert\n- ±0.5℃ accuracy, M30 x 1.5mm connection\n- Works with OWON ZigBee Gateway and Home Assistant"
   }
 ];
