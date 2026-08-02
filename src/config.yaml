@@ -14,22 +14,20 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: OWON Technology — Smart Energy Solutions
-    template: '%s | XIAMEN OWON TECHNOLOGY CO.,LTD'
+    default: Smart Energy Solutions & IoT Devices
+    template: '%s | OWON Technology'
   description: 'OWON Technology — Professional smart energy solutions provider. Smart meters, thermostats, senior care devices, hotel control systems, and IoT platforms for B2B customers worldwide.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: AstroWind
+    site_name: OWON Technology
     images:
       - url: '~/assets/images/default.png'
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
     cardType: summary_large_image
 
 i18n:

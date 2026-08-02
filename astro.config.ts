@@ -91,7 +91,7 @@ export default defineConfig({
   ],
 
   image: {
-    domains: ['cdn.pixabay.com'],
+    domains: ['cdn.pixabay.com', 'documents.owon-iot.com'],
   },
 
   markdown: {

@@ -6,6 +6,7 @@ import BlogList from '~/components/blog/List.astro';
 import Pagination from '~/components/blog/Pagination.astro';
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import { SITE } from 'astrowind:config';
 
 export const prerender = true;
 
@@ -17,6 +18,8 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
+
+const siteOrigin = (SITE.site as string).replace(/\/+$/, '');
 
 const blogCategories = [
   { name: 'Product Updates', slug: 'product-updates', desc: 'New launches, firmware, features' },
@@ -42,8 +45,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: `${Astro.url.origin}/` },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${Astro.url.origin}/blog/` },
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteOrigin}/` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteOrigin}/blog/` },
   ],
 };
 ---

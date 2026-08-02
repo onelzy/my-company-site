@@ -31,8 +31,9 @@ const allProducts = rawProducts.map((entry) => {
 const products: Product[] = allProducts;
 const enProducts = products;
 
-const title = 'Product Center';
-const description = 'OWON Technology complete product range — smart meters, thermostats, senior care, hotel control & software platforms';
+const title = 'Smart Energy Meters, Thermostats & IoT Devices';
+const description =
+  'OWON Technology B2B smart IoT products — WiFi/ZigBee/MQTT smart energy meters, thermostats, senior care devices, hotel control systems and gateways for OEM/ODM partners.';
 
 const techSolutionTree: Record<string, string[]> = {
   tuya: ['tuya-meters','tuya-thermostats','tuya-lighting','tuya-gateways','tuya-remotes','tuya-senior','tuya-sensors'],
@@ -74,7 +75,7 @@ const connectionTags = [
 ];
 ---
 
-<PageLayout metadata={{ title, description }}>
+<PageLayout metadata={{ title: title, description: description }}>
   <section class="py-8 lg:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="mb-8">
