@@ -2058,10 +2058,6 @@ export const productDocs: ProductDoc[] = [
     category: 'Smart Devices',
     specs: [
       {
-        name: 'WSP403 Lite Range Extender 220330',
-        url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP403-Lite_Range_Extender_-_220330.pdf',
-      },
-      {
         name: 'WSP403 ZigBee Smart Plug 220330',
         url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP403_ZigBee_Smart_Plug_-_220330.pdf',
       },
@@ -2071,6 +2067,18 @@ export const productDocs: ProductDoc[] = [
         name: 'WSP403 Smart Plug 211119',
         url: 'https://documents.owon-iot.com/manuals/Quick_Start_Guide_-_WSP403_Smart_Plug_-_211119.pdf',
       },
+    ],
+  },
+  {
+    model: 'WSP403-Lite',
+    category: 'Smart Devices',
+    specs: [
+      {
+        name: 'WSP403 Lite Range Extender 220330',
+        url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP403-Lite_Range_Extender_-_220330.pdf',
+      },
+    ],
+    manuals: [
       {
         name: 'WSP403 lite',
         url: 'https://documents.owon-iot.com/manuals/Quick_Start_Guide_-_WSP403_lite.pdf',
@@ -2098,22 +2106,34 @@ export const productDocs: ProductDoc[] = [
     category: 'Smart Devices',
     specs: [
       {
-        name: 'WSP406 2G(uk) 220330',
-        url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP406-2G%28uk%29_-_220330.pdf',
-      },
-      {
         name: 'WSP406 UK In wall Smart Plug 20231026',
         url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP406-UK_In-wall_Smart_Plug_-_20231026.pdf',
-      },
-      {
-        name: 'WSP406 Z TY ZigBee Wall Socket',
-        url: 'https://documents.owon-iot.com/specs/Tuya/Datasheet_-_WSP406-Z-TY_ZigBee_Wall_Socket.pdf',
       },
     ],
     manuals: [
       {
         name: 'WSP406 Smart Plug',
         url: 'https://documents.owon-iot.com/manuals/Quick_Start_Guide_-_WSP406_Smart_Plug.pdf',
+      },
+    ],
+  },
+  {
+    model: 'WSP406-2G',
+    category: 'Smart Devices',
+    specs: [
+      {
+        name: 'WSP406 2G(uk) 220330',
+        url: 'https://documents.owon-iot.com/specs/Datasheet_-_WSP406-2G%28uk%29_-_220330.pdf',
+      },
+    ],
+  },
+  {
+    model: 'WSP406-Z-TY',
+    category: 'Smart Devices',
+    specs: [
+      {
+        name: 'WSP406 Z TY ZigBee Wall Socket',
+        url: 'https://documents.owon-iot.com/specs/Tuya/Datasheet_-_WSP406-Z-TY_ZigBee_Wall_Socket.pdf',
       },
     ],
   },

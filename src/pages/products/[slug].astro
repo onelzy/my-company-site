@@ -191,6 +191,8 @@ const specFieldLabels: Record<string, string> = {
   sensing: 'Sensing',
   stages: 'Stages',
   fan: 'Fan',
+  powerConsumption: 'Power Consumption',
+  control: 'Control',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -751,6 +753,12 @@ const faqSchema = {
                     { icon: '🎛️', title: '±0.5℃ Precision', desc: 'Accurate room temperature control with M30 x 1.5 connection.' },
                     { icon: '🔋', title: 'Wireless Retrofit', desc: '3x AA powered, no wiring — replaces existing TRV with 3 adapters.' },
                   ],
+                  'wsp406-uk': [
+                    { icon: '🔌', title: 'In-Wall Control', desc: 'Replaces a standard UK wall socket with ZigBee smart control.' },
+                    { icon: '📊', title: 'Energy Monitoring', desc: 'Tracks consumption of the connected appliance from your phone.' },
+                    { icon: '⏰', title: 'Scheduling', desc: 'Automatic on/off switching by schedule.' },
+                    { icon: '🕸️', title: 'ZigBee 3.0 Router', desc: 'Extends mesh range and strengthens network communication.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -1126,6 +1134,14 @@ const faqSchema = {
                     { title: 'Home Assistant Users', desc: 'Works with Home Assistant and OWON ZigBee Gateway.' },
                     { title: 'Energy-Saving Programs', desc: 'ECO/holiday modes and open-window detection cut heating waste.' },
                     { title: 'OEM / ODM Partnerships', desc: 'OEM customization available.' },
+                  ],
+                  'wsp406-uk': [
+                    { title: 'Hotel Guest Rooms', desc: 'Smart in-wall sockets for appliance control and energy insight.' },
+                    { title: 'Serviced Apartments', desc: 'Schedule and monitor sockets across units via one ZigBee gateway.' },
+                    { title: 'UK Residential', desc: 'Drop-in replacement for standard UK wall sockets.' },
+                    { title: 'Energy Monitoring Programs', desc: 'Track appliance consumption to identify waste.' },
+                    { title: 'Retrofit Projects', desc: 'In-wall install with no external plug footprint.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available.' },
                   ],
                 };
                 const scenarios = {

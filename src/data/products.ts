@@ -2729,5 +2729,66 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "TRV527-Z helps you manage your Radiator heating from your App. It can replace your existing thermostatic radiator valve (TRV) directly or with one of the 3 included adapters.\n\n## Key Features\n\n- Automatically turn on or off the radiator valve according to the schedule you set\n- Set temperatures from the App or directly on the valve by touch-sensitive buttons\n- ECO mode & Holiday Mode: maintain a lower temperature when you temporarily leave home\n- Open Window Detection: automatically turn off heating when you open a window\n- Child Lock, Anti-scale, Low battery alert\n- ±0.5℃ accuracy, M30 x 1.5mm connection\n- Works with OWON ZigBee Gateway and Home Assistant"
+  },
+  {
+    "slug": "wsp406-uk",
+    "data": {
+      "name": "WSP406 In-wall Smart Plug (UK)",
+      "model": "WSP406-UK",
+      "slug": {
+        "name": "WSP406 In-wall Smart Plug (UK)",
+        "slug": "wsp406-uk"
+      },
+      "description": "ZigBee 3.0 in-wall smart plug for UK back boxes — remote on/off control, energy monitoring and scheduling from your mobile phone.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/wsp406-uk/wsp406-uk-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/wsp406-uk/wsp406-uk-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB Antenna",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "maxLoad": "13A",
+        "powerConsumption": "< 0.7W",
+        "measuredParams": "Energy consumption measuring",
+        "mountingType": "In-wall (UK back box)",
+        "control": "Remote On/Off; physical button; scheduling"
+      },
+      "faqs": [
+        {
+          "q": "What can the WSP406 control?",
+          "a": "Home appliances connected to the in-wall socket — remote on/off control from your mobile phone plus manual control via the physical button."
+        },
+        {
+          "q": "Does it measure energy?",
+          "a": "Yes — the WSP406 monitors the energy consumption of the connected load remotely."
+        },
+        {
+          "q": "Can I schedule switching?",
+          "a": "Yes — scheduling enables automatic switching of connected appliances."
+        },
+        {
+          "q": "What is the maximum load?",
+          "a": "13A at 100~240 Vac 50/60 Hz."
+        },
+        {
+          "q": "Does it strengthen the ZigBee network?",
+          "a": "Yes — it acts as a ZigBee router, extending the range and strengthening network communication."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The WSP406 In-wall Smart Plug allows you to remotely control your home appliances and set schedules to automate via mobile phone. It also helps users to monitor the energy consumption remotely.\n\n## Key Features\n\n- ZigBee 3.0 compliant\n- Remote On/Off control, ideal for home appliance control\n- Physical button to switch on/off manually\n- Energy consumption measuring\n- Enables scheduling for automatic switching\n- Extends the range and strengthens ZigBee network communication\n- In-wall design for UK back boxes"
   }
 ];
