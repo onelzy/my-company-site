@@ -502,7 +502,7 @@ const faqSchema = {
                   ],
                 };
                 const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
-                const productSlug = product.slug || '';
+                const productSlug = canonicalSlug || product.slug || '';
                 const items =
                   productSpecificBenefits[productSlug] ||
                   benefits[currentType] ||
@@ -587,7 +587,7 @@ const faqSchema = {
                   ],
                 };
                 const currentType = (typeof productType === 'string' ? productType : '') || 'smart-meters';
-                const productSlug = product.slug || '';
+                const productSlug = canonicalSlug || product.slug || '';
                 const items =
                   productSpecificScenarios[productSlug] ||
                   scenarios[currentType] ||
