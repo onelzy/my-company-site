@@ -23,7 +23,7 @@ const caseStudies = [
     background:
       'Commissioned by national energy agencies to develop a carbon emission monitoring system for commercial incentive and penalty purposes. Required a smart meter that installs without disrupting existing billing systems, supports single/split/three-phase circuits from 50A to 1000A, adapts to different cellular networks, and complies with local data privacy regulations.',
     solution:
-      'OWON delivered a Smart Electric Meter with open-type CTs for non-invasive installation on existing circuits. A single model supports all phase types and current ranges by simply changing CT size. Communicates via LTE with swappable modules for different countries. Device-level local APIs enable direct data forwarding to each country\'s designated cloud server, avoiding intermediate data servers for full regulatory compliance.',
+      "OWON delivered a Smart Electric Meter with open-type CTs for non-invasive installation on existing circuits. A single model supports all phase types and current ranges by simply changing CT size. Communicates via LTE with swappable modules for different countries. Device-level local APIs enable direct data forwarding to each country's designated cloud server, avoiding intermediate data servers for full regulatory compliance.",
     results: [
       { metric: '50A–1000A', label: 'Universal Range' },
       { metric: '4G/Cat1/CatM', label: 'Multi-Network' },
@@ -40,7 +40,7 @@ const caseStudies = [
     background:
       'Heat pump adoption has grown rapidly, but many households retain conventional heating/cooling equipment. The manufacturer needed a thermostat that controls both systems and intelligently switches between them for optimal cost-effectiveness. Additional requirements included outdoor temperature acquisition, compatibility with a proprietary Wi-Fi module and backend server, and humidifier/dehumidifier control.',
     solution:
-      'OWON customized an existing thermostat model — rewrote firmware for dual-fuel switching logic, integrated outdoor temperature from online weather data and a wireless sensor, replaced the communication module with the client\'s designated Wi-Fi module (MQTT protocol), and added extra relays and terminals for humidity control.',
+      "OWON customized an existing thermostat model — rewrote firmware for dual-fuel switching logic, integrated outdoor temperature from online weather data and a wireless sensor, replaced the communication module with the client's designated Wi-Fi module (MQTT protocol), and added extra relays and terminals for humidity control.",
     results: [
       { metric: 'Dual Fuel', label: 'Heat Pump + Furnace' },
       { metric: 'Custom FW', label: 'Bespoke Control Logic' },
@@ -74,7 +74,7 @@ const caseStudies = [
     background:
       'The client sought a wireless IoT system to replace traditional wired BMS, which is expensive and difficult to install. They needed faster deployment, lower costs, and the ability to integrate both OWON and third-party smart devices through a unified gateway with device-level MQTT API. Some high-end locations also required Android-based touchscreen control panels.',
     solution:
-      'OWON provided a complete ZigBee 3.0 ecosystem: IoT gateway (Wi-Fi/Ethernet/4G) with full MQTT device-level APIs, and a comprehensive line of hotel room devices — wall switches, relay switches, wall sockets, power meters, fan coil thermostats, curtain controllers, door/window sensors, temperature/humidity sensors, and occupancy sensors. The gateway supports offline mode with local device-to-device logic. Android touchscreen control panels were supplied from OWON\'s 20-year industrial tablet experience. Custom devices (DND buttons, door signage, relay switches) were developed for specific project needs.',
+      "OWON provided a complete ZigBee 3.0 ecosystem: IoT gateway (Wi-Fi/Ethernet/4G) with full MQTT device-level APIs, and a comprehensive line of hotel room devices — wall switches, relay switches, wall sockets, power meters, fan coil thermostats, curtain controllers, door/window sensors, temperature/humidity sensors, and occupancy sensors. The gateway supports offline mode with local device-to-device logic. Android touchscreen control panels were supplied from OWON's 20-year industrial tablet experience. Custom devices (DND buttons, door signage, relay switches) were developed for specific project needs.",
     results: [
       { metric: 'Wireless', label: 'No Wiring Required' },
       { metric: 'ZigBee 3.0', label: '3rd-Party Compatible' },
@@ -91,7 +91,7 @@ const caseStudies = [
     background:
       'The telecom operator planned a Home Energy Management System (HEMS) for mass deployment to millions of homes. Requirements: monitor and control energy consumption, solar generation, and EV chargers; schedule HVAC equipment including boilers, heat pumps, and mini-split A/C; enable device-to-device interactions such as turning off A/C when a window opens or adjusting EV charging based on solar surplus; and provide device-level local APIs for direct cloud integration.',
     solution:
-      'OWON delivered a complete ZigBee device suite — clamp power meters, Din rail relays, and smart plugs for energy monitoring; thermostats and IR blasters for HVAC control — plus a Smart ZigBee Hub with local networking capabilities for device-to-device interaction logic. The hub\'s complete local API allows direct connection to the Telco\'s backend server with no intermediate cloud dependency.',
+      "OWON delivered a complete ZigBee device suite — clamp power meters, Din rail relays, and smart plugs for energy monitoring; thermostats and IR blasters for HVAC control — plus a Smart ZigBee Hub with local networking capabilities for device-to-device interaction logic. The hub's complete local API allows direct connection to the Telco's backend server with no intermediate cloud dependency.",
     results: [
       { metric: 'Millions', label: 'Target Deployment' },
       { metric: 'ZigBee Hub', label: 'Local Intelligence' },
@@ -140,9 +140,9 @@ const caseStudies = [
     client: 'A Provincial Senior Care Software Provider',
     location: 'China',
     background:
-      'A well-established care management software vendor serving dozens of facilities and community sites across multiple cities lacked IoT device connectivity and AI behavioral analysis. Their platform couldn\'t deliver the safety monitoring, behavior reports, or proactive alerts that customers increasingly demanded. They needed to rapidly add IoT and AI capabilities for an upcoming tender — without building AI from scratch.',
+      "A well-established care management software vendor serving dozens of facilities and community sites across multiple cities lacked IoT device connectivity and AI behavioral analysis. Their platform couldn't deliver the safety monitoring, behavior reports, or proactive alerts that customers increasingly demanded. They needed to rapidly add IoT and AI capabilities for an upcoming tender — without building AI from scratch.",
     solution:
-      'OWON provided hardware device APIs: 4G standalone devices and ZigBee gateways natively support MQTT/HTTP — the client\'s platform directly subscribes to device data. AI capabilities delivered via API: OWON\'s behavioral analysis API and health alert API are called over HTTP to generate resident behavior reports. After winning the tender, the full AiHome platform (including the AI engine) is deployed on the client\'s own servers for complete data sovereignty.',
+      "OWON provided hardware device APIs: 4G standalone devices and ZigBee gateways natively support MQTT/HTTP — the client's platform directly subscribes to device data. AI capabilities delivered via API: OWON's behavioral analysis API and health alert API are called over HTTP to generate resident behavior reports. After winning the tender, the full AiHome platform (including the AI engine) is deployed on the client's own servers for complete data sovereignty.",
     results: [
       { metric: 'MQTT/HTTP', label: 'Native Protocol Support' },
       { metric: 'AI API', label: 'Behavior + Health Alerts' },
@@ -162,124 +162,138 @@ const caseStudies = [
 >
   <section class="py-8 lg:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <!-- Breadcrumb -->
+      {/* Breadcrumb */}
       <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
         <a href="/" class="hover:text-primary transition-colors">Home</a>
         <span class="mx-2">/</span>
         <span class="text-default dark:text-slate-200">Case Studies</span>
       </nav>
 
-      <!-- Hero -->
+      {/* Hero */}
       <div class="mb-10">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-default dark:text-slate-100 mb-3">
-          Customer Case Studies
-        </h1>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-default dark:text-slate-100 mb-3">Customer Case Studies</h1>
         <p class="text-lg text-muted dark:text-slate-400 max-w-3xl">
-          Real deployments from OWON product catalogs and solution brochures — spanning carbon monitoring,
-          HVAC, hospitality, telecom HEMS, and senior care IoT across 60+ countries.
+          Real deployments from OWON product catalogs and solution brochures — spanning carbon monitoring, HVAC,
+          hospitality, telecom HEMS, and senior care IoT across 60+ countries.
         </p>
       </div>
 
-      <!-- Stats Row -->
+      {/* Stats Row */}
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-        {stats.map((stat) => (
-          <div class="bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-5 border border-gray-200 dark:border-slate-700 text-center">
-            <div class="text-2xl sm:text-3xl font-extrabold text-primary mb-1">{stat.value}</div>
-            <div class="text-xs sm:text-sm text-muted dark:text-slate-400">{stat.label}</div>
-          </div>
-        ))}
+        {
+          stats.map((stat) => (
+            <div class="bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-5 border border-gray-200 dark:border-slate-700 text-center">
+              <div class="text-2xl sm:text-3xl font-extrabold text-primary mb-1">{stat.value}</div>
+              <div class="text-xs sm:text-sm text-muted dark:text-slate-400">{stat.label}</div>
+            </div>
+          ))
+        }
       </div>
 
-      <!-- Category Filter -->
+      {/* Category Filter */}
       <div class="flex items-center gap-2 flex-wrap mb-8" id="industryFilters">
-        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider mr-1">Category:</span>
-        {industries.map((ind, i) => (
-          <button
-            class={`filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 ${
-              i === 0
-                ? 'bg-primary text-primary-foreground border border-primary shadow-sm'
-                : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
-            }`}
-            data-category={ind}
-          >
-            {ind}
-          </button>
-        ))}
+        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider mr-1"
+          >Category:</span
+        >
+        {
+          industries.map((ind, i) => (
+            <button
+              class={`filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 ${
+                i === 0
+                  ? 'bg-primary text-primary-foreground border border-primary shadow-sm'
+                  : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
+              }`}
+              data-category={ind}
+            >
+              {ind}
+            </button>
+          ))
+        }
       </div>
 
-      <!-- Case Study Cards — Unified Layout -->
+      {/* Case Study Cards — Unified Layout */}
       <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="caseStudyGrid">
-        {caseStudies.map((cs) => (
-          <div
-            class="case-study-item group bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:border-primary/30 dark:hover:border-primary/30 transition-all flex flex-col"
-            data-category={cs.category}
-          >
-            <div class="p-5 sm:p-6 flex flex-col flex-1">
-              <!-- Header -->
-              <div class="flex items-center gap-2 mb-3">
-                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
-                  {cs.category}
-                </span>
-                <span class="text-xs text-muted dark:text-slate-500">{cs.location}</span>
-              </div>
-
-              <h3 class="text-base font-bold text-default dark:text-slate-100 mb-1 group-hover:text-primary transition-colors leading-snug">
-                {cs.title}
-              </h3>
-              <p class="text-xs text-muted dark:text-slate-500 mb-4">{cs.client}</p>
-
-              <!-- Content -->
-              <div class="space-y-3 flex-1">
-                <div>
-                  <h4 class="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Background</h4>
-                  <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{cs.background}</p>
+        {
+          caseStudies.map((cs) => (
+            <div
+              class="case-study-item group bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:border-primary/30 dark:hover:border-primary/30 transition-all flex flex-col"
+              data-category={cs.category}
+            >
+              <div class="p-5 sm:p-6 flex flex-col flex-1">
+                {/* Header */}
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+                    {cs.category}
+                  </span>
+                  <span class="text-xs text-muted dark:text-slate-500">{cs.location}</span>
                 </div>
-                <div>
-                  <h4 class="text-xs font-semibold text-primary uppercase tracking-wide mb-1">OWON Solution</h4>
-                  <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{cs.solution}</p>
-                </div>
-              </div>
 
-              <!-- KPI Metrics -->
-              <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
-                <div class="grid grid-cols-2 gap-2">
-                  {cs.results.map((r) => (
-                    <div class="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-2.5 text-center">
-                      <div class="text-sm font-extrabold text-primary">{r.metric}</div>
-                      <div class="text-[10px] text-muted dark:text-slate-400 leading-tight mt-0.5">{r.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                <h3 class="text-base font-bold text-default dark:text-slate-100 mb-1 group-hover:text-primary transition-colors leading-snug">
+                  {cs.title}
+                </h3>
+                <p class="text-xs text-muted dark:text-slate-500 mb-4">{cs.client}</p>
 
-              <!-- Action -->
-              <div class="mt-3">
-                <a
-                  href="/contact-sales"
-                  class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
-                >
-                  Discuss a similar project →
-                </a>
+                {/* Content */}
+                <div class="space-y-3 flex-1">
+                  <div>
+                    <h4 class="text-xs font-semibold text-primary uppercase tracking-wide mb-1">Background</h4>
+                    <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{cs.background}</p>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-semibold text-primary uppercase tracking-wide mb-1">OWON Solution</h4>
+                    <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{cs.solution}</p>
+                  </div>
+                </div>
+
+                {/* KPI Metrics */}
+                <div class="mt-4 pt-4 border-t border-gray-100 dark:border-slate-700">
+                  <div class="grid grid-cols-2 gap-2">
+                    {cs.results.map((r) => (
+                      <div class="bg-gray-50 dark:bg-slate-700/50 rounded-lg p-2.5 text-center">
+                        <div class="text-sm font-extrabold text-primary">{r.metric}</div>
+                        <div class="text-[10px] text-muted dark:text-slate-400 leading-tight mt-0.5">{r.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Action */}
+                <div class="mt-3">
+                  <a
+                    href="/contact-sales"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+                  >
+                    Discuss a similar project →
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
-      <!-- No Results -->
+      {/* No Results */}
       <div id="noResults" class="hidden text-center py-16">
-        <h3 class="text-lg font-semibold text-default dark:text-slate-200 mb-2">No case studies in this category yet</h3>
+        <h3 class="text-lg font-semibold text-default dark:text-slate-200 mb-2">
+          No case studies in this category yet
+        </h3>
         <p class="text-sm text-muted dark:text-slate-400 mb-4">Contact us — you could be the first.</p>
-        <a href="/contact-sales" class="inline-flex items-center px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm">
+        <a
+          href="/contact-sales"
+          class="inline-flex items-center px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
+        >
           Contact Sales →
         </a>
       </div>
 
-      <!-- Bottom CTA -->
-      <div class="mt-16 p-8 sm:p-10 bg-gradient-to-r from-primary/5 to-blue-500/5 dark:from-primary/10 dark:to-blue-500/10 rounded-2xl border border-primary/10 text-center">
+      {/* Bottom CTA */}
+      <div
+        class="mt-16 p-8 sm:p-10 bg-gradient-to-r from-primary/5 to-blue-500/5 dark:from-primary/10 dark:to-blue-500/10 rounded-2xl border border-primary/10 text-center"
+      >
         <h2 class="text-2xl font-bold mb-3 text-default dark:text-slate-100">Ready to start your project?</h2>
         <p class="text-muted dark:text-slate-400 mb-6 max-w-lg mx-auto text-sm">
-          Share your requirements and we'll design an IoT solution tailored to your use case — from hardware customization to full system integration.
+          Share your requirements and we'll design an IoT solution tailored to your use case — from hardware
+          customization to full system integration.
         </p>
         <div class="flex flex-wrap justify-center gap-3">
           <a
@@ -301,23 +315,27 @@ const caseStudies = [
 </PageLayout>
 
 <script is:inline>
-  (function() {
-    var filters = document.getElementById('industryFilters');
+  (function () {
+    const filters = document.getElementById('industryFilters');
     if (!filters) return;
-    var chips = filters.querySelectorAll('.filter-chip');
-    var items = document.querySelectorAll('.case-study-item');
-    var noResults = document.getElementById('noResults');
+    const chips = filters.querySelectorAll('.filter-chip');
+    const items = document.querySelectorAll('.case-study-item');
+    const noResults = document.getElementById('noResults');
 
-    chips.forEach(function(chip) {
-      chip.addEventListener('click', function() {
-        chips.forEach(function(c) {
-          c.className = c.className.replace(/bg-primary text-primary-foreground border border-primary shadow-sm/g, 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary');
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) {
+          c.className = c.className.replace(
+            /bg-primary text-primary-foreground border border-primary shadow-sm/g,
+            'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
+          );
         });
-        this.className = 'filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 bg-primary text-primary-foreground border border-primary shadow-sm';
+        this.className =
+          'filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 bg-primary text-primary-foreground border border-primary shadow-sm';
 
-        var category = this.getAttribute('data-category');
-        var anyVisible = false;
-        items.forEach(function(item) {
+        const category = this.getAttribute('data-category');
+        let anyVisible = false;
+        items.forEach(function (item) {
           if (category === 'All' || item.getAttribute('data-category') === category) {
             item.style.display = '';
             anyVisible = true;

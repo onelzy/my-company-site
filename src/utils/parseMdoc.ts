@@ -36,7 +36,6 @@ export function renderMarkdown(md: string, opts: { headingOffset?: number } = {}
   }
   const renderer = new marked.Renderer();
   const origHeading = renderer.heading.bind(renderer);
-  renderer.heading = ({ tokens, depth }) =>
-    origHeading({ tokens, depth: Math.min(6, depth + offset) });
+  renderer.heading = ({ tokens, depth }) => origHeading({ tokens, depth: Math.min(6, depth + offset) });
   return marked.parse(md, { async: false, renderer }) as string;
 }

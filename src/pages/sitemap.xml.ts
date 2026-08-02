@@ -65,11 +65,7 @@ export const GET = async () => {
   }
 
   // 2. Solution detail pages (3 real solutions)
-  const solutionSlugs = [
-    'smart-hotel-energy-management',
-    'senior-care-monitoring',
-    'industrial-energy-submetering',
-  ];
+  const solutionSlugs = ['smart-hotel-energy-management', 'senior-care-monitoring', 'industrial-energy-submetering'];
   for (const s of solutionSlugs) {
     urls.push({ loc: `${baseUrl}/solutions/${s}/`, changefreq: 'weekly', priority: '0.8' });
   }

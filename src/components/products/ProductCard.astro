@@ -50,7 +50,7 @@ const locale = (product.language as string) || 'en';
     <a
       href={detailUrl}
       class:list={[
-        'relative aspect-square bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2'
+        'relative aspect-square bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2',
       ]}
     >
       {
@@ -87,16 +87,18 @@ const locale = (product.language as string) || 'en';
       <h3
         class:list={[
           'font-semibold leading-snug text-default dark:text-slate-200 group-hover:text-primary transition-colors duration-200',
-          compact ? 'text-[13px] line-clamp-1' : 'text-[15px] line-clamp-1'
+          compact ? 'text-[13px] line-clamp-1' : 'text-[15px] line-clamp-1',
         ]}
       >
         {product.name}
       </h3>
-      {modelDisplay && (
-        <p class:list={['text-muted dark:text-slate-400 font-mono', compact ? 'text-[10px]' : 'text-[11px]']}>
-          {modelDisplay}
-        </p>
-      )}
+      {
+        modelDisplay && (
+          <p class:list={['text-muted dark:text-slate-400 font-mono', compact ? 'text-[10px]' : 'text-[11px]']}>
+            {modelDisplay}
+          </p>
+        )
+      }
       {
         description && !compact && (
           <p class="text-[11px] text-muted dark:text-slate-400 line-clamp-1 leading-snug mt-0.5">{description}</p>

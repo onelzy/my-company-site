@@ -40,9 +40,7 @@ if (!entry) return Astro.redirect('/404', 302);
 const siteOrigin = (SITE.site as string).replace(/\/+$/, '');
 const canonicalSlug =
   ((entry.data as Record<string, unknown>).slug as { slug?: string } | undefined)?.slug || entry.slug;
-const isLegacySlug = slug !== canonicalSlug;
 const canonicalUrl = `${siteOrigin}/products/${canonicalSlug}/`;
-
 const allProducts = rawProducts.map((p) => ({
   ...p.data,
   id: p.slug,
@@ -105,9 +103,7 @@ const pickBest = (files: { name: string; url: string }[]) => {
   })[0];
 };
 const bestSpec = pickBest(docEntry?.specs ?? []);
-const bestManual = pickBest(docEntry?.manuals ?? []);
 const datasheetUrl = bestSpec?.url ?? '';
-const manualUrl = bestManual?.url ?? '';
 
 const specFieldLabels: Record<string, string> = {
   accuracy: 'Accuracy',
