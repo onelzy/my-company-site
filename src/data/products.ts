@@ -129,6 +129,245 @@ export const products: ProductsEntry[] = [
     "body": "The Din-Rail Relay CB432 is a device with wattage (W) and kilowatt hours (kWh) measurement functions. It allows you to control On/Off status and check real-time energy usage via the mobile App.\n\n## Key Features\n\n- ZigBee 3.0, works with any standard ZigBee hub\n- Measures instantaneous and accumulative energy consumption (W and kWh)\n- Calibrated metering: ≤100W within ±2W, >100W within ±2%\n- Schedule devices to automatically power on and off\n- 32A or 63A load models\n- Extends the range and strengthens ZigBee network communication"
   },
   {
+    "slug": "dws312",
+    "data": {
+      "name": "DWS312 ZigBee Door/Window Sensor",
+      "model": "DWS312",
+      "slug": {
+        "name": "DWS312 Door/Window Sensor",
+        "slug": "dws312"
+      },
+      "description": "ZigBee HA1.2 door/window sensor with tamper protection, low battery detection and 1-year battery life.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/dws312/dws312-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/dws312/dws312-01.jpg",
+        "https://documents.owon-iot.com/product-images/dws312/dws312-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "battery": "CR2450 3V lithium, 1 year battery life",
+        "tamperProtection": "Yes — protects the enclosure from being opened",
+        "operatingTemp": "-10℃ ~ +45℃ (up to 85% non-condensing)",
+        "dimensions": "Sensor 6.2(W) x 3.3(L) x 1.4(H) cm; Magnetic 5.7(W) x 1(L) x 1.1(H) cm",
+        "weight": "41g",
+        "lowBatteryAlert": "Yes"
+      },
+      "faqs": [
+        {
+          "q": "What does the DWS312 detect?",
+          "a": "Door and window open/close status, with notifications to the mobile app."
+        },
+        {
+          "q": "How long does the battery last?",
+          "a": "1 year with a CR2450 3V lithium battery."
+        },
+        {
+          "q": "Does it have tamper protection?",
+          "a": "Yes — tamper protection protects the enclosure from being opened."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee HA1.2, compatible with other ZigBee products."
+        },
+        {
+          "q": "Is battery status monitored?",
+          "a": "Yes — low battery detection alerts you when the battery is running low."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The DWS312 Door/Window Sensor detects door and window openings and closings, with easy installation and tamper protection.\n\n## Key Features\n\n- ZigBee HA1.2 compliant, compatible with other ZigBee products\n- Easy installation\n- Tamper protection protects the enclosure from being opened\n- Low battery detection\n- Low power consumption\n- 1-year battery life with CR2450 3V lithium battery"
+  },
+  {
+    "slug": "dws332",
+    "data": {
+      "name": "DWS332 ZigBee Door/Window Sensor",
+      "model": "DWS332",
+      "slug": {
+        "name": "DWS332 Door/Window Sensor",
+        "slug": "dws332"
+      },
+      "description": "ZigBee 3.0 door/window sensor with secure screw installation, tamper alerts and 2-year battery life for hotel automation.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/dws332/dws332-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/dws332/dws332-01.jpg",
+        "https://documents.owon-iot.com/product-images/dws332/dws332-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "battery": "CR2477, 2 years battery life",
+        "tamperAlert": "Yes — alerts if the sensor is removed",
+        "mountingType": "4-screw main unit + 2-screw magnetic strip; optional spacer for uneven surfaces",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)",
+        "securityScrew": "Yes — additional security screw prevents removal"
+      },
+      "faqs": [
+        {
+          "q": "What does the DWS332 detect?",
+          "a": "Door and window openings and closings, with real-time monitoring for hotel automation systems."
+        },
+        {
+          "q": "How secure is the installation?",
+          "a": "4-screw mounting on the main unit and 2-screw fixation on the magnetic strip; an additional security screw is required to remove the main unit."
+        },
+        {
+          "q": "What happens if the sensor is removed?",
+          "a": "Tamper alerts fire if the sensor is removed."
+        },
+        {
+          "q": "How long does the battery last?",
+          "a": "2 years with a CR2477 battery."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, works in tandem with other ZigBee devices for integrated smart hotel solutions."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The DWS332 ZigBee Door/Window Sensor features 4-screw mounting on the main unit and 2-screw fixation on the magnetic strip, ensuring tamper-resistant installation. With ZigBee 3.0, it provides real-time monitoring for hotel automation systems.\n\n## Key Features\n\n- ZigBee 3.0\n- Detects door and window openings and closings\n- Tamper alerts if the sensor is removed\n- Secure screw installation with additional security screw\n- Long-lasting battery (2 years, CR2477)\n- Low power consumption\n- Magnetic strip with spacer for uneven surfaces (optional)"
+  },
+  {
+    "slug": "fds315",
+    "data": {
+      "name": "FDS315 Fall Detection Sensor",
+      "model": "FDS315",
+      "slug": {
+        "name": "FDS315 Fall Detection Sensor",
+        "slug": "fds315"
+      },
+      "description": "60GHz radar fall detection sensor — detects falls, out-of-bed events and sleep breathing rate for senior care.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/fds315/fds315-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/fds315/fds315-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "detector": "60GHz Radar",
+        "detectionRange": "Fall: 4 x 4m",
+        "powerSupply": "Micro-USB",
+        "detectionModes": "Fall, out-of-bed, sleep breathing rate, human activity location",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the FDS315 detect?",
+          "a": "Fall detection (single person), location of human activity, out-of-bed detection and real-time breathing rate detection during sleep."
+        },
+        {
+          "q": "What technology does it use?",
+          "a": "A 60GHz radar detector with a fall detection range of 4 x 4m."
+        },
+        {
+          "q": "Where is it used?",
+          "a": "Nursing homes and senior care — monitor residents and link with other devices to make care smarter."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "Micro-USB."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0, and it extends the range and strengthens ZigBee network communication."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The FDS315 Fall Detection Sensor can detect if a person falls, so you can know the risk in time. It can be tremendously beneficial in nursing homes to monitor and link with other devices to make your home smarter.\n\n## Key Features\n\n- ZigBee 3.0\n- Fall detection (works on single person)\n- Identifies the location of human activity\n- Out-of-bed detection\n- Real-time breathing rate detection during sleep\n- Extends the range and strengthens ZigBee network communication\n- Suitable for residential and commercial applications"
+  },
+  {
+    "slug": "ops305",
+    "data": {
+      "name": "OPS305 Occupancy Sensor",
+      "model": "OPS305",
+      "slug": {
+        "name": "OPS305 Occupancy Sensor",
+        "slug": "ops305"
+      },
+      "description": "24GHz radar occupancy sensor — detects presence even when stationary, with three-mode intelligence for senior care.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/ops305/ops305-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/ops305/ops305-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "detector": "24GHz Millimeter Wave Radar",
+        "detectionRange": "Ceiling: 3m radius / 110°; Wall: 6m / 110°",
+        "modes": "Large movement, micro movement, no presence",
+        "powerSupply": "Micro-USB (5V/1A)",
+        "operatingTemp": "-20℃ ~ +55℃ (≤ 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the OPS305 detect?",
+          "a": "Presence, even if the person is asleep or in a stationary posture — more sensitive and accurate than PIR detection."
+        },
+        {
+          "q": "What technology does it use?",
+          "a": "24GHz millimeter wave radar."
+        },
+        {
+          "q": "What are the detection modes?",
+          "a": "Intelligent recognition of three modes: large movement, micro movement and no presence."
+        },
+        {
+          "q": "What is the detection range?",
+          "a": "Ceiling-mounted: 3m maximum radius at 110°; wall-mounted: 6m maximum distance at 110°."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "Micro-USB (5V/1A)."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The OPS305 Occupancy Sensor can detect presence, even if you are asleep or in a stationary posture. Presence is detected via radar technology, which is more sensitive and accurate than PIR detection.\n\n## Key Features\n\n- ZigBee 3.0\n- Intelligent recognition of three modes: large movement, micro movement and no presence\n- Discerns presence even in a stationary posture\n- More sensitive and accurate than PIR detection\n- Extends the range and strengthens ZigBee network communication\n- Suitable for residential and commercial applications"
+  },
+  {
     "slug": "pc311-ty",
     "data": {
       "name": "PC311-TY Single-Phase WiFi Smart Energy Clamp",
@@ -2318,6 +2557,183 @@ export const products: ProductsEntry[] = [
     "body": "The Wi-Fi thermostat makes it easier and smarter to control your household temperature. Interact with your home on a brilliant 4.3\" full-color display. The high-resolution screen brings your controls to life with stunning clarity and rich, vibrant colors.\n\n## Key Features\n\n- Works with most 24V heating and cooling systems\n- 4.3 in. full-color LCD touchscreen\n- 2.5D curved edge design\n- 7-day customizable Fan/Temp programming schedule\n- Multiple HOLD options: Permanent Hold, Temporary Hold, Follow Schedule\n- Fan periodically circulates fresh air in circulate mode\n- Preheat or precool to reach the temperature at the time you scheduled\n- Provides Daily/Weekly/Monthly energy usage\n- Lock feature, maintenance reminders, adjustable temperature swing"
   },
   {
+    "slug": "pir313-z",
+    "data": {
+      "name": "PIR313-Z ZigBee Multi-Sensor",
+      "model": "PIR313-Z",
+      "slug": {
+        "name": "PIR313-Z ZigBee Multi-Sensor",
+        "slug": "pir313-z"
+      },
+      "description": "ZigBee 3.0 multi-sensor measuring motion, temperature, humidity and illuminance with anti-tamper and low battery alerts.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pir313-z/pir313-z-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pir313-z/pir313-z-01.jpg",
+        "https://documents.owon-iot.com/product-images/pir313-z/pir313-z-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "models": "PIR313-A (temp/humidity + light), PIR313-P (PIR), PIR313-T (temp/humidity), PIR313-L (light)",
+        "measuredParams": "Motion, temperature, humidity, illuminance",
+        "battery": "Long battery life with low battery alerts",
+        "antiTamper": "Yes",
+        "notifications": "Mobile app notifications"
+      },
+      "faqs": [
+        {
+          "q": "What does the PIR313 measure?",
+          "a": "Ambient temperature, humidity, motion and illuminance — with notifications from the mobile app."
+        },
+        {
+          "q": "What standard models are available?",
+          "a": "PIR313-A (temperature & humidity + light), PIR313-P (PIR only), PIR313-T (temperature & humidity), PIR313-L (light only)."
+        },
+        {
+          "q": "Does it have anti-tamper protection?",
+          "a": "Yes."
+        },
+        {
+          "q": "How is battery status handled?",
+          "a": "Long battery life with low battery alerts."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PIR313 Multi-sensor is used to measure the ambient temperature, humidity, motion and illuminance. It is available to receive notifications from the mobile app.\n\n## Key Features\n\n- ZigBee 3.0\n- PIR motion detection\n- Temperature and humidity measuring\n- Illuminance measurement\n- Long battery life\n- Low battery alerts\n- Anti-tamper\n- Sleek design"
+  },
+  {
+    "slug": "pir323",
+    "data": {
+      "name": "PIR323 ZigBee Multi-Sensor",
+      "model": "PIR323",
+      "slug": {
+        "name": "PIR323 ZigBee Multi-Sensor",
+        "slug": "pir323"
+      },
+      "description": "ZigBee 3.0 multi-sensor with PIR motion, vibration detection, built-in temperature & humidity and remote probe.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pir323/pir323-01.png",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pir323/pir323-01.png"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "models": "PIR323-PTH (PIR + built-in TH), PIR323-A (PIR + TH + vibration), PIR323-P (PIR)",
+        "measuredParams": "Motion, vibration, temperature & humidity, external temperature (remote probe)",
+        "lowPower": "Yes",
+        "notifications": "Mobile app notifications"
+      },
+      "faqs": [
+        {
+          "q": "What does the PIR323 measure?",
+          "a": "Motion (PIR), vibration, environmental temperature & humidity with built-in sensor, and external temperature with remote probe."
+        },
+        {
+          "q": "What standard models are available?",
+          "a": "PIR323-PTH (PIR, built-in temperature & humidity), PIR323-A (PIR, TH, vibration), PIR323-P (PIR only)."
+        },
+        {
+          "q": "Does it support a remote probe?",
+          "a": "Yes — external temperature via remote probe."
+        },
+        {
+          "q": "How is battery life?",
+          "a": "Low power consumption design."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The PIR323 Multi-sensor is used to measure the ambient temperature & humidity with built-in sensor and external temperature with remote probe. It is available to detect motion, vibration and receive notifications from the mobile app.\n\n## Key Features\n\n- ZigBee 3.0\n- PIR motion detection\n- Vibration detection\n- Environmental temperature & humidity measuring\n- Remote probe (external temperature)\n- Low power consumption"
+  },
+  {
+    "slug": "rc204",
+    "data": {
+      "name": "RC204 ZigBee Mini Remote Control",
+      "model": "RC204",
+      "slug": {
+        "name": "RC204 ZigBee Mini Remote Control",
+        "slug": "rc204"
+      },
+      "description": "ZigBee HA1.2/ZLL mini remote — up to 4 on/off dimming controls, all-lights-on/off, rechargeable battery backup.",
+      "productType": "hotel-control",
+      "productSubType": "lighting",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-lighting",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/rc204/rc204-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/rc204/rc204-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee HA1.2 + ZLL (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor/indoor: 100m / 30m",
+        "antenna": "Internal PCB Antenna",
+        "controlGroups": "Up to 4 on/off dimming controls",
+        "battery": "500mAh rechargeable or 2 x AAA (1 year battery life)",
+        "dimensions": "17(W) x 45(L) x 129(H) mm",
+        "weight": "51g",
+        "specialFunctions": "All-lights-on, all-lights-off; status feedback; power saving + auto wake-up",
+        "operatingTemp": "-28℃ ~ +70℃ (10% ~ 90% humidity)"
+      },
+      "faqs": [
+        {
+          "q": "What can the RC204 control?",
+          "a": "Up to 4 on/off dimming control groups, plus all-lights-on and all-lights-off functions."
+        },
+        {
+          "q": "Which ZigBee profiles does it support?",
+          "a": "Home Automation Profile and ZigBee Lighting Link Profile."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "500mAh rechargeable battery backup or 2 x AAA batteries (1 year battery life)."
+        },
+        {
+          "q": "Does it show light status?",
+          "a": "Yes — lights status feedback."
+        },
+        {
+          "q": "How does it save power?",
+          "a": "Power saving mode with auto wake-up."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The RC204 ZigBee Mini Remote Control provides up to 4 on/off dimming controls with lights status feedback, all-lights-on and all-lights-off functions.\n\n## Key Features\n\n- ZigBee HA1.2 compliant, ZigBee ZLL compliant\n- Up to 4 on/off dimming control\n- Lights status feedback\n- All-lights-on, all-lights-off\n- Rechargeable battery backup\n- Power saving mode and auto wake-up\n- Mini size (17 x 45 x 129 mm, 51g)"
+  },
+  {
     "slug": "seg-x3-a",
     "data": {
       "name": "SEG-X3-A ZigBee Gateway",
@@ -3032,6 +3448,124 @@ export const products: ProductsEntry[] = [
     "body": "The SLC631 Lighting Relay could be embedded in any global standard in-wall junction box, connecting the traditional switch panel without destroying the original home decoration style. It could remotely control the in-wall switch when it works with a gateway.\n\n## Key Features\n\n- ZigBee HA1.2 compliant, works with any standard ZHA ZigBee hub\n- Upgrades existing lighting to a remote control lighting system\n- Optional 1-3 channels\n- Remote control, schedules, linkage (on/off) and scene support (max. 16 scenes)\n- Compatible with heating, ventilation and LED drivers for on/off control\n- Outside leads for control"
   },
   {
+    "slug": "ths317",
+    "data": {
+      "name": "THS317 Temperature & Humidity Sensor",
+      "model": "THS317",
+      "slug": {
+        "name": "THS317 Temperature & Humidity Sensor",
+        "slug": "ths317"
+      },
+      "description": "ZigBee 3.0 temperature & humidity sensor with built-in sensor or 2.5m remote probe for liquid and enclosed spaces.",
+      "productType": "senior-care",
+      "productSubType": "health",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/ths317/ths317-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/ths317/ths317-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB Antenna",
+        "measuredParams": "Environmental temperature & humidity; external temperature via 2.5m remote probe",
+        "models": "THS317 (built-in TH), THS317-ET (external probe)",
+        "lowPower": "Yes"
+      },
+      "faqs": [
+        {
+          "q": "What does the THS317 measure?",
+          "a": "Ambient temperature & humidity with the built-in sensor, or external temperature with the remote probe."
+        },
+        {
+          "q": "How long is the probe cable?",
+          "a": "2.5m — it allows measuring liquid or enclosed space temperatures that normal sensors cannot reach."
+        },
+        {
+          "q": "What models are available?",
+          "a": "THS317 (built-in temperature & humidity) and THS317-ET (external temperature probe)."
+        },
+        {
+          "q": "How is power consumption?",
+          "a": "Low power consumption."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The THS317 is used to measure the ambient temperature & humidity with built-in sensor, or external temperature with remote probe. The 2.5m long probe allows you to measure liquid or enclosed space temperatures, reaching areas that normal sensors cannot.\n\n## Key Features\n\n- ZigBee 3.0\n- Environmental temperature & humidity measuring\n- Remote probe (external temperature)\n- 2.5m probe cable for liquid and enclosed spaces\n- Low power consumption"
+  },
+  {
+    "slug": "ths327-et",
+    "data": {
+      "name": "THS327-ET ZigBee Temperature Sensor with Probe",
+      "model": "THS327-ET",
+      "slug": {
+        "name": "THS327-ET Temperature Sensor with Probe",
+        "slug": "ths327-et"
+      },
+      "description": "ZigBee 3.0 temperature sensor with remote probe — measures water and air temperature from -30°C to 100°C.",
+      "productType": "senior-care",
+      "productSubType": "health",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/ths327-et/ths327-et-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/ths327-et/ths327-et-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m (open area)",
+        "antenna": "Internal PCB Antenna (TX power 19dB)",
+        "voltage": "100~240 Vac 50/60 Hz",
+        "powerConsumption": "< 1W",
+        "probeRange": "-30℃ ~ +100℃ (accuracy ±1℃)",
+        "probeType": "Remote probe — measures water temperature and air temperature around the probe",
+        "operatingTemp": "-10℃ ~ +55℃ (≤ 90% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the THS327-ET measure?",
+          "a": "Temperature with a remote probe — water temperature, air temperature around the probe and more."
+        },
+        {
+          "q": "What is the probe sensing range?",
+          "a": "-30℃ to +100℃ with ±1℃ accuracy."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "100~240 Vac 50/60 Hz, < 1W."
+        },
+        {
+          "q": "Where can it be used?",
+          "a": "Measuring water temperature, air temperature and other enclosed-space temperatures."
+        },
+        {
+          "q": "Which ZigBee profile does it use?",
+          "a": "ZigBee 3.0."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The THS327-ET Temperature Sensor is used to measure the temperature with a remote probe. It is available to measure the temperature of water, the air temperature around the probe and so on.\n\n## Key Features\n\n- ZigBee 3.0\n- Temperature measuring with remote probe\n- Probe sensing range: -30℃ ~ +100℃, ±1℃ accuracy\n- 100~240 Vac powered, < 1W\n- Low power consumption"
+  },
+  {
     "slug": "trv527-z",
     "data": {
       "name": "TRV527-Z ZigBee Smart Radiator Valve",
@@ -3094,6 +3628,65 @@ export const products: ProductsEntry[] = [
       "language": "en"
     },
     "body": "TRV527-Z helps you manage your Radiator heating from your App. It can replace your existing thermostatic radiator valve (TRV) directly or with one of the 3 included adapters.\n\n## Key Features\n\n- Automatically turn on or off the radiator valve according to the schedule you set\n- Set temperatures from the App or directly on the valve by touch-sensitive buttons\n- ECO mode & Holiday Mode: maintain a lower temperature when you temporarily leave home\n- Open Window Detection: automatically turn off heating when you open a window\n- Child Lock, Anti-scale, Low battery alert\n- ±0.5℃ accuracy, M30 x 1.5mm connection\n- Works with OWON ZigBee Gateway and Home Assistant"
+  },
+  {
+    "slug": "wls316",
+    "data": {
+      "name": "WLS316 Water Leakage Sensor",
+      "model": "WLS316",
+      "slug": {
+        "name": "WLS316 Water Leakage Sensor",
+        "slug": "wls316"
+      },
+      "description": "ZigBee 3.0 water leakage sensor with immediate reporting on trigger, long battery life and smart device linkage.",
+      "productType": "senior-care",
+      "productSubType": "safety",
+      "techSolution": "zigbee",
+      "techSubType": "zigbee-sensor",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "zigbee-solution"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/wls316/wls316-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/wls316/wls316-01.jpg"
+      ],
+      "specs": {
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "rfRange": "Outdoor: 100m",
+        "antenna": "Internal PCB Antenna",
+        "battery": "DC 3V (two AAA batteries)",
+        "reportingCycle": "Triggered: immediate; untriggered: once an hour",
+        "mountingType": "Tabletop stand or wall mounting",
+        "operatingTemp": "-10℃ ~ +55℃ (≤ 85% non-condensing)"
+      },
+      "faqs": [
+        {
+          "q": "What does the WLS316 detect?",
+          "a": "Water leakage, with notifications from the mobile app."
+        },
+        {
+          "q": "How fast does it report?",
+          "a": "When triggered it reports immediately; when untriggered it reports once an hour."
+        },
+        {
+          "q": "How is it powered?",
+          "a": "DC 3V with two AAA batteries."
+        },
+        {
+          "q": "How can it be mounted?",
+          "a": "Tabletop stand or wall mounting."
+        },
+        {
+          "q": "Does it integrate with other devices?",
+          "a": "Yes — linkage with smart devices."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "The Water Leakage Sensor is used to detect water leakage and receive notifications from the mobile app. It uses an extra-low power consumption ZigBee wireless module and has a long battery life.\n\n## Key Features\n\n- ZigBee 3.0\n- Water leakage detection\n- Low power consumption\n- Linkage with smart devices\n- Tabletop stand or wall mounting"
   },
   {
     "slug": "wsp406-uk",
