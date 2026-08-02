@@ -1527,7 +1527,12 @@ export const productDocs: ProductDoc[] = [
   {
     model: 'SLC603',
     category: 'Switches & Relays',
-    specs: [],
+    specs: [
+      {
+        name: 'SLC603 Dimmer Switch',
+        url: 'https://documents.owon-iot.com/specs/Datasheet_-_SLC603_Dimmer_Switch.pdf',
+      },
+    ],
     manuals: [
       {
         name: 'SLC603 Dimmer Switch v.1',
