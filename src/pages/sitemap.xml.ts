@@ -9,6 +9,7 @@
  * served URLs (the adapter 307-redirects the non-slash form).
  */
 import { SITE } from 'astrowind:config';
+import { getCollection } from 'astro:content';
 import { products } from '~/data/products';
 
 export const prerender = false;
@@ -77,6 +78,14 @@ export const GET = async () => {
     if (!slug || seen.has(slug)) continue;
     seen.add(slug);
     urls.push({ loc: `${baseUrl}/products/${slug}/`, changefreq: 'weekly', priority: '0.8' });
+  }
+
+  // 4. Blog post detail pages (real posts only)
+  const posts = await getCollection('post');
+  for (const post of posts) {
+    const id = post.id.replace(/\.(md|mdx)$/, '');
+    if (post.data.draft) continue;
+    urls.push({ loc: `${baseUrl}/blog/${id}/`, changefreq: 'monthly', priority: '0.6' });
   }
 
   // ---------------------------------------------------------------------------
