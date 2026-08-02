@@ -1,0 +1,68 @@
+---
+name: PC321-W/3W Single/Three-Phase WiFi MQTT Smart Energy Clamp
+model: PC321-W/3W
+slug:
+  name: PC321-W/3W Smart Energy Clamp
+  slug: pc321-w-3w
+description: Open-protocol WiFi smart energy clamp for single, split and three-phase systems (incl. 3P3W). MQTT API with direct-to-cloud reporting — no third-party cloud required. Three CT clamps up to 750A, bidirectional measurement for solar PV.
+productType: smart-meters
+productSubType: three-phase
+techSolution: mqtt
+techSubType: mqtt-meters
+communication:
+  - wifi
+  - mqtt
+ecosystem:
+  - mqtt-open
+image: https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg
+images:
+  - https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg
+  - https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-02.jpg
+  - https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-03.jpg
+  - https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-04.jpg
+  - https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-05.jpg
+specs:
+  accuracy: "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating"
+  voltage: "L-N: 90~277 Vac 50/60Hz; L-L: 156~480 Vac 50/60Hz"
+  current: 80A~750A (CT dependent)
+  frequency: 50/60Hz
+  powerSupply: <2W
+  protocol: "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing); MQTT API"
+  mqtt: Direct-to-cloud MQTT API — no third-party public cloud required
+  dimensions: 86(W) x 37(D) x 86(H) mm
+  mountingType: Wall mounting (default); DIN rail mounting (optional)
+  operatingTemp: -20℃ to +55℃ (≤90% non-condensing)
+  measuredParams: Voltage, Current, Power Factor, Frequency, Active Power
+  reportingCycle: 10s (default, configurable in integration)
+  certification: CE
+  placeOfOrigin: China
+  brandName: OWON
+  supportedSystems: "Single-Phase, Split-Phase, Three-Phase (included 3-Phase 3-Wire)"
+  clampInnerDimension: "80A (default): Ø10mm; 120A: Ø16mm; 200A: Ø20mm; 300A: Ø24mm; 500A: Ø36mm; 750A: Ø51mm"
+  ammeterAccuracy: "80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A); 500A CT: ±1% (6-500A), ±2% (2-6A), ±5% (0-2A); 750A CT: ±1% (6-750A), ±2% (2-6A), ±5% (0-2A)"
+  wifi: 802.11 b/g/n @ 2.4GHz
+  ble: For Pairing
+faqs:
+  - q: How does the PC321-W/3W connect to my own cloud server?
+    a: It reports real-time data directly to your cloud server through the provided MQTT API — no third-party public cloud is required.
+  - q: Which electrical systems does the PC321-W/3W support?
+    a: Single-phase, split-phase and three-phase systems, including 3-phase 3-wire (3P3W) wiring.
+  - q: What CT clamp ranges are available?
+    a: CT clamps from 80A (default, Ø10mm opening) up to 750A (Ø51mm opening), covering HVAC, solar and EV energy management applications.
+  - q: Does it support bidirectional measurement?
+    a: Yes. It measures both energy usage and solar production — ideal for solar PV self-consumption monitoring.
+  - q: What is the reporting cycle?
+    a: 10 seconds by default, and it can be configured during integration.
+language: en
+---
+
+PC321-W/3W helps you monitor the amount of electricity Consumed and Produced in your three-phase power system by connecting the clamps on to the power cables. It is also compatible with split-phase and single-phase. The real-time data can be reported directly to your cloud server without going through a third-party public cloud.
+
+## Key Features
+
+- Supports Wi-Fi 2.4GHz wireless communication, MQTT API provided.
+- External magnetic antenna can avoid shielding of wireless signals by metal distribution boxes
+- Three-Phase (included 3P3W), Split-Phase and Single-Phase electricity system compatible
+- Remotely monitor whole home Energy with three current transformers
+- Real-time Voltage, Current, PowerFactor, Frequency, ActivePower measurement
+- Bidirectional measurement: Energy Usage / Solar Production

@@ -125,6 +125,7 @@ const specFieldLabels: Record<string, string> = {
   wifi: 'Wi-Fi',
   ble: 'BLE',
   ethernet: 'Ethernet',
+  mqtt: 'MQTT',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -463,6 +464,12 @@ const faqSchema = {
                     { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: '2.4GHz WiFi with BLE-assisted pairing; monitor and control in real time via Tuya Smart / Smart Life apps.' },
                     { icon: '📡', title: 'External Magnetic Antenna', desc: 'Keeps the signal reliable even inside metal distribution boxes — no shielding interference.' },
                   ],
+                  'pc321-w-3w': [
+                    { icon: '☁️', title: 'Direct-to-Cloud MQTT', desc: 'Reports real-time data straight to your own cloud server via the MQTT API — no third-party public cloud required.' },
+                    { icon: '🔀', title: '3P3W & Split-Phase Compatible', desc: 'Supports three-phase 4-wire, 3-phase 3-wire, split-phase and single-phase systems with three CT clamps.' },
+                    { icon: '🔁', title: 'Bidirectional Measurement', desc: 'Tracks both energy consumed and produced — ideal for solar PV self-consumption monitoring.' },
+                    { icon: '📡', title: 'External Magnetic Antenna', desc: 'Avoids signal shielding inside metal distribution boxes for reliable wireless reporting.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -542,6 +549,14 @@ const faqSchema = {
                     { title: 'Residential & Commercial Submetering', desc: 'Non-invasive CT clamp installation from 80A to 750A, wall or DIN-rail mounting — no rewiring required.' },
                     { title: 'HVAC & EV Charging Circuits', desc: 'CT range and 15-second reporting cycle suit HVAC systems and EV charger energy management.' },
                     { title: 'Solar Installer Commissioning', desc: 'Verify PV system performance and validate inverter output during installation using real-time clamp data.' },
+                  ],
+                  'pc321-w-3w': [
+                    { title: 'Direct Cloud Integration', desc: 'Feed real-time energy data into your own cloud server or MQTT broker without any third-party public cloud.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bi-directional measurement tracks solar generation, grid import/export and home consumption in real time.' },
+                    { title: 'Three-Phase 3-Wire Installations', desc: '3P3W wiring support covers regions and industrial panels using three-phase three-wire systems.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Three CT clamps monitor total household consumption across single, split or three-phase supplies.' },
+                    { title: 'Residential & Commercial Submetering', desc: 'Non-invasive CT clamps from 80A to 750A, wall or DIN-rail mounting — no rewiring required.' },
+                    { title: 'System Integrators & Platform Builders', desc: 'MQTT API makes it straightforward to onboard the meter into custom EMS/BMS or energy analytics platforms.' },
                   ],
                 };
                 const scenarios = {
