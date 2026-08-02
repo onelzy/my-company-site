@@ -3,3 +3,6 @@
 # so even if this file is bypassed the duplicates consolidate.
 /products/pc321-ty-smart-meter       /products/pc321-w-ty/       301
 /products/pc321-ty                   /products/pc321-w-ty/       301
+/senior-care-monitoring-owon-case-study* /blog/senior-care-monitoring-owon-case-study/ 301
+/industrial-energy-submetering-owon-case-study* /blog/industrial-energy-submetering-owon-case-study/ 301
+/hotel-energy-savings-owon-case-study* /blog/hotel-energy-savings-owon-case-study/ 301
