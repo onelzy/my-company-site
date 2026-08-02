@@ -85,6 +85,226 @@ export const products: ProductsEntry[] = [
     "body": "PC311-TY Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- Tuya compliant\n- Support automation with other Tuya device\n- Single phase electricity compatible\n- Measures real-time Energy Usage, Voltage, Current, PowerFactor, Active Power and frequency.\n- Support Energy Production measurement\n- Usage trends by day, week, month\n- Suitable for both residential and commercial application\n- Lightweight and easy to install\n- Support two loads measurement with 2 CTs (Optional)"
   },
   {
+    "slug": "pc311-w-ty-n",
+    "data": {
+      "name": "PC311-W-TY/N Single-Phase WiFi Smart Energy Clamp",
+      "model": "PC311-W-TY/N",
+      "slug": {
+        "name": "PC311-W-TY/N Smart Energy Clamp",
+        "slug": "pc311-w-ty-n"
+      },
+      "description": "Tuya-compatible single-phase WiFi smart energy clamp with two CT clamps and bidirectional measurement. 15-second reporting, 90-277V operation, compact 52x23x46mm design with sticker or DIN-rail mounting.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc311-w-ty-n/pc311-w-ty-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-n/pc311-w-ty-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-n/pc311-w-ty-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-n/pc311-w-ty-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-n/pc311-w-ty-n-04.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "20A CT: ±1% (1-20A), ±2% (0-1A); 80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz",
+        "current": "20A~300A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "antenna": "Internal antenna",
+        "mountingType": "Sticker; DIN rail bracket",
+        "dimensions": "52(W) x 23(D) x 46(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency; Energy Usage / Solar Production",
+        "reportingCycle": "Every 15 seconds",
+        "clampInnerDimension": "20A (optional): Ø5mm; 80A (default): Ø10mm; 120A (optional): Ø16mm; 200A (optional): Ø20mm; 300A (optional): Ø24mm",
+        "certification": "CE; FCC",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "How does the PC311-W-TY/N monitor solar energy?",
+          "a": "It measures bidirectionally — both energy usage and solar production — so you can track generation and consumption of a single-phase PV system from the App."
+        },
+        {
+          "q": "How many loads can it monitor?",
+          "a": "Two current transformers let it monitor a single-phase circuit or two separate loads from one device."
+        },
+        {
+          "q": "How does the device connect to the network?",
+          "a": "Via WiFi 802.11 b/g/n at 2.4GHz with BLE-assisted pairing, managed through the Tuya platform App."
+        },
+        {
+          "q": "How often does it report energy data?",
+          "a": "Every 15 seconds, with historical data viewable and exportable in the App."
+        },
+        {
+          "q": "What CT clamp ranges are available?",
+          "a": "20A (Ø5mm), 80A default (Ø10mm), 120A (Ø16mm), 200A (Ø20mm) and 300A (Ø24mm) options."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC311-W-TY/N helps you monitor the amount of electricity Consumed and Produced in your single-phase power system by connecting the clamp on to the power cable.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device\n- Single-Phase electricity system Suitable\n- Remotely monitor a single-phase circuit/load, with 2 current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App"
+  },
+  {
+    "slug": "pc311-w-ty-r-n",
+    "data": {
+      "name": "PC311-W-TY/R/N Single-Phase WiFi Power Meter with Relay",
+      "model": "PC311-W-TY/R/N",
+      "slug": {
+        "name": "PC311-W-TY/R/N Power Meter with Relay",
+        "slug": "pc311-w-ty-r-n"
+      },
+      "description": "Tuya-compatible single-phase WiFi power meter with dry-contact relay (10A rated, 16A max) for remote on/off control. Bidirectional measurement, relay status reporting in real time, compact 52x23x46mm design.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "wifi"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc311-w-ty-r-n/pc311-w-ty-r-n-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-r-n/pc311-w-ty-r-n-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-r-n/pc311-w-ty-r-n-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-r-n/pc311-w-ty-r-n-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-w-ty-r-n/pc311-w-ty-r-n-04.jpg"
+      ],
+      "specs": {
+        "accuracy": "±1% (Voltmeters)",
+        "ammeterAccuracy": "20A CT: ±1% (1-20A), ±2% (0-1A); 80A CT: ±1% (1-80A), ±2% (0-1A); 120A CT: ±1% (2-120A), ±2% (0-2A); 200A CT: ±1% (2-200A), ±2% (0-2A); 300A CT: ±1% (6-300A), ±2% (2-6A), ±5% (0-2A)",
+        "voltage": "90~277 Vac 50/60Hz",
+        "current": "20A~300A (CT dependent)",
+        "frequency": "50/60Hz",
+        "powerSupply": "<2W",
+        "protocol": "WiFi 802.11 b/g/n @ 2.4GHz + BLE (pairing)",
+        "wifi": "802.11 b/g/n @ 2.4GHz",
+        "ble": "For Pairing",
+        "antenna": "Internal antenna",
+        "relayType": "Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting",
+        "mountingType": "Sticker; DIN rail bracket",
+        "dimensions": "52(W) x 23(D) x 46(H) mm",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Frequency; Energy Usage / Solar Production; relay on/off control",
+        "reportingCycle": "Energy data: every 15 seconds; relay status: immediately",
+        "clampInnerDimension": "20A (optional): Ø5mm; 80A (default): Ø10mm; 120A (optional): Ø16mm; 200A (optional): Ø20mm; 300A (optional): Ø24mm",
+        "certification": "CE; FCC",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "What makes the PC311-W-TY/R/N different from a standard power clamp?",
+          "a": "It integrates a dry-contact relay (resistive current rated 10A, max 16A) so you can turn a connected load on or off remotely from the App."
+        },
+        {
+          "q": "How fast does the relay react?",
+          "a": "Relay status is reported immediately, while energy data is reported every 15 seconds."
+        },
+        {
+          "q": "Can it monitor solar energy?",
+          "a": "Yes — bidirectional measurement tracks both energy usage and solar production on a single-phase system."
+        },
+        {
+          "q": "How is the relay protected?",
+          "a": "The relay includes overload protection and relay settings, with a resistive rating of 10A and a maximum of 16A."
+        },
+        {
+          "q": "How does the device connect to the network?",
+          "a": "Via WiFi 802.11 b/g/n at 2.4GHz with BLE-assisted pairing, controlled through the Tuya platform App."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC311-W-TY/R/N helps you monitor the amount of electricity Consumed and Produced in your single-phase power system by connecting the clamp on to the power cable. It allows you to turn On/Off of relay and check real-time or historical energy data via mobile App.\n\n## Key Features\n\n- Tuya compliant. Support automation with other Tuya device\n- Single-Phase electricity system Suitable\n- Remotely monitor a single-phase circuit, with 1 current transformers\n- Wireless communication via Wi-Fi 2.4GHz\n- Real-time Voltage, Current, PowerFactor, ActivePower, Frequency, measurement\n- Bidirectional measurement: Energy Usage / Solar Production\n- Historical data can be displayed and exported in the App\n- Dry contact relay, resistive current rated 10A, max.16A, overload protection and relay setting"
+  },
+  {
+    "slug": "pc311-z-ty",
+    "data": {
+      "name": "PC311-Z-TY Single-Phase ZigBee Smart Energy Clamp",
+      "model": "PC311-Z-TY",
+      "slug": {
+        "name": "PC311-Z-TY Smart Energy Clamp",
+        "slug": "pc311-z-ty"
+      },
+      "description": "Tuya-compatible single-phase ZigBee 3.0 smart energy clamp with OTA updates, two-CT dual-load option and energy production measurement. 90-250V operation, DIN-rail 35mm mounting.",
+      "productType": "smart-meters",
+      "productSubType": "single-phase",
+      "techSolution": "tuya",
+      "techSubType": "tuya-meters",
+      "communication": [
+        "zigbee"
+      ],
+      "ecosystem": [
+        "tuya"
+      ],
+      "image": "https://documents.owon-iot.com/product-images/pc311-z-ty/pc311-z-ty-01.jpg",
+      "images": [
+        "https://documents.owon-iot.com/product-images/pc311-z-ty/pc311-z-ty-01.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-z-ty/pc311-z-ty-02.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-z-ty/pc311-z-ty-03.jpg",
+        "https://documents.owon-iot.com/product-images/pc311-z-ty/pc311-z-ty-04.jpg"
+      ],
+      "specs": {
+        "accuracy": "≤100W: ±2W; >100W: ±2%",
+        "voltage": "90~250 Vac 50/60Hz",
+        "current": "80A~120A (CT dependent)",
+        "frequency": "50/60Hz",
+        "protocol": "ZigBee 3.0 (2.4GHz IEEE 802.15.4)",
+        "antenna": "Internal antenna",
+        "mountingType": "DIN rail 35mm",
+        "weight": "85g (one 80A CT); 150g (two 80A CT)",
+        "operatingTemp": "-20℃ to +55℃ (≤90% non-condensing)",
+        "measuredParams": "Voltage, Current, Power Factor, Active Power, Energy Usage, Frequency; Energy Production",
+        "reportingCycle": "Every 1 minute",
+        "clampInnerDimension": "80A (default): Ø10.6mm; 120A (optional): Ø16.7mm; clamp cable 1m",
+        "ota": "Support OTA",
+        "certification": "CE",
+        "placeOfOrigin": "China",
+        "brandName": "OWON"
+      },
+      "faqs": [
+        {
+          "q": "How does the PC311-Z-TY integrate with smart home platforms?",
+          "a": "It runs ZigBee 3.0 on 2.4GHz and is Tuya compliant, pairing with Tuya gateways and automating together with other Tuya devices."
+        },
+        {
+          "q": "Can it monitor two loads at once?",
+          "a": "Yes — a second CT clamp is optional, enabling two-load measurement on single-phase circuits."
+        },
+        {
+          "q": "Does it support solar monitoring?",
+          "a": "Yes, it supports energy production measurement alongside usage tracking, with daily, weekly and monthly usage trends."
+        },
+        {
+          "q": "How often does it report data?",
+          "a": "Every one minute over the ZigBee network."
+        },
+        {
+          "q": "Can the firmware be updated remotely?",
+          "a": "Yes, the device supports OTA firmware updates."
+        }
+      ],
+      "language": "en"
+    },
+    "body": "PC311-Z-TY Power Clamp helps you monitor the amount of electricity usage in your facility by connecting the clamp on to the power cable. It can also measure Voltage, Current, PowerFactor, ActivePower.\n\n## Key Features\n\n- Tuya compliant\n- Support automation with other Tuya device\n- Single phase electricity compatible\n- Measures real-time Energy Usage, Voltage, Current, PowerFactor, Active Power and frequency.\n- Support Energy Production measurement\n- Usage trends by day, week, month\n- Suitable for both residential and commercial application\n- Lightweight and easy to install\n- Support two loads measurement with 2 CTs (Optional)\n- Support OTA"
+  },
+  {
     "slug": "pc321-ty-smart-meter",
     "data": {
       "name": "PC321-W-TY Single/Three-Phase WiFi Smart Energy Clamp",

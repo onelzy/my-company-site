@@ -582,10 +582,6 @@ export const productDocs: ProductDoc[] = [
         "url": "https://documents.owon-iot.com/specs/Datasheet_-_PC311-TY_Single_Phase_Power_Clamp_-_230424.pdf"
       },
       {
-        "name": "PC311 three phase Power Clamp",
-        "url": "https://documents.owon-iot.com/specs/Datasheet_-_PC311_three-phase_Power_Clamp.pdf"
-      },
-      {
         "name": "PC311 W TY N Single Phase Power Clamp 260618",
         "url": "https://documents.owon-iot.com/specs/Tuya/Datasheet_-_PC311-W-TY_N_Single_Phase_Power_Clamp_-_260618.pdf"
       },

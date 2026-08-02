@@ -146,6 +146,7 @@ const specFieldLabels: Record<string, string> = {
   gatewayCompatibility: 'Gateway Compatibility',
   dataStorage: 'Data Storage',
   ota: 'OTA',
+  relayType: 'Relay Type',
 };
 const relatedProducts: Product[] = allProducts
   .filter(
@@ -514,6 +515,24 @@ const faqSchema = {
                     { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: 'WiFi with BLE 4.2 pairing; monitor and automate in real time via the Tuya platform.' },
                     { icon: '📊', title: 'Usage Trends', desc: 'Daily, weekly and monthly usage trends for energy analysis and reporting.' },
                   ],
+                  'pc311-w-ty-n': [
+                    { icon: '🔌', title: 'Dual-CT Two-Load Monitoring', desc: 'Two current transformers monitor a single-phase circuit or two separate loads from one device.' },
+                    { icon: '🌞', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production — ideal for single-phase PV self-consumption.' },
+                    { icon: '📱', title: 'WiFi + Tuya Ecosystem', desc: 'WiFi 2.4GHz with BLE pairing; monitor and automate in real time via the Tuya platform.' },
+                    { icon: '📊', title: 'Historical Data Export', desc: 'Historical data can be displayed and exported in the App for reporting and analysis.' },
+                  ],
+                  'pc311-w-ty-r-n': [
+                    { icon: '🔘', title: 'Remote Relay Control', desc: 'Dry-contact relay (10A rated, 16A max) turns a connected load on or off from the App.' },
+                    { icon: '🌞', title: 'Bidirectional Measurement', desc: 'Tracks energy usage and solar production on a single-phase system.' },
+                    { icon: '⚡', title: 'Instant Relay Status', desc: 'Relay status reported immediately while energy data updates every 15 seconds.' },
+                    { icon: '🛡️', title: 'Relay Protection', desc: 'Overload protection and relay settings safeguard the connected load.' },
+                  ],
+                  'pc311-z-ty': [
+                    { icon: '🕸️', title: 'Tuya ZigBee Ecosystem', desc: 'ZigBee 3.0 with Tuya compliance — automate together with other Tuya devices via gateway.' },
+                    { icon: '🔌', title: 'Dual-Load Option', desc: 'Optional second CT clamp monitors two loads on single-phase circuits.' },
+                    { icon: '🌞', title: 'Energy Production', desc: 'Measures generated energy with daily, weekly and monthly usage trends.' },
+                    { icon: '🔄', title: 'OTA Updates', desc: 'Firmware updates over the air — no physical access required.' },
+                  ],
                 };
                 const benefits = {
                   'smart-meters': isTuyaWifiEco ? [
@@ -633,6 +652,30 @@ const faqSchema = {
                     { title: 'Residential Energy Management', desc: 'Single-phase whole-home monitoring with daily, weekly and monthly usage trends.' },
                     { title: 'Commercial Submetering', desc: 'Dual-CT option monitors two separate loads from one device on a single phase.' },
                     { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and system integrators.' },
+                  ],
+                  'pc311-w-ty-n': [
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation, grid import/export and home consumption.' },
+                    { title: 'Whole-Home Energy Monitoring', desc: 'Single-phase household monitoring with two CT clamps on the main feed.' },
+                    { title: 'Two-Load Submetering', desc: 'Monitor two separate circuits (e.g. HVAC + EV charger) from one clamp meter.' },
+                    { title: 'Residential Smart Home', desc: 'Tuya App with historical data export for daily, weekly and monthly analysis.' },
+                    { title: 'Commercial & OEM Projects', desc: 'Compact sticker or DIN-rail mounting suits distribution boxes and OEM integration.' },
+                    { title: 'Energy Analytics & BMS', desc: '15-second reporting feeds energy analytics and building management platforms.' },
+                  ],
+                  'pc311-w-ty-r-n': [
+                    { title: 'Remote Load On/Off Control', desc: 'Turn water heaters, pumps or lighting on/off remotely via the dry-contact relay.' },
+                    { title: 'Solar PV Self-Consumption', desc: 'Bidirectional measurement tracks generation and consumption; relay can shed load.' },
+                    { title: 'Smart Home Automation', desc: 'Tuya ecosystem automation — schedule and control the relay alongside other devices.' },
+                    { title: 'Distribution Box Installations', desc: 'Compact sticker or DIN-rail mounting for single-phase distribution panels.' },
+                    { title: 'Energy Management Projects', desc: 'Real-time energy data plus relay control for demand-response and load management.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
+                  ],
+                  'pc311-z-ty': [
+                    { title: 'Tuya Smart Home Automation', desc: 'ZigBee 3.0 with Tuya compliance — energy data and automation in one ecosystem.' },
+                    { title: 'Solar & Distributed Energy', desc: 'Energy production measurement for PV system monitoring alongside usage.' },
+                    { title: 'ZigBee Gateway Networks', desc: 'Pairs with Tuya ZigBee gateways; joins larger mesh networks for whole-home coverage.' },
+                    { title: 'Single-Phase Whole-Home', desc: 'Residential consumption monitoring with daily, weekly and monthly trends.' },
+                    { title: 'Two-Load Submetering', desc: 'Optional second CT monitors two loads from one device.' },
+                    { title: 'OEM / ODM Projects', desc: 'OEM branding and ODM development available for distributors and integrators.' },
                   ],
                 };
                 const scenarios = {
