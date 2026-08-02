@@ -104,10 +104,10 @@ export const products: ProductsEntry[] = [
       "ecosystem": [
         "mqtt-open"
       ],
-      "image": "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg",
+      "image": "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg?v=2",
       "images": [
-        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg",
-        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-02.jpg"
+        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-01.jpg?v=2",
+        "https://documents.owon-iot.com/product-images/pc321-w-3w/pc321-w-3w-02.jpg?v=2"
       ],
       "specs": {
         "accuracy": "±1% (Voltmeters); Ammeters: ±1% (1-80A) / ±2% (0-1A) depending on CT rating",
