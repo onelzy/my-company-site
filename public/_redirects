@@ -3,7 +3,3 @@
 # so even if this file is bypassed the duplicates consolidate.
 /products/pc321-ty-smart-meter       /products/pc321-w-ty/       301
 /products/pc321-ty                   /products/pc321-w-ty/       301
-/products/pct513-smart-thermostat    /products/pct513/           301
-/products/spm-915-sleep-monitor      /products/spm-915/          301
-/products/pc341-3m16s-energy-monitor /products/pc341-3m16s/      301
-/products/pc341-w-ty-smart-meter     /products/pc341-w-ty/       301
