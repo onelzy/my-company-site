@@ -152,16 +152,16 @@ const solutionSlides = [
 
 <Layout metadata={metadata}>
   <!-- ===== 1. Hero Carousel ===== -->
-  <section class="hero-carousel relative w-full overflow-hidden" style="min-height: 500px;" id="heroSection">
+  <section class="hero-carousel relative w-full overflow-hidden md:min-h-[500px]" id="heroSection">
     {
       heroSlides.map((slide, i) => (
         <div
-          class={`hero-slide absolute inset-0 flex items-center transition-opacity duration-700 bg-gradient-to-r ${slide.gradient}`}
+          class={`hero-slide flex items-start md:items-center transition-opacity duration-700 bg-gradient-to-r ${slide.gradient} md:absolute md:inset-0 ${i === 0 ? '' : 'hidden md:block'}`}
           class:list={[i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0']}
           data-index={i}
         >
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-20">
-            <div class="grid lg:grid-cols-2 gap-10 items-center">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-14 md:py-20">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-10 items-center">
               <div class="text-center lg:text-left">
                 <div class="flex gap-2 justify-center lg:justify-start mb-4">
                   {slide.badges.map((b) => (
@@ -194,8 +194,8 @@ const solutionSlides = [
                     <img
                       src={slide.imgSrc}
                       alt="OWON PC321 three-phase power clamp and PC341 multi-circuit smart energy meter"
-                      class="relative w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl shadow-blue-950/50"
-                      style="mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 60%, transparent 98%); -webkit-mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, black 60%, transparent 98%);"
+                      class="relative w-full max-w-[240px] sm:max-w-sm md:max-w-md rounded-2xl shadow-2xl shadow-blue-950/50"
+                      style="mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 75%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 75%, transparent 100%);"
                       loading="eager"
                     />
                   </div>
@@ -684,6 +684,12 @@ const solutionSlides = [
         s.classList.toggle('z-10', j === i);
         s.classList.toggle('opacity-0', j !== i);
         s.classList.toggle('z-0', j !== i);
+        // Mobile (<md): only the active slide occupies layout; md+ all absolute anyway
+        if (j === i) {
+          s.classList.remove('hidden');
+        } else {
+          if (window.innerWidth < 768) s.classList.add('hidden');
+        }
       });
       dots.forEach(function (d, j) {
         d.classList.toggle('bg-white', j === i);
@@ -693,6 +699,16 @@ const solutionSlides = [
       });
       current = i;
     }
+    window.addEventListener('resize', function () {
+      if (window.innerWidth >= 768) {
+        slides.forEach(function (s) {
+          s.classList.remove('hidden');
+        });
+        showSlide(current);
+      } else {
+        showSlide(current);
+      }
+    });
     function next() {
       showSlide((current + 1) % slides.length);
     }
