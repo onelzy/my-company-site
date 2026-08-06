@@ -26,7 +26,6 @@ const heroSlides = [
     link: '/products?dim=type&type=smart-meters',
     linkText: 'Explore Smart Meters',
     imgSrc: 'https://documents.owon-iot.com/product-images/hero/smart-energy-hero.png',
-    blend: true,
   },
   {
     title: 'Smart Thermostats',
@@ -152,7 +151,7 @@ const solutionSlides = [
 
 <Layout metadata={metadata}>
   <!-- ===== 1. Hero Carousel ===== -->
-  <section class="hero-carousel relative w-full overflow-hidden md:min-h-[500px]" id="heroSection">
+  <section class="hero-carousel relative w-full overflow-hidden md:min-h-[560px] lg:min-h-[640px]" id="heroSection">
     {
       heroSlides.map((slide, i) => (
         <div
@@ -160,8 +159,8 @@ const solutionSlides = [
           class:list={[i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0']}
           data-index={i}
         >
-          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-14 md:py-20">
-            <div class="grid lg:grid-cols-2 gap-8 md:gap-10 items-center">
+          <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full py-14 md:py-24">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-14 items-center">
               <div class="text-center lg:text-left">
                 <div class="flex gap-2 justify-center lg:justify-start mb-4">
                   {slide.badges.map((b) => (
@@ -188,27 +187,18 @@ const solutionSlides = [
                 </div>
               </div>
               <div class="flex items-center justify-center">
-                {slide.blend ? (
-                  <div class="relative flex items-center justify-center w-full">
-                    <div class="absolute inset-6 md:inset-8 bg-blue-200/30 rounded-full blur-3xl"></div>
-                    <img
-                      src={slide.imgSrc}
-                      alt="OWON PC321 three-phase power clamp and PC341 multi-circuit smart energy meter"
-                      class="relative w-full max-w-[240px] sm:max-w-sm md:max-w-md rounded-2xl shadow-2xl shadow-blue-950/50"
-                      style="mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 75%, transparent 100%); -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 75%, transparent 100%);"
-                      loading="eager"
-                    />
-                  </div>
-                ) : (
-                  <div class="w-full max-w-sm rounded-2xl bg-white/10 backdrop-blur-sm p-6 border border-white/20">
-                    <img
-                      src={slide.imgSrc}
-                      alt={slide.title}
-                      class="w-full h-auto object-contain drop-shadow-2xl"
-                      loading="eager"
-                    />
-                  </div>
-                )}
+                <div class="w-full max-w-sm p-4 sm:p-6 md:max-w-md lg:max-w-xl rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+                  <img
+                    src={slide.imgSrc}
+                    alt={
+                      i === 0
+                        ? 'OWON PC321 three-phase power clamp and PC341 multi-circuit smart energy meter'
+                        : slide.title
+                    }
+                    class="w-full h-auto object-contain rounded-xl drop-shadow-2xl"
+                    loading="eager"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -225,51 +215,6 @@ const solutionSlides = [
           />
         ))
       }
-    </div>
-  </section>
-
-  <!-- ===== Trust Bar ===== -->
-  <section class="py-8 bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-slate-800">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-wrap items-center justify-center lg:justify-between gap-6">
-        <div class="flex flex-wrap justify-center gap-3">
-          <span
-            class="inline-flex items-center gap-1.5 rounded-full bg-green-100 dark:bg-green-900/40 px-3 py-1.5 text-sm font-medium text-green-700 dark:text-green-300"
-            ><span class="text-green-600 dark:text-green-400 text-xs font-bold">&#10003;</span> CE Certified</span
-          >
-          <span
-            class="inline-flex items-center gap-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 px-3 py-1.5 text-sm font-medium text-blue-700 dark:text-blue-300"
-            ><span class="text-blue-600 dark:text-blue-400 text-xs font-bold">&#10003;</span> FCC Certified</span
-          >
-          <span
-            class="inline-flex items-center gap-1.5 rounded-full bg-purple-100 dark:bg-purple-900/40 px-3 py-1.5 text-sm font-medium text-purple-700 dark:text-purple-300"
-            ><span class="text-purple-600 dark:text-purple-400 text-xs font-bold">&#10003;</span> RoHS Compliant</span
-          >
-        </div>
-        <div class="flex gap-8">
-          <div class="text-center">
-            <div class="text-2xl font-bold text-primary dark:text-blue-300">1M+</div><div
-              class="text-xs text-muted dark:text-slate-400"
-            >
-              Devices Deployed
-            </div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-primary dark:text-blue-300">50+</div><div
-              class="text-xs text-muted dark:text-slate-400"
-            >
-              Countries
-            </div>
-          </div>
-          <div class="text-center">
-            <div class="text-2xl font-bold text-primary dark:text-blue-300">15+</div><div
-              class="text-xs text-muted dark:text-slate-400"
-            >
-              Years R&amp;D
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
