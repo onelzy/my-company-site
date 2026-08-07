@@ -29,10 +29,10 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
   <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 dark:text-slate-300">
-    <div class="grid grid-cols-12 gap-x-6 md:gap-x-8 gap-y-10 text-left">
+    <div class="flex flex-wrap justify-between gap-x-10 gap-y-10 text-left lg:pr-16">
       {
         links.map(({ title, description, links }) => (
-          <div class="col-span-6 md:col-span-4 lg:col-span-2">
+          <div class="w-40 sm:w-44">
             <div class="text-gray-900 dark:text-gray-200 font-semibold text-sm mb-3">{title}</div>
             {description && (
               <p class="text-sm leading-relaxed text-muted dark:text-gray-400">{description}</p>
