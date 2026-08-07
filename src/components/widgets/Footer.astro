@@ -29,10 +29,10 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
 <footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
   <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 dark:text-slate-300">
-    <div class="flex flex-wrap justify-start gap-x-10 gap-y-10 text-left">
+    <div class="grid grid-cols-12 gap-x-6 md:gap-x-8 gap-y-10 text-left">
       {
         links.map(({ title, description, links }) => (
-          <div class="w-40 sm:w-44">
+          <div class="col-span-6 md:col-span-4 lg:col-span-2">
             <div class="text-gray-900 dark:text-gray-200 font-semibold text-sm mb-3">{title}</div>
             {description && (
               <p class="text-sm leading-relaxed text-muted dark:text-gray-400">{description}</p>
@@ -57,8 +57,8 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
       }
     </div>
 
-    <div class="mt-10 md:mt-12 pt-6 border-t border-gray-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center md:justify-center gap-4">
-      <div class="text-sm text-muted dark:text-gray-400 flex flex-wrap items-center justify-center gap-x-2">
+    <div class="mt-10 md:mt-12 pt-6 border-t border-gray-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="text-sm text-muted dark:text-gray-400 flex flex-wrap items-center gap-x-2">
         <span><Fragment set:html={footNote} /></span>
         <span class="text-muted/50">·</span>
         <a class="hover:text-link dark:hover:text-white transition duration-150 ease-in-out" href={getPermalink('/privacy')}>Privacy Policy</a>
