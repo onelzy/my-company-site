@@ -151,7 +151,7 @@ const solutionSlides = [
 
 <Layout metadata={metadata}>
   <!-- ===== 1. Hero Carousel ===== -->
-  <section class="hero-carousel relative w-full overflow-hidden md:min-h-[680px] lg:min-h-[740px]" id="heroSection">
+  <section class="hero-carousel relative w-full overflow-hidden md:min-h-[680px] lg:min-h-[760px]" id="heroSection">
     {
       heroSlides.map((slide, i) => (
         <div
@@ -187,18 +187,16 @@ const solutionSlides = [
                 </div>
               </div>
               <div class="flex items-center justify-center">
-                <div class="w-full max-w-sm p-4 sm:p-6 md:max-w-md lg:max-w-xl rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
-                  <img
-                    src={slide.imgSrc}
-                    alt={
-                      i === 0
-                        ? 'OWON PC321 three-phase power clamp and PC341 multi-circuit smart energy meter'
-                        : slide.title
-                    }
-                    class="w-full h-auto object-contain rounded-xl drop-shadow-2xl lg:w-auto lg:max-h-[480px] lg:block lg:mx-auto"
-                    loading="eager"
-                  />
-                </div>
+                <img
+                  src={slide.imgSrc}
+                  alt={
+                    i === 0
+                      ? 'OWON PC321 three-phase power clamp and PC341 multi-circuit smart energy meter'
+                      : slide.title
+                  }
+                  class="w-full h-auto object-contain lg:w-auto lg:max-h-[560px] lg:block lg:mx-auto"
+                  loading="eager"
+                />
               </div>
             </div>
           </div>
