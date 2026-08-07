@@ -24,8 +24,7 @@ export interface Props {
 
 const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
 
-const brandTagline =
-  'OWON Technology — professional smart energy solutions provider. Smart meters, thermostats, senior care devices, hotel control systems and IoT platforms for B2B customers worldwide.';
+const brandTagline = 'OWON Technology — smart IoT devices and solutions for B2B customers worldwide.';
 const contactEmail = 'info@owon-iot.com';
 ---
 
@@ -35,8 +34,8 @@ const contactEmail = 'info@owon-iot.com';
     <div class="grid grid-cols-12 gap-x-8 gap-y-10">
       <div class="col-span-12 lg:col-span-4">
         <a class="inline-block" href={getHomePermalink()}>
-          <img src="/images/logo.png" alt="OWON" class="h-9 w-auto dark:hidden" />
-          <img src="/images/logo-white.png" alt="OWON" class="h-9 w-auto hidden dark:block" />
+          <img src="/images/logo.png" alt="OWON" class="h-7 w-auto dark:hidden" />
+          <img src="/images/logo-white.png" alt="OWON" class="h-7 w-auto hidden dark:block" />
         </a>
         <p class="mt-4 text-sm leading-relaxed text-muted dark:text-gray-400 max-w-sm">{brandTagline}</p>
         <a
