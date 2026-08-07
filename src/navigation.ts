@@ -105,8 +105,12 @@ export const footerData = {
     },
     {
       title: 'About',
-      description: 'XIAMEN OWON TECHNOLOGY CO.,LTD. — smart IoT devices and solutions for B2B customers worldwide.',
-      links: [],
+      links: [
+        { text: 'About Us', href: getPermalink('/about') },
+        { text: 'Contact Us', href: getPermalink('/contact-sales') },
+        { text: 'Privacy Policy', href: getPermalink('/privacy') },
+        { text: 'Terms of Use', href: getPermalink('/terms') },
+      ],
     },
   ],
   secondaryLinks: [],
