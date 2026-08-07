@@ -1,5 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { getPermalink } from '~/utils/permalinks';
 
 interface Link {
   text?: string;
@@ -10,6 +11,7 @@ interface Link {
 
 interface Links {
   title?: string;
+  description?: string;
   links: Array<Link>;
 }
 
@@ -29,9 +31,12 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-14 dark:text-slate-300">
     <div class="flex flex-wrap justify-start gap-x-10 gap-y-10 text-left">
       {
-        links.map(({ title, links }) => (
+        links.map(({ title, description, links }) => (
           <div class="w-40 sm:w-44">
             <div class="text-gray-900 dark:text-gray-200 font-semibold text-sm mb-3">{title}</div>
+            {description && (
+              <p class="text-sm leading-relaxed text-muted dark:text-gray-400">{description}</p>
+            )}
             {links && Array.isArray(links) && links.length > 0 && (
               <ul class="text-sm space-y-2.5">
                 {links.map(({ text, href, ariaLabel }) => (
@@ -53,8 +58,12 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
     </div>
 
     <div class="mt-10 md:mt-12 pt-6 border-t border-gray-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center md:justify-center gap-4">
-      <div class="text-sm text-muted dark:text-gray-400">
-        <Fragment set:html={footNote} />
+      <div class="text-sm text-muted dark:text-gray-400 flex flex-wrap items-center justify-center gap-x-2">
+        <span><Fragment set:html={footNote} /></span>
+        <span class="text-muted/50">·</span>
+        <a class="hover:text-link dark:hover:text-white transition duration-150 ease-in-out" href={getPermalink('/privacy')}>Privacy Policy</a>
+        <span class="text-muted/50">·</span>
+        <a class="hover:text-link dark:hover:text-white transition duration-150 ease-in-out" href={getPermalink('/terms')}>Terms of Use</a>
       </div>
       {
         socialLinks?.length ? (

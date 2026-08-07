@@ -92,15 +92,6 @@ export const footerData = {
       ],
     },
     {
-      title: 'About',
-      links: [
-        { text: 'About Us', href: getPermalink('/about') },
-        { text: 'Contact Sales', href: getPermalink('/contact-sales') },
-        { text: 'Privacy Policy', href: getPermalink('/privacy') },
-        { text: 'Terms of Use', href: getPermalink('/terms') },
-      ],
-    },
-    {
       title: 'Developers',
       links: [
         { text: 'Developer Center', href: getPermalink('/developers') },
@@ -111,6 +102,11 @@ export const footerData = {
         { text: 'Home Assistant', href: getPermalink('/developers/ha') },
         { text: 'Code Examples', href: getPermalink('/developers/examples') },
       ],
+    },
+    {
+      title: 'About',
+      description: 'XIAMEN OWON TECHNOLOGY CO.,LTD. — smart IoT devices and solutions for B2B customers worldwide.',
+      links: [],
     },
   ],
   secondaryLinks: [],
