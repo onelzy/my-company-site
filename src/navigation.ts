@@ -60,7 +60,7 @@ export const headerData = {
 export const footerData = {
   links: [
     {
-      title: 'Products & Solutions',
+      title: 'Products',
       links: [
         { text: 'Smart Energy Meters', href: getPermalink('/products?dim=type&type=smart-meters') },
         { text: 'Smart Thermostats', href: getPermalink('/products?dim=type&type=thermostats') },
@@ -96,7 +96,6 @@ export const footerData = {
       links: [
         { text: 'About Us', href: getPermalink('/about') },
         { text: 'Contact Sales', href: getPermalink('/contact-sales') },
-        { text: `✉️ ${contactEmail}`, href: `mailto:${contactEmail}` },
         { text: 'Privacy Policy', href: getPermalink('/privacy') },
         { text: 'Terms of Use', href: getPermalink('/terms') },
       ],
