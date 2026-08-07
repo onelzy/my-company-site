@@ -64,9 +64,9 @@ export const footerData = {
       links: [
         { text: 'Smart Energy Meters', href: getPermalink('/products?dim=type&type=smart-meters') },
         { text: 'Smart Thermostats', href: getPermalink('/products?dim=type&type=thermostats') },
-        { text: 'Hotel Control Systems', href: getPermalink('/products?dim=type&type=hotel-control') },
-        { text: 'Senior Care Solutions', href: getPermalink('/products?dim=type&type=senior-care') },
-        { text: 'EdgeEco IoT Platform', href: getPermalink('/products?dim=type&type=software-platforms') },
+        { text: 'Hotel Control', href: getPermalink('/products?dim=type&type=hotel-control') },
+        { text: 'Senior Care', href: getPermalink('/products?dim=type&type=senior-care') },
+        { text: 'Software & Platforms', href: getPermalink('/products?dim=type&type=software-platforms') },
         { text: 'All Products →', href: getPermalink('/products') },
       ],
     },
@@ -92,12 +92,24 @@ export const footerData = {
       ],
     },
     {
-      title: 'Company',
+      title: 'About',
       links: [
         { text: 'About Us', href: getPermalink('/about') },
         { text: 'Contact Sales', href: getPermalink('/contact-sales') },
         { text: 'Privacy Policy', href: getPermalink('/privacy') },
         { text: 'Terms of Use', href: getPermalink('/terms') },
+      ],
+    },
+    {
+      title: 'Developers',
+      links: [
+        { text: 'Developer Center', href: getPermalink('/developers') },
+        { text: 'HTTP Server API', href: getPermalink('/developers/api') },
+        { text: 'ZigBee Clusters', href: getPermalink('/developers/zigbee') },
+        { text: 'MQTT Quick Start', href: getPermalink('/developers/mqtt') },
+        { text: 'SDKs & Libraries', href: getPermalink('/developers/sdks') },
+        { text: 'Home Assistant', href: getPermalink('/developers/ha') },
+        { text: 'Code Examples', href: getPermalink('/developers/examples') },
       ],
     },
   ],
