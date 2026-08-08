@@ -137,8 +137,11 @@
     emailError.classList.add('hidden');
 
     var config = e.target._config || {};
+    var cfg = SCENARIO_CONFIG[config.scenario] || SCENARIO_CONFIG.price;
+    var company = (document.getElementById('lead-company') || { value: '' }).value.trim();
+    var submitBtn = document.getElementById('lead-modal-submit');
 
-    // Fire GA event
+    // Fire GA event (no-op until analytics is enabled)
     if (window.gtag) {
       window.gtag('event', 'lead_capture', {
         scenario: config.scenario,
@@ -146,36 +149,58 @@
       });
     }
 
-    // Show success
-    document.getElementById('lead-modal-form').classList.add('hidden');
-    var successDiv = document.getElementById('lead-modal-success');
-    successDiv.classList.remove('hidden');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
 
-    // For PDF scenario, add manual download link
-    var existingLink = document.getElementById('lead-modal-download-link');
-    if (existingLink) existingLink.remove();
+    var payload = new FormData();
+    payload.append('source', 'lead-modal');
+    payload.append('scenario', config.scenario || '');
+    payload.append('product', config.productName || '');
+    payload.append('email', email);
+    payload.append('company', company);
+    payload.append('pageUrl', window.location.href);
 
-    var cfg = SCENARIO_CONFIG[config.scenario];
-    if (cfg && cfg.successLink && config.pdfUrl) {
-      var linkEl = document.createElement('a');
-      linkEl.id = 'lead-modal-download-link';
-      linkEl.href = config.pdfUrl;
-      linkEl.download = '';
-      linkEl.className =
-        'inline-flex items-center gap-2 mt-3 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity';
-      linkEl.innerHTML =
-        '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Click here if download doesn\'t start';
-      document.getElementById('lead-modal-success-msg').after(linkEl);
-    }
+    fetch('/api/contact', {
+      method: 'POST',
+      body: payload,
+      headers: { Accept: 'application/json' },
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error('send failed');
+      })
+      .then(function () {
+        // Show success
+        document.getElementById('lead-modal-form').classList.add('hidden');
+        var successDiv = document.getElementById('lead-modal-success');
+        successDiv.classList.remove('hidden');
 
-    // Execute success action after delay
-    setTimeout(function () {
-      var cfg = SCENARIO_CONFIG[config.scenario];
-      if (cfg && cfg.onSuccess) {
-        cfg.onSuccess(config.pdfUrl);
-      }
-      closeModal();
-    }, 2000);
+        // For PDF scenario, add manual download link
+        var existingLink = document.getElementById('lead-modal-download-link');
+        if (existingLink) existingLink.remove();
+
+        if (cfg.successLink && config.pdfUrl) {
+          var linkEl = document.createElement('a');
+          linkEl.id = 'lead-modal-download-link';
+          linkEl.href = config.pdfUrl;
+          linkEl.download = '';
+          linkEl.className =
+            'inline-flex items-center gap-2 mt-3 px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm font-medium hover:opacity-90 transition-opacity';
+          linkEl.innerHTML =
+            '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>Click here if download doesn\'t start';
+          document.getElementById('lead-modal-success-msg').after(linkEl);
+        }
+
+        // Execute success action after delay
+        setTimeout(function () {
+          if (cfg.onSuccess) cfg.onSuccess(config.pdfUrl);
+          closeModal();
+        }, 2000);
+      })
+      .catch(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = cfg.submitLabel;
+        alert('Sorry, something went wrong. Please try again, or contact us on WhatsApp.');
+      });
   }
 
   // Event listeners

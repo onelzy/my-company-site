@@ -5,7 +5,9 @@ import Button from '~/components/ui/Button.astro';
 const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
 ---
 
-<form>
+<form id="contact-page-form" method="POST" action="/api/contact">
+  <input type="hidden" name="source" value="contact" />
+  <input type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
   {
     inputs &&
       inputs.map(
@@ -85,3 +87,59 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
     )
   }
 </form>
+
+<script is:inline>
+  (function () {
+    const form = document.getElementById('contact-page-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const emailInput = form.querySelector('input[name="email"]');
+      const email = (emailInput || { value: '' }).value.trim();
+      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      const disclaimer = form.querySelector('input[name="disclaimer"]');
+      if (disclaimer && !disclaimer.checked) {
+        alert('Please accept the privacy notice to submit the form.');
+        return;
+      }
+
+      const btn = form.querySelector('button[type="submit"]');
+      const originalLabel = btn ? btn.textContent : 'Contact us';
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+      }
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' },
+        });
+        if (!res.ok) throw new Error('send failed');
+
+        const wrap = form.parentElement;
+        form.classList.add('hidden');
+        const ok = document.createElement('div');
+        ok.className = 'text-center py-8';
+        ok.innerHTML =
+          '<div class="text-4xl mb-3">✅</div>' +
+          '<h3 class="text-lg font-semibold text-default dark:text-slate-100 mb-1">Message sent!</h3>' +
+          '<p class="text-sm text-gray-600 dark:text-gray-400">Thank you for contacting us. We will get back to you within one business day.</p>';
+        wrap.appendChild(ok);
+      } catch {
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+        }
+        alert('Sorry, something went wrong. Please try again, or email us at info@owon-iot.com.');
+      }
+    });
+  })();
+</script>

@@ -58,6 +58,15 @@ const metadata = {
           <div class="order-1 lg:order-2">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">✉️ Send us a message</h2>
             <form id="contactSalesForm" class="space-y-4" method="POST" action="/api/contact">
+              <input type="hidden" name="source" value="contact-sales" />
+              <input
+                type="text"
+                name="company_website"
+                tabindex="-1"
+                autocomplete="off"
+                aria-hidden="true"
+                class="hidden"
+              />
               <div>
                 <label for="fullName" class="block text-sm font-medium text-default dark:text-slate-300 mb-1.5">
                   Full Name *
@@ -210,22 +219,20 @@ const metadata = {
     btn.disabled = true;
 
     try {
-      // In production, POST to /api/contact (Cloudflare Worker)
-      // For now, simulate success
-      await new Promise((r) => setTimeout(r, 1000));
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error('send failed');
       form.classList.add('hidden');
       document.getElementById('contactSuccess')?.classList.remove('hidden');
-
-      if (window.gtag) {
-        window.gtag('event', 'contact_form_submit', {
-          event_category: 'lead',
-          event_label: 'contact-sales',
-        });
-      }
     } catch {
       btn.textContent = 'Send Message';
       btn.disabled = false;
-      alert('Something went wrong. Please try again or email us directly.');
+      alert(
+        'Sorry, something went wrong. Please try again, or email us directly at info@owon-iot.com or chat on WhatsApp.'
+      );
     }
   });
 </script>
