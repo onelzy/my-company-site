@@ -108,8 +108,6 @@ export const footerData = {
       links: [
         { text: 'About Us', href: getPermalink('/about') },
         { text: 'Contact Us', href: getPermalink('/contact-sales') },
-        { text: 'Privacy Policy', href: getPermalink('/privacy') },
-        { text: 'Terms of Use', href: getPermalink('/terms') },
       ],
     },
   ],
