@@ -128,7 +128,15 @@ const totalFAQs = faqCategories.reduce((sum, cat) => sum + cat.items.length, 0);
         <span class="text-default dark:text-slate-200">FAQ</span>
       </nav>
 
-      <!-- Dimension Tabs -->
+      {/* Page heading */}
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-default dark:text-slate-100">FAQ</h1>
+        <p class="text-muted dark:text-slate-400 mt-2 max-w-2xl">
+          Answers to common questions about OWON products, integrations, and ordering.
+        </p>
+      </div>
+
+      {/* Dimension Tabs */}
       <div class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-8 w-fit">
         <a
           href="/resources/documentation"
