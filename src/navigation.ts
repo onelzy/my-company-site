@@ -107,7 +107,7 @@ export const footerData = {
       title: 'About',
       links: [
         { text: 'About Us', href: getPermalink('/about') },
-        { text: 'Contact Us', href: getPermalink('/contact-sales') },
+        { text: 'Contact Us', href: getPermalink('/contact') },
       ],
     },
   ],
