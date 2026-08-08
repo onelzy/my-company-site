@@ -559,57 +559,59 @@ const solutionSlides = [
   </section>
 
   <!-- ===== 6. Latest from Blog ===== -->
-  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-default dark:text-slate-100">
-        Latest from Blog
-      </h2>
-      <div class="grid gap-6 sm:grid-cols-3">
-        {
-          latestPosts.map((post) => (
-            <a
-              href={`/blog/${post.id}`}
-              class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-md transition-all"
-            >
-              {post.data.image ? (
-                <div class="aspect-[16/10] overflow-hidden">
-                  <img
-                    src={post.data.image}
-                    alt={post.data.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-              ) : (
-                <div class="aspect-[16/10] bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/10 dark:to-transparent flex items-center justify-center">
-                  <svg class="w-10 h-10 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="1.5"
-                      d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+  {
+    latestPosts.length > 0 && (
+      <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 text-default dark:text-slate-100">
+            Latest from Blog
+          </h2>
+          <div class="grid gap-6 sm:grid-cols-3">
+            {latestPosts.map((post) => (
+              <a
+                href={`/blog/${post.id}`}
+                class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-md transition-all"
+              >
+                {post.data.image ? (
+                  <div class="aspect-[16/10] overflow-hidden">
+                    <img
+                      src={post.data.image}
+                      alt={post.data.title}
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      loading="lazy"
                     />
-                  </svg>
+                  </div>
+                ) : (
+                  <div class="aspect-[16/10] bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/10 dark:to-transparent flex items-center justify-center">
+                    <svg class="w-10 h-10 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                      />
+                    </svg>
+                  </div>
+                )}
+                <div class="p-5 flex-1">
+                  <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
+                  <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">
+                    {post.data.title}
+                  </h3>
+                  <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">
+                    {post.data.excerpt}
+                  </p>
+                  <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
+                    Read more &rarr;
+                  </span>
                 </div>
-              )}
-              <div class="p-5 flex-1">
-                <time class="text-xs text-muted dark:text-slate-400 mb-2">{formatDate(post.data.publishDate)}</time>
-                <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors mb-2 line-clamp-2">
-                  {post.data.title}
-                </h3>
-                <p class="text-sm text-muted dark:text-slate-400 leading-relaxed line-clamp-2 flex-1">
-                  {post.data.excerpt}
-                </p>
-                <span class="inline-flex items-center gap-1 mt-4 text-sm font-medium text-primary group-hover:underline">
-                  Read more &rarr;
-                </span>
-              </div>
-            </a>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
   <ContactBand />
 </Layout>
 

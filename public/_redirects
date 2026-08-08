@@ -1,9 +1,8 @@
+# Legacy case-study slugs → real case study detail pages
 # Legacy product slug aliases → canonical Keystatic slugs (real 301s at the edge).
-# Canonical slugs are also emitted via rel=canonical on the prerendered pages,
-# so even if this file is bypassed the duplicates consolidate.
 /contact-sales                            /contact                     301
 /products/pc321-ty-smart-meter       /products/pc321-w-ty/       301
 /products/pc321-ty                   /products/pc321-w-ty/       301
-/senior-care-monitoring-owon-case-study* /blog/senior-care-monitoring-owon-case-study/ 301
-/industrial-energy-submetering-owon-case-study* /blog/industrial-energy-submetering-owon-case-study/ 301
-/hotel-energy-savings-owon-case-study* /blog/hotel-energy-savings-owon-case-study/ 301
+/senior-care-monitoring-owon-case-study* /case-studies/senior-care-nursing-home/ 301
+/industrial-energy-submetering-owon-case-study* /case-studies/4g-clamp-meter-carbon/ 301
+/hotel-energy-savings-owon-case-study* /case-studies/hotel-room-management/ 301

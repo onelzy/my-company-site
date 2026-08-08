@@ -35,10 +35,10 @@ export const solutions: SolutionsEntry[] = [
       ],
       "caseStudies": [
         {
-          "title": "Automotive Manufacturer Saves 15% with Per-Machine Submetering",
-          "excerpt": "An automotive parts factory deployed OWON's PC341 multi-circuit monitors for per-machine energy tracking, integrating with existing SCADA via MQTT.",
+          "title": "Carbon Emission Monitoring with 4G Clamp-Type Smart Meter",
+          "excerpt": "Commissioned by national energy agencies to develop a carbon emission monitoring system for commercial incentive and penalty purposes. Required a smart meter that installs without disrupting existing billing systems, supports single/split/three-phase circuits from 50A to 1000A, adapts to different cellular networks, and complies with local data privacy regulations.",
           "image": "https://documents.owon-iot.com/product-images/pc341-w-mqtt/pc341-w-mqtt-01.jpg",
-          "blogSlug": "industrial-energy-submetering-owon-case-study"
+          "caseSlug": "4g-clamp-meter-carbon"
         }
       ],
       "language": "en"
@@ -72,10 +72,10 @@ export const solutions: SolutionsEntry[] = [
       ],
       "caseStudies": [
         {
-          "title": "200-Bed Senior Care Facility Cuts Night Staff by 40%",
-          "excerpt": "A senior care facility deployed OWON's SPM-915 sleep monitors and AiJuan platform, achieving 90% alert accuracy and 3-minute emergency response times.",
+          "title": "Five-Star Nursing Home — AiHome Wireless Monitoring System",
+          "excerpt": "Dual-phase project: a new 16-story smart ward building (18,000 m², 380 beds) plus retrofitting of an older building (200 beds). Required resident monitoring, environmental sensing, energy management, and temperature control. Devices had to be wireless, battery-powered, and adhesive-mounted to avoid operational disruptions. Software needed to be modular with no custom coding, deployed on a local server for data privacy and offline resilience.",
           "image": "https://documents.owon-iot.com/product-images/fds315/fds315-01.jpg",
-          "blogSlug": "senior-care-monitoring-owon-case-study"
+          "caseSlug": "senior-care-nursing-home"
         }
       ],
       "language": "en"
@@ -110,10 +110,10 @@ export const solutions: SolutionsEntry[] = [
       ],
       "caseStudies": [
         {
-          "title": "How a 200-Room European Hotel Cut Energy Costs by 30%",
-          "excerpt": "A European hotel chain deployed OWON's PC341 multi-circuit monitors and PCT513 thermostats across 200 rooms, achieving 30% HVAC energy savings.",
+          "title": "Guest Room Management System for a Chain Resort Hotel",
+          "excerpt": "The client sought a wireless IoT system to replace traditional wired BMS, which is expensive and difficult to install. They needed faster deployment, lower costs, and the ability to integrate both OWON and third-party smart devices through a unified gateway with device-level MQTT API. Some high-end locations also required Android-based touchscreen control panels.",
           "image": "https://documents.owon-iot.com/product-images/hero/thermostat-family-hero.png",
-          "blogSlug": "hotel-energy-savings-owon-case-study"
+          "caseSlug": "hotel-room-management"
         }
       ],
       "language": "en"

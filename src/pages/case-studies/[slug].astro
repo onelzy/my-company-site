@@ -1,0 +1,137 @@
+---
+// /case-studies/[slug]/ — professional case study detail page.
+// Content is 100% from official sources (2026 Catalog + AiHome brochure) —
+// no fabricated claims. See src/data/caseStudies.ts.
+import PageLayout from '~/layouts/PageLayout.astro';
+import ContactBand from '~/components/common/ContactBand.astro';
+import { SITE } from 'astrowind:config';
+import { caseStudies } from '~/data/caseStudies';
+import { products as allProducts } from '~/data/products';
+
+export function getStaticPaths() {
+  return caseStudies.map((cs) => ({ params: { slug: cs.slug } }));
+}
+
+const { slug } = Astro.params;
+const cs = caseStudies.find((c) => c.slug === slug)!;
+
+const siteOrigin = (SITE.site as string).replace(/\/+$/, '');
+const canonicalUrl = `${siteOrigin}/case-studies/${cs.slug}/`;
+
+// Related products (only models explicitly named by the source document)
+const related = allProducts.filter((p) => cs.products.includes(p.slug));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: cs.title,
+  description: cs.background,
+  author: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.' },
+  publisher: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.' },
+  mainEntityOfPage: canonicalUrl,
+};
+
+const metadata = {
+  title: cs.title,
+  description: `${cs.background.slice(0, 150)}`,
+  canonical: canonicalUrl,
+  openGraph: {
+    title: cs.title,
+    description: cs.background.slice(0, 150),
+  },
+  jsonLd,
+};
+---
+
+<PageLayout metadata={metadata}>
+  {/* Breadcrumb */}
+  <section class="py-8 lg:py-10">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <nav class="mb-6 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-primary transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <a href="/resources/case-studies" class="hover:text-primary transition-colors">Case Studies</a>
+        <span class="mx-2">/</span>
+        <span class="text-default dark:text-slate-200">{cs.title}</span>
+      </nav>
+
+      {/* Header */}
+      <div class="mb-10">
+        <span
+          class="inline-block text-xs font-semibold text-primary uppercase tracking-wide bg-primary/10 dark:bg-primary/15 px-3 py-1 rounded-full mb-4"
+        >
+          {cs.category}
+        </span>
+        <h1 class="text-3xl md:text-4xl font-bold text-default dark:text-slate-100 leading-tight mb-4">
+          {cs.title}
+        </h1>
+        <div class="flex flex-wrap gap-x-8 gap-y-2 text-sm text-muted dark:text-slate-400">
+          <span><span class="font-medium text-default dark:text-slate-200">Client:</span> {cs.client}</span>
+          <span><span class="font-medium text-default dark:text-slate-200">Location:</span> {cs.location}</span>
+          <span>
+            <span class="font-medium text-default dark:text-slate-200">Source:</span>{' '}
+            {cs.source === 'catalog' ? '2026 OWON Technology Catalog' : 'OWON Senior Care AIoT Brochure'}
+          </span>
+        </div>
+      </div>
+
+      {/* Background */}
+      <div class="prose prose-slate dark:prose-invert max-w-none mb-10">
+        <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-3">Background</h2>
+        <p class="text-default dark:text-slate-300 leading-relaxed">{cs.background}</p>
+      </div>
+
+      {/* Solution */}
+      <div class="prose prose-slate dark:prose-invert max-w-none mb-10">
+        <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-3">Our Solution</h2>
+        <p class="text-default dark:text-slate-300 leading-relaxed">{cs.solution}</p>
+      </div>
+
+      {/* Results */}
+      <div class="mb-10">
+        <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-5">Key Results</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {
+            cs.results.map((r) => (
+              <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 text-center">
+                <div class="text-2xl font-bold text-primary mb-1">{r.metric}</div>
+                <div class="text-xs text-muted dark:text-slate-400">{r.label}</div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      {/* Related products (only when the source document names them) */}
+      {
+        related.length > 0 && (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-5">Products Used</h2>
+            <div class="flex flex-wrap gap-3">
+              {related.map((p) => (
+                <a
+                  href={`/products/${p.slug}/`}
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 text-sm font-medium text-default dark:text-slate-200 hover:border-primary hover:text-primary transition-colors"
+                >
+                  {p.model || p.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
+      {/* More case studies */}
+      <div class="mb-10">
+        <a
+          href="/resources/case-studies"
+          class="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+        >
+          ← All Case Studies
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <ContactBand productName={cs.title} />
+</PageLayout>

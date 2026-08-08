@@ -11,6 +11,7 @@
 import { SITE } from 'astrowind:config';
 import { getCollection } from 'astro:content';
 import { products } from '~/data/products';
+import { caseStudies } from '~/data/caseStudies';
 
 export const prerender = true;
 
@@ -79,7 +80,12 @@ export const GET = async () => {
     urls.push({ loc: `${baseUrl}/products/${slug}/`, changefreq: 'weekly', priority: '0.8' });
   }
 
-  // 4. Blog post detail pages (real posts only)
+  // 4. Case study detail pages (8 real cases from catalog + brochure)
+  for (const cs of caseStudies) {
+    urls.push({ loc: `${baseUrl}/case-studies/${cs.slug}/`, changefreq: 'monthly', priority: '0.7' });
+  }
+
+  // 5. Blog post detail pages (real posts only)
   const posts = await getCollection('post');
   for (const post of posts) {
     const id = post.id.replace(/\.(md|mdx)$/, '');

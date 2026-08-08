@@ -72,7 +72,7 @@ const sortedGroups = [...groupedProducts.entries()].sort(
   ([a], [b]) => productTypeOrder.indexOf(a) - productTypeOrder.indexOf(b)
 );
 
-const relatedCaseStudies = (Array.isArray(caseStudies) ? caseStudies : []) as Array<{ title: string; excerpt: string; image: string; blogSlug: string }>;
+const relatedCaseStudies = (Array.isArray(caseStudies) ? caseStudies : []) as Array<{ title: string; excerpt: string; image: string; caseSlug: string }>;
 const hasCaseStudies = relatedCaseStudies.length > 0;
 ---
 
@@ -278,7 +278,7 @@ const hasCaseStudies = relatedCaseStudies.length > 0;
             <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedCaseStudies.map((cs) => (
                 <a
-                  href={`/blog/${cs.blogSlug}/`}
+                  href={`/case-studies/${cs.caseSlug}/`}
                   class="group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
                 >
                   <div class="h-40 bg-gray-100 dark:bg-slate-700 overflow-hidden relative">
