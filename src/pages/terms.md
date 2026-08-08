@@ -57,5 +57,3 @@ If you have any questions about these Terms, please contact us:
 - **Company**: XIAMEN OWON TECHNOLOGY CO.,LTD.
 - **Website**: [https://www.owon-iot.com](https://www.owon-iot.com)
 - **Email**: [info@owon-iot.com](mailto:info@owon-iot.com)
-- **Phone**: +86 592 6300186
-- **WhatsApp**: +86 186 5013 9895
