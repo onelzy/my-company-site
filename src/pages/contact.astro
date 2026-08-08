@@ -286,9 +286,16 @@ const metadata = {
     btn.disabled = true;
 
     try {
+      const body = new FormData(form);
+      // Session tracking (entry referrer, duration, pages, UTM)
+      const track = typeof window.__leadTrack === 'function' ? window.__leadTrack() : {};
+      Object.keys(track).forEach((k) => {
+        if (track[k]) body.append(k, String(track[k]));
+      });
+
       const res = await fetch('/api/contact', {
         method: 'POST',
-        body: new FormData(form),
+        body,
         headers: { Accept: 'application/json' },
       });
       if (!res.ok) throw new Error('send failed');

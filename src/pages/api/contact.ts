@@ -85,6 +85,20 @@ export const POST: APIRoute = async ({ request, locals }) => {
     const product = cleanField(data.product || '');
     const pageUrl = cleanField(data.pageUrl || '');
 
+    // Visitor geo/IP (injected by Cloudflare at the edge — free, no API).
+    const country = cleanField(request.headers.get('cf-ipcountry') || '');
+    const ip = cleanField(request.headers.get('cf-connecting-ip') || '');
+
+    // Session tracking (client-side, from lead-track.js).
+    const referrer = cleanField(data.referrer || '');
+    const entryUrl = cleanField(data.entryUrl || '');
+    const timeOnSite = cleanField(data.timeOnSite || '');
+    const timeOnPage = cleanField(data.timeOnPage || '');
+    const pagesViewed = cleanField(data.pagesViewed || '');
+    const utmSource = cleanField(data.utmSource || '');
+    const utmMedium = cleanField(data.utmMedium || '');
+    const utmCampaign = cleanField(data.utmCampaign || '');
+
     const lines: string[] = [];
     lines.push(`🔔 新询盘 — ${source}`);
     if (scenario) lines.push(`📌 场景: ${scenario}`);
@@ -95,6 +109,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (phone) lines.push(`📞 电话: ${phone}`);
     if (message) lines.push(`💬 留言:\n${message}`);
     if (pageUrl) lines.push(`🔗 来源页: ${pageUrl}`);
+    if (country) lines.push(`🌍 国家: ${country}`);
+    if (ip) lines.push(`📡 IP: ${ip}`);
+    if (referrer && referrer !== 'direct') lines.push(`🔗 入口来源: ${referrer}`);
+    if (entryUrl && entryUrl !== pageUrl) lines.push(`📍 落地页: ${entryUrl}`);
+    const durations: string[] = [];
+    if (timeOnSite) durations.push(`本站 ${timeOnSite}`);
+    if (timeOnPage) durations.push(`本页 ${timeOnPage}`);
+    if (durations.length) lines.push(`⏱ 停留: ${durations.join(' · ')}`);
+    if (pagesViewed && pagesViewed !== '1') lines.push(`📄 浏览页数: ${pagesViewed}`);
+    if (utmSource) {
+      lines.push(`🎯 渠道: ${utmSource}${utmMedium ? '/' + utmMedium : ''}${utmCampaign ? ` (${utmCampaign})` : ''}`);
+    }
     lines.push(`🕐 ${new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false })}`);
 
     const text = lines.join('\n');

@@ -143,6 +143,12 @@
     payload.append('company', company);
     payload.append('pageUrl', window.location.href);
 
+    // Session tracking (entry referrer, duration, pages, UTM)
+    var track = typeof window.__leadTrack === 'function' ? window.__leadTrack() : {};
+    Object.keys(track).forEach(function (k) {
+      if (track[k]) payload.append(k, String(track[k]));
+    });
+
     fetch('/api/contact', {
       method: 'POST',
       body: payload,
