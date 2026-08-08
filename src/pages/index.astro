@@ -3,6 +3,7 @@
 export const prerender = true;
 
 import Layout from '~/layouts/PageLayout.astro';
+import ContactBand from '~/components/common/ContactBand.astro';
 
 import { getPermalink } from '~/utils/permalinks';
 import { getCollection } from 'astro:content';
@@ -609,6 +610,7 @@ const solutionSlides = [
       </div>
     </div>
   </section>
+  <ContactBand />
 </Layout>
 
 <script>
