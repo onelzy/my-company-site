@@ -203,13 +203,24 @@ const metadata = {
 </Layout>
 
 <script is:inline>
+  // Show success if redirected back from a no-JS native submit.
+  (function () {
+    if (new URLSearchParams(window.location.search).get('thanks') === '1') {
+      const form = document.getElementById('contactSalesForm');
+      const success = document.getElementById('contactSuccess');
+      if (form) form.classList.add('hidden');
+      if (success) success.classList.remove('hidden');
+    }
+  })();
+
   document.getElementById('contactSalesForm')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const form = e.target as HTMLFormElement;
-    const btn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
 
     // Basic validation
-    const email = (form.querySelector('#businessEmail') as HTMLInputElement)?.value?.trim();
+    const emailInput = form.querySelector('#businessEmail');
+    const email = (emailInput && emailInput.value ? emailInput.value : '').trim();
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       alert('Please enter a valid business email address.');
       return;

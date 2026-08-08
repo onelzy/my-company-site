@@ -110,10 +110,19 @@ export const POST: APIRoute = async ({ request, locals }) => {
       return json({ ok: false, error: 'notify_failed' }, 502);
     }
 
-    // Native (no-JS) submits navigate to the response; send them back.
+    // Native (no-JS) submits navigate to the response; send them back with
+    // an HTML redirect (meta refresh + JS fallback — works everywhere).
     const acceptsHtml = (request.headers.get('accept') || '').includes('text/html');
     if (acceptsHtml) {
-      return new Response(null, { status: 303, headers: { Location: '/contact-sales?thanks=1' } });
+      const html =
+        '<!doctype html><html><head><meta charset="utf-8">' +
+        '<meta http-equiv="refresh" content="0;url=/contact-sales?thanks=1">' +
+        '<script>location.replace("/contact-sales?thanks=1")</scr' +
+        'ipt></head><body></body></html>';
+      return new Response(html, {
+        status: 200,
+        headers: { 'content-type': 'text/html; charset=utf-8' },
+      });
     }
     return json({ ok: true });
   } catch (err) {
