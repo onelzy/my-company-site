@@ -1,6 +1,8 @@
 ---
 // WhatsAppButton.astro — Floating WhatsApp chat button
-// Targets consumer WhatsApp for customers to message the business account
+// Targets consumer WhatsApp for customers to message the business account.
+// Appears after the visitor scrolls ~300px (hides above the fold so it
+// doesn't compete with the header CTA); English copy for overseas buyers.
 export interface Props {
   phone: string;
   productName?: string;
@@ -12,14 +14,19 @@ export interface Props {
 const { phone, productName = '', company = '', pageUrl = '', siteUrl = '' } = Astro.props;
 
 const fullUrl = siteUrl && pageUrl ? `${siteUrl}${pageUrl}` : '';
-const urlLine = fullUrl ? `\n产品链接: ${fullUrl}` : '';
+const urlLine = fullUrl ? `\nProduct link: ${fullUrl}` : '';
 
-const message = productName ? `你好！我想咨询一下 ${productName}${urlLine}` : `你好！我想了解更多产品信息${urlLine}`;
+const message = productName
+  ? `Hi! I'm interested in ${productName}.${urlLine}`
+  : `Hi! I'd like to learn more about your products.${urlLine}`;
 
 const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 ---
 
-<div class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2">
+<div
+  id="whatsapp-fab"
+  class="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-2 opacity-0 translate-y-3 pointer-events-none transition-all duration-300"
+>
   {
     company && (
       <span class="text-xs text-muted dark:text-slate-400 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm border border-gray-100 dark:border-slate-700">
@@ -41,7 +48,7 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
     </svg>
     <span
       class="max-w-0 overflow-hidden group-hover:max-w-[200px] transition-all duration-300 whitespace-nowrap font-medium text-sm"
-      >咨询</span
+      >Chat</span
     >
     <span class="absolute -top-1 -right-1 flex h-3 w-3">
       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -49,3 +56,28 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
     </span>
   </a>
 </div>
+
+<script is:inline>
+  // Pure JS (is:inline — no TS syntax allowed). Show the FAB only after
+  // the visitor scrolls 300px, so it never competes with the header CTA.
+  (function () {
+    if (window.__whatsappFabBound) return; // avoid duplicate listeners across View Transitions
+    window.__whatsappFabBound = true;
+
+    var fab = document.getElementById('whatsapp-fab');
+    if (!fab) return;
+
+    var SHOW_AT = 300;
+
+    function update() {
+      if (window.scrollY > SHOW_AT) {
+        fab.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+      } else {
+        fab.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+      }
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>
