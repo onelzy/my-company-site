@@ -47,14 +47,7 @@ export const headerData = {
       href: getPermalink('/about'),
     },
   ],
-  actions: [
-    {
-      text: 'WhatsApp',
-      href: `https://wa.me/${whatsappNumber}`,
-      icon: 'tabler:brand-whatsapp',
-    },
-    { text: 'Contact Us', href: getPermalink('/contact'), icon: 'tabler:message' },
-  ],
+  actions: [{ text: 'Contact Us', href: getPermalink('/contact'), icon: 'tabler:message' }],
 };
 
 export const footerData = {

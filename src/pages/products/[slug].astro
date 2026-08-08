@@ -4,7 +4,6 @@
 import type { Product } from '~/types';
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
-import WhatsAppButton from '~/components/common/WhatsAppButton.astro';
 import ProductGrid from '~/components/products/ProductGrid.astro';
 import { SITE } from 'astrowind:config';
 import { PRODUCT_TYPE_LABELS, TECH_SOLUTION_LABELS, SPEC_LABELS, getLocalizedLabel } from '~/utils/products';
@@ -1793,14 +1792,14 @@ const faqSchema = {
             ) : (
               <a
                 href="/contact"
-                class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+                class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-opacity inline-flex items-center gap-2"
               >
                 Request Datasheet
               </a>
             )
           }
           <button
-            class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors inline-flex items-center gap-2"
+            class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
             onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' }) : (window.location.href = '/contact')`}
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1813,23 +1812,10 @@ const faqSchema = {
             </svg>
             Get Pricing
           </button>
-          <a
-            href="/contact"
-            class="px-6 py-3 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors inline-flex items-center gap-2"
-          >
-            Contact Us →
-          </a>
         </div>
       </div>
     </div>
   </section>
-  <WhatsAppButton
-    phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || '8618650139895'}
-    productName={String(name)}
-    company={(SITE as unknown as Record<string, Record<string, string>>).contact?.company || 'OWON Technology'}
-    pageUrl={`/products/${slug}`}
-    siteUrl="https://www.owon-iot.com"
-  />
 </PageLayout>
 
 {galleryMode && (
