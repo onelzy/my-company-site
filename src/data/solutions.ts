@@ -37,7 +37,7 @@ export const solutions: SolutionsEntry[] = [
         {
           "title": "Automotive Manufacturer Saves 15% with Per-Machine Submetering",
           "excerpt": "An automotive parts factory deployed OWON's PC341 multi-circuit monitors for per-machine energy tracking, integrating with existing SCADA via MQTT.",
-          "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          "image": "https://documents.owon-iot.com/product-images/pc341-w-mqtt/pc341-w-mqtt-01.jpg",
           "blogSlug": "industrial-energy-submetering-owon-case-study"
         }
       ],
@@ -74,7 +74,7 @@ export const solutions: SolutionsEntry[] = [
         {
           "title": "200-Bed Senior Care Facility Cuts Night Staff by 40%",
           "excerpt": "A senior care facility deployed OWON's SPM-915 sleep monitors and AiJuan platform, achieving 90% alert accuracy and 3-minute emergency response times.",
-          "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          "image": "https://documents.owon-iot.com/product-images/fds315/fds315-01.jpg",
           "blogSlug": "senior-care-monitoring-owon-case-study"
         }
       ],
@@ -112,7 +112,7 @@ export const solutions: SolutionsEntry[] = [
         {
           "title": "How a 200-Room European Hotel Cut Energy Costs by 30%",
           "excerpt": "A European hotel chain deployed OWON's PC341 multi-circuit monitors and PCT513 thermostats across 200 rooms, achieving 30% HVAC energy savings.",
-          "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+          "image": "https://documents.owon-iot.com/product-images/hero/thermostat-family-hero.png",
           "blogSlug": "hotel-energy-savings-owon-case-study"
         }
       ],

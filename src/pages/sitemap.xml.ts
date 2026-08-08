@@ -12,7 +12,7 @@ import { SITE } from 'astrowind:config';
 import { getCollection } from 'astro:content';
 import { products } from '~/data/products';
 
-export const prerender = false;
+export const prerender = true;
 
 /** Derive the canonical Keystatic slug for a product entry. */
 function productSlug(p: { data?: { slug?: { slug?: string }; name?: string }; slug: string }): string {

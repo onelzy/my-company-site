@@ -26,17 +26,18 @@ When you contact us through the Website, by email, WhatsApp or other channels, w
 
 When you visit the Website, our servers may automatically record standard technical information, including:
 
-- Your IP address
+- Your IP address and the country or region associated with it
 - Browser type and version
 - Operating system
 - Pages you visit and the time and date of your visit
 - Referring website addresses
+- Approximate time spent on the Website and number of pages viewed during your visit
 
-This information is used in aggregate to understand how visitors use the Website and to improve its performance and usability. It does not identify you personally.
+This information is used to protect the Website against abuse and spam, to understand where inquiries come from, and in aggregate to improve the Website's performance and usability.
 
-### Cookies
+### Cookies and Local Storage
 
-The Website may use essential cookies to support basic functionality such as remembering your language preference. We do not currently use advertising or third-party analytics cookies. If this changes in the future, we will update this Privacy Policy and, where required, obtain your consent.
+The Website may use essential cookies and session-based browser storage (which is cleared when you close your browser) to support basic functionality such as remembering your language preference and, when you submit an inquiry, to help us understand how you found the Website. We do not currently use advertising or third-party analytics cookies. If this changes in the future, we will update this Privacy Policy and, where required, obtain your consent.
 
 ## How We Use Your Information
 
