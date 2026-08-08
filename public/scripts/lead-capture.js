@@ -37,7 +37,7 @@
       showCompany: true,
       successMsg: 'We will send pricing details to your email shortly.',
       onSuccess: function () {
-        window.location.href = '/contact-sales';
+        window.location.href = '/contact';
       },
     },
     pdf: {

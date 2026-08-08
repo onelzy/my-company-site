@@ -129,7 +129,7 @@ const hasCaseStudies = relatedCaseStudies.length > 0;
             }
           </div>
           <a
-            href="/contact-sales"
+            href="/contact"
             class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity w-fit"
             >Request a Demo →</a
           >
@@ -348,21 +348,21 @@ const hasCaseStudies = relatedCaseStudies.length > 0;
         <div class="flex flex-wrap justify-center gap-3">
           <button
             class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
-            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${title}' }) : (window.location.href = '/contact-sales')`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${title}' }) : (window.location.href = '/contact')`}
           >
             Request Pricing
           </button>
           <button
             class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
-            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'case', productName: '${title}' }) : (window.location.href = '/contact-sales')`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'case', productName: '${title}' }) : (window.location.href = '/contact')`}
           >
             Download Case Study
           </button>
           <a
-            href="/contact-sales"
+            href="/contact"
             class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
           >
-            Contact Sales →
+            Contact Us →
           </a>
         </div>
       </div>

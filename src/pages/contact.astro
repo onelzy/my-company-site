@@ -1,7 +1,7 @@
 ---
 /**
- * Contact Sales — Minimal conversion page (no global nav).
- * Embed Calendly + contact form. Pre-fills email from query params.
+ * Contact — single contact page (no global nav).
+ * Form + company info card. Pre-fills email from query params.
  */
 import Layout from '~/layouts/Layout.astro';
 import Logo from '~/components/Logo.astro';
@@ -10,8 +10,8 @@ const prefilledEmail = url.searchParams.get('email') || '';
 const prefilledCompany = url.searchParams.get('company') || '';
 
 const metadata = {
-  title: 'Contact Sales',
-  description: 'Get in touch with our sales team for product pricing, demos, and custom solutions.',
+  title: 'Contact Us',
+  description: 'Get in touch with our team for product pricing, demos, technical support, and custom solutions.',
 };
 ---
 
@@ -30,7 +30,7 @@ const metadata = {
     <main class="flex-1 py-8 sm:py-16">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h1 class="text-3xl font-bold sm:text-4xl text-default dark:text-slate-100 mb-3">Let's Talk</h1>
+          <h1 class="text-3xl font-bold sm:text-4xl text-default dark:text-slate-100 mb-3">Contact Us</h1>
           <p class="text-lg text-muted dark:text-slate-400 max-w-xl mx-auto">
             Tell us about your project and we'll get back to you within one business day.
           </p>
@@ -103,7 +103,7 @@ const metadata = {
           <div class="order-1 lg:order-2">
             <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">✉️ Send us a message</h2>
             <form id="contactSalesForm" class="space-y-4" method="POST" action="/api/contact">
-              <input type="hidden" name="source" value="contact-sales" />
+              <input type="hidden" name="source" value="contact" />
               <input
                 type="text"
                 name="company_website"

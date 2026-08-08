@@ -53,7 +53,7 @@ export const headerData = {
       href: `https://wa.me/${whatsappNumber}`,
       icon: 'tabler:brand-whatsapp',
     },
-    { text: 'Contact Sales', href: getPermalink('/contact-sales'), icon: 'tabler:message' },
+    { text: 'Contact Us', href: getPermalink('/contact'), icon: 'tabler:message' },
   ],
 };
 
@@ -107,7 +107,7 @@ export const footerData = {
       title: 'About',
       links: [
         { text: 'About Us', href: getPermalink('/about') },
-        { text: 'Contact Us', href: getPermalink('/contact-sales') },
+        { text: 'Contact Us', href: getPermalink('/contact') },
       ],
     },
   ],

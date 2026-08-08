@@ -1,7 +1,7 @@
 /**
  * POST /api/contact — lead capture endpoint.
  *
- * Receives submissions from the contact-sales form, the contact page form,
+ * Receives submissions from the contact form, the lead-capture modal,
  * and the global lead-capture modal, then pushes a notification to the OWON
  * Feishu group via a custom-bot webhook.
  *
@@ -116,8 +116,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
     if (acceptsHtml) {
       const html =
         '<!doctype html><html><head><meta charset="utf-8">' +
-        '<meta http-equiv="refresh" content="0;url=/contact-sales?thanks=1">' +
-        '<script>location.replace("/contact-sales?thanks=1")</scr' +
+        '<meta http-equiv="refresh" content="0;url=/contact?thanks=1">' +
+        '<script>location.replace("/contact?thanks=1")</scr' +
         'ipt></head><body></body></html>';
       return new Response(html, {
         status: 200,

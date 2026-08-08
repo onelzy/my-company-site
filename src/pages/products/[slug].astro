@@ -1792,7 +1792,7 @@ const faqSchema = {
               </a>
             ) : (
               <a
-                href="/contact-sales"
+                href="/contact"
                 class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
               >
                 Request Datasheet
@@ -1801,7 +1801,7 @@ const faqSchema = {
           }
           <button
             class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors inline-flex items-center gap-2"
-            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' }) : (window.location.href = '/contact-sales')`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' }) : (window.location.href = '/contact')`}
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -1814,10 +1814,10 @@ const faqSchema = {
             Get Pricing
           </button>
           <a
-            href="/contact-sales"
+            href="/contact"
             class="px-6 py-3 border border-gray-300 dark:border-slate-600 text-default dark:text-slate-200 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors inline-flex items-center gap-2"
           >
-            Contact Sales →
+            Contact Us →
           </a>
         </div>
       </div>
