@@ -41,7 +41,6 @@ export const GET = async () => {
   const staticRoutes: Array<[string, string, string]> = [
     ['', 'weekly', '1.0'],
     ['/about', 'monthly', '0.5'],
-    ['/contact', 'monthly', '0.5'],
     ['/contact-sales', 'monthly', '0.6'],
     ['/products', 'weekly', '0.9'],
     ['/solutions', 'weekly', '0.9'],

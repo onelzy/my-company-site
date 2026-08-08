@@ -1,6 +1,7 @@
 # Legacy product slug aliases → canonical Keystatic slugs (real 301s at the edge).
 # Canonical slugs are also emitted via rel=canonical on the prerendered pages,
 # so even if this file is bypassed the duplicates consolidate.
+/contact                                 /contact-sales                301
 /products/pc321-ty-smart-meter       /products/pc321-w-ty/       301
 /products/pc321-ty                   /products/pc321-w-ty/       301
 /senior-care-monitoring-owon-case-study* /blog/senior-care-monitoring-owon-case-study/ 301
