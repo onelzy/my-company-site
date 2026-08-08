@@ -6,25 +6,8 @@
 (function () {
   'use strict';
 
-  const FREE_DOMAINS = [
-    'gmail.com',
-    'yahoo.com',
-    'hotmail.com',
-    'outlook.com',
-    'aol.com',
-    'icloud.com',
-    'mail.com',
-    'protonmail.com',
-    'qq.com',
-    '163.com',
-    '126.com',
-    'sina.com',
-    'sohu.com',
-  ];
-
-  function isValidBusinessEmail(email) {
-    const domain = email.split('@')[1]?.toLowerCase();
-    return domain && !FREE_DOMAINS.includes(domain) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   const SCENARIO_CONFIG = {
@@ -130,7 +113,8 @@
     var email = document.getElementById('lead-email').value.trim();
     var emailError = document.getElementById('lead-email-error');
 
-    if (!isValidBusinessEmail(email)) {
+    if (!isValidEmail(email)) {
+      emailError.textContent = 'Please enter a valid email address.';
       emailError.classList.remove('hidden');
       return;
     }
