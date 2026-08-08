@@ -84,9 +84,14 @@ const textDirection = I18N.textDirection;
     <LeadCaptureModal />
 
     <!-- Global floating WhatsApp button (site-wide single entry for WhatsApp) -->
-    <WhatsAppButton
-      phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || '8618650139895'}
-      company={(SITE as unknown as Record<string, Record<string, string>>).contact?.company || 'OWON Technology'}
-    />
+    <!-- Hidden on /contact — that page already has WhatsApp quick buttons + number -->
+    {
+      Astro.url.pathname !== '/contact' && (
+        <WhatsAppButton
+          phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || '8618650139895'}
+          company={(SITE as unknown as Record<string, Record<string, string>>).contact?.company || 'OWON Technology'}
+        />
+      )
+    }
   </body>
 </html>
