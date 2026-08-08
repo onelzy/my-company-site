@@ -64,10 +64,10 @@ const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
     if (window.__whatsappFabBound) return; // avoid duplicate listeners across View Transitions
     window.__whatsappFabBound = true;
 
-    var fab = document.getElementById('whatsapp-fab');
+    const fab = document.getElementById('whatsapp-fab');
     if (!fab) return;
 
-    var SHOW_AT = 300;
+    const SHOW_AT = 300;
 
     function update() {
       if (window.scrollY > SHOW_AT) {
