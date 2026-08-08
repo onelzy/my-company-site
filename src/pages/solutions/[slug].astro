@@ -3,6 +3,7 @@
 // Data from pre-generated src/data/solutions.ts
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
+import ContactBand from '~/components/common/ContactBand.astro';
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { solutions as rawSolutions } from '~/data/solutions';
 import { products as rawProducts } from '~/data/products';
@@ -361,4 +362,5 @@ const hasCaseStudies = relatedCaseStudies.length > 0;
       </div>
     </div>
   </section>
+  <ContactBand productName={title} />
 </PageLayout>

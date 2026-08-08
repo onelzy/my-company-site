@@ -12,8 +12,6 @@ import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
 import LeadCaptureModal from '~/components/common/LeadCaptureModal.astro';
-import WhatsAppButton from '~/components/common/WhatsAppButton.astro';
-import { SITE } from 'astrowind:config';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -82,16 +80,5 @@ const textDirection = I18N.textDirection;
 
     <!-- Lead Capture Modal (global) -->
     <LeadCaptureModal />
-
-    <!-- Global floating WhatsApp button (site-wide single entry for WhatsApp) -->
-    <!-- Hidden on /contact — that page already has WhatsApp quick buttons + number -->
-    {
-      Astro.url.pathname !== '/contact' && (
-        <WhatsAppButton
-          phone={(SITE as unknown as Record<string, Record<string, string>>).contact?.whatsapp || '8618650139895'}
-          company={(SITE as unknown as Record<string, Record<string, string>>).contact?.company || 'OWON Technology'}
-        />
-      )
-    }
   </body>
 </html>
