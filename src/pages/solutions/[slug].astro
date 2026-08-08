@@ -3,7 +3,7 @@
 // Data from pre-generated src/data/solutions.ts
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
-import ContactBand from '~/components/common/ContactBand.astro';
+import WhatsAppLink from '~/components/common/WhatsAppLink.astro';
 import { renderMarkdown } from '~/utils/parseMdoc';
 import { solutions as rawSolutions } from '~/data/solutions';
 import { products as rawProducts } from '~/data/products';
@@ -358,9 +358,12 @@ const hasCaseStudies = relatedCaseStudies.length > 0;
           >
             Download Case Study
           </button>
+          <WhatsAppLink productName={title} />
         </div>
+        <p class="text-muted dark:text-slate-400 text-xs mt-4">
+          Our engineers usually reply within one business day.
+        </p>
       </div>
     </div>
   </section>
-  <ContactBand productName={title} />
 </PageLayout>
