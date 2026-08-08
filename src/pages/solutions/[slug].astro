@@ -348,13 +348,13 @@ const hasCaseStudies = relatedCaseStudies.length > 0;
         <div class="flex flex-wrap justify-center gap-3">
           <button
             class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity"
-            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${title}' })`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${title}' }) : (window.location.href = '/contact-sales')`}
           >
             Request Pricing
           </button>
           <button
             class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors"
-            onclick={`window.__openLeadModal({ scenario: 'case', productName: '${title}' })`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'case', productName: '${title}' }) : (window.location.href = '/contact-sales')`}
           >
             Download Case Study
           </button>

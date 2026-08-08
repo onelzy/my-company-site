@@ -1801,7 +1801,7 @@ const faqSchema = {
           }
           <button
             class="px-6 py-3 border border-primary text-primary rounded-lg font-semibold hover:bg-primary/5 transition-colors inline-flex items-center gap-2"
-            onclick={`window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' })`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' }) : (window.location.href = '/contact-sales')`}
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
