@@ -261,7 +261,9 @@ const productSchema = {
   name,
   description: metaDescription,
   sku: model || product.slug,
+  mpn: model || product.slug,
   brand: { '@type': 'Brand', name: 'OWON Technology' },
+  ...(typeLabel ? { category: typeLabel } : {}),
   ...(hasImage && { image: new URL(images[0], SITE.site).href }),
   offers: { '@type': 'Offer', availability: 'https://schema.org/InStock' },
 };

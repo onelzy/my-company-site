@@ -55,6 +55,9 @@ export interface MetaData {
 
   openGraph?: MetaDataOpenGraph;
   twitter?: MetaDataTwitter;
+
+  /** Page-level JSON-LD schema, rendered as <script type="application/ld+json">. */
+  jsonLd?: object;
 }
 
 export interface MetaDataRobots {

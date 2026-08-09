@@ -27,10 +27,17 @@ const jsonLd = {
   '@type': 'Article',
   headline: cs.title,
   description: cs.background,
-  author: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.' },
-  publisher: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.' },
-  image: cs.image,
   mainEntityOfPage: canonicalUrl,
+  inLanguage: 'en',
+  articleSection: 'Case Studies',
+  author: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.', url: siteOrigin },
+  publisher: {
+    '@type': 'Organization',
+    name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.',
+    url: siteOrigin,
+    logo: { '@type': 'ImageObject', url: `${siteOrigin}/images/logo.png` },
+  },
+  image: cs.image,
 };
 
 const metadata = {

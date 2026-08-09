@@ -77,7 +77,30 @@ const relatedCaseStudies = (Array.isArray(caseStudies) ? caseStudies : []) as Ar
 const hasCaseStudies = relatedCaseStudies.length > 0;
 ---
 
-<PageLayout metadata={{ title, description: subtitle || title, canonical: `${siteOrigin}/solutions/${slug}/` }}>
+<PageLayout
+  metadata={{
+    title,
+    description: subtitle || title,
+    canonical: `${siteOrigin}/solutions/${slug}/`,
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title,
+      description: subtitle || title,
+      mainEntityOfPage: `${siteOrigin}/solutions/${slug}/`,
+      inLanguage: 'en',
+      articleSection: 'Solutions',
+      author: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD', url: siteOrigin },
+      publisher: {
+        '@type': 'Organization',
+        name: 'XIAMEN OWON TECHNOLOGY CO.,LTD',
+        url: siteOrigin,
+        logo: { '@type': 'ImageObject', url: `${siteOrigin}/images/logo.png` },
+      },
+      ...(heroImage ? { image: heroImage.startsWith('http') ? heroImage : `${siteOrigin}${heroImage}` } : {}),
+    },
+  }}
+>
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <section class="py-12 lg:py-16">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
