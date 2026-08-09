@@ -61,8 +61,9 @@ export const GET = async () => {
     ['/developers/mqtt/', 'monthly', '0.7'],
     ['/developers/zigbee/', 'monthly', '0.7'],
     ['/developers/ha/', 'monthly', '0.7'],
-    // Blog list is EXCLUDED while the blog is empty (0 posts = thin content).
-    // Re-add ['/blog/', 'weekly', '0.8'] when real posts exist.
+    // Blog list re-added 2026-08-09 when the first real post landed
+    // (AI Behavior Trajectory Monitoring for Seniors Living Alone).
+    ['/blog/', 'weekly', '0.8'],
   ];
   for (const [path, changefreq, priority] of staticRoutes) {
     urls.push({ loc: `${baseUrl}${path}`, changefreq, priority });

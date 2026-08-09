@@ -1,4 +1,4 @@
-import { getPermalink, getAsset } from './utils/permalinks';
+import { getPermalink, getAsset, getBlogPermalink } from './utils/permalinks';
 import { SITE } from 'astrowind:config';
 
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
@@ -35,6 +35,7 @@ export const headerData = {
         { text: 'App Downloads', href: getPermalink('/resources/app') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
         { text: 'Case Studies', href: getPermalink('/resources/case-studies') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
     {
@@ -80,6 +81,7 @@ export const footerData = {
         { text: 'App Downloads', href: getPermalink('/resources/app') },
         { text: 'FAQ', href: getPermalink('/resources/faq') },
         { text: 'Case Studies', href: getPermalink('/resources/case-studies') },
+        { text: 'Blog', href: getBlogPermalink() },
       ],
     },
     {
