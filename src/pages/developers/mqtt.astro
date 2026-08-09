@@ -2,6 +2,7 @@
 export const prerender = true;
 import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
 
 const pythonGatewayCode = `import paho.mqtt.client as mqtt
 import json, ssl
@@ -282,7 +283,7 @@ const RBRACE = '}';
               <div
                 class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
               >
-                <span class="text-3xl flex-shrink-0">🍎</span>
+                <Icon name="tabler:brand-apple" class="w-8 h-8 flex-shrink-0" />
                 <div>
                   <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON Device Config — iOS</h3>
                   <p class="text-xs text-muted dark:text-slate-400 mb-2">
@@ -296,7 +297,7 @@ const RBRACE = '}';
               <div
                 class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
               >
-                <span class="text-3xl flex-shrink-0">🤖</span>
+                <Icon name="tabler:robot" class="w-8 h-8 flex-shrink-0" />
                 <div>
                   <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON Device Config — Android</h3>
                   <p class="text-xs text-muted dark:text-slate-400 mb-2">

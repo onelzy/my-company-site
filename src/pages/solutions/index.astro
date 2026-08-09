@@ -4,6 +4,7 @@
 import PageLayout from '~/layouts/PageLayout.astro';
 import Image from '~/components/common/Image.astro';
 import { solutions as rawSolutions } from '~/data/solutions';
+import { Icon } from 'astro-icon/components';
 
 // Static page: build-time render → CDN-cached.
 export const prerender = true;
@@ -19,11 +20,11 @@ const industries = [
   { value: 'industrial-iot', label: 'Industrial IoT' },
 ];
 const industryIcons: Record<string, string> = {
-  'smart-hotels': '🏨',
-  'senior-care': '🏥',
-  'energy-management': '⚡',
-  'smart-building': '🏢',
-  'industrial-iot': '🏭',
+  'smart-hotels': 'building',
+  'senior-care': 'building-hospital',
+  'energy-management': 'bolt',
+  'smart-building': 'building',
+  'industrial-iot': 'building-factory',
 };
 function getIndustryLabel(value: string): string {
   return industries.find((i) => i.value === value)?.label || '';
@@ -38,7 +39,7 @@ const preparedSolutions = solutions.map((s) => {
     heroImage: d.heroImage as string | undefined,
     industry: d.industry as string | undefined,
     indLabel: getIndustryLabel((d.industry as string) || ''),
-    icon: industryIcons[(d.industry as string) || ''] || '🏢',
+    icon: industryIcons[(d.industry as string) || ''] || 'building',
   };
 });
 ---
@@ -122,7 +123,7 @@ const preparedSolutions = solutions.map((s) => {
                     height={400}
                   />
                 ) : (
-                  <span>{s.icon}</span>
+                  <Icon name={`tabler:${s.icon}`} class="w-8 h-8" />
                 )}
               </div>
               <div class="p-5">

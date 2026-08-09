@@ -132,11 +132,15 @@ const connectionTags = [
       <div id="dimensionTabs" class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-6 w-fit">
         <button
           class="dimension-tab inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all duration-200 bg-white dark:bg-slate-700 text-default dark:text-slate-200 shadow-sm active"
-          data-dim="type">📂 By Product Type</button
+          data-dim="type"
+        >
+          By Product Type</button
         >
         <button
           class="dimension-tab inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
-          data-dim="solution">🔬 By Tech Solution</button
+          data-dim="solution"
+        >
+          By Tech Solution</button
         >
       </div>
 
@@ -257,7 +261,7 @@ const connectionTags = [
       {
         enProducts.length === 0 && (
           <div class="text-center py-16 bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700">
-            <div class="text-5xl mb-4">📦</div>
+            <div class="text-5xl mb-4" />
             <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-2">Product Catalogue Coming Soon</h2>
             <p class="text-sm text-muted dark:text-slate-400 mb-6 max-w-md mx-auto">
               We're updating our product catalogue. Meanwhile, browse datasheets and user manuals for all{' '}

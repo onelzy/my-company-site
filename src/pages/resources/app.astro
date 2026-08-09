@@ -1,5 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
 
 // Static page: build-time render → CDN-cached.
 export const prerender = true;
@@ -26,17 +27,20 @@ export const prerender = true;
         <a
           href="/resources/documentation"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
-          >📄 Documentation</a
+        >
+          Documentation</a
         >
         <a
           href="/resources/videos"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
-          >🎬 Videos</a
+        >
+          Videos</a
         >
         <a
           href="/resources/app"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white dark:bg-slate-700 text-default dark:text-slate-200 shadow-sm"
-          >📱 App Downloads</a
+        >
+          App Downloads</a
         >
         <a
           href="/resources/faq"
@@ -55,7 +59,7 @@ export const prerender = true;
 
       <!-- API Debugger -->
       <section class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">🔧 OWON API Debugger</h2>
+        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">OWON API Debugger</h2>
         <p class="text-sm text-muted dark:text-slate-400 mb-6">
           Inspect MQTT traffic, test API endpoints, and simulate device data — all from your mobile device.
         </p>
@@ -63,7 +67,7 @@ export const prerender = true;
           <div
             class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
           >
-            <span class="text-3xl">🍎</span>
+            <Icon name="tabler:brand-apple" class="w-8 h-8" />
             <div>
               <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — iOS</h3>
               <p class="text-xs text-muted dark:text-slate-400 mb-2">
@@ -77,7 +81,7 @@ export const prerender = true;
           <div
             class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
           >
-            <span class="text-3xl">🤖</span>
+            <Icon name="tabler:robot" class="w-8 h-8" />
             <div>
               <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — Android</h3>
               <p class="text-xs text-muted dark:text-slate-400 mb-2">
@@ -93,7 +97,7 @@ export const prerender = true;
 
       <!-- Energy Dashboard -->
       <section class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">📊 OWON Energy Dashboard</h2>
+        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">OWON Energy Dashboard</h2>
         <p class="text-sm text-muted dark:text-slate-400 mb-6">
           Real-time energy monitoring dashboard — track consumption, view trends, and manage multiple sites.
         </p>
@@ -101,7 +105,7 @@ export const prerender = true;
           <div
             class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
           >
-            <span class="text-3xl">🍎</span>
+            <Icon name="tabler:brand-apple" class="w-8 h-8" />
             <div>
               <h3 class="font-semibold text-default dark:text-slate-200 text-sm">Energy Dashboard — iOS</h3>
               <p class="text-xs text-muted dark:text-slate-400 mb-2">Web-based dashboard, optimized for mobile</p>
@@ -113,7 +117,7 @@ export const prerender = true;
           <div
             class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
           >
-            <span class="text-3xl">🤖</span>
+            <Icon name="tabler:robot" class="w-8 h-8" />
             <div>
               <h3 class="font-semibold text-default dark:text-slate-200 text-sm">Energy Dashboard — Android</h3>
               <p class="text-xs text-muted dark:text-slate-400 mb-2">Web-based dashboard, optimized for mobile</p>
@@ -127,7 +131,7 @@ export const prerender = true;
 
       <!-- Device Config Tool -->
       <section class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">⚙️ OWON Device Config</h2>
+        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">OWON Device Config</h2>
         <p class="text-sm text-muted dark:text-slate-400 mb-6">
           On-site device configuration tool — scan ZigBee networks, configure WiFi credentials, and update firmware.
         </p>
@@ -135,7 +139,7 @@ export const prerender = true;
           <div
             class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
           >
-            <span class="text-3xl">🤖</span>
+            <Icon name="tabler:robot" class="w-8 h-8" />
             <div>
               <h3 class="font-semibold text-default dark:text-slate-200 text-sm">Device Config Tool — Android</h3>
               <p class="text-xs text-muted dark:text-slate-400 mb-2">ZigBee scanner, WiFi config, firmware update</p>

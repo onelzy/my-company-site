@@ -1,5 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
 
 // Static page: build-time render → CDN-cached.
 export const prerender = true;
@@ -60,7 +61,7 @@ const faqItems = [
           href="/resources/documentation"
           class="group bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
         >
-          <div class="text-3xl mb-3">📖</div>
+          <Icon name="tabler:book" class="w-8 h-8 mb-3" />
           <h3
             class="text-lg font-semibold text-default dark:text-slate-100 mb-1 group-hover:text-blue-600 transition-colors"
           >
@@ -72,7 +73,7 @@ const faqItems = [
           href="/resources/videos"
           class="group bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
         >
-          <div class="text-3xl mb-3">🎬</div>
+          <Icon name="tabler:video" class="w-8 h-8 mb-3" />
           <h3
             class="text-lg font-semibold text-default dark:text-slate-100 mb-1 group-hover:text-blue-600 transition-colors"
           >
@@ -84,7 +85,7 @@ const faqItems = [
           href="/resources/app"
           class="group bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
         >
-          <div class="text-3xl mb-3">📱</div>
+          <Icon name="tabler:device-mobile" class="w-8 h-8 mb-3" />
           <h3
             class="text-lg font-semibold text-default dark:text-slate-100 mb-1 group-hover:text-blue-600 transition-colors"
           >
@@ -96,7 +97,7 @@ const faqItems = [
           href="/blog"
           class="group bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border border-gray-100 dark:border-slate-700 hover:shadow-md hover:border-blue-300 dark:hover:border-blue-700 transition-all"
         >
-          <div class="text-3xl mb-3">📝</div>
+          <Icon name="tabler:note" class="w-8 h-8 mb-3" />
           <h3
             class="text-lg font-semibold text-default dark:text-slate-100 mb-1 group-hover:text-blue-600 transition-colors"
           >

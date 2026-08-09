@@ -31,8 +31,6 @@ faq:
     answer: Yes — it is modular. The same gateway and platform support optional sleep radar or fall-detection radar modules for vital-sign monitoring (respiratory rate, heart rate, sleep quality analysis), so the system scales as care needs change.
 ---
 
-# AI Behavior Trajectory Monitoring for Seniors Living Alone
-
 _From "passive response" to "proactive care" — a new paradigm for smart senior care._
 
 ## The Challenge of Caring for Seniors Who Live Alone

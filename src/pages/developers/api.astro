@@ -2,6 +2,7 @@
 export const prerender = true;
 import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
 ---
 
 <PageLayout
@@ -210,7 +211,7 @@ import DevSidebar from '~/components/widgets/DevSidebar.astro';
               <div
                 class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
               >
-                <span class="text-3xl">🍎</span>
+                <Icon name="tabler:brand-apple" class="w-8 h-8" />
                 <div>
                   <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — iOS</h3>
                   <p class="text-xs text-muted dark:text-slate-400 mb-2">
@@ -224,7 +225,7 @@ import DevSidebar from '~/components/widgets/DevSidebar.astro';
               <div
                 class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
               >
-                <span class="text-3xl">🤖</span>
+                <Icon name="tabler:robot" class="w-8 h-8" />
                 <div>
                   <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — Android</h3>
                   <p class="text-xs text-muted dark:text-slate-400 mb-2">

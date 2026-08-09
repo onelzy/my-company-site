@@ -2,6 +2,7 @@
 export const prerender = true;
 import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
 
 const pythonCode = `from owon_iot import OWONClient
 
@@ -143,7 +144,7 @@ const mavenDep = `<dependency>
           <!-- Python -->
           <div class="mb-8 p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">🐍</span>
+              <Icon name="tabler:brand-python" class="w-7 h-7" />
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">Python SDK</h2>
               <span
                 class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
@@ -173,7 +174,7 @@ const mavenDep = `<dependency>
           <!-- Node.js -->
           <div class="mb-8 p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">🟢</span>
+              <Icon name="tabler:brand-nodejs" class="w-7 h-7" />
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">Node.js SDK</h2>
               <span
                 class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
@@ -203,7 +204,7 @@ const mavenDep = `<dependency>
           <!-- Java -->
           <div class="mb-8 p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">☕</span>
+              <Icon name="tabler:coffee" class="w-7 h-7" />
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">Java SDK</h2>
               <span
                 class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
@@ -233,7 +234,7 @@ const mavenDep = `<dependency>
           <!-- C# -->
           <div class="mb-8 p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">🟣</span>
+              <Icon name="tabler:brand-c-sharp" class="w-7 h-7" />
               <h2 class="text-xl font-semibold text-default dark:text-slate-200">C# SDK</h2>
               <span
                 class="px-2 py-0.5 rounded text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"

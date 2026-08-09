@@ -125,7 +125,7 @@ public class DeviceMonitor {
 
             if (ago.compareTo(OFFLINE_THRESHOLD) > 0) {
                 System.out.printf(
-                    "⚠ ALERT: %s last seen %d min ago%n",
+                    "ALERT: %s last seen %d min ago%n",
                     d.getName(), ago.toMinutes()
                 );
                 // Integrate with your alerting system here

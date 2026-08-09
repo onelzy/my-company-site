@@ -1,5 +1,6 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import { Icon } from 'astro-icon/components';
 
 // Static page: build-time render → CDN-cached.
 export const prerender = true;
@@ -35,17 +36,20 @@ const categories = [
         <a
           href="/resources/documentation"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
-          >📄 Documentation</a
+        >
+          Documentation</a
         >
         <a
           href="/resources/videos"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white dark:bg-slate-700 text-default dark:text-slate-200 shadow-sm"
-          >🎬 Videos</a
+        >
+          Videos</a
         >
         <a
           href="/resources/app"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
-          >📱 App Downloads</a
+        >
+          App Downloads</a
         >
         <a
           href="/resources/faq"
@@ -117,13 +121,13 @@ const categories = [
       <div id="videoList">
         <!-- Featured Video -->
         <div class="video-section mb-16">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">🎬 Featured</h2>
+          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Featured</h2>
           <div
             class="video-card rounded-xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center border border-gray-200 dark:border-slate-700"
             data-category="Featured"
           >
             <div class="text-center">
-              <div class="text-6xl mb-4">▶️</div>
+              <div class="text-6xl mb-4">▶</div>
               <p class="text-gray-400 text-lg">OWON Smart Energy — Company Overview</p>
               <p class="text-gray-500 text-sm mt-2">Video coming soon — available on YouTube</p>
             </div>
@@ -173,7 +177,7 @@ const categories = [
                 >
                   <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                     <div class="text-center">
-                      <div class="text-4xl mb-2">▶️</div>
+                      <div class="text-4xl mb-2">▶</div>
                       <span class="text-xs text-muted">Coming soon</span>
                     </div>
                   </div>
@@ -192,7 +196,7 @@ const categories = [
 
         <!-- Installation & Tutorials -->
         <div class="video-section mb-16">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">📖 Installation & Tutorials</h2>
+          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Installation & Tutorials</h2>
           <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {
               [
@@ -209,7 +213,7 @@ const categories = [
                 >
                   <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
                     <div class="text-center">
-                      <div class="text-4xl mb-2">🎓</div>
+                      <Icon name="tabler:school" class="w-10 h-10 mb-2" />
                       <span class="text-xs text-muted">Coming soon</span>
                     </div>
                   </div>
@@ -227,7 +231,7 @@ const categories = [
 
         <!-- Case Studies -->
         <div class="video-section mb-8">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">🏗️ Customer Case Studies</h2>
+          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Customer Case Studies</h2>
           <div class="grid gap-6 sm:grid-cols-2">
             {
               [
@@ -261,7 +265,7 @@ const categories = [
                   <p class="text-sm text-muted dark:text-slate-400">{cs.desc}</p>
                   <div class="mt-4 aspect-video bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
                     <div class="text-center">
-                      <div class="text-3xl mb-1">▶️</div>
+                      <div class="text-3xl mb-1">▶</div>
                       <span class="text-xs text-muted">Case study video — coming soon</span>
                     </div>
                   </div>
@@ -274,7 +278,7 @@ const categories = [
 
       <!-- YouTube CTA -->
       <div class="rounded-xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 p-8 text-center">
-        <div class="text-4xl mb-4">📺</div>
+        <Icon name="tabler:device-tv" class="w-10 h-10 mb-4" />
         <h2 class="text-xl font-bold mb-3 text-default dark:text-slate-200">Subscribe on YouTube</h2>
         <p class="text-muted dark:text-slate-400 mb-6 max-w-lg mx-auto">
           New product demos, installation guides, and case studies published regularly. Subscribe to get notified.
