@@ -231,28 +231,28 @@ const solutionSlides = [
             {
               label: 'Smart Meters',
               desc: 'Single-phase, three-phase, multi-circuit DIN rail meters',
-              img: '/images/products/cat/pc321.webp',
+              img: '/images/products/cat/smart-meters.webp',
               link: '/products?dim=type&type=smart-meters',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Thermostats',
               desc: '24V AC, boiler, touchscreen & ZigBee HVAC controllers',
-              img: '/images/products/cat/pct513.webp',
+              img: '/images/products/cat/thermostats.webp',
               link: '/products?dim=type&type=thermostats',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Hotel Control',
               desc: 'Room thermostats, lighting, door signs & energy mgmt',
-              img: '/images/products/cat/slc611.webp',
+              img: '/images/products/cat/hotel-control.webp',
               link: '/products?dim=type&type=hotel-control',
               badges: ['ZigBee'],
             },
             {
               label: 'Senior Care',
               desc: 'Sleep monitors, emergency call, fall detection & nurse station',
-              img: '/images/products/cat/fds315.webp',
+              img: '/images/products/cat/senior-care.webp',
               link: '/products?dim=type&type=senior-care',
               badges: ['ZigBee'],
             },
@@ -261,18 +261,29 @@ const solutionSlides = [
               href={cat.link}
               class="group relative rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              <div class="aspect-[4/3] bg-gray-50 dark:bg-slate-700/40 flex items-center justify-center p-6 group-hover:scale-105 transition-transform duration-500">
-                <img src={cat.img} alt={cat.label} class="w-4/5 h-4/5 object-contain drop-shadow-md" loading="lazy" />
-              </div>
-              <div class="p-5">
-                <h3 class="text-lg font-bold text-default dark:text-slate-200 mb-1">{cat.label}</h3>
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">{cat.desc}</p>
-                <div class="flex gap-1.5 flex-wrap">
-                  {cat.badges.map((b) => (
-                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-primary/10 dark:bg-primary/20 text-primary">
-                      {b}
-                    </span>
-                  ))}
+              <div class="relative aspect-[4/3]">
+                <img
+                  src={cat.img}
+                  alt={cat.label}
+                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/90 via-black/50 to-transparent"
+                  aria-hidden="true"
+                />
+                <div class="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                  <h3 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight drop-shadow-sm">
+                    {cat.label}
+                  </h3>
+                  <p class="text-sm sm:text-base text-white/90 mt-1.5 leading-snug">{cat.desc}</p>
+                  <div class="flex gap-1.5 mt-3 flex-wrap">
+                    {cat.badges.map((b) => (
+                      <span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-white/15 border border-white/25 text-white">
+                        {b}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </a>
