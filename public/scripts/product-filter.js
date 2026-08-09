@@ -232,64 +232,21 @@
         }
       }
 
-      // Toggle active classes
+      // Toggle active classes (component classes — see .chip-* in tailwind.css)
       if (active) {
-        chip.classList.add('active');
-        chip.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
-        chip.classList.remove(
-          'text-gray-600',
-          'dark:text-slate-400',
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'border-blue-200',
-          'dark:border-blue-700',
-          'bg-blue-50',
-          'dark:bg-blue-900/20',
-          'text-blue-700',
-          'dark:text-blue-300',
-          'border-green-200',
-          'dark:border-green-700',
-          'bg-green-50',
-          'dark:bg-green-900/20',
-          'text-green-700',
-          'dark:text-green-300'
-        );
+        chip.classList.add('active', 'chip-active');
+        chip.classList.remove('chip-idle', 'chip-blue', 'chip-green');
       } else {
-        chip.classList.remove('active');
-        chip.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
-
+        chip.classList.remove('active', 'chip-active');
         if (group === 'sol') {
           // Eco tags: blue style
-          chip.classList.add(
-            'bg-blue-50',
-            'dark:bg-blue-900/20',
-            'text-blue-700',
-            'dark:text-blue-300',
-            'border-blue-200',
-            'dark:border-blue-700'
-          );
+          chip.classList.add('chip-blue');
         } else if (group === 'comm') {
           // Comm tags: green style
-          chip.classList.add(
-            'bg-green-50',
-            'dark:bg-green-900/20',
-            'text-green-700',
-            'dark:text-green-300',
-            'border-green-200',
-            'dark:border-green-700'
-          );
+          chip.classList.add('chip-green');
         } else {
           // Default: gray style
-          chip.classList.add(
-            'text-gray-600',
-            'dark:text-slate-400',
-            'bg-white',
-            'dark:bg-slate-800',
-            'border-gray-300',
-            'dark:border-slate-600'
-          );
+          chip.classList.add('chip-idle');
         }
       }
     });
@@ -342,12 +299,9 @@
 
     for (const [value, label] of Object.entries(children)) {
       const active = filterState[group] === value;
-      const activeClass = active
-        ? 'bg-primary text-primary-foreground border-primary active'
-        : 'border text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary';
+      const activeClass = active ? 'chip-active active' : 'chip-idle';
       html +=
-        '<button class="filter-chip px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer ' +
-        'transition-all duration-150 ' +
+        '<button class="filter-chip chip ' +
         activeClass +
         '" ' +
         'data-group="' +

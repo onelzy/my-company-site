@@ -12,6 +12,9 @@
   --color-accent: var(--aw-color-accent);
   --color-default: var(--aw-color-text-default);
   --color-muted: var(--aw-color-text-muted);
+  /* text/bg-primary-foreground were DEAD classes until 2026-08-09 (not defined
+     anywhere) — active chips/badges had no white-on-primary text. */
+  --color-primary-foreground: #fff;
 
   --font-sans:
     'var(--aw-font-sans, ui-sans-serif)', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
@@ -114,4 +117,51 @@
 
 .dd *:first-child {
   margin-top: 0;
+}
+
+/* ============================================================
+   Component classes — dedupe repeated class strings in loops
+   (products grid: 71 cards + filter chips; saves ~80KB HTML).
+   product-filter.js toggles .chip-active / .chip-idle / .chip-blue / .chip-green
+   ============================================================ */
+@layer components {
+  /* Product card (ProductCard.astro) — `group` stays in the markup (not a utility) */
+  .pc-card {
+    @apply rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all duration-300 ease-in-out flex flex-col overflow-hidden h-full;
+  }
+  .pc-card-img {
+    @apply relative aspect-square bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+  .pc-card-title {
+    @apply font-semibold leading-snug text-default dark:text-slate-200 group-hover:text-primary transition-colors duration-200;
+  }
+  .pc-badge {
+    @apply inline-flex items-center px-1.5 py-px rounded-full text-[10px] font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground border border-primary/20 dark:border-primary/30;
+  }
+  .pc-badge-muted {
+    @apply inline-flex items-center px-1.5 py-px rounded-full text-[10px] font-medium bg-gray-100 text-muted dark:bg-slate-700 dark:text-slate-400;
+  }
+  .pc-btn-outline {
+    @apply flex-1 text-center px-2 py-1 rounded-lg text-[11px] font-medium border border-gray-300 dark:border-slate-600 text-default dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors;
+  }
+  .pc-btn-price {
+    @apply flex-1 px-2 py-1 rounded-lg text-[11px] font-medium transition-colors bg-[#FF6B00] text-white hover:bg-[#E55D00];
+  }
+
+  /* Filter chips (products index) */
+  .chip {
+    @apply px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all duration-150;
+  }
+  .chip-active {
+    @apply bg-primary text-primary-foreground border border-primary;
+  }
+  .chip-idle {
+    @apply text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary;
+  }
+  .chip-blue {
+    @apply border border-blue-200 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40;
+  }
+  .chip-green {
+    @apply border border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/40;
+  }
 }
