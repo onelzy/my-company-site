@@ -28,6 +28,7 @@ const jsonLd = {
   description: cs.background,
   author: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.' },
   publisher: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.' },
+  image: cs.image,
   mainEntityOfPage: canonicalUrl,
 };
 
@@ -73,6 +74,11 @@ const metadata = {
             {cs.source === 'catalog' ? '2026 OWON Technology Catalog' : 'OWON Senior Care AIoT Brochure'}
           </span>
         </div>
+      </div>
+
+      {/* Hero image (placeholder until real case photos exist) */}
+      <div class="mb-10 overflow-hidden rounded-xl border border-gray-200 dark:border-slate-700">
+        <img src={cs.image} alt={cs.title} class="w-full h-auto object-cover" loading="eager" />
       </div>
 
       {/* Background */}

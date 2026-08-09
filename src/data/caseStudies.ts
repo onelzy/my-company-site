@@ -14,6 +14,9 @@ export interface CaseStudy {
   title: string;
   client: string;
   location: string;
+  /** Placeholder image — real OWON product shot matching the case domain.
+   *  Temporary: swap for a real case photo when one is available. */
+  image: string;
   background: string;
   solution: string;
   results: CaseStudyResult[];
@@ -30,6 +33,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Carbon Emission Monitoring with 4G Clamp-Type Smart Meter',
     client: 'A Global Energy Management Platform Provider',
     location: 'Multi-Country',
+    image: 'https://documents.owon-iot.com/product-images/pc341-w-mqtt/pc341-w-mqtt-01.jpg',
     background:
       'Commissioned by national energy agencies to develop a carbon emission monitoring system for commercial incentive and penalty purposes. Required a smart meter that installs without disrupting existing billing systems, supports single/split/three-phase circuits from 50A to 1000A, adapts to different cellular networks, and complies with local data privacy regulations.',
     solution:
@@ -49,6 +53,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Custom Dual Fuel Thermostat for Heat Pump + Furnace Systems',
     client: 'A North American Furnace & Heat Pump Manufacturer',
     location: 'North America',
+    image: 'https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-02.jpg',
     background:
       'Heat pump adoption has grown rapidly, but many households retain conventional heating/cooling equipment. The manufacturer needed a thermostat that controls both systems and intelligently switches between them for optimal cost-effectiveness. Additional requirements included outdoor temperature acquisition, compatibility with a proprietary Wi-Fi module and backend server, and humidifier/dehumidifier control.',
     solution:
@@ -68,6 +73,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Government-Driven Residential Heating Energy Saving System',
     client: 'A European System Integrator',
     location: 'Europe',
+    image: 'https://documents.owon-iot.com/product-images/pct513/pct513-01.jpg',
     background:
       'A government initiative to reduce residential heating energy consumption required a system that manages all mainstream European heating equipment — boilers, heat pumps, hot water, hydraulic and electric radiators, underfloor heating. Critical requirements: full offline operation, mobile app control without a Wi-Fi router (AP mode), and complete device-level local APIs for custom cloud and mobile development.',
     solution:
@@ -87,6 +93,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Guest Room Management System for a Chain Resort Hotel',
     client: 'A Smart Hotel System Provider',
     location: 'Global',
+    image: 'https://documents.owon-iot.com/product-images/hero/thermostat-family-hero.png',
     background:
       'The client sought a wireless IoT system to replace traditional wired BMS, which is expensive and difficult to install. They needed faster deployment, lower costs, and the ability to integrate both OWON and third-party smart devices through a unified gateway with device-level MQTT API. Some high-end locations also required Android-based touchscreen control panels.',
     solution:
@@ -106,6 +113,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Utility-Driven Home Energy Management for Millions of Homes',
     client: 'A European Telecommunication Company',
     location: 'Europe',
+    image: 'https://documents.owon-iot.com/product-images/pc321/pc321-01.jpg',
     background:
       'The telecom operator planned a Home Energy Management System (HEMS) for mass deployment to millions of homes. Requirements: monitor and control energy consumption, solar generation, and EV chargers; schedule HVAC equipment including boilers, heat pumps, and mini-split A/C; enable device-to-device interactions such as turning off A/C when a window opens or adjusting EV charging based on solar surplus; and provide device-level local APIs for direct cloud integration.',
     solution:
@@ -125,6 +133,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Integrated Smart Senior Care Platform — Home · Community · Facility',
     client: 'A State-Owned Senior Service Company (Hubei Cultural Tourism Group)',
     location: 'Hubei, China',
+    image: 'https://documents.owon-iot.com/product-images/pir323/pir323-01.png',
     background:
       'Operating nearly 100 service locations across Hubei Province with 1,000+ home-based care beds and over 1 million cumulative visits (50,000+ monthly). Needed a unified platform managing three independent scenarios — home care, community care, and cafeteria services — plus a family app, admin backend, meal sales analytics, facility bed management, and AI-generated behavioral summaries for care decision support.',
     solution:
@@ -144,6 +153,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Five-Star Nursing Home — AiHome Wireless Monitoring System',
     client: 'A Five-Star Nursing Home (Fujian Province)',
     location: 'Fujian, China',
+    image: 'https://documents.owon-iot.com/product-images/fds315/fds315-01.jpg',
     background:
       'Dual-phase project: a new 16-story smart ward building (18,000 m², 380 beds) plus retrofitting of an older building (200 beds). Required resident monitoring, environmental sensing, energy management, and temperature control. Devices had to be wireless, battery-powered, and adhesive-mounted to avoid operational disruptions. Software needed to be modular with no custom coding, deployed on a local server for data privacy and offline resilience.',
     solution:
@@ -163,6 +173,7 @@ export const caseStudies: CaseStudy[] = [
     title: 'Platform API Integration — AI Enablement for a Care Software Vendor',
     client: 'A Provincial Senior Care Software Provider',
     location: 'China',
+    image: 'https://documents.owon-iot.com/product-images/seg-x5/seg-x5-01.jpg',
     background:
       "A well-established care management software vendor serving dozens of facilities and community sites across multiple cities lacked IoT device connectivity and AI behavioral analysis. Their platform couldn't deliver the safety monitoring, behavior reports, or proactive alerts that customers increasingly demanded. They needed to rapidly add IoT and AI capabilities for an upcoming tender — without building AI from scratch.",
     solution:
