@@ -8,13 +8,6 @@ import { caseStudies } from '~/data/caseStudies';
 // Static page: build-time render → CDN-cached.
 export const prerender = true;
 
-const stats = [
-  { value: '60+', label: 'Countries Deployed' },
-  { value: '~1,000', label: 'Devices per Project' },
-  { value: '1M+', label: 'Senior Care Visits' },
-  { value: 'ISO 9001', label: 'Certified Since 1993' },
-];
-
 const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', 'Senior Care', 'Telecom & Utility'];
 ---
 
@@ -34,25 +27,12 @@ const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', '
         <span class="text-default dark:text-slate-200">Case Studies</span>
       </nav>
 
-      {/* Hero */}
-      <div class="mb-10">
-        <h1 class="text-3xl sm:text-4xl font-extrabold text-default dark:text-slate-100 mb-3">Customer Case Studies</h1>
-        <p class="text-lg text-muted dark:text-slate-400 max-w-3xl">
-          Real deployments from OWON product catalogs and solution brochures — spanning carbon monitoring, HVAC,
-          hospitality, telecom HEMS, and senior care IoT across 60+ countries.
+      {/* Page heading */}
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-default dark:text-slate-100">Customer Case Studies</h1>
+        <p class="text-muted dark:text-slate-400 mt-2 max-w-2xl">
+          Real deployments documented from OWON product catalogs and solution brochures.
         </p>
-      </div>
-
-      {/* Stats Row */}
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
-        {
-          stats.map((stat) => (
-            <div class="bg-white dark:bg-slate-800 rounded-xl p-4 sm:p-5 border border-gray-200 dark:border-slate-700 text-center">
-              <div class="text-2xl sm:text-3xl font-extrabold text-primary mb-1">{stat.value}</div>
-              <div class="text-xs sm:text-sm text-muted dark:text-slate-400">{stat.label}</div>
-            </div>
-          ))
-        }
       </div>
 
       {/* Category Filter */}
