@@ -39,27 +39,30 @@ export const GET = async () => {
   const urls: UrlEntry[] = [];
 
   // 1. Static pages (all real routes — English only)
+  //    Prerendered pages serve WITH trailing slash (no-slash 307s → slash);
+  //    /contact is SSR (reads query params) and serves WITHOUT slash.
   const staticRoutes: Array<[string, string, string]> = [
-    ['', 'weekly', '1.0'],
-    ['/about', 'monthly', '0.5'],
+    ['/', 'weekly', '1.0'],
+    ['/about/', 'monthly', '0.5'],
     ['/contact', 'monthly', '0.6'],
-    ['/products', 'weekly', '0.9'],
-    ['/solutions', 'weekly', '0.9'],
-    ['/resources', 'monthly', '0.6'],
-    ['/resources/documentation', 'weekly', '0.7'],
-    ['/resources/faq', 'weekly', '0.6'],
-    ['/resources/videos', 'monthly', '0.6'],
-    ['/resources/app', 'monthly', '0.6'],
-    ['/resources/case-studies', 'weekly', '0.7'],
-    ['/developers', 'monthly', '0.8'],
-    ['/developers/api', 'monthly', '0.8'],
-    ['/developers/sdks', 'monthly', '0.7'],
-    ['/developers/examples', 'monthly', '0.7'],
-    ['/developers/changelog', 'monthly', '0.7'],
-    ['/developers/mqtt', 'monthly', '0.7'],
-    ['/developers/zigbee', 'monthly', '0.7'],
-    ['/developers/ha', 'monthly', '0.7'],
-    ['/blog/', 'weekly', '0.8'],
+    ['/products/', 'weekly', '0.9'],
+    ['/solutions/', 'weekly', '0.9'],
+    ['/resources/', 'monthly', '0.6'],
+    ['/resources/documentation/', 'weekly', '0.7'],
+    ['/resources/faq/', 'weekly', '0.6'],
+    ['/resources/videos/', 'monthly', '0.6'],
+    ['/resources/app/', 'monthly', '0.6'],
+    ['/resources/case-studies/', 'weekly', '0.7'],
+    ['/developers/', 'monthly', '0.8'],
+    ['/developers/api/', 'monthly', '0.8'],
+    ['/developers/sdks/', 'monthly', '0.7'],
+    ['/developers/examples/', 'monthly', '0.7'],
+    ['/developers/changelog/', 'monthly', '0.7'],
+    ['/developers/mqtt/', 'monthly', '0.7'],
+    ['/developers/zigbee/', 'monthly', '0.7'],
+    ['/developers/ha/', 'monthly', '0.7'],
+    // Blog list is EXCLUDED while the blog is empty (0 posts = thin content).
+    // Re-add ['/blog/', 'weekly', '0.8'] when real posts exist.
   ];
   for (const [path, changefreq, priority] of staticRoutes) {
     urls.push({ loc: `${baseUrl}${path}`, changefreq, priority });

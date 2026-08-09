@@ -243,7 +243,10 @@ const relatedProducts: Product[] = allProducts
   .slice(0, 4) as Product[];
 
 const metaTitle = String(name || '');
-const metaDescription = description?.trim() || `Learn about ${name} specifications and features.`;
+// Meta description must stay ≤160 chars (Google truncates around there);
+// the visible in-page paragraph below still uses the full `description`.
+const rawMetaDescription = description?.trim() || `Learn about ${name} specifications and features.`;
+const metaDescription = rawMetaDescription.length > 155 ? `${rawMetaDescription.slice(0, 152).trimEnd()}...` : rawMetaDescription;
 const typeLabel = productType ? getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en') : '';
 const htmlContent = renderMarkdown(entry.body || '', { headingOffset: 1 });
 const imageSrc = (entry.data as Record<string, unknown>).image as string | undefined;

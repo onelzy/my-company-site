@@ -153,6 +153,8 @@ const solutionSlides = [
 <Layout metadata={metadata}>
   <!-- ===== 1. Hero Carousel ===== -->
   <section class="hero-carousel relative w-full overflow-hidden md:min-h-[680px] lg:min-h-[760px]" id="heroSection">
+    {/* Single visible-for-SEO H1 — rotating slide titles are H2s (4×H1 was invalid) */}
+    <h1 class="sr-only">{heroSlides[0]?.title}</h1>
     {
       heroSlides.map((slide, i) => (
         <div
@@ -170,7 +172,7 @@ const solutionSlides = [
                     </span>
                   ))}
                 </div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">{slide.title}</h1>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">{slide.title}</h2>
                 <p class="text-lg md:text-xl text-white/80 mb-8 max-w-xl lg:mx-0">{slide.subtitle}</p>
                 <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
                   <a

@@ -6,7 +6,6 @@ import type { SEOProps } from 'astro-seo';
 
 import { SITE, METADATA, I18N } from 'astrowind:config';
 import type { MetaData, MetaDataOpenGraph } from '~/types';
-import { getCanonical } from '~/utils/permalinks';
 
 import { adaptOpenGraphImages } from '~/utils/images';
 
@@ -17,7 +16,12 @@ export interface Props extends MetaData {
 const {
   title,
   ignoreTitleTemplate = false,
-  canonical = String(getCanonical(String(Astro.url.pathname))),
+  // Canonical must match the SERVED URL exactly:
+  // - Prerendered pages serve at /path/ (the no-slash form 307s → slash)
+  // - /contact (SSR, reads query params) serves at /contact (no slash)
+  // getCanonical() strips the slash (SITE.trailingSlash: false) and would emit
+  // a canonical pointing at a 307 — fixed 2026-08-09 by using pathname as-is.
+  canonical = String(new URL(String(Astro.url.pathname), SITE.site).href),
   robots = {},
   description,
   openGraph = {},

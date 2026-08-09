@@ -50,7 +50,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'hybrid-thermostat',
     category: 'HVAC & Heating',
-    title: 'Custom Dual Fuel Thermostat for Heat Pump + Furnace Systems',
+    title: 'Dual Fuel Thermostat for Heat Pump + Furnace Systems',
     client: 'A North American Furnace & Heat Pump Manufacturer',
     location: 'North America',
     image: 'https://documents.owon-iot.com/product-images/pct533c-w-ty/pct533c-w-ty-02.jpg',
@@ -110,7 +110,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'home-energy-telecom',
     category: 'Telecom & Utility',
-    title: 'Utility-Driven Home Energy Management for Millions of Homes',
+    title: 'Home Energy Management for Millions of Homes',
     client: 'A European Telecommunication Company',
     location: 'Europe',
     image: 'https://documents.owon-iot.com/product-images/pc321/pc321-01.jpg',
@@ -130,7 +130,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'senior-care-platform',
     category: 'Senior Care',
-    title: 'Integrated Smart Senior Care Platform — Home · Community · Facility',
+    title: 'Smart Senior Care Platform — Home · Community · Facility',
     client: 'A State-Owned Senior Service Company (Hubei Cultural Tourism Group)',
     location: 'Hubei, China',
     image: 'https://documents.owon-iot.com/product-images/pir323/pir323-01.png',
@@ -170,7 +170,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'senior-care-api-integration',
     category: 'Senior Care',
-    title: 'Platform API Integration — AI Enablement for a Care Software Vendor',
+    title: 'Platform API Integration — AI for Care Software Vendors',
     client: 'A Provincial Senior Care Software Provider',
     location: 'China',
     image: 'https://documents.owon-iot.com/product-images/seg-x5/seg-x5-01.jpg',

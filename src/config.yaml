@@ -16,16 +16,16 @@ metadata:
   title:
     default: Smart Energy Solutions & IoT Devices
     template: '%s | OWON'
-  description: 'OWON Technology — Professional smart energy solutions provider. Smart meters, thermostats, senior care devices, hotel control systems, and IoT platforms for B2B customers worldwide.'
+  description: 'OWON Technology — smart energy meters, thermostats, senior care devices, hotel control systems, and IoT platforms for B2B customers worldwide.'
   robots:
     index: true
     follow: true
   openGraph:
     site_name: OWON Technology
     images:
-      - url: '~/assets/images/default.png'
+      - url: 'https://documents.owon-iot.com/product-images/hero/smart-energy-hero.png'
         width: 1200
-        height: 628
+        height: 1200
     type: website
   twitter:
     cardType: summary_large_image
