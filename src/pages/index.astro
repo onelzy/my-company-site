@@ -7,6 +7,7 @@ import ContactBand from '~/components/common/ContactBand.astro';
 
 import { getPermalink } from '~/utils/permalinks';
 import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
   title: 'Smart IoT Devices for Your Industry — OWON',
@@ -231,28 +232,32 @@ const solutionSlides = [
             {
               label: 'Smart Meters',
               desc: 'Single-phase, three-phase, multi-circuit DIN rail meters',
-              img: '/images/products/cat/smart-meters.webp',
+              icon: 'tabler:gauge',
+              color: 'from-blue-600 to-sky-500',
               link: '/products?dim=type&type=smart-meters',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Thermostats',
               desc: '24V AC, boiler, touchscreen & ZigBee HVAC controllers',
-              img: '/images/products/cat/thermostats.webp',
+              icon: 'tabler:temperature',
+              color: 'from-orange-500 to-amber-400',
               link: '/products?dim=type&type=thermostats',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Hotel Control',
               desc: 'Room thermostats, lighting, door signs & energy mgmt',
-              img: '/images/products/cat/hotel-control.webp',
+              icon: 'tabler:building',
+              color: 'from-violet-600 to-purple-500',
               link: '/products?dim=type&type=hotel-control',
               badges: ['ZigBee'],
             },
             {
               label: 'Senior Care',
               desc: 'Sleep monitors, emergency call, fall detection & nurse station',
-              img: '/images/products/cat/senior-care.webp',
+              icon: 'tabler:heart-handshake',
+              color: 'from-rose-600 to-pink-500',
               link: '/products?dim=type&type=senior-care',
               badges: ['ZigBee'],
             },
@@ -261,27 +266,20 @@ const solutionSlides = [
               href={cat.link}
               class="group relative rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              <div class="relative aspect-[4/3]">
-                <img
-                  src={cat.img}
-                  alt={cat.label}
-                  class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div
-                  class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 via-black/55 to-transparent"
-                  aria-hidden="true"
-                />
-                <div class="absolute inset-x-0 bottom-0 p-5">
-                  <h3 class="text-xl font-bold text-white mb-1 drop-shadow">{cat.label}</h3>
-                  <p class="text-sm text-white/85 mb-3 leading-snug drop-shadow">{cat.desc}</p>
-                  <div class="flex gap-1.5 flex-wrap">
-                    {cat.badges.map((b) => (
-                      <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-white/20 text-white backdrop-blur-sm border border-white/25">
-                        {b}
-                      </span>
-                    ))}
-                  </div>
+              <div
+                class={`aspect-[4/3] bg-gradient-to-br ${cat.color} flex items-center justify-center group-hover:scale-105 transition-transform duration-500`}
+              >
+                <Icon name={cat.icon} class="w-16 h-16 text-white drop-shadow-lg" />
+              </div>
+              <div class="p-5">
+                <h3 class="text-lg font-bold text-default dark:text-slate-200 mb-1">{cat.label}</h3>
+                <p class="text-sm text-muted dark:text-slate-400 mb-3">{cat.desc}</p>
+                <div class="flex gap-1.5 flex-wrap">
+                  {cat.badges.map((b) => (
+                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-primary/10 dark:bg-primary/20 text-primary">
+                      {b}
+                    </span>
+                  ))}
                 </div>
               </div>
             </a>
