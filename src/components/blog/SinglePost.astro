@@ -96,6 +96,23 @@ const { post, url } = Astro.props;
     >
       <slot />
     </div>
+    {
+      post.faq && post.faq.length > 0 && (
+        <section class="mx-auto px-6 sm:px-6 max-w-3xl mt-12" aria-label="Frequently Asked Questions">
+          <h2 class="text-2xl font-bold font-heading leading-tighter tracking-tighter text-default dark:text-slate-200">
+            Frequently Asked Questions
+          </h2>
+          <div class="mt-5 space-y-3">
+            {post.faq.map((item) => (
+              <details class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-5 py-4 open:ring-1 open:ring-primary/30">
+                <summary class="cursor-pointer font-semibold text-default dark:text-slate-200">{item.question}</summary>
+                <p class="mt-2.5 text-muted dark:text-slate-400 leading-relaxed">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+      )
+    }
     <div class="mx-auto px-6 sm:px-6 max-w-3xl mt-8 flex justify-between flex-col sm:flex-row">
       <PostTags tags={post.tags} class="mr-5 rtl:mr-0 rtl:ml-5" />
       <SocialShare url={url} text={post.title} class="mt-5 sm:mt-1 align-middle text-gray-500 dark:text-slate-600" />

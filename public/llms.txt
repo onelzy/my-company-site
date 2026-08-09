@@ -1,0 +1,34 @@
+# OWON Technology — Smart IoT Device Manufacturer
+
+> XIAMEN OWON TECHNOLOGY CO.,LTD (OWON) designs and manufactures smart IoT devices for energy management, smart buildings, hotels and senior care — smart energy meters, smart thermostats, hotel control systems and senior-care monitoring kits across ZigBee, MQTT and Tuya ecosystems.
+
+## Products
+- [Smart Energy Meters](https://www.owon-iot.com/products?dim=type&type=smart-meters)
+- [Smart Thermostats](https://www.owon-iot.com/products?dim=type&type=thermostats)
+- [Hotel Control](https://www.owon-iot.com/products?dim=type&type=hotel-control)
+- [Senior Care](https://www.owon-iot.com/products?dim=type&type=senior-care)
+- [Software & Platforms](https://www.owon-iot.com/products?dim=type&type=software-platforms)
+- [All Products](https://www.owon-iot.com/products)
+
+## Solutions
+- [Senior Care Monitoring](https://www.owon-iot.com/solutions/senior-care-monitoring)
+- [Smart Hotel Energy Management](https://www.owon-iot.com/solutions/smart-hotel-energy-management)
+- [Industrial Energy Submetering](https://www.owon-iot.com/solutions/industrial-energy-submetering)
+
+## Case Studies
+- [Senior Care AIoT at a Five-Star Nursing Home](https://www.owon-iot.com/case-studies/senior-care-nursing-home/)
+- [All Case Studies](https://www.owon-iot.com/resources/case-studies/)
+
+## Blog
+- [AI Behavior Trajectory Monitoring for Seniors Living Alone](https://www.owon-iot.com/blog/ai-behavior-trajectory-monitoring-seniors/) — Real deployment Case N014: a battery-powered PIR + door sensor + bed presence pad kit with ZigBee + 4G-CAT1 communication caught a 1h41m bathroom stay, a missed morning routine and fragile sleep before they became emergencies.
+
+## Documentation & Developers
+- [Documentation](https://www.owon-iot.com/resources/documentation)
+- [Developer Center](https://www.owon-iot.com/developers)
+- [HTTP Server API](https://www.owon-iot.com/developers/api)
+- [ZigBee Clusters](https://www.owon-iot.com/developers/zigbee)
+- [Home Assistant Integration](https://www.owon-iot.com/developers/ha)
+
+## Contact
+- [Contact Sales](https://www.owon-iot.com/contact) · WhatsApp/WeChat +86 186 5013 9895 · info@owon-iot.com · +86 592 6300186
+- Address: Room 501, 5F, Building C07, Software Park III, Jimei, Xiamen, China

@@ -53,16 +53,54 @@ const textDirection = I18N.textDirection;
     <!-- Comment the line below to disable View Transitions -->
     <ClientRouter fallback="swap" />
 
-    <!-- Organization SEO Schema -->
+    <!-- Organization SEO Schema (site-wide entity signal) -->
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Organization',
         name: 'XIAMEN OWON TECHNOLOGY CO.,LTD',
+        alternateName: 'OWON Technology',
         url: 'https://www.owon-iot.com',
+        logo: 'https://www.owon-iot.com/images/logo.png',
         description:
           'Professional smart IoT device manufacturer — smart meters, thermostats, hotel control, senior care.',
+        email: 'info@owon-iot.com',
+        telephone: '+86 592 6300186',
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+86 592 6300186',
+          email: 'info@owon-iot.com',
+          contactType: 'sales',
+          areaServed: 'Worldwide',
+          availableLanguage: ['English', 'Chinese'],
+        },
+        knowsAbout: [
+          'Smart energy meters',
+          'Smart thermostats',
+          'Hotel control systems',
+          'Senior care monitoring',
+          'IoT devices',
+          'ZigBee',
+          'MQTT',
+          'Tuya',
+        ],
+      })}
+    />
+    <!-- WebSite schema -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'OWON Technology',
+        url: 'https://www.owon-iot.com',
+        inLanguage: 'en',
+        publisher: {
+          '@type': 'Organization',
+          name: 'XIAMEN OWON TECHNOLOGY CO.,LTD',
+          url: 'https://www.owon-iot.com',
+        },
       })}
     />
   </head>

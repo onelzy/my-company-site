@@ -21,6 +21,9 @@ export interface Post {
   tags?: Taxonomy[];
   author?: string;
 
+  /** FAQ items — rendered as a visible section AND as FAQPage JSON-LD. */
+  faq?: Array<{ question: string; answer: string }>;
+
   metadata?: MetaData;
 
   draft?: boolean;
@@ -30,6 +33,9 @@ export interface Post {
 
   /** Estimated reading time in minutes. */
   readingTime?: number;
+
+  /** Raw markdown word count (used for Article schema). */
+  wordCount?: number;
 }
 
 export interface Taxonomy {

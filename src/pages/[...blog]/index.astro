@@ -7,7 +7,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import SinglePost from '~/components/blog/SinglePost.astro';
 import ToBlogLink from '~/components/blog/ToBlogLink.astro';
 
-import { getCanonical, getPermalink } from '~/utils/permalinks';
+import { getPermalink } from '~/utils/permalinks';
 import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
@@ -26,7 +26,11 @@ const { post } = Astro.props as Props;
 
 const siteOrigin = (SITE.site as string).replace(/\/+$/, '');
 
-const url = getCanonical(getPermalink(post.permalink, 'post'));
+// Canonical URL: posts are prerendered and serve WITH a trailing slash
+// (the non-slash form 307s). Metadata.astro computes the canonical from
+// Astro.url.pathname, so do NOT pass a stripped canonical here — the
+// getCanonical() helper strips the slash (SITE.trailingSlash: false).
+const url = `${siteOrigin}${getPermalink(post.permalink, 'post')}/`;
 const image = (await findImage(post.image)) as ImageMetadata | string | undefined;
 
 const metadata = merge(
@@ -44,7 +48,7 @@ const metadata = merge(
         : {}),
     },
   },
-  { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
+  { ...(post?.metadata ? { ...post.metadata } : {}) }
 ) as MetaData;
 
 const articleSchema = {
@@ -52,15 +56,41 @@ const articleSchema = {
   '@type': 'Article',
   headline: post.title,
   description: post.excerpt,
+  mainEntityOfPage: url,
+  inLanguage: 'en',
   datePublished: post.publishDate,
-  ...(post.author ? { author: { '@type': 'Person', name: post.author.replaceAll('-', ' ') } } : {}),
+  dateModified: post.updateDate || post.publishDate,
+  articleSection: post.category?.title,
+  keywords: (post.tags || []).map((tag) => tag.title).join(', '),
+  wordCount: post.wordCount,
+  author: {
+    '@type': 'Organization',
+    name: 'OWON Technology',
+    url: siteOrigin,
+  },
   ...(image ? { image: typeof image === 'string' ? image : image.src } : {}),
   publisher: {
     '@type': 'Organization',
     name: 'OWON Technology',
     url: siteOrigin,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${siteOrigin}/images/logo.png`,
+    },
   },
 };
+
+const faqSchema = post.faq?.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: post.faq.map((f) => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: { '@type': 'Answer', text: f.answer },
+      })),
+    }
+  : null;
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
@@ -85,6 +115,7 @@ const breadcrumbSchema = {
 
 <Layout metadata={metadata}>
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  {faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 
   <!-- Breadcrumb -->

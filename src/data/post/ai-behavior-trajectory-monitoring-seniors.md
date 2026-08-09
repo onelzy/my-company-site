@@ -14,6 +14,21 @@ tags:
   - Smart Home
   - Elderly Care
 author: OWON Technology
+faq:
+  - question: How does AI behavior trajectory monitoring work?
+    answer: The kit combines PIR motion sensors, door sensors and a bed presence pad, all connected through a local ZigBee mesh to a 4G gateway. The AI system first builds a baseline of the senior's daily routine, then tracks every movement second by second — where they are, for how long, and when the pattern breaks.
+  - question: Does the monitoring system use cameras?
+    answer: No. There are no cameras at all. Every device is battery-powered and contactless, which protects privacy and avoids the psychological resistance many seniors feel toward camera monitoring.
+  - question: Can it be installed without home broadband?
+    answer: Yes. The gateway uses independent 4G-CAT1 cellular communication with ZigBee 3.0 local networking, so no home broadband or Wi-Fi is required — ideal for older buildings and rural homes. An optional 8-year data plan (100 MB/month) covers network costs.
+  - question: How long do the sensor batteries last?
+    answer: Around 1 year. The multi-function sensor runs on 2×AA batteries, the door sensor on a CR2450, and the bed presence pad on 2×AAA batteries. Only the gateway needs 220V power.
+  - question: What happens when an abnormal stay is detected?
+    answer: The AI system flags the anomaly in real time and alerts the family — for example a 1h41m bathroom stay (possible fall, sudden illness or severe constipation), a missed morning routine, or abnormally fragmented sleep. Full trajectory reports, including 5-minute traces, PIR trigger seconds and night-wake timestamps, are available from OWON customer service.
+  - question: How is this different from millimeter-wave radar systems?
+    answer: A millimeter-wave radar unit covers about 24 m² and needs wiring, wall mounting and continuous power — whole-house coverage multiplies cost and installation effort. The distributed PIR + door sensor + bed presence pad network covers the whole home battery-powered at 1/3 to 1/2 the deployment cost, and it monitors behavior trajectories across rooms rather than a single room. Radar modules can still be added later in key areas through the same gateway and platform.
+  - question: Can the kit be upgraded later?
+    answer: Yes — it is modular. The same gateway and platform support optional sleep radar or fall-detection radar modules for vital-sign monitoring (respiratory rate, heart rate, sleep quality analysis), so the system scales as care needs change.
 ---
 
 # AI Behavior Trajectory Monitoring for Seniors Living Alone
@@ -42,10 +57,10 @@ Insights from a real OWON deployment (Case N014) show that emergencies often hid
 The kit installs in minutes — no wiring, no cameras:
 
 <div class="grid grid-cols-2 gap-3 not-prose my-6">
-  <img src="/images/blog/ai-behavior-trajectory/gateway-install.jpg" alt="SEG-X6 gateway installed in the living room" class="rounded-lg shadow-md w-full" loading="lazy" />
-  <img src="/images/blog/ai-behavior-trajectory/door-sensor-install.jpg" alt="Door sensor mounted on the main door" class="rounded-lg shadow-md w-full" loading="lazy" />
-  <img src="/images/blog/ai-behavior-trajectory/pir-install.jpg" alt="Multi-function PIR sensor installation" class="rounded-lg shadow-md w-full" loading="lazy" />
-  <img src="/images/blog/ai-behavior-trajectory/bed-pad-install.jpg" alt="Bed presence pad placed under the mattress" class="rounded-lg shadow-md w-full" loading="lazy" />
+  <img src="/images/blog/ai-behavior-trajectory/gateway-install.webp" alt="SEG-X6 gateway installed in the living room" class="rounded-lg shadow-md w-full" loading="lazy" />
+  <img src="/images/blog/ai-behavior-trajectory/door-sensor-install.webp" alt="Door sensor mounted on the main door" class="rounded-lg shadow-md w-full" loading="lazy" />
+  <img src="/images/blog/ai-behavior-trajectory/pir-install.webp" alt="Multi-function PIR sensor installation" class="rounded-lg shadow-md w-full" loading="lazy" />
+  <img src="/images/blog/ai-behavior-trajectory/bed-pad-install.webp" alt="Bed presence pad placed under the mattress" class="rounded-lg shadow-md w-full" loading="lazy" />
 </div>
 
 The complete trajectory report — including 5-minute trajectory data, PIR trigger seconds, and night-wake timestamps — is available on request from OWON customer service.
@@ -125,12 +140,12 @@ One kit, whole-house coverage. Every sensor is battery-powered — no wiring, in
     <p class="text-xs text-muted mt-0">4G Smart Gateway</p>
   </div>
   <div class="text-center">
-    <img src="/images/blog/ai-behavior-trajectory/pir313.jpg" alt="PIR313-E multi-function sensor with light and temperature monitoring" class="rounded-lg shadow-md w-full aspect-square object-contain bg-white" loading="lazy" />
+    <img src="/images/blog/ai-behavior-trajectory/pir313.webp" alt="PIR313-E multi-function sensor with light and temperature monitoring" class="rounded-lg shadow-md w-full aspect-square object-contain bg-white" loading="lazy" />
     <p class="text-sm font-semibold mt-2 mb-0">PIR313-E</p>
     <p class="text-xs text-muted mt-0">Multi-Function Sensor</p>
   </div>
   <div class="text-center">
-    <img src="/images/blog/ai-behavior-trajectory/dws332.jpg" alt="DWS332-Z door sensor with night door-open alerts" class="rounded-lg shadow-md w-full aspect-square object-contain bg-white" loading="lazy" />
+    <img src="/images/blog/ai-behavior-trajectory/dws332.webp" alt="DWS332-Z door sensor with night door-open alerts" class="rounded-lg shadow-md w-full aspect-square object-contain bg-white" loading="lazy" />
     <p class="text-sm font-semibold mt-2 mb-0">DWS332-Z</p>
     <p class="text-xs text-muted mt-0">Door Sensor</p>
   </div>
