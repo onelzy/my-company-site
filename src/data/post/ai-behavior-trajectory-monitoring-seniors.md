@@ -3,32 +3,32 @@ publishDate: 2026-08-09
 updateDate: 2026-08-09
 title: AI Behavior Trajectory Monitoring for Seniors Living Alone
 metadata:
- title: Behavior Trajectory Monitoring for Seniors Living Alone
+  title: Behavior Trajectory Monitoring for Seniors Living Alone
 excerpt: Case N014 shows how PIR, door and bed-presence sensors catch a 1h41m bathroom stay, a missed morning routine and fragile sleep — before they become emergencies.
 image: /images/blog/ai-behavior-trajectory/cover.jpg
 category: Senior Care
 tags:
- - Senior Care
- - AI Behavior Monitoring
- - IoT
- - Smart Home
- - Elderly Care
+  - Senior Care
+  - AI Behavior Monitoring
+  - IoT
+  - Smart Home
+  - Elderly Care
 author: OWON Technology
 faq:
- - question: How does AI behavior trajectory monitoring work?
- answer: The kit combines PIR motion sensors, door sensors and a bed presence pad, all connected through a local ZigBee mesh to a 4G gateway. The AI system first builds a baseline of the senior's daily routine, then tracks every movement second by second — where they are, for how long, and when the pattern breaks.
- - question: Does the monitoring system use cameras?
- answer: No. There are no cameras at all. Every device is battery-powered and contactless, which protects privacy and avoids the psychological resistance many seniors feel toward camera monitoring.
- - question: Can it be installed without home broadband?
- answer: Yes. The gateway uses independent 4G-CAT1 cellular communication with ZigBee 3.0 local networking, so no home broadband or Wi-Fi is required — ideal for older buildings and rural homes. An optional 8-year data plan (100 MB/month) covers network costs.
- - question: How long do the sensor batteries last?
- answer: Around 1 year. The multi-function sensor runs on 2×AA batteries, the door sensor on a CR2450, and the bed presence pad on 2×AAA batteries. Only the gateway needs 220V power.
- - question: What happens when an abnormal stay is detected?
- answer: The AI system flags the anomaly in real time and alerts the family — for example a 1h41m bathroom stay (possible fall, sudden illness or severe constipation), a missed morning routine, or abnormally fragmented sleep. Full trajectory reports, including 5-minute traces, PIR trigger seconds and night-wake timestamps, are available from OWON customer service.
- - question: How is this different from millimeter-wave radar systems?
- answer: A millimeter-wave radar unit covers about 24 m² and needs wiring, wall mounting and continuous power — whole-house coverage multiplies cost and installation effort. The distributed PIR + door sensor + bed presence pad network covers the whole home battery-powered at 1/3 to 1/2 the deployment cost, and it monitors behavior trajectories across rooms rather than a single room. Radar modules can still be added later in key areas through the same gateway and platform.
- - question: Can the kit be upgraded later?
- answer: Yes — it is modular. The same gateway and platform support optional sleep radar or fall-detection radar modules for vital-sign monitoring (respiratory rate, heart rate, sleep quality analysis), so the system scales as care needs change.
+  - question: How does AI behavior trajectory monitoring work?
+    answer: The kit combines PIR motion sensors, door sensors and a bed presence pad, all connected through a local ZigBee mesh to a 4G gateway. The AI system first builds a baseline of the senior's daily routine, then tracks every movement second by second — where they are, for how long, and when the pattern breaks.
+  - question: Does the monitoring system use cameras?
+    answer: No. There are no cameras at all. Every device is battery-powered and contactless, which protects privacy and avoids the psychological resistance many seniors feel toward camera monitoring.
+  - question: Can it be installed without home broadband?
+    answer: Yes. The gateway uses independent 4G-CAT1 cellular communication with ZigBee 3.0 local networking, so no home broadband or Wi-Fi is required — ideal for older buildings and rural homes. An optional 8-year data plan (100 MB/month) covers network costs.
+  - question: How long do the sensor batteries last?
+    answer: Around 1 year. The multi-function sensor runs on 2×AA batteries, the door sensor on a CR2450, and the bed presence pad on 2×AAA batteries. Only the gateway needs 220V power.
+  - question: What happens when an abnormal stay is detected?
+    answer: The AI system flags the anomaly in real time and alerts the family — for example a 1h41m bathroom stay (possible fall, sudden illness or severe constipation), a missed morning routine, or abnormally fragmented sleep. Full trajectory reports, including 5-minute traces, PIR trigger seconds and night-wake timestamps, are available from OWON customer service.
+  - question: How is this different from millimeter-wave radar systems?
+    answer: A millimeter-wave radar unit covers about 24 m² and needs wiring, wall mounting and continuous power — whole-house coverage multiplies cost and installation effort. The distributed PIR + door sensor + bed presence pad network covers the whole home battery-powered at 1/3 to 1/2 the deployment cost, and it monitors behavior trajectories across rooms rather than a single room. Radar modules can still be added later in key areas through the same gateway and platform.
+  - question: Can the kit be upgraded later?
+    answer: Yes — it is modular. The same gateway and platform support optional sleep radar or fall-detection radar modules for vital-sign monitoring (respiratory rate, heart rate, sleep quality analysis), so the system scales as care needs change.
 ---
 
 # AI Behavior Trajectory Monitoring for Seniors Living Alone
@@ -42,7 +42,7 @@ In a deeply aging society, the safety and health of seniors living alone have be
 Insights from a real OWON deployment (Case N014) show that emergencies often hide in subtle changes to daily routines:
 
 - **Abnormal bathroom stay** — 1 hour 41 minutes
-- ⏰ **Disrupted daily rhythm** — no kitchen activity, zero fridge openings all morning
+- **Disrupted daily rhythm** — no kitchen activity, zero fridge openings all morning
 - **Fragile sleep** — 37 in-bed position changes during the midday rest
 
 <figure>
