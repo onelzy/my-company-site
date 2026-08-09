@@ -16,12 +16,17 @@ export interface Props extends MetaData {
 const {
   title,
   ignoreTitleTemplate = false,
-  // Canonical must match the SERVED URL exactly:
-  // - Prerendered pages serve at /path/ (the no-slash form 307s → slash)
-  // - /contact (SSR, reads query params) serves at /contact (no slash)
-  // getCanonical() strips the slash (SITE.trailingSlash: false) and would emit
-  // a canonical pointing at a 307 — fixed 2026-08-09 by using pathname as-is.
-  canonical = String(new URL(String(Astro.url.pathname), SITE.site).href),
+  // Canonical must match the SERVED URL exactly (verified live 2026-08-09):
+  // - All prerendered pages serve at /path/ (no-slash 307s → slash)
+  // - /contact is the only SSR static page: serves at /contact (slash form 301s back)
+  // Astro.url.pathname at prerender time has NO trailing slash, so append it
+  // explicitly. getCanonical() stripped the slash (SITE.trailingSlash: false)
+  // and emitted canonicals pointing at 307s.
+  canonical = (() => {
+    const rawPath = String(Astro.url.pathname);
+    const canonicalPath = rawPath === '/contact' ? rawPath : rawPath.endsWith('/') ? rawPath : `${rawPath}/`;
+    return String(new URL(canonicalPath, SITE.site).href);
+  })(),
   robots = {},
   description,
   openGraph = {},
