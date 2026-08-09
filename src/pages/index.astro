@@ -84,7 +84,7 @@ const solutionSlides = [
       'Central PMS integration',
       'Per-room energy monitoring',
     ],
-    img: '/images/products/pct513.svg',
+    img: '/images/products/cat/hotel-control.webp',
     color: 'from-blue-600 to-sky-500',
   },
   {
@@ -99,7 +99,7 @@ const solutionSlides = [
       'Automated anomaly alerts',
       'Tenant billing ready',
     ],
-    img: '/images/products/pc321-ty.svg',
+    img: '/images/products/cat/energy-management.webp',
     color: 'from-amber-600 to-orange-500',
   },
   {
@@ -114,7 +114,7 @@ const solutionSlides = [
       'Web management dashboard',
       'Energy saving analytics',
     ],
-    img: '/images/products/pc341-3m16s.svg',
+    img: '/images/products/cat/smart-building.webp',
     color: 'from-violet-600 to-purple-500',
   },
   {
@@ -129,7 +129,7 @@ const solutionSlides = [
       'AiJuan nurse dashboard',
       'Health trend reports',
     ],
-    img: '/images/products/spm-915.svg',
+    img: '/images/products/cat/senior-care.webp',
     color: 'from-rose-600 to-pink-500',
   },
   {
@@ -144,7 +144,7 @@ const solutionSlides = [
       'SCADA/MES integration',
       'Machinery energy tracking',
     ],
-    img: '/images/products/edgeeco.svg',
+    img: '/images/products/cat/industrial-iot.webp',
     color: 'from-emerald-600 to-teal-500',
   },
 ];
@@ -231,28 +231,28 @@ const solutionSlides = [
             {
               label: 'Smart Meters',
               desc: 'Single-phase, three-phase, multi-circuit DIN rail meters',
-              img: '/images/products/pc321-ty.svg',
+              img: '/images/products/cat/smart-meters.webp',
               link: '/products?dim=type&type=smart-meters',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Thermostats',
               desc: '24V AC, boiler, touchscreen & ZigBee HVAC controllers',
-              img: '/images/products/pct513.svg',
+              img: '/images/products/cat/thermostats.webp',
               link: '/products?dim=type&type=thermostats',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Hotel Control',
               desc: 'Room thermostats, lighting, door signs & energy mgmt',
-              img: '/images/products/pc341-3m16s.svg',
+              img: '/images/products/cat/hotel-control.webp',
               link: '/products?dim=type&type=hotel-control',
               badges: ['ZigBee'],
             },
             {
               label: 'Senior Care',
               desc: 'Sleep monitors, emergency call, fall detection & nurse station',
-              img: '/images/products/spm-915.svg',
+              img: '/images/products/cat/senior-care.webp',
               link: '/products?dim=type&type=senior-care',
               badges: ['ZigBee'],
             },
@@ -261,8 +261,8 @@ const solutionSlides = [
               href={cat.link}
               class="group relative rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              <div class="aspect-[4/3] bg-white dark:bg-slate-700/50 flex items-center justify-center p-6 group-hover:scale-105 transition-transform duration-500">
-                <img src={cat.img} alt={cat.label} class="w-full h-full object-contain" loading="lazy" />
+              <div class="aspect-[4/3] overflow-hidden group-hover:scale-105 transition-transform duration-500">
+                <img src={cat.img} alt={cat.label} class="w-full h-full object-cover" loading="lazy" />
               </div>
               <div class="p-5">
                 <h3 class="text-lg font-bold text-default dark:text-slate-200 mb-1">{cat.label}</h3>
@@ -368,15 +368,8 @@ const solutionSlides = [
                       </a>
                     </div>
                   </div>
-                  <div
-                    class={`bg-gradient-to-br ${sol.color} flex items-center justify-center p-8 lg:p-12 min-h-[280px]`}
-                  >
-                    <img
-                      src={sol.img}
-                      alt={sol.title}
-                      class="w-full max-w-xs h-auto object-contain drop-shadow-2xl"
-                      loading="lazy"
-                    />
+                  <div class={`min-h-[280px] overflow-hidden`}>
+                    <img src={sol.img} alt={sol.title} class="w-full h-full object-cover" loading="lazy" />
                   </div>
                 </div>
               </div>
