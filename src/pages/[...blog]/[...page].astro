@@ -6,6 +6,7 @@ import BlogList from '~/components/blog/List.astro';
 import Pagination from '~/components/blog/Pagination.astro';
 
 import { blogListRobots, getStaticPathsBlogList, fetchPosts } from '~/utils/blog';
+import { getPermalink } from '~/utils/permalinks';
 import { SITE } from 'astrowind:config';
 
 export const prerender = true;
@@ -100,7 +101,7 @@ const breadcrumbSchema = {
         {
           blogCategories.map((cat) => (
             <a
-              href={`/blog/${cat.slug}/`}
+              href={getPermalink(cat.slug, 'category')}
               class="filter-chip inline-block px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all bg-white dark:bg-slate-800 text-gray-600 dark:text-slate-400 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary no-underline"
               data-category={cat.slug}
               title={cat.desc}

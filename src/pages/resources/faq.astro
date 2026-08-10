@@ -109,7 +109,6 @@ const faqCategories = [
   },
 ];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars -- used in template placeholder
 const totalFAQs = faqCategories.reduce((sum, cat) => sum + cat.items.length, 0);
 ---
 
@@ -178,7 +177,7 @@ const totalFAQs = faqCategories.reduce((sum, cat) => sum + cat.items.length, 0);
           <input
             type="text"
             id="faqSearch"
-            placeholder="Search {totalFAQs} FAQs by keyword..."
+            placeholder={`Search ${totalFAQs} FAQs by keyword...`}
             class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow"
           />
         </div>

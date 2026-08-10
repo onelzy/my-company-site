@@ -24,7 +24,10 @@ const {
   // and emitted canonicals pointing at 307s.
   canonical = (() => {
     const rawPath = String(Astro.url.pathname);
-    const canonicalPath = rawPath === '/contact' ? rawPath : rawPath.endsWith('/') ? rawPath : `${rawPath}/`;
+    // Pages that serve WITHOUT a trailing slash: /contact (SSR), and the
+    // prerendered legal .md pages /privacy + /terms (trailingSlash: false).
+    const noSlashPaths = ['/contact', '/privacy', '/terms'];
+    const canonicalPath = noSlashPaths.includes(rawPath) ? rawPath : rawPath.endsWith('/') ? rawPath : `${rawPath}/`;
     return String(new URL(canonicalPath, SITE.site).href);
   })(),
   robots = {},

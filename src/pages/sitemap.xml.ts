@@ -12,6 +12,7 @@ import { SITE } from 'astrowind:config';
 import { getCollection } from 'astro:content';
 import { products } from '~/data/products';
 import { caseStudies } from '~/data/caseStudies';
+import { fetchPosts } from '~/utils/blog';
 
 export const prerender = true;
 
@@ -61,6 +62,9 @@ export const GET = async () => {
     ['/developers/mqtt/', 'monthly', '0.7'],
     ['/developers/zigbee/', 'monthly', '0.7'],
     ['/developers/ha/', 'monthly', '0.7'],
+    // Legal pages serve WITHOUT trailing slash (prerendered .md, trailingSlash: false)
+    ['/privacy', 'monthly', '0.3'],
+    ['/terms', 'monthly', '0.3'],
     // Blog list re-added 2026-08-09 when the first real post landed
     // (AI Behavior Trajectory Monitoring for Seniors Living Alone).
     ['/blog/', 'weekly', '0.8'],
@@ -95,6 +99,21 @@ export const GET = async () => {
     const id = post.id.replace(/\.(md|mdx)$/, '');
     if (post.data.draft) continue;
     urls.push({ loc: `${baseUrl}/blog/${id}/`, changefreq: 'monthly', priority: '0.6' });
+  }
+
+  // 6. Blog taxonomy pages — real categories & tags derived from published posts
+  const allPosts = await fetchPosts();
+  const categorySlugs = Array.from(
+    new Set(allPosts.map((p) => p.category?.slug).filter((s): s is string => Boolean(s)))
+  );
+  for (const c of categorySlugs) {
+    urls.push({ loc: `${baseUrl}/category/${c}/`, changefreq: 'monthly', priority: '0.4' });
+  }
+  const tagSlugs = Array.from(
+    new Set(allPosts.flatMap((p) => (p.tags ?? []).map((t) => t.slug)).filter((s): s is string => Boolean(s)))
+  );
+  for (const t of tagSlugs) {
+    urls.push({ loc: `${baseUrl}/tag/${t}/`, changefreq: 'monthly', priority: '0.3' });
   }
 
   // ---------------------------------------------------------------------------

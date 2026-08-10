@@ -312,4 +312,4 @@ The kit is not fixed. Depending on care needs, hardware modules can be swapped o
 
 Let protection move from "knowing after the fact" to "preventing in advance". With the warmth of technology, we bridge the distance of time and space, and protect every senior's dignity and a safe later life. No matter how far away you are, love stays online — install an invisible safety net for your parents, and turn constant worry into peace of mind.
 
-See how the same technology protects residents in a [five-star nursing home](/resources/case-studies/senior-care-nursing-home/), or explore our [senior care monitoring solution](/solutions/senior-care-monitoring). Want to request a sample trajectory report? [Contact our team](/contact).
+See how the same technology protects residents in a [five-star nursing home](/case-studies/senior-care-nursing-home/), or explore our [senior care monitoring solution](/solutions/senior-care-monitoring). Want to request a sample trajectory report? [Contact our team](/contact).
