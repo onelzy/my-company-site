@@ -18,6 +18,48 @@ const contactUrl = getPermalink('/contact');
 const developersUrl = getPermalink('/developers');
 const solutionsUrl = getPermalink('/solutions');
 
+// Technology cards: product counts are computed from real catalog data at build time,
+// so adding products later updates the homepage automatically (no manual edits).
+import { products as rawProductEntries } from '~/data/products';
+const protocolCount = (filter: (d: Record<string, unknown>) => boolean): number =>
+  rawProductEntries.filter((e) => filter((e.data || {}) as Record<string, unknown>)).length;
+const protoComm = (v: string) => protocolCount((d) => ((d.communication as string[]) || []).includes(v));
+const protoSol = (v: string) => protocolCount((d) => d.techSolution === v);
+const techCards = [
+  {
+    name: 'ZigBee 3.0',
+    desc: 'Self-healing mesh • 100m+ range • Low power • 250+ devices per gateway',
+    icon: 'M5 12l5 5L20 7',
+    href: '/products?dim=comm&comm=zigbee',
+    count: protoComm('zigbee'),
+    color: 'from-emerald-500 to-teal-500',
+  },
+  {
+    name: 'Tuya',
+    desc: 'Certified devices • Smart Life app • Global cloud • Consumer-friendly',
+    icon: 'M12 6v6m0 0l3-3m-3 3l-3-3m6 6a9 9 0 11-18 0 9 9 0 0118 0z',
+    href: '/products?dim=solution&sol=tuya',
+    count: protoSol('tuya'),
+    color: 'from-sky-500 to-blue-600',
+  },
+  {
+    name: 'MQTT',
+    desc: 'Real-time streaming • TLS security • SCADA/BMS integration • JSON payloads',
+    icon: 'M4 7h16M4 12h16M4 17h16',
+    href: '/products?dim=solution&sol=mqtt',
+    count: protoSol('mqtt'),
+    color: 'from-amber-500 to-orange-600',
+  },
+  {
+    name: 'Modbus',
+    desc: 'Industrial RS-485 • Legacy system compatible • Reliable polling',
+    icon: 'M5 8h14M5 12h14M5 16h14M8 5v14M16 5v14',
+    href: '/products?dim=comm&comm=rs485',
+    count: protoComm('rs485'),
+    color: 'from-violet-500 to-purple-600',
+  },
+];
+
 // Real solution pages drive the homepage carousel (title/subtitle/image/slug from mdoc data)
 import { solutions as rawSolutions } from '~/data/solutions';
 const solutionSlideMap: Record<string, { color: string; features: string[] }> = {
@@ -351,40 +393,7 @@ const formatDate = (date) => {
       <p class="text-center text-muted dark:text-slate-400 mb-12">Protocols &amp; ecosystems we support</p>
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {
-          [
-            {
-              name: 'ZigBee 3.0',
-              desc: 'Self-healing mesh • 100m+ range • Low power • 250+ devices per gateway',
-              icon: 'M5 12l5 5L20 7',
-              href: '/products?dim=comm&comm=zigbee',
-              count: '45',
-              color: 'from-emerald-500 to-teal-500',
-            },
-            {
-              name: 'Tuya',
-              desc: 'Certified devices • Smart Life app • Global cloud • Consumer-friendly',
-              icon: 'M12 6v6m0 0l3-3m-3 3l-3-3m6 6a9 9 0 11-18 0 9 9 0 0118 0z',
-              href: '/products?dim=solution&sol=tuya',
-              count: '21',
-              color: 'from-sky-500 to-blue-600',
-            },
-            {
-              name: 'MQTT',
-              desc: 'Real-time streaming • TLS security • SCADA/BMS integration • JSON payloads',
-              icon: 'M4 7h16M4 12h16M4 17h16',
-              href: '/products?dim=solution&sol=mqtt',
-              count: '4',
-              color: 'from-amber-500 to-orange-600',
-            },
-            {
-              name: 'Modbus',
-              desc: 'Industrial RS-485 • Legacy system compatible • Reliable polling',
-              icon: 'M5 8h14M5 12h14M5 16h14M8 5v14M16 5v14',
-              href: '/products?dim=comm&comm=rs485',
-              count: '1',
-              color: 'from-violet-500 to-purple-600',
-            },
-          ].map((proto) => (
+          techCards.map((proto) => (
             <a
               href={proto.href}
               class="group rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 p-6 hover:shadow-lg hover:-translate-y-1 hover:border-primary/40 transition-all duration-300"
