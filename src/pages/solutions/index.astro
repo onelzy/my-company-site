@@ -112,7 +112,7 @@ const preparedSolutions = solutions.map((s) => {
               class="solution-card group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
               data-industry={s.industry || ''}
             >
-              <div class="h-48 bg-gray-100 dark:bg-slate-700 overflow-hidden relative flex items-center justify-center text-5xl">
+              <div class="aspect-square bg-gray-100 dark:bg-slate-700 overflow-hidden relative flex items-center justify-center text-5xl">
                 {s.heroImage ? (
                   <Image
                     src={s.heroImage}
@@ -120,7 +120,7 @@ const preparedSolutions = solutions.map((s) => {
                     layout="cover"
                     class="absolute inset-0 w-full h-full"
                     width={600}
-                    height={400}
+                    height={600}
                   />
                 ) : (
                   <Icon name={`tabler:${s.icon}`} class="w-8 h-8" />
