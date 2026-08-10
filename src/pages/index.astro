@@ -189,7 +189,7 @@ const formatDate = (date) => {
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">
         Product Categories
       </h2>
-      <div class="grid gap-5 grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {
           [
             {
@@ -202,34 +202,34 @@ const formatDate = (date) => {
             {
               label: 'Thermostats',
               desc: '24V AC, boiler, touchscreen & ZigBee HVAC controllers',
-              img: '/images/products/cat/thermostats.webp',
+              img: '/images/hero/thermostat-family-hero.webp',
               link: '/products?dim=type&type=thermostats',
               badges: ['Tuya', 'MQTT', 'ZigBee'],
             },
             {
               label: 'Hotel Control',
               desc: 'Room thermostats, lighting, door signs & energy mgmt',
-              img: '/images/products/cat/hotel-control.webp',
+              img: '/images/hero/hotel-solution-hero.webp',
               link: '/products?dim=type&type=hotel-control',
               badges: ['ZigBee'],
             },
             {
               label: 'Senior Care',
               desc: 'Sleep monitors, emergency call, fall detection & nurse station',
-              img: '/images/products/cat/senior-care.webp',
+              img: '/images/hero/senior-care-hero.webp',
               link: '/products?dim=type&type=senior-care',
               badges: ['ZigBee'],
             },
           ].map((cat) => (
             <a
               href={cat.link}
-              class="group relative rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              class="group block rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              <div class="aspect-[4/3] p-5 flex items-center justify-center">
-                <img src={cat.img} alt={cat.label} class="max-h-full max-w-full object-contain" loading="lazy" />
+              <div class="aspect-square overflow-hidden bg-gray-50 dark:bg-slate-700">
+                <img src={cat.img} alt={cat.label} class="w-full h-full object-cover" loading="lazy" />
               </div>
-              <div class="p-5">
-                <h3 class="text-2xl font-bold text-default dark:text-slate-200 mb-1">{cat.label}</h3>
+              <div class="p-4 sm:p-5">
+                <h3 class="text-xl sm:text-2xl font-bold text-default dark:text-slate-200 mb-1">{cat.label}</h3>
                 <p class="text-sm text-muted dark:text-slate-400 mb-3">{cat.desc}</p>
                 <div class="flex gap-1.5 flex-wrap">
                   {cat.badges.map((b) => (
@@ -287,20 +287,9 @@ const formatDate = (date) => {
               <div class="w-full flex-shrink-0" data-sol-index={i}>
                 <div class="grid lg:grid-cols-2 gap-0">
                   <div class="p-8 lg:p-12 flex flex-col justify-center">
-                    <div class="flex items-center gap-3 mb-4">
-                      <div
-                        class={`w-12 h-12 rounded-xl bg-gradient-to-br ${sol.color} flex items-center justify-center shadow-lg`}
-                      >
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d={sol.icon} />
-                        </svg>
-                      </div>
-                      <div>
-                        <>
-                          <h3 class="text-xl font-bold text-default dark:text-slate-200">{sol.title}</h3>
-                          <p class="text-sm text-muted dark:text-slate-400">{sol.subtitle}</p>
-                        </>
-                      </div>
+                    <div class="mb-4">
+                      <h3 class="text-xl font-bold text-default dark:text-slate-200">{sol.title}</h3>
+                      <p class="text-sm text-muted dark:text-slate-400">{sol.subtitle}</p>
                     </div>
                     <p class="text-muted dark:text-slate-400 leading-relaxed mb-6">{sol.desc}</p>
                     <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 mb-6">
