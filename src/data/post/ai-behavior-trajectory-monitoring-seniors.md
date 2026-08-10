@@ -47,10 +47,26 @@ Insights from a real OWON deployment (Case N014) show that emergencies often hid
 - **Disrupted daily rhythm** — no kitchen activity, zero fridge openings all morning
 - **Fragile sleep** — 37 in-bed position changes during the midday rest
 
-<figure>
- <img src="/images/blog/ai-behavior-trajectory/alerts.webp" alt="Case N014 alerts: 1h41m abnormal bathroom stay, disrupted daily rhythm, 37 sleep position changes" loading="lazy" />
- <figcaption>Three alerts from a real deployment — subtle routine changes that can signal an emergency.</figcaption>
-</figure>
+<div class="not-prose my-6 grid gap-3 sm:grid-cols-3">
+  <div style="background:#fef2f2; border:1px solid #fecaca; border-radius:14px; padding:16px 14px;">
+    <p style="font-size:12px; font-weight:700; color:#dc2626; letter-spacing:0.4px; margin:0 0 6px;">ALERT 01</p>
+    <p style="font-size:15px; font-weight:700; color:#0b1e3a; margin:0 0 4px;">Abnormal bathroom stay</p>
+    <p style="font-size:22px; font-weight:700; color:#b91c1c; margin:0 0 6px;">1 hour 41 minutes</p>
+    <p style="font-size:13px; color:#4d6079; line-height:1.6; margin:0;">Possible fall, sudden illness or severe constipation — the system alerted the family in real time.</p>
+  </div>
+  <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:14px; padding:16px 14px;">
+    <p style="font-size:12px; font-weight:700; color:#d97706; letter-spacing:0.4px; margin:0 0 6px;">ALERT 02</p>
+    <p style="font-size:15px; font-weight:700; color:#0b1e3a; margin:0 0 4px;">Disrupted daily rhythm</p>
+    <p style="font-size:22px; font-weight:700; color:#b45309; margin:0 0 6px;">Zero kitchen activity</p>
+    <p style="font-size:13px; color:#4d6079; line-height:1.6; margin:0;">No kitchen movement and no fridge openings all morning — the senior may not have gotten up normally.</p>
+  </div>
+  <div style="background:#f5f3ff; border:1px solid #ddd6fe; border-radius:14px; padding:16px 14px;">
+    <p style="font-size:12px; font-weight:700; color:#7c3aed; letter-spacing:0.4px; margin:0 0 6px;">ALERT 03</p>
+    <p style="font-size:15px; font-weight:700; color:#0b1e3a; margin:0 0 4px;">Fragile sleep</p>
+    <p style="font-size:22px; font-weight:700; color:#6d28d9; margin:0 0 6px;">37 position changes</p>
+    <p style="font-size:13px; color:#4d6079; line-height:1.6; margin:0;">In-bed position changes during the midday rest — abnormally shallow sleep that needs attention.</p>
+  </div>
+</div>
 
 > Real case file · No. N014 · Deployed October 3, 2025. All data in this article comes from real deployments and can be verified against the original reports through OWON customer service.
 
@@ -71,10 +87,58 @@ The complete trajectory report — including 5-minute trajectory data, PIR trigg
 
 The system automatically generates a daily activity trajectory chart, recording how long the resident stays in each zone and their activity patterns.
 
-<figure>
- <img src="/images/blog/ai-behavior-trajectory/timeline.webp" alt="Whole-house behavior trajectory timeline for July 12 2026, showing sleep, kitchen visits, a nap and a flagged 1h41m abnormal bathroom stay" loading="lazy" />
- <figcaption>The daily timeline — where the resident was, every minute of the day.</figcaption>
-</figure>
+<div class="not-prose my-6 rounded-2xl border border-gray-100 p-4 sm:p-5 bg-white">
+  <div class="mb-4 flex items-center gap-2">
+    <span style="font-size:15px; font-weight:700; color:#0b1e3a;">Daily behavior trajectory timeline</span>
+    <span style="font-size:12px; color:#8a99b0; margin-left:auto;">2026.07.12</span>
+  </div>
+  <div class="space-y-1.5">
+    <div class="flex items-center gap-2">
+      <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">00:00</span>
+      <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
+        <div style="width:42%; background:#3b82f6; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Sleep</div>
+        <div style="width:58%; background:#2563eb; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">In bed</div>
+      </div>
+      <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">10:04</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">10:04</span>
+      <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
+        <div style="width:6%; background:#8b5cf6;"></div><div style="width:4%; background:#06b6d4;"></div><div style="width:4%; background:#f59e0b;"></div><div style="width:8%; background:#3b82f6;"></div><div style="width:22%; background:#f59e0b; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Kitchen</div><div style="width:8%; background:#06b6d4;"></div><div style="width:6%; background:#8b5cf6;"></div>
+      </div>
+      <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">13:26</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">13:26</span>
+      <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
+        <div style="width:4%; background:#06b6d4;"></div><div style="width:16%; background:#3b82f6; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Nap</div><div style="width:4%; background:#8b5cf6;"></div><div style="width:2%; background:#10b981;"></div><div style="width:4%; background:#f59e0b;"></div><div style="width:2%; background:#10b981;"></div><div style="width:38%; background:#dc2626; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#fff;">Abnormal stay 1h41m</div>
+      </div>
+      <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">16:19</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">16:19</span>
+      <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
+        <div style="width:6%; background:#8b5cf6;"></div><div style="width:3%; background:#10b981;"></div><div style="width:6%; background:#06b6d4;"></div><div style="width:6%; background:#8b5cf6;"></div><div style="width:8%; background:#f59e0b;"></div><div style="width:6%; background:#8b5cf6;"></div><div style="width:3%; background:#06b6d4;"></div><div style="width:12%; background:#f59e0b;"></div><div style="width:8%; background:#8b5cf6;"></div>
+      </div>
+      <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">20:27</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">20:27</span>
+      <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
+        <div style="width:14%; background:#8b5cf6;"></div><div style="width:6%; background:#10b981;"></div><div style="width:20%; background:#8b5cf6;"></div><div style="width:10%; background:#3b82f6;"></div>
+      </div>
+      <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">24:00</span>
+    </div>
+  </div>
+  <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-gray-100 pt-3" style="font-size:11px; color:#4d6079;">
+    <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#3b82f6;"></span> Bedroom</span>
+    <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#f59e0b;"></span> Kitchen</span>
+    <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#10b981;"></span> Living room</span>
+    <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#06b6d4;"></span> Bathroom</span>
+    <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#8b5cf6;"></span> Main door</span>
+    <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#dc2626;"></span> Abnormal stay</span>
+  </div>
+</div>
 
 ### Activity by Zone — 55 movements in one day
 
@@ -86,10 +150,47 @@ The system automatically generates a daily activity trajectory chart, recording 
 | Kitchen     | 14        | 5h19m      |
 | Bathroom    | 11        | 2h43m      |
 
-<figure>
- <img src="/images/blog/ai-behavior-trajectory/stats.webp" alt="Activity by zone: 55 movements, 23h59m tracked, main door 20x 4h37m, bedroom 6x 11h11m, living room 4x, kitchen 14x 5h19m, bathroom 11x 2h43m" loading="lazy" />
- <figcaption>Total tracked time: 23 hours 59 minutes — covering all living areas.</figcaption>
-</figure>
+<div class="not-prose my-6 rounded-2xl border border-gray-100 p-4 sm:p-5 bg-white">
+  <div class="mb-4 flex items-center gap-2">
+    <span style="font-size:15px; font-weight:700; color:#0b1e3a;">Activity statistics by zone</span>
+    <span style="font-size:12px; color:#8a99b0; margin-left:auto;">55 movements tracked</span>
+  </div>
+  <div class="space-y-2">
+    <div class="flex items-center gap-2">
+      <span style="width:74px; flex-shrink:0; font-size:13px; font-weight:500; color:#3d4e66; text-align:right;">Main door</span>
+      <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100"><div style="width:28%; height:100%; border-radius:9999px; background:#8b5cf6;"></div></div>
+      <span style="width:44px; flex-shrink:0; font-size:13px; font-weight:600; color:#0b1e3a; text-align:right;">20x</span>
+      <span style="width:50px; flex-shrink:0; font-size:12px; color:#8a99b0; text-align:right;">4h37m</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:74px; flex-shrink:0; font-size:13px; font-weight:500; color:#3d4e66; text-align:right;">Bedroom</span>
+      <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100"><div style="width:46%; height:100%; border-radius:9999px; background:#3b82f6;"></div></div>
+      <span style="width:44px; flex-shrink:0; font-size:13px; font-weight:600; color:#0b1e3a; text-align:right;">6x</span>
+      <span style="width:50px; flex-shrink:0; font-size:12px; color:#8a99b0; text-align:right;">11h11m</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:74px; flex-shrink:0; font-size:13px; font-weight:500; color:#3d4e66; text-align:right;">Living room</span>
+      <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100"><div style="width:8%; height:100%; border-radius:9999px; background:#10b981;"></div></div>
+      <span style="width:44px; flex-shrink:0; font-size:13px; font-weight:600; color:#0b1e3a; text-align:right;">4x</span>
+      <span style="width:50px; flex-shrink:0; font-size:12px; color:#8a99b0; text-align:right;">0h07m</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:74px; flex-shrink:0; font-size:13px; font-weight:500; color:#3d4e66; text-align:right;">Kitchen</span>
+      <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100"><div style="width:34%; height:100%; border-radius:9999px; background:#f59e0b;"></div></div>
+      <span style="width:44px; flex-shrink:0; font-size:13px; font-weight:600; color:#0b1e3a; text-align:right;">14x</span>
+      <span style="width:50px; flex-shrink:0; font-size:12px; color:#8a99b0; text-align:right;">5h19m</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span style="width:74px; flex-shrink:0; font-size:13px; font-weight:500; color:#3d4e66; text-align:right;">Bathroom</span>
+      <div class="h-2.5 flex-1 overflow-hidden rounded-full bg-gray-100"><div style="width:22%; height:100%; border-radius:9999px; background:#06b6d4;"></div></div>
+      <span style="width:44px; flex-shrink:0; font-size:13px; font-weight:600; color:#0b1e3a; text-align:right;">11x</span>
+      <span style="width:50px; flex-shrink:0; font-size:12px; color:#8a99b0; text-align:right;">2h43m</span>
+    </div>
+  </div>
+  <div class="mt-4 rounded-lg bg-gray-50 px-4 py-2.5 text-center" style="border:1px solid #f1f4f9;">
+    <span style="font-size:13px; color:#4d6079;">Total tracked time: <strong style="color:#0b1e3a;">23 hours 59 minutes</strong> · covering all living areas</span>
+  </div>
+</div>
 
 ## The Solution: A Non-Intrusive, Predictive Monitoring Kit
 
@@ -104,10 +205,28 @@ What we provide is not just a collection of sensors, but an AI system that auton
 
 Many competing products also use PIR + door sensors — but the communication method determines the fundamental difference in data granularity.
 
-<figure>
- <img src="/images/blog/ai-behavior-trajectory/comparison.webp" alt="NB-IoT vs OWON ZigBee + 4G-CAT1: hourly vs millisecond reporting, 26kbps vs 10Mbps, 10s latency vs real-time" loading="lazy" />
- <figcaption>Communication technology decides whether you see events — or the full behavior trajectory.</figcaption>
-</figure>
+<div class="not-prose my-6 grid gap-4 sm:grid-cols-2">
+  <div class="rounded-2xl border border-gray-200 p-5" style="background:#fafafa;">
+    <span class="inline-block rounded-full px-3 py-0.5 mb-3" style="font-size:11px; font-weight:700; background:#f0f0f0; color:#6b7a8f;">COMMON MARKET APPROACH</span>
+    <p style="font-size:18px; font-weight:700; color:#6b7a8f; margin:0 0 12px;">NB-IoT</p>
+    <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Device sleeps to save power — reports <strong style="color:#991b1b;">hourly or daily</strong></li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Downlink only <span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#fecaca; color:#991b1b;">26 kbps</span> — status-only</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Latency up to <span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#fecaca; color:#991b1b;">10 seconds</span></li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Designed for smart meters — <strong style="color:#991b1b;">not senior care</strong></li>
+    </ul>
+  </div>
+  <div class="rounded-2xl border p-5" style="background:linear-gradient(145deg,#f0f7ff,#e8f0fe); border-color:#b8d4fe;">
+    <span class="inline-block rounded-full px-3 py-0.5 mb-3" style="font-size:11px; font-weight:700; background:#1d4ed8; color:#fff;">OWON SOLUTION</span>
+    <p style="font-size:18px; font-weight:700; color:#0b1e3a; margin:0 0 12px;">ZigBee + 4G-CAT1</p>
+    <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span>ZigBee local mesh — <strong style="color:#1d4ed8;">millisecond response</strong>, real-time upload</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span>4G-CAT1 downlink <span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#86efac; color:#065f46;">10 Mbps</span> · uplink <span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#86efac; color:#065f46;">5 Mbps</span></li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span><span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#bfdbfe; color:#1e40af;">1 hour</span> heartbeat keeps devices online</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span>Every PIR trigger reported — <strong style="color:#1d4ed8;">no movement is missed</strong></li>
+    </ul>
+  </div>
+</div>
 
 **The core value:** when the senior enters the bathroom at 14:38, the system tracks second by second and records the exit at 16:19 — that is what real "behavior trajectory monitoring" means.
 
