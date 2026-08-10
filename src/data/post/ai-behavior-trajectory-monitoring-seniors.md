@@ -104,28 +104,28 @@ The system automatically generates a daily activity trajectory chart, recording 
     <div class="flex items-center gap-2">
       <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">10:04</span>
       <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
-        <div style="width:6%; background:#8b5cf6;"></div><div style="width:4%; background:#06b6d4;"></div><div style="width:4%; background:#f59e0b;"></div><div style="width:8%; background:#3b82f6;"></div><div style="width:22%; background:#f59e0b; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Kitchen</div><div style="width:8%; background:#06b6d4;"></div><div style="width:6%; background:#8b5cf6;"></div>
+        <div style="width:10.3%; background:#8b5cf6;"></div><div style="width:6.9%; background:#06b6d4;"></div><div style="width:6.9%; background:#f59e0b;"></div><div style="width:13.8%; background:#3b82f6;"></div><div style="width:37.9%; background:#f59e0b; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Kitchen</div><div style="width:13.8%; background:#06b6d4;"></div><div style="width:10.3%; background:#8b5cf6;"></div>
       </div>
       <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">13:26</span>
     </div>
     <div class="flex items-center gap-2">
       <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">13:26</span>
       <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
-        <div style="width:4%; background:#06b6d4;"></div><div style="width:16%; background:#3b82f6; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Nap</div><div style="width:4%; background:#8b5cf6;"></div><div style="width:2%; background:#10b981;"></div><div style="width:4%; background:#f59e0b;"></div><div style="width:2%; background:#10b981;"></div><div style="width:38%; background:#dc2626; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#fff;">Abnormal stay 1h41m</div>
+        <div style="width:5.7%; background:#06b6d4;"></div><div style="width:22.9%; background:#3b82f6; display:flex; align-items:center; justify-content:center; font-size:9px; font-weight:600; color:#fff;">Nap</div><div style="width:5.7%; background:#8b5cf6;"></div><div style="width:2.9%; background:#10b981;"></div><div style="width:5.7%; background:#f59e0b;"></div><div style="width:2.9%; background:#10b981;"></div><div style="width:54.3%; background:#dc2626; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700; color:#fff;">Abnormal stay 1h41m</div>
       </div>
       <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">16:19</span>
     </div>
     <div class="flex items-center gap-2">
       <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">16:19</span>
       <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
-        <div style="width:6%; background:#8b5cf6;"></div><div style="width:3%; background:#10b981;"></div><div style="width:6%; background:#06b6d4;"></div><div style="width:6%; background:#8b5cf6;"></div><div style="width:8%; background:#f59e0b;"></div><div style="width:6%; background:#8b5cf6;"></div><div style="width:3%; background:#06b6d4;"></div><div style="width:12%; background:#f59e0b;"></div><div style="width:8%; background:#8b5cf6;"></div>
+        <div style="width:10.3%; background:#8b5cf6;"></div><div style="width:5.2%; background:#10b981;"></div><div style="width:10.3%; background:#06b6d4;"></div><div style="width:10.3%; background:#8b5cf6;"></div><div style="width:13.8%; background:#f59e0b;"></div><div style="width:10.3%; background:#8b5cf6;"></div><div style="width:5.2%; background:#06b6d4;"></div><div style="width:20.7%; background:#f59e0b;"></div><div style="width:13.8%; background:#8b5cf6;"></div>
       </div>
       <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">20:27</span>
     </div>
     <div class="flex items-center gap-2">
       <span style="width:42px; flex-shrink:0; font-size:11px; font-weight:600; color:#8a99b0; text-align:right;">20:27</span>
       <div class="flex h-8 flex-1 overflow-hidden rounded-md bg-gray-100">
-        <div style="width:14%; background:#8b5cf6;"></div><div style="width:6%; background:#10b981;"></div><div style="width:20%; background:#8b5cf6;"></div><div style="width:10%; background:#3b82f6;"></div>
+        <div style="width:28%; background:#8b5cf6;"></div><div style="width:12%; background:#10b981;"></div><div style="width:40%; background:#8b5cf6;"></div><div style="width:20%; background:#3b82f6;"></div>
       </div>
       <span style="width:38px; flex-shrink:0; font-size:11px; color:#8a99b0; text-align:right;">24:00</span>
     </div>
@@ -138,6 +138,7 @@ The system automatically generates a daily activity trajectory chart, recording 
     <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#8b5cf6;"></span> Main door</span>
     <span class="flex items-center gap-1"><span style="width:12px; height:12px; border-radius:3px; background:#dc2626;"></span> Abnormal stay</span>
   </div>
+</div>
 </div>
 
 ### Activity by Zone — 55 movements in one day
@@ -234,23 +235,32 @@ Many competing products also use PIR + door sensors — but the communication me
 
 Millimeter-wave radar has genuine advantages in fall detection, but deploying it across a real home brings practical challenges.
 
-**Whole-house mmWave challenges**
-
-- One unit covers about **24 m²** — a whole house needs one per room
-- Multi-point deployment = **equipment cost ×N, installation hours ×N, power consumption ×N**
-- Power draw **>5 W**; needs continuous power, **wiring and wall mounting**, and a qualified electrician
-- **Multi-radar interference** — multiple mmWave units in adjacent rooms share the same 60 GHz band and interfere with each other, causing **false alarms and missed detections**
-- **Radar cannot see through walls** — each room needs its own unit, and the moment the senior walks behind a wall the signal is lost, making **cross-room trajectory tracking physically impossible**
-- Mainstream use remains **single-room monitoring** — continuous whole-house trajectory is not practical
-
-  **Distributed sensor network**
-
-- **1 gateway + multiple micro sensors** covering every zone in the home
-- Sensors run **1 year on battery** — no wiring, no sockets needed
-- Monitors **bathroom stays and behavior trajectories**, not just single events
-- Data this precise: what time they got up, when they went out, how long they stayed in the bathroom, **where they were every minute**
-
-  **Our view:** millimeter-wave radar can also be deployed in key areas (such as the bathroom), but with significantly higher cost, plus wiring and wall mounting. For most households, **PIR + door sensors + bed presence pad** already covers about **90% of daily care needs** at **1/3 to 1/2** the deployment cost of a mmWave solution — and it is the only architecture that delivers a **true whole-house behavior trajectory**, tracking the senior across every room, through every door, minute by minute.
+<div class="not-prose my-6 grid gap-4 sm:grid-cols-2">
+  <div class="rounded-2xl border border-gray-200 p-5" style="background:#fafafa;">
+    <span class="inline-block rounded-full px-3 py-0.5 mb-3" style="font-size:11px; font-weight:700; background:#f0f0f0; color:#6b7a8f;">WHOLE-HOUSE DEPLOYMENT CHALLENGES</span>
+    <p style="font-size:18px; font-weight:700; color:#6b7a8f; margin:0 0 12px;">Millimeter-wave radar</p>
+    <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>One unit covers about <strong style="color:#991b1b;">24 m²</strong> — a whole house needs one per room</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Multi-point deployment = <strong style="color:#991b1b;">equipment cost ×N, installation ×N, power ×N</strong></li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Power draw <span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#fecaca; color:#991b1b;">&gt;5 W</span> — needs wiring, wall mounting and an electrician</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span><strong style="color:#991b1b;">Multi-radar interference</strong> — adjacent units share the 60 GHz band, causing <strong style="color:#991b1b;">false alarms and missed detections</strong></li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span><strong style="color:#991b1b;">Cannot see through walls</strong> — signal lost behind a wall; <strong style="color:#991b1b;">cross-room trajectory is physically impossible</strong></li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#b91c1c; font-weight:700;">•</span>Mainstream use is <strong style="color:#991b1b;">single-room monitoring</strong> — no continuous whole-house trajectory</li>
+    </ul>
+    <div class="mt-3 border-t pt-3" style="border-color:rgba(0,0,0,0.06); font-size:13px; color:#4d6079; line-height:1.7;"><strong style="color:#0b1e3a;">The dilemma:</strong> going whole-house multiplies cost and installation complexity.</div>
+  </div>
+  <div class="rounded-2xl border p-5" style="background:linear-gradient(145deg,#f0f7ff,#e8f0fe); border-color:#b8d4fe;">
+    <span class="inline-block rounded-full px-3 py-0.5 mb-3" style="font-size:11px; font-weight:700; background:#1d4ed8; color:#fff;">OWON SOLUTION</span>
+    <p style="font-size:18px; font-weight:700; color:#0b1e3a; margin:0 0 12px;">Distributed sensor network</p>
+    <ul style="list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:6px;">
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span><strong style="color:#1d4ed8;">1 gateway + multiple micro sensors</strong> covering every zone in the home</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span>Sensors run <span class="inline-block rounded-full px-2 py-0.5 text-xs font-bold" style="background:#86efac; color:#065f46;">1 year on battery</span> — no wiring, no sockets</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span>Monitors <strong style="color:#1d4ed8;">bathroom stays and behavior trajectories</strong>, not just single events</li>
+      <li style="font-size:14px; color:#3d4e66; line-height:1.6; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:#2563eb; font-weight:700;">•</span>Data this precise: when they got up, when they went out, how long in the bathroom, <strong style="color:#1d4ed8;">where they were every minute</strong></li>
+    </ul>
+    <div class="mt-3 border-t pt-3" style="border-color:rgba(37,99,235,0.15); font-size:13px; color:#4d6079; line-height:1.7;"><strong style="color:#0b1e3a;">Our view:</strong> mmWave can be added in key areas (such as the bathroom), but for most households <span style="color:#1d4ed8; font-weight:600;">PIR + door sensors + bed pad</span> already covers <span style="color:#1d4ed8; font-weight:600;">90% of daily care needs</span> at <span style="color:#1d4ed8; font-weight:600;">1/3 to 1/2</span> the cost — and it is the only architecture that delivers a <span style="color:#1d4ed8; font-weight:600;">true whole-house behavior trajectory</span>, tracking the senior across every room, through every door, minute by minute.</div>
+  </div>
+</div>
 
 ## The AI Behavior Trajectory Monitoring Kit
 
