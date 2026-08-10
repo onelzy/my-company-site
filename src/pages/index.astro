@@ -30,7 +30,7 @@ const protoSol = (v: string) => protocolCount((d) => d.techSolution === v);
 // Official protocol icons: brand marks (fill) from Simple Icons / custom-brand-icons,
 // generic protocol icons (stroke) from Lucide. Rendered white on gradient chip.
 const iconPaths: Record<string, string[]> = {
-  tcpip: ['M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20', 'M2 12h20'],
+  tcpip: ['M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.319-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831 2.34 2.34 0 0 1 2.33-4.033 2.34 2.34 0 0 0 3.319-1.915M12 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4'],
   modbus: [
     'M10 16h.01',
     'M2.212 11.577a2 2 0 0 0-.212.896V18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5.527a2 2 0 0 0-.212-.896',
@@ -77,6 +77,7 @@ const techGroups = [
         name: 'Tuya',
         desc: 'Certified devices • Smart Life app • Global cloud • Consumer-friendly',
         icon: 'tuya',
+        iconSize: 'w-7 h-7',
         href: '/products?dim=solution&sol=tuya',
         count: protoSol('tuya'),
         color: 'from-sky-500 to-blue-600',
@@ -522,16 +523,21 @@ const formatDate = (date) => {
                 >
                   <div
                     class={`w-11 h-11 shrink-0 rounded-lg bg-gradient-to-br ${proto.color} flex items-center justify-center shadow-md`}
-                  >
-                    {filledIcons.has(proto.icon) ? (
-                      <svg class="w-5.5 h-5.5 text-white" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                  {
+                    filledIcons.has(proto.icon) ? (
+                      <svg
+                        class={`${proto.iconSize || 'w-5.5 h-5.5'} text-white`}
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="none"
+                      >
                         {(iconPaths[proto.icon] || []).map((d) => (
                           <path d={d} />
                         ))}
                       </svg>
                     ) : (
                       <svg
-                        class="w-5.5 h-5.5 text-white"
+                        class={`${proto.iconSize || 'w-5.5 h-5.5'} text-white`}
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -543,8 +549,8 @@ const formatDate = (date) => {
                           <path d={d} />
                         ))}
                       </svg>
-                    )}
-                  </div>
+                    )
+                  }
                   <div class="min-w-0">
                     <h3 class="text-sm font-bold text-default dark:text-slate-200 leading-tight mb-0.5 group-hover:text-primary transition-colors">
                       {proto.name}
