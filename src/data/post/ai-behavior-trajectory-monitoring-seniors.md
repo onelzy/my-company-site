@@ -1,6 +1,6 @@
 ---
 publishDate: 2026-08-09
-updateDate: 2026-08-09
+updateDate: 2026-08-11
 title: AI Behavior Trajectory Monitoring for Seniors Living Alone
 metadata:
   title: Behavior Trajectory Monitoring for Seniors Living Alone
@@ -18,7 +18,11 @@ faq:
   - question: How does AI behavior trajectory monitoring work?
     answer: The kit combines PIR motion sensors, door sensors and a bed presence pad, all connected through a local ZigBee mesh to a 4G gateway. The AI system first builds a baseline of the senior's daily routine, then tracks every movement second by second — where they are, for how long, and when the pattern breaks.
   - question: Does the monitoring system use cameras?
-    answer: No. There are no cameras at all. Every device is battery-powered and contactless, which protects privacy and avoids the psychological resistance many seniors feel toward camera monitoring.
+    answer: 'No. There are no cameras at all. Every device is battery-powered and contactless, which protects privacy and avoids the psychological resistance many seniors feel toward camera monitoring. An optional auto-shuttering privacy camera module exists for on-demand verification — the lens stays physically shuttered 100% of the time and opens only for a moment when an abnormal event is flagged.'
+  - question: Do multiple millimeter-wave radar units interfere with each other?
+    answer: Yes. Multiple mmWave units in adjacent rooms share the same 60 GHz band, so they interfere with one another and cause false alarms and missed detections. This is one reason whole-house radar deployment is impractical — the distributed PIR + door sensor + bed presence pad network has no such interference problem.
+  - question: Can millimeter-wave radar track the senior through walls?
+    answer: No. Millimeter-wave radar cannot see through walls, so each room needs its own unit and the signal is lost the moment the senior walks behind a wall. Cross-room trajectory tracking is physically impossible with radar alone — which is exactly what the OWON whole-house behavior trajectory solution delivers.
   - question: Can it be installed without home broadband?
     answer: Yes. The gateway uses independent 4G-CAT1 cellular communication with ZigBee 3.0 local networking, so no home broadband or Wi-Fi is required — ideal for older buildings and rural homes. An optional 8-year data plan (100 MB/month) covers network costs.
   - question: How long do the sensor batteries last?
@@ -116,6 +120,8 @@ Millimeter-wave radar has genuine advantages in fall detection, but deploying it
 - One unit covers about **24 m²** — a whole house needs one per room
 - Multi-point deployment = **equipment cost ×N, installation hours ×N, power consumption ×N**
 - Power draw **>5 W**; needs continuous power, **wiring and wall mounting**, and a qualified electrician
+- **Multi-radar interference** — multiple mmWave units in adjacent rooms share the same 60 GHz band and interfere with each other, causing **false alarms and missed detections**
+- **Radar cannot see through walls** — each room needs its own unit, and the moment the senior walks behind a wall the signal is lost, making **cross-room trajectory tracking physically impossible**
 - Mainstream use remains **single-room monitoring** — continuous whole-house trajectory is not practical
 
   **Distributed sensor network**
@@ -125,7 +131,7 @@ Millimeter-wave radar has genuine advantages in fall detection, but deploying it
 - Monitors **bathroom stays and behavior trajectories**, not just single events
 - Data this precise: what time they got up, when they went out, how long they stayed in the bathroom, **where they were every minute**
 
-  **Our view:** millimeter-wave radar can also be deployed in key areas (such as the bathroom), but with significantly higher cost, plus wiring and wall mounting. For most households, **PIR + door sensors + bed presence pad** already covers about **90% of daily care needs** at **1/3 to 1/2** the deployment cost of a mmWave solution.
+  **Our view:** millimeter-wave radar can also be deployed in key areas (such as the bathroom), but with significantly higher cost, plus wiring and wall mounting. For most households, **PIR + door sensors + bed presence pad** already covers about **90% of daily care needs** at **1/3 to 1/2** the deployment cost of a mmWave solution — and it is the only architecture that delivers a **true whole-house behavior trajectory**, tracking the senior across every room, through every door, minute by minute.
 
 ## The AI Behavior Trajectory Monitoring Kit
 
@@ -169,8 +175,9 @@ The kit is not fixed. Depending on care needs, hardware modules can be swapped o
 
 - **Sleep monitoring upgrade (mmWave radar)** — replaces the bed presence pad with contactless monitoring; tracks **respiratory rate and heart rate** in real time; auto-generates **sleep quality analysis reports**; screens for **apnea and abnormal heart rate**
 - **Precise monitoring for key zones** — can replace the bathroom PIR; **>95% accuracy** with a false-alarm rate of only **once per 3 months**; warns on **prolonged stillness** (automatic alert when the bathroom stay is too long); monitors **vital signs** and auto-detects leaving bed or prolonged inactivity; contactless and **privacy-free**, completely unnoticed by the senior
+- **Auto-shuttering privacy camera (optional)** — an on-demand visual verification module. The lens is **physically shuttered by default, 100% of the time**, so there is no continuous video capture and no privacy concern. When an abnormal event is flagged (bathroom timeout, night-time fall), the shutter opens only for that moment and the AI visually verifies the key zone, then closes again. This adds **visual confirmation on top of trajectory data** for the rare moments that need it — without ever running a camera inside the home
 
-  **Flexible combinations, configured on demand:** the base kit already covers whole-house behavior trajectory. For finer vital-sign monitoring, upgrade with a sleep radar or fall-detection radar module. **The same gateway, the same platform — scale as needed.** That is the value of modular design.
+  **Flexible combinations, configured on demand:** the base kit already covers whole-house behavior trajectory. For finer vital-sign monitoring, upgrade with a sleep radar or fall-detection radar module; for on-demand visual verification, add an auto-shuttering privacy camera. **The same gateway, the same platform — scale as needed.** That is the value of modular design.
 
 ## Turning Worry into Peace of Mind
 
