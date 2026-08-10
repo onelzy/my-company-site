@@ -20,11 +20,12 @@ export const headerData = {
     {
       text: 'Solutions',
       links: [
-        { text: 'Smart Hotels', href: getPermalink('/solutions/smart-hotel-energy-management') },
-        { text: 'Senior Care', href: getPermalink('/solutions/senior-care-monitoring') },
-        { text: 'Energy Management', href: getPermalink('/solutions/industrial-energy-submetering') },
-        { text: 'Smart Building', href: getPermalink('/solutions') },
-        { text: 'Industrial IoT', href: getPermalink('/solutions') },
+        { text: 'Smart Hotels', href: getPermalink('/solutions?industry=smart-hotels') },
+        { text: 'Senior Care', href: getPermalink('/solutions?industry=senior-care') },
+        { text: 'Energy Management', href: getPermalink('/solutions?industry=energy-management') },
+        { text: 'Smart Building', href: getPermalink('/solutions?industry=smart-building') },
+        { text: 'Industrial IoT', href: getPermalink('/solutions?industry=industrial-iot') },
+        { text: 'All Solutions →', href: getPermalink('/solutions') },
       ],
     },
     {
@@ -66,11 +67,12 @@ export const footerData = {
     {
       title: 'Solutions',
       links: [
-        { text: 'Smart Hotels', href: getPermalink('/solutions/smart-hotel-energy-management') },
-        { text: 'Senior Care', href: getPermalink('/solutions/senior-care-monitoring') },
-        { text: 'Energy Management', href: getPermalink('/solutions/industrial-energy-submetering') },
-        { text: 'Smart Building', href: getPermalink('/solutions') },
-        { text: 'Industrial IoT', href: getPermalink('/solutions') },
+        { text: 'Smart Hotels', href: getPermalink('/solutions?industry=smart-hotels') },
+        { text: 'Senior Care', href: getPermalink('/solutions?industry=senior-care') },
+        { text: 'Energy Management', href: getPermalink('/solutions?industry=energy-management') },
+        { text: 'Smart Building', href: getPermalink('/solutions?industry=smart-building') },
+        { text: 'Industrial IoT', href: getPermalink('/solutions?industry=industrial-iot') },
+        { text: 'All Solutions →', href: getPermalink('/solutions') },
       ],
     },
     {

@@ -18,6 +18,48 @@ const contactUrl = getPermalink('/contact');
 const developersUrl = getPermalink('/developers');
 const solutionsUrl = getPermalink('/solutions');
 
+// Real solution pages drive the homepage carousel (title/subtitle/image/slug from mdoc data)
+import { solutions as rawSolutions } from '~/data/solutions';
+const solutionSlideMap: Record<string, { color: string; features: string[] }> = {
+  'smart-hotels': {
+    color: 'from-blue-600 to-sky-500',
+    features: ['Per-room energy monitoring', 'Occupancy-based HVAC control', 'Central dashboard for facility managers'],
+  },
+  'senior-care': {
+    color: 'from-rose-600 to-pink-500',
+    features: ['Non-contact sleep monitoring', 'Emergency call system', 'AiJuan caregiver dashboard'],
+  },
+  'industrial-iot': {
+    color: 'from-emerald-600 to-teal-500',
+    features: ['Per-machine energy tracking', 'MQTT to SCADA / BMS', 'EdgeEco analytics'],
+  },
+};
+// Extract first real body paragraph (after the first ## heading) as the slide description
+function firstBodyPara(body: string): string {
+  const lines = body
+    .split('\n')
+    .map((l) => l.trim())
+    .filter(Boolean);
+  const start = lines.findIndex((l) => l.startsWith('## '));
+  const para = start >= 0 ? lines.slice(start + 1).find((l) => !l.startsWith('#')) : undefined;
+  return para || '';
+}
+const solutionSlides = rawSolutions.map((s) => {
+  const d = s.data as Record<string, string | string[] | undefined>;
+  const industry = (d.industry as string) || '';
+  const style = solutionSlideMap[industry] || { color: 'from-blue-600 to-sky-500', features: [] };
+  return {
+    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
+    title: d.title as string,
+    subtitle: d.subtitle as string,
+    desc: firstBodyPara(s.body),
+    features: style.features,
+    img: (d.heroImage as string) || '',
+    href: `/solutions/${s.slug}`,
+    color: style.color,
+  };
+});
+
 const heroSlides = [
   {
     title: 'Smart Energy Meters',
@@ -70,84 +112,6 @@ const formatDate = (date) => {
   if (!date) return '';
   return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 };
-
-const solutionSlides = [
-  {
-    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
-    title: 'Smart Hotels',
-    subtitle: 'Complete room automation system for modern hospitality',
-    desc: 'OWON hotel solution integrates room thermostats, lighting control panels, and door sign displays into a unified ZigBee mesh network. PMS integration and energy analytics included.',
-    features: [
-      'Room thermostat with guest profile',
-      'Lighting scene control panels',
-      'E-ink door sign displays',
-      'Central PMS integration',
-      'Per-room energy monitoring',
-    ],
-    img: '/images/products/cat/scene-hotel-control.webp',
-    color: 'from-blue-600 to-sky-500',
-  },
-  {
-    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
-    title: 'Energy Management',
-    subtitle: 'Enterprise-grade sub-metering and energy analytics',
-    desc: 'Deploy OWON smart meters and multi-circuit monitors with Modbus/RS-485 or wireless connectivity. Real-time data feeds into EdgeEco cloud dashboard with automated reporting and anomaly detection.',
-    features: [
-      'Single & three-phase smart meters',
-      'Multi-circuit CT monitoring',
-      'Real-time cloud dashboard',
-      'Automated anomaly alerts',
-      'Tenant billing ready',
-    ],
-    img: '/images/products/cat/energy-management.webp',
-    color: 'from-amber-600 to-orange-500',
-  },
-  {
-    icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6',
-    title: 'Smart Building',
-    subtitle: 'HVAC optimization & intelligent lighting for commercial spaces',
-    desc: 'OWON building automation covers HVAC control, lighting management, and access systems. ZigBee mesh ensures reliable device communication with centralized web dashboard for facility managers.',
-    features: [
-      'ZigBee HVAC thermostats',
-      'Zone-based lighting control',
-      'Access control integration',
-      'Web management dashboard',
-      'Energy saving analytics',
-    ],
-    img: '/images/products/cat/smart-building.webp',
-    color: 'from-violet-600 to-purple-500',
-  },
-  {
-    icon: 'M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z',
-    title: 'Senior Care',
-    subtitle: 'Non-contact health monitoring for elderly facilities',
-    desc: 'OWON senior care solution uses non-invasive sleep monitors, emergency call buttons, and fall detection sensors. AiJuan platform provides nurse station dashboard with real-time alerts and health trend reports.',
-    features: [
-      'Non-contact sleep monitoring',
-      'Emergency call system',
-      'Fall detection sensors',
-      'AiJuan nurse dashboard',
-      'Health trend reports',
-    ],
-    img: '/images/products/cat/scene-senior-care.webp',
-    color: 'from-rose-600 to-pink-500',
-  },
-  {
-    icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
-    title: 'Industrial IoT',
-    subtitle: 'Factory monitoring & predictive maintenance',
-    desc: 'OWON industrial solution connects machinery sensors via Modbus RS-485 and wireless networks. Edge computing gateway processes data locally with predictive alerts, feeding into SCADA and MES systems.',
-    features: [
-      'Modbus RS-485 connectivity',
-      'Edge computing gateway',
-      'Predictive maintenance alerts',
-      'SCADA/MES integration',
-      'Machinery energy tracking',
-    ],
-    img: '/images/products/cat/industrial-iot.webp',
-    color: 'from-emerald-600 to-teal-500',
-  },
-];
 ---
 
 <Layout metadata={metadata}>
@@ -361,7 +325,7 @@ const solutionSlides = [
                     </ul>
                     <div>
                       <a
-                        href={solutionsUrl}
+                        href={sol.href || solutionsUrl}
                         class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-3 transition-colors"
                       >
                         Learn More &rarr;
