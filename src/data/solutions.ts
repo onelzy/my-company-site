@@ -14,6 +14,7 @@ export const solutions: SolutionsEntry[] = [
       "title": "Industrial Energy Submetering",
       "subtitle": "Granular per-machine energy tracking for factories and industrial facilities. MQTT integration with existing SCADA and BMS systems.",
       "industry": "industrial-iot",
+      "heroImage": "/images/solutions/industrial-energy-submetering.webp",
       "productLines": [
         "smart-meters",
         "software-platforms"
@@ -37,6 +38,7 @@ export const solutions: SolutionsEntry[] = [
       "title": "Senior Care Monitoring System",
       "subtitle": "Non-intrusive health monitoring for elderly residents. Detect falls, track sleep quality, and alert caregivers in real time.",
       "industry": "senior-care",
+      "heroImage": "/images/solutions/senior-care-monitoring.webp",
       "productLines": [
         "senior-care",
         "software-platforms"
@@ -60,6 +62,7 @@ export const solutions: SolutionsEntry[] = [
       "title": "Smart Hotel Energy Management",
       "subtitle": "Reduce energy costs with per-room monitoring and automated HVAC control across your entire property.",
       "industry": "smart-hotels",
+      "heroImage": "/images/solutions/smart-hotel-energy-management.webp",
       "productLines": [
         "smart-meters",
         "thermostats",
