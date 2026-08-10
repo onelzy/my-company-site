@@ -344,6 +344,75 @@ const formatDate = (date) => {
     </div>
   </section>
 
+  <!-- ===== 3.5 Technology / Protocols ===== -->
+  <section class="py-16 lg:py-20 bg-white dark:bg-slate-900" id="technologySection">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-3 text-default dark:text-slate-100">Technology</h2>
+      <p class="text-center text-muted dark:text-slate-400 mb-12">Protocols &amp; ecosystems we support</p>
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          [
+            {
+              name: 'ZigBee 3.0',
+              desc: 'Self-healing mesh • 100m+ range • Low power • 250+ devices per gateway',
+              icon: 'M5 12l5 5L20 7',
+              href: '/products?dim=comm&comm=zigbee',
+              count: '45',
+              color: 'from-emerald-500 to-teal-500',
+            },
+            {
+              name: 'Tuya',
+              desc: 'Certified devices • Smart Life app • Global cloud • Consumer-friendly',
+              icon: 'M12 6v6m0 0l3-3m-3 3l-3-3m6 6a9 9 0 11-18 0 9 9 0 0118 0z',
+              href: '/products?dim=solution&sol=tuya',
+              count: '21',
+              color: 'from-sky-500 to-blue-600',
+            },
+            {
+              name: 'MQTT',
+              desc: 'Real-time streaming • TLS security • SCADA/BMS integration • JSON payloads',
+              icon: 'M4 7h16M4 12h16M4 17h16',
+              href: '/products?dim=solution&sol=mqtt',
+              count: '4',
+              color: 'from-amber-500 to-orange-600',
+            },
+            {
+              name: 'Modbus',
+              desc: 'Industrial RS-485 • Legacy system compatible • Reliable polling',
+              icon: 'M5 8h14M5 12h14M5 16h14M8 5v14M16 5v14',
+              href: '/products?dim=comm&comm=rs485',
+              count: '1',
+              color: 'from-violet-500 to-purple-600',
+            },
+          ].map((proto) => (
+            <a
+              href={proto.href}
+              class="group rounded-2xl bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 p-6 hover:shadow-lg hover:-translate-y-1 hover:border-primary/40 transition-all duration-300"
+            >
+              <div
+                class={`w-12 h-12 rounded-xl bg-gradient-to-br ${proto.color} flex items-center justify-center mb-4 shadow-lg`}
+              >
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={proto.icon} />
+                </svg>
+              </div>
+              <h3 class="text-lg font-bold text-default dark:text-slate-200 mb-2 group-hover:text-primary transition-colors">
+                {proto.name}
+              </h3>
+              <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">{proto.desc}</p>
+              <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                {proto.count} products
+                <svg class="w-4 h-4 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- ===== 4. Developer Platform ===== -->
   <section class="py-16 lg:py-20 bg-white dark:bg-slate-900">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
