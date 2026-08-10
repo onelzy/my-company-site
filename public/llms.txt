@@ -20,7 +20,7 @@
 - [All Case Studies](https://www.owon-iot.com/resources/case-studies/)
 
 ## Blog
-- [AI Behavior Trajectory Monitoring for Seniors Living Alone](https://www.owon-iot.com/blog/ai-behavior-trajectory-monitoring-seniors/) — Real deployment Case N014: a battery-powered PIR + door sensor + bed presence pad kit with ZigBee + 4G-CAT1 communication caught a 1h41m bathroom stay, a missed morning routine and fragile sleep before they became emergencies.
+- [AI Behavior Trajectory Monitoring for Seniors Living Alone](https://www.owon-iot.com/blog/ai-behavior-trajectory-monitoring-seniors/) — Real deployment Case N014: a battery-powered PIR + door sensor + bed presence pad kit with ZigBee + 4G-CAT1 communication caught a 1h41m bathroom stay, a missed morning routine and fragile sleep before they became emergencies. Explains why millimeter-wave radar (multi-unit interference, cannot see through walls) cannot deliver whole-house trajectory tracking, and how the modular kit scales with sleep radar, fall-detection radar or an auto-shuttering privacy camera.
 
 ## Documentation & Developers
 - [Documentation](https://www.owon-iot.com/resources/documentation)
