@@ -756,7 +756,7 @@ const formatDate = (date) => {
                 class="group flex flex-col rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 overflow-hidden hover:shadow-md transition-all"
               >
                 {post.data.image ? (
-                  <div class="aspect-[16/10] overflow-hidden">
+                  <div class="aspect-square overflow-hidden">
                     <img
                       src={post.data.image}
                       alt={post.data.title}
@@ -765,7 +765,7 @@ const formatDate = (date) => {
                     />
                   </div>
                 ) : (
-                  <div class="aspect-[16/10] bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/10 dark:to-transparent flex items-center justify-center">
+                  <div class="aspect-square bg-gradient-to-br from-primary/20 to-primary/5 dark:from-primary/10 dark:to-transparent flex items-center justify-center">
                     <svg class="w-10 h-10 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         stroke-linecap="round"
