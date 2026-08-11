@@ -61,6 +61,20 @@ export const adaptOpenGraphImages = async (
       const resolved = await findImage(image.url);
       if (!resolved) return { url: '' };
 
+      // Remote images (R2-backed documents.owon-iot.com, etc.) must NOT be
+      // fetched at build time — the CF build env network can fail transiently
+      // and kill the whole build. Emit the runtime /_image proxy URL instead:
+      // identical optimized output (1200x626 jpg) served by the edge, zero
+      // build-time fetch.
+      if (typeof resolved === 'string' && /^https?:\/\//.test(resolved)) {
+        const proxy = `/_image?href=${encodeURIComponent(resolved)}&w=${OG_WIDTH}&h=${OG_HEIGHT}&f=jpg`;
+        return {
+          url: String(new URL(proxy, astroSite)),
+          width: OG_WIDTH,
+          height: OG_HEIGHT,
+        };
+      }
+
       // Generate an optimized JPG via Astro's image service (Sharp by default).
       const optimized = await getImage({
         src: resolved,
