@@ -1,6 +1,7 @@
 # Legacy case-study slugs → real case study detail pages
 # Legacy product slug aliases → canonical Keystatic slugs (real 301s at the edge).
 /contact-sales                            /contact                     301
+/resources/case-studies                   /case-studies                301
 /products/pc321-ty-smart-meter       /products/pc321-w-ty/       301
 /products/pc321-ty                   /products/pc321-w-ty/       301
 /senior-care-monitoring-owon-case-study* /case-studies/senior-care-nursing-home/ 301
