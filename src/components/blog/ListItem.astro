@@ -22,22 +22,22 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
 ---
 
 <article
-  class={`blog-post-item max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${image ? 'md:grid-cols-2' : ''}`}
+  class={`blog-post-item max-w-md mx-auto md:max-w-none flex flex-col md:flex-row gap-5 md:gap-8 items-start intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade`}
   data-category={post.category?.slug || ''}
 >
   {
     image &&
       (link ? (
-        <a class="relative block group" href={link ?? 'javascript:void(0)'}>
-          <div class="relative aspect-square overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
+        <a class="block w-full md:w-48 shrink-0" href={link ?? 'javascript:void(0)'}>
+          <div class="relative aspect-square overflow-hidden bg-gray-400 dark:bg-slate-700 rounded-xl shadow-sm">
             {image && (
               <Image
                 src={image}
-                class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-                widths={[400, 900]}
-                width={900}
-                height={900}
-                sizes="(max-width: 900px) 400px, 900px"
+                class="absolute inset-0 object-cover w-full h-full rounded-xl shadow-sm bg-gray-400 dark:bg-slate-700"
+                widths={[400, 800]}
+                width={400}
+                height={400}
+                sizes="(max-width: 768px) 100vw, 192px"
                 alt={post.title}
                 format="webp"
                 loading="lazy"
@@ -47,15 +47,15 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
           </div>
         </a>
       ) : (
-        <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
+        <div class="relative w-full md:w-48 aspect-square overflow-hidden bg-gray-400 dark:bg-slate-700 rounded-xl shadow-sm">
           {image && (
             <Image
               src={image}
-              class="absolute inset-0 object-cover w-full h-full mb-6 rounded shadow-lg bg-gray-400 dark:bg-slate-700"
-              widths={[400, 900]}
-              width={900}
-              height={506}
-              sizes="(max-width: 900px) 400px, 900px"
+              class="absolute inset-0 object-cover w-full h-full rounded-xl shadow-sm bg-gray-400 dark:bg-slate-700"
+              widths={[400, 800]}
+              width={400}
+              height={400}
+              sizes="(max-width: 768px) 100vw, 192px"
               alt={post.title}
               format="webp"
               loading="lazy"
@@ -65,7 +65,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
         </div>
       ))
   }
-  <div class="mt-2">
+  <div class="mt-2 md:mt-0 flex-1 min-w-0">
     <header>
       <div class="mb-1">
         <span class="text-sm">
