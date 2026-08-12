@@ -33,6 +33,8 @@ export interface MegaPanel {
   groups?: MegaGroup[];
   /** Description-item layout (Solutions, Resources). */
   items?: MegaLink[];
+  /** Optional label above the items grid. */
+  label?: string;
   /** 2×2 grouped layout (Developers). */
   devGroups?: MegaDevGroup[];
   /** Bottom-right "All … →" link. */
@@ -121,6 +123,7 @@ export const headerData = {
       ],
       mega: {
         width: 640,
+        label: 'By Industry',
         items: [
           industryItem('smart-hotels', 'Smart Hotels'),
           industryItem('senior-care', 'Senior Care'),

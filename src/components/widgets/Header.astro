@@ -125,15 +125,18 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         </div>
                       ))}
                       {mega.items?.length ? (
-                        <div class="grid grid-cols-2 gap-0.5">
-                          {mega.items.map((item) => (
-                            <a class="mega-item" href={item.href}>
-                              <span class="mega-item-name">{item.text}</span>
-                              <span class:list={['mega-item-desc', item.placeholder && 'ph']}>
-                                {item.placeholder ? '(Solution page in progress)' : item.desc}
-                              </span>
-                            </a>
-                          ))}
+                        <div>
+                          {mega.label && <p class="mega-label">{mega.label}</p>}
+                          <div class="grid grid-cols-2 gap-0.5">
+                            {mega.items.map((item) => (
+                              <a class="mega-item" href={item.href}>
+                                <span class="mega-item-name">{item.text}</span>
+                                <span class:list={['mega-item-desc', item.placeholder && 'ph']}>
+                                  {item.placeholder ? '(Solution page in progress)' : item.desc}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
                         </div>
                       ) : (
                         ''
