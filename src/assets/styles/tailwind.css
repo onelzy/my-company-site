@@ -127,13 +127,13 @@
 @layer components {
   /* Product card (ProductCard.astro) — `group` stays in the markup (not a utility) */
   .pc-card {
-    @apply rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all duration-300 ease-in-out flex flex-col overflow-hidden h-full;
+    @apply rounded-2xl bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-300 flex flex-col overflow-hidden h-full;
   }
   .pc-card-img {
     @apply relative aspect-square bg-gray-100 dark:bg-slate-700 overflow-hidden block focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
   .pc-card-title {
-    @apply font-semibold leading-snug text-default dark:text-slate-200 group-hover:text-primary transition-colors duration-200;
+    @apply font-bold leading-snug text-default dark:text-slate-200 group-hover:text-primary transition-colors duration-200;
   }
   .pc-badge {
     @apply inline-flex items-center px-1.5 py-px rounded-full text-[10px] font-medium bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-foreground border border-primary/20 dark:border-primary/30;
@@ -158,15 +158,17 @@
     @apply px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all duration-150;
   }
   .chip-active {
-    @apply bg-primary text-primary-foreground border border-primary;
+    @apply bg-gray-900 text-white dark:bg-slate-100 dark:text-gray-900;
   }
   .chip-idle {
-    @apply text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary;
+    @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
   }
+  /* Intelligence/Connection tags — kept quiet (same idle look) so the filter
+     row stays single-color; group labels carry the meaning. */
   .chip-blue {
-    @apply border border-blue-200 dark:border-blue-700 bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300 hover:bg-blue-100 dark:hover:bg-blue-900/40;
+    @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
   }
   .chip-green {
-    @apply border border-green-200 dark:border-green-700 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 hover:bg-green-100 dark:hover:bg-green-900/40;
+    @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
   }
 }

@@ -84,12 +84,12 @@ const fullName = modelDisplay ? `${modelDisplay} ${product.name}`.trim() : produ
       }
       {
         description && !compact && (
-          <p class="text-[11px] text-muted dark:text-slate-400 line-clamp-1 leading-snug mt-0.5">{description}</p>
+          <p class="text-[11px] text-muted dark:text-slate-400 line-clamp-1 leading-snug mt-1.5">{description}</p>
         )
       }
       {
         visibleComms.length > 0 && (
-          <div class="flex flex-wrap items-center gap-1 mt-1">
+          <div class="flex flex-wrap items-center gap-1.5 mt-2">
             {visibleComms.map((method) => (
               <span class="pc-badge">{getLocalizedLabel(SPEC_LABELS, method, locale)}</span>
             ))}

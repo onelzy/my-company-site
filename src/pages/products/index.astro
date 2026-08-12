@@ -29,6 +29,7 @@ const allProducts = rawProducts.map((entry) => {
 
 const products: Product[] = allProducts;
 const enProducts = products;
+const productCount = enProducts.length;
 
 const title = 'Smart Energy Meters, Thermostats & IoT Devices';
 const description =
@@ -100,18 +101,19 @@ const connectionTags = [
 <PageLayout metadata={{ title: title, description: description }}>
   <section class="py-8 lg:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="mb-8">
+      <div class="mb-10">
         <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
           <a href="/" class="hover:text-primary transition-colors">Home</a>
           <span class="mx-2">/</span>
           <span class="text-default dark:text-slate-200">Products</span>
         </nav>
-        <h1 class="text-3xl font-bold text-default dark:text-slate-100 sm:text-4xl">{title}</h1>
+        <h1 class="text-4xl font-extrabold tracking-tight text-default dark:text-slate-100">Products</h1>
+        <p class="text-lg text-muted dark:text-slate-400 mt-2">Smart energy meters, thermostats, gateways and sensors for IoT deployments — {productCount} models.</p>
       </div>
 
-      <div class="mb-6">
+      <div class="mb-8">
         <div class="relative max-w-md">
-          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 text-gray-400">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
               ><path
                 stroke-linecap="round"
@@ -123,8 +125,8 @@ const connectionTags = [
           <input
             type="text"
             id="productSearch"
-            placeholder="Search products by name, model, or keyword..."
-            class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow"
+            placeholder="Search by model or keyword"
+            class="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow"
           />
         </div>
       </div>
@@ -145,7 +147,7 @@ const connectionTags = [
       </div>
 
       <div
-        class="bg-white dark:bg-slate-800/50 rounded-xl p-4 mb-6 border border-gray-200 dark:border-slate-700 shadow-sm"
+        class="mb-8"
         id="filterRow"
       >
         <div id="typeFilters" class="filter-dim">
@@ -277,7 +279,7 @@ const connectionTags = [
         )
       }
 
-      <div id="productGrid" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div id="productGrid" class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {enProducts.map((product) => <ProductCard product={product} href="/products" />)}
       </div>
 
