@@ -114,6 +114,7 @@ export const footerData = {
       icon: 'tabler:brand-facebook',
       href: 'https://www.facebook.com/profile.php?id=61581911978541',
     },
+    { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://youtube.com/@owon-technology' },
     { ariaLabel: 'Email', icon: 'tabler:mail', href: `mailto:${contactEmail}` },
     { ariaLabel: 'RSS', icon: 'tabler:rss', href: getAsset('/rss.xml') },
   ],
