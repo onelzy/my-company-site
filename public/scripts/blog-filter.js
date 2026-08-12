@@ -72,43 +72,16 @@
   });
 
   function updateChips() {
+    // Quiet chip system: active = dark solid (chip-active), idle = soft gray (chip-idle)
     filterChips.forEach(function (c) {
       var v = c.getAttribute('data-category') || '';
       if (v === activeCategory) {
-        c.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
-        c.classList.remove(
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'text-gray-600',
-          'dark:text-slate-400'
-        );
+        c.classList.remove('chip-idle');
+        c.classList.add('chip-active');
       } else {
-        c.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
-        c.classList.add(
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'text-gray-600',
-          'dark:text-slate-400'
-        );
+        c.classList.remove('chip-active');
+        c.classList.add('chip-idle');
       }
     });
-    var allBtn = $('#blogFilters [data-category=""]');
-    if (allBtn) {
-      if (!activeCategory) {
-        allBtn.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
-        allBtn.classList.remove(
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'text-gray-600',
-          'dark:text-slate-400'
-        );
-      }
-    }
   }
 })();

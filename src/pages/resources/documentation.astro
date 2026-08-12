@@ -109,7 +109,7 @@ const totalCount = productDocs.reduce((sum, d) => sum + d.specs.length + d.manua
               type="text"
               id="brochureSearch"
               placeholder="Search by model number or name (e.g. PC341, PCT513, SEG-X5)..."
-              class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-shadow"
+              class="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow"
             />
           </div>
         </div>
@@ -121,14 +121,7 @@ const totalCount = productDocs.reduce((sum, d) => sum + d.specs.length + d.manua
           >
           {
             categories.map((cat, i) => (
-              <button
-                class={`filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 ${
-                  i === 0
-                    ? 'bg-primary text-primary-foreground border border-primary shadow-sm'
-                    : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
-                }`}
-                data-category={cat}
-              >
+              <button class:list={['filter-chip chip', i === 0 ? 'chip-active' : 'chip-idle']} data-category={cat}>
                 {cat}
               </button>
             ))
@@ -284,14 +277,13 @@ const totalCount = productDocs.reduce((sum, d) => sum + d.specs.length + d.manua
     if (filters) {
       filters.querySelectorAll('.filter-chip').forEach(function (chip) {
         chip.addEventListener('click', function () {
+          // Quiet chip system: active = dark, idle = soft gray (same as products/solutions)
           filters.querySelectorAll('.filter-chip').forEach(function (c) {
-            c.className = c.className.replace(
-              /bg-primary text-primary-foreground border border-primary shadow-sm/g,
-              'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
-            );
+            c.classList.remove('chip-active');
+            c.classList.add('chip-idle');
           });
-          this.className =
-            'filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 bg-primary text-primary-foreground border border-primary shadow-sm';
+          this.classList.remove('chip-idle');
+          this.classList.add('chip-active');
           currentCategory = this.getAttribute('data-category');
           applyFilter();
         });
