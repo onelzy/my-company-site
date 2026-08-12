@@ -101,19 +101,15 @@ export const GET = async () => {
     urls.push({ loc: `${baseUrl}/blog/${id}/`, changefreq: 'monthly', priority: '0.6' });
   }
 
-  // 6. Blog taxonomy pages — real categories & tags derived from published posts
+  // 6. Blog category pages (indexable) — tags are EXCLUDED: tag pages are
+  // deliberately noindexed (thin content), and Google's guidance is to keep
+  // noindexed URLs out of the sitemap (noindex + sitemap = conflicting signal).
   const allPosts = await fetchPosts();
   const categorySlugs = Array.from(
     new Set(allPosts.map((p) => p.category?.slug).filter((s): s is string => Boolean(s)))
   );
   for (const c of categorySlugs) {
     urls.push({ loc: `${baseUrl}/category/${c}/`, changefreq: 'monthly', priority: '0.4' });
-  }
-  const tagSlugs = Array.from(
-    new Set(allPosts.flatMap((p) => (p.tags ?? []).map((t) => t.slug)).filter((s): s is string => Boolean(s)))
-  );
-  for (const t of tagSlugs) {
-    urls.push({ loc: `${baseUrl}/tag/${t}/`, changefreq: 'monthly', priority: '0.3' });
   }
 
   // ---------------------------------------------------------------------------
