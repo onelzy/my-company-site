@@ -1,13 +1,17 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import type { InferGetStaticPropsType, GetStaticPaths, ImageMetadata } from 'astro';
 
 import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Pagination from '~/components/blog/Pagination.astro';
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
 
 import { blogListRobots, getStaticPathsBlogList, fetchPosts } from '~/utils/blog';
 import { getPermalink } from '~/utils/permalinks';
-import { SITE } from 'astrowind:config';
+import { findImage } from '~/utils/images';
+import { getFormattedDate } from '~/utils/utils';
+import { SITE, APP_BLOG } from 'astrowind:config';
 
 export const prerender = true;
 
@@ -50,6 +54,26 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteOrigin}/blog/` },
   ],
 };
+
+// Featured-first editorial layout: page 1 shows the newest post as a large
+// hero card, remaining posts (if any) as the "Latest articles" list below.
+const isFirstPage = currentPage === 1;
+const featuredPost = isFirstPage ? page.data[0] : null;
+const restPosts = isFirstPage ? page.data.slice(1) : page.data;
+const heroImage = featuredPost
+  ? ((await findImage(featuredPost.image)) as ImageMetadata | undefined)
+  : undefined;
+const featuredLink =
+  featuredPost && APP_BLOG?.post?.isEnabled ? getPermalink(featuredPost.permalink, 'post') : '';
+const featuredAuthor = featuredPost?.author?.replaceAll('-', ' ');
+const featuredInitials = featuredAuthor
+  ? featuredAuthor
+      .split(' ')
+      .map((w) => w[0])
+      .slice(0, 2)
+      .join('')
+      .toUpperCase()
+  : '';
 ---
 
 <Layout metadata={metadata}>
@@ -113,7 +137,109 @@ const breadcrumbSchema = {
       </div>
 
       <div id="blogPostList">
-        <BlogList posts={page.data} />
+        {
+          featuredPost && (
+            <a
+              href={featuredLink}
+              class="blog-post-item block group"
+              data-category={featuredPost.category?.slug || ''}
+            >
+              <article class="grid md:grid-cols-2 overflow-hidden rounded-3xl border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-800/60 hover:shadow-lg transition-shadow duration-300">
+                <div class="relative aspect-video md:aspect-auto md:min-h-[340px] bg-gray-300 dark:bg-slate-700">
+                  {
+                    heroImage && (
+                      <Image
+                        src={heroImage}
+                        class="absolute inset-0 object-cover w-full h-full bg-gray-300 dark:bg-slate-700"
+                        widths={[800, 1200]}
+                        width={800}
+                        height={450}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        alt={featuredPost.title}
+                        format="webp"
+                        loading="eager"
+                        decoding="async"
+                      />
+                    )
+                  }
+                  <span
+                    class="absolute top-4 left-4 bg-white/95 text-primary text-xs font-bold px-3 py-1 rounded-full shadow-sm"
+                    >Featured</span
+                  >
+                </div>
+                <div class="p-8 md:p-12 flex flex-col justify-center">
+                  <div class="flex items-center gap-3 text-xs text-muted dark:text-slate-400 font-medium mb-4">
+                    {
+                      featuredPost.category && (
+                        <span class="bg-primary/10 text-primary font-bold px-3 py-1 rounded-full"
+                          >{featuredPost.category.title}</span
+                        >
+                      )
+                    }
+                    <time datetime={String(featuredPost.publishDate)}
+                      >{getFormattedDate(featuredPost.publishDate)}</time
+                    >
+                  </div>
+                  <h2
+                    class="text-2xl sm:text-3xl font-bold leading-tight tracking-tight font-heading dark:text-slate-200 group-hover:text-primary dark:group-hover:text-blue-700 transition-colors"
+                  >
+                    {featuredPost.title}
+                  </h2>
+                  {
+                    featuredPost.excerpt && (
+                      <p class="text-muted dark:text-slate-400 mt-4 leading-relaxed"
+                        >{featuredPost.excerpt}</p
+                      >
+                    )
+                  }
+                  <div class="mt-6 flex items-center gap-3">
+                    {
+                      featuredAuthor && (
+                        <>
+                          <span
+                            class="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold shrink-0"
+                            >{featuredInitials}</span
+                          >
+                          <span class="text-sm font-medium text-default dark:text-slate-300"
+                            >{featuredAuthor}</span
+                          >
+                        </>
+                      )
+                    }
+                    <span
+                      class="text-primary font-semibold text-sm ml-auto group-hover:translate-x-1 transition-transform"
+                      >Read article →</span
+                    >
+                  </div>
+                </div>
+              </article>
+            </a>
+          )
+        }
+
+        {
+          restPosts.length > 0 && (
+            <section class="mt-14">
+              <h3 class="text-xl font-bold text-default dark:text-slate-200 mb-6">Latest articles</h3>
+              <BlogList posts={restPosts} />
+            </section>
+          )
+        }
+
+        {
+          isFirstPage && restPosts.length === 0 && (
+            <section class="mt-14">
+              <h3 class="text-xl font-bold text-default dark:text-slate-200 mb-6">Latest articles</h3>
+              <div class="border-2 border-dashed border-gray-300 dark:border-slate-600 rounded-2xl p-10 text-center">
+                <Icon name="tabler:writing" class="w-12 h-12 mx-auto text-gray-300 dark:text-slate-500 mb-3" />
+                <p class="font-semibold text-gray-700 dark:text-slate-300">New articles are in the works</p>
+                <p class="text-muted dark:text-slate-400 text-sm mt-1"
+                  >This space will list the latest OWON technology insights as they publish.</p
+                >
+              </div>
+            </section>
+          )
+        }
       </div>
       <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
     </div>
