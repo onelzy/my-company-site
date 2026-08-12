@@ -3442,7 +3442,7 @@ export const products: ProductsEntry[] = [
       "techSubType": "zigbee-gateways",
       "communication": [
         "zigbee",
-        "ethernet",
+        "rj45",
         "ble"
       ],
       "ecosystem": [
