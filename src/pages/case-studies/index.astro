@@ -1,6 +1,8 @@
 ---
-// Case Studies index — summary cards linking to /case-studies/<slug>/ detail pages.
+// Case Studies index — uniform proof-first cards linking to /case-studies/<slug>/ detail pages.
 // Content source: 2026 OWON Technology Catalog + AiHome senior care brochure (no fabrication).
+// Card layout: quiet gray-50 surface (site-wide language), real results 2x2 grid as the
+// proof focus — uniform cards, no special styles (per user's standing rule).
 import PageLayout from '~/layouts/PageLayout.astro';
 import ContactBand from '~/components/common/ContactBand.astro';
 import { caseStudies } from '~/data/caseStudies';
@@ -9,6 +11,7 @@ import { caseStudies } from '~/data/caseStudies';
 export const prerender = true;
 
 const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', 'Senior Care', 'Telecom & Utility'];
+const caseCount = caseStudies.length;
 ---
 
 <PageLayout
@@ -28,26 +31,23 @@ const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', '
       </nav>
 
       {/* Page heading */}
-      <div class="mb-8">
-        <h1 class="text-3xl font-bold text-default dark:text-slate-100">Customer Case Studies</h1>
-        <p class="text-muted dark:text-slate-400 mt-2 max-w-2xl">
-          Real deployments documented from OWON product catalogs and solution brochures.
+      <div class="mb-10">
+        <h1 class="text-4xl font-extrabold tracking-tight text-default dark:text-slate-100">Case Studies</h1>
+        <p class="text-lg text-muted dark:text-slate-400 mt-2">
+          Real deployments documented from OWON product catalogs and solution brochures — with verified outcomes.
+          <strong id="caseCount" class="font-semibold text-default dark:text-slate-200"> {caseCount}</strong> case studies.
         </p>
       </div>
 
-      {/* Category Filter */}
-      <div class="flex items-center gap-2 flex-wrap mb-8" id="industryFilters">
-        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider mr-1"
+      {/* Category Filter — quiet chip system (same as products/solutions) */}
+      <div class="flex items-center gap-2 flex-wrap mb-10" id="industryFilters">
+        <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0"
           >Category:</span
         >
         {
           industries.map((ind, i) => (
             <button
-              class={`filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 ${
-                i === 0
-                  ? 'bg-primary text-primary-foreground border border-primary shadow-sm'
-                  : 'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
-              }`}
+              class:list={['filter-chip chip', i === 0 ? 'chip-active' : 'chip-idle']}
               data-category={ind}
             >
               {ind}
@@ -56,45 +56,63 @@ const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', '
         }
       </div>
 
-      {/* Case Study Cards — summary cards linking to detail pages */}
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" id="caseStudyGrid">
+      {/* Case Study Cards — uniform proof-first cards */}
+      <div class="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3" id="caseStudyGrid">
         {
           caseStudies.map((cs) => (
             <a
               href={`/case-studies/${cs.slug}/`}
-              class="case-study-item group block rounded-xl bg-white dark:bg-slate-800 shadow-md hover:shadow-xl border border-gray-200 dark:border-slate-700 transition-all overflow-hidden"
+              class="case-study-item group block rounded-2xl bg-gray-50 dark:bg-slate-800 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors duration-300 overflow-hidden"
               data-category={cs.category}
             >
-              {/* Blog-style cover image (placeholder until real case photos exist) */}
               <div class="relative aspect-square overflow-hidden bg-gray-100 dark:bg-slate-900">
                 <img
                   src={cs.image}
                   alt={cs.title}
                   loading="lazy"
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </div>
-              <div class="p-4 sm:p-5">
-                {/* Header */}
-                <div class="flex items-center gap-1.5 mb-2 flex-wrap">
-                  <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-primary/10 text-primary">
-                    {cs.category}
-                  </span>
-                  <span class="text-[11px] text-muted dark:text-slate-500">{cs.location}</span>
+              <div class="p-5 flex flex-col flex-1">
+                {/* Meta */}
+                <div class="flex items-center gap-2 mb-2.5 flex-wrap">
+                  <span
+                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary"
+                    >{cs.category}</span
+                  >
+                  {cs.location && <span class="text-[11px] text-muted dark:text-slate-500">{cs.location}</span>}
                 </div>
 
-                <h3 class="text-sm sm:text-base font-semibold text-default dark:text-slate-100 mb-1 group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                <h3
+                  class="text-[15px] font-bold text-default dark:text-slate-100 leading-snug line-clamp-2 group-hover:text-primary transition-colors"
+                >
                   {cs.title}
                 </h3>
-                <p class="text-[11px] text-muted dark:text-slate-500 mb-2 line-clamp-1">{cs.client}</p>
+                {cs.client && <p class="text-[11px] text-muted dark:text-slate-500 mt-1">{cs.client}</p>}
+
+                {/* Real results 2x2 grid — the proof focus */}
+                {cs.results.length > 0 && (
+                  <div class="mt-4">
+                    <div class="grid grid-cols-2 divide-x divide-gray-200 dark:divide-slate-700 border-y border-gray-200 dark:border-slate-700">
+                      {cs.results.map((r) => (
+                        <div class="py-2.5 px-2 first:pl-0 last:pr-0">
+                          <p class="text-[13px] font-bold text-default dark:text-slate-200 leading-tight">{r.metric}</p>
+                          <p class="text-[10px] text-muted dark:text-slate-500 mt-0.5">{r.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Excerpt */}
-                <p class="text-xs text-muted dark:text-slate-400 leading-relaxed line-clamp-2">{cs.background}</p>
+                <p class="text-[11px] text-muted dark:text-slate-400 leading-relaxed mt-3 line-clamp-2">{cs.background}</p>
 
                 {/* Action */}
-                <div class="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary group-hover:underline">
+                <p
+                  class="text-primary dark:text-blue-400 text-xs font-semibold mt-auto pt-4 group-hover:translate-x-0.5 transition-transform"
+                >
                   Read case study →
-                </div>
+                </p>
               </div>
             </a>
           ))
@@ -128,17 +146,25 @@ const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', '
     const chips = filters.querySelectorAll('.filter-chip');
     const items = document.querySelectorAll('.case-study-item');
     const noResults = document.getElementById('noResults');
+    const countEl = document.getElementById('caseCount');
+
+    function visibleCount() {
+      let n = 0;
+      items.forEach(function (item) {
+        if (item.style.display !== 'none') n++;
+      });
+      return n;
+    }
 
     chips.forEach(function (chip) {
       chip.addEventListener('click', function () {
+        // Quiet chip system: active = dark, idle = soft gray (same as products/solutions)
         chips.forEach(function (c) {
-          c.className = c.className.replace(
-            /bg-primary text-primary-foreground border border-primary shadow-sm/g,
-            'text-gray-600 dark:text-slate-400 bg-white dark:bg-slate-800 border-2 border-gray-300 dark:border-slate-600 hover:border-primary dark:hover:border-primary hover:text-primary'
-          );
+          c.classList.remove('chip-active');
+          c.classList.add('chip-idle');
         });
-        this.className =
-          'filter-chip px-4 py-2 rounded-full text-sm font-semibold cursor-pointer transition-all duration-150 bg-primary text-primary-foreground border border-primary shadow-sm';
+        this.classList.remove('chip-idle');
+        this.classList.add('chip-active');
 
         const category = this.getAttribute('data-category');
         let anyVisible = false;
@@ -150,6 +176,7 @@ const industries = ['All', 'Carbon & Energy', 'HVAC & Heating', 'Hospitality', '
             item.style.display = 'none';
           }
         });
+        if (countEl) countEl.textContent = ' ' + visibleCount();
         if (noResults) noResults.style.display = anyVisible ? 'none' : '';
       });
     });
