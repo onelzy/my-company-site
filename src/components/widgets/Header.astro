@@ -275,11 +275,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
 
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      if (li.classList.contains('mega-open')) {
-        close();
-      } else {
-        open();
-      }
+      // Open only — closing is handled by mouseleave / Escape / outside
+      // click / focus-out. (A toggle here fights hover: mouseenter opens
+      // the panel, then the same click would immediately close it.)
+      open();
     });
 
     document.addEventListener('click', (e) => {
