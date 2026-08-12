@@ -36,44 +36,25 @@
   }
 
   function syncChipUI() {
+    // Quiet chip system (same as products): active = dark chip, idle = soft gray.
     industryChips.forEach(function (c) {
       var v = c.getAttribute('data-industry') || '';
       if (v === activeIndustry) {
-        c.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
-        c.classList.remove(
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'text-gray-600',
-          'dark:text-slate-400'
-        );
+        c.classList.add('chip-active');
+        c.classList.remove('chip-idle');
       } else if (v !== '') {
-        c.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
-        c.classList.add(
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'text-gray-600',
-          'dark:text-slate-400'
-        );
+        c.classList.remove('chip-active');
+        c.classList.add('chip-idle');
       }
     });
     var allBtn = $('#industryFilters [data-industry=""]');
     if (allBtn) {
       if (!activeIndustry) {
-        allBtn.classList.add('bg-primary', 'text-primary-foreground', 'border-primary');
+        allBtn.classList.add('chip-active');
+        allBtn.classList.remove('chip-idle');
       } else {
-        allBtn.classList.remove('bg-primary', 'text-primary-foreground', 'border-primary');
-        allBtn.classList.add(
-          'bg-white',
-          'dark:bg-slate-800',
-          'border-gray-300',
-          'dark:border-slate-600',
-          'text-gray-600',
-          'dark:text-slate-400'
-        );
+        allBtn.classList.remove('chip-active');
+        allBtn.classList.add('chip-idle');
       }
     }
   }
