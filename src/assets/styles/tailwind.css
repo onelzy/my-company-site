@@ -147,6 +147,11 @@
   .pc-btn-price {
     @apply flex-1 px-2 py-1 rounded-lg text-[11px] font-medium transition-colors bg-[#FF6B00] text-white hover:bg-[#E55D00];
   }
+  /* Quiet text link — the only list-card affordance (customer-first: no
+     price/sales CTA on the products list; conversion lives on detail pages). */
+  .pc-btn-text {
+    @apply text-primary dark:text-blue-400 text-[11px] font-semibold;
+  }
 
   /* Filter chips (products index) */
   .chip {

@@ -22,10 +22,7 @@ const imageSrc = product.image || undefined;
 const hasImage = !!imageSrc;
 const modelDisplay = product.model?.trim() ?? '';
 const locale = (product.language as string) || 'en';
-
-// Build the onclick in JS scope so {product.name} is GUARANTEED interpolated
-// (attribute-string interpolation of {expr} proved unreliable in this file).
-const leadClick = `window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: ${JSON.stringify(product.name)} }) : (window.location.href = '/contact')`;
+const fullName = modelDisplay ? `${modelDisplay} ${product.name}`.trim() : product.name;
 ---
 
 <div
@@ -48,7 +45,7 @@ const leadClick = `window.__openLeadModal ? window.__openLeadModal({ scenario: '
         hasImage ? (
           <Image
             src={imageSrc}
-            alt={product.name}
+            alt={fullName}
             layout="cover"
             class="absolute inset-0 w-full h-full"
             width={600}
@@ -76,12 +73,12 @@ const leadClick = `window.__openLeadModal ? window.__openLeadModal({ scenario: '
          stays below ~half the square image height -->
     <a href={detailUrl} class:list={['flex-1 block', compact ? 'px-2.5 py-1.5' : 'px-3 py-2']}>
       <h3 class:list={['pc-card-title', compact ? 'text-[13px] line-clamp-1' : 'text-[15px] line-clamp-1']}>
-        {product.name}
+        {modelDisplay || product.name}
       </h3>
       {
         modelDisplay && (
-          <p class:list={['text-muted dark:text-slate-400 font-mono', compact ? 'text-[10px]' : 'text-[11px]']}>
-            {modelDisplay}
+          <p class:list={['text-muted dark:text-slate-400', compact ? 'text-[10px] line-clamp-1' : 'text-[11px] line-clamp-1']}>
+            {product.name}
           </p>
         )
       }
@@ -109,10 +106,11 @@ const leadClick = `window.__openLeadModal ? window.__openLeadModal({ scenario: '
       }
     </a>
 
-    <!-- Action buttons — slim to keep total content height ≤ ~half image -->
-    <div class:list={['flex gap-1.5', compact ? 'px-2.5 pb-2' : 'px-3 pb-2.5']}>
-      <a href={detailUrl} class="pc-btn-outline"> View Details </a>
-      <button type="button" onclick={leadClick} class="pc-btn-price"> Get Base Price </button>
+    <!-- Quiet footer: whole card is clickable; "View details →" is the only
+         affordance. No price/sales CTA on the list (conversion lives on the
+         detail page) — customer-first evaluation pattern. -->
+    <div class:list={['flex justify-end', compact ? 'px-2.5 pb-2' : 'px-3 pb-2.5']}>
+      <span class="pc-btn-text">View details →</span>
     </div>
   </div>
 </div>

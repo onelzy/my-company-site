@@ -11,7 +11,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "ac201-a",
     "data": {
-      "name": "AC201-A ZigBee Split AC Control (IR Learning)",
+      "name": "ZigBee Split AC Control (IR Learning)",
       "model": "AC201-A",
       "slug": {
         "name": "AC201-A ZigBee Split AC Control",
@@ -77,7 +77,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "ac201",
     "data": {
-      "name": "AC201 ZigBee Split AC Control",
+      "name": "ZigBee Split AC Control",
       "model": "AC201",
       "slug": {
         "name": "AC201 ZigBee Split AC Control",
@@ -139,7 +139,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "cb432-dp",
     "data": {
-      "name": "CB432-DP Din-rail Relay (Double Pole)",
+      "name": "Din-rail Relay (Double Pole)",
       "model": "CB432-DP",
       "slug": {
         "name": "CB432-DP Din-rail Relay (Double Pole)",
@@ -199,7 +199,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "cb432",
     "data": {
-      "name": "CB432 Din-rail Relay with Power Meter",
+      "name": "Din-rail Relay with Power Meter",
       "model": "CB432",
       "slug": {
         "name": "CB432 Din-rail Relay",
@@ -259,7 +259,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "dws312",
     "data": {
-      "name": "DWS312 ZigBee Door/Window Sensor",
+      "name": "ZigBee Door/Window Sensor",
       "model": "DWS312",
       "slug": {
         "name": "DWS312 Door/Window Sensor",
@@ -320,7 +320,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "dws332",
     "data": {
-      "name": "DWS332 ZigBee Door/Window Sensor",
+      "name": "ZigBee Door/Window Sensor",
       "model": "DWS332",
       "slug": {
         "name": "DWS332 Door/Window Sensor",
@@ -380,7 +380,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "fds315",
     "data": {
-      "name": "FDS315 Fall Detection Sensor",
+      "name": "Fall Detection Sensor",
       "model": "FDS315",
       "slug": {
         "name": "FDS315 Fall Detection Sensor",
@@ -439,7 +439,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "kf205",
     "data": {
-      "name": "KF205 ZigBee Key Fob",
+      "name": "ZigBee Key Fob",
       "model": "KF205",
       "slug": {
         "name": "KF205 ZigBee Key Fob",
@@ -497,7 +497,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "lc421",
     "data": {
-      "name": "LC421 ZigBee Load Control",
+      "name": "ZigBee Load Control",
       "model": "LC421",
       "slug": {
         "name": "LC421 ZigBee Load Control",
@@ -558,7 +558,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "ops305",
     "data": {
-      "name": "OPS305 Occupancy Sensor",
+      "name": "Occupancy Sensor",
       "model": "OPS305",
       "slug": {
         "name": "OPS305 Occupancy Sensor",
@@ -617,7 +617,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pb206",
     "data": {
-      "name": "PB206 ZigBee Panic Button",
+      "name": "ZigBee Panic Button",
       "model": "PB206",
       "slug": {
         "name": "PB206 ZigBee Panic Button",
@@ -676,7 +676,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pb236",
     "data": {
-      "name": "PB236 ZigBee Panic Button with Pull Cord",
+      "name": "ZigBee Panic Button with Pull Cord",
       "model": "PB236",
       "slug": {
         "name": "PB236 ZigBee Panic Button (Pull Cord)",
@@ -735,7 +735,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc311-ty",
     "data": {
-      "name": "PC311-TY Single-Phase WiFi Smart Energy Clamp",
+      "name": "Single-Phase WiFi Smart Energy Clamp",
       "model": "PC311-TY",
       "slug": {
         "name": "PC311-TY Smart Energy Clamp",
@@ -811,7 +811,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc311-w-ty-n",
     "data": {
-      "name": "PC311-W-TY/N Single-Phase WiFi Smart Energy Clamp",
+      "name": "Single-Phase WiFi Smart Energy Clamp",
       "model": "PC311-W-TY/N",
       "slug": {
         "name": "PC311-W-TY/N Smart Energy Clamp",
@@ -885,7 +885,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc311-w-ty-r-n",
     "data": {
-      "name": "PC311-W-TY/R/N Single-Phase WiFi Power Meter with Relay",
+      "name": "Single-Phase WiFi Power Meter with Relay",
       "model": "PC311-W-TY/R/N",
       "slug": {
         "name": "PC311-W-TY/R/N Power Meter with Relay",
@@ -960,7 +960,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc311-z-ty",
     "data": {
-      "name": "PC311-Z-TY Single-Phase ZigBee Smart Energy Clamp",
+      "name": "Single-Phase ZigBee Smart Energy Clamp",
       "model": "PC311-Z-TY",
       "slug": {
         "name": "PC311-Z-TY Smart Energy Clamp",
@@ -1031,7 +1031,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc321-ty-smart-meter",
     "data": {
-      "name": "PC321-W-TY Single/Three-Phase WiFi Smart Energy Clamp",
+      "name": "Single/Three-Phase WiFi Smart Energy Clamp",
       "model": "PC321-W-TY",
       "slug": {
         "name": "PC321-W-TY Smart Energy Clamp",
@@ -1106,7 +1106,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc321-w-3w",
     "data": {
-      "name": "PC321-W/3W Single/Three-Phase WiFi MQTT Smart Energy Clamp",
+      "name": "Single/Three-Phase WiFi MQTT Smart Energy Clamp",
       "model": "PC321-W/3W",
       "slug": {
         "name": "PC321-W/3W Smart Energy Clamp",
@@ -1181,7 +1181,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc321-w",
     "data": {
-      "name": "PC321-W Single/Three-Phase WiFi Smart Energy Clamp",
+      "name": "Single/Three-Phase WiFi Smart Energy Clamp",
       "model": "PC321-W",
       "slug": {
         "name": "PC321-W Smart Energy Clamp",
@@ -1252,7 +1252,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc321-z-ty",
     "data": {
-      "name": "PC321-Z-TY Single/Three-Phase ZigBee Smart Energy Clamp",
+      "name": "Single/Three-Phase ZigBee Smart Energy Clamp",
       "model": "PC321-Z-TY",
       "slug": {
         "name": "PC321-Z-TY Smart Energy Clamp",
@@ -1331,7 +1331,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc321",
     "data": {
-      "name": "PC321 Single/Three-Phase ZigBee Smart Energy Clamp",
+      "name": "Single/Three-Phase ZigBee Smart Energy Clamp",
       "model": "PC321",
       "slug": {
         "name": "PC321 Smart Energy Clamp",
@@ -1406,7 +1406,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc341-w-mqtt",
     "data": {
-      "name": "PC341-W-MQTT Multi-Circuit WiFi Power Meter",
+      "name": "Multi-Circuit WiFi Power Meter",
       "model": "PC341-W-MQTT",
       "slug": {
         "name": "PC341-W-MQTT Multi-Circuit Power Meter",
@@ -1468,7 +1468,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc341-w-ty-n",
     "data": {
-      "name": "PC341-W-TY/N Multi-Circuit WiFi Energy Monitor",
+      "name": "Multi-Circuit WiFi Energy Monitor",
       "model": "PC341-W-TY/N",
       "slug": {
         "name": "PC341-W-TY/N Multi-Circuit Energy Monitor",
@@ -1553,7 +1553,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc4713-w-485",
     "data": {
-      "name": "PC4713-W-485 Three-Phase WiFi + RS485 Smart Energy Meter",
+      "name": "Three-Phase WiFi + RS485 Smart Energy Meter",
       "model": "PC4713-W-485",
       "slug": {
         "name": "PC4713-W-485 Smart Energy Meter",
@@ -1631,7 +1631,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc4713-w-e-ty-3w",
     "data": {
-      "name": "PC4713-W-E-TY/3W Three Phase WiFi + Ethernet Smart Energy Meter",
+      "name": "Three Phase WiFi + Ethernet Smart Energy Meter",
       "model": "PC4713-W-E-TY/3W",
       "slug": {
         "name": "PC4713-W-E-TY/3W Smart Energy Meter",
@@ -1712,7 +1712,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc4713-w-e-ty-r",
     "data": {
-      "name": "PC4713-W-E-TY/R Three-Phase WiFi + Ethernet Smart Energy Meter with Relay",
+      "name": "Three-Phase WiFi + Ethernet Smart Energy Meter with Relay",
       "model": "PC4713-W-E-TY/R",
       "slug": {
         "name": "PC4713-W-E-TY/R Smart Energy Meter",
@@ -1790,7 +1790,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc4713-w-e-ty",
     "data": {
-      "name": "PC4713-W-E-TY Three-Phase WiFi + Ethernet Smart Energy Meter",
+      "name": "Three-Phase WiFi + Ethernet Smart Energy Meter",
       "model": "PC4713-W-E-TY",
       "slug": {
         "name": "PC4713-W-E-TY Smart Energy Meter",
@@ -1866,7 +1866,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc4713-w-ty-r",
     "data": {
-      "name": "PC4713-W-TY/R Three-Phase WiFi Smart Energy Meter with Relay",
+      "name": "Three-Phase WiFi Smart Energy Meter with Relay",
       "model": "PC4713-W-TY/R",
       "slug": {
         "name": "PC4713-W-TY/R Smart Energy Meter",
@@ -1942,7 +1942,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc4713-w-ty",
     "data": {
-      "name": "PC4713-W-TY Three-Phase WiFi Smart Energy Meter",
+      "name": "Three-Phase WiFi Smart Energy Meter",
       "model": "PC4713-W-TY",
       "slug": {
         "name": "PC4713-W-TY Smart Energy Meter",
@@ -2017,7 +2017,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc472-w-ty-n",
     "data": {
-      "name": "PC472-W-TY/N Single-Phase WiFi Power Meter",
+      "name": "Single-Phase WiFi Power Meter",
       "model": "PC472-W-TY/N",
       "slug": {
         "name": "PC472-W-TY/N Power Meter",
@@ -2092,7 +2092,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc472-w-ty-r-n",
     "data": {
-      "name": "PC472-W-TY/R/N Single-Phase WiFi Power Meter with Relay",
+      "name": "Single-Phase WiFi Power Meter with Relay",
       "model": "PC472-W-TY/R/N",
       "slug": {
         "name": "PC472-W-TY/R/N Power Meter with Relay",
@@ -2168,7 +2168,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pc473-w-ty-r-n",
     "data": {
-      "name": "PC473-W-TY/R/N Three-Phase WiFi Power Meter with Relay",
+      "name": "Three-Phase WiFi Power Meter with Relay",
       "model": "PC473-W-TY/R/N",
       "slug": {
         "name": "PC473-W-TY/R/N Power Meter with Relay",
@@ -2245,7 +2245,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct501",
     "data": {
-      "name": "PCT501 ZigBee Programmable Communicating Thermostat",
+      "name": "ZigBee Programmable Communicating Thermostat",
       "model": "PCT501",
       "slug": {
         "name": "PCT501 ZigBee Thermostat",
@@ -2309,7 +2309,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct503-w",
     "data": {
-      "name": "PCT503-W Wi-Fi Programmable Communicating Thermostat",
+      "name": "Wi-Fi Programmable Communicating Thermostat",
       "model": "PCT503-W",
       "slug": {
         "name": "PCT503-W Wi-Fi Thermostat",
@@ -2364,7 +2364,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct503",
     "data": {
-      "name": "PCT503 ZigBee Smart Thermostat (ZHA)",
+      "name": "ZigBee Smart Thermostat (ZHA)",
       "model": "PCT503",
       "slug": {
         "name": "PCT503 ZigBee Smart Thermostat",
@@ -2436,7 +2436,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct504-z",
     "data": {
-      "name": "PCT504-Z ZigBee Fan Coil Thermostat (DC12V)",
+      "name": "ZigBee Fan Coil Thermostat (DC12V)",
       "model": "PCT504-Z",
       "slug": {
         "name": "PCT504-Z Fan Coil Thermostat (DC12V)",
@@ -2497,7 +2497,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct504",
     "data": {
-      "name": "PCT504 ZigBee Fan Coil Thermostat",
+      "name": "ZigBee Fan Coil Thermostat",
       "model": "PCT504",
       "slug": {
         "name": "PCT504 ZigBee Fan Coil Thermostat",
@@ -2560,7 +2560,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct513-ty",
     "data": {
-      "name": "PCT513-TY Wi-Fi Touchscreen Thermostat",
+      "name": "Wi-Fi Touchscreen Thermostat",
       "model": "PCT513-TY",
       "slug": {
         "name": "PCT513-TY Wi-Fi Touchscreen Thermostat",
@@ -2613,7 +2613,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct513",
     "data": {
-      "name": "PCT513 Wi-Fi Touchscreen Thermostat",
+      "name": "Wi-Fi Touchscreen Thermostat",
       "model": "PCT513",
       "slug": {
         "name": "PCT513 Wi-Fi Touchscreen Thermostat",
@@ -2665,7 +2665,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct523-w-ty",
     "data": {
-      "name": "PCT523-W-TY WiFi 24VAC Thermostat (Touch Button)",
+      "name": "WiFi 24VAC Thermostat (Touch Button)",
       "model": "PCT523-W-TY",
       "slug": {
         "name": "PCT523-W-TY WiFi Thermostat",
@@ -2730,7 +2730,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct5231-w-ty",
     "data": {
-      "name": "PCT5231-W-TY WiFi 24VAC Thermostat (Wall Box)",
+      "name": "WiFi 24VAC Thermostat (Wall Box)",
       "model": "PCT5231-W-TY",
       "slug": {
         "name": "PCT5231-W-TY WiFi Thermostat",
@@ -2795,7 +2795,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct533-w-ty",
     "data": {
-      "name": "PCT533-W-TY WiFi Thermostat with Remote Sensors and Humidity Control",
+      "name": "WiFi Thermostat with Remote Sensors and Humidity Control",
       "model": "PCT533-W-TY",
       "slug": {
         "name": "PCT533-W-TY WiFi Thermostat",
@@ -2861,7 +2861,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pct533c-w-ty",
     "data": {
-      "name": "PCT533C-W-TY WiFi Thermostat (Core)",
+      "name": "WiFi Thermostat (Core)",
       "model": "PCT533C-W-TY",
       "slug": {
         "name": "PCT533C-W-TY WiFi Thermostat (Core)",
@@ -2924,7 +2924,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pir313-z",
     "data": {
-      "name": "PIR313-Z ZigBee Multi-Sensor",
+      "name": "ZigBee Multi-Sensor",
       "model": "PIR313-Z",
       "slug": {
         "name": "PIR313-Z ZigBee Multi-Sensor",
@@ -2983,7 +2983,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pir323",
     "data": {
-      "name": "PIR323 ZigBee Multi-Sensor",
+      "name": "ZigBee Multi-Sensor",
       "model": "PIR323",
       "slug": {
         "name": "PIR323 ZigBee Multi-Sensor",
@@ -3040,7 +3040,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "pr412",
     "data": {
-      "name": "PR412 ZigBee Curtain Control",
+      "name": "ZigBee Curtain Control",
       "model": "PR412",
       "slug": {
         "name": "PR412 ZigBee Curtain Control",
@@ -3100,7 +3100,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "rc204",
     "data": {
-      "name": "RC204 ZigBee Mini Remote Control",
+      "name": "ZigBee Mini Remote Control",
       "model": "RC204",
       "slug": {
         "name": "RC204 ZigBee Mini Remote Control",
@@ -3161,7 +3161,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "seg-x3-a",
     "data": {
-      "name": "SEG-X3-A ZigBee Gateway",
+      "name": "ZigBee Gateway",
       "model": "SEG-X3-A",
       "slug": {
         "name": "SEG-X3-A ZigBee Gateway",
@@ -3230,7 +3230,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "seg-x3-c",
     "data": {
-      "name": "SEG-X3-C ZigBee Gateway",
+      "name": "ZigBee Gateway",
       "model": "SEG-X3-C",
       "slug": {
         "name": "SEG-X3-C ZigBee Gateway",
@@ -3299,7 +3299,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "seg-x3-n",
     "data": {
-      "name": "SEG-X3-N ZigBee Home Automation Gateway",
+      "name": "ZigBee Home Automation Gateway",
       "model": "SEG-X3-N",
       "slug": {
         "name": "SEG-X3-N ZigBee Gateway",
@@ -3363,7 +3363,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "seg-x3",
     "data": {
-      "name": "SEG-X3 ZigBee Home Automation Gateway",
+      "name": "ZigBee Home Automation Gateway",
       "model": "SEG-X3",
       "slug": {
         "name": "SEG-X3 ZigBee Gateway",
@@ -3429,7 +3429,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "seg-x5",
     "data": {
-      "name": "SEG-X5 ZigBee Gateway",
+      "name": "ZigBee Gateway",
       "model": "SEG-X5",
       "slug": {
         "name": "SEG-X5 ZigBee Gateway",
@@ -3505,7 +3505,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc600-d",
     "data": {
-      "name": "SLC600-D Dimmer Switch",
+      "name": "Dimmer Switch",
       "model": "SLC600-D",
       "slug": {
         "name": "SLC600-D Dimmer Switch",
@@ -3567,7 +3567,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc600-s",
     "data": {
-      "name": "SLC600-S Scene Switch",
+      "name": "Scene Switch",
       "model": "SLC600-S",
       "slug": {
         "name": "SLC600-S Scene Switch",
@@ -3629,7 +3629,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc601",
     "data": {
-      "name": "SLC601 ZigBee Smart Relay Module",
+      "name": "ZigBee Smart Relay Module",
       "model": "SLC601",
       "slug": {
         "name": "SLC601 Smart Relay Module",
@@ -3691,7 +3691,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc602",
     "data": {
-      "name": "SLC602 ZigBee Wireless Switch",
+      "name": "ZigBee Wireless Switch",
       "model": "SLC602",
       "slug": {
         "name": "SLC602 ZigBee Wireless Switch",
@@ -3750,7 +3750,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc603",
     "data": {
-      "name": "SLC603 ZigBee Wireless Dimmer Switch",
+      "name": "ZigBee Wireless Dimmer Switch",
       "model": "SLC603",
       "slug": {
         "name": "SLC603 ZigBee Wireless Dimmer Switch",
@@ -3810,7 +3810,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc611-z",
     "data": {
-      "name": "SLC611-Z ZigBee Power Meter with Relay",
+      "name": "ZigBee Power Meter with Relay",
       "model": "SLC611-Z",
       "slug": {
         "name": "SLC611-Z Power Meter with Relay",
@@ -3873,7 +3873,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc611",
     "data": {
-      "name": "SLC611 LED Lighting Driver (0-10V Dimmable)",
+      "name": "LED Lighting Driver (0-10V Dimmable)",
       "model": "SLC611",
       "slug": {
         "name": "SLC611 LED Lighting Driver",
@@ -3934,7 +3934,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc620",
     "data": {
-      "name": "SLC620 In-wall Mechanical Switch",
+      "name": "In-wall Mechanical Switch",
       "model": "SLC620",
       "slug": {
         "name": "SLC620 In-wall Mechanical Switch",
@@ -3995,7 +3995,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc621-m-z",
     "data": {
-      "name": "SLC621-M-Z ZigBee Smart Switch with Power Meter",
+      "name": "ZigBee Smart Switch with Power Meter",
       "model": "SLC621-M-Z",
       "slug": {
         "name": "SLC621-M-Z Smart Switch with Power Meter",
@@ -4057,7 +4057,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc627",
     "data": {
-      "name": "SLC627 In-Wall Touch Switch (US)",
+      "name": "In-Wall Touch Switch (US)",
       "model": "SLC627",
       "slug": {
         "name": "SLC627 In-Wall Touch Switch (US)",
@@ -4117,7 +4117,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc628",
     "data": {
-      "name": "SLC628 In-Wall Touch Switch",
+      "name": "In-Wall Touch Switch",
       "model": "SLC628",
       "slug": {
         "name": "SLC628 In-Wall Touch Switch",
@@ -4177,7 +4177,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "slc631",
     "data": {
-      "name": "SLC631 Lighting Relay",
+      "name": "Lighting Relay",
       "model": "SLC631",
       "slug": {
         "name": "SLC631 Lighting Relay",
@@ -4236,7 +4236,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "ths317",
     "data": {
-      "name": "THS317 Temperature & Humidity Sensor",
+      "name": "Temperature & Humidity Sensor",
       "model": "THS317",
       "slug": {
         "name": "THS317 Temperature & Humidity Sensor",
@@ -4294,7 +4294,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "ths327-et",
     "data": {
-      "name": "THS327-ET ZigBee Temperature Sensor with Probe",
+      "name": "ZigBee Temperature Sensor with Probe",
       "model": "THS327-ET",
       "slug": {
         "name": "THS327-ET Temperature Sensor with Probe",
@@ -4354,7 +4354,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "trv527-z",
     "data": {
-      "name": "TRV527-Z ZigBee Smart Radiator Valve",
+      "name": "ZigBee Smart Radiator Valve",
       "model": "TRV527-Z",
       "slug": {
         "name": "TRV527-Z Smart Radiator Valve",
@@ -4418,7 +4418,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "wls316",
     "data": {
-      "name": "WLS316 Water Leakage Sensor",
+      "name": "Water Leakage Sensor",
       "model": "WLS316",
       "slug": {
         "name": "WLS316 Water Leakage Sensor",
@@ -4477,7 +4477,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "wsp403",
     "data": {
-      "name": "WSP403 ZigBee Smart Plug",
+      "name": "ZigBee Smart Plug",
       "model": "WSP403",
       "slug": {
         "name": "WSP403 ZigBee Smart Plug",
@@ -4539,7 +4539,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "wsp406-uk",
     "data": {
-      "name": "WSP406 In-wall Smart Plug (UK)",
+      "name": "In-wall Smart Plug (UK)",
       "model": "WSP406-UK",
       "slug": {
         "name": "WSP406 In-wall Smart Plug (UK)",
@@ -4600,7 +4600,7 @@ export const products: ProductsEntry[] = [
   {
     "slug": "wsp406-z-ty",
     "data": {
-      "name": "WSP406-Z-TY ZigBee Wall Socket",
+      "name": "ZigBee Wall Socket",
       "model": "WSP406-Z-TY",
       "slug": {
         "name": "WSP406-Z-TY ZigBee Wall Socket",

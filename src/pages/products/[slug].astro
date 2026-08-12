@@ -58,6 +58,10 @@ const product: Product = {
   data: entry.data,
 };
 const { name, model, description } = entry.data as Record<string, unknown>;
+// Model (e.g. "PC311-W-TY-N") and descriptive name (e.g. "Single-Phase WiFi
+// Smart Energy Clamp") are separate fields, rendered separately on the page.
+// The combined string is used for SEO titles / structured data / alt text.
+const fullName = model ? `${model} ${name}`.trim() : String(name || '');
 const productType = (entry.data as Record<string, unknown>).productType as string | undefined;
 const techSolution = (entry.data as Record<string, unknown>).techSolution as string | undefined;
 const communication = ((entry.data as Record<string, unknown>).communication ?? []) as string[];
@@ -243,10 +247,10 @@ const relatedProducts: Product[] = allProducts
   )
   .slice(0, 4) as Product[];
 
-const metaTitle = String(name || '');
+const metaTitle = fullName;
 // Meta description must stay ≤160 chars (Google truncates around there);
 // the visible in-page paragraph below still uses the full `description`.
-const rawMetaDescription = description?.trim() || `Learn about ${name} specifications and features.`;
+const rawMetaDescription = description?.trim() || `Learn about ${fullName} specifications and features.`;
 const metaDescription = rawMetaDescription.length > 155 ? `${rawMetaDescription.slice(0, 152).trimEnd()}...` : rawMetaDescription;
 const typeLabel = productType ? getLocalizedLabel(PRODUCT_TYPE_LABELS, productType, 'en') : '';
 const htmlContent = renderMarkdown(entry.body || '', { headingOffset: 1 });
@@ -258,7 +262,7 @@ const galleryMode = images.length > 1;
 const productSchema = {
   '@context': 'https://schema.org',
   '@type': 'Product',
-  name,
+  name: fullName,
   description: metaDescription,
   sku: model || product.slug,
   mpn: model || product.slug,
@@ -275,7 +279,7 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteOrigin}/` },
     { '@type': 'ListItem', position: 2, name: 'Products', item: `${siteOrigin}/products` },
     ...(typeLabel ? ([{ '@type': 'ListItem', position: 3, name: typeLabel }] as const) : []),
-    { '@type': 'ListItem', position: typeLabel ? 4 : 3, name },
+    { '@type': 'ListItem', position: typeLabel ? 4 : 3, name: fullName },
   ],
 };
 
@@ -396,7 +400,7 @@ const faqSchema = {
               hasImage ? (
                 <Image
                   src={images[0]}
-                  alt={name}
+                  alt={fullName}
                   layout="cover"
                   class="absolute inset-0 w-full h-full"
                   width={800}
@@ -450,7 +454,7 @@ const faqSchema = {
                       i === 0 ? 'border-primary' : 'border-gray-200 dark:border-slate-600 hover:border-primary/50'
                     }`}
                   >
-                    <Image src={img} alt={`${name} ${i + 1}`} width={64} height={64} class="w-full h-full object-cover" />
+                    <Image src={img} alt={`${fullName} ${i + 1}`} width={64} height={64} class="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
@@ -461,14 +465,14 @@ const faqSchema = {
 
         <!-- Right: Product Info -->
         <div class="flex flex-col justify-center">
-          <h1 class="text-3xl font-bold text-default dark:text-slate-100 sm:text-4xl lg:text-5xl mb-3">{name}</h1>
           {
             model && (
-              <p class="text-lg font-mono text-muted dark:text-slate-400 mb-4 bg-gray-100 dark:bg-slate-800 inline-block self-start px-3 py-1 rounded-md border border-gray-200 dark:border-slate-700">
+              <p class="text-base font-mono text-muted dark:text-slate-400 mb-3 bg-gray-100 dark:bg-slate-800 inline-block self-start px-3 py-1 rounded-md border border-gray-200 dark:border-slate-700">
                 {model}
               </p>
             )
           }
+          <h1 class="text-3xl font-bold text-default dark:text-slate-100 sm:text-4xl lg:text-5xl mb-3">{name}</h1>
           {
             description && (
               <p class="text-base text-default dark:text-slate-300 leading-relaxed mb-6 max-w-xl">{description}</p>
@@ -1807,7 +1811,7 @@ const faqSchema = {
           }
           <button
             class="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity inline-flex items-center gap-2"
-            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${name}', pdfUrl: '${datasheetUrl || ''}' }) : (window.location.href = '/contact')`}
+            onclick={`window.__openLeadModal ? window.__openLeadModal({ scenario: 'price', productName: '${fullName}', pdfUrl: '${datasheetUrl || ''}' }) : (window.location.href = '/contact')`}
           >
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
