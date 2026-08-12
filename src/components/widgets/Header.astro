@@ -258,6 +258,13 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     let timer = 0;
     const open = () => {
       clearTimeout(timer);
+      // Close sibling panels (accordion behavior on mobile, tidy on desktop)
+      document.querySelectorAll('[data-mega]').forEach((other) => {
+        if (other !== li) {
+          other.classList.remove('mega-open');
+          other.querySelector('[data-mega-toggle]')?.setAttribute('aria-expanded', 'false');
+        }
+      });
       li.classList.add('mega-open');
       btn.setAttribute('aria-expanded', 'true');
     };

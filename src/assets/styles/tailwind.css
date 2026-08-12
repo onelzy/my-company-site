@@ -179,7 +179,7 @@
      src/navigation.ts (mega.groups / items / devGroups).
      ============================================================ */
   .mega-panel {
-    @apply absolute top-full pt-3 z-50 hidden;
+    @apply hidden top-full pt-3 z-50 static md:absolute max-w-[calc(100vw-2rem)];
   }
   .mega-open .mega-panel {
     @apply block;
