@@ -171,4 +171,53 @@
   .chip-green {
     @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
   }
+
+  /* ============================================================
+     Mega menu panels (header dropdowns — products/solutions/
+     resources/developers). Quiet premium: white rounded panel,
+     soft shadow, gray chips / text items. Data defined in
+     src/navigation.ts (mega.groups / items / devGroups).
+     ============================================================ */
+  .mega-panel {
+    @apply absolute top-full pt-3 z-50 hidden;
+  }
+  .mega-open .mega-panel {
+    @apply block;
+  }
+  .mega-panel-left {
+    @apply left-0;
+  }
+  .mega-panel-right {
+    @apply right-0;
+  }
+  .mega-panel-inner {
+    @apply bg-white dark:bg-slate-800 rounded-2xl shadow-xl ring-1 ring-gray-100 dark:ring-slate-700 p-4;
+  }
+  .mega-group {
+    @apply mb-2.5;
+  }
+  .mega-group:not(:first-child) {
+    @apply border-t border-gray-100 dark:border-slate-700/60 pt-2.5;
+  }
+  .mega-label {
+    @apply text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-slate-500 mb-1.5 px-1.5;
+  }
+  .mega-item {
+    @apply block rounded-lg p-2 hover:bg-gray-50 dark:hover:bg-slate-700/60 transition-colors;
+  }
+  .mega-item-name {
+    @apply block text-[13.5px] font-semibold text-gray-900 dark:text-slate-100;
+  }
+  .mega-item-desc {
+    @apply block text-xs text-gray-500 dark:text-slate-400 mt-0.5 leading-snug;
+  }
+  .mega-item-desc.ph {
+    @apply italic text-gray-300 dark:text-slate-600;
+  }
+  .mega-footer {
+    @apply mt-3 pt-3 border-t border-gray-100 dark:border-slate-700/60 flex justify-end;
+  }
+  .mega-all {
+    @apply text-[13px] font-semibold text-primary dark:text-blue-400;
+  }
 }

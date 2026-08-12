@@ -9,16 +9,13 @@ import Button from '~/components/ui/Button.astro';
 import { getHomePermalink } from '~/utils/permalinks';
 import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
+import type { MenuLink } from '~/navigation';
 
 interface Link {
   text?: string;
   href?: string;
   ariaLabel?: string;
   icon?: string;
-}
-
-interface MenuLink extends Link {
-  links?: Array<MenuLink>;
 }
 
 export interface Props {
@@ -92,9 +89,83 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
       >
         {
-          links.map(({ text, href, links }) => (
-            <li class={links?.length ? 'dropdown' : ''}>
-              {links?.length ? (
+          links.map(({ text, href, links, mega }) => (
+            <li
+              class:list={[mega ? 'mega relative' : links?.length ? 'dropdown' : '']}
+              {...(mega ? { 'data-mega': true } : {})}
+            >
+              {mega ? (
+                <>
+                  <button
+                    type="button"
+                    class="mega-btn hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-mega-toggle
+                  >
+                    {text}{' '}
+                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                  </button>
+                  <div
+                    class:list={['mega-panel', mega.align === 'right' ? 'mega-panel-right' : 'mega-panel-left']}
+                    style={`width:${mega.width}px`}
+                    data-mega-panel
+                  >
+                    <div class="mega-panel-inner">
+                      {mega.groups?.map((group) => (
+                        <div class="mega-group">
+                          <p class="mega-label">{group.label}</p>
+                          <div class="flex flex-wrap gap-1.5 px-1">
+                            {group.chips.map((chip) => (
+                              <a class="chip chip-idle" href={chip.href}>
+                                {chip.text}
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                      {mega.items?.length ? (
+                        <div class="grid grid-cols-2 gap-0.5">
+                          {mega.items.map((item) => (
+                            <a class="mega-item" href={item.href}>
+                              <span class="mega-item-name">{item.text}</span>
+                              <span class:list={['mega-item-desc', item.placeholder && 'ph']}>
+                                {item.placeholder ? '(Solution page in progress)' : item.desc}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                      {mega.devGroups?.length ? (
+                        <div class="grid grid-cols-2 gap-x-5 gap-y-3">
+                          {mega.devGroups.map((group) => (
+                            <div>
+                              <p class="mega-label">{group.label}</p>
+                              {group.items.map((item) => (
+                                <a class="mega-item" href={item.href}>
+                                  <span class="mega-item-name">{item.text}</span>
+                                  <span class="mega-item-desc">{item.desc}</span>
+                                </a>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        ''
+                      )}
+                      {mega.footer && (
+                        <div class="mega-footer">
+                          <a class="mega-all" href={mega.footer.href}>
+                            {mega.footer.text}
+                          </a>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </>
+              ) : links?.length ? (
                 <>
                   <button
                     type="button"
@@ -172,3 +243,50 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     </div>
   </div>
 </header>
+
+<script>
+  // Mega menu interaction: hover (with 150ms grace to move into the panel),
+  // click toggle, Escape to close, outside-click to close, focus-out to close.
+  document.querySelectorAll('[data-mega]').forEach((li) => {
+    const btn = li.querySelector('[data-mega-toggle]');
+    const panel = li.querySelector('[data-mega-panel]');
+    if (!btn || !panel) return;
+
+    let timer = 0;
+    const open = () => {
+      clearTimeout(timer);
+      li.classList.add('mega-open');
+      btn.setAttribute('aria-expanded', 'true');
+    };
+    const close = () => {
+      li.classList.remove('mega-open');
+      btn.setAttribute('aria-expanded', 'false');
+    };
+    const closeDelayed = () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(close, 150);
+    };
+
+    li.addEventListener('mouseenter', open);
+    li.addEventListener('mouseleave', closeDelayed);
+
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (li.classList.contains('mega-open')) {
+        close();
+      } else {
+        open();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!li.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+    li.addEventListener('focusout', (e) => {
+      if (!li.contains(e.relatedTarget)) close();
+    });
+  });
+</script>

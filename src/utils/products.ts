@@ -2,6 +2,8 @@
 // Products — utility functions and label maps for OWON B2B catalogue
 // ===================================================================
 
+import { products as rawProducts } from '~/data/products';
+
 // -------------------------------------------------------------------
 // Supported locales (ISO 639-1) — must match content.config.ts schema
 // -------------------------------------------------------------------
@@ -856,6 +858,8 @@ const SUB_TYPE_PARENT: Record<string, string> = {
   lighting: 'hotel-control',
   'door-sign': 'hotel-control',
   'energy-management': 'hotel-control',
+  // Gateways
+  'zigbee-gateways': 'gateways',
   // Software & Platforms
   'smartowon-app': 'software-platforms',
   'zigbee-control-web': 'software-platforms',
@@ -1002,9 +1006,24 @@ export function filterProducts<
 
 /**
  * Return all distinct main product type values.
+ *
+ * DATA-DRIVEN membership (curated order): a type only appears if at least
+ * one product in the catalog carries it, so there are never dead-end chips
+ * (e.g. "Software & Platforms" is hidden until software products exist,
+ * "Gateways" appears automatically for the 5 SEG gateway models).
  */
+const PRODUCT_TYPE_ORDER = [
+  'smart-meters',
+  'thermostats',
+  'senior-care',
+  'hotel-control',
+  'gateways',
+  'software-platforms',
+];
+
 export function getAllProductTypes(): string[] {
-  return ['smart-meters', 'thermostats', 'senior-care', 'hotel-control', 'software-platforms'];
+  const existing = new Set(rawProducts.map((p) => p.data.productType));
+  return PRODUCT_TYPE_ORDER.filter((t) => existing.has(t));
 }
 
 /**

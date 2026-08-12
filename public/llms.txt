@@ -7,6 +7,7 @@
 - [Smart Thermostats](https://www.owon-iot.com/products?dim=type&type=thermostats)
 - [Hotel Control](https://www.owon-iot.com/products?dim=type&type=hotel-control)
 - [Senior Care](https://www.owon-iot.com/products?dim=type&type=senior-care)
+- [Gateways](https://www.owon-iot.com/products?dim=type&type=gateways)
 - [Software & Platforms](https://www.owon-iot.com/products?dim=type&type=software-platforms)
 - [All Products](https://www.owon-iot.com/products)
 

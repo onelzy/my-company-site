@@ -1,21 +1,113 @@
 import { getPermalink, getAsset, getBlogPermalink } from './utils/permalinks';
 import { SITE } from 'astrowind:config';
+import { solutions } from '~/data/solutions';
+import { getAllProductTypes, PRODUCT_TYPE_LABELS, getLocalizedLabel } from './utils/products';
 
 const whatsappNumber = SITE.contact?.whatsapp || '8618650139895';
 const contactEmail = SITE.contact?.email || 'info@owon-iot.com';
+
+// ---------------------------------------------------------------------------
+// Mega menu types
+// ---------------------------------------------------------------------------
+export interface MegaLink {
+  text: string;
+  href: string;
+  /** One-line description shown under the link text (SEO/AI-friendly). */
+  desc?: string;
+  /** True when the target page doesn't exist yet — renders an italic placeholder. */
+  placeholder?: boolean;
+}
+
+export interface MegaGroup {
+  label: string;
+  chips: MegaLink[];
+}
+
+export interface MegaDevGroup {
+  label: string;
+  items: MegaLink[];
+}
+
+export interface MegaPanel {
+  /** Chip-group layout (Products). */
+  groups?: MegaGroup[];
+  /** Description-item layout (Solutions, Resources). */
+  items?: MegaLink[];
+  /** 2×2 grouped layout (Developers). */
+  devGroups?: MegaDevGroup[];
+  /** Bottom-right "All … →" link. */
+  footer?: MegaLink;
+  /** Panel width in px. */
+  width: number;
+  /** Align under the trigger (right-align prevents viewport overflow at lg). */
+  align?: 'left' | 'right';
+}
+
+export interface MenuLink {
+  text: string;
+  href?: string;
+  links?: MenuLink[];
+  mega?: MegaPanel;
+}
+
+// ---------------------------------------------------------------------------
+// Real solution subtitles from the solution mdocs, keyed by industry —
+// the mega menu shows real copy and auto-updates when solution pages land.
+// ---------------------------------------------------------------------------
+const solutionSubtitle: Record<string, string> = {};
+for (const s of solutions) {
+  const industry = s.data.industry as string | undefined;
+  const subtitle = s.data.subtitle as string | undefined;
+  if (industry && subtitle) solutionSubtitle[industry] = subtitle;
+}
+
+const industryItem = (industry: string, label: string): MegaLink => {
+  const href = getPermalink(`/solutions?industry=${industry}`);
+  const desc = solutionSubtitle[industry];
+  return desc ? { text: label, href, desc } : { text: label, href, placeholder: true };
+};
+
+// Product Type chips derive from the real catalog (no dead-end chips).
+const productTypeChips: MegaLink[] = getAllProductTypes().map((t) => ({
+  text: getLocalizedLabel(PRODUCT_TYPE_LABELS, t, 'en'),
+  href: getPermalink(`/products?dim=type&type=${t}`),
+}));
+
+// Tech Solution chips mirror the products page filter (getAllTechSolutions).
+const TECH_SOLUTION_LABELS: Record<string, string> = { tuya: 'Tuya', mqtt: 'API', zigbee: 'ZigBee 3.0' };
+const techSolutionChips: MegaLink[] = Object.entries(TECH_SOLUTION_LABELS).map(([value, label]) => ({
+  text: label,
+  href: getPermalink(`/products?dim=solution&sol=${value}`),
+}));
+
+// Connection chips mirror the products page filter panel exactly.
+const connectionChips: MegaLink[] = [
+  { text: 'ZigBee', href: getPermalink('/products?dim=comm&comm=zigbee') },
+  { text: 'WiFi', href: getPermalink('/products?dim=comm&comm=wifi') },
+  { text: 'Bluetooth', href: getPermalink('/products?dim=comm&comm=ble') },
+  { text: '4G', href: getPermalink('/products?dim=comm&comm=4g') },
+  { text: 'RJ45', href: getPermalink('/products?dim=comm&comm=rj45') },
+  { text: 'RF', href: getPermalink('/products?dim=comm&comm=rf') },
+  { text: 'RS-485', href: getPermalink('/products?dim=comm&comm=rs485') },
+];
 
 export const headerData = {
   links: [
     {
       text: 'Products',
       links: [
-        { text: 'Smart Energy Meters', href: getPermalink('/products?dim=type&type=smart-meters') },
-        { text: 'Smart Thermostats', href: getPermalink('/products?dim=type&type=thermostats') },
-        { text: 'Hotel Control', href: getPermalink('/products?dim=type&type=hotel-control') },
-        { text: 'Senior Care', href: getPermalink('/products?dim=type&type=senior-care') },
-        { text: 'Software & Platforms', href: getPermalink('/products?dim=type&type=software-platforms') },
+        ...productTypeChips.map(({ text, href }) => ({ text, href })),
         { text: 'All Products →', href: getPermalink('/products') },
       ],
+      mega: {
+        width: 560,
+        groups: [
+          { label: 'By Product Type', chips: productTypeChips },
+          { label: 'By Tech Solution', chips: techSolutionChips },
+          { label: 'By Connection', chips: connectionChips },
+        ],
+        footer: { text: 'All Products →', href: getPermalink('/products') },
+      },
     },
     {
       text: 'Solutions',
@@ -27,6 +119,17 @@ export const headerData = {
         { text: 'Industrial IoT', href: getPermalink('/solutions?industry=industrial-iot') },
         { text: 'All Solutions →', href: getPermalink('/solutions') },
       ],
+      mega: {
+        width: 640,
+        items: [
+          industryItem('smart-hotels', 'Smart Hotels'),
+          industryItem('senior-care', 'Senior Care'),
+          industryItem('energy-management', 'Energy Management'),
+          industryItem('smart-building', 'Smart Building'),
+          industryItem('industrial-iot', 'Industrial IoT'),
+        ],
+        footer: { text: 'All Solutions →', href: getPermalink('/solutions') },
+      },
     },
     {
       text: 'Resources',
@@ -38,10 +141,96 @@ export const headerData = {
         { text: 'Case Studies', href: getPermalink('/case-studies') },
         { text: 'Blog', href: getBlogPermalink() },
       ],
+      mega: {
+        width: 540,
+        items: [
+          {
+            text: 'Documentation',
+            href: getPermalink('/resources/documentation'),
+            desc: 'Datasheets, manuals & quick start guides',
+          },
+          { text: 'Videos', href: getPermalink('/resources/videos'), desc: 'Product demos & installation guides' },
+          {
+            text: 'App Downloads',
+            href: getPermalink('/resources/app'),
+            desc: 'MQTT Debugger, Energy Dashboard & tools',
+          },
+          { text: 'FAQ', href: getPermalink('/resources/faq'), desc: 'Meters, thermostats, IoT & API questions' },
+          { text: 'Case Studies', href: getPermalink('/case-studies'), desc: 'Real deployments across industries' },
+          { text: 'Blog', href: getBlogPermalink(), desc: 'Product news & industry insights' },
+        ],
+      },
     },
     {
       text: 'Developers',
       href: getPermalink('/developers'),
+      links: [
+        { text: 'Developer Center', href: getPermalink('/developers') },
+        { text: 'HTTP Server API', href: getPermalink('/developers/api') },
+        { text: 'ZigBee Clusters', href: getPermalink('/developers/zigbee') },
+        { text: 'MQTT Quick Start', href: getPermalink('/developers/mqtt') },
+        { text: 'SDKs & Libraries', href: getPermalink('/developers/sdks') },
+        { text: 'Home Assistant', href: getPermalink('/developers/ha') },
+        { text: 'Code Examples', href: getPermalink('/developers/examples') },
+      ],
+      mega: {
+        width: 620,
+        align: 'right',
+        devGroups: [
+          {
+            label: 'Getting Started',
+            items: [
+              { text: 'Overview', href: getPermalink('/developers'), desc: 'API, SDKs, MQTT & integration guides' },
+              {
+                text: 'MQTT Quick Start',
+                href: getPermalink('/developers/mqtt'),
+                desc: 'Connect gateways, WiFi & 4G devices',
+              },
+            ],
+          },
+          {
+            label: 'API Reference',
+            items: [
+              {
+                text: 'HTTP Server API',
+                href: getPermalink('/developers/api'),
+                desc: 'Device management, telemetry, webhooks',
+              },
+              { text: 'ZigBee Clusters', href: getPermalink('/developers/zigbee'), desc: 'ZCL specs for OWON devices' },
+            ],
+          },
+          {
+            label: 'Integration',
+            items: [
+              {
+                text: 'Home Assistant & Z2M',
+                href: getPermalink('/developers/ha'),
+                desc: 'Config guides & automations',
+              },
+              {
+                text: 'SDKs & Libraries',
+                href: getPermalink('/developers/sdks'),
+                desc: 'Python, Node.js, Java, C# clients',
+              },
+            ],
+          },
+          {
+            label: 'Resources',
+            items: [
+              {
+                text: 'Code Examples',
+                href: getPermalink('/developers/examples'),
+                desc: 'MQTT, REST API & OTA snippets',
+              },
+              {
+                text: 'Firmware Changelog',
+                href: getPermalink('/developers/changelog'),
+                desc: 'Version history for OWON devices',
+              },
+            ],
+          },
+        ],
+      },
     },
     {
       text: 'About',
@@ -60,7 +249,7 @@ export const footerData = {
         { text: 'Smart Thermostats', href: getPermalink('/products?dim=type&type=thermostats') },
         { text: 'Hotel Control', href: getPermalink('/products?dim=type&type=hotel-control') },
         { text: 'Senior Care', href: getPermalink('/products?dim=type&type=senior-care') },
-        { text: 'Software & Platforms', href: getPermalink('/products?dim=type&type=software-platforms') },
+        { text: 'Gateways', href: getPermalink('/products?dim=type&type=gateways') },
         { text: 'All Products →', href: getPermalink('/products') },
       ],
     },
