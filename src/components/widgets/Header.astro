@@ -274,7 +274,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     };
     const closeDelayed = () => {
       clearTimeout(timer);
-      timer = window.setTimeout(close, 150);
+      timer = window.setTimeout(close, 250);
     };
 
     li.addEventListener('mouseenter', open);

@@ -161,15 +161,15 @@
     @apply bg-gray-900 text-white dark:bg-slate-100 dark:text-gray-900;
   }
   .chip-idle {
-    @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
+    @apply text-gray-600 dark:text-slate-300 bg-gray-100 dark:bg-slate-700/60 hover:bg-gray-200 dark:hover:bg-slate-600/60;
   }
   /* Intelligence/Connection tags — kept quiet (same idle look) so the filter
      row stays single-color; group labels carry the meaning. */
   .chip-blue {
-    @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
+    @apply text-gray-600 dark:text-slate-300 bg-gray-100 dark:bg-slate-700/60 hover:bg-gray-200 dark:hover:bg-slate-600/60;
   }
   .chip-green {
-    @apply text-gray-600 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-slate-700;
+    @apply text-gray-600 dark:text-slate-300 bg-gray-100 dark:bg-slate-700/60 hover:bg-gray-200 dark:hover:bg-slate-600/60;
   }
 
   /* ============================================================
