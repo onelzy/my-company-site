@@ -27,6 +27,12 @@ const cfg = JSON.parse(readFileSync(wranglerPath, 'utf8'));
 const main = cfg.main ?? '';
 console.log('wrap-worker-entry: original main =', main);
 
+// Idempotency: if main already points at our wrapper, nothing to do.
+if (main.includes('owon-entry')) {
+  console.log('wrap-worker-entry: already wrapped, skip');
+  process.exit(0);
+}
+
 // Locate the real entry chunk. Candidates: main as written, or the
 // standard _worker.js/index.js output of @astrojs/cloudflare.
 let entryChunk = null;

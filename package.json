@@ -12,7 +12,7 @@
     "start": "astro dev",
     "prebuild": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs && node scripts/gen-content-data.mjs && node scripts/write-marker.mjs prebuild",
     "postinstall": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs && node scripts/write-marker.mjs postinstall",
-    "build": "npm run prebuild && astro build",
+    "build": "npm run prebuild && astro build && node scripts/wrap-worker-entry.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
