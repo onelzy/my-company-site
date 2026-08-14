@@ -25,9 +25,9 @@ const SECURITY_HEADERS: Record<string, string> = {
   'Content-Security-Policy':
     "default-src 'self'; " +
     "script-src 'self' 'unsafe-inline'; " +
-    "style-src 'self' 'unsafe-inline'; " +
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
     "img-src 'self' data: blob: https://documents.owon-iot.com; " +
-    "font-src 'self'; " +
+    "font-src 'self' https://fonts.gstatic.com; " +
     "connect-src 'self' https://api.github.com; " +
     'frame-src https://www.google.com https://www.youtube.com https://www.youtube-nocookie.com; ' +
     "frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; " +
