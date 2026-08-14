@@ -41,7 +41,7 @@ if (jsonc.includes('owon-entry')) {
 
 // Dump dist layout for diagnosis (GH log visible).
 function dumpDist(dir, prefix, out, depth) {
-  if (depth > 4 || out.length > 120) return;
+  if (depth > 4 || out.length > 200) return;
   let items;
   try { items = readdirSync(dir, { withFileTypes: true }); } catch { return; }
   for (const it of items) {
@@ -57,7 +57,9 @@ if (!existsSync(entryChunk)) {
   const out = [];
   dumpDist(dist, '', out, 0);
   console.log('dist listing: ' + out.length + ' entries');
-  console.log(out.slice(0, 80).join(' '));
+  console.log('L0: ' + out.slice(0, 70).join(' '));
+  console.log('L1: ' + out.slice(70, 140).join(' '));
+  console.log('L2: ' + out.slice(140).join(' '));
   try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=NOT-FOUND mode=' + mode + '\\n', 'utf8'); } catch {}
   process.exit(0);
 }
