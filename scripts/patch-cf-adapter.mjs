@@ -61,7 +61,8 @@ count += patch(join(dist, 'utils', 'handler.js'), [['createLocals(context);', 'c
 // middleware), so http://… and the apex host redirect for every route.
 count += patch(join(dist, 'utils', 'handler.js'), [
   [
-    `async function handle(request, env, context) {`,
+    `async function handle(request, env, context) {
+  if (isPrerender) {`,
     `async function handle(request, env, context) {
   {
     const url = new URL(request.url);
@@ -71,7 +72,8 @@ count += patch(join(dist, 'utils', 'handler.js'), [
       const status = request.method === 'GET' || request.method === 'HEAD' ? 301 : 308;
       return Response.redirect('https://www.owon-iot.com' + url.pathname + url.search, status);
     }
-  }`,
+  }
+  if (isPrerender) {`,
   ],
 ]) ? 1 : 0;
 
