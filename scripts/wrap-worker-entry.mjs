@@ -49,6 +49,15 @@ const wrapperPath = join(entryDir, 'owon-entry.js');
 const wrapper = readFileSync(templatePath, 'utf8').replace('__ENTRY__', entryName);
 writeFileSync(wrapperPath, wrapper, 'utf8');
 
+// Route every request through the Worker first; otherwise the CF
+// static-assets layer answers asset requests without running our
+// canonical-redirect wrapper at all.
+if (cfg.assets && typeof cfg.assets === 'object') {
+  cfg.assets.run_worker_first = ['/*'];
+} else {
+  cfg.assets = { run_worker_first: ['/*'] };
+}
+
 cfg.main = relative(dist, wrapperPath).split('\\').join('/');
 writeFileSync(wranglerPath, JSON.stringify(cfg, null, 2) + '\n', 'utf8');
 console.log('wrap-worker-entry: wrapped', entryName, '-> main =', cfg.main);
