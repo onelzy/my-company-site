@@ -49,8 +49,17 @@ if (jsonc.includes('owon-entry')) {
 const entryChunk = join(dist, '_worker.js', 'index.js');
 if (!existsSync(entryChunk)) {
   console.log('wrap-worker-entry: dist/_worker.js/index.js not found, skip');
+  try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=NOT-FOUND mode=' + mode + '\n', 'utf8'); } catch {}
   process.exit(0);
 }
+
+// Diagnostic: prove in the deployed output that this ran, and dump the
+// entry chunk tail so we can design a precise string injection later.
+try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=FOUND\n', 'utf8'); } catch {}
+const tail = readFileSync(entryChunk, 'utf8').slice(-400);
+console.log('wrap-worker-entry: index.js tail >>>');
+console.log(tail);
+console.log('<<< end tail');
 
 const wrapperPath = join(dirname(entryChunk), 'owon-entry.js');
 const template = readFileSync(join(root, 'scripts', 'owon-entry.template.js'), 'utf8')
