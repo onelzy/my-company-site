@@ -56,7 +56,26 @@ count += patch(join(dist, 'fetch.js'), [['createLocals(ctx)', 'createLocals(ctx,
 // 3. handler.js: prerender code path (belt and suspenders)
 count += patch(join(dist, 'utils', 'handler.js'), [['createLocals(context);', 'createLocals(context, env);']]) ? 1 : 0;
 
-console.log(count > 0 ? `✅ Patched Cloudflare adapter (${count}/3)` : '⏭️  Already patched');
+// 4. handler.js: canonical redirects at the Worker entry. Covers requests
+// served as static assets via ASSETS.fetch (prerendered pages bypass Astro
+// middleware), so http://… and the apex host redirect for every route.
+count += patch(join(dist, 'utils', 'handler.js'), [
+  [
+    `async function handle(request, env, context) {`,
+    `async function handle(request, env, context) {
+  {
+    const url = new URL(request.url);
+    const host = (request.headers.get('host') ?? '').toLowerCase();
+    const proto = (request.headers.get('x-forwarded-proto') ?? 'https').toLowerCase();
+    if (host === 'owon-iot.com' || proto === 'http') {
+      const status = request.method === 'GET' || request.method === 'HEAD' ? 301 : 308;
+      return Response.redirect('https://www.owon-iot.com' + url.pathname + url.search, status);
+    }
+  }`,
+  ],
+]) ? 1 : 0;
+
+console.log(count > 0 ? `✅ Patched Cloudflare adapter (${count}/4)` : '⏭️  Already patched');
 
 // Clear Vite's dependency pre-bundling cache so it picks up the patched files.
 // Without this, Vite uses the pre-patch cached bundle from node_modules/.vite.
