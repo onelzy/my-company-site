@@ -11,6 +11,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "prebuild": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs && node scripts/gen-content-data.mjs",
+    "postinstall": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs",
     "build": "npm run prebuild && astro build",
     "preview": "astro preview",
     "astro": "astro",
