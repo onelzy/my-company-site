@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "prebuild": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs && node scripts/gen-content-data.mjs && node scripts/write-marker.mjs prebuild",
+    "prebuild": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs && node scripts/gen-content-data.mjs && node scripts/write-marker.mjs prebuild && node scripts/wrap-worker-entry.mjs reset",
     "postinstall": "node scripts/patch-cf-adapter.mjs && node scripts/patch-keystatic-oauth.mjs && node scripts/write-marker.mjs postinstall",
     "build": "npm run prebuild && astro build && node scripts/wrap-worker-entry.mjs",
     "preview": "astro preview",

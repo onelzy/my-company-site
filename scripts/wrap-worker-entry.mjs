@@ -1,69 +1,63 @@
 #!/usr/bin/env node
 /**
- * Post-build: wrap the Cloudflare Worker entrypoint with canonical
- * redirects (apex -> www, http -> https) at the platform entry level.
+ * Wraps the Cloudflare Worker entrypoint with canonical redirects
+ * (apex -> www, http -> https) at the platform entry level.
  *
- * Runs from 'astro:build:done' after the adapter has produced
- * dist/wrangler.json and dist/_worker.js/*. The wrapper is placed next
- * to the real entry chunk and wrangler.json `main` is repointed at it.
- * No node_modules patching is involved, so CF build caching cannot
- * defeat it.
+ * CF Workers Builds reads the ROOT wrangler.jsonc (no main field).
+ * dist/wrangler.json does NOT exist in this setup. The adapter's vite
+ * build writes dist/_worker.js/index.js; the wrapper is added next to
+ * it AFTER astro build, then root wrangler.jsonc gets:
+ *   main: "dist/_worker.js/owon-entry.js"
+ *   assets.run_worker_first: ["/*"]
+ *
+ * Usage:
+ *   node scripts/wrap-worker-entry.mjs          # after astro build
+ *   node scripts/wrap-worker-entry.mjs reset    # before build (prebuild)
  */
 import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join, dirname, relative, basename } from 'path';
+import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
-const wranglerPath = join(dist, 'wrangler.json');
-const templatePath = join(root, 'scripts', 'owon-entry.template.js');
+const jsoncPath = join(root, 'wrangler.jsonc');
+const mode = process.argv[2] ?? 'wrap';
 
-if (!existsSync(wranglerPath)) {
-  console.log('wrap-worker-entry: dist/wrangler.json not found, skip');
+if (!existsSync(jsoncPath)) {
+  console.log('wrap-worker-entry: root wrangler.jsonc not found, skip');
   process.exit(0);
 }
 
-const cfg = JSON.parse(readFileSync(wranglerPath, 'utf8'));
-const main = cfg.main ?? '';
-console.log('wrap-worker-entry: original main =', main);
+const jsonc = readFileSync(jsoncPath, 'utf8');
 
-// Idempotency: if main already points at our wrapper, nothing to do.
-if (main.includes('owon-entry')) {
+if (mode === 'reset') {
+  if (jsonc.includes('owon-entry')) {
+    let cleaned = jsonc
+      .replace(/^\s*"main"\s*:\s*"[^"]*",\s*$/m, '')
+      .replace(/"assets"\s*:\s*\{\s*\n?\s*"run_worker_first"\s*:\s*\[[^\]]*\],/, '"assets": {');
+    writeFileSync(jsoncPath, cleaned, 'utf8');
+    console.log('wrap-worker-entry: reset wrangler.jsonc');
+  }
+  process.exit(0);
+}
+
+if (jsonc.includes('owon-entry')) {
   console.log('wrap-worker-entry: already wrapped, skip');
   process.exit(0);
 }
 
-// Locate the real entry chunk. Candidates: main as written, or the
-// standard _worker.js/index.js output of @astrojs/cloudflare.
-let entryChunk = null;
-const candidates = [
-  main ? join(dist, main) : null,
-  join(dist, '_worker.js', 'index.js'),
-];
-for (const c of candidates) {
-  if (c && existsSync(c)) { entryChunk = c; break; }
-}
-if (!entryChunk) {
-  console.log('wrap-worker-entry: entry chunk not found, skip');
+const entryChunk = join(dist, '_worker.js', 'index.js');
+if (!existsSync(entryChunk)) {
+  console.log('wrap-worker-entry: dist/_worker.js/index.js not found, skip');
   process.exit(0);
 }
 
-const entryDir = dirname(entryChunk);
-const entryName = basename(entryChunk);
-const wrapperPath = join(entryDir, 'owon-entry.js');
+const wrapperPath = join(dirname(entryChunk), 'owon-entry.js');
+const template = readFileSync(join(root, 'scripts', 'owon-entry.template.js'), 'utf8')
+  .replace('__ENTRY__', basename(entryChunk));
+writeFileSync(wrapperPath, template, 'utf8');
 
-const wrapper = readFileSync(templatePath, 'utf8').replace('__ENTRY__', entryName);
-writeFileSync(wrapperPath, wrapper, 'utf8');
-
-// Route every request through the Worker first; otherwise the CF
-// static-assets layer answers asset requests without running our
-// canonical-redirect wrapper at all.
-if (cfg.assets && typeof cfg.assets === 'object') {
-  cfg.assets.run_worker_first = ['/*'];
-} else {
-  cfg.assets = { run_worker_first: ['/*'] };
-}
-
-cfg.main = relative(dist, wrapperPath).split('\\').join('/');
-writeFileSync(wranglerPath, JSON.stringify(cfg, null, 2) + '\n', 'utf8');
-console.log('wrap-worker-entry: wrapped', entryName, '-> main =', cfg.main);
+const next = jsonc
+  .replace(/"assets"\s*:\s*\{/, '"main": "dist/_worker.js/owon-entry.js",\n  "assets": {\n    "run_worker_first": ["/*"],');
+writeFileSync(jsoncPath, next, 'utf8');
+console.log('wrap-worker-entry: wrapped -> main = dist/_worker.js/owon-entry.js');
