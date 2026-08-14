@@ -33,8 +33,8 @@ const jsonc = readFileSync(jsoncPath, 'utf8');
 if (mode === 'reset') {
   if (jsonc.includes('owon-entry')) {
     let cleaned = jsonc
-      .replace(/^\s*"main"\s*:\s*"[^"]*",\s*$/m, '')
-      .replace(/"assets"\s*:\s*\{\s*\n?\s*"run_worker_first"\s*:\s*\[[^\]]*\],/, '"assets": {');
+      .replace(/[\t ]*"main"\s*:\s*"[^"]*",?[\t ]*(?:\n|$)/g, '')
+      .replace(/"assets"\s*:\s*\{[\t ]*\n[\t ]*"run_worker_first"\s*:\s*\[[^\]]*\],[\t ]*\n/, '"assets": {\n');
     writeFileSync(jsoncPath, cleaned, 'utf8');
     console.log('wrap-worker-entry: reset wrangler.jsonc');
   }
