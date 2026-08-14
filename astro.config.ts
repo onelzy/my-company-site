@@ -20,6 +20,7 @@ import keystatic from '@keystatic/astro';
 import cloudflare from '@astrojs/cloudflare';
 
 import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
+import { execSync } from 'node:child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -44,6 +45,19 @@ export default defineConfig({
   // ================================================================
 
   integrations: [
+    // CF Workers Builds may run `astro build` directly (skipping the npm
+    // prebuild hook), so re-run the required build-time patches here.
+    // All three scripts are idempotent.
+    {
+      name: 'owon-build-patches',
+      hooks: {
+        'astro:build:start': () => {
+          for (const script of ['patch-cf-adapter.mjs', 'patch-keystatic-oauth.mjs', 'gen-content-data.mjs']) {
+            execSync('node scripts/' + script, { stdio: 'inherit' });
+          }
+        },
+      },
+    },
     react(),
     keystatic(),
     mdx(),
