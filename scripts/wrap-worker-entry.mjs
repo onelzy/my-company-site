@@ -3,18 +3,11 @@
  * Wraps the Cloudflare Worker entrypoint with canonical redirects
  * (apex -> www, http -> https) at the platform entry level.
  *
- * CF Workers Builds reads the ROOT wrangler.jsonc (no main field).
- * dist/wrangler.json does NOT exist in this setup. The adapter's vite
- * build writes dist/_worker.js/index.js; the wrapper is added next to
- * it AFTER astro build, then root wrangler.jsonc gets:
- *   main: "dist/_worker.js/owon-entry.js"
- *   assets.run_worker_first: ["/*"]
- *
  * Usage:
  *   node scripts/wrap-worker-entry.mjs          # after astro build
  *   node scripts/wrap-worker-entry.mjs reset    # before build (prebuild)
  */
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -46,16 +39,30 @@ if (jsonc.includes('owon-entry')) {
   process.exit(0);
 }
 
+// Dump dist layout for diagnosis (GH log visible).
+function dumpDist(dir, prefix, out, depth) {
+  if (depth > 4 || out.length > 120) return;
+  let items;
+  try { items = readdirSync(dir, { withFileTypes: true }); } catch { return; }
+  for (const it of items) {
+    const p = prefix + it.name;
+    if (it.isDirectory()) { out.push(p + '/'); dumpDist(join(dir, it.name), p + '/', out, depth + 1); }
+    else out.push(p);
+  }
+}
+
 const entryChunk = join(dist, '_worker.js', 'index.js');
 if (!existsSync(entryChunk)) {
   console.log('wrap-worker-entry: dist/_worker.js/index.js not found, skip');
-  try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=NOT-FOUND mode=' + mode + '\n', 'utf8'); } catch {}
+  const out = [];
+  dumpDist(dist, '', out, 0);
+  console.log('dist listing: ' + out.length + ' entries');
+  console.log(out.slice(0, 80).join(' '));
+  try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=NOT-FOUND mode=' + mode + '\\n', 'utf8'); } catch {}
   process.exit(0);
 }
 
-// Diagnostic: prove in the deployed output that this ran, and dump the
-// entry chunk tail so we can design a precise string injection later.
-try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=FOUND\n', 'utf8'); } catch {}
+try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=FOUND\\n', 'utf8'); } catch {}
 const tail = readFileSync(entryChunk, 'utf8').slice(-400);
 console.log('wrap-worker-entry: index.js tail >>>');
 console.log(tail);
