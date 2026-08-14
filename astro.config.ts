@@ -55,7 +55,6 @@ export default defineConfig({
           for (const script of ['patch-cf-adapter.mjs', 'patch-keystatic-oauth.mjs', 'gen-content-data.mjs']) {
             execSync('node scripts/' + script, { stdio: 'inherit' });
           }
-          execSync('node scripts/write-marker.mjs hook', { stdio: 'inherit' });
         },
 
       },
