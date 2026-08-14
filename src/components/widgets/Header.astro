@@ -11,13 +11,6 @@ import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
 import type { MenuLink } from '~/navigation';
 
-interface Link {
-  text?: string;
-  href?: string;
-  ariaLabel?: string;
-  icon?: string;
-}
-
 export interface Props {
   id?: string;
   links?: Array<MenuLink>;

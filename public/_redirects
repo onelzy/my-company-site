@@ -7,6 +7,3 @@
 /senior-care-monitoring-owon-case-study* /case-studies/senior-care-nursing-home/ 301
 /industrial-energy-submetering-owon-case-study* /case-studies/4g-clamp-meter-carbon/ 301
 /hotel-energy-savings-owon-case-study* /case-studies/hotel-room-management/ 301
-
-# Host canonicalization: apex -> www (edge-level; middleware covers the scheme upgrade)
-https://owon-iot.com/*                      https://www.owon-iot.com/:splat  301
