@@ -57,6 +57,9 @@ export default defineConfig({
           }
           execSync('node scripts/write-marker.mjs hook', { stdio: 'inherit' });
         },
+        'astro:build:done': () => {
+          execSync('node scripts/wrap-worker-entry.mjs', { stdio: 'inherit' });
+        },
       },
     },
     react(),
