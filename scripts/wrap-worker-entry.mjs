@@ -40,33 +40,43 @@ if (jsonc.includes('owon-entry')) {
 }
 
 // Dump dist layout for diagnosis (GH log visible).
-function dumpDist(dir, prefix, out, depth) {
-  if (depth > 4 || out.length > 200) return;
+function dumpDist(dir, prefix, out, depth, max) {
+  if (depth > 5 || out.length > max) return;
   let items;
   try { items = readdirSync(dir, { withFileTypes: true }); } catch { return; }
   for (const it of items) {
     const p = prefix + it.name;
-    if (it.isDirectory()) { out.push(p + '/'); dumpDist(join(dir, it.name), p + '/', out, depth + 1); }
+    if (it.isDirectory()) { out.push(p + '/'); dumpDist(join(dir, it.name), p + '/', out, depth + 1, max); }
     else out.push(p);
   }
 }
 
-const entryChunk = join(dist, '_worker.js', 'index.js');
-if (!existsSync(entryChunk)) {
-  console.log('wrap-worker-entry: dist/_worker.js/index.js not found, skip');
+const entryCandidates = [
+  join(dist, '_worker.js', 'index.js'),
+  join(dist, 'server', '_worker.js', 'index.js'),
+  join(dist, 'server', 'index.js'),
+]
+
+let entryChunk = null;
+for (const c of entryCandidates) {
+  if (existsSync(c)) { entryChunk = c; break; }
+}
+
+if (!entryChunk) {
+  console.log('wrap-worker-entry: entry chunk not found, skip');
   const out = [];
-  dumpDist(dist, '', out, 0);
-  console.log('dist listing: ' + out.length + ' entries');
-  console.log('L0: ' + out.slice(0, 70).join(' '));
-  console.log('L1: ' + out.slice(70, 140).join(' '));
-  console.log('L2: ' + out.slice(140).join(' '));
+  dumpDist(join(dist, 'server'), 'server/', out, 0, 90);
+  console.log('server listing: ' + out.length + ' entries');
+  console.log('S0: ' + out.slice(0, 45).join(' '));
+  console.log('S1: ' + out.slice(45, 90).join(' '));
   try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=NOT-FOUND mode=' + mode + '\\n', 'utf8'); } catch {}
   process.exit(0);
 }
 
 try { writeFileSync(join(dist, 'marker-wrap.txt'), 'wrap-ran entry=FOUND\\n', 'utf8'); } catch {}
+console.log('wrap-worker-entry: entry chunk = ' + entryChunk);
 const tail = readFileSync(entryChunk, 'utf8').slice(-400);
-console.log('wrap-worker-entry: index.js tail >>>');
+console.log('wrap-worker-entry: entry tail >>>');
 console.log(tail);
 console.log('<<< end tail');
 
