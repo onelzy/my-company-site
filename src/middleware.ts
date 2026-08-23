@@ -1,20 +1,16 @@
 /**
- * Edge middleware (runs for every request handled by the Cloudflare Worker).
+ * Edge middleware (runs for requests handled by the Astro SSR app).
  *
- * 1. Canonical redirects:
- *    - http://…            → https://www.owon-iot.com/…  (scheme upgrade;
- *      Cloudflare sets X-Forwarded-Proto to the client's real scheme)
- *    - https://owon-iot.com → https://www.owon-iot.com/…  (apex → www;
- *      belt-and-braces on top of the _redirects edge rule)
- *    301 for GET/HEAD, 308 for other methods so POST bodies survive.
+ * NOTE: prerendered pages are served straight from ASSETS and never reach this
+ * middleware — URL canonicalization (trailing slash, /index.html collapse,
+ * legacy aliases, apex -> www) lives in scripts/owon-entry.template.js, which
+ * runs for EVERY request at the platform level.
  *
- * 2. Security headers on every Worker-served response (HTML/API/SSR).
- *    Static assets (_astro/*, /images/*, …) bypass the Worker and are
- *    covered by public/_headers instead.
+ * 1. Security headers on every Worker-served response (HTML/API/SSR).
+ * 2. X-Robots-Tag: noindex on the Keystatic CMS UI (/keystatic*) so the
+ *    admin surface never enters Google's index.
  */
 import { defineMiddleware } from 'astro:middleware';
-
-const CANONICAL_HOST = 'www.owon-iot.com';
 
 const SECURITY_HEADERS: Record<string, string> = {
   'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
@@ -41,24 +37,11 @@ function applySecurityHeaders(response: Response): void {
 }
 
 export const onRequest = defineMiddleware(async (context, next) => {
-  const request = context.request;
-  const url = new URL(request.url);
-
-  const host = (request.headers.get('host') ?? '').toLowerCase();
-  const forwardedProto = (request.headers.get('x-forwarded-proto') ?? 'https').toLowerCase();
-
-  const isApex = host === 'owon-iot.com';
-  const isPlainHttp = forwardedProto === 'http';
-
-  if (isApex || isPlainHttp) {
-    const target = `https://${CANONICAL_HOST}${url.pathname}${url.search}`;
-    const status = request.method === 'GET' || request.method === 'HEAD' ? 301 : 308;
-    const response = await context.redirect(target, status);
-    applySecurityHeaders(response);
-    return response;
-  }
-
   const response = await next();
   applySecurityHeaders(response);
+  // Keep the Keystatic CMS admin surface out of the index.
+  if (context.url.pathname.startsWith('/keystatic')) {
+    response.headers.set('X-Robots-Tag', 'noindex, nofollow');
+  }
   return response;
 });
