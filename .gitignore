@@ -37,5 +37,5 @@ progress.log
 failed_urls.json
 extract_products.py
 scraped_products/
-scripts/
+/scripts/
 alibaba_cookies.json
