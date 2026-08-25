@@ -53,7 +53,6 @@ export const GET = async () => {
     ['/resources/faq/', 'weekly', '0.6'],
     ['/resources/videos/', 'monthly', '0.6'],
     ['/resources/app/', 'monthly', '0.6'],
-    ['/resources/brochures/', 'monthly', '0.6'],
     ['/case-studies/', 'weekly', '0.7'],
     ['/developers/', 'monthly', '0.8'],
     ['/developers/api/', 'monthly', '0.8'],
