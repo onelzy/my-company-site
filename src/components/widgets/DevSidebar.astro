@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  currentPage: 'overview' | 'mqtt' | 'api' | 'zigbee' | 'ha' | 'sdks' | 'examples' | 'changelog';
+  currentPage: 'overview' | 'mqtt' | 'api' | 'zigbee' | 'ha' | 'examples';
 }
 
 const { currentPage } = Astro.props;
@@ -20,30 +20,21 @@ const groups: SidebarGroup[] = [
   {
     label: 'Getting Started',
     children: [
-      { slug: 'overview', label: 'Overview', href: '/developers' },
-      { slug: 'mqtt', label: 'MQTT Quick Start', href: '/developers/mqtt' },
+      { slug: 'overview', label: 'Integration Overview', href: '/developers' },
+      { slug: 'examples', label: 'Samples', href: '/developers/examples' },
     ],
   },
   {
-    label: 'API Reference',
+    label: 'Methods',
     children: [
-      { slug: 'api', label: 'HTTP Server API', href: '/developers/api' },
-      { slug: 'zigbee', label: 'ZigBee Clusters', href: '/developers/zigbee' },
+      { slug: 'api', label: 'Method A · Server API', href: '/developers/api' },
+      { slug: 'mqtt', label: 'Method B · MQTT / TCP', href: '/developers/mqtt' },
+      { slug: 'zigbee', label: 'Method D · ZigBee', href: '/developers/zigbee' },
     ],
   },
   {
-    label: 'Integration',
-    children: [
-      { slug: 'ha', label: 'Home Assistant & Z2M', href: '/developers/ha' },
-      { slug: 'sdks', label: 'SDKs & Libraries', href: '/developers/sdks' },
-    ],
-  },
-  {
-    label: 'Resources',
-    children: [
-      { slug: 'examples', label: 'Code Examples', href: '/developers/examples' },
-      { slug: 'changelog', label: 'Firmware Changelog', href: '/developers/changelog' },
-    ],
+    label: 'Platforms',
+    children: [{ slug: 'ha', label: 'Home Assistant & Z2M', href: '/developers/ha' }],
   },
 ];
 ---

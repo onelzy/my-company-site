@@ -3,484 +3,221 @@ export const prerender = true;
 import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
 import { Icon } from 'astro-icon/components';
+
+const LBRACE = '{';
+const RBRACE = '}';
+
+const authCode = `# 1. Obtain an AccessToken  (valid 24h)
+POST {OWON_SERVER}/busproc/nt/agent/getaccesstoken
+Content-Type: application/json; charset=utf-8
+
+${LBRACE}
+  "agentId":  "your_agent_id",     # issued by OWON
+  "agentKey": "your_agent_key",    # issued by OWON
+  "ts": "586851710"                # seconds since 2000-01-01 00:00:00
+${RBRACE}
+
+# Response
+${LBRACE}
+  "code": "100",                   # 100 = success
+  "accessToken":  "...",           # use for the next 24 hours
+  "refreshToken": "...",           # use to renew without new credentials
+  "ts": "586851710"
+${RBRACE}
+
+# 2. Renew before expiry
+POST {OWON_SERVER}/busproc/nt/agent/refreshtoken
+${LBRACE} "agentId": "...", "refreshToken": "...", "ts": "..." ${RBRACE}`;
+
+const queryCode = `# Query the gateways belonging to an end-user account
+POST {OWON_SERVER}/busproc/agent/userGw
+${LBRACE}
+  "agentId": "...", "accessToken": "...",
+  "account": "user@example.com", "password": "***",
+  "pageno": 1, "pagesize": 10, "ts": "..."
+${RBRACE}
+
+# Response — one page of gateways
+${LBRACE}
+  "code": "100", "msg": "success",
+  "response": ${LBRACE}
+    "pageno": 1, "pagesize": 10, "total": 2,
+    "rows": [
+      ${LBRACE}
+        "mac": "ACDD11A...",        # gateway MAC = unique id
+        "name": "gateway1",
+        "online": 1,                 # 1 online / 0 offline
+        "gversion": "X3_HA_V2.5.10_20180417",
+        "devmodel": "X3",
+        "timezone": 8, "status": 1
+      ${RBRACE}
+    ]
+  ${RBRACE}
+${RBRACE}`;
+
+const sendCode = `# Send a command to a gateway (forwarded by OWON cloud)
+POST {OWON_SERVER}/busproc/agent/sendGwData
+${LBRACE}
+  "agentId": "...", "accessToken": "...",
+  "mac": "ACDD11A...",              # target gateway
+  "data": ${LBRACE} ... ${RBRACE},               # Gateway API command JSON
+  "ts": "..."
+${RBRACE}
+
+# Device telemetry uplink: provide a URL at onboarding —
+# the OWON server POSTs forwarded device data to it.`;
+
+const codes = [
+  ['100', 'Success'],
+  ['101', 'Failure'],
+  ['102', 'Requests too frequent / wrong account or password'],
+  ['103', 'agentKey or accessToken not valid'],
+  ['104', 'Account locked after 10 failed verifications (retry in 20 min)'],
+  ['106', 'accessToken expired — refresh it'],
+];
 ---
 
 <PageLayout
   metadata={{
-    title: 'HTTP Server API',
+    title: 'Method A — Cloud-to-Cloud Server API',
     description:
-      'REST API + server-side HTTPS integration for OWON IoT devices — device management, telemetry, webhooks, and OTA updates.',
+      'Integrate OWON devices through the OWON 6000 cloud: authenticate with agentId/agentKey, get a 24-hour accessToken, query gateways, send commands, and receive forwarded device data on your URL.',
   }}
 >
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex gap-8">
         <DevSidebar currentPage="api" />
-
-        <!-- Content -->
         <div class="flex-1 min-w-0">
-          <!-- Breadcrumb -->
           <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
             <a href="/" class="hover:text-primary transition-colors">Home</a>
             <span class="mx-2">/</span>
             <a href="/developers" class="hover:text-primary transition-colors">Developers</a>
             <span class="mx-2">/</span>
-            <span class="text-default dark:text-slate-200">HTTP Server API</span>
+            <span class="text-default dark:text-slate-200">Method A · Server API</span>
           </nav>
-          <!-- Mobile tabs -->
+
           <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
             <div class="flex gap-1.5 min-w-max pb-1">
-              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Overview</a>
-              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">MQTT Quick Start</a>
-              <a href="/developers/api" class="inline-flex shrink-0 chip chip-active no-underline">HTTP Server API</a>
-              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">ZigBee Clusters</a>
-              <a href="/developers/ha" class="inline-flex shrink-0 chip chip-idle no-underline">HA &amp; Z2M</a>
-              <a href="/developers/sdks" class="inline-flex shrink-0 chip chip-idle no-underline">SDKs</a>
-              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Examples</a>
-              <a href="/developers/changelog" class="inline-flex shrink-0 chip chip-idle no-underline">Changelog</a>
+              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Integration Overview</a>
+              <a href="/developers/api" class="inline-flex shrink-0 chip chip-active no-underline"
+                >Method A · Server API</a
+              >
+              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">Method B · MQTT/TCP</a
+              >
+              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">Method D · ZigBee</a
+              >
+              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Samples</a>
             </div>
           </div>
-          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">HTTP Server API</h1>
-          <p class="text-muted dark:text-slate-400 mb-8">
-            REST API + server-side HTTPS integration for OWON IoT devices — manage devices, query telemetry, trigger OTA
-            updates, and receive webhook events.
+
+          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">
+            Method A · Cloud-to-Cloud <span class="text-primary">Server API</span>
+          </h1>
+          <p class="text-muted dark:text-slate-400 mb-8 max-w-3xl">
+            Your server talks to the OWON 6000 cloud; the cloud talks to the gateways. Gateways keep their normal OWON
+            setup, and you get device data and control through a small set of HTTP/JSON endpoints — the fastest path to
+            production. If you need data to bypass the OWON cloud entirely, use
+            <a href="/developers/mqtt" class="text-primary underline">Method B</a> instead.
           </p>
 
-          <!-- NEW: Server Integration Overview -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Server Integration Overview</h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-6">
-              The OWON cloud platform can push real-time device events to your server via HTTPS webhooks. This enables
-              event-driven architectures without polling.
+          <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-5 mb-10">
+            <div class="flex flex-wrap items-center gap-3 text-sm">
+              <Icon name="tabler:route" class="w-5 h-5 text-primary" />
+              <span class="font-mono text-xs text-muted dark:text-slate-400">
+                Your devices → OWON Gateway → (socket) → OWON Cloud → (HTTP/JSON) → Your Server
+              </span>
+            </div>
+          </div>
+
+          <!-- Credentials -->
+          <section class="mb-10">
+            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">1 · Credentials &amp; Address</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4 leading-relaxed">
+              OWON issues each project an <span class="font-mono text-[13px]">agentId</span> and
+              <span class="font-mono text-[13px]">agentKey</span>, together with the server address for your deployment
+              (ask sales). Every request carries a timestamp in <em>seconds since 2000-01-01 00:00:00</em> — note the non-standard
+              epoch.
             </p>
-
-            <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 mb-6">
-              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Architecture</h3>
-              <div class="rounded bg-gray-50 dark:bg-slate-900/50 p-4 font-mono text-sm overflow-x-auto">
-                <p class="mb-1">
-                  <span class="text-green-600 dark:text-green-400">Device</span>
-                  <span class="text-gray-400">→ MQTT →</span>
-                  <span class="text-blue-600 dark:text-blue-400">OWON Cloud</span>
-                </p>
-                <p class="mb-1">
-                  <span class="text-blue-600 dark:text-blue-400">OWON Cloud</span>
-                  <span class="text-gray-400">→ HTTPS Webhook →</span>
-                  <span class="text-orange-600 dark:text-orange-400">Your Server</span>
-                </p>
-                <p>
-                  <span class="text-orange-600 dark:text-orange-400">Your Server</span>
-                  <span class="text-gray-400">→ HTTPS API →</span>
-                  <span class="text-blue-600 dark:text-blue-400">OWON Cloud</span>
-                </p>
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Registering a Webhook Callback URL</h3>
-              <p class="text-sm text-muted dark:text-slate-400 mb-3">
-                Configure your callback endpoint via the REST API or the OWON Cloud Console:
-              </p>
-              <div
-                class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto"
-              >
-                <p class="text-muted dark:text-slate-500 mb-1"># Register webhook</p>
-                <p class="text-default dark:text-slate-200 mb-1">POST /webhooks</p>
-                <p class="text-muted dark:text-slate-500 mb-1">{'{'}</p>
-                <p class="text-default dark:text-slate-200 mb-1">"url": "https://your-server.com/owon-webhook",</p>
-                <p class="text-default dark:text-slate-200 mb-1">
-                  "events": ["device.online", "device.offline", "device.data"],
-                </p>
-                <p class="text-default dark:text-slate-200 mb-1">"secret": "your-webhook-secret"</p>
-                <p class="text-muted dark:text-slate-500 mb-1">{'}'}</p>
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Webhook Event Types</h3>
-              <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                  <thead>
-                    <tr class="border-b border-gray-200 dark:border-slate-700">
-                      <th class="text-left py-2 pr-4 text-muted">Event</th>
-                      <th class="text-left py-2 pr-4 text-muted">Trigger</th>
-                      <th class="text-left py-2 text-muted">Frequency</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-default dark:text-slate-300">
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">device.online</td><td class="py-2 pr-4"
-                        >Device connects to MQTT broker</td
-                      ><td class="py-2">On connection</td></tr
-                    >
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">device.offline</td><td class="py-2 pr-4"
-                        >Device disconnects (clean or unclean)</td
-                      ><td class="py-2">On disconnect</td></tr
-                    >
-                    <tr
-                      ><td class="py-2 pr-4 font-mono">device.data</td><td class="py-2 pr-4"
-                        >Device publishes telemetry</td
-                      ><td class="py-2">Per report interval</td></tr
-                    >
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div class="mb-6">
-              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Webhook Payload Format</h3>
-              <div class="rounded-lg bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                <pre>{`{
-  "event": "device.data",
-  "device_id": "dev_7a3b9c",
-  "timestamp": "2026-07-10T08:30:00Z",
-  "data": {
-    "voltage": 220.5,
-    "current": 12.3,
-    "power": 2712.15,
-    "energy_kwh": 1847.6
-  }
-}`}</pre>
-              </div>
-            </div>
-
-            <div>
-              <h3 class="font-semibold mb-3 text-default dark:text-slate-200">Signature Verification</h3>
-              <p class="text-sm text-muted dark:text-slate-400 mb-3">
-                Every webhook request includes an <code class="bg-gray-100 dark:bg-slate-700 px-1 rounded"
-                  >X-OWON-Signature</code
-                > header. Verify using HMAC-SHA256 with your webhook secret:
-              </p>
-              <div
-                class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto"
-              >
-                <p class="text-default dark:text-slate-200"># Node.js example:</p>
-                <p class="text-default dark:text-slate-200">const crypto = require('crypto');</p>
-                <p class="text-default dark:text-slate-200">const sig = req.headers['x-owon-signature'];</p>
-                <p class="text-default dark:text-slate-200">const expected = crypto</p>
-                <p class="text-default dark:text-slate-200">.createHmac('sha256', secret)</p>
-                <p class="text-default dark:text-slate-200">.update(JSON.stringify(req.body))</p>
-                <p class="text-default dark:text-slate-200">.digest('hex');</p>
-                <p class="text-default dark:text-slate-200">
-                  if (sig !== expected) throw new Error('Invalid signature');
-                </p>
-              </div>
-            </div>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">
+              You also register a <span class="font-mono text-[13px]">callback URL</span>: the OWON server POSTs device
+              data forwarded from your gateways to that URL, so telemetry uplink and command downlink stay symmetric
+              with your own backend design.
+            </p>
           </section>
 
-          <!-- NEW: Debugging Application -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Debugging Application</h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-6">
-              The OWON API Debugger app lets you inspect MQTT traffic, test API endpoints, and simulate device data —
-              all from your mobile device.
-            </p>
-            <div class="grid gap-4 sm:grid-cols-2 mb-4">
-              <div
-                class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
-              >
-                <Icon name="tabler:brand-apple" class="w-8 h-8" />
-                <div>
-                  <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — iOS</h3>
-                  <p class="text-xs text-muted dark:text-slate-400 mb-2">
-                    MQTT monitor, API request builder, device simulator
-                  </p>
-                  <a href="#" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
-                    Download on App Store →
-                  </a>
-                </div>
-              </div>
-              <div
-                class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
-              >
-                <Icon name="tabler:robot" class="w-8 h-8" />
-                <div>
-                  <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — Android</h3>
-                  <p class="text-xs text-muted dark:text-slate-400 mb-2">
-                    MQTT monitor, API request builder, device simulator
-                  </p>
-                  <a href="#" class="inline-flex items-center gap-1 text-xs text-primary hover:underline font-medium">
-                    Download APK →
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4">
-              <h4 class="text-xs font-semibold uppercase text-muted mb-2">Debugger Screens</h4>
-              <ul class="text-sm text-default dark:text-slate-300 space-y-1 list-disc pl-4">
-                <li><strong>MQTT Monitor</strong> — Subscribe to topics and view live telemetry in real time</li>
-                <li><strong>API Request Builder</strong> — Construct and send REST API requests with your API key</li>
-                <li><strong>Device Simulator</strong> — Generate mock telemetry data to test your integration</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- EXISTING: Authentication -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Authentication</h2>
+          <!-- Auth flow -->
+          <section class="mb-10">
+            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">2 · Authentication</h2>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              All API requests require an API key in the <code class="bg-gray-100 dark:bg-slate-700 px-1 rounded"
-                >Authorization</code
-              > header. Keys are issued per project — contact our engineering team to obtain one.
+              Exchange agent credentials for an <span class="font-mono text-[13px]">accessToken</span> valid for 24 hours;
+              renew with the <span class="font-mono text-[13px]">refreshToken</span> before expiry.
             </p>
-            <div
-              class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm overflow-x-auto"
-            >
-              <p class="text-muted dark:text-slate-500 mb-1"># Every request must include:</p>
-              <p>
-                <span class="text-orange-600 dark:text-orange-400">Authorization:</span>
-                <span class="text-default dark:text-slate-200">Bearer YOUR_API_KEY</span>
-              </p>
-              <p>
-                <span class="text-orange-600 dark:text-orange-400">Content-Type:</span>
-                <span class="text-default dark:text-slate-200">application/json</span>
-              </p>
-            </div>
+            <pre
+              class="rounded-xl bg-slate-950 text-slate-100 text-[13px] leading-relaxed p-5 overflow-x-auto font-mono"><code>{authCode}</code></pre>
           </section>
 
-          <!-- EXISTING: Base URL -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Base URL</h2>
-            <div
-              class="rounded-lg bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 p-4 font-mono text-sm"
-            >
-              <p>
-                <span class="text-green-600 dark:text-green-400">https://</span><span
-                  class="text-default dark:text-slate-200">api.owon-iot.com/v1</span
-                >
-              </p>
-            </div>
+          <!-- Typical queries -->
+          <section class="mb-10">
+            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">3 · Query &amp; Control</h2>
+            <p class="text-sm text-muted dark:text-slate-400 mb-4">
+              Verify end-user accounts, page through their gateways (online state, firmware version, model), and send
+              Gateway API commands through the cloud:
+            </p>
+            <pre
+              class="rounded-xl bg-slate-950 text-slate-100 text-[13px] leading-relaxed p-5 overflow-x-auto font-mono mb-4"><code>{queryCode}</code></pre>
+            <pre
+              class="rounded-xl bg-slate-950 text-slate-100 text-[13px] leading-relaxed p-5 overflow-x-auto font-mono"><code>{sendCode}</code></pre>
           </section>
 
-          <!-- EXISTING: Device Endpoints -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-6 text-default dark:text-slate-200">Device Management</h2>
-
-            <!-- GET /devices -->
-            <div class="mb-8 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div
-                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
-              >
-                <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">GET</span>
-                <code class="text-sm font-mono text-default dark:text-slate-200">/devices</code>
-              </div>
-              <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">List all devices under your project.</p>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Query Parameters</h4>
-                <table class="w-full text-sm mb-4">
-                  <thead>
-                    <tr class="border-b border-gray-200 dark:border-slate-700">
-                      <th class="text-left py-2 pr-4 text-muted">Name</th>
-                      <th class="text-left py-2 pr-4 text-muted">Type</th>
-                      <th class="text-left py-2 text-muted">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-default dark:text-slate-300">
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">page</td><td class="py-2 pr-4">int</td><td class="py-2"
-                        >Page number (default: 1)</td
-                      ></tr
-                    >
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">limit</td><td class="py-2 pr-4">int</td><td class="py-2"
-                        >Items per page (default: 20, max: 100)</td
-                      ></tr
-                    >
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">type</td><td class="py-2 pr-4">string</td><td class="py-2"
-                        >Filter: <code>smart-meter</code>, <code>thermostat</code>, <code>sensor</code></td
-                      ></tr
-                    >
-                    <tr
-                      ><td class="py-2 pr-4 font-mono">status</td><td class="py-2 pr-4">string</td><td class="py-2"
-                        >Filter: <code>online</code>, <code>offline</code>, <code>all</code></td
-                      ></tr
-                    >
-                  </tbody>
-                </table>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 200</h4>
-                <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{`{
-  "data": [
-    {
-      "id": "dev_7a3b9c",
-      "name": "Office Meter A1",
-      "type": "smart-meter",
-      "status": "online",
-      "firmware": "2.1.4",
-      "last_seen": "2026-07-10T08:30:00Z"
-    }
-  ],
-  "total": 42,
-  "page": 1,
-  "limit": 20
-}`}</pre>
-                </div>
-              </div>
-            </div>
-
-            <!-- GET /devices/:id -->
-            <div class="mb-8 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div
-                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
-              >
-                <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">GET</span>
-                <code class="text-sm font-mono text-default dark:text-slate-200">/devices/:id</code>
-              </div>
-              <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">
-                  Get device details including current telemetry snapshot.
-                </p>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 200</h4>
-                <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{`{
-  "id": "dev_7a3b9c",
-  "name": "Office Meter A1",
-  "type": "smart-meter",
-  "status": "online",
-  "firmware": "2.1.4",
-  "telemetry": {
-    "voltage": 220.5,
-    "current": 12.3,
-    "power": 2712.15,
-    "energy_kwh": 1847.6,
-    "temperature": 34.2
-  },
-  "last_seen": "2026-07-10T08:30:00Z"
-}`}</pre>
-                </div>
-              </div>
-            </div>
-
-            <!-- POST /devices/:id/ota -->
-            <div class="mb-8 border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div
-                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
-              >
-                <span class="px-2 py-0.5 rounded text-xs font-bold bg-orange-500 text-white">POST</span>
-                <code class="text-sm font-mono text-default dark:text-slate-200">/devices/:id/ota</code>
-              </div>
-              <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">
-                  Trigger an OTA firmware update for a specific device.
-                </p>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Request Body</h4>
-                <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto mb-3">
-                  <pre>{`{
-  "firmware_version": "2.2.0",
-  "firmware_url": "https://firmware.owon-iot.com/v2.2.0.bin"
-}`}</pre>
-                </div>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 202</h4>
-                <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{`{
-  "ota_id": "ota_9f2e1a",
-  "device_id": "dev_7a3b9c",
-  "status": "pending",
-  "target_version": "2.2.0"
-}`}</pre>
-                </div>
-              </div>
-            </div>
-
-            <!-- GET /devices/:id/telemetry -->
-            <div class="border border-gray-200 dark:border-slate-700 rounded-xl overflow-hidden">
-              <div
-                class="flex items-center gap-3 px-4 py-3 bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700"
-              >
-                <span class="px-2 py-0.5 rounded text-xs font-bold bg-green-500 text-white">GET</span>
-                <code class="text-sm font-mono text-default dark:text-slate-200">/devices/:id/telemetry</code>
-              </div>
-              <div class="p-4">
-                <p class="text-sm text-muted dark:text-slate-400 mb-3">
-                  Query historical telemetry data with time range.
-                </p>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Query Parameters</h4>
-                <table class="w-full text-sm mb-4">
-                  <thead>
-                    <tr class="border-b border-gray-200 dark:border-slate-700">
-                      <th class="text-left py-2 pr-4 text-muted">Name</th>
-                      <th class="text-left py-2 pr-4 text-muted">Type</th>
-                      <th class="text-left py-2 text-muted">Description</th>
-                    </tr>
-                  </thead>
-                  <tbody class="text-default dark:text-slate-300">
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">from</td><td class="py-2 pr-4">ISO 8601</td><td class="py-2"
-                        >Start time (required)</td
-                      ></tr
-                    >
-                    <tr class="border-b border-gray-100 dark:border-slate-800"
-                      ><td class="py-2 pr-4 font-mono">to</td><td class="py-2 pr-4">ISO 8601</td><td class="py-2"
-                        >End time (default: now)</td
-                      ></tr
-                    >
-                    <tr
-                      ><td class="py-2 pr-4 font-mono">interval</td><td class="py-2 pr-4">string</td><td class="py-2"
-                        >Aggregation: <code>1m</code>, <code>15m</code>, <code>1h</code>, <code>1d</code></td
-                      ></tr
-                    >
-                  </tbody>
-                </table>
-                <h4 class="text-xs font-semibold uppercase text-muted mb-2">Response 200</h4>
-                <div class="rounded bg-gray-900 text-gray-100 p-4 font-mono text-xs overflow-x-auto">
-                  <pre>{`{
-  "device_id": "dev_7a3b9c",
-  "interval": "1h",
-  "data": [
-    { "ts": "2026-07-10T08:00:00Z", "power": 2710, "energy_kwh": 1847.6 },
-    { "ts": "2026-07-10T09:00:00Z", "power": 2685, "energy_kwh": 1850.3 }
-  ]
-}`}</pre>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- EXISTING: Rate Limits -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">Rate Limits</h2>
-            <div class="overflow-x-auto">
+          <!-- Response codes -->
+          <section class="mb-10">
+            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">4 · Response Codes</h2>
+            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-700">
               <table class="w-full text-sm">
-                <thead>
-                  <tr class="border-b border-gray-200 dark:border-slate-700">
-                    <th class="text-left py-2 pr-4 text-muted">Tier</th>
-                    <th class="text-left py-2 pr-4 text-muted">Requests / min</th>
-                    <th class="text-left py-2 text-muted">Burst</th>
-                  </tr>
-                </thead>
-                <tbody class="text-default dark:text-slate-300">
-                  <tr class="border-b border-gray-100 dark:border-slate-800"
-                    ><td class="py-2 pr-4">Standard</td><td class="py-2 pr-4">120</td><td class="py-2">20</td></tr
-                  >
-                  <tr class="border-b border-gray-100 dark:border-slate-800"
-                    ><td class="py-2 pr-4">Enterprise</td><td class="py-2 pr-4">600</td><td class="py-2">50</td></tr
-                  >
-                  <tr
-                    ><td class="py-2 pr-4">Custom</td><td class="py-2 pr-4" colspan="2"
-                      >Contact us for dedicated rate limits</td
-                    ></tr
-                  >
+                <tbody>
+                  {
+                    codes.map(([c, d]) => (
+                      <tr class="border-b border-gray-100 dark:border-slate-700/60 last:border-0">
+                        <td class="py-2.5 px-4 font-mono text-primary whitespace-nowrap">{c}</td>
+                        <td class="py-2.5 px-4 text-muted dark:text-slate-300">{d}</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
           </section>
 
-          <!-- EXISTING: Contact CTA -->
-          <div class="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
-            <p class="text-default dark:text-slate-200 font-medium mb-2">
-              Need API access or custom integration support?
+          <!-- Full doc CTA -->
+          <section
+            class="mb-4 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 p-6"
+          >
+            <h2 class="text-lg font-semibold mb-2 text-default dark:text-slate-100">
+              Full Server API Document on Request
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">
+              The complete specification — every command, field-by-field payload tables, data-forwarding format, OTA and
+              gateway-management functions, and worked examples — is delivered as an official document along with your
+              agentId/agentKey when a project starts.
             </p>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              Our engineering team can provision API keys and provide dedicated onboarding.
-            </p>
-            <a
-              href="/contact"
-              class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm"
-            >
-              Contact Engineering Team →
-            </a>
-          </div>
+            <div class="flex flex-wrap gap-3">
+              <a
+                href="/contact"
+                class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 transition-colors no-underline text-sm"
+              >
+                <Icon name="tabler:mail" class="w-4 h-4" /> Request Server API Document
+              </a>
+              <a
+                href="https://wa.me/8618650139895"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-2 rounded-full border border-primary/40 text-primary hover:bg-primary/5 dark:hover:bg-primary/10 font-medium px-6 py-2.5 transition-colors no-underline text-sm"
+              >
+                <Icon name="tabler:brand-whatsapp" class="w-4 h-4" /> WhatsApp
+              </a>
+            </div>
+          </section>
         </div>
       </div>
     </div>

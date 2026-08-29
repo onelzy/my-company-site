@@ -218,7 +218,9 @@
       // error inline so the visitor always gets feedback.
       var btn = document.getElementById('lead-modal-submit');
       if (btn) {
-        var cfg2 = SCENARIO_CONFIG[(e && e.target && e.target._config && e.target._config.scenario) || 'price'] || SCENARIO_CONFIG.price;
+        var cfg2 =
+          SCENARIO_CONFIG[(e && e.target && e.target._config && e.target._config.scenario) || 'price'] ||
+          SCENARIO_CONFIG.price;
         btn.disabled = false;
         btn.textContent = cfg2.submitLabel;
       }

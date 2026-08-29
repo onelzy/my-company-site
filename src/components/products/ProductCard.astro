@@ -77,7 +77,12 @@ const fullName = modelDisplay ? `${modelDisplay} ${product.name}`.trim() : produ
       </h3>
       {
         modelDisplay && (
-          <p class:list={['text-muted dark:text-slate-400', compact ? 'text-[10px] line-clamp-1' : 'text-[11px] line-clamp-1']}>
+          <p
+            class:list={[
+              'text-muted dark:text-slate-400',
+              compact ? 'text-[10px] line-clamp-1' : 'text-[11px] line-clamp-1',
+            ]}
+          >
             {product.name}
           </p>
         )

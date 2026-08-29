@@ -168,13 +168,12 @@ export const headerData = {
       text: 'Developers',
       href: getPermalink('/developers'),
       links: [
-        { text: 'Developer Center', href: getPermalink('/developers') },
-        { text: 'HTTP Server API', href: getPermalink('/developers/api') },
-        { text: 'ZigBee Clusters', href: getPermalink('/developers/zigbee') },
-        { text: 'MQTT Quick Start', href: getPermalink('/developers/mqtt') },
-        { text: 'SDKs & Libraries', href: getPermalink('/developers/sdks') },
+        { text: 'Integration Overview', href: getPermalink('/developers') },
+        { text: 'Method A · Server API', href: getPermalink('/developers/api') },
+        { text: 'Method B · MQTT / TCP', href: getPermalink('/developers/mqtt') },
+        { text: 'Method D · ZigBee', href: getPermalink('/developers/zigbee') },
         { text: 'Home Assistant', href: getPermalink('/developers/ha') },
-        { text: 'Code Examples', href: getPermalink('/developers/examples') },
+        { text: 'Samples', href: getPermalink('/developers/examples') },
       ],
       mega: {
         width: 620,
@@ -183,52 +182,45 @@ export const headerData = {
           {
             label: 'Getting Started',
             items: [
-              { text: 'Overview', href: getPermalink('/developers'), desc: 'API, SDKs, MQTT & integration guides' },
               {
-                text: 'MQTT Quick Start',
-                href: getPermalink('/developers/mqtt'),
-                desc: 'Connect gateways, WiFi & 4G devices',
+                text: 'Integration Overview',
+                href: getPermalink('/developers'),
+                desc: 'Four proven ways to connect OWON devices',
+              },
+              {
+                text: 'Samples',
+                href: getPermalink('/developers/examples'),
+                desc: 'Real command, telemetry & heartbeat flows',
               },
             ],
           },
           {
-            label: 'API Reference',
+            label: 'Methods',
             items: [
               {
-                text: 'HTTP Server API',
+                text: 'Method A · Server API',
                 href: getPermalink('/developers/api'),
-                desc: 'Device management, telemetry, webhooks',
+                desc: 'Cloud-to-cloud HTTP/JSON with OWON 6000',
               },
-              { text: 'ZigBee Clusters', href: getPermalink('/developers/zigbee'), desc: 'ZCL specs for OWON devices' },
+              {
+                text: 'Method B · MQTT / TCP',
+                href: getPermalink('/developers/mqtt'),
+                desc: 'Gateway straight to your own server',
+              },
+              {
+                text: 'Method D · ZigBee',
+                href: getPermalink('/developers/zigbee'),
+                desc: 'OWON devices on your coordinator',
+              },
             ],
           },
           {
-            label: 'Integration',
+            label: 'Platforms',
             items: [
               {
                 text: 'Home Assistant & Z2M',
                 href: getPermalink('/developers/ha'),
-                desc: 'Config guides & automations',
-              },
-              {
-                text: 'SDKs & Libraries',
-                href: getPermalink('/developers/sdks'),
-                desc: 'Python, Node.js, Java, C# clients',
-              },
-            ],
-          },
-          {
-            label: 'Resources',
-            items: [
-              {
-                text: 'Code Examples',
-                href: getPermalink('/developers/examples'),
-                desc: 'MQTT, REST API & OTA snippets',
-              },
-              {
-                text: 'Firmware Changelog',
-                href: getPermalink('/developers/changelog'),
-                desc: 'Version history for OWON devices',
+                desc: 'Pairing, entities & per-model support',
               },
             ],
           },
@@ -281,13 +273,12 @@ export const footerData = {
     {
       title: 'Developers',
       links: [
-        { text: 'Developer Center', href: getPermalink('/developers') },
-        { text: 'HTTP Server API', href: getPermalink('/developers/api') },
-        { text: 'ZigBee Clusters', href: getPermalink('/developers/zigbee') },
-        { text: 'MQTT Quick Start', href: getPermalink('/developers/mqtt') },
-        { text: 'SDKs & Libraries', href: getPermalink('/developers/sdks') },
+        { text: 'Integration Overview', href: getPermalink('/developers') },
+        { text: 'Method A · Server API', href: getPermalink('/developers/api') },
+        { text: 'Method B · MQTT / TCP', href: getPermalink('/developers/mqtt') },
+        { text: 'Method D · ZigBee', href: getPermalink('/developers/zigbee') },
         { text: 'Home Assistant', href: getPermalink('/developers/ha') },
-        { text: 'Code Examples', href: getPermalink('/developers/examples') },
+        { text: 'Samples', href: getPermalink('/developers/examples') },
       ],
     },
     {

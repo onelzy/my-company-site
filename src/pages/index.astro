@@ -589,19 +589,29 @@ const formatDate = (date) => {
         {
           [
             {
-              method: 'GET',
-              path: '/api/v2/devices',
-              title: 'REST API',
-              desc: 'JSON. Token auth. Pagination. Webhooks.',
+              method: 'HTTP',
+              path: '/busproc/nt/agent/getaccesstoken',
+              title: 'Method A · Server API',
+              desc: 'Cloud-to-cloud with OWON 6000. agentId + 24h token.',
             },
             {
-              method: 'PUB',
-              path: 'devices/+/telemetry',
-              title: 'MQTT',
-              desc: '3.1.1 / 5.0. Per-topic ACLs. QoS 0-2.',
+              method: 'MQTT',
+              path: 'device/{gateway}/report',
+              title: 'Method B · Your Server',
+              desc: 'Gateway publishes straight to your broker or TCP socket.',
             },
-            { method: 'SDK', path: 'pip install owon-sdk', title: 'SDKs', desc: 'Python. Node.js. Java. Embedded C.' },
-            { method: 'POST', path: '/api/v2/alerts', title: 'Webhooks', desc: 'Real-time push. Configurable events.' },
+            {
+              method: 'ZCL',
+              path: 'your coordinator · Z2M · HA',
+              title: 'Method D · ZigBee',
+              desc: 'Devices join your own ZigBee network.',
+            },
+            {
+              method: 'DOC',
+              path: 'request the integration pack',
+              title: 'Full Docs on Request',
+              desc: 'API spec, topic list, 90+ model table.',
+            },
           ].map((item) => (
             <div class="rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:border-primary/30 hover:shadow-sm transition-all group">
               <div class="flex items-center gap-3 mb-4">

@@ -127,7 +127,7 @@ const metadata = {
                   href={`/products/${p.slug}/`}
                   class="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 dark:border-slate-600 text-sm font-medium text-default dark:text-slate-200 hover:border-primary hover:text-primary transition-colors"
                 >
-                  {(p.model && p.name) ? `${p.model} ${p.name}` : (p.model || p.name)}
+                  {p.model && p.name ? `${p.model} ${p.name}` : p.model || p.name}
                 </a>
               ))}
             </div>

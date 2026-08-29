@@ -294,8 +294,8 @@ const protocolAnswer = isTuyaWifi
   : `This model supports ${productProtocol || prodComm || 'standard communication protocols'}.`;
 
 const integrationAnswer = prodEco
-  ? `Yes. ${prodEco} compatibility enables integration with most energy management platforms. Custom SDK available for advanced integration.`
-  : 'Yes. Standard protocol integration with major building and energy management systems. Custom SDK available.';
+  ? `Yes. ${prodEco} compatibility enables integration with most energy management platforms. Server API and Gateway API documentation available on request.`
+  : 'Yes. Standard protocol integration with major building and energy management systems. Server API and Gateway API documentation available on request.';
 
 const cloudAnswer = isTuyaWifi
   ? 'No — fully local operation. Remote monitoring available via the Tuya Smart / Smart Life app. WiFi required for cloud connectivity.'
@@ -337,7 +337,7 @@ const faqItems = (() => {
     ],
     'software-platforms': [
       {q:'Is the platform white-label ready?', a:'Yes. Custom branding, domains, white-label apps, and tailored UI for OEM/ODM partners.'},
-      {q:'What APIs are available?', a:'REST API, MQTT broker, WebSocket streaming, webhooks. SDKs for Python, Node.js, Java, embedded C.'},
+      {q:'What APIs are available?', a:'Cloud-to-cloud Server API (HTTP/JSON) and direct MQTT Gateway API, plus devices that publish straight to your own broker. Full API documentation is provided on request.'},
       {q:'Is it cloud-based or on-premise?', a:'Both. EdgeEco Cloud (multi-tenant SaaS) and EdgeEco On-Premise for air-gapped environments.'},
       {q:'Can I manage devices from other brands?', a:'Yes. Multi-vendor device management via MQTT and Modbus. Contact us for specific compatibility.'},
     ],
@@ -1027,7 +1027,7 @@ const faqSchema = {
                   ],
                   'software-platforms': [
                     {icon: 'cloud', title:'Cloud-Native', desc:'Scalable IoT platform with multi-tenant architecture for B2B deployments.'},
-                    {icon: 'link', title:'Open API', desc:'RESTful APIs, MQTT bridges, and WebSocket streaming for seamless integration.'},
+                    {icon: 'link', title:'Open API', desc:'Server API (HTTP/JSON) and MQTT Gateway API for third-party platform integration.'},
                     {icon: 'chart-bar', title:'Data Analytics', desc:'Real-time dashboards, historical reports, and exportable data for business intelligence.'},
                     {icon: 'palette', title:'White-Label Ready', desc:'Custom branding, custom domains, and tailored UI for your business identity.'},
                   ],
@@ -1740,7 +1740,7 @@ const faqSchema = {
                   ],
                   'software-platforms': [
                     {q:'Is the platform white-label ready?', a:'Yes. EdgeEco supports custom branding, custom domains, white-label mobile apps, and tailored UI for OEM/ODM partners.'},
-                    {q:'What APIs are available?', a:'Full REST API, MQTT broker integration, WebSocket streaming, and webhook support. SDKs available for Python, Node.js, Java, and embedded C.'},
+                    {q:'What APIs are available?', a:'Cloud-to-cloud Server API (HTTP/JSON), MQTT Gateway API and direct-to-broker device integration. Full API documentation is provided on request.'},
                     {q:'Is it cloud-based or on-premise?', a:'Both. EdgeEco Cloud is a multi-tenant SaaS platform. EdgeEco On-Premise can be deployed on your own servers for air-gapped or regulated environments.'},
                     {q:'Can I manage devices from other brands?', a:'EdgeEco supports multi-vendor device management via MQTT and Modbus. Contact us for specific third-party device compatibility.'},
                   ],

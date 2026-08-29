@@ -2,98 +2,38 @@
 export const prerender = true;
 import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
 
-const z2mConfig = `# Zigbee2MQTT configuration.yaml
-# File: /opt/zigbee2mqtt/data/configuration.yaml
-
-homeassistant: true
-permit_join: false
+const z2mConfig = `# Zigbee2MQTT — configuration.yaml (standard setup)
+# Works with any supported coordinator: ConBee II, Sonoff
+# ZBDongle-P, CC2531, OpenZigbee, etc.
 
 mqtt:
-  base_topic: zigbee2mqtt
   server: mqtt://localhost:1883
-
 serial:
-  port: /dev/ttyUSB0  # Your ZigBee coordinator
+  port: /dev/ttyUSB0
   adapter: zstack
+frontend: true
 
-advanced:
-  log_level: info
-  channel: 11
+# Pair an OWON device the normal Z2M way:
+# permit_join: true, then factory-reset the device and
+# let it search for a network.`;
 
-# OWON devices use standard ZCL clusters
-# No custom converter needed — auto-supported
+const haNote = `# Once a device is paired in Zigbee2MQTT, its published
+# topics feed Home Assistant through Z2M's MQTT discovery —
+# entities appear automatically for every device Z2M
+# supports out of the box.
 
-# Device pairing:
-# 1. Set permit_join: true in Zigbee2MQTT
-# 2. Hold OWON device reset button for 5 seconds
-# 3. Device auto-detects and appears in HA`;
-
-const haConfig = `# Home Assistant configuration.yaml
-# OWON Smart Meter (via Zigbee2MQTT)
-
-mqtt:
-  broker: localhost
-  port: 1883
-
-# After device is paired via Zigbee2MQTT, it auto-discovers
-# Manual sensor template (if needed):
-sensor:
-  - name: "OWON Meter Power"
-    state_topic: "zigbee2mqtt/OWON_METER_A1"
-    value_template: "{{ value_json.power }}"
-    unit_of_measurement: "W"
-    device_class: power
-
-  - name: "OWON Meter Energy"
-    state_topic: "zigbee2mqtt/OWON_METER_A1"
-    value_template: "{{ value_json.energy }}"
-    unit_of_measurement: "kWh"
-    device_class: energy
-
-  - name: "OWON Meter Voltage"
-    state_topic: "zigbee2mqtt/OWON_METER_A1"
-    value_template: "{{ value_json.voltage }}"
-    unit_of_measurement: "V"
-    device_class: voltage`;
-
-const thermostatHA = `# Home Assistant automation — OWON Thermostat (PCT513)
-# After pairing via Zigbee2MQTT, the thermostat exposes:
-#   climate.owon_pct513 — thermostat entity
-#   sensor.owon_pct513_temperature — local temp
-#   sensor.owon_pct513_humidity — humidity (if equipped)
-
-automation:
-  - alias: "Night setback"
-    trigger:
-      - platform: time
-        at: "22:00:00"
-    action:
-      - service: climate.set_temperature
-        target:
-          entity_id: climate.owon_pct513
-        data:
-          temperature: 18
-          hvac_mode: heat
-
-  - alias: "Morning warm-up"
-    trigger:
-      - platform: time
-        at: "06:30:00"
-    action:
-      - service: climate.set_temperature
-        target:
-          entity_id: climate.owon_pct513
-        data:
-          temperature: 22
-          hvac_mode: heat`;
+# For OWON models that need a custom converter (non-standard
+# attributes), our engineering team supplies the converter
+# file + mapping notes with the Device Cluster List.`;
 ---
 
 <PageLayout
   metadata={{
     title: 'Home Assistant & Zigbee2MQTT',
     description:
-      'Integrate OWON ZigBee devices with Home Assistant and Zigbee2MQTT — configuration guides and automation examples.',
+      'Run OWON ZigBee 3.0 devices with Home Assistant via Zigbee2MQTT: standard pairing flow, what auto-discovery covers, and where to get device-specific converter files for OWON models.',
   }}
 >
   <section class="py-12">
@@ -111,132 +51,87 @@ automation:
             <span class="mx-2">/</span>
             <span class="text-default dark:text-slate-200">Home Assistant &amp; Zigbee2MQTT</span>
           </nav>
-          <!-- Mobile tabs -->
           <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
             <div class="flex gap-1.5 min-w-max pb-1">
-              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Overview</a>
-              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">MQTT Quick Start</a>
-              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline">HTTP Server API</a>
-              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">ZigBee Clusters</a>
-              <a href="/developers/ha" class="inline-flex shrink-0 chip chip-active no-underline">HA &amp; Z2M</a>
-              <a href="/developers/sdks" class="inline-flex shrink-0 chip chip-idle no-underline">SDKs</a>
-              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Examples</a>
-              <a href="/developers/changelog" class="inline-flex shrink-0 chip chip-idle no-underline">Changelog</a>
+              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Integration Overview</a>
+              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline"
+                >Method A · Server API</a
+              >
+              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">Method B · MQTT/TCP</a
+              >
+              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">Method D · ZigBee</a
+              >
+              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Samples</a>
             </div>
           </div>
           <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">Home Assistant &amp; Zigbee2MQTT</h1>
           <p class="text-muted dark:text-slate-400 mb-8">
-            Integrate OWON ZigBee devices with Home Assistant via Zigbee2MQTT — zero custom converters needed.
+            OWON ZigBee devices join your Home Assistant setup through Zigbee2MQTT (the device side of
+            <a href="/developers/zigbee" class="text-primary underline">Method D</a>). This page covers the pairing
+            flow, what you get out of the box, and what we supply per model.
           </p>
 
           <div
-            class="mb-8 p-5 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700"
+            class="mb-8 p-5 rounded-xl bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700"
           >
-            <p class="text-sm text-green-800 dark:text-green-200">
-              <strong>Plug and play.</strong> OWON ZigBee 3.0 devices use standard ZCL clusters and are auto-discovered by
-              Zigbee2MQTT. No custom converters or manual device definitions required.
+            <p class="text-sm text-yellow-800 dark:text-yellow-200">
+              <strong>Honest version.</strong> OWON ZigBee devices are ZigBee 3.0 / ZCL-compliant, which is what Zigbee2MQTT
+              expects — devices using standard clusters (On/Off, Metering, Thermostat, Temperature…) pair and publish through
+              stock converters. A few OWON models expose manufacturer-specific attributes; for those we provide the custom-converter
+              file and attribute mapping with the official Device Cluster List.
             </p>
           </div>
 
-          <!-- Supported Devices -->
+          <!-- Pairing -->
           <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">1. Supported Devices</h2>
-            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-700">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
-                    <th class="text-left py-3 px-4 text-muted">Model</th>
-                    <th class="text-left py-3 px-4 text-muted">Type</th>
-                    <th class="text-left py-3 px-4 text-muted">HA Entity</th>
-                    <th class="text-left py-3 px-4 text-muted">Z2M Status</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-slate-800 text-default dark:text-slate-300">
-                  <tr class="border-b border-gray-100 dark:border-slate-700">
-                    <td class="py-3 px-4 font-medium">PC321-TY</td>
-                    <td class="py-3 px-4 text-muted dark:text-slate-400">Smart Meter</td>
-                    <td class="py-3 px-4 font-mono text-xs">sensor.*</td>
-                    <td class="py-3 px-4"
-                      ><span class="text-green-600 dark:text-green-400 font-medium">Auto-discovered</span></td
-                    >
-                  </tr>
-                  <tr class="border-b border-gray-100 dark:border-slate-700">
-                    <td class="py-3 px-4 font-medium">PC341-3M16S</td>
-                    <td class="py-3 px-4 text-muted dark:text-slate-400">Multi-Circuit Monitor</td>
-                    <td class="py-3 px-4 font-mono text-xs">sensor.* (x19)</td>
-                    <td class="py-3 px-4"
-                      ><span class="text-green-600 dark:text-green-400 font-medium">Auto-discovered</span></td
-                    >
-                  </tr>
-                  <tr class="border-b border-gray-100 dark:border-slate-700">
-                    <td class="py-3 px-4 font-medium">PCT513</td>
-                    <td class="py-3 px-4 text-muted dark:text-slate-400">Thermostat</td>
-                    <td class="py-3 px-4 font-mono text-xs">climate.*</td>
-                    <td class="py-3 px-4"
-                      ><span class="text-green-600 dark:text-green-400 font-medium">Auto-discovered</span></td
-                    >
-                  </tr>
-                  <tr>
-                    <td class="py-3 px-4 font-medium">SPM-915</td>
-                    <td class="py-3 px-4 text-muted dark:text-slate-400">Sleep Monitor</td>
-                    <td class="py-3 px-4 font-mono text-xs">sensor.*, binary_sensor.*</td>
-                    <td class="py-3 px-4"
-                      ><span class="text-green-600 dark:text-green-400 font-medium">Auto-discovered</span></td
-                    >
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- Zigbee2MQTT Setup -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">2. Zigbee2MQTT Configuration</h2>
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">1. Pairing</h2>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              Standard Zigbee2MQTT setup with any supported ZigBee coordinator (CC2531, CC2652, ConBee II, Sonoff
-              ZBDongle, etc.).
+              Standard Zigbee2MQTT setup with any supported ZigBee coordinator (ConBee II, Sonoff ZBDongle, CC2531, …) —
+              no OWON account, cloud or gateway required:
             </p>
             <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
               <pre>{z2mConfig}</pre>
             </div>
           </section>
 
-          <!-- HA MQTT Sensor Config -->
+          <!-- Entities -->
           <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">3. Home Assistant MQTT Sensors</h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              After pairing, Zigbee2MQTT publishes device data to MQTT. Home Assistant auto-discovers entities via MQTT
-              discovery. Manual templates are only needed for custom dashboards.
-            </p>
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">2. Entities in Home Assistant</h2>
             <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
-              <pre>{haConfig}</pre>
+              <pre>{haNote}</pre>
             </div>
+            <p class="text-sm text-muted dark:text-slate-400 mt-4">
+              Typical entity shapes by family: meters → <span class="font-mono text-[13px]">sensor.*</span> (voltage, current,
+              power, energy), thermostats → <span class="font-mono text-[13px]">climate.*</span>, plugs/switches → <span
+                class="font-mono text-[13px]">switch.*</span
+              >, sensors →
+              <span class="font-mono text-[13px]">sensor.*</span> / <span class="font-mono text-[13px]"
+                >binary_sensor.*</span
+              >.
+            </p>
           </section>
 
-          <!-- Thermostat Automation -->
+          <!-- Which models -->
           <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">
-              4. Thermostat Automation Example
-            </h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              Example automation for PCT513 thermostat — night setback and morning warm-up schedule.
+            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-200">3. Model-by-Model Status</h2>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">
+              Support in Zigbee2MQTT evolves with its device database. Before your project starts, ask our engineering
+              team for the current list: for each model we confirm whether the stock converter covers it or a custom
+              converter ships with the Device Cluster List package.
             </p>
-            <div class="rounded-lg bg-gray-900 text-gray-100 p-5 font-mono text-xs overflow-x-auto leading-relaxed">
-              <pre>{thermostatHA}</pre>
-            </div>
           </section>
 
           <!-- Contact CTA -->
           <div class="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
-            <p class="text-default dark:text-slate-200 font-medium mb-2">Need help with your Home Assistant setup?</p>
+            <p class="text-default dark:text-slate-200 font-medium mb-2">Planning a Home Assistant deployment?</p>
             <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              Our engineering team can provide device-specific Z2M converter details and HA blueprint templates.
+              We provide device-specific Z2M converter files, attribute maps and pairing instructions per model.
             </p>
             <a
               href="/contact"
-              class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm"
+              class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm no-underline"
             >
-              Contact Engineering Team →
+              <Icon name="tabler:mail" class="w-4 h-4" /> Contact Engineering Team →
             </a>
           </div>
         </div>

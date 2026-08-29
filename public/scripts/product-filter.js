@@ -456,10 +456,24 @@
       // Update dimension tab UI
       $$('.dimension-tab').forEach(function (tab) {
         if (tab.getAttribute('data-dim') === currentDim) {
-          tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+          tab.classList.add(
+            'active',
+            'bg-white',
+            'dark:bg-slate-700',
+            'text-default',
+            'dark:text-slate-200',
+            'shadow-sm'
+          );
           tab.classList.remove('text-gray-600', 'dark:text-slate-400');
         } else {
-          tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+          tab.classList.remove(
+            'active',
+            'bg-white',
+            'dark:bg-slate-700',
+            'text-default',
+            'dark:text-slate-200',
+            'shadow-sm'
+          );
           tab.classList.add('text-gray-600', 'dark:text-slate-400');
         }
       });
@@ -498,10 +512,24 @@
     // Apply initial dimension
     $$('.dimension-tab').forEach(function (tab) {
       if (tab.getAttribute('data-dim') === currentDim) {
-        tab.classList.add('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.add(
+          'active',
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm'
+        );
         tab.classList.remove('text-gray-600', 'dark:text-slate-400');
       } else {
-        tab.classList.remove('active', 'bg-white', 'dark:bg-slate-700', 'text-default', 'dark:text-slate-200', 'shadow-sm');
+        tab.classList.remove(
+          'active',
+          'bg-white',
+          'dark:bg-slate-700',
+          'text-default',
+          'dark:text-slate-200',
+          'shadow-sm'
+        );
         tab.classList.add('text-gray-600', 'dark:text-slate-400');
       }
     });

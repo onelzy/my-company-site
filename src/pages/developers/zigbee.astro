@@ -36,8 +36,9 @@ const sleepMonitorClusters = [
 
 <PageLayout
   metadata={{
-    title: 'ZigBee Clusters',
-    description: 'ZigBee cluster specifications for OWON smart meters, thermostats, and sleep monitors.',
+    title: 'Method D — OWON ZigBee Devices on Your Coordinator',
+    description:
+      'Use OWON ZigBee 3.0 meters, thermostats and sensors with your own coordinator: typical ZCL clusters per device family, with exact attribute maps in the official Device Cluster List.',
   }}
 >
   <section class="py-12">
@@ -58,21 +59,25 @@ const sleepMonitorClusters = [
           <!-- Mobile tabs -->
           <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
             <div class="flex gap-1.5 min-w-max pb-1">
-              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Overview</a>
-              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">MQTT Quick Start</a>
-              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline">HTTP Server API</a>
-              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-active no-underline">ZigBee Clusters</a
+              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Integration Overview</a>
+              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline"
+                >Method A · Server API</a
               >
-              <a href="/developers/ha" class="inline-flex shrink-0 chip chip-idle no-underline">HA &amp; Z2M</a>
-              <a href="/developers/sdks" class="inline-flex shrink-0 chip chip-idle no-underline">SDKs</a>
-              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Examples</a>
-              <a href="/developers/changelog" class="inline-flex shrink-0 chip chip-idle no-underline">Changelog</a>
+              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">Method B · MQTT/TCP</a
+              >
+              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-active no-underline"
+                >Method D · ZigBee</a
+              >
+              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Samples</a>
             </div>
           </div>
-          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">ZigBee Clusters</h1>
+          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">
+            Method D · ZigBee Devices, Your Coordinator
+          </h1>
           <p class="text-muted dark:text-slate-400 mb-8">
-            ZigBee Cluster Library (ZCL) specifications for OWON devices. Use these clusters when integrating with
-            custom ZigBee coordinators or Zigbee2MQTT.
+            OWON ZigBee end devices can join your own coordinator or hub (Method D). Below are the typical ZCL clusters
+            implemented by each device family. Exact endpoint and attribute maps per model ship in the official
+            <strong>Device Cluster List</strong> — request it from our engineering team.
           </p>
 
           <div

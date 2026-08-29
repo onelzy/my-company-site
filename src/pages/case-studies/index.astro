@@ -46,10 +46,7 @@ const caseCount = caseStudies.length;
         >
         {
           industries.map((ind, i) => (
-            <button
-              class:list={['filter-chip chip', i === 0 ? 'chip-active' : 'chip-idle']}
-              data-category={ind}
-            >
+            <button class:list={['filter-chip chip', i === 0 ? 'chip-active' : 'chip-idle']} data-category={ind}>
               {ind}
             </button>
           ))
@@ -76,16 +73,13 @@ const caseCount = caseStudies.length;
               <div class="p-5 flex flex-col flex-1">
                 {/* Meta */}
                 <div class="flex items-center gap-2 mb-2.5 flex-wrap">
-                  <span
-                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary"
-                    >{cs.category}</span
-                  >
+                  <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-primary/10 text-primary">
+                    {cs.category}
+                  </span>
                   {cs.location && <span class="text-[11px] text-muted dark:text-slate-500">{cs.location}</span>}
                 </div>
 
-                <h3
-                  class="text-[15px] font-bold text-default dark:text-slate-100 leading-snug line-clamp-2 group-hover:text-primary transition-colors"
-                >
+                <h3 class="text-[15px] font-bold text-default dark:text-slate-100 leading-snug line-clamp-2 group-hover:text-primary transition-colors">
                   {cs.title}
                 </h3>
                 {cs.client && <p class="text-[11px] text-muted dark:text-slate-500 mt-1">{cs.client}</p>}
@@ -105,12 +99,12 @@ const caseCount = caseStudies.length;
                 )}
 
                 {/* Excerpt */}
-                <p class="text-[11px] text-muted dark:text-slate-400 leading-relaxed mt-3 line-clamp-2">{cs.background}</p>
+                <p class="text-[11px] text-muted dark:text-slate-400 leading-relaxed mt-3 line-clamp-2">
+                  {cs.background}
+                </p>
 
                 {/* Action */}
-                <p
-                  class="text-primary dark:text-blue-400 text-xs font-semibold mt-auto pt-4 group-hover:translate-x-0.5 transition-transform"
-                >
+                <p class="text-primary dark:text-blue-400 text-xs font-semibold mt-auto pt-4 group-hover:translate-x-0.5 transition-transform">
                   Read case study →
                 </p>
               </div>

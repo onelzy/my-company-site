@@ -27,6 +27,11 @@ const LEGACY_REDIRECTS = {
   '/contact-sales/': '/contact',
   '/resources/case-studies': '/case-studies/',
   '/resources/case-studies/': '/case-studies/',
+  // Retired developer pages (fabricated SDK/changelog content) -> live equivalents.
+  '/developers/sdks': '/developers/examples/',
+  '/developers/sdks/': '/developers/examples/',
+  '/developers/changelog': '/developers/',
+  '/developers/changelog/': '/developers/',
 };
 
 /** Returns the canonical pathname for `pathname`, or null when no redirect is needed. */

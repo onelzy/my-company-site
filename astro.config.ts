@@ -56,7 +56,6 @@ export default defineConfig({
             execSync('node scripts/' + script, { stdio: 'inherit' });
           }
         },
-
       },
     },
     react(),
