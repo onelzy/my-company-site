@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  currentPage: 'overview' | 'mqtt' | 'api' | 'zigbee' | 'ha' | 'examples';
+  currentPage: 'overview' | 'mqtt' | 'api' | 'uart' | 'zigbee' | 'devices' | 'ha' | 'examples';
 }
 
 const { currentPage } = Astro.props;
@@ -25,12 +25,17 @@ const groups: SidebarGroup[] = [
     ],
   },
   {
-    label: 'Methods',
+    label: 'Gateway System · 6000',
     children: [
-      { slug: 'api', label: 'Method A · Server API', href: '/developers/api' },
+      { slug: 'api', label: 'Method A · Cloud to Cloud', href: '/developers/api' },
       { slug: 'mqtt', label: 'Method B · MQTT / TCP', href: '/developers/mqtt' },
-      { slug: 'zigbee', label: 'Method D · ZigBee', href: '/developers/zigbee' },
+      { slug: 'uart', label: 'Method C · UART Board', href: '/developers/uart' },
+      { slug: 'zigbee', label: 'Method D · Zigbee Clusters', href: '/developers/zigbee' },
     ],
+  },
+  {
+    label: 'Wi-Fi Direct Devices',
+    children: [{ slug: 'devices', label: 'Meters & Thermostats', href: '/developers/devices' }],
   },
   {
     label: 'Platforms',

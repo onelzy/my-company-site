@@ -1,0 +1,124 @@
+---
+export const prerender = true;
+import PageLayout from '~/layouts/PageLayout.astro';
+import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
+
+const layers = [
+  { t: 'Your product', d: 'Your enclosure, your MCU, your power supply, your firmware.' },
+  {
+    t: 'UART link',
+    d: 'The OWON gateway board docks to your MCU over UART — the same command language as every other gateway path.',
+  },
+  {
+    t: 'Zigbee network',
+    d: 'The board acts as Zigbee master: pairing, reporting, control and OTA for OWON devices around it.',
+  },
+];
+---
+
+<PageLayout
+  metadata={{
+    title: 'Method C — Gateway to Gateway (UART Board Integration)',
+    description:
+      'Embed the OWON gateway board inside your own device: dock the PCB to your MCU over UART and control the gateway with the Gateway API command set. Your product gains a full Zigbee master without building one.',
+  }}
+>
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex gap-8">
+        <DevSidebar currentPage="uart" />
+
+        <div class="flex-1 min-w-0">
+          <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-primary transition-colors">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/developers" class="hover:text-primary transition-colors">Developers</a>
+            <span class="mx-2">/</span>
+            <span class="text-default dark:text-slate-200">Method C · UART</span>
+          </nav>
+
+          <div class="flex items-center gap-3 mb-2">
+            <Icon name="tabler:circuit-switch-open" class="w-8 h-8 text-primary" />
+            <h1 class="text-3xl font-bold text-default dark:text-slate-100">Method C · Gateway to Gateway</h1>
+          </div>
+          <p
+            class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-primary/10 dark:bg-primary/20 text-primary mb-6"
+          >
+            UART GATEWAY API · PCB INTEGRATION
+          </p>
+
+          <p class="text-muted dark:text-slate-400 mb-8 max-w-3xl leading-relaxed">
+            You do not need the whole gateway enclosure. Take the board inside an OWON gateway and dock it to the MCU of
+            your own device — a hub, a panel, an appliance controller — over UART. Your firmware then drives the gateway
+            through the UART protocol, using the same Gateway API command format as Methods A and B. Your product gains
+            a certified Zigbee 3.0 master, device pairing, local logic and OTA without developing one yourself.
+          </p>
+
+          <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-default dark:text-slate-100">How the Stack Splits</h2>
+            <div class="space-y-3">
+              {
+                layers.map((l, i) => (
+                  <div class="flex gap-4 items-start rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+                    <span class="inline-flex items-center justify-center w-7 h-7 shrink-0 rounded-full bg-primary/10 dark:bg-primary/20 text-primary text-xs font-bold">
+                      {i + 1}
+                    </span>
+                    <div>
+                      <p class="font-semibold text-default dark:text-slate-200">{l.t}</p>
+                      <p class="text-sm text-muted dark:text-slate-400 mt-0.5">{l.d}</p>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-default dark:text-slate-100">Typical Fits</h2>
+            <ul class="space-y-2 text-sm text-muted dark:text-slate-400">
+              <li class="flex gap-2">
+                <Icon name="tabler:check" class="w-4 h-4 mt-0.5 shrink-0 text-primary" /> OEM / ODM manufacturers embedding
+                Zigbee capability into their own gateway or control product
+              </li>
+              <li class="flex gap-2">
+                <Icon name="tabler:check" class="w-4 h-4 mt-0.5 shrink-0 text-primary" /> Building-automation panels that
+                need a maintenance-free Zigbee coordinator on-board
+              </li>
+              <li class="flex gap-2">
+                <Icon name="tabler:check" class="w-4 h-4 mt-0.5 shrink-0 text-primary" /> Products where the cloud side is
+                entirely yours — the board only speaks UART to your MCU
+              </li>
+            </ul>
+          </section>
+
+          <section
+            class="mb-10 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 p-6"
+          >
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-100 flex items-center gap-2">
+              <Icon name="tabler:file-description" class="w-5 h-5 text-primary" /> Documents for This Path
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">
+              UART Integration Guide (board interface, electrical and UART protocol) and the Gateway API command
+              dictionary. These, plus board samples for evaluation, are delivered by our engineering team after we
+              understand your product and volumes.
+            </p>
+            <a
+              href="/contact"
+              class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 transition-colors no-underline text-sm"
+            >
+              <Icon name="tabler:mail" class="w-4 h-4" /> Request UART Integration Guide
+            </a>
+          </section>
+
+          <p class="text-sm text-muted dark:text-slate-500">
+            Compare paths on the <a href="/developers" class="text-primary underline">integration overview</a>, or see
+            how the same command language works over <a href="/developers/mqtt" class="text-primary underline"
+              >MQTT/TCP (Method B)</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

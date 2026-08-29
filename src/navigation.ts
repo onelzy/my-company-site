@@ -169,9 +169,11 @@ export const headerData = {
       href: getPermalink('/developers'),
       links: [
         { text: 'Integration Overview', href: getPermalink('/developers') },
-        { text: 'Method A · Server API', href: getPermalink('/developers/api') },
+        { text: 'Method A · Cloud to Cloud', href: getPermalink('/developers/api') },
         { text: 'Method B · MQTT / TCP', href: getPermalink('/developers/mqtt') },
-        { text: 'Method D · ZigBee', href: getPermalink('/developers/zigbee') },
+        { text: 'Method C · UART Board', href: getPermalink('/developers/uart') },
+        { text: 'Method D · Zigbee Clusters', href: getPermalink('/developers/zigbee') },
+        { text: 'Wi-Fi Direct Devices', href: getPermalink('/developers/devices') },
         { text: 'Home Assistant', href: getPermalink('/developers/ha') },
         { text: 'Samples', href: getPermalink('/developers/examples') },
       ],
@@ -185,7 +187,7 @@ export const headerData = {
               {
                 text: 'Integration Overview',
                 href: getPermalink('/developers'),
-                desc: 'Four proven ways to connect OWON devices',
+                desc: 'Two families: gateway paths A–D + Wi-Fi direct',
               },
               {
                 text: 'Samples',
@@ -195,12 +197,12 @@ export const headerData = {
             ],
           },
           {
-            label: 'Methods',
+            label: 'Gateway System · 6000',
             items: [
               {
-                text: 'Method A · Server API',
+                text: 'Method A · Cloud to Cloud',
                 href: getPermalink('/developers/api'),
-                desc: 'Cloud-to-cloud HTTP/JSON with OWON 6000',
+                desc: 'HTTP Server API via OWON 6000 cloud',
               },
               {
                 text: 'Method B · MQTT / TCP',
@@ -208,15 +210,25 @@ export const headerData = {
                 desc: 'Gateway straight to your own server',
               },
               {
-                text: 'Method D · ZigBee',
+                text: 'Method C · UART Board',
+                href: getPermalink('/developers/uart'),
+                desc: 'Gateway PCB inside your own hardware',
+              },
+              {
+                text: 'Method D · Zigbee Clusters',
                 href: getPermalink('/developers/zigbee'),
                 desc: 'OWON devices on your coordinator',
               },
             ],
           },
           {
-            label: 'Platforms',
+            label: 'Wi-Fi Direct · Platforms',
             items: [
+              {
+                text: 'Wi-Fi Direct Devices',
+                href: getPermalink('/developers/devices'),
+                desc: 'Meters & thermostats straight to your broker',
+              },
               {
                 text: 'Home Assistant & Z2M',
                 href: getPermalink('/developers/ha'),
@@ -274,10 +286,11 @@ export const footerData = {
       title: 'Developers',
       links: [
         { text: 'Integration Overview', href: getPermalink('/developers') },
-        { text: 'Method A · Server API', href: getPermalink('/developers/api') },
+        { text: 'Method A · Cloud to Cloud', href: getPermalink('/developers/api') },
         { text: 'Method B · MQTT / TCP', href: getPermalink('/developers/mqtt') },
-        { text: 'Method D · ZigBee', href: getPermalink('/developers/zigbee') },
-        { text: 'Home Assistant', href: getPermalink('/developers/ha') },
+        { text: 'Method C · UART Board', href: getPermalink('/developers/uart') },
+        { text: 'Method D · Zigbee Clusters', href: getPermalink('/developers/zigbee') },
+        { text: 'Wi-Fi Direct Devices', href: getPermalink('/developers/devices') },
         { text: 'Samples', href: getPermalink('/developers/examples') },
       ],
     },

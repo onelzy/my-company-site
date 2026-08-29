@@ -7,71 +7,120 @@ import { Icon } from 'astro-icon/components';
 const LBRACE = '{';
 const RBRACE = '}';
 
-const controlFlow = `# Method B — switching a socket, end to end
-# (official Gateway MQTT sample sequence)
+const samples = [
+  {
+    icon: 'tabler:cloud-data-connection',
+    href: '/developers/api',
+    title: 'Method A · Cloud to Cloud',
+    caption: 'HTTP Server API — obtain a 24-hour accessToken, then call agent APIs',
+    code: `# 1. Authenticate with the agentId/agentKey OWON provisions
+POST ${'$'}{OWON_SERVER}/busproc/nt/agent/getaccesstoken
+Content-Type: application/json; charset=utf-8
 
-1. You PUBLISH the command:
-   topic  api/device/{gateway_mac}/{your_client_id}
-   payload 0x02 ${LBRACE}
-     "type":"request","command":"set",
-     "mac":"000D6F000D743E53",
-     "clusterid":"0x0006","endpoint":1,
-     "data":${LBRACE}"onoff":true${RBRACE}
-   ${RBRACE} 0x03
+${LBRACE}
+  "agentId": "testagentid",
+  "agentKey": "testkey",
+  "cmd": "getaccesstoken"
+${RBRACE}
 
-2. Gateway executes on ZigBee, then REPLIES to you:
-   topic  reply/device/{gateway_mac}/{your_client_id}
-   payload ${LBRACE}"result":true,"command":"set"${RBRACE}
+# Response — accessToken valid 24h, refreshToken to renew it
+${LBRACE}
+  "code": "100",
+  "accessToken": "***",
+  "refreshToken": "testRe…oken"
+${RBRACE}
 
-3. Gateway PUBLISHES the new state (report uplink):
-   topic  device/{gateway_mac}/report
-   payload ${LBRACE}
-     "type":"update","command":"loadstate",
-     "argument":${LBRACE}"ieee":"F72201000...","ep":1,
-       "power":58.2,"energy":12.44${RBRACE}
-   ${RBRACE}`;
+# 2. Every later call carries agentId + accessToken
+${LBRACE} "agentId": ..., "accessToken": ..., "cmd": "userGw" ... ${RBRACE}`,
+  },
+  {
+    icon: 'tabler:server-2',
+    href: '/developers/mqtt',
+    title: 'Method B · Gateway to Cloud (MQTT)',
+    caption: 'Official payload sample — switch a smart plug (entire Gateway API package in the payload)',
+    code: `# Publish to the gateway's command topic
+api/device/{'$'}{gateway_mac}/{'$'}{your_client_id}
 
-const telemetryFlow = `# Energy meter reading arrives unprompted
-topic   device/{gateway_mac}/report
-payload ${LBRACE}
-  "type":"update","command":"energy",
-  "argument":${LBRACE}
-    "ieee":"00124B001EAC010A","ep":1,
-    "voltage":238.6,          # V
-    "current":[1.24,0.0,0.0], # A per phase
-    "activePower":-296.04,    # W (signed)
-    "totalEnergy":32.16       # kWh cumulative
+${LBRACE}
+  "type": "smartPlug",
+  "sequence": 1017,
+  "command": "setSwitchgear",
+  "argument": ${LBRACE}
+    "ieee": "0100000000221100",
+    "ep": 1,
+    "switchgear": "off"
   ${RBRACE}
 ${RBRACE}
 
-# Subscribe once; every meter under the gateway
-# streams through the same topic family.`;
+# Gateway answers on reply/device/{'$'}{gateway_mac}/{'$'}{your_client_id}
+${LBRACE}
+  "result": true,
+  "switchgear": "off",
+  "ieee": "0100000000221100",
+  "ep": 1,
+  "description": "setOnOff back success",
+  "sequence": 1017
+${RBRACE}
 
-const connectFlow = `# Keep-alive every 60s — one message does two jobs
--> ${LBRACE}"type":"server","command":"connect",
-    "argument":${LBRACE}"mac":"000D6F000D743E53",
-      "version":"X3_HA_V2.5.8_20180317"${RBRACE}${RBRACE}
+# The docs' own CLI test command:
+mosquitto_pub -h broker.xxx.com \\
+  -t "api/device/{'$'}{gateway_mac}/{'$'}{client}" \\
+  -m '${LBRACE}"type":"smartPlug","sequence":1017,"command":"setSwitchgear","argument":${LBRACE}"ieee":"0100000000221100","ep":1,"switchgear":"off"${RBRACE}${RBRACE}'`,
+  },
+  {
+    icon: 'tabler:transform',
+    href: '/developers/zigbee',
+    title: 'Method D · Device to Gateway',
+    caption: 'ZCL on your coordinator — DWS332 IAS Zone enrollment',
+    code: `# Device → your gateway (cluster 0x0500, generated)
+ZoneEnrollRequest  zoneType = 0x0015  (contact switch)
 
-<- ${LBRACE}"result":true,"type":"server","command":"connect",
-    "response":${LBRACE}"utc":579315025,
-      "mac":"000D6F000D743E53"${RBRACE}${RBRACE}
+# Your gateway → device
+ZoneEnrollResponse enrollResponse = SUCCESS
 
-# 1. Link stays alive  2. Device RTC syncs from "utc"
-# (seconds since 2000-01-01 — the OWON epoch)
-# Miss >= 3 replies -> reconnect.`;
+# Every open/close event
+ZoneStatusChangeNotification
+  zoneStatus bit0 = 1  → opened
+  zoneStatus bit0 = 0  → closed`,
+  },
+  {
+    icon: 'tabler:wifi',
+    href: '/developers/devices',
+    title: 'Wi-Fi Direct · Your Broker',
+    caption: 'Real device-side flow from the Device API document — nothing transits OWON',
+    code: `# 1. Put the device in configuration mode (BLE or Wi-Fi AP)
+#    Configure: Wi-Fi credentials, MQTT broker settings,
+#    device identity, MQTT connection parameters,
+#    time zone & location — via X5 Config Tool or your
+#    own app built on the Configuration API. All
+#    application-layer messages are JSON.
+
+# 2. Send startRegister → device exits config mode,
+#    joins your Wi-Fi, connects to YOUR broker
+
+# 3. Steady state: device publishes attribute reports
+#    (string or raw payloads), your server publishes
+#    set-attribute commands; OTA, weather and time
+#    sync run over the same broker connection.
+
+# Broker options from the official guide:
+EMQX · Mosquitto · VerneMQ · AWS IoT Core`,
+  },
+];
 ---
 
 <PageLayout
   metadata={{
-    title: 'Integration Samples — OWON Gateway MQTT / TCP',
+    title: 'Integration Samples — OWON Developer Center',
     description:
-      'Real message flows from the OWON integration package: socket switching command-reply-report sequence, energy telemetry uplink, and the 60-second heartbeat with time sync.',
+      'Concrete request and payload samples for each OWON integration path: Server API token flow, MQTT smartPlug command with Gateway API payload, Zigbee IAS Zone enrollment, and Wi-Fi direct broker connection.',
   }}
 >
   <section class="py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex gap-8">
         <DevSidebar currentPage="examples" />
+
         <div class="flex-1 min-w-0">
           <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
             <a href="/" class="hover:text-primary transition-colors">Home</a>
@@ -81,78 +130,73 @@ const connectFlow = `# Keep-alive every 60s — one message does two jobs
             <span class="text-default dark:text-slate-200">Samples</span>
           </nav>
 
-          <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
-            <div class="flex gap-1.5 min-w-max pb-1">
-              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Integration Overview</a>
-              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline"
-                >Method A · Server API</a
-              >
-              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">Method B · MQTT/TCP</a
-              >
-              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">Method D · ZigBee</a
-              >
-              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-active no-underline">Samples</a>
-            </div>
-          </div>
-
-          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">
-            Integration <span class="text-primary">Samples</span>
-          </h1>
+          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">Samples</h1>
           <p class="text-muted dark:text-slate-400 mb-8 max-w-3xl">
-            Message flows taken directly from the official integration package (Method B samples document). These are
-            the exact topics, frames and payloads exchanged between an OWON gateway and your server — enough to design
-            your handler; the full command dictionary comes with the documents.
+            One short, real example per path, taken from the official integration documents. They show the <em>shape</em
+            >
+            of a working exchange — enough to design against before the full specifications and credentials arrive.
           </p>
 
-          <section class="mb-10">
-            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">
-              1 · Control a Device (command → reply → report)
-            </h2>
-            <pre
-              class="rounded-xl bg-slate-950 text-slate-100 text-[13px] leading-relaxed p-5 overflow-x-auto font-mono"><code>{controlFlow}</code></pre>
-          </section>
+          <div class="space-y-8 mb-12">
+            {
+              samples.map((s, i) => (
+                <section>
+                  <div class="flex items-center gap-3 mb-1">
+                    <Icon name={s.icon} class="w-6 h-6 text-primary" />
+                    <h2 class="text-xl font-bold text-default dark:text-slate-100">
+                      {i + 1}. {s.title}
+                    </h2>
+                  </div>
+                  <p class="text-sm text-muted dark:text-slate-400 mb-3">{s.caption}</p>
+                  <pre class="rounded-lg bg-gray-900 dark:bg-slate-950 text-gray-100 text-[13px] leading-relaxed p-5 overflow-x-auto">
+                    <code>{s.code}</code>
+                  </pre>
+                  <a href={s.href} class="inline-block text-sm text-primary hover:underline mt-2 no-underline">
+                    Full details → {s.title}
+                  </a>
+                </section>
+              ))
+            }
+          </div>
 
-          <section class="mb-10">
-            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">2 · Energy Telemetry Uplink</h2>
-            <pre
-              class="rounded-xl bg-slate-950 text-slate-100 text-[13px] leading-relaxed p-5 overflow-x-auto font-mono"><code>{telemetryFlow}</code></pre>
-          </section>
-
-          <section class="mb-10">
-            <h2 class="text-xl font-semibold mb-3 text-default dark:text-slate-100">3 · Heartbeat &amp; Time Sync</h2>
-            <pre
-              class="rounded-xl bg-slate-950 text-slate-100 text-[13px] leading-relaxed p-5 overflow-x-auto font-mono"><code>{connectFlow}</code></pre>
-          </section>
-
-          <section class="mb-10 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6">
-            <h2 class="text-lg font-semibold mb-2 text-default dark:text-slate-100">
-              Code Samples &amp; Reference Projects
+          <section
+            class="rounded-xl border border-amber-200 dark:border-amber-900 bg-amber-50/60 dark:bg-amber-950/30 p-6 mb-8"
+          >
+            <h2 class="text-lg font-semibold mb-2 text-default dark:text-slate-100 flex items-center gap-2">
+              <Icon name="tabler:key" class="w-5 h-5 text-primary" /> Where Credentials Come From
             </h2>
             <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">
-              Runnable reference code (Python/Node service stubs, the official Method B sample controller, the North
-              America thermostat Device API with its Flutter example, and broker configuration walkthroughs) is packaged
-              per project — tell us your stack and integration path and we send the matching set.
+              agentKey / agentSecret (Method A) are provisioned per project by our engineering team after NDA on
+              request; Methods B–D and the Wi-Fi direct line need no OWON credentials at all — the devices talk to
+              <strong class="text-default dark:text-slate-200">your</strong> server, broker or coordinator. Endpoint hosts
+              and topic names follow the pattern shown; request the specification documents for production values.
             </p>
           </section>
 
-          <section
-            class="mb-4 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 p-6"
-          >
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <h2 class="text-lg font-semibold mb-1 text-default dark:text-slate-100">Request the Full Package</h2>
-                <p class="text-sm text-muted dark:text-slate-400">
-                  Server API spec · Gateway API command list · MQTT topic definition · TCP protocol · device-model table
-                  · samples for your stack.
-                </p>
-              </div>
-              <a
-                href="/contact"
-                class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 transition-colors no-underline text-sm"
-              >
-                <Icon name="tabler:mail" class="w-4 h-4" /> Request Documents
-              </a>
-            </div>
+          <section class="rounded-xl border border-gray-200 dark:border-slate-700 p-6">
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-100">Continue</h2>
+            <ul class="space-y-2 text-sm">
+              <li>
+                <a href="/developers" class="text-primary hover:underline no-underline"
+                  >Integration Overview — pick your path</a
+                >
+              </li>
+              <li>
+                <a href="/developers/uart" class="text-primary hover:underline no-underline"
+                  >Method C · UART Gateway Board</a
+                >
+              </li>
+              <li>
+                <a href="/developers/mqtt" class="text-primary hover:underline no-underline"
+                  >Gateway API command format (shared by Methods A–C)</a
+                >
+              </li>
+              <li>
+                <a href="/contact" class="text-primary hover:underline no-underline"
+                  >Request the full specification package</a
+                >
+              </li>
+            </ul>
           </section>
         </div>
       </div>

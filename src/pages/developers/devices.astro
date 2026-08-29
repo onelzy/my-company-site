@@ -1,0 +1,185 @@
+---
+export const prerender = true;
+import PageLayout from '~/layouts/PageLayout.astro';
+import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
+
+const layers = [
+  {
+    icon: 'tabler:plug',
+    t: 'Device Nodes Layer',
+    d: 'OWON Wi-Fi devices — thermostats, power meters, gateways and other embedded or sensor devices. Each one opens a TCP/IP connection to your MQTT broker, publishes telemetry, status and events to predefined topics, subscribes to control topics and executes what your server sends.',
+  },
+  {
+    icon: 'tabler:topology-star',
+    t: 'MQTT Broker Layer',
+    d: 'The broker you run is the core routing component: persistent connections, authentication, session and keep-alive management, topic-based routing. It decouples device communication from your business logic entirely.',
+  },
+  {
+    icon: 'tabler:server-cog',
+    t: 'Your Server Layer',
+    d: 'Your systems subscribe to the topics they care about to receive device data, and publish control or configuration commands back. Bidirectional, real-time, and nothing transits an OWON server.',
+  },
+];
+
+const steps = [
+  {
+    n: 'Step 1',
+    t: 'Prepare your MQTT broker',
+    d: 'EMQX, Eclipse Mosquitto, VerneMQ or AWS IoT Core are recommended. Any standards-compliant broker works.',
+  },
+  {
+    n: 'Step 2',
+    t: 'Configure the device',
+    d: 'Wi-Fi credentials, broker address/port, MQTT connection parameters, device identity and time zone. Use the X5 Config Tool (search the App Store) or build your own tool on the Configuration API. Devices support BLE and Wi-Fi AP configuration modes.',
+  },
+  {
+    n: 'Step 3',
+    t: 'Device data publishing',
+    d: 'After the startRegister command the device leaves configuration mode, joins your Wi-Fi and connects to your broker, then publishes per the topic list.',
+  },
+  {
+    n: 'Step 4',
+    t: 'Server subscription & processing',
+    d: 'Subscribe to the attribute-report and event topics; payloads are JSON (raw data streams are Base64/Hex encoded inside JSON).',
+  },
+  {
+    n: 'Step 5',
+    t: 'Command publishing & control',
+    d: 'Publish set-attribute and control commands on the command topics; the device executes and reports the new state back.',
+  },
+];
+
+const extras = [
+  {
+    t: 'Device API per model',
+    d: 'Each family ships a Device API document — e.g. PCT513 covers topics, attribute lists, set/report examples, firmware upgrade (OTA), weather forecast pull and time synchronization.',
+  },
+  {
+    t: 'Firmware upgrade over the same broker',
+    d: 'Upgrade query, trigger and feedback run through documented topics, so your server controls the rollout.',
+  },
+  {
+    t: 'Lightweight by design',
+    d: 'MQTT over TCP/IP keeps bandwidth low and delivery reliable — suited to constrained devices and unstable networks.',
+  },
+];
+---
+
+<PageLayout
+  metadata={{
+    title: 'Wi-Fi Devices Direct to Your MQTT Broker',
+    description:
+      'OWON Wi-Fi smart meters and thermostats connect straight to your own MQTT broker — no gateway, no OWON cloud. Three-layer architecture, five integration steps, X5 config tool, per-device API documents with OTA, weather and time sync.',
+  }}
+>
+  <section class="py-12">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex gap-8">
+        <DevSidebar currentPage="devices" />
+
+        <div class="flex-1 min-w-0">
+          <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
+            <a href="/" class="hover:text-primary transition-colors">Home</a>
+            <span class="mx-2">/</span>
+            <a href="/developers" class="hover:text-primary transition-colors">Developers</a>
+            <span class="mx-2">/</span>
+            <span class="text-default dark:text-slate-200">Wi-Fi Direct</span>
+          </nav>
+
+          <div class="flex items-center gap-3 mb-2">
+            <Icon name="tabler:wifi" class="w-8 h-8 text-primary" />
+            <h1 class="text-3xl font-bold text-default dark:text-slate-100">Wi-Fi Devices · Direct to Your Broker</h1>
+          </div>
+          <p
+            class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-primary/10 dark:bg-primary/20 text-primary mb-6"
+          >
+            DEVICE → YOUR MQTT BROKER → YOUR SERVER
+          </p>
+
+          <p class="text-muted dark:text-slate-400 mb-8 max-w-3xl leading-relaxed">
+            The second integration family needs no gateway and no OWON cloud. OWON Wi-Fi devices — energy meters and the
+            PCT-series thermostats — speak MQTT straight to a broker you operate. Device and business systems are fully
+            decoupled by the publish/subscribe model, so data collection, command delivery and business logic all live
+            on your side and your data never transits ours.
+          </p>
+
+          <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-default dark:text-slate-100">Three-Layer Architecture</h2>
+            <div class="space-y-3">
+              {
+                layers.map((l) => (
+                  <div class="flex gap-4 items-start rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+                    <Icon name={l.icon} class="w-6 h-6 mt-0.5 shrink-0 text-primary" />
+                    <div>
+                      <p class="font-semibold text-default dark:text-slate-200">{l.t}</p>
+                      <p class="text-sm text-muted dark:text-slate-400 mt-0.5 leading-relaxed">{l.d}</p>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-default dark:text-slate-100">Integration in Five Steps</h2>
+            <div class="grid gap-3 md:grid-cols-2">
+              {
+                steps.map((s) => (
+                  <div class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-primary/10 dark:bg-primary/20 text-primary mb-2">
+                      {s.n}
+                    </span>
+                    <p class="font-semibold text-default dark:text-slate-200">{s.t}</p>
+                    <p class="text-sm text-muted dark:text-slate-400 mt-1 leading-relaxed">{s.d}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-default dark:text-slate-100">What the Device API Covers</h2>
+            <div class="grid gap-3 md:grid-cols-3">
+              {
+                extras.map((e) => (
+                  <div class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+                    <p class="font-semibold text-default dark:text-slate-200 text-sm mb-1">{e.t}</p>
+                    <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">{e.d}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section
+            class="mb-10 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 p-6"
+          >
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-100 flex items-center gap-2">
+              <Icon name="tabler:file-description" class="w-5 h-5 text-primary" /> Get the Topic Lists &amp; Device API
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">
+              The full topic definitions, attribute lists (string and raw payloads), configuration-command set and
+              firmware-upgrade flows are documented per device family — the Device Integration Overview plus each
+              model's Device API document. Our engineering team delivers them together with sample devices for
+              evaluation.
+            </p>
+            <a
+              href="/contact"
+              class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 transition-colors no-underline text-sm"
+            >
+              <Icon name="tabler:mail" class="w-4 h-4" /> Request Device API Docs
+            </a>
+          </section>
+
+          <p class="text-sm text-muted dark:text-slate-500">
+            Looking for Zigbee devices behind a gateway instead? See the <a
+              href="/developers"
+              class="text-primary underline">6000 system paths (Methods A–D)</a
+            >.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</PageLayout>

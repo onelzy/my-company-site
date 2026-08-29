@@ -2,43 +2,100 @@
 export const prerender = true;
 import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
+import { Icon } from 'astro-icon/components';
 
-const meterClusters = [
-  { cluster: '0x0000', name: 'Basic', desc: 'Device info, manufacturer, model, ZCL version' },
-  { cluster: '0x0006', name: 'On/Off', desc: 'Relay control (on devices with relay output)' },
-  { cluster: '0x0702', name: 'Smart Energy Metering', desc: 'Energy readings: current, voltage, power, total energy' },
+// ── DWS332 Door/Window Sensor — published cluster document, v0.1.0 ──
+const dwsClusters = [
   {
-    cluster: '0x0B04',
-    name: 'Electrical Measurement',
-    desc: 'RMS voltage, current, active/reactive power, power factor',
+    id: '0x0000',
+    name: 'Basic',
+    role: 'Server',
+    purpose: 'Device identity: ZCL/stack versions, manufacturer "OWON", model "DWS332", power source.',
   },
-  { cluster: '0x0402', name: 'Temperature Measurement', desc: 'Internal temperature sensor reading' },
-  { cluster: '0x0019', name: 'OTA Upgrade', desc: 'Over-the-air firmware update support' },
+  {
+    id: '0x0001',
+    name: 'Power Configuration',
+    role: 'Server',
+    purpose: 'Battery voltage and remaining percentage (reportable) — drives low-battery maintenance.',
+  },
+  {
+    id: '0x0003',
+    name: 'Identify',
+    role: 'Server',
+    purpose: 'Identify / Identify Query commands for pairing and commissioning flows.',
+  },
+  {
+    id: '0x0020',
+    name: 'Poll Control',
+    role: 'Server',
+    purpose:
+      'Check-in interval, long/short poll intervals, fast-poll timeout — the sleepy-end-device keep-alive contract with your coordinator.',
+  },
+  {
+    id: '0x0500',
+    name: 'IAS Zone',
+    role: 'Server',
+    purpose:
+      'Zone state/type (0x15 contact switch), ZoneStatus bitmap, IAS CIE address, enroll request/response, ZoneStatusChangeNotification.',
+  },
 ];
 
-const thermostatClusters = [
-  { cluster: '0x0000', name: 'Basic', desc: 'Device info, manufacturer, model, ZCL version' },
-  { cluster: '0x0201', name: 'Thermostat', desc: 'Setpoint, mode (heat/cool/auto), temperature display, schedule' },
-  { cluster: '0x0402', name: 'Temperature Measurement', desc: 'Local temperature sensor, external probe support' },
-  { cluster: '0x0405', name: 'Relative Humidity', desc: 'Humidity sensor (PCT513 with humidity add-on)' },
-  { cluster: '0x0006', name: 'On/Off', desc: 'HVAC relay output control' },
-  { cluster: '0x0019', name: 'OTA Upgrade', desc: 'Over-the-air firmware update support' },
+const dwsZoneBits = [
+  ['Bit 0', 'Alarm 1', '1 = opened / alarmed'],
+  ['Bit 1', 'Alarm 2', '1 = opened / alarmed'],
+  ['Bit 2', 'Tamper', '1 = tampered'],
+  ['Bit 3', 'Battery', '1 = low battery'],
+  ['Bit 4', 'Supervision report', '1 = reports'],
+  ['Bit 5', 'Restore reports', '1 = reports restore'],
+  ['Bit 6', 'Trouble', '1 = trouble / failure'],
+  ['Bit 7', 'AC (mains)', '1 = AC fault'],
+  ['Bit 8', 'Test', '1 = test mode'],
+  ['Bit 9', 'Battery defect', '1 = defective battery detected'],
 ];
 
-const sleepMonitorClusters = [
-  { cluster: '0x0000', name: 'Basic', desc: 'Device info, manufacturer, model, ZCL version' },
-  { cluster: '0x0402', name: 'Temperature Measurement', desc: 'Bed/room temperature' },
-  { cluster: '0x0400', name: 'Illuminance Measurement', desc: 'Ambient light level' },
-  { cluster: '0x0406', name: 'Occupancy Sensing', desc: 'Bed occupancy detection (in/out of bed)' },
-  { cluster: '0x0019', name: 'OTA Upgrade', desc: 'Over-the-air firmware update support' },
+// ── AC201A Multi AC IR Controller — published cluster document, v0.4.0 ──
+const acClusters = [
+  { id: '0x0000', name: 'Basic', role: 'Server', purpose: 'Manufacturer "OWON", model "AC201A".' },
+  { id: '0x0003', name: 'Identify', role: 'Server', purpose: 'Commissioning identify commands.' },
+  { id: '0x0004', name: 'Groups', role: 'Server', purpose: 'Full group add/view/remove membership handling.' },
+  { id: '0x0005', name: 'Scenes', role: 'Server', purpose: 'Scene storage on the device.' },
+  {
+    id: '0x0201',
+    name: 'Thermostat',
+    role: 'Server (bind with gateway)',
+    purpose:
+      'LocalTemperature, heat/cool setpoint limits, deadband, ControlSequenceOfOperation, SystemMode, ThermostatRunningMode; weekly-schedule and RelayStatusLog reports.',
+  },
+  {
+    id: '0x0202',
+    name: 'Fan Control',
+    role: 'Server (bind with gateway)',
+    purpose: 'FanMode and FanModeSequence, both configurable.',
+  },
+  {
+    id: '0xFFAD',
+    name: 'OWON Specific — Multi AC Control',
+    role: 'Server',
+    purpose: 'Manufacturer-specific cluster (OWON code 0x113C): the whole IR business below.',
+  },
+];
+
+const ffadCommands = [
+  ['0x00 / 0x01', 'Read / Write multi pairing codes', 'Map up to 5 ACs (Device Id 1–5) to IR pairing codes'],
+  ['0x02 / 0x03', 'Read / Write AC status', 'Set or query target temperature, mode, fan per AC'],
+  ['0x04', 'AC status update', 'Device pushes current AC state'],
+  ['0x10–0x19', 'IR learn mode & learned-data management', 'Enter learning, read groups/buttons, rename, clear'],
+  ['0x1F', 'Send learned data', 'Transmit a learned IR command'],
+  ['0x40 / 0xC0', 'Search mode / raw IR data', 'Brand search and raw IR waveform transmit'],
+  ['0x50 / 0x52', 'Brand searching / one-key pairing', 'Response + status/result updates (0x70 / 0x80)'],
 ];
 ---
 
 <PageLayout
   metadata={{
-    title: 'Method D — OWON ZigBee Devices on Your Coordinator',
+    title: 'Method D — Zigbee Devices on Your Gateway (Cluster Lists)',
     description:
-      'Use OWON ZigBee 3.0 meters, thermostats and sensors with your own coordinator: typical ZCL clusters per device family, with exact attribute maps in the official Device Cluster List.',
+      'Connect OWON Zigbee devices to a third-party gateway using published ZCL cluster and attribute documents. Real examples: DWS332 door sensor (Basic, PowerConfig, Identify, PollControl, IAS Zone) and AC201A multi-AC controller with the OWON-specific 0xFFAD IR cluster.',
   }}
 >
   <section class="py-12">
@@ -46,154 +103,257 @@ const sleepMonitorClusters = [
       <div class="flex gap-8">
         <DevSidebar currentPage="zigbee" />
 
-        <!-- Content -->
         <div class="flex-1 min-w-0">
-          <!-- Breadcrumb -->
           <nav class="mb-4 text-sm text-muted dark:text-slate-400" aria-label="Breadcrumb">
             <a href="/" class="hover:text-primary transition-colors">Home</a>
             <span class="mx-2">/</span>
             <a href="/developers" class="hover:text-primary transition-colors">Developers</a>
             <span class="mx-2">/</span>
-            <span class="text-default dark:text-slate-200">ZigBee Clusters</span>
+            <span class="text-default dark:text-slate-200">Method D · Zigbee Clusters</span>
           </nav>
-          <!-- Mobile tabs -->
-          <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
-            <div class="flex gap-1.5 min-w-max pb-1">
-              <a href="/developers" class="inline-flex shrink-0 chip chip-idle no-underline">Integration Overview</a>
-              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline"
-                >Method A · Server API</a
-              >
-              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">Method B · MQTT/TCP</a
-              >
-              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-active no-underline"
-                >Method D · ZigBee</a
-              >
-              <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Samples</a>
-            </div>
+
+          <div class="flex items-center gap-3 mb-2">
+            <Icon name="tabler:binary-tree-2" class="w-8 h-8 text-primary" />
+            <h1 class="text-3xl font-bold text-default dark:text-slate-100">Method D · Devices to Your Gateway</h1>
           </div>
-          <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">
-            Method D · ZigBee Devices, Your Coordinator
-          </h1>
-          <p class="text-muted dark:text-slate-400 mb-8">
-            OWON ZigBee end devices can join your own coordinator or hub (Method D). Below are the typical ZCL clusters
-            implemented by each device family. Exact endpoint and attribute maps per model ship in the official
-            <strong>Device Cluster List</strong> — request it from our engineering team.
+          <p
+            class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-primary/10 dark:bg-primary/20 text-primary mb-6"
+          >
+            ZIGBEE 3.0 · ZCL CLUSTER LISTS
           </p>
 
-          <div
-            class="mb-8 p-5 rounded-xl bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700"
+          <p class="text-muted dark:text-slate-400 mb-8 max-w-3xl leading-relaxed">
+            OWON Zigbee end devices join <em>your</em> gateway and exchange data with it only — no OWON cloud anywhere in
+            the loop. Every device model is documented as a ZHA Clusters and Attributes sheet: endpoints, device ID, and for
+            each cluster the attribute IDs, data types, mandatory/optional flags, defaults, read/write and reportable bits,
+            plus commands received and generated. Two published examples below show the format you will design against — one
+            battery sensor on standard clusters, one controller that adds an OWON-specific cluster.
+          </p>
+
+          <!-- ─────────────── DWS332 ─────────────── -->
+          <section class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <h2 class="text-2xl font-bold text-default dark:text-slate-100">Example · DWS332 Door/Window Sensor</h2>
+              <span
+                class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-gray-100 dark:bg-slate-700 text-muted dark:text-slate-300"
+              >
+                CLUSTERS &amp; ATTRIBUTES v0.1.0
+              </span>
+            </div>
+            <p class="text-sm text-muted dark:text-slate-400 mb-5">
+              A sleepy battery sensor built entirely from standard HA-profile clusters — the easiest OWON device to
+              bring up on a third-party coordinator.
+            </p>
+
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 mb-5 text-sm"
+            >
+              <p class="font-mono text-xs text-muted dark:text-slate-400">
+                Endpoint 0x01 · Profile <span class="text-default dark:text-slate-200"
+                  >0x0104 (Zigbee Home Automation)</span
+                >
+                · Device ID <span class="text-default dark:text-slate-200">0x0402</span>
+                <span class="block mt-1">Endpoint 0x00 · Profile 0x0000 (Zigbee Device Profile)</span>
+              </p>
+            </div>
+
+            <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 mb-6">
+              <table class="w-full text-sm">
+                <thead
+                  class="bg-gray-50 dark:bg-slate-900 text-left text-xs uppercase tracking-wide text-muted dark:text-slate-500"
+                >
+                  <tr>
+                    <th class="px-4 py-2.5 font-semibold">Cluster</th>
+                    <th class="px-4 py-2.5 font-semibold">Name</th>
+                    <th class="px-4 py-2.5 font-semibold">Role</th>
+                    <th class="px-4 py-2.5 font-semibold">What you get</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-slate-700/60">
+                  {
+                    dwsClusters.map((c) => (
+                      <tr class="bg-white dark:bg-slate-800">
+                        <td class="px-4 py-2.5 font-mono text-primary whitespace-nowrap">{c.id}</td>
+                        <td class="px-4 py-2.5 font-semibold text-default dark:text-slate-200 whitespace-nowrap">
+                          {c.name}
+                        </td>
+                        <td class="px-4 py-2.5 text-muted dark:text-slate-400 whitespace-nowrap">{c.role}</td>
+                        <td class="px-4 py-2.5 text-muted dark:text-slate-400">{c.purpose}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="font-semibold text-default dark:text-slate-200 mb-2">IAS ZoneStatus bitmap (0x0500 / 0x0002)</h3>
+            <p class="text-xs text-muted dark:text-slate-500 mb-3">
+              The bit layout your coordinator parses to turn a single report into open/close, tamper and battery alarms
+              — reproduced from the device document:
+            </p>
+            <div class="grid gap-1.5 sm:grid-cols-2 mb-2 text-xs">
+              {
+                dwsZoneBits.map((b) => (
+                  <div class="flex gap-2 rounded border border-gray-100 dark:border-slate-700/60 px-2.5 py-1.5">
+                    <span class="font-mono text-primary font-semibold shrink-0">{b[0]}</span>
+                    <span class="text-default dark:text-slate-300 font-medium shrink-0">{b[1]}</span>
+                    <span class="text-muted dark:text-slate-400">{b[2]}</span>
+                  </div>
+                ))
+              }
+            </div>
+            <p class="text-xs text-muted dark:text-slate-500">
+              Zone type defaults to 0x15 (contact switch). The device sends ZoneEnrollRequest and pushes
+              ZoneStatusChangeNotification on state change — your gateway answers with ZoneEnrollResponse.
+            </p>
+          </section>
+
+          <!-- ─────────────── AC201A ─────────────── -->
+          <section class="mb-12">
+            <div class="flex flex-wrap items-center gap-3 mb-2">
+              <h2 class="text-2xl font-bold text-default dark:text-slate-100">
+                Example · AC201A Multi AC IR Controller
+              </h2>
+              <span
+                class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-gray-100 dark:bg-slate-700 text-muted dark:text-slate-300"
+              >
+                CLUSTERS &amp; ATTRIBUTES v0.4.0
+              </span>
+            </div>
+            <p class="text-sm text-muted dark:text-slate-400 mb-5">
+              Shows the second pattern: standard Thermostat/Fan clusters for interoperability, plus an OWON-specific
+              cluster that carries capabilities the Zigbee specification does not define — IR learning, brand search and
+              one-to-many AC control.
+            </p>
+
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 mb-5 text-sm"
+            >
+              <p class="font-mono text-xs text-muted dark:text-slate-400">
+                Endpoint 0x01 · Profile <span class="text-default dark:text-slate-200">0x0104 (ZHA)</span> · Device ID{
+                  ' '
+                }
+                <span class="text-default dark:text-slate-200">0xC204</span> · Thermostat &amp; Fan clusters bind with the
+                gateway
+              </p>
+            </div>
+
+            <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700 mb-6">
+              <table class="w-full text-sm">
+                <thead
+                  class="bg-gray-50 dark:bg-slate-900 text-left text-xs uppercase tracking-wide text-muted dark:text-slate-500"
+                >
+                  <tr>
+                    <th class="px-4 py-2.5 font-semibold">Cluster</th>
+                    <th class="px-4 py-2.5 font-semibold">Name</th>
+                    <th class="px-4 py-2.5 font-semibold">Role</th>
+                    <th class="px-4 py-2.5 font-semibold">What you get</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-slate-700/60">
+                  {
+                    acClusters.map((c) => (
+                      <tr class="bg-white dark:bg-slate-800">
+                        <td class="px-4 py-2.5 font-mono text-primary whitespace-nowrap">{c.id}</td>
+                        <td class="px-4 py-2.5 font-semibold text-default dark:text-slate-200 whitespace-nowrap">
+                          {c.name}
+                        </td>
+                        <td class="px-4 py-2.5 text-muted dark:text-slate-400 whitespace-nowrap">{c.role}</td>
+                        <td class="px-4 py-2.5 text-muted dark:text-slate-400">{c.purpose}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="font-semibold text-default dark:text-slate-200 mb-2">OWON cluster 0xFFAD — command map</h3>
+            <p class="text-xs text-muted dark:text-slate-500 mb-3">
+              Manufacturer code 0x113C. Client-to-server commands and the responses the device generates:
+            </p>
+            <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700">
+              <table class="w-full text-sm">
+                <thead
+                  class="bg-gray-50 dark:bg-slate-900 text-left text-xs uppercase tracking-wide text-muted dark:text-slate-500"
+                >
+                  <tr>
+                    <th class="px-4 py-2.5 font-semibold">Command IDs</th>
+                    <th class="px-4 py-2.5 font-semibold">Function</th>
+                    <th class="px-4 py-2.5 font-semibold">Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100 dark:divide-slate-700/60">
+                  {
+                    ffadCommands.map((r) => (
+                      <tr class="bg-white dark:bg-slate-800">
+                        <td class="px-4 py-2.5 font-mono text-primary whitespace-nowrap">{r[0]}</td>
+                        <td class="px-4 py-2.5 font-medium text-default dark:text-slate-200">{r[1]}</td>
+                        <td class="px-4 py-2.5 text-muted dark:text-slate-400">{r[2]}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+            </div>
+            <p class="text-xs text-muted dark:text-slate-500 mt-3">
+              Parameter-level formats for every 0xFFAD command (pairing-code tables, learned-data group/button
+              structures, search and raw-IR payloads) are in the companion “Self-Defined Cluster Commands” document.
+            </p>
+          </section>
+
+          <!-- ─────────────── what every cluster doc contains ─────────────── -->
+          <section class="mb-10">
+            <h2 class="text-xl font-bold mb-4 text-default dark:text-slate-100">
+              How to Read Any OWON Cluster Document
+            </h2>
+            <div class="grid gap-3 sm:grid-cols-2 text-sm">
+              <div class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+                <p class="font-semibold text-default dark:text-slate-200 mb-1">Attribute table columns</p>
+                <p class="text-muted dark:text-slate-400 leading-relaxed">
+                  ID · Name · Type · <span class="font-mono text-xs">M/O</span> (mandatory/optional) ·{' '}
+                  <span class="font-mono text-xs">MFG</span> (manufacturer-specific) ·{' '}
+                  <span class="font-mono text-xs">PER</span> (persistent) · Default ·{' '}
+                  <span class="font-mono text-xs">R/W</span> · <span class="font-mono text-xs">REP</span> (reportable) · Description.
+                </p>
+              </div>
+              <div class="rounded-lg border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4">
+                <p class="font-semibold text-default dark:text-slate-200 mb-1">Commands received / generated</p>
+                <p class="text-muted dark:text-slate-400 leading-relaxed">
+                  Per cluster, split by direction, with IDs and M/O flags — enough to implement the coordinator side of
+                  pairing, control and reporting without guesswork.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section
+            class="mb-10 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 p-6"
           >
-            <p class="text-sm text-yellow-800 dark:text-yellow-200">
-              <strong>ZigBee 3.0 compliant.</strong> All OWON ZigBee devices follow the ZigBee Cluster Library (ZCL) specification.
-              Endpoint and attribute details vary by firmware version — refer to the product datasheet for the exact attribute
-              map.
-            </p>
-          </div>
-
-          <!-- Smart Meter Clusters -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-1 text-default dark:text-slate-200">Smart Energy Meters</h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              PC321-TY, PC341 series — ZigBee 3.0 Router devices
-            </p>
-            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-700">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
-                    <th class="text-left py-3 px-4 text-muted">Cluster ID</th>
-                    <th class="text-left py-3 px-4 text-muted">Name</th>
-                    <th class="text-left py-3 px-4 text-muted">Description</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-slate-800 text-default dark:text-slate-300">
-                  {
-                    meterClusters.map((c) => (
-                      <tr class="border-b border-gray-100 dark:border-slate-700 last:border-b-0">
-                        <td class="py-3 px-4 font-mono text-xs text-primary">{c.cluster}</td>
-                        <td class="py-3 px-4 font-medium whitespace-nowrap">{c.name}</td>
-                        <td class="py-3 px-4 text-muted dark:text-slate-400">{c.desc}</td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- Thermostat Clusters -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-1 text-default dark:text-slate-200">Smart Thermostats</h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              PCT513, TRV controllers — ZigBee 3.0 Router devices
-            </p>
-            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-700">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
-                    <th class="text-left py-3 px-4 text-muted">Cluster ID</th>
-                    <th class="text-left py-3 px-4 text-muted">Name</th>
-                    <th class="text-left py-3 px-4 text-muted">Description</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-slate-800 text-default dark:text-slate-300">
-                  {
-                    thermostatClusters.map((c) => (
-                      <tr class="border-b border-gray-100 dark:border-slate-700 last:border-b-0">
-                        <td class="py-3 px-4 font-mono text-xs text-primary">{c.cluster}</td>
-                        <td class="py-3 px-4 font-medium whitespace-nowrap">{c.name}</td>
-                        <td class="py-3 px-4 text-muted dark:text-slate-400">{c.desc}</td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- Sleep Monitor Clusters -->
-          <section class="mb-12">
-            <h2 class="text-xl font-semibold mb-1 text-default dark:text-slate-200">Sleep Monitors (Senior Care)</h2>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              SPM-915 — ZigBee 3.0 End Device (battery optimized)
-            </p>
-            <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-700">
-              <table class="w-full text-sm">
-                <thead>
-                  <tr class="bg-gray-50 dark:bg-slate-800/50 border-b border-gray-200 dark:border-slate-700">
-                    <th class="text-left py-3 px-4 text-muted">Cluster ID</th>
-                    <th class="text-left py-3 px-4 text-muted">Name</th>
-                    <th class="text-left py-3 px-4 text-muted">Description</th>
-                  </tr>
-                </thead>
-                <tbody class="bg-white dark:bg-slate-800 text-default dark:text-slate-300">
-                  {
-                    sleepMonitorClusters.map((c) => (
-                      <tr class="border-b border-gray-100 dark:border-slate-700 last:border-b-0">
-                        <td class="py-3 px-4 font-mono text-xs text-primary">{c.cluster}</td>
-                        <td class="py-3 px-4 font-medium whitespace-nowrap">{c.name}</td>
-                        <td class="py-3 px-4 text-muted dark:text-slate-400">{c.desc}</td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <!-- Contact CTA -->
-          <div class="rounded-xl bg-primary/5 border border-primary/20 p-6 text-center">
-            <p class="text-default dark:text-slate-200 font-medium mb-2">Need custom cluster documentation?</p>
-            <p class="text-sm text-muted dark:text-slate-400 mb-4">
-              Contact our engineering team for detailed attribute maps, endpoint configurations, and binding
-              instructions.
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-100 flex items-center gap-2">
+              <Icon name="tabler:file-description" class="w-5 h-5 text-primary" /> Cluster Lists for Your Device Mix
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">
+              The two documents above are the published format. Tell us which models you plan to integrate — smart
+              plugs, meters (Electrical Measurement 0x0B04 / Metering 0x0702), thermostats, sensors, panic buttons — and
+              our engineering team sends the matching cluster documents for each one.
             </p>
             <a
               href="/contact"
-              class="inline-flex items-center gap-2 px-6 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm"
+              class="inline-flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-white font-medium px-6 py-2.5 transition-colors no-underline text-sm"
             >
-              Contact Engineering Team →
+              <Icon name="tabler:mail" class="w-4 h-4" /> Request Cluster Documents
             </a>
-          </div>
+          </section>
+
+          <p class="text-sm text-muted dark:text-slate-500">
+            Running Home Assistant or Zigbee2MQTT as your gateway? See <a
+              href="/developers/ha"
+              class="text-primary underline">open-platform notes</a
+            >. Command formats for gateway-hosted setups live in the <a
+              href="/developers/mqtt"
+              class="text-primary underline">Gateway API / MQTT path</a
+            >.
+          </p>
         </div>
       </div>
     </div>

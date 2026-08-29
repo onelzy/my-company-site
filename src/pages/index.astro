@@ -585,32 +585,48 @@ const formatDate = (date) => {
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">
         Developer Platform
       </h2>
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <p class="text-center text-muted dark:text-slate-400 -mt-8 mb-12 max-w-2xl mx-auto">
+        Two integration families: the 6000 gateway system with four symmetric paths (A–D), and Wi-Fi devices that speak
+        MQTT straight to your own broker.
+      </p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {
           [
             {
               method: 'HTTP',
               path: '/busproc/nt/agent/getaccesstoken',
-              title: 'Method A · Server API',
-              desc: 'Cloud-to-cloud with OWON 6000. agentId + 24h token.',
+              title: 'Method A · Cloud to Cloud',
+              desc: 'Your server against the OWON 6000 cloud. agentId + 24h accessToken.',
             },
             {
               method: 'MQTT',
               path: 'device/{gateway}/report',
-              title: 'Method B · Your Server',
-              desc: 'Gateway publishes straight to your broker or TCP socket.',
+              title: 'Method B · Gateway to Cloud',
+              desc: 'Gateway publishes straight to your server — MQTT topics or TCP frames.',
+            },
+            {
+              method: 'UART',
+              path: 'gateway PCB → your MCU',
+              title: 'Method C · Gateway to Gateway',
+              desc: 'Embed the gateway board in your own hardware over UART.',
             },
             {
               method: 'ZCL',
-              path: 'your coordinator · Z2M · HA',
-              title: 'Method D · ZigBee',
-              desc: 'Devices join your own ZigBee network.',
+              path: 'cluster docs · e.g. DWS332, AC201A',
+              title: 'Method D · Device to Gateway',
+              desc: 'OWON Zigbee devices join your coordinator, standard + OWON clusters.',
+            },
+            {
+              method: 'Wi-Fi',
+              path: 'device → your EMQX / Mosquitto',
+              title: 'Wi-Fi Direct Devices',
+              desc: 'Meters & thermostats connect to your broker — no gateway, no OWON cloud.',
             },
             {
               method: 'DOC',
               path: 'request the integration pack',
               title: 'Full Docs on Request',
-              desc: 'API spec, topic list, 90+ model table.',
+              desc: 'Gateway API dictionary, topic lists, 90+ model table, cluster sheets.',
             },
           ].map((item) => (
             <div class="rounded-xl bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 p-6 hover:border-primary/30 hover:shadow-sm transition-all group">

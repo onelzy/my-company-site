@@ -58,7 +58,9 @@ export const GET = async () => {
     ['/developers/api/', 'monthly', '0.8'],
     ['/developers/examples/', 'monthly', '0.7'],
     ['/developers/mqtt/', 'monthly', '0.7'],
+    ['/developers/uart/', 'monthly', '0.7'],
     ['/developers/zigbee/', 'monthly', '0.7'],
+    ['/developers/devices/', 'monthly', '0.7'],
     ['/developers/ha/', 'monthly', '0.7'],
     // Legal pages serve WITHOUT trailing slash (prerendered .md, trailingSlash: false)
     ['/privacy', 'monthly', '0.3'],

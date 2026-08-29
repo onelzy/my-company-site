@@ -4,54 +4,71 @@ import PageLayout from '~/layouts/PageLayout.astro';
 import DevSidebar from '~/components/widgets/DevSidebar.astro';
 import { Icon } from 'astro-icon/components';
 
-const methods = [
+const gatewayMethods = [
   {
     id: 'A',
-    title: 'Method A · Cloud-to-Cloud',
-    tag: 'Server API',
-    desc: 'Your server connects to the OWON cloud. Gateways stay on OWON servers; data and commands are forwarded to your platform over HTTP/HTTPS with agent credentials. Fastest way to get device data into your own system.',
+    title: 'Method A · Cloud to Cloud',
+    tag: 'HTTP Server API',
+    desc: 'The gateway stays connected to the OWON server. Device data uploaded by the gateway and commands sent to it are forwarded to your platform over HTTP/HTTPS; your server accesses its gateways through agent authorization.',
     docs: ['Server API', 'Gateway API'],
     icon: 'tabler:cloud-data-connection',
     href: '/developers/api',
-    fit: 'SaaS platforms, cloud integrators, quick pilots',
+    fit: 'SaaS platforms and quick pilots — no gateway-side work at all',
   },
   {
     id: 'B',
-    title: 'Method B · Gateway-to-Server',
-    tag: 'MQTT / TCP',
-    desc: 'The OWON gateway connects directly to your own server — all data management lives on your side, no OWON cloud in the loop. MQTT topics or a persistent TCP link with a documented frame protocol.',
+    title: 'Method B · Gateway to Cloud',
+    tag: 'MQTT Gateway API',
+    desc: 'The OWON gateway connects directly to your own server. All data management and communication lives on your side — no OWON cloud in the loop. MQTT topics plus a TCP frame mechanism are fully specified.',
     docs: ['Gateway API', 'MQTT Topic Definition', 'TCP Mechanism'],
     icon: 'tabler:server-2',
     href: '/developers/mqtt',
     fit: 'Private deployments, energy-management platforms, data-sensitive customers',
   },
   {
-    id: 'D',
-    title: 'Method D · Devices to Your Gateway',
-    tag: 'ZigBee 3.0',
-    desc: 'Use OWON ZigBee end devices with your own coordinator or hub. Devices exchange standard ZCL data with your gateway — a cluster list per device family is provided.',
-    docs: ['Device Cluster List'],
-    icon: 'tabler:transform',
-    href: '/developers/zigbee',
-    fit: 'Hub makers, building-automation controllers, custom gateways',
-  },
-  {
-    id: 'U',
-    title: 'UART · Gateway Board Inside Your Device',
-    tag: 'PCB Integration',
-    desc: 'Take the gateway PCB out of an OWON gateway and dock it to your own MCU over UART. Your product gains a full ZigBee 3.0 master + cloud client, controlled via the same Gateway API command set.',
+    id: 'C',
+    title: 'Method C · Gateway to Gateway',
+    tag: 'UART Gateway API',
+    desc: 'Use only the PCB inside an OWON gateway: dock the board to the MCU of your own device (gateway or hub) over UART and drive it with the Gateway API command set. Your hardware gains a full ZigBee master.',
     docs: ['UART Integration Guide', 'Gateway API'],
     icon: 'tabler:circuit-switch-open',
-    href: '/contact',
-    fit: 'OEM / ODM device manufacturers',
+    href: '/developers/uart',
+    fit: 'OEM / ODM manufacturers embedding gateway capability in their own product',
+  },
+  {
+    id: 'D',
+    title: 'Method D · Device to Gateway',
+    tag: 'Zigbee Cluster List',
+    desc: 'OWON Zigbee end devices join a third-party gateway and exchange data with it only. Each device model ships with a cluster & attribute document — standard ZCL clusters plus OWON-specific ones where needed.',
+    docs: ['Device Cluster List'],
+    icon: 'tabler:binary-tree-2',
+    href: '/developers/zigbee',
+    fit: 'Hub makers, smart-home platforms, building-automation controllers',
   },
 ];
 
-const facts = [
-  { k: 'Device families', v: 'Meters · Thermostats · Gateways · Sensors' },
-  { k: 'Radios', v: 'ZigBee 3.0 · Wi-Fi · RS-485/Modbus · BLE (config)' },
-  { k: 'Protocols', v: 'MQTT · HTTP/HTTPS · TCP · UART' },
-  { k: 'Firmware', v: 'OTA updates on all devices' },
+const directSteps = [
+  {
+    n: '1',
+    t: 'Prepare your MQTT broker',
+    d: 'EMQX, Eclipse Mosquitto, VerneMQ or AWS IoT Core — the device connects to you, not to OWON.',
+  },
+  {
+    n: '2',
+    t: 'Configure the device',
+    d: 'Use the X5 Config Tool (App Store) or build your own tool on the Configuration API: Wi-Fi credentials, broker address, device identity, time zone.',
+  },
+  {
+    n: '3',
+    t: 'Device publishes data',
+    d: 'Telemetry, status and events go to predefined MQTT topics as the device sees them.',
+  },
+  { n: '4', t: 'Your server subscribes', d: 'Consume the topics relevant to your business logic.' },
+  {
+    n: '5',
+    t: 'Publish commands back',
+    d: 'Control and configuration flow down the command topics; the device executes them.',
+  },
 ];
 ---
 
@@ -59,7 +76,7 @@ const facts = [
   metadata={{
     title: 'Developer Center — Integrate OWON Devices',
     description:
-      'Four official integration paths for OWON smart meters, thermostats and gateways: cloud-to-cloud Server API, direct MQTT/TCP to your own server, ZigBee devices to your coordinator, or the gateway board via UART.',
+      'OWON offers two integration families: the 6000 gateway system with four symmetric paths (cloud-to-cloud Server API, gateway-to-cloud MQTT, gateway-to-gateway UART, and Zigbee device clusters), and Wi-Fi devices that connect directly to your own MQTT broker. Architecture overview for platform teams, integrators and OEMs.',
   }}
 >
   <section class="py-12">
@@ -79,78 +96,178 @@ const facts = [
           <div class="lg:hidden mb-8 -mx-4 px-4 overflow-x-auto scrollbar-none">
             <div class="flex gap-1.5 min-w-max pb-1">
               <a href="/developers" class="inline-flex shrink-0 chip chip-active no-underline">Integration Overview</a>
-              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline"
-                >Method A · Server API</a
-              >
-              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">Method B · MQTT/TCP</a
-              >
-              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">Method D · ZigBee</a
-              >
+              <a href="/developers/api" class="inline-flex shrink-0 chip chip-idle no-underline">A · Server API</a>
+              <a href="/developers/mqtt" class="inline-flex shrink-0 chip chip-idle no-underline">B · MQTT / TCP</a>
+              <a href="/developers/uart" class="inline-flex shrink-0 chip chip-idle no-underline">C · UART</a>
+              <a href="/developers/zigbee" class="inline-flex shrink-0 chip chip-idle no-underline">D · Zigbee</a>
+              <a href="/developers/devices" class="inline-flex shrink-0 chip chip-idle no-underline">Wi-Fi Direct</a>
               <a href="/developers/examples" class="inline-flex shrink-0 chip chip-idle no-underline">Samples</a>
             </div>
           </div>
 
           <h1 class="text-3xl font-bold mb-2 text-default dark:text-slate-100">Developer Center</h1>
           <p class="text-muted dark:text-slate-400 mb-8 max-w-3xl">
-            OWON devices integrate with your platform through four documented paths. This portal summarizes how each one
-            works so you can pick the right architecture. Full specifications — Server API, Gateway API, MQTT topic and
-            payload definitions, TCP framing, device model tables and per-device cluster lists — are provided by our
-            engineering team on request.
+            OWON supports two integration families. The <strong class="text-default dark:text-slate-200"
+              >6000 gateway system</strong
+            > exposes four symmetric paths between your stack and ours — cloud-to-cloud, gateway-to-cloud, gateway-to-gateway
+            and device-to-gateway. Separately, our <strong class="text-default dark:text-slate-200"
+              >Wi-Fi devices</strong
+            > (smart meters, thermostats) talk MQTT straight to your own broker, with no gateway and no OWON cloud involved.
+            This portal summarizes the architecture so you can pick the right path; complete specifications are delivered
+            to project partners by our engineering team.
           </p>
 
-          <!-- Architecture at a glance -->
+          <!-- ============ Architecture diagram ============ -->
           <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">System at a Glance</h2>
-            <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 mb-6">
-              <div class="flex flex-col md:flex-row items-stretch gap-4 text-center text-sm">
-                <div class="flex-1 rounded-lg bg-gray-50 dark:bg-slate-900 p-4">
-                  <Icon name="tabler:devices" class="w-6 h-6 mx-auto mb-2 text-primary" />
-                  <p class="font-semibold text-default dark:text-slate-200">OWON Devices</p>
-                  <p class="text-muted dark:text-slate-400 mt-1">Meters, thermostats, sensors, HVAC controls</p>
-                  <p class="font-mono text-[11px] text-muted mt-2">ZigBee 3.0 / Wi-Fi / RS-485</p>
-                </div>
-                <div class="flex items-center justify-center text-muted">
-                  <Icon name="tabler:arrows-right-left" class="w-5 h-5 rotate-90 md:rotate-0" />
-                </div>
-                <div class="flex-1 rounded-lg bg-gray-50 dark:bg-slate-900 p-4">
-                  <Icon name="tabler:router" class="w-6 h-6 mx-auto mb-2 text-primary" />
-                  <p class="font-semibold text-default dark:text-slate-200">Gateway</p>
-                  <p class="text-muted dark:text-slate-400 mt-1">ZigBee master, local logic, OTA</p>
-                  <p class="font-mono text-[11px] text-muted mt-2">MQTT / TCP / UART</p>
-                </div>
-                <div class="flex items-center justify-center text-muted">
-                  <Icon name="tabler:arrows-right-left" class="w-5 h-5 rotate-90 md:rotate-0" />
-                </div>
-                <div class="flex-1 rounded-lg bg-gray-50 dark:bg-slate-900 p-4">
-                  <Icon name="tabler:server-cog" class="w-6 h-6 mx-auto mb-2 text-primary" />
-                  <p class="font-semibold text-default dark:text-slate-200">Your Server</p>
-                  <p class="text-muted dark:text-slate-400 mt-1">Direct (Method B) or via OWON cloud (Method A)</p>
-                  <p class="font-mono text-[11px] text-muted mt-2">HTTP/HTTPS · MQTT broker · TCP socket</p>
-                </div>
-              </div>
+            <h2 class="text-2xl font-bold mb-6 text-default dark:text-slate-100">
+              6000 System — Four Integration Paths
+            </h2>
+            <div
+              class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-4 sm:p-6 overflow-x-auto"
+            >
+              <svg
+                viewBox="0 0 900 360"
+                class="w-full min-w-[640px]"
+                role="img"
+                aria-label="OWON 6000 integration architecture: four symmetric paths between the OWON stack and your stack"
+              >
+                <defs>
+                  <marker
+                    id="arr"
+                    viewBox="0 0 10 10"
+                    refX="9"
+                    refY="5"
+                    markerWidth="7"
+                    markerHeight="7"
+                    orient="auto-start-reverse"
+                  >
+                    <path d="M0 0L10 5L0 10z" fill="#94a3b8"></path>
+                  </marker>
+                </defs>
+                {/* column headers */}
+                <text x="130" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor"
+                  >OWON Stack</text
+                >
+                <text x="770" y="24" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor"
+                  >Your Stack</text
+                >
+                {/* left column boxes */}
+                <g font-size="12" fill="currentColor">
+                  <rect x="30" y="45" width="200" height="52" rx="8" fill="rgba(59,130,246,0.10)" stroke="#3b82f6"
+                  ></rect>
+                  <text x="130" y="67" text-anchor="middle" font-weight="600">Application</text>
+                  <text x="130" y="84" text-anchor="middle" opacity="0.75">OWON APP / Web</text>
+                  <rect x="30" y="117" width="200" height="52" rx="8" fill="rgba(59,130,246,0.10)" stroke="#3b82f6"
+                  ></rect>
+                  <text x="130" y="139" text-anchor="middle" font-weight="600">Cloud</text>
+                  <text x="130" y="156" text-anchor="middle" opacity="0.75">OWON 6000 server</text>
+                  <rect x="30" y="189" width="200" height="52" rx="8" fill="rgba(59,130,246,0.10)" stroke="#3b82f6"
+                  ></rect>
+                  <text x="130" y="211" text-anchor="middle" font-weight="600">Gateway</text>
+                  <text x="130" y="228" text-anchor="middle" opacity="0.75">Zigbee master / board</text>
+                  <rect x="30" y="261" width="200" height="52" rx="8" fill="rgba(59,130,246,0.10)" stroke="#3b82f6"
+                  ></rect>
+                  <text x="130" y="283" text-anchor="middle" font-weight="600">Device</text>
+                  <text x="130" y="300" text-anchor="middle" opacity="0.75">Meters · thermostats · sensors</text>
+                </g>
+                {/* right column boxes */}
+                <g font-size="12" fill="currentColor">
+                  <rect x="670" y="45" width="200" height="52" rx="8" fill="rgba(16,185,129,0.10)" stroke="#10b981"
+                  ></rect>
+                  <text x="770" y="67" text-anchor="middle" font-weight="600">Application</text>
+                  <text x="770" y="84" text-anchor="middle" opacity="0.75">Your app / portal</text>
+                  <rect x="670" y="117" width="200" height="52" rx="8" fill="rgba(16,185,129,0.10)" stroke="#10b981"
+                  ></rect>
+                  <text x="770" y="139" text-anchor="middle" font-weight="600">Cloud / Server</text>
+                  <text x="770" y="156" text-anchor="middle" opacity="0.75">Your platform</text>
+                  <rect x="670" y="189" width="200" height="52" rx="8" fill="rgba(16,185,129,0.10)" stroke="#10b981"
+                  ></rect>
+                  <text x="770" y="211" text-anchor="middle" font-weight="600">Gateway / Hub</text>
+                  <text x="770" y="228" text-anchor="middle" opacity="0.75">Your hardware or broker</text>
+                  <rect x="670" y="261" width="200" height="52" rx="8" fill="rgba(16,185,129,0.10)" stroke="#10b981"
+                  ></rect>
+                  <text x="770" y="283" text-anchor="middle" font-weight="600">Device</text>
+                  <text x="770" y="300" text-anchor="middle" opacity="0.75">OWON Zigbee devices</text>
+                </g>
+                {/* four symmetric paths */}
+                <g font-size="11.5" fill="#ea580c" font-weight="600">
+                  <line
+                    x1="230"
+                    y1="71"
+                    x2="670"
+                    y2="71"
+                    stroke="#94a3b8"
+                    stroke-width="1.5"
+                    marker-start="url(#arr)"
+                    marker-end="url(#arr)"
+                    stroke-dasharray="none"
+                    opacity="0"></line>
+                  {/* A: cloud to cloud */}
+                  <line
+                    x1="230"
+                    y1="135"
+                    x2="670"
+                    y2="135"
+                    stroke="#3b82f6"
+                    stroke-width="2"
+                    marker-start="url(#arr)"
+                    marker-end="url(#arr)"></line>
+                  <text x="450" y="127" text-anchor="middle" fill="#3b82f6">A · Cloud to Cloud — HTTP Server API</text>
+                  {/* B: gateway to cloud */}
+                  <line x1="230" y1="199" x2="670" y2="149" stroke="#10b981" stroke-width="2" marker-end="url(#arr)"
+                  ></line>
+                  <text x="452" y="168" text-anchor="middle" fill="#10b981"
+                    >B · Gateway to Cloud — MQTT Gateway API</text
+                  >
+                  {/* C: gateway to gateway */}
+                  <line
+                    x1="230"
+                    y1="215"
+                    x2="670"
+                    y2="215"
+                    stroke="#8b5cf6"
+                    stroke-width="2"
+                    marker-start="url(#arr)"
+                    marker-end="url(#arr)"></line>
+                  <text x="450" y="236" text-anchor="middle" fill="#8b5cf6"
+                    >C · Gateway to Gateway — UART Gateway API</text
+                  >
+                  {/* D: device to gateway */}
+                  <line
+                    x1="230"
+                    y1="280"
+                    x2="670"
+                    y2="280"
+                    stroke="#f59e0b"
+                    stroke-width="2"
+                    marker-start="url(#arr)"
+                    marker-end="url(#arr)"></line>
+                  <text x="450" y="272" text-anchor="middle" fill="#f59e0b"
+                    >D · Device to Gateway — Zigbee Cluster List</text
+                  >
+                </g>
+                <text x="450" y="345" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.65">
+                  Every request to a gateway follows the shared Gateway API command format (full document available on
+                  request)
+                </text>
+              </svg>
             </div>
-            <dl class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {
-                facts.map((f) => (
-                  <div class="rounded-lg border border-gray-200 dark:border-slate-700 p-4">
-                    <dt class="text-xs uppercase tracking-wide text-muted dark:text-slate-500">{f.k}</dt>
-                    <dd class="text-sm font-medium text-default dark:text-slate-200 mt-1">{f.v}</dd>
-                  </div>
-                ))
-              }
-            </dl>
+            <p class="text-xs text-muted dark:text-slate-500 mt-3">
+              Google Assistant / Alexa / IFTTT bridges are implemented on <em>your</em> server in Methods A and B — OWON exposes
+              the device layer, your platform owns the voice and automation layer.
+            </p>
           </section>
 
-          <!-- Four integration methods -->
+          <!-- ============ Family 1: gateway methods ============ -->
           <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">Choose Your Integration Path</h2>
-            <p class="text-muted dark:text-slate-400 mb-8">
-              Every path ships with its own specification document. Google Home / Alexa / IFTTT bridges are built on
-              your own server in all methods.
+            <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">Family 1 · Gateway System (6000)</h2>
+            <p class="text-muted dark:text-slate-400 mb-6 max-w-3xl">
+              Zigbee devices behind an OWON gateway (or gateway board). Four symmetric paths let you attach at whichever
+              layer fits your product — server, gateway, or device.
             </p>
             <div class="grid gap-6 md:grid-cols-2">
               {
-                methods.map((m) => (
+                gatewayMethods.map((m) => (
                   <a
                     href={m.href}
                     class="group rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 hover:border-primary/40 hover:shadow-md transition-all no-underline"
@@ -179,7 +296,84 @@ const facts = [
             </div>
           </section>
 
-          <!-- What you get / what stays private -->
+          <!-- ============ Family 2: Wi-Fi direct ============ -->
+          <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-2 text-default dark:text-slate-100">
+              Family 2 · Wi-Fi Devices, Direct to Your Broker
+            </h2>
+            <p class="text-muted dark:text-slate-400 mb-6 max-w-3xl">
+              Smart meters and Wi-Fi thermostats connect straight to an MQTT broker you run. Three layers — device
+              nodes, your broker, your server — fully decoupled by publish/subscribe. No gateway, no OWON cloud, your
+              data stays on your infrastructure.
+            </p>
+            <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 p-6">
+              <div class="flex flex-col md:flex-row items-stretch gap-4 text-center text-sm mb-6">
+                <div class="flex-1 rounded-lg bg-gray-50 dark:bg-slate-900 p-4">
+                  <Icon name="tabler:plug" class="w-6 h-6 mx-auto mb-2 text-primary" />
+                  <p class="font-semibold text-default dark:text-slate-200">Device Nodes</p>
+                  <p class="text-muted dark:text-slate-400 mt-1">Energy meters · thermostats · sensors</p>
+                </div>
+                <div class="flex items-center justify-center text-muted">
+                  <Icon name="tabler:arrows-right-left" class="w-5 h-5 rotate-90 md:rotate-0" />
+                </div>
+                <div class="flex-1 rounded-lg bg-gray-50 dark:bg-slate-900 p-4">
+                  <Icon name="tabler:topology-star" class="w-6 h-6 mx-auto mb-2 text-primary" />
+                  <p class="font-semibold text-default dark:text-slate-200">Your MQTT Broker</p>
+                  <p class="text-muted dark:text-slate-400 mt-1">EMQX · Mosquitto · VerneMQ · AWS IoT Core</p>
+                </div>
+                <div class="flex items-center justify-center text-muted">
+                  <Icon name="tabler:arrows-right-left" class="w-5 h-5 rotate-90 md:rotate-0" />
+                </div>
+                <div class="flex-1 rounded-lg bg-gray-50 dark:bg-slate-900 p-4">
+                  <Icon name="tabler:server-cog" class="w-6 h-6 mx-auto mb-2 text-primary" />
+                  <p class="font-semibold text-default dark:text-slate-200">Your Server</p>
+                  <p class="text-muted dark:text-slate-400 mt-1">Subscribe to data, publish commands</p>
+                </div>
+              </div>
+              <ol class="grid gap-3 sm:grid-cols-2 lg:grid-cols-5 text-sm">
+                {
+                  directSteps.map((s) => (
+                    <li class="rounded-lg border border-gray-100 dark:border-slate-700/60 p-3">
+                      <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary/10 dark:bg-primary/20 text-primary text-[11px] font-bold mb-1.5">
+                        {s.n}
+                      </span>
+                      <p class="font-semibold text-default dark:text-slate-200 text-[13px] leading-snug">{s.t}</p>
+                      <p class="text-muted dark:text-slate-400 text-xs mt-1 leading-relaxed">{s.d}</p>
+                    </li>
+                  ))
+                }
+              </ol>
+              <div class="mt-5">
+                <a
+                  href="/developers/devices"
+                  class="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline no-underline"
+                >
+                  <Icon name="tabler:wifi" class="w-4 h-4" /> Read the Wi-Fi direct integration guide
+                </a>
+              </div>
+            </div>
+          </section>
+
+          <!-- ============ The shared pivot ============ -->
+          <section
+            class="mb-12 rounded-xl border border-amber-200 dark:border-amber-900 bg-amber-50/60 dark:bg-amber-950/30 p-6"
+          >
+            <h2 class="text-lg font-semibold mb-3 text-default dark:text-slate-100 flex items-center gap-2">
+              <Icon name="tabler:book-2" class="w-5 h-5 text-primary" /> One Command Dictionary Across Methods A–D
+            </h2>
+            <p class="text-sm text-muted dark:text-slate-500 dark:text-slate-400 leading-relaxed mb-2">
+              Requests from your server, your hub or your MCU to an OWON gateway all follow the same
+              <strong class="text-default dark:text-slate-200">Gateway API</strong> command format — type, command, argument,
+              sequence. MQTT payloads, TCP frames, UART commands and forwarded cloud traffic share it, so an integration built
+              on one path transfers to the others.
+            </p>
+            <p class="text-sm text-muted dark:text-slate-400 leading-relaxed">
+              The Gateway API document, Server API document, topic/payload definitions, device-model mapping table and
+              per-device cluster lists are delivered to project partners together with credentials.
+            </p>
+          </section>
+
+          <!-- ============ Docs on request CTA ============ -->
           <section
             class="mb-12 rounded-xl border border-blue-200 dark:border-blue-900 bg-blue-50/60 dark:bg-blue-950/40 p-6"
           >
@@ -187,10 +381,11 @@ const facts = [
               <Icon name="tabler:file-description" class="w-5 h-5 text-primary" /> Full Documentation on Request
             </h2>
             <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-4">
-              This portal gives you the architecture overview. The complete integration package — Authentication
-              (agentId/agentKey → accessToken), gateway MQTT topic &amp; payload specs, TCP frame protocol, the 90+
-              model device-model mapping table, PCT-series device APIs, cluster lists and sample sequences — is
-              delivered as official documents by our engineering team, together with the credentials your project needs.
+              This portal gives you the architecture and the parts you need to design against: real topic schemes, frame
+              formats, sequence samples and published cluster examples. The complete integration package —
+              authentication (agentId/agentKey → accessToken), the Gateway API command dictionary, device-model table,
+              per-device API documents and cluster lists — is provided by our engineering team along with the
+              credentials your project needs.
             </p>
             <div class="flex flex-wrap gap-3">
               <a
@@ -210,38 +405,40 @@ const facts = [
             </div>
           </section>
 
-          <!-- FAQ teaser -->
+          <!-- ============ FAQ ============ -->
           <section class="mb-4">
-            <h2 class="text-xl font-semibold mb-4 text-default dark:text-slate-100">Common Questions</h2>
+            <h2 class="xl font-semibold mb-4 text-xl text-default dark:text-slate-100">Common Questions</h2>
             <div class="space-y-4 text-sm">
               <div class="rounded-lg border border-gray-200 dark:border-slate-700 p-4">
-                <p class="font-semibold text-default dark:text-slate-200">Which method should I pick?</p>
+                <p class="font-semibold text-default dark:text-slate-200">Which family / method should I pick?</p>
                 <p class="text-muted dark:text-slate-400 mt-1">
-                  Cloud-to-cloud pilot → Method A. Private / on-prem platform or data must not touch OWON servers →
-                  Method B. You already run a ZigBee hub → Method D. You build your own hardware → UART board.
+                  Zigbee devices behind our gateway → the 6000 system (A for a quick cloud pilot, B for private servers,
+                  C to embed our board in your hardware, D if you already run your own Zigbee hub). Wi-Fi meters and
+                  thermostats → the direct MQTT line, straight into your broker.
                 </p>
               </div>
               <div class="rounded-lg border border-gray-200 dark:border-slate-700 p-4">
                 <p class="font-semibold text-default dark:text-slate-200">Do devices work without internet?</p>
                 <p class="text-muted dark:text-slate-400 mt-1">
-                  Yes. OWON gateways keep local ZigBee control and device interoperation running offline; data and
-                  commands sync when the link is back.
+                  Yes. Gateways keep local Zigbee control and device interoperation running offline; data and commands
+                  sync when the link is back. Direct Wi-Fi devices only need reachability to your broker.
                 </p>
               </div>
               <div class="rounded-lg border border-gray-200 dark:border-slate-700 p-4">
                 <p class="font-semibold text-default dark:text-slate-200">How do I get API credentials?</p>
                 <p class="text-muted dark:text-slate-400 mt-1">
-                  agentId / agentKey (and access tokens) are provisioned per project by our team —
+                  agentId / agentKey and access tokens are provisioned per project by our team —
                   <a href="/contact" class="text-primary underline">contact us</a> with your use case.
                 </p>
               </div>
               <div class="rounded-lg border border-gray-200 dark:border-slate-700 p-4">
                 <p class="font-semibold text-default dark:text-slate-200">
-                  Can I control devices and read energy data?
+                  Can I both read telemetry and control devices?
                 </p>
                 <p class="text-muted dark:text-slate-400 mt-1">
                   Both ways: telemetry uplink (energy, temperature, status) and command downlink (relay, setpoint,
-                  configuration) are defined per device family in the Gateway API document.
+                  configuration) are defined in the Gateway API document, the device API documents and the per-model
+                  cluster lists.
                 </p>
               </div>
             </div>
