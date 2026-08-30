@@ -10,7 +10,7 @@ export const prerender = true;
   metadata={{
     title: 'App Downloads',
     description:
-      'Download OWON mobile apps — MQTT API Debugger, Energy Dashboard, and device configuration tools for iOS and Android.',
+      'Download OWON mobile apps — SmartOWON for device control and energy monitoring, and the X5 Config Tool for Zigbee device debugging. Direct Android APK and iOS App Store links.',
   }}
 >
   <section class="py-8 lg:py-12">
@@ -53,15 +53,23 @@ export const prerender = true;
       <div class="mb-8">
         <h1 class="text-3xl font-bold text-default dark:text-slate-100">App Downloads</h1>
         <p class="text-muted dark:text-slate-400 mt-2 max-w-2xl">
-          OWON companion apps and tools for device configuration, energy monitoring, and API debugging.
+          OWON companion apps for device control, energy monitoring, and Zigbee debugging — iOS via the App Store,
+          Android via direct APK download.
         </p>
       </div>
 
-      <!-- API Debugger -->
+      <!-- SmartOWON -->
       <section class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">OWON API Debugger</h2>
+        <div class="flex items-center gap-3 mb-2">
+          <h2 class="text-xl font-bold text-default dark:text-slate-200">SmartOWON</h2>
+          <span
+            class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300"
+            >v5.2.6</span
+          >
+        </div>
         <p class="text-sm text-muted dark:text-slate-400 mb-6">
-          Inspect MQTT traffic, test API endpoints, and simulate device data — all from your mobile device.
+          The OWON mobile app — pair and control OWON thermostats, plugs, sensors and meters, and monitor your energy
+          data on the go.
         </p>
         <div class="grid gap-4 sm:grid-cols-2">
           <div
@@ -69,12 +77,15 @@ export const prerender = true;
           >
             <Icon name="tabler:brand-apple" class="w-8 h-8" />
             <div>
-              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — iOS</h3>
-              <p class="text-xs text-muted dark:text-slate-400 mb-2">
-                MQTT monitor, API request builder, device simulator
-              </p>
-              <span class="inline-flex items-center gap-1 text-xs text-muted dark:text-slate-500 font-medium"
-                >Coming soon on App Store</span
+              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">SmartOWON — iOS</h3>
+              <p class="text-xs text-muted dark:text-slate-400 mb-3">Download from the App Store</p>
+              <a
+                href="https://apps.apple.com/cn/app/smartowon/id1306572782"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-700 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                <Icon name="tabler:external-link" class="w-3.5 h-3.5" /> App Store</a
               >
             </div>
           </div>
@@ -83,23 +94,31 @@ export const prerender = true;
           >
             <Icon name="tabler:robot" class="w-8 h-8" />
             <div>
-              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">OWON API Debugger — Android</h3>
-              <p class="text-xs text-muted dark:text-slate-400 mb-2">
-                MQTT monitor, API request builder, device simulator
-              </p>
-              <span class="inline-flex items-center gap-1 text-xs text-muted dark:text-slate-500 font-medium"
-                >Coming soon on Google Play</span
+              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">SmartOWON — Android</h3>
+              <p class="text-xs text-muted dark:text-slate-400 mb-3">Direct APK · 65 MB · v5.2.6 (build 2024-10-28)</p>
+              <a
+                href="https://documents.owon-iot.com/apps/SmartOWON.apk"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                <Icon name="tabler:download" class="w-3.5 h-3.5" /> Download APK</a
               >
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Energy Dashboard -->
+      <!-- X5 Config Tool -->
       <section class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">OWON Energy Dashboard</h2>
+        <div class="flex items-center gap-3 mb-2">
+          <h2 class="text-xl font-bold text-default dark:text-slate-200">X5 Config Tool</h2>
+          <span
+            class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 dark:bg-blue-900/40 dark:text-blue-300"
+            >v5.3.3</span
+          >
+        </div>
         <p class="text-sm text-muted dark:text-slate-400 mb-6">
-          Real-time energy monitoring dashboard — track consumption, view trends, and manage multiple sites.
+          The OWON Zigbee debugging tool — pair and configure Zigbee devices through the X5 gateway, inspect clusters
+          and attributes, and debug MQTT integration. Built for developers integrating OWON devices.
         </p>
         <div class="grid gap-4 sm:grid-cols-2">
           <div
@@ -107,10 +126,15 @@ export const prerender = true;
           >
             <Icon name="tabler:brand-apple" class="w-8 h-8" />
             <div>
-              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">Energy Dashboard — iOS</h3>
-              <p class="text-xs text-muted dark:text-slate-400 mb-2">Web-based dashboard, optimized for mobile</p>
-              <span class="inline-flex items-center gap-1 text-xs text-muted dark:text-slate-500 font-medium"
-                >Coming soon on App Store</span
+              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">X5 Config Tool — iOS</h3>
+              <p class="text-xs text-muted dark:text-slate-400 mb-3">Download from the App Store</p>
+              <a
+                href="https://apps.apple.com/cn/app/x5-config-tool/id1595999687"
+                target="_blank"
+                rel="noopener"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-white bg-neutral-900 hover:bg-neutral-700 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                <Icon name="tabler:external-link" class="w-3.5 h-3.5" /> App Store</a
               >
             </div>
           </div>
@@ -119,37 +143,27 @@ export const prerender = true;
           >
             <Icon name="tabler:robot" class="w-8 h-8" />
             <div>
-              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">Energy Dashboard — Android</h3>
-              <p class="text-xs text-muted dark:text-slate-400 mb-2">Web-based dashboard, optimized for mobile</p>
-              <span class="inline-flex items-center gap-1 text-xs text-muted dark:text-slate-500 font-medium"
-                >Coming soon on Google Play</span
+              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">X5 Config Tool — Android</h3>
+              <p class="text-xs text-muted dark:text-slate-400 mb-3">Direct APK · 49 MB · v5.3.3 (2026-05)</p>
+              <a
+                href="https://documents.owon-iot.com/apps/OWON-MQTT-Config-Tool.apk"
+                class="inline-flex items-center gap-1 text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                <Icon name="tabler:download" class="w-3.5 h-3.5" /> Download APK</a
               >
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Device Config Tool -->
-      <section class="mb-12">
-        <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">OWON Device Config</h2>
-        <p class="text-sm text-muted dark:text-slate-400 mb-6">
-          On-site device configuration tool — scan ZigBee networks, configure WiFi credentials, and update firmware.
+      <!-- Install note -->
+      <div class="rounded-xl border border-amber-200 bg-amber-50 dark:border-amber-800/50 dark:bg-amber-900/20 p-4">
+        <p class="text-xs text-amber-800 dark:text-amber-200">
+          <strong>Android APK notes:</strong> Our APKs are distributed directly from OWON's official server. On first install,
+          allow "Install unknown apps" for your browser if prompted. For production integration, always test against the latest
+          firmware — contact us if you need a specific app version.
         </p>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div
-            class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 flex items-center gap-4"
-          >
-            <Icon name="tabler:robot" class="w-8 h-8" />
-            <div>
-              <h3 class="font-semibold text-default dark:text-slate-200 text-sm">Device Config Tool — Android</h3>
-              <p class="text-xs text-muted dark:text-slate-400 mb-2">ZigBee scanner, WiFi config, firmware update</p>
-              <span class="inline-flex items-center gap-1 text-xs text-muted dark:text-slate-500 font-medium"
-                >Coming soon on Google Play</span
-              >
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
     </div>
   </section>
 </PageLayout>
