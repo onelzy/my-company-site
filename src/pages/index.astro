@@ -4,6 +4,7 @@ export const prerender = true;
 
 import Layout from '~/layouts/PageLayout.astro';
 import ContactBand from '~/components/common/ContactBand.astro';
+import VideoPlayer from '~/components/common/VideoPlayer.astro';
 
 import { getPermalink } from '~/utils/permalinks';
 import { getCollection } from 'astro:content';
@@ -657,46 +658,15 @@ const formatDate = (date) => {
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-default dark:text-slate-100">About OWON</h2>
       <div class="grid lg:grid-cols-2 gap-10 mb-12">
-        <div
-          class="rounded-2xl bg-slate-800 dark:bg-slate-700 relative overflow-hidden group cursor-pointer"
-          id="aboutVideo"
-        >
-          <!-- Thumbnail + Play overlay (click to load iframe) -->
-          <div class="absolute inset-0" id="videoThumb">
-            <img
-              src="https://documents.owon-iot.com/product-images/hero/smart-energy-hero.png"
-              alt="About OWON Technology — Global Leader in IoT & Energy Management"
-              class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-              loading="lazy"
-            />
-            <div
-              class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors"
-            >
-              <div
-                class="w-16 h-16 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center shadow-xl transition-colors"
-              >
-                <svg class="w-7 h-7 text-red-600 ml-1" fill="currentColor" viewBox="0 0 24 24"
-                  ><path d="M8 5v14l11-7z"></path></svg
-                >
-              </div>
-            </div>
-            <div class="absolute bottom-3 left-3 right-3">
-              <p class="text-white font-medium text-sm drop-shadow-lg">
-                About OWON Technology — Global Leader in IoT &amp; Energy Management
-              </p>
-              <p class="text-slate-300 text-xs mt-0.5 drop-shadow">Watch on YouTube</p>
-            </div>
-          </div>
-          <!-- iframe injected on click -->
-          <div id="videoFrame" class="absolute inset-0 hidden">
-            <iframe
-              class="w-full h-full"
-              src="https://www.youtube.com/embed/UGiYiyPsLLM?autoplay=1&rel=0"
-              title="About OWON Technology — Global Leader in IoT & Energy Management"
-              frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen></iframe>
-          </div>
+        <div>
+          <VideoPlayer
+            src="https://documents.owon-iot.com/videos/about-owon.mp4"
+            poster="https://documents.owon-iot.com/videos/about-owon-poster.jpg"
+            title="OWON company film"
+            tracks={[
+              { src: 'https://documents.owon-iot.com/videos/about-owon-en.vtt', srclang: 'en', label: 'English' },
+            ]}
+          />
         </div>
         <div>
           <p class="text-sm text-muted dark:text-slate-400 leading-relaxed mb-6">
@@ -822,108 +792,97 @@ const formatDate = (date) => {
     )
   }
   <ContactBand />
-</Layout>
 
-<script>
-  (function () {
-    const section = document.getElementById('heroSection');
-    if (!section) return;
-    const slides = section.querySelectorAll('.hero-slide');
-    const dots = section.querySelectorAll('.hero-dot');
-    if (slides.length === 0) return;
-    let current = 0,
-      timer;
-    function showSlide(i) {
-      slides.forEach(function (s, j) {
-        s.classList.toggle('opacity-100', j === i);
-        s.classList.toggle('z-10', j === i);
-        s.classList.toggle('opacity-0', j !== i);
-        s.classList.toggle('z-0', j !== i);
-        // Mobile (<md): only the active slide occupies layout; md+ all absolute anyway
-        if (j === i) {
-          s.classList.remove('hidden');
+  <script>
+    (function () {
+      const section = document.getElementById('heroSection');
+      if (!section) return;
+      const slides = section.querySelectorAll('.hero-slide');
+      const dots = section.querySelectorAll('.hero-dot');
+      if (slides.length === 0) return;
+      let current = 0,
+        timer;
+      function showSlide(i) {
+        slides.forEach(function (s, j) {
+          s.classList.toggle('opacity-100', j === i);
+          s.classList.toggle('z-10', j === i);
+          s.classList.toggle('opacity-0', j !== i);
+          s.classList.toggle('z-0', j !== i);
+          // Mobile (<md): only the active slide occupies layout; md+ all absolute anyway
+          if (j === i) {
+            s.classList.remove('hidden');
+          } else {
+            if (window.innerWidth < 768) s.classList.add('hidden');
+          }
+        });
+        dots.forEach(function (d, j) {
+          d.classList.toggle('bg-white', j === i);
+          d.classList.toggle('border-white', j === i);
+          d.classList.toggle('scale-125', j === i);
+          d.classList.toggle('bg-transparent', j !== i);
+        });
+        current = i;
+      }
+      window.addEventListener('resize', function () {
+        if (window.innerWidth >= 768) {
+          slides.forEach(function (s) {
+            s.classList.remove('hidden');
+          });
+          showSlide(current);
         } else {
-          if (window.innerWidth < 768) s.classList.add('hidden');
+          showSlide(current);
         }
       });
-      dots.forEach(function (d, j) {
-        d.classList.toggle('bg-white', j === i);
-        d.classList.toggle('border-white', j === i);
-        d.classList.toggle('scale-125', j === i);
-        d.classList.toggle('bg-transparent', j !== i);
-      });
-      current = i;
-    }
-    window.addEventListener('resize', function () {
-      if (window.innerWidth >= 768) {
-        slides.forEach(function (s) {
-          s.classList.remove('hidden');
-        });
-        showSlide(current);
-      } else {
-        showSlide(current);
+      function next() {
+        showSlide((current + 1) % slides.length);
       }
-    });
-    function next() {
-      showSlide((current + 1) % slides.length);
-    }
-    function start() {
-      stop();
-      timer = setInterval(next, 5000);
-    }
-    function stop() {
-      if (timer) clearInterval(timer);
-    }
-    dots.forEach(function (d) {
-      d.addEventListener('click', function () {
-        showSlide(parseInt(d.getAttribute('data-dot'), 10));
-        start();
+      function start() {
+        stop();
+        timer = setInterval(next, 5000);
+      }
+      function stop() {
+        if (timer) clearInterval(timer);
+      }
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          showSlide(parseInt(d.getAttribute('data-dot'), 10));
+          start();
+        });
       });
-    });
-    start();
-  })();
-  (function () {
-    const track = document.getElementById('solTrack');
-    const prev = document.getElementById('solPrev');
-    const next = document.getElementById('solNext');
-    const dots = document.querySelectorAll('.sol-dot');
-    if (!track || !prev || !next) return;
-    const slides = track.querySelectorAll('[data-sol-index]');
-    const total = slides.length;
-    let current = 0;
-    function goTo(i) {
-      if (i < 0) i = total - 1;
-      if (i >= total) i = 0;
-      current = i;
-      track.style.transform = 'translateX(-' + i * 100 + '%)';
-      dots.forEach(function (d, j) {
-        d.classList.toggle('bg-primary', j === i);
-        d.classList.toggle('scale-125', j === i);
-        d.classList.toggle('bg-gray-300', j !== i);
-        d.classList.toggle('dark:bg-slate-600', j !== i);
+      start();
+    })();
+    (function () {
+      const track = document.getElementById('solTrack');
+      const prev = document.getElementById('solPrev');
+      const next = document.getElementById('solNext');
+      const dots = document.querySelectorAll('.sol-dot');
+      if (!track || !prev || !next) return;
+      const slides = track.querySelectorAll('[data-sol-index]');
+      const total = slides.length;
+      let current = 0;
+      function goTo(i) {
+        if (i < 0) i = total - 1;
+        if (i >= total) i = 0;
+        current = i;
+        track.style.transform = 'translateX(-' + i * 100 + '%)';
+        dots.forEach(function (d, j) {
+          d.classList.toggle('bg-primary', j === i);
+          d.classList.toggle('scale-125', j === i);
+          d.classList.toggle('bg-gray-300', j !== i);
+          d.classList.toggle('dark:bg-slate-600', j !== i);
+        });
+      }
+      prev.addEventListener('click', function () {
+        goTo(current - 1);
       });
-    }
-    prev.addEventListener('click', function () {
-      goTo(current - 1);
-    });
-    next.addEventListener('click', function () {
-      goTo(current + 1);
-    });
-    dots.forEach(function (d) {
-      d.addEventListener('click', function () {
-        goTo(parseInt(d.getAttribute('data-sol-dot'), 10));
+      next.addEventListener('click', function () {
+        goTo(current + 1);
       });
-    });
-  })();
-  (function () {
-    const video = document.getElementById('aboutVideo');
-    if (!video) return;
-    video.addEventListener('click', function () {
-      const thumb = document.getElementById('videoThumb');
-      const frame = document.getElementById('videoFrame');
-      if (!thumb || !frame) return;
-      thumb.style.display = 'none';
-      frame.classList.remove('hidden');
-    });
-  })();
-</script>
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          goTo(parseInt(d.getAttribute('data-sol-dot'), 10));
+        });
+      });
+    })();
+  </script>
+</Layout>

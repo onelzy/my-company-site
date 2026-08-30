@@ -1,27 +1,38 @@
 ---
 import PageLayout from '~/layouts/PageLayout.astro';
+import VideoPlayer from '~/components/common/VideoPlayer.astro';
 import { Icon } from 'astro-icon/components';
 
 // Static page: build-time render → CDN-cached.
 export const prerender = true;
 
-const categories = [
-  'Smart Meters',
-  'Thermostats',
-  'Hotel Control',
-  'Senior Care',
-  'Software',
-  'Tutorials',
-  'Case Studies',
-];
+const R2 = 'https://documents.owon-iot.com/videos';
 ---
 
 <PageLayout
   metadata={{
-    title: 'Video Center',
-    description: 'Product demos, installation guides, and customer case studies — see OWON IoT devices in action.',
+    title: 'Video Center — OWON Company & Product Videos',
+    description:
+      'Watch the OWON company film and product demonstration videos: smart energy meters, zigbee thermostats, gateways, and industry solutions for hotels and senior care.',
+    ogImage: `${R2}/about-owon-poster.jpg`,
   }}
 >
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: 'OWON — Smart Energy & IoT Devices Company Film',
+      description:
+        'A five-minute tour of Xiamen OWON: company overview, smart energy meters, zigbee thermostats, IoT gateways, hotel and senior-care solutions, R&D and manufacturing.',
+      thumbnailUrl: `${R2}/about-owon-poster.jpg`,
+      uploadDate: '2026-08-31',
+      duration: 'PT5M19S',
+      contentUrl: `${R2}/about-owon.mp4`,
+      embedUrl: 'https://www.owon-iot.com/resources/videos/',
+    })}
+  />
+
   <section class="py-8 lg:py-12">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <!-- Breadcrumb -->
@@ -32,7 +43,7 @@ const categories = [
       </nav>
 
       <!-- Dimension Tabs -->
-      <div class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-6 w-fit">
+      <div class="flex gap-1 p-1 bg-gray-100 dark:bg-slate-800 rounded-xl mb-8 w-fit">
         <a
           href="/resources/documentation"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-gray-600 dark:text-slate-400 hover:bg-white/60 dark:hover:bg-slate-700/60"
@@ -41,6 +52,7 @@ const categories = [
         >
         <a
           href="/resources/videos"
+          aria-current="page"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 bg-white dark:bg-slate-700 text-default dark:text-slate-200 shadow-sm"
         >
           Videos</a
@@ -58,236 +70,79 @@ const categories = [
         >
       </div>
 
-      <!-- Filter Card -->
-      <div
-        class="bg-white dark:bg-slate-800/50 rounded-xl p-4 mb-6 border border-gray-200 dark:border-slate-700 shadow-sm"
-      >
-        <!-- Search -->
-        <div class="mb-4">
-          <div class="relative max-w-md">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                ><path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg
-              >
-            </span>
-            <input
-              type="text"
-              id="videoSearch"
-              placeholder="Search videos by title or keyword..."
-              class="w-full pl-10 pr-4 py-2.5 rounded-full border border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-default dark:text-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-shadow"
-            />
-          </div>
-        </div>
-
-        <!-- Category Filters -->
-        <div class="flex items-center gap-2 flex-wrap" id="videoFilters">
-          <span class="text-xs font-semibold text-gray-700 dark:text-slate-300 uppercase tracking-wider shrink-0"
-            >Category:</span
-          >
-          <button class="filter-chip chip chip-active active" data-category="">All Videos</button>
-          {
-            categories.map((cat) => (
-              <button class="filter-chip chip chip-idle" data-category={cat}>
-                {cat}
-              </button>
-            ))
-          }
-        </div>
-      </div>
-
       <!-- Page heading -->
       <div class="mb-8">
-        <h1 class="text-3xl font-bold text-default dark:text-slate-100">Videos</h1>
+        <h1 class="text-3xl font-bold text-default dark:text-slate-100">Video Center</h1>
         <p class="text-muted dark:text-slate-400 mt-2 max-w-2xl">
-          Product demos, installation tutorials, and customer case studies.
+          Get to know OWON in five minutes — factory, products, and the people behind 400+ device models.
         </p>
       </div>
 
-      <!-- Count -->
-      <span class="text-sm text-muted dark:text-slate-400 mb-6 block">
-        Showing <strong id="videoCount" class="text-default dark:text-slate-200 font-semibold">17</strong> videos
-      </span>
+      <!-- Featured: company film -->
+      <div class="mb-12 max-w-4xl">
+        <VideoPlayer
+          src={`${R2}/about-owon.mp4`}
+          poster={`${R2}/about-owon-poster.jpg`}
+          title="OWON Company Film"
+          description="Xiamen OWON at a glance: smart energy meters, zigbee thermostats and room control, IoT gateways, hotel and senior-care solutions, R&D, SMT manufacturing and assembly."
+          tracks={[{ src: `${R2}/about-owon-en.vtt`, srclang: 'en', label: 'English', default: true }]}
+        />
+      </div>
 
-      <div id="videoList">
-        <!-- Featured Video -->
-        <div class="video-section mb-16">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Featured</h2>
-          <div
-            class="video-card rounded-xl overflow-hidden bg-gray-900 aspect-video flex items-center justify-center border border-gray-200 dark:border-slate-700"
-            data-category="Featured"
-          >
-            <div class="text-center">
-              <div class="text-6xl mb-4">▶</div>
-              <p class="text-gray-400 text-lg">OWON Smart Energy — Company Overview</p>
-              <p class="text-gray-500 text-sm mt-2">Video coming soon — available on YouTube</p>
+      <!-- On-request video categories -->
+      <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-4">Product videos — on request</h2>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-10">
+        {
+          [
+            {
+              icon: 'tabler:gauge',
+              title: 'Smart Energy Meters',
+              desc: 'Single-phase and three-phase meter unboxing, wiring, DIN-rail installation, and live readings walkthrough.',
+            },
+            {
+              icon: 'tabler:temperature',
+              title: 'Thermostats & HVAC Control',
+              desc: 'TRV and wall thermostat setup, weekly scheduling, and controller pairing demos.',
+            },
+            {
+              icon: 'tabler:router',
+              title: 'Gateways & Integration',
+              desc: 'Gateway provisioning and a hands-on look at the MQTT integration debugger in action.',
+            },
+            {
+              icon: 'tabler:building-community',
+              title: 'Industry Solutions',
+              desc: 'Hotel room control and senior-care monitoring solution overviews for facility teams.',
+            },
+          ].map((item) => (
+            <div class="p-5 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800">
+              <Icon name={item.icon} class="w-7 h-7 mb-3 text-primary" />
+              <h3 class="font-semibold text-default dark:text-slate-200 mb-1">{item.title}</h3>
+              <p class="text-sm text-muted dark:text-slate-400">{item.desc}</p>
             </div>
-          </div>
-        </div>
-
-        <!-- Product Demos -->
-        <div class="video-section mb-16">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Product Demos</h2>
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {
-              [
-                {
-                  title: 'Smart Meter Installation Guide',
-                  desc: 'Step-by-step installation for PC341 single-phase smart meter.',
-                  cat: 'Smart Meters',
-                },
-                {
-                  title: 'Thermostat Smart Scheduling',
-                  desc: 'How to configure weekly schedules for radiator thermostats.',
-                  cat: 'Thermostats',
-                },
-                {
-                  title: 'Hotel Room Panel Setup',
-                  desc: 'Installing and pairing the HCH-01 hotel control panel.',
-                  cat: 'Hotel Control',
-                },
-                {
-                  title: 'Senior Care Pendant Tutorial',
-                  desc: 'Pairing the emergency pendant with the SCB-01 gateway.',
-                  cat: 'Senior Care',
-                },
-                {
-                  title: 'Energy Dashboard Walkthrough',
-                  desc: 'Tour of the OWON energy monitoring web dashboard.',
-                  cat: 'Software',
-                },
-                {
-                  title: '3-Phase Meter Wiring',
-                  desc: 'Professional installation wiring for PC342 3-phase meter.',
-                  cat: 'Smart Meters',
-                },
-              ].map((video) => (
-                <div
-                  class="video-card rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:border-primary/40 transition-colors"
-                  data-category={video.cat}
-                >
-                  <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                    <div class="text-center">
-                      <div class="text-4xl mb-2">▶</div>
-                      <span class="text-xs text-muted">Coming soon</span>
-                    </div>
-                  </div>
-                  <div class="p-4">
-                    <span class="text-xs text-primary font-medium">{video.cat}</span>
-                    <h3 class="font-semibold text-default dark:text-slate-200 mt-1 group-hover:text-primary transition-colors">
-                      {video.title}
-                    </h3>
-                    <p class="text-sm text-muted dark:text-slate-400 mt-1">{video.desc}</p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <!-- Installation & Tutorials -->
-        <div class="video-section mb-16">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Installation & Tutorials</h2>
-          <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {
-              [
-                { title: 'MQTT Broker Configuration', desc: 'Connect OWON devices to your own MQTT broker.' },
-                { title: 'API Integration Quickstart', desc: 'First 10 minutes with the OWON REST API.' },
-                { title: 'OTA Firmware Update Demo', desc: 'How to push firmware updates to deployed devices.' },
-                { title: 'Zigbee Gateway Setup', desc: 'Adding Zigbee devices through the OWON gateway.' },
-                { title: 'RS-485 Modbus Wiring', desc: 'Industrial meter wiring for RS-485 Modbus RTU.' },
-                { title: 'Cloud Platform Onboarding', desc: 'Register and activate devices on the OWON cloud.' },
-              ].map((video) => (
-                <div
-                  class="video-card rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 overflow-hidden group hover:border-primary/40 transition-colors"
-                  data-category="Tutorials"
-                >
-                  <div class="aspect-video bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
-                    <div class="text-center">
-                      <Icon name="tabler:school" class="w-10 h-10 mb-2" />
-                      <span class="text-xs text-muted">Coming soon</span>
-                    </div>
-                  </div>
-                  <div class="p-4">
-                    <h3 class="font-semibold text-default dark:text-slate-200 group-hover:text-primary transition-colors">
-                      {video.title}
-                    </h3>
-                    <p class="text-sm text-muted dark:text-slate-400 mt-1">{video.desc}</p>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <!-- Case Studies -->
-        <div class="video-section mb-8">
-          <h2 class="text-xl font-bold mb-6 text-default dark:text-slate-200">Customer Case Studies</h2>
-          <div class="grid gap-6 sm:grid-cols-2">
-            {
-              [
-                {
-                  title: '500-Room Hotel Energy Retrofit — Jakarta',
-                  desc: 'How a 5-star hotel reduced energy costs by 32% with OWON meters and hotel panels.',
-                  region: 'Southeast Asia',
-                },
-                {
-                  title: 'Smart Senior Care — Tokyo Nursing Home',
-                  desc: 'Deploying 200+ senior care pendants across a multi-floor care facility.',
-                  region: 'Japan',
-                },
-                {
-                  title: 'Apartment Sub-Metering — Dubai',
-                  desc: 'Real-time tenant energy billing for a 1200-unit residential complex.',
-                  region: 'Middle East',
-                },
-                {
-                  title: 'Cold Chain Monitoring — Rotterdam',
-                  desc: 'Temperature monitoring for pharmaceutical cold storage using OWON sensors.',
-                  region: 'Europe',
-                },
-              ].map((cs) => (
-                <div
-                  class="video-card p-6 rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800"
-                  data-category="Case Studies"
-                >
-                  <span class="text-xs text-primary font-medium">{cs.region}</span>
-                  <h3 class="font-semibold text-default dark:text-slate-200 mt-1 mb-2">{cs.title}</h3>
-                  <p class="text-sm text-muted dark:text-slate-400">{cs.desc}</p>
-                  <div class="mt-4 aspect-video bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center">
-                    <div class="text-center">
-                      <div class="text-3xl mb-1">▶</div>
-                      <span class="text-xs text-muted">Case study video — coming soon</span>
-                    </div>
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-        </div>
+          ))
+        }
       </div>
 
-      <!-- YouTube CTA -->
-      <div class="rounded-xl bg-red-50 dark:bg-red-900/10 border border-red-200 dark:border-red-800 p-8 text-center">
-        <Icon name="tabler:device-tv" class="w-10 h-10 mb-4" />
-        <h2 class="text-xl font-bold mb-3 text-default dark:text-slate-200">Subscribe on YouTube</h2>
-        <p class="text-muted dark:text-slate-400 mb-6 max-w-lg mx-auto">
-          New product demos, installation guides, and case studies published regularly. Subscribe to get notified.
-        </p>
-        <a
-          href="https://youtube.com/@owon-technology"
-          target="_blank"
-          rel="noopener"
-          class="inline-flex items-center gap-2 px-8 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium"
-        >
-          <span class="text-lg">▶</span> OWON Technology on YouTube
-        </a>
+      <!-- CTA: request videos -->
+      <div class="rounded-xl border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800/50 p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+          <Icon name="tabler:video" class="w-8 h-8 text-primary shrink-0" />
+          <div class="flex-1">
+            <h2 class="font-bold text-default dark:text-slate-200 mb-1">Need a demo video for a specific device?</h2>
+            <p class="text-sm text-muted dark:text-slate-400">
+              Our video library is being published in batches. Tell us which product or integration you are evaluating
+              and we will send the matching footage — usually within one business day.
+            </p>
+          </div>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-primary hover:opacity-90 transition-opacity shrink-0"
+          >
+            <Icon name="tabler:mail" class="w-4 h-4" /> Request a Video</a
+          >
+        </div>
       </div>
     </div>
   </section>
 </PageLayout>
-
-<script is:inline src="/scripts/video-filter.js"></script>

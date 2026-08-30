@@ -1,0 +1,42 @@
+---
+// Reusable video player: native HTML5 <video> served from R2 (documents.owon-iot.com).
+// poster + preload="none" => zero bandwidth until visitor clicks play.
+// R2 egress is free, so even millions of plays cost $0.
+
+interface Props {
+  src: string;
+  poster?: string;
+  title: string;
+  description?: string;
+  tracks?: { src: string; srclang: string; label: string; default?: boolean }[];
+  class?: string;
+}
+
+const { src, poster, title, description, tracks = [], class: className = '' } = Astro.props;
+---
+
+<figure class={`video-player relative ${className}`}>
+  <div
+    class="relative aspect-video w-full overflow-hidden rounded-2xl border border-gray-200 bg-black shadow-xl dark:border-slate-700"
+  >
+    <video
+      controls
+      preload="none"
+      playsinline
+      poster={poster}
+      aria-label={title}
+      title={title}
+      class="h-full w-full object-contain"
+      style="background:#000"
+    >
+      {
+        tracks.map((t) => (
+          <track kind="subtitles" src={t.src} srcLang={t.srclang} label={t.label} default={t.default} />
+        ))
+      }
+      <source src={src} type="video/mp4" />
+      Your browser doesn't support HTML5 video. <a href={src} class="text-primary underline">Download the video</a> instead.
+    </video>
+  </div>
+  {description && <figcaption class="mt-3 text-sm text-muted dark:text-slate-400">{description}</figcaption>}
+</figure>
