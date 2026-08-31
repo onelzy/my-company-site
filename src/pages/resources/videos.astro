@@ -14,7 +14,7 @@ const R2 = 'https://documents.owon-iot.com/videos';
     title: 'Video Center — OWON Company & Product Videos',
     description:
       'Watch the OWON company film and product demonstration videos: smart energy meters, zigbee thermostats, gateways, and industry solutions for hotels and senior care.',
-    ogImage: `${R2}/about-owon-poster.jpg`,
+    ogImage: `https://www.owon-iot.com/about-owon-poster.jpg`,
   }}
 >
   <script
@@ -25,7 +25,7 @@ const R2 = 'https://documents.owon-iot.com/videos';
       name: 'OWON — Smart Energy & IoT Devices Company Film',
       description:
         'A five-minute tour of Xiamen OWON: company overview, smart energy meters, zigbee thermostats, IoT gateways, hotel and senior-care solutions, R&D and manufacturing.',
-      thumbnailUrl: `${R2}/about-owon-poster.jpg`,
+      thumbnailUrl: `https://www.owon-iot.com/about-owon-poster.jpg`,
       uploadDate: '2026-08-31',
       duration: 'PT5M19S',
       contentUrl: `${R2}/about-owon.mp4`,
@@ -82,10 +82,12 @@ const R2 = 'https://documents.owon-iot.com/videos';
       <div class="mb-12 max-w-4xl">
         <VideoPlayer
           src={`${R2}/about-owon.mp4`}
-          poster={`${R2}/about-owon-poster.jpg`}
+          poster={`https://www.owon-iot.com/about-owon-poster.jpg`}
           title="OWON Company Film"
           description="Xiamen OWON at a glance: smart energy meters, zigbee thermostats and room control, IoT gateways, hotel and senior-care solutions, R&D, SMT manufacturing and assembly."
-          tracks={[{ src: `${R2}/about-owon-en.vtt`, srclang: 'en', label: 'English', default: true }]}
+          tracks={[
+            { src: `https://www.owon-iot.com/about-owon-en.vtt`, srclang: 'en', label: 'English', default: true },
+          ]}
         />
       </div>
 
