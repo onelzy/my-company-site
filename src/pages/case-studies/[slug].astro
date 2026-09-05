@@ -19,6 +19,10 @@ const cs = caseStudies.find((c) => c.slug === slug)!;
 const siteOrigin = (SITE.site as string).replace(/\/+$/, '');
 const canonicalUrl = `${siteOrigin}/case-studies/${cs.slug}/`;
 
+// Absolute image URL — required for JSON-LD image + og:image (social/AI crawlers
+// reject relative URLs). Local files under /images/ are resolved against the origin.
+const absImage = cs.image.startsWith('http') ? cs.image : `${siteOrigin}${cs.image}`;
+
 // Related products (only models explicitly named by the source document)
 const related = allProducts.filter((p) => cs.products.includes(p.slug));
 
@@ -30,14 +34,16 @@ const jsonLd = {
   mainEntityOfPage: canonicalUrl,
   inLanguage: 'en',
   articleSection: 'Case Studies',
-  author: { '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.', url: siteOrigin },
+  keywords: [cs.category, cs.client, 'IoT case study', 'OWON'].join(','),
+  authors: [{ '@type': 'Organization', name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.', url: siteOrigin }],
   publisher: {
     '@type': 'Organization',
     name: 'XIAMEN OWON TECHNOLOGY CO.,LTD.',
     url: siteOrigin,
     logo: { '@type': 'ImageObject', url: `${siteOrigin}/images/logo.png` },
   },
-  image: cs.image,
+  image: absImage,
+  url: canonicalUrl,
 };
 
 const metadata = {
@@ -45,9 +51,11 @@ const metadata = {
   description: `${cs.background.slice(0, 150)}`,
   canonical: canonicalUrl,
   openGraph: {
+    type: 'article',
     title: cs.title,
     description: cs.background.slice(0, 150),
-  },
+    images: [{ url: absImage, width: 1600, height: 1600, alt: cs.title }],
+  } as Record<string, unknown>,
   jsonLd,
 };
 ---
@@ -95,10 +103,36 @@ const metadata = {
         <p class="text-default dark:text-slate-300 leading-relaxed">{cs.background}</p>
       </div>
 
+      {/* Project Requirements — verbatim bullet list from the source doc */}
+      {
+        cs.requirements && cs.requirements.length > 0 && (
+          <div class="mb-10">
+            <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-5">Project Requirements</h2>
+            <ul class="space-y-3">
+              {cs.requirements.map((r) => (
+                <li class="flex gap-3 text-default dark:text-slate-300 leading-relaxed">
+                  <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-primary"></span>
+                  <span>{r}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
       {/* Solution */}
       <div class="prose prose-slate dark:prose-invert max-w-none mb-10">
         <h2 class="text-xl font-bold text-default dark:text-slate-100 mb-3">Our Solution</h2>
         <p class="text-default dark:text-slate-300 leading-relaxed">{cs.solution}</p>
+        {
+          cs.solutionPoints && cs.solutionPoints.length > 0 && (
+            <ul class="mt-5 space-y-3 list-disc pl-5">
+              {cs.solutionPoints.map((sp) => (
+                <li class="text-default dark:text-slate-300 leading-relaxed">{sp}</li>
+              ))}
+            </ul>
+          )
+        }
       </div>
 
       {/* Results */}
