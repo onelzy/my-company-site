@@ -108,7 +108,7 @@ export const caseStudies: CaseStudy[] = [
       'Should monitor and control boilers, heat pumps, hot water, hydraulic radiators, electrical radiators, underfloor heating, etc.',
       'Should work normally under offline mode, without relying on an Internet connection.',
       'The mobile app should control the system with or without an Internet connection, even without a Wi-Fi router.',
-      'Requires a complete set of \"device-level local APIs\" to develop a cloud server and mobile APP.',
+      'Requires a complete set of "device-level local APIs" to develop a cloud server and mobile APP.',
     ],
     solution:
       'OWON provided a full ZigBee ecosystem centered on an Edge Gateway. PCT512 controls boilers/heat pumps, TRV517 handles hydraulic radiators, PIR323 + SLC621 manage electric heaters, and THS317-ET + SLC651 control underfloor heating. The gateway supports three modes — Local (same Wi-Fi), Internet (remote cloud), and AP (direct hotspot). TCP/IP and MQTT APIs provided for system integration.',
@@ -176,7 +176,7 @@ export const caseStudies: CaseStudy[] = [
       'Monitors and controls the overall home energy consumption, solar power generation, EV chargers, etc.',
       'Controls and schedules the HVAC equipment, including gas boilers, electric heat pumps, and mini-split A/C units.',
       'Allows functional interaction between components within the system. For example, turn off split A/C when a window is opened, change the EV charging status according to the solar power generation mode, etc.',
-      'Requires a complete set of \"device-level local APIs\" to directly connect to the Telco\u2019s backend cloud server.',
+      'Requires a complete set of "device-level local APIs" to directly connect to the Telco\u2019s backend cloud server.',
     ],
     solution:
       "OWON delivered a complete ZigBee device suite — clamp power meters, Din rail relays, and smart plugs for energy monitoring; thermostats and IR blasters for HVAC control — plus a Smart ZigBee Hub with local networking capabilities for device-to-device interaction logic. The hub's complete local API allows direct connection to the Telco's backend server with no intermediate cloud dependency.",
